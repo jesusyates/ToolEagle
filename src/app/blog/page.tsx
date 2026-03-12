@@ -1,25 +1,45 @@
+import Link from "next/link";
+import { SiteHeader } from "../_components/SiteHeader";
+import { SiteFooter } from "../_components/SiteFooter";
+
 export const metadata = {
   title: "Creator Resources & Tips",
   description:
     "Articles, tips and case studies on how to use ToolEagle tools to publish better content, faster."
 };
 
+const posts = [
+  {
+    slug: "tiktok-caption-ideas",
+    title: "50 TikTok Caption Ideas that Actually Work",
+    description:
+      "Caption formulas and angles you can plug into ToolEagle’s TikTok Caption Generator.",
+    tag: "TikTok"
+  },
+  {
+    slug: "how-to-go-viral-on-tiktok",
+    title: "How to Go Viral on TikTok in 2026",
+    description: "A simple framework for hooks, pacing and captions.",
+    tag: "TikTok"
+  },
+  {
+    slug: "best-hashtags-for-reels",
+    title: "Best Hashtags for Reels in 2026",
+    description: "How to use hashtags to get more reach without looking spammy.",
+    tag: "Reels"
+  },
+  {
+    slug: "youtube-title-formulas",
+    title: "YouTube Title Formulas that Drive Clicks",
+    description: "Battle-tested title patterns you can adapt in seconds.",
+    tag: "YouTube"
+  }
+];
+
 export default function BlogPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50 flex flex-col">
-      <header className="border-b border-slate-800/80 bg-slate-950/70 backdrop-blur">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-xl bg-gradient-to-tr from-cyan-400 via-sky-500 to-indigo-500 flex items-center justify-center text-xs font-semibold shadow-lg shadow-cyan-500/40">
-              TE
-            </div>
-            <div>
-              <p className="text-lg font-semibold tracking-tight">ToolEagle</p>
-              <p className="text-xs text-slate-400">Free Tools for Creators</p>
-            </div>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <div className="flex-1">
         <section className="max-w-5xl mx-auto px-4 pt-10 pb-16">
@@ -31,35 +51,37 @@ export default function BlogPage() {
               Creator playbook & case studies
             </h1>
             <p className="text-sm sm:text-base text-slate-300">
-              This space will collect short, practical articles on how real creators use tools like
-              the TikTok Caption Generator, Hashtag Generator and more to ship content consistently.
+              Short, practical articles on how real creators use ToolEagle tools to publish better
+              content, faster.
             </p>
           </div>
 
-          <div className="mt-8 rounded-2xl border border-slate-800 bg-slate-900/70 p-4 sm:p-6">
-            <p className="text-xs font-semibold text-slate-200">Coming soon</p>
-            <p className="mt-2 text-xs text-slate-400">
-              As ToolEagle grows, this page will feature:
-            </p>
-            <ul className="mt-2 list-disc list-inside text-xs text-slate-400 space-y-1">
-              <li>Quick-start guides for each tool.</li>
-              <li>Swipeable caption, hook and hashtag templates.</li>
-              <li>Real-world examples from creators across niches.</li>
-            </ul>
+          <div className="mt-8 space-y-4">
+            {posts.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="block rounded-2xl border border-slate-800 bg-slate-900/70 p-4 hover:border-sky-500/70 hover:bg-slate-900 transition"
+              >
+                <div className="flex items-center gap-2 text-[11px] text-slate-400 mb-1">
+                  <span className="px-2 py-0.5 rounded-full border border-slate-700 bg-slate-950/70">
+                    {post.tag}
+                  </span>
+                  <span>Playbook</span>
+                </div>
+                <h2 className="text-sm font-semibold text-slate-50">
+                  {post.title}
+                </h2>
+                <p className="mt-1 text-xs text-slate-300">
+                  {post.description}
+                </p>
+              </Link>
+            ))}
           </div>
         </section>
       </div>
 
-      <footer className="border-t border-slate-900/80 bg-slate-950/90">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-[11px] text-slate-500">
-            © {new Date().getFullYear()} ToolEagle. Built for creators.
-          </p>
-          <p className="text-[11px] text-slate-500">
-            New articles and examples will be added over time.
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

@@ -3,6 +3,7 @@ import "./globals.css";
 import { Analytics } from "./Analytics";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.tooleagle.com"),
   title: {
     default: "ToolEagle - Free Tools for Creators",
     template: "%s | ToolEagle"
@@ -14,13 +15,16 @@ export const metadata: Metadata = {
     "creator tools",
     "TikTok tools",
     "caption generator",
+    "hashtag generator",
+    "hook generator",
+    "title generator",
     "social media tools",
     "content creator"
   ],
   openGraph: {
     title: "ToolEagle - Free Tools for Creators",
     description:
-      "Free, creator-first tools to help you move from idea to published video faster. Start with the TikTok Caption Generator.",
+      "Free, creator-first tools to help you move from idea to published video faster. Start with captions, hashtags, hooks and titles.",
     type: "website",
     url: "https://www.tooleagle.com",
     siteName: "ToolEagle"

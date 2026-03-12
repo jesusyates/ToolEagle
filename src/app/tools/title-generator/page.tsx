@@ -1,19 +1,18 @@
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
-import { TikTokCaptionGeneratorClient } from "./pageClient";
+import { TitleGeneratorClient } from "./pageClient";
 
 export const metadata = {
-  title: "TikTok Caption Generator",
-  description:
-    "Generate scroll-stopping TikTok captions from a simple video idea, complete with emojis and hashtags."
+  title: "Title Generator",
+  description: "Generate titles for YouTube, TikTok, Reels and Shorts."
 };
 
-export default function TikTokCaptionGeneratorPage() {
+export default function TitleGeneratorPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50 flex flex-col">
       <SiteHeader />
       <div className="flex-1">
-        <TikTokCaptionGeneratorClient />
+        <TitleGeneratorClient />
       </div>
       <SiteFooter />
     </main>

@@ -25,7 +25,8 @@ button {
   border: none;
 }
 
-textarea {
+textarea,
+input {
   font-family: inherit;
 }
 
@@ -45,5 +46,9 @@ textarea {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #4b5563;
+}
+
+.prose {
+  color: inherit;
 }
 

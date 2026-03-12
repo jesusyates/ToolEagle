@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 export default function HomePage() {
@@ -54,7 +55,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-slate-950 text-slate-50 flex flex-col">
       <header className="border-b border-slate-800/80 bg-slate-950/70 backdrop-blur">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-xl bg-gradient-to-tr from-cyan-400 via-sky-500 to-indigo-500 flex items-center justify-center text-xs font-semibold shadow-lg shadow-cyan-500/40">
               TE
             </div>
@@ -62,12 +63,21 @@ export default function HomePage() {
               <p className="text-lg font-semibold tracking-tight">ToolEagle</p>
               <p className="text-xs text-slate-400">Free Tools for Creators</p>
             </div>
-          </div>
+          </Link>
 
-          <nav className="hidden sm:flex items-center gap-4 text-sm text-slate-300">
-            <span className="px-2 py-1 rounded-full bg-slate-900/70 border border-slate-800/70">
-              TikTok Caption Generator
-            </span>
+          <nav className="hidden sm:flex items-center gap-3 text-xs text-slate-300">
+            <Link
+              href="/tools"
+              className="px-3 py-1.5 rounded-full border border-slate-800 bg-slate-900/70 hover:border-sky-500/70 hover:text-sky-200 transition"
+            >
+              All tools
+            </Link>
+            <Link
+              href="/blog"
+              className="px-3 py-1.5 rounded-full border border-slate-800 bg-slate-900/70 hover:border-sky-500/70 hover:text-sky-200 transition"
+            >
+              Resources
+            </Link>
           </nav>
         </div>
       </header>
@@ -89,8 +99,29 @@ export default function HomePage() {
                   <span className="font-medium text-sky-300">
                     Free Tools for Creators.
                   </span>{" "}
-                  Ship content faster with simple, focused utilities built just for you.
+                  Our mission is to give every creator fast, free tools that remove friction between
+                  ideas and published content.
                 </p>
+              </div>
+
+              <p className="text-sm text-slate-400 max-w-xl">
+                Start with captions for TikTok, Reels and Shorts, then expand into hooks, hashtags,
+                idea banks and more—all in one lightweight place.
+              </p>
+
+              <div className="flex flex-wrap gap-3 pt-1">
+                <Link
+                  href="/tools/tiktok-caption-generator"
+                  className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-sky-500 via-cyan-400 to-indigo-500 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-sky-500/40 hover:brightness-110 transition"
+                >
+                  Start with TikTok captions
+                </Link>
+                <Link
+                  href="/tools"
+                  className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-900/80 px-4 py-2.5 text-sm font-medium text-slate-200 hover:border-sky-500/70 hover:text-sky-200 transition"
+                >
+                  Browse all tools
+                </Link>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-3">
@@ -176,7 +207,10 @@ export default function HomePage() {
             </p>
 
             <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <article className="rounded-2xl border border-sky-500/40 bg-sky-500/10 p-4">
+              <Link
+                href="/tools/tiktok-caption-generator"
+                className="rounded-2xl border border-sky-500/40 bg-sky-500/10 p-4 hover:border-sky-400/80 transition block"
+              >
                 <p className="text-xs font-semibold text-sky-200 uppercase tracking-wide">
                   Live
                 </p>
@@ -186,7 +220,7 @@ export default function HomePage() {
                 <p className="mt-1.5 text-xs text-slate-200">
                   Turn a simple idea into a ready‑to‑post TikTok caption, complete with emojis and hashtags.
                 </p>
-              </article>
+              </Link>
 
               <article className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4 opacity-70">
                 <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide">
@@ -221,9 +255,32 @@ export default function HomePage() {
           <p className="text-[11px] text-slate-500">
             © {new Date().getFullYear()} ToolEagle. Built for creators.
           </p>
-          <p className="text-[11px] text-slate-500">
-            More small, focused tools coming soon.
-          </p>
+          <div className="flex items-center gap-3 text-[11px] text-slate-500">
+            <a
+              href="https://www.tiktok.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-sky-300"
+            >
+              TikTok
+            </a>
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-pink-300"
+            >
+              Instagram
+            </a>
+            <a
+              href="https://x.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-sky-300"
+            >
+              X
+            </a>
+          </div>
         </div>
       </footer>
     </main>

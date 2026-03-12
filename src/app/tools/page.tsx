@@ -1,6 +1,7 @@
-import Link from "next/link";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
+import { tools, toolCategories } from "@/config/tools";
+import { ToolCard } from "@/components/tools/ToolCard";
 
 export const metadata = {
   title: "Tools",
@@ -8,70 +9,56 @@ export const metadata = {
     "Browse ToolEagle tools for creators: captions, hashtags, hooks and more."
 };
 
-const tools = [
-  {
-    slug: "tiktok-caption-generator",
-    name: "TikTok Caption Generator",
-    description:
-      "Turn a simple idea into a ready-to-post TikTok caption with hooks, emojis and hashtags."
-  },
-  {
-    slug: "hashtag-generator",
-    name: "Hashtag Generator",
-    description: "Generate niche-friendly hashtags for TikTok, Reels and Shorts."
-  },
-  {
-    slug: "hook-generator",
-    name: "Hook Generator",
-    description: "Create scroll-stopping hooks for short-form videos and carousels."
-  },
-  {
-    slug: "title-generator",
-    name: "Title Generator",
-    description: "Generate titles for YouTube, TikTok, Reels and Shorts."
-  }
-];
-
 export default function ToolsPage() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-50 flex flex-col">
+    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
       <SiteHeader />
 
       <div className="flex-1">
-        <section className="max-w-5xl mx-auto px-4 pt-10 pb-16">
+        <section className="container pt-10 pb-16">
           <div className="space-y-2 max-w-xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">
               Tools
             </p>
-            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">
+            <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
               Free tools for every creator
             </h1>
-            <p className="text-sm sm:text-base text-slate-300">
-              ToolEagle is building a small, focused set of utilities to help you move from idea to
-              published content faster.
+            <p className="text-base text-slate-600 leading-relaxed">
+              ToolEagle is building a creator-first toolkit you can scan quickly: captions, hooks,
+              titles, ideas and scripts.
             </p>
           </div>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {tools.map((tool) => (
-              <Link
-                key={tool.slug}
-                href={`/tools/${tool.slug}`}
-                className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/80 rounded-2xl"
-              >
-                <article className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4 hover:border-sky-500/60 hover:bg-slate-900 transition h-full">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-sky-200">
-                    Live
-                  </p>
-                  <h2 className="mt-1 text-sm font-semibold text-slate-50">
-                    {tool.name}
-                  </h2>
-                  <p className="mt-1.5 text-xs text-slate-300">
-                    {tool.description}
-                  </p>
-                </article>
-              </Link>
-            ))}
+          <div className="mt-10 space-y-10">
+            {toolCategories.map((category) => {
+              const categoryTools = tools.filter((t) => t.category === category);
+              if (categoryTools.length === 0) return null;
+
+              return (
+                <div key={category}>
+                  <div className="flex items-end justify-between gap-4">
+                    <h2 className="text-lg font-semibold text-slate-900">
+                      {category}
+                    </h2>
+                    <p className="text-sm text-slate-500">
+                      {categoryTools.length} tools
+                    </p>
+                  </div>
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {categoryTools.map((tool) => (
+                      <ToolCard
+                        key={tool.slug}
+                        href={`/tools/${tool.slug}`}
+                        icon={tool.icon}
+                        name={tool.name}
+                        description={tool.description}
+                        category={tool.category}
+                      />
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
       </div>

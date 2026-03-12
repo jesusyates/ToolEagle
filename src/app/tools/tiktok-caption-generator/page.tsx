@@ -3,12 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 
-export const metadata = {
-  title: "TikTok Caption Generator",
-  description:
-    "Generate scroll-stopping TikTok captions from a simple video idea, complete with emojis and hashtags."
-};
-
 export default function TikTokCaptionGeneratorPage() {
   const [idea, setIdea] = useState("");
   const [caption, setCaption] = useState<string | null>(null);

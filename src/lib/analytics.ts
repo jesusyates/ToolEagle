@@ -4,9 +4,15 @@ declare global {
   }
 }
 
-type ToolEvent = "caption_generate_click" | "copy_caption" | "tool_page_view";
+type ToolEvent = "tool_page_view" | "tool_generate" | "tool_copy";
 
-export function trackEvent(action: ToolEvent, params?: Record<string, any>) {
+export type ToolAnalyticsPayload = {
+  tool_slug: string;
+  tool_category?: string;
+  [key: string]: any;
+};
+
+export function trackEvent(action: ToolEvent, params: ToolAnalyticsPayload) {
   if (typeof window === "undefined") return;
   if (!window.gtag) return;
 

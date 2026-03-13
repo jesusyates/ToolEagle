@@ -2,14 +2,26 @@
 
 import { useEffect, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { tools } from "@/config/tools";
+import { ToolPageShell } from "@/components/tools/ToolPageShell";
+import { ToolInputCard } from "@/components/tools/ToolInputCard";
+import { ToolResultCard } from "@/components/tools/ToolResultCard";
+import { ToolCopyButton } from "@/components/tools/ToolCopyButton";
+import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
 
 export function TikTokCaptionGeneratorClient() {
   const [idea, setIdea] = useState("");
   const [caption, setCaption] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
+  const toolMeta = tools.find((t) => t.slug === "tiktok-caption-generator");
+
   useEffect(() => {
-    trackEvent("tool_page_view", { tool: "tiktok-caption-generator" });
+    if (!toolMeta) return;
+    trackEvent("tool_page_view", {
+      tool_slug: toolMeta.slug,
+      tool_category: toolMeta.category
+    });
   }, []);
 
   function generateCaption() {
@@ -52,15 +64,25 @@ export function TikTokCaptionGeneratorClient() {
     setTimeout(() => {
       setCaption(generated);
       setIsGenerating(false);
-      trackEvent("caption_generate_click", { tool: "tiktok-caption-generator" });
-    }, 250);
+      if (toolMeta) {
+        trackEvent("tool_generate", {
+          tool_slug: toolMeta.slug,
+          tool_category: toolMeta.category
+        });
+      }
+    }, 200);
   }
 
   async function handleCopy() {
     if (!caption) return;
     try {
       await navigator.clipboard.writeText(caption);
-      trackEvent("copy_caption", { tool: "tiktok-caption-generator" });
+      if (toolMeta) {
+        trackEvent("tool_copy", {
+          tool_slug: toolMeta.slug,
+          tool_category: toolMeta.category
+        });
+      }
       alert("Caption copied. Paste it into TikTok, Instagram or Shorts.");
     } catch {
       alert("Could not copy automatically. Please select the text and copy it manually.");
@@ -72,107 +94,65 @@ export function TikTokCaptionGeneratorClient() {
     : undefined;
 
   return (
-    <section className="max-w-5xl mx-auto px-4 pt-10 pb-16">
-      <div className="space-y-2 max-w-xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">
-          Tool #1
-        </p>
-        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">
-          TikTok Caption Generator
-        </h1>
-        <p className="text-sm sm:text-base text-slate-300">
-          Turn a quick idea into a ready-to-post TikTok caption with hooks, emojis and hashtags.
-          Built for creators who want to move fast without overthinking the text.
-        </p>
-      </div>
-
-      <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] items-start">
-        <div className="rounded-3xl border border-slate-800/80 bg-slate-900/70 p-5 sm:p-6 shadow-[0_18px_60px_rgba(15,23,42,0.9)]">
-          <div className="space-y-3">
-            <label className="block text-xs font-medium text-slate-200">
-              Your video idea or hook
-            </label>
-            <textarea
-              value={idea}
-              onChange={(e) => setIdea(e.target.value)}
-              className="w-full min-h-[110px] resize-none rounded-2xl border border-slate-800 bg-slate-950/70 px-3.5 py-3 text-sm text-slate-50 placeholder:text-slate-500 shadow-inner shadow-black/40 focus:outline-none focus:ring-2 focus:ring-sky-500/70 focus:border-sky-400/80"
-              placeholder="Example: Share a 10-second tip that shows how to make vertical videos look more cinematic using just your phone."
-            />
-
-            <button
-              type="button"
-              onClick={generateCaption}
-              disabled={isGenerating}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-sky-500 via-cyan-400 to-indigo-500 px-4 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-sky-500/40 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-75"
-            >
-              {isGenerating ? "Crafting your caption…" : "Generate TikTok Caption"}
-            </button>
-          </div>
-
-          <div className="mt-5 border-t border-slate-800/80 pt-4 space-y-3">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-              <p className="text-xs font-medium text-slate-300">Preview</p>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={handleCopy}
-                  disabled={!caption}
-                  className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-900/90 px-3 py-1 text-[11px] font-medium text-slate-200 hover:border-sky-500/80 hover:text-sky-200 disabled:opacity-60 disabled:cursor-not-allowed transition"
+    <ToolPageShell
+      eyebrow="Tool #1"
+      title="TikTok Caption Generator"
+      description="Turn a quick idea into a ready-to-post TikTok caption with hooks, emojis and hashtags. Built for creators who want to move fast without overthinking the text."
+      input={
+        <ToolInputCard label="Your video idea or hook">
+          <textarea
+            value={idea}
+            onChange={(e) => setIdea(e.target.value)}
+            className="w-full min-h-[110px] resize-none rounded-2xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner shadow-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-500/70 focus:border-sky-400/80"
+            placeholder="Example: Share a 10-second tip that shows how to make vertical videos look more cinematic using just your phone."
+          />
+          <button
+            type="button"
+            onClick={generateCaption}
+            disabled={isGenerating}
+            className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-75 transition"
+          >
+            {isGenerating ? "Crafting your caption…" : "Generate TikTok Caption"}
+          </button>
+        </ToolInputCard>
+      }
+      result={
+        <ToolResultCard
+          title="Preview"
+          actions={
+            <>
+              <ToolCopyButton
+                label="Copy caption"
+                onClick={handleCopy}
+                disabled={!caption}
+              />
+              {shareOnXUrl && (
+                <a
+                  href={shareOnXUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-3 py-1 text-[11px] font-medium text-slate-800 hover:border-sky-500/80 hover:text-sky-700 transition"
                 >
-                  Copy caption
-                </button>
-                {shareOnXUrl && (
-                  <a
-                    href={shareOnXUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-900/90 px-3 py-1 text-[11px] font-medium text-slate-200 hover:border-sky-500/80 hover:text-sky-200 transition"
-                  >
-                    Share on X
-                  </a>
-                )}
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-slate-800 bg-slate-950/60 px-3.5 py-3 text-sm text-slate-100 whitespace-pre-line min-h-[80px]">
-              {caption ??
-                "Your caption will appear here. Once you’re happy, copy it and paste into TikTok, Instagram Reels or YouTube Shorts."}
-            </div>
-          </div>
-
-          <div className="mt-4 rounded-2xl border border-slate-800 bg-slate-900/70 px-3.5 py-3">
-            <p className="text-xs font-semibold text-slate-200">Pro tips</p>
-            <ul className="mt-1.5 space-y-1.5 text-[11px] text-slate-400">
-              <li>Make the first line feel like you; that’s what stops the scroll.</li>
-              <li>Keep it under 2–3 short lines so it doesn’t get cut off.</li>
-              <li>Swap in 1–2 of your own branded hashtags to build your niche.</li>
-            </ul>
-          </div>
-        </div>
-
-        <aside className="space-y-4">
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
-            <p className="text-xs font-semibold text-slate-300 uppercase tracking-wide">
-              ToolEagle mission
-            </p>
-            <p className="mt-2 text-xs text-slate-400">
-              ToolEagle exists to give every creator free, focused tools that remove friction
-              between ideas and published work. No logins, no noise—just what you need.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
-            <p className="text-xs font-semibold text-slate-300 uppercase tracking-wide">
-              Share your results
-            </p>
-            <p className="mt-2 text-xs text-slate-400">
-              Paste your caption into TikTok, Instagram or Shorts, post your video, and share
-              ToolEagle with another creator who could use faster workflows.
-            </p>
-          </div>
-        </aside>
-      </div>
-    </section>
+                  Share on X
+                </a>
+              )}
+            </>
+          }
+        >
+          {caption ??
+            "Your caption will appear here. Once you’re happy, copy it and paste into TikTok, Instagram Reels or YouTube Shorts."}
+        </ToolResultCard>
+      }
+      proTips={
+        <ToolProTipsCard
+          tips={[
+            "Make the first line feel like you; that’s what stops the scroll.",
+            "Keep it under 2–3 short lines so it doesn’t get cut off.",
+            "Swap in 1–2 of your own branded hashtags to build your niche."
+          ]}
+        />
+      }
+    />
   );
 }
 

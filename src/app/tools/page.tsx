@@ -29,22 +29,27 @@ export default function ToolsPage() {
             </p>
           </div>
 
-          <div className="mt-10 space-y-10">
+          <div className="mt-10 space-y-12">
             {toolCategories.map((category) => {
               const categoryTools = tools.filter((t) => t.category === category);
               if (categoryTools.length === 0) return null;
 
               return (
-                <div key={category}>
+                <section key={category} className="space-y-4">
                   <div className="flex items-end justify-between gap-4">
-                    <h2 className="text-lg font-semibold text-slate-900">
-                      {category}
-                    </h2>
+                    <div>
+                      <h2 className="text-lg font-semibold text-slate-900">
+                        {category}
+                      </h2>
+                      <p className="text-sm text-slate-600">
+                        Tools to help with your {category.toLowerCase()}.
+                      </p>
+                    </div>
                     <p className="text-sm text-slate-500">
                       {categoryTools.length} tools
                     </p>
                   </div>
-                  <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {categoryTools.map((tool) => (
                       <ToolCard
                         key={tool.slug}
@@ -56,7 +61,7 @@ export default function ToolsPage() {
                       />
                     ))}
                   </div>
-                </div>
+                </section>
               );
             })}
           </div>

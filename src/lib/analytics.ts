@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-type ToolEvent = "tool_page_view" | "tool_generate" | "tool_copy";
+type ToolEvent = "tool_page_view" | "tool_generate" | "tool_generate_ai" | "tool_copy";
 
 export type ToolAnalyticsPayload = {
   tool_slug: string;

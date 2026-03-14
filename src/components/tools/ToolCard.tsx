@@ -16,7 +16,7 @@ export function ToolCard({
   return (
     <Link
       href={href}
-      className="group block rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-slate-300 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40"
+      className="group block rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-slate-300 transition duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/40"
     >
       <div className="flex items-start gap-3">
         <div className="h-10 w-10 rounded-xl bg-slate-100 flex items-center justify-center border border-slate-200">

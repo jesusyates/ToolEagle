@@ -3,10 +3,13 @@
 import Link from "next/link";
 import { SiteHeader } from "./_components/SiteHeader";
 import { SiteFooter } from "./_components/SiteFooter";
-import { tools } from "@/config/tools";
+import { tools, popularToolSlugs, type ToolConfig } from "@/config/tools";
 import { ToolCard } from "@/components/tools/ToolCard";
 
-const popularTools = tools.filter((t) => t.isPopular).slice(0, 6);
+const popularTools = popularToolSlugs
+  .map((slug) => tools.find((t) => t.slug === slug))
+  .filter((t): t is ToolConfig => t != null)
+  .slice(0, 6);
 
 const latestArticles = [
   {
@@ -37,7 +40,7 @@ export default function HomePage() {
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                Creator toolkit
+                AI tools for creators
               </div>
 
               <div className="space-y-3">
@@ -46,7 +49,7 @@ export default function HomePage() {
                 </h1>
                 <p className="text-xl text-slate-700 leading-relaxed max-w-2xl">
                   <span className="font-semibold text-slate-900">
-                    Free tools for creators.
+                    AI tools for creators.
                   </span>{" "}
                   Generate captions, hashtags, hooks and titles in seconds—so you can spend less
                   time writing and more time creating.
@@ -54,27 +57,58 @@ export default function HomePage() {
               </div>
 
               <p className="text-base text-slate-600 max-w-2xl leading-relaxed">
-                A clean, creator-first toolkit designed to be fast, scannable, and easy to use on
+                A clean, creator-first toolkit powered by AI. Fast, scannable, and easy to use on
                 mobile. No sign-ups. No distractions.
               </p>
 
               <div className="flex flex-wrap gap-3 pt-1">
                 <Link
                   href="/tools/tiktok-caption-generator"
-                  className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition w-full sm:w-auto text-center"
+                  className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition duration-150 w-full sm:w-auto text-center"
                 >
                   Start with TikTok captions
                 </Link>
                 <Link
                   href="/tools"
-                  className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-50 transition w-full sm:w-auto text-center"
+                  className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-50 transition duration-150 w-full sm:w-auto text-center"
                 >
                   Browse all tools
                 </Link>
               </div>
 
+              <div className="flex flex-wrap gap-3 mt-4">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-600">
+                  ⚡ 12,000+ captions generated
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-600">
+                  🚀 Used by creators on TikTok & YouTube
+                </span>
+              </div>
+
+              <p className="text-xs text-slate-500 mt-3">Popular for creators</p>
+              <div className="flex flex-wrap gap-2">
+                <Link
+                  href="/tools/tiktok-caption-generator"
+                  className="inline-flex items-center rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition duration-150"
+                >
+                  TikTok Captions
+                </Link>
+                <Link
+                  href="/tools/hook-generator"
+                  className="inline-flex items-center rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition duration-150"
+                >
+                  Hooks
+                </Link>
+                <Link
+                  href="/tools/hashtag-generator"
+                  className="inline-flex items-center rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition duration-150"
+                >
+                  Hashtags
+                </Link>
+              </div>
+
               <div className="grid gap-4 sm:grid-cols-3 pt-2">
-                <div className="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm">
+                <div className="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm hover:shadow-md transition duration-150">
                   <p className="text-sm font-semibold text-slate-900">
                     No sign‑up
                   </p>
@@ -82,7 +116,7 @@ export default function HomePage() {
                     Open, use and close. No accounts, no onboarding flows.
                   </p>
                 </div>
-                <div className="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm">
+                <div className="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm hover:shadow-md transition duration-150">
                   <p className="text-sm font-semibold text-slate-900">
                     Creator‑first
                   </p>
@@ -90,7 +124,7 @@ export default function HomePage() {
                     Built around TikTok, Reels, Shorts and YouTube, not generic marketing.
                   </p>
                 </div>
-                <div className="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm">
+                <div className="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm hover:shadow-md transition duration-150">
                   <p className="text-sm font-semibold text-slate-900">
                     Always free
                   </p>
@@ -189,7 +223,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/blog"
-              className="text-sm text-sky-700 hover:text-sky-800 underline-offset-2 hover:underline"
+              className="text-sm text-sky-700 hover:text-sky-800 underline-offset-2 hover:underline transition duration-150"
             >
               View all articles
             </Link>
@@ -200,7 +234,7 @@ export default function HomePage() {
               <Link
                 key={article.href}
                 href={article.href}
-                className="block rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-slate-300 transition"
+                className="block rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-slate-300 transition duration-150"
               >
                 <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
                   <span className="px-2 py-1 rounded-full border border-slate-200 bg-slate-50">

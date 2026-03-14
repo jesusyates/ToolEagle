@@ -31,14 +31,14 @@ export default function BlogPage() {
             </p>
           </div>
 
-          <div className="mt-8 space-y-4">
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
               <Link
                 key={post.frontmatter.slug}
                 href={`/blog/${post.frontmatter.slug}`}
-                className="block rounded-2xl border border-slate-200 bg-white p-4 hover:border-sky-500/70 hover:shadow-md transition"
+                className="group block rounded-2xl border border-slate-200 bg-white p-6 hover:border-sky-500/70 hover:shadow-md transition"
               >
-                <div className="flex items-center gap-2 text-[11px] text-slate-500 mb-1">
+                <div className="flex items-center gap-2 text-[11px] text-slate-500 mb-2">
                   {post.frontmatter.tags && post.frontmatter.tags[0] && (
                     <span className="px-2 py-0.5 rounded-full border border-slate-200 bg-slate-50">
                       {post.frontmatter.tags[0]}
@@ -46,12 +46,20 @@ export default function BlogPage() {
                   )}
                   <span>Playbook</span>
                 </div>
-                <h2 className="text-sm font-semibold text-slate-900">
+                <h2 className="text-base font-semibold text-slate-900">
                   {post.frontmatter.title}
                 </h2>
-                <p className="mt-1 text-xs text-slate-600">
+                <p className="mt-2 text-sm text-slate-600 leading-relaxed">
                   {post.frontmatter.description}
                 </p>
+                <div className="mt-4 flex items-center justify-between">
+                  <span className="text-xs text-slate-500">
+                    {new Date(post.frontmatter.date).toLocaleDateString()}
+                  </span>
+                  <span className="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 text-[11px] font-semibold text-white group-hover:bg-slate-800">
+                    Read article
+                  </span>
+                </div>
               </Link>
             ))}
           </div>

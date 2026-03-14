@@ -1,26 +1,44 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { tools } from "@/config/tools";
+import { aiPrompts, MAX_INPUT_LENGTH } from "@/config/prompts";
+import { generateAIText } from "@/lib/ai/generateText";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { ToolInputCard } from "@/components/tools/ToolInputCard";
-import { ToolResultCard } from "@/components/tools/ToolResultCard";
-import { ToolCopyButton } from "@/components/tools/ToolCopyButton";
+import { ToolResultListCard } from "@/components/tools/ToolResultListCard";
+import { HowItWorksCard } from "@/components/tools/HowItWorksCard";
+import { ExamplesCard } from "@/components/tools/ExamplesCard";
 import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
+
+const TRY_EXAMPLE = "Instagram Reels for small business owners, showing how to turn one video into 5 posts.";
 
 const patterns = [
   "POV: {outcome} without {pain}",
-  "You’re doing {topic} wrong, here’s why:",
+  "You're doing {topic} wrong, here's why:",
   "Stop scrolling if you {identity}",
   "No one is talking about {secret}",
   "If you {identity}, watch this before {action}",
-  "I tried {experiment} so you don’t have to"
+  "I tried {experiment} so you don't have to"
 ];
 
-export function HookGeneratorClient() {
+const HOOK_EXAMPLES = [
+  {
+    input: "Instagram Reels for small business owners",
+    output: "Stop scrolling if you post Instagram Reels for small business owners\n\nPOV: your content is good, but your hook is invisible."
+  },
+  {
+    input: "morning routine productivity tips",
+    output: "You're doing morning routine productivity tips wrong, here's why:\n\nI tried morning routine productivity tips hacks so you don't have to"
+  }
+];
+
+type Props = { relatedAside?: ReactNode };
+
+export function HookGeneratorClient({ relatedAside }: Props) {
   const [topic, setTopic] = useState("");
-  const [hooks, setHooks] = useState<string[] | null>(null);
+  const [hooks, setHooks] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
 
   const toolMeta = tools.find((t) => t.slug === "hook-generator");
@@ -33,19 +51,8 @@ export function HookGeneratorClient() {
     });
   }, []);
 
-  function generateHooks() {
-    const trimmed = topic.trim();
-    if (!trimmed) {
-      setHooks([
-        "Stop scrolling if you want your next video to do better than the last one.",
-        "POV: your content is good, but your hook is invisible."
-      ]);
-      return;
-    }
-
-    setIsGenerating(true);
-
-    const replacements = {
+  function templateGenerate(trimmed: string): string[] {
+    const replacements: Record<string, string> = {
       "{outcome}": "getting " + trimmed,
       "{pain}": "burning out on content",
       "{topic}": trimmed,
@@ -54,40 +61,70 @@ export function HookGeneratorClient() {
       "{action}": "you post your next " + trimmed + " video",
       "{experiment}": trimmed + " hacks"
     };
-
-    const generated = patterns.map((pattern) =>
-      pattern.replace(/\{[^}]+\}/g, (match) => (replacements as any)[match] || trimmed)
-    );
-
-    setTimeout(() => {
-      setHooks(generated.slice(0, 5));
-      setIsGenerating(false);
-      if (toolMeta) {
-        trackEvent("tool_generate", {
-          tool_slug: toolMeta.slug,
-          tool_category: toolMeta.category
-        });
-      }
-    }, 200);
+    return patterns.map((pattern) =>
+      pattern.replace(/\{[^}]+\}/g, (match) => replacements[match] ?? trimmed)
+    ).slice(0, 5);
   }
 
-  function handleCopyAll() {
-    if (!hooks || hooks.length === 0) return;
-    const text = hooks.map((h, i) => `${i + 1}. ${h}`).join("\n");
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
+  async function generateHooks() {
+    const trimmed = topic.trim();
+    if (!trimmed) {
+      setHooks([
+        "Stop scrolling if you want your next video to do better than the last one.",
+        "POV: your content is good, but your hook is invisible."
+      ]);
+      return;
+    }
+    if (trimmed.length > MAX_INPUT_LENGTH) {
+      setHooks([`Please keep your input under ${MAX_INPUT_LENGTH} characters.`]);
+      return;
+    }
+
+    setIsGenerating(true);
+
+    const aiPrompt = aiPrompts["hook-generator"];
+    if (aiPrompt) {
+      try {
+        const prompt = aiPrompt.replace(/\{input\}/g, trimmed);
+        const results = await generateAIText(prompt);
+        setHooks(results);
         if (toolMeta) {
-          trackEvent("tool_copy", {
-            tool_slug: toolMeta.slug,
-            tool_category: toolMeta.category
-          });
+          trackEvent("tool_generate_ai", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, input_length: trimmed.length });
         }
-        alert("Hooks copied. Paste them into your notes or script doc.");
-      })
-      .catch(() => {
-        alert("Could not copy automatically. Please select and copy manually.");
+      } catch {
+        setHooks(templateGenerate(trimmed));
+        if (toolMeta) trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category });
+      }
+    } else {
+      setHooks(templateGenerate(trimmed));
+      if (toolMeta) trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category });
+    }
+
+    setIsGenerating(false);
+  }
+
+  async function handleCopyItem(index: number) {
+    const text = hooks[index];
+    if (!text) return;
+    await navigator.clipboard.writeText(text);
+    if (toolMeta) {
+      trackEvent("tool_copy", {
+        tool_slug: toolMeta.slug,
+        tool_category: toolMeta.category
       });
+    }
+  }
+
+  async function handleCopyAll() {
+    if (hooks.length === 0) return;
+    const text = hooks.join("\n\n");
+    await navigator.clipboard.writeText(text);
+    if (toolMeta) {
+      trackEvent("tool_copy", {
+        tool_slug: toolMeta.slug,
+        tool_category: toolMeta.category
+      });
+    }
   }
 
   return (
@@ -97,50 +134,69 @@ export function HookGeneratorClient() {
       description="Generate punchy first lines for TikToks, Reels, Shorts and carousels so people stop and actually listen."
       input={
         <ToolInputCard label="What is this video/post about?">
+          <button
+            type="button"
+            onClick={() => setTopic(TRY_EXAMPLE)}
+            className="text-xs font-medium text-sky-700 hover:underline mb-2 block"
+          >
+            Try example
+          </button>
           <textarea
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
+            maxLength={MAX_INPUT_LENGTH + 50}
             className="w-full min-h-[100px] resize-none rounded-2xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner shadow-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-500/70 focus:border-sky-400/80"
             placeholder="Example: Instagram Reels for small business owners, showing how to turn one video into 5 posts."
           />
+          {topic.length > MAX_INPUT_LENGTH && (
+            <p className="text-xs text-amber-600 mt-1">Please keep under {MAX_INPUT_LENGTH} characters.</p>
+          )}
           <button
             type="button"
             onClick={generateHooks}
             disabled={isGenerating}
-            className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-75 transition"
+            className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-75 transition duration-150"
           >
-            {isGenerating ? "Generating hooks…" : "Generate Hooks"}
+            {isGenerating ? "Generating..." : "Generate Hooks"}
           </button>
         </ToolInputCard>
       }
       result={
-        <ToolResultCard
+        <ToolResultListCard
           title="Hook ideas"
-          actions={
-            <ToolCopyButton
-              label="Copy all hooks"
-              onClick={handleCopyAll}
-              disabled={!hooks || hooks.length === 0}
-            />
-          }
-        >
-          {hooks && hooks.length > 0 ? (
-            hooks.map((hook, index) => `${index + 1}. ${hook}`).join("\n")
-          ) : (
-            "Your hook ideas will appear here. Keep them short enough to say in 2–3 seconds."
-          )}
-        </ToolResultCard>
+          items={hooks}
+          isLoading={isGenerating}
+          onCopyItem={handleCopyItem}
+          onCopyAll={handleCopyAll}
+          emptyMessage="Your hook ideas will appear here. Keep them short enough to say in 2–3 seconds."
+          toolSlug="hook-generator"
+        />
       }
-      proTips={
-        <ToolProTipsCard
-          tips={[
-            "Say your hook out loud; if it’s hard to say, it’s hard to listen to.",
-            "Record the hook twice: one calm, one high‑energy—test which performs better.",
-            "Match the hook to the first frame visually so they feel like one idea."
+      howItWorks={
+        <HowItWorksCard
+          steps={[
+            { step: 1, text: "Enter your video or post topic above." },
+            { step: 2, text: "Generate hooks that stop the scroll." },
+            { step: 3, text: "Copy and post—use in your script or caption." }
           ]}
         />
+      }
+      aside={
+        <>
+          <ExamplesCard
+            examples={HOOK_EXAMPLES}
+            onUseExample={(input) => setTopic(input)}
+          />
+          <ToolProTipsCard
+            tips={[
+              "Say your hook out loud; if it's hard to say, it's hard to listen to.",
+              "Record the hook twice: one calm, one high‑energy—test which performs better.",
+              "Match the hook to the first frame visually so they feel like one idea."
+            ]}
+          />
+          {relatedAside}
+        </>
       }
     />
   );
 }
-

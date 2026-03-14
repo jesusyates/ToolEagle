@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: "%s | ToolEagle"
   },
   description:
-    "ToolEagle is a hub of free, creator-first tools to help you ship TikTok, Reels, Shorts and more—starting with a TikTok Caption Generator.",
+    "AI tools for creators. Generate captions, hashtags, hooks and titles in seconds. Free TikTok, Reels, Shorts and YouTube tools.",
   keywords: [
     "ToolEagle",
     "creator tools",
@@ -22,18 +22,18 @@ export const metadata: Metadata = {
     "content creator"
   ],
   openGraph: {
-    title: "ToolEagle - Free Tools for Creators",
+    title: "ToolEagle - AI Tools for Creators",
     description:
-      "Free, creator-first tools to help you move from idea to published video faster. Start with captions, hashtags, hooks and titles.",
+      "AI-powered tools for creators. Generate captions, hashtags, hooks and titles in seconds. Free and no sign-up required.",
     type: "website",
     url: "https://www.tooleagle.com",
     siteName: "ToolEagle"
   },
   twitter: {
     card: "summary_large_image",
-    title: "ToolEagle - Free Tools for Creators",
+    title: "ToolEagle - AI Tools for Creators",
     description:
-      "Free, creator-first tools to help you move from idea to published video faster."
+      "AI-powered tools for creators. Generate captions, hashtags, hooks and titles in seconds."
   }
 };
 

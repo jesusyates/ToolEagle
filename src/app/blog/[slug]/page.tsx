@@ -3,9 +3,11 @@ import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import { Metadata } from "next";
-import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents } from "@/components/mdx";
+import { TryToolCard } from "@/components/blog/TryToolCard";
+import { TryToolsCard } from "@/components/blog/TryToolsCard";
+import { TableOfContents } from "@/components/blog/TableOfContents";
 
 type Params = {
   slug: string;
@@ -64,40 +66,29 @@ export default function BlogPostPage({ params }: { params: Params }) {
 
   const { frontmatter, content } = post;
 
-  const jsonLd = {
+  const blogUrl = `https://www.tooleagle.com/blog/${frontmatter.slug}`;
+
+  const blogPosting = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: frontmatter.title,
     description: frontmatter.description,
     datePublished: frontmatter.date,
-    url: `https://www.tooleagle.com/blog/${frontmatter.slug}`,
+    url: blogUrl,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://www.tooleagle.com/blog/${frontmatter.slug}`
-    },
-    breadcrumb: {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: "https://www.tooleagle.com/"
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Blog",
-          item: "https://www.tooleagle.com/blog"
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: frontmatter.title,
-          item: `https://www.tooleagle.com/blog/${frontmatter.slug}`
-        }
-      ]
+      "@id": blogUrl
     }
+  };
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.tooleagle.com/" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.tooleagle.com/blog" },
+      { "@type": "ListItem", position: 3, name: frontmatter.title, item: blogUrl }
+    ]
   };
 
   return (
@@ -120,25 +111,27 @@ export default function BlogPostPage({ params }: { params: Params }) {
 
           <hr className="my-4 border-slate-200" />
 
+          {frontmatter.toc && frontmatter.toc.length > 0 && (
+            <TableOfContents items={frontmatter.toc} />
+          )}
+
           <MDXRemote source={content} components={mdxComponents} />
 
           <hr className="my-6 border-slate-200" />
-          <p className="text-xs text-slate-500">
-            Looking for tools to apply these ideas? Try{" "}
-            <Link href="/tools/tiktok-caption-generator" className="text-sky-700 underline">
-              TikTok Caption Generator
-            </Link>{" "}
-            or{" "}
-            <Link href="/tools/title-generator" className="text-sky-700 underline">
-              Title Generator
-            </Link>
-            .
-          </p>
+          {frontmatter.recommendedTools?.length ? (
+            <TryToolsCard toolSlugs={frontmatter.recommendedTools} />
+          ) : (
+            <TryToolCard tags={frontmatter.tags} />
+          )}
         </article>
 
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPosting) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
         />
       </div>
 

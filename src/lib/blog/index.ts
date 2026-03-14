@@ -3,12 +3,16 @@ import path from "path";
 import matter from "gray-matter";
 import { cache } from "react";
 
+export type TocItem = { title: string; id: string };
+
 export type BlogFrontmatter = {
   title: string;
   description: string;
   date: string;
   tags?: string[];
   slug: string;
+  toc?: TocItem[];
+  recommendedTools?: string[];
 };
 
 export type BlogPost = {
@@ -35,7 +39,9 @@ export const getAllPosts = cache((): BlogPost[] => {
         description: data.description,
         date: data.date,
         tags: data.tags ?? [],
-        slug: data.slug ?? file.replace(/\.mdx$/, "")
+        slug: data.slug ?? file.replace(/\.mdx$/, ""),
+        toc: data.toc ?? [],
+        recommendedTools: data.recommendedTools ?? []
       };
 
       return { frontmatter, content, filePath: fullPath };

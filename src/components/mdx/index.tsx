@@ -46,10 +46,25 @@ export function NoteBox({ title = "Note", children }: BoxProps) {
   );
 }
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 export const mdxComponents = {
   ToolLink,
   TipBox,
   NoteBox,
+  h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
+    const id = props.id ?? (typeof props.children === "string" ? slugify(props.children) : undefined);
+    return <h2 {...props} id={id} className="scroll-mt-20" />;
+  },
+  h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
+    const id = props.id ?? (typeof props.children === "string" ? slugify(props.children) : undefined);
+    return <h3 {...props} id={id} className="scroll-mt-20" />;
+  },
   a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
     <a {...props} className="text-sky-700 underline" />
   ),

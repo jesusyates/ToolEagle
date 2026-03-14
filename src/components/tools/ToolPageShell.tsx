@@ -6,7 +6,8 @@ type ToolPageShellProps = {
   description: string;
   input: ReactNode;
   result: ReactNode;
-  proTips: ReactNode;
+  howItWorks?: ReactNode;
+  proTips?: ReactNode;
   aside?: ReactNode;
 };
 
@@ -16,6 +17,7 @@ export function ToolPageShell({
   description,
   input,
   result,
+  howItWorks,
   proTips,
   aside
 }: ToolPageShellProps) {
@@ -39,6 +41,7 @@ export function ToolPageShell({
         <div className="space-y-4">
           {input}
           {result}
+          {howItWorks}
           {proTips}
         </div>
         {aside && <aside className="space-y-4">{aside}</aside>}

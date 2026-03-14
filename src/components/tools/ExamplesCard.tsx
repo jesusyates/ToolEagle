@@ -1,3 +1,5 @@
+import { DelegatedButton } from "@/components/DelegatedButton";
+
 type Example = { input: string; output: string };
 
 type ExamplesCardProps = {
@@ -23,13 +25,12 @@ export function ExamplesCard({
             <p className="text-slate-800 mb-2">{ex.input}</p>
             <p className="text-slate-500 font-medium mb-1">Output</p>
             <p className="text-slate-800 whitespace-pre-line mb-2">{ex.output}</p>
-            <button
-              type="button"
+            <DelegatedButton
               onClick={() => onUseExample(ex.input)}
               className="text-sky-700 font-medium hover:underline"
             >
               Use this example
-            </button>
+            </DelegatedButton>
           </li>
         ))}
       </ul>

@@ -1,14 +1,21 @@
-import Link from "next/link";
-import { Bird } from "lucide-react";
+"use client";
 
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/tools", label: "Tools" },
-  { href: "/blog", label: "Blog" },
-  { href: "/about", label: "About" }
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Bird } from "lucide-react";
+import { AuthButton } from "@/components/auth/AuthButton";
+
+const navPaths = [
+  { href: "/", key: "home" as const },
+  { href: "/tools", key: "tools" as const },
+  { href: "/favorites", key: "favorites" as const },
+  { href: "/blog", key: "blog" as const },
+  { href: "/about", key: "about" as const }
 ];
 
 export function SiteHeader() {
+  const t = useTranslations("nav");
+
   return (
     <header className="border-b border-slate-200 bg-white/80 backdrop-blur">
       <div className="container py-4 flex items-center justify-between gap-4">
@@ -24,17 +31,20 @@ export function SiteHeader() {
           </div>
         </Link>
 
-        <nav className="hidden sm:flex items-center gap-2 text-sm text-slate-700">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="px-3 py-2 rounded-full hover:bg-slate-100 hover:underline transition duration-150"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="flex items-center gap-2">
+          <nav className="hidden sm:flex items-center gap-2 text-sm text-slate-700">
+            {navPaths.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="px-3 py-2 rounded-full hover:bg-slate-100 hover:underline transition duration-150"
+              >
+                {t(item.key)}
+              </Link>
+            ))}
+          </nav>
+          <AuthButton />
+        </div>
       </div>
     </header>
   );

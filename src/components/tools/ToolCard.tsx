@@ -5,13 +5,15 @@ export function ToolCard({
   icon: Icon,
   name,
   description,
-  category
+  category,
+  badge
 }: {
   href: string;
   icon: React.ComponentType<{ className?: string }>;
   name: string;
   description: string;
   category: string;
+  badge?: "Popular" | "Trending";
 }) {
   return (
     <Link
@@ -22,10 +24,23 @@ export function ToolCard({
         <div className="h-10 w-10 rounded-xl bg-slate-100 flex items-center justify-center border border-slate-200">
           <Icon className="h-5 w-5 text-slate-700" />
         </div>
-        <div className="min-w-0 space-y-1">
-          <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">
-            {category}
-          </p>
+        <div className="min-w-0 space-y-1 flex-1">
+          <div className="flex items-center gap-2 flex-wrap">
+            <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">
+              {category}
+            </p>
+            {badge && (
+              <span
+                className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                  badge === "Popular"
+                    ? "bg-amber-100 text-amber-700"
+                    : "bg-sky-100 text-sky-700"
+                }`}
+              >
+                {badge}
+              </span>
+            )}
+          </div>
           <h3 className="text-base font-semibold text-slate-900 leading-snug">
             {name}
           </h3>

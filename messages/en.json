@@ -1,0 +1,30 @@
+{
+  "common": {
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyAll": "Copy all",
+    "save": "Save",
+    "saved": "Saved",
+    "regenerate": "Regenerate",
+    "shareLink": "Share link",
+    "linkCopied": "Link copied ✓",
+    "shareToTwitter": "Share to Twitter",
+    "tryExample": "Try example",
+    "login": "Login",
+    "account": "Account",
+    "use": "Use",
+    "useAgain": "Use again",
+    "unsave": "Unsave"
+  },
+  "error": {
+    "somethingWentWrong": "Something went wrong",
+    "tryAgain": "Try again"
+  },
+  "nav": {
+    "home": "Home",
+    "tools": "Tools",
+    "favorites": "Favorites",
+    "blog": "Blog",
+    "about": "About"
+  }
+}

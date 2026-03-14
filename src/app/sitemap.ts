@@ -3,6 +3,7 @@ import { tools } from "@/config/tools";
 import { generators } from "@/config/generators";
 import { getAllPosts } from "@/lib/blog";
 import { getSeoPageSlugs } from "@/config/seoPages";
+import { getSeoPageParams } from "@/config/seo-pages";
 
 const BASE_URL = "https://www.tooleagle.com";
 
@@ -41,5 +42,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8
   }));
 
-  return [...staticPages, ...toolPages, ...blogPages, ...seoPages];
+  const programmaticParams = getSeoPageParams();
+  const programmaticSeoPages: MetadataRoute.Sitemap = programmaticParams.map(({ category, topic }) => ({
+    url: `${BASE_URL}/${category}/${topic}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.75
+  }));
+
+  return [...staticPages, ...toolPages, ...blogPages, ...seoPages, ...programmaticSeoPages];
 }

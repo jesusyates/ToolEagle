@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { tools, toolCategories, popularToolSlugs, type ToolConfig } from "@/config/tools";
+import { getToolUsageCounts } from "@/lib/storage";
 import { ToolCard } from "@/components/tools/ToolCard";
 
 function filterTools(toolsList: ToolConfig[], query: string): ToolConfig[] {
@@ -17,8 +18,29 @@ function filterTools(toolsList: ToolConfig[], query: string): ToolConfig[] {
   );
 }
 
+function getBadgeForTool(
+  slug: string,
+  usageCounts: Record<string, number>,
+  tool: ToolConfig
+): "Popular" | "Trending" | undefined {
+  const sorted = [...tools]
+    .filter((t) => (usageCounts[t.slug] ?? 0) > 0)
+    .sort((a, b) => (usageCounts[b.slug] ?? 0) - (usageCounts[a.slug] ?? 0));
+  const popularSlugs = new Set(sorted.slice(0, 6).map((t) => t.slug));
+  const trendingSlugs = new Set(sorted.slice(6, 12).map((t) => t.slug));
+  if (popularSlugs.has(slug)) return "Popular";
+  if (trendingSlugs.has(slug)) return "Trending";
+  if (tool.isPopular && Object.keys(usageCounts).length === 0) return "Popular";
+  return undefined;
+}
+
 export function ToolsPageClient() {
   const [search, setSearch] = useState("");
+  const [usageCounts, setUsageCounts] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    setUsageCounts(getToolUsageCounts());
+  }, []);
 
   const filteredByCategory = toolCategories.map((category) => {
     const categoryTools = tools.filter((t) => t.category === category);
@@ -56,7 +78,12 @@ export function ToolsPageClient() {
           </div>
 
           <section className="mt-10">
-            <h2 className="text-lg font-semibold text-slate-900">Popular tools</h2>
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-semibold text-slate-900">Popular tools</h2>
+              <span className="rounded-full bg-sky-100 px-2.5 py-0.5 text-xs font-medium text-sky-700">
+                Trending
+              </span>
+            </div>
             <p className="mt-2 text-sm text-slate-600">
               Most used by creators. Start here.
             </p>
@@ -73,6 +100,7 @@ export function ToolsPageClient() {
                       name={tool.name}
                       description={tool.description}
                       category={tool.category}
+                      badge={getBadgeForTool(tool.slug, usageCounts, tool)}
                     />
                   ) : null
                 )}
@@ -107,6 +135,7 @@ export function ToolsPageClient() {
                         name={tool.name}
                         description={tool.description}
                         category={tool.category}
+                        badge={getBadgeForTool(tool.slug, usageCounts, tool)}
                       />
                     ))}
                   </div>

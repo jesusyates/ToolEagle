@@ -1,7 +1,10 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { trackEvent } from "@/lib/analytics";
+import { safeCopyToClipboard } from "@/lib/clipboard";
+import { addToHistory, incrementToolUsage } from "@/lib/storage";
 import { tools } from "@/config/tools";
 import { generators } from "@/config/generators";
 import { aiPrompts, MAX_INPUT_LENGTH } from "@/config/prompts";
@@ -9,9 +12,11 @@ import { generateAIText } from "@/lib/ai/generateText";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { ToolInputCard } from "@/components/tools/ToolInputCard";
 import { ToolResultListCard } from "@/components/tools/ToolResultListCard";
+import { HistoryPanel } from "@/components/tools/HistoryPanel";
 import { HowItWorksCard } from "@/components/tools/HowItWorksCard";
 import { ExamplesCard } from "@/components/tools/ExamplesCard";
 import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
+import { DelegatedButton } from "@/components/DelegatedButton";
 
 type GenericToolClientProps = {
   slug: string;
@@ -22,6 +27,7 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
   const [input, setInput] = useState("");
   const [items, setItems] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [historyTrigger, setHistoryTrigger] = useState(0);
 
   const toolMeta = tools.find((t) => t.slug === slug);
   const config = generators[slug];
@@ -35,6 +41,8 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
   }, [toolMeta]);
 
   if (!toolMeta || !config) return null;
+
+  const t = useTranslations("common");
 
   async function handleGenerate() {
     const trimmed = input.trim();
@@ -51,11 +59,11 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
     setIsGenerating(true);
 
     const aiPrompt = aiPrompts[slug];
+    let results: string[];
     if (aiPrompt) {
       try {
         const prompt = aiPrompt.replace(/\{input\}/g, trimmed);
-        const results = await generateAIText(prompt);
-        setItems(results);
+        results = await generateAIText(prompt);
         if (toolMeta) {
           trackEvent("tool_generate_ai", {
             tool_slug: toolMeta.slug,
@@ -64,8 +72,7 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
           });
         }
       } catch {
-        const results = config.generate(trimmed);
-        setItems(results);
+        results = config.generate(trimmed);
         if (toolMeta) {
           trackEvent("tool_generate", {
             tool_slug: toolMeta.slug,
@@ -74,8 +81,7 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
         }
       }
     } else {
-      const results = config.generate(trimmed);
-      setItems(results);
+      results = config.generate(trimmed);
       if (toolMeta) {
         trackEvent("tool_generate", {
           tool_slug: toolMeta.slug,
@@ -84,13 +90,25 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
       }
     }
 
+    setItems(results);
     setIsGenerating(false);
+
+    if (toolMeta && results.length > 0) {
+      incrementToolUsage(toolMeta.slug);
+      addToHistory({
+        toolSlug: toolMeta.slug,
+        toolName: toolMeta.name,
+        input: trimmed,
+        items: results
+      });
+      setHistoryTrigger((t) => t + 1);
+    }
   }
 
   async function handleCopyItem(index: number) {
     const text = items[index];
     if (!text) return;
-    await navigator.clipboard.writeText(text);
+    await safeCopyToClipboard(text);
     if (toolMeta) {
       trackEvent("tool_copy", {
         tool_slug: toolMeta.slug,
@@ -102,7 +120,7 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
   async function handleCopyAll() {
     if (items.length === 0) return;
     const text = items.join("\n\n---\n\n");
-    await navigator.clipboard.writeText(text);
+    await safeCopyToClipboard(text);
     if (toolMeta) {
       trackEvent("tool_copy", {
         tool_slug: toolMeta.slug,
@@ -117,13 +135,12 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
       description={toolMeta.description}
       input={
         <ToolInputCard label={config.inputLabel}>
-          <button
-            type="button"
+          <DelegatedButton
             onClick={() => setInput(config.tryExample)}
             className="text-xs font-medium text-sky-700 hover:underline mb-2 block"
           >
-            Try example
-          </button>
+            {t("tryExample")}
+          </DelegatedButton>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -136,14 +153,23 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
               Please keep under {MAX_INPUT_LENGTH} characters for best results.
             </p>
           )}
-          <button
-            type="button"
+          <DelegatedButton
             onClick={handleGenerate}
             disabled={isGenerating}
-            className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-75 transition duration-150"
+            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-5 py-3.5 text-base font-semibold text-white shadow-sm hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-75 transition duration-150"
           >
-            {isGenerating ? "Generating..." : config.buttonLabel}
-          </button>
+            {isGenerating ? (
+              <>
+                <span className="inline-block h-3 w-3 rounded-full border-2 border-white border-t-transparent animate-spin" />
+                Generating...
+              </>
+            ) : (
+              <>
+                {config.buttonLabel}
+                <span className="text-slate-400">→</span>
+              </>
+            )}
+          </DelegatedButton>
         </ToolInputCard>
       }
       result={
@@ -153,13 +179,16 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
           isLoading={isGenerating}
           onCopyItem={handleCopyItem}
           onCopyAll={handleCopyAll}
+          onRegenerate={handleGenerate}
           emptyMessage={config.emptyMessage}
           toolSlug={slug}
+          toolName={toolMeta.name}
         />
       }
       howItWorks={<HowItWorksCard steps={config.howItWorks} />}
       aside={
         <>
+          <HistoryPanel toolSlug={slug} refreshTrigger={historyTrigger} />
           <ExamplesCard examples={config.examples} onUseExample={(i) => setInput(i)} />
           <ToolProTipsCard tips={config.proTips} />
           {relatedAside}

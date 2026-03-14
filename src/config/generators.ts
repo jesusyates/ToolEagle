@@ -36,7 +36,7 @@ const USERNAME_SUFFIXES = ["hq", "tv", "daily", "vibes", "zone", "life", "world"
 
 export const generators: Record<string, GeneratorConfig> = {
   "tiktok-bio-generator": {
-    inputLabel: "Your niche or what you create",
+    inputLabel: "What do you create?",
     placeholder: "Example: fitness coach, cooking tips, travel vlogs",
     tryExample: "fitness coach sharing quick workout tips",
     buttonLabel: "Generate Bios",
@@ -72,7 +72,7 @@ export const generators: Record<string, GeneratorConfig> = {
   },
 
   "youtube-title-generator": {
-    inputLabel: "Your video topic",
+    inputLabel: "Video topic",
     placeholder: "Example: how to edit videos faster",
     tryExample: "how to grow on YouTube in 2025",
     buttonLabel: "Generate Titles",
@@ -106,7 +106,7 @@ export const generators: Record<string, GeneratorConfig> = {
   },
 
   "instagram-caption-generator": {
-    inputLabel: "Your post idea or photo theme",
+    inputLabel: "Post idea",
     placeholder: "Example: morning coffee, sunset at the beach",
     tryExample: "cozy morning routine with coffee",
     buttonLabel: "Generate Captions",
@@ -141,7 +141,7 @@ export const generators: Record<string, GeneratorConfig> = {
   },
 
   "youtube-description-generator": {
-    inputLabel: "Your video topic and key points",
+    inputLabel: "Video topic",
     placeholder: "Example: 5 tips for better thumbnails",
     tryExample: "how to get more subscribers on YouTube",
     buttonLabel: "Generate Descriptions",

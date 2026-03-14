@@ -40,7 +40,7 @@ export default function HomePage() {
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                AI tools for creators
+                AI Tools for TikTok, YouTube and Instagram creators
               </div>
 
               <div className="space-y-3">
@@ -49,7 +49,7 @@ export default function HomePage() {
                 </h1>
                 <p className="text-xl text-slate-700 leading-relaxed max-w-2xl">
                   <span className="font-semibold text-slate-900">
-                    AI tools for creators.
+                    AI Tools for TikTok, YouTube and Instagram creators.
                   </span>{" "}
                   Generate captions, hashtags, hooks and titles in seconds—so you can spend less
                   time writing and more time creating.
@@ -163,7 +163,7 @@ export default function HomePage() {
             Popular tools
           </h2>
           <p className="mt-2 text-sm text-slate-600 max-w-2xl">
-            Quick, scannable tools with a consistent workflow. Pick one and ship.
+            Most used by creators. Quick, scannable workflow—pick one and ship.
           </p>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

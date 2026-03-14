@@ -1,30 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { DelegatedButton } from "@/components/DelegatedButton";
+
+const STORAGE_KEY = "tooleagle_newsletter_subscribed";
 
 export function NewsletterCapture() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
-  async function handleSubmit(e: React.FormEvent) {
+  useEffect(() => {
+    if (typeof window !== "undefined" && localStorage.getItem(STORAGE_KEY)) {
+      setStatus("success");
+    }
+  }, []);
+
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email.trim() || status === "loading") return;
+    if (!email.trim()) return;
 
-    setStatus("loading");
+    const trimmed = email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setStatus("error");
+      return;
+    }
+
     try {
-      const res = await fetch("/api/newsletter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim() })
-      });
-      const data = await res.json();
-
-      if (res.ok) {
-        setStatus("success");
-        setEmail("");
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      if (Array.isArray(stored)) {
+        stored.push(trimmed);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
       } else {
-        setStatus("error");
+        localStorage.setItem(STORAGE_KEY, JSON.stringify([trimmed]));
       }
+      setStatus("success");
+      setEmail("");
     } catch {
       setStatus("error");
     }
@@ -33,7 +43,7 @@ export function NewsletterCapture() {
   return (
     <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
       <p className="text-sm font-semibold text-slate-900">
-        Get new creator tools and ideas every week
+        Get creator ideas and new tools weekly
       </p>
       <p className="mt-1 text-xs text-slate-600">
         No spam. Unsubscribe anytime.
@@ -50,16 +60,17 @@ export function NewsletterCapture() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your@email.com"
-            disabled={status === "loading"}
-            className="flex-1 min-w-0 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/70 disabled:opacity-60"
+            className="flex-1 min-w-0 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/70"
           />
-          <button
-            type="submit"
-            disabled={status === "loading"}
-            className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-60 transition duration-150"
+          <DelegatedButton
+            onClick={(e) => {
+              const form = (e.target as Element).closest("[data-delegate-click]")?.closest("form");
+              if (form) (form as HTMLFormElement).requestSubmit();
+            }}
+            className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 transition duration-150"
           >
-            {status === "loading" ? "..." : "Subscribe"}
-          </button>
+            Subscribe
+          </DelegatedButton>
         </form>
       )}
 

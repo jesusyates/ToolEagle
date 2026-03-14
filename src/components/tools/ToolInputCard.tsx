@@ -10,7 +10,7 @@ export function ToolInputCard({ label, children, helperText }: ToolInputCardProp
   return (
     <div className="rounded-3xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
       <div className="space-y-3">
-        <label className="block text-xs font-medium text-slate-700">
+        <label className="block text-sm font-semibold text-slate-900">
           {label}
         </label>
         {children}

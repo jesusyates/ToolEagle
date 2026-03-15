@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function MeLayout({
@@ -12,7 +13,9 @@ export default async function MeLayout({
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect("/login?next=/me");
+    const headersList = await headers();
+    const pathname = headersList.get("x-pathname") ?? "/me";
+    redirect(`/login?next=${encodeURIComponent(pathname)}`);
   }
 
   return <>{children}</>;

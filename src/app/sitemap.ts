@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { tools } from "@/config/tools";
 import { generators } from "@/config/generators";
-import { getAllPosts } from "@/lib/blog";
 import { getSeoPageSlugs } from "@/config/seoPages";
 import { getSeoPageParams } from "@/config/seo-pages";
 import { getAllSeoParams } from "@/config/seo/index";
@@ -21,29 +20,11 @@ import { getAllLibrarySlugs } from "@/config/library-pages";
 import { getVariationSlugs } from "@/lib/example-variations";
 
 const BASE_URL = "https://www.tooleagle.com";
-const MAX_URLS_PER_SITEMAP = 5000;
 
-export async function generateSitemaps() {
-  const seoV2Params = getAllSeoParams();
-  const seoChunks = Math.ceil(seoV2Params.length / MAX_URLS_PER_SITEMAP);
-  const ids: { id: string }[] = [
-    { id: "static" },
-    { id: "tools" },
-    { id: "blog" },
-    { id: "creators" },
-    { id: "examples" },
-    ...Array.from({ length: seoChunks }, (_, i) => ({ id: `seo-${i + 1}` }))
-  ];
-  return ids;
-}
+type SitemapEntry = { url: string; lastModified: Date; changeFrequency?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never"; priority?: number };
 
-export default async function sitemap(props: {
-  id: Promise<string>;
-}): Promise<MetadataRoute.Sitemap> {
-  const id = await props.id;
-
-  if (id === "static") {
-    return [
+function staticUrls(): SitemapEntry[] {
+  return [
       { url: BASE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
       { url: `${BASE_URL}/creator`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.95 },
       { url: `${BASE_URL}/tools`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
@@ -60,6 +41,7 @@ export default async function sitemap(props: {
       { url: `${BASE_URL}/blog/creator-tips`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
       { url: `${BASE_URL}/blog/ai-tools`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
       { url: `${BASE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
+      { url: `${BASE_URL}/pricing`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
       { url: `${BASE_URL}/creators`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
       { url: `${BASE_URL}/ai-tools`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
       { url: `${BASE_URL}/ai-tools-directory`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
@@ -170,25 +152,27 @@ export default async function sitemap(props: {
         priority: 0.75
       }))
     ];
-  }
+}
 
-  if (id === "tools") {
-    const toolSlugs = tools
-      .filter(
-        (t) =>
-          t.slug in generators ||
-          ["tiktok-caption-generator", "hashtag-generator", "hook-generator", "title-generator"].includes(t.slug)
-      )
-      .map((t) => t.slug);
-    return toolSlugs.map((slug) => ({
-      url: `${BASE_URL}/tools/${slug}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.8
-    }));
-  }
+function toolUrls(): SitemapEntry[] {
+  const toolSlugs = tools
+    .filter(
+      (t) =>
+        t.slug in generators ||
+        ["tiktok-caption-generator", "hashtag-generator", "hook-generator", "title-generator"].includes(t.slug)
+    )
+    .map((t) => t.slug);
+  return toolSlugs.map((slug) => ({
+    url: `${BASE_URL}/tools/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.8
+  }));
+}
 
-  if (id === "blog") {
+async function blogUrls(): Promise<SitemapEntry[]> {
+  try {
+    const { getAllPosts } = await import("@/lib/blog");
     const posts = await getAllPosts();
     const programmaticUrls = getAllProgrammaticBlogParams().map(({ topic, platform, type }) => ({
       url: `${BASE_URL}/blog/${getProgrammaticBlogSlug(topic, platform, type)}`,
@@ -205,65 +189,77 @@ export default async function sitemap(props: {
       })),
       ...programmaticUrls
     ];
+  } catch {
+    return [];
   }
+}
 
-  if (id === "creators") {
-    try {
-      const supabase = await createClient();
-      const { data: profiles } = await supabase
-        .from("profiles")
-        .select("username, updated_at")
-        .not("username", "is", null);
-      return (profiles ?? []).map((p) => ({
-        url: `${BASE_URL}/creators/${p.username}`,
-        lastModified: p.updated_at ? new Date(p.updated_at) : new Date(),
-        changeFrequency: "weekly" as const,
-        priority: 0.6
-      }));
-    } catch {
-      return [];
-    }
+async function creatorUrls(): Promise<SitemapEntry[]> {
+  try {
+    const supabase = await createClient();
+    const { data: profiles } = await supabase
+      .from("profiles")
+      .select("username, updated_at")
+      .not("username", "is", null);
+    return (profiles ?? []).map((p) => ({
+      url: `${BASE_URL}/creators/${p.username}`,
+      lastModified: p.updated_at ? new Date(p.updated_at) : new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.6
+    }));
+  } catch {
+    return [];
   }
+}
 
-  if (id === "examples") {
-    try {
-      const supabase = await createClient();
-      const { data: examples } = await supabase
-        .from("public_examples")
-        .select("slug, created_at")
-        .not("slug", "is", null);
-      const baseUrls = (examples ?? []).map((e) => ({
-        url: `${BASE_URL}/examples/${e.slug}`,
+async function exampleUrls(): Promise<SitemapEntry[]> {
+  try {
+    const supabase = await createClient();
+    const { data: examples } = await supabase
+      .from("public_examples")
+      .select("slug, created_at")
+      .not("slug", "is", null);
+    const baseUrls = (examples ?? []).map((e) => ({
+      url: `${BASE_URL}/examples/${e.slug}`,
+      lastModified: e.created_at ? new Date(e.created_at) : new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.7
+    }));
+    const variationUrls = (examples ?? []).flatMap((e) =>
+      getVariationSlugs(e.slug!).map((v) => ({
+        url: `${BASE_URL}/examples/${v}`,
         lastModified: e.created_at ? new Date(e.created_at) : new Date(),
         changeFrequency: "weekly" as const,
-        priority: 0.7
-      }));
-      const variationUrls = (examples ?? []).flatMap((e) =>
-        getVariationSlugs(e.slug!).map((v) => ({
-          url: `${BASE_URL}/examples/${v}`,
-          lastModified: e.created_at ? new Date(e.created_at) : new Date(),
-          changeFrequency: "weekly" as const,
-          priority: 0.65
-        }))
-      );
-      return [...baseUrls, ...variationUrls];
-    } catch {
-      return [];
-    }
+        priority: 0.65
+      }))
+    );
+    return [...baseUrls, ...variationUrls];
+  } catch {
+    return [];
   }
+}
 
-  if (id.startsWith("seo-")) {
-    const chunkIndex = parseInt(id.replace("seo-", ""), 10) - 1;
-    const seoV2Params = getAllSeoParams();
-    const start = chunkIndex * MAX_URLS_PER_SITEMAP;
-    const chunk = seoV2Params.slice(start, start + MAX_URLS_PER_SITEMAP);
-    return chunk.map(({ platform, type, topic }) => ({
-      url: `${BASE_URL}/${platform}/${type}/${topic}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.75
-    }));
-  }
+function seoUrls(): SitemapEntry[] {
+  return getAllSeoParams().map(({ platform, type, topic }) => ({
+    url: `${BASE_URL}/${platform}/${type}/${topic}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.75
+  }));
+}
 
-  return [];
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [blog, creators, examples] = await Promise.all([
+    blogUrls(),
+    creatorUrls(),
+    exampleUrls()
+  ]);
+  return [
+    ...staticUrls(),
+    ...toolUrls(),
+    ...blog,
+    ...creators,
+    ...examples,
+    ...seoUrls()
+  ];
 }

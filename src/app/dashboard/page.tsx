@@ -14,7 +14,8 @@ export default async function DashboardPage() {
     redirect("/login?next=/dashboard");
   }
 
-  const [favoritesRes, historyRes] = await Promise.all([
+  const today = new Date().toISOString().slice(0, 10);
+  const [favoritesRes, historyRes, usageRes, profileRes, projectsRes] = await Promise.all([
     supabase
       .from("favorites")
       .select("id, tool_slug, tool_name, text, saved_at")
@@ -24,6 +25,19 @@ export default async function DashboardPage() {
     supabase
       .from("generation_history")
       .select("id, tool_slug, tool_name, input, items, created_at")
+      .eq("user_id", user.id)
+      .order("created_at", { ascending: false })
+      .limit(20),
+    supabase
+      .from("usage_stats")
+      .select("generations_count")
+      .eq("user_id", user.id)
+      .eq("date", today)
+      .single(),
+    supabase.from("profiles").select("plan").eq("id", user.id).single(),
+    supabase
+      .from("projects")
+      .select("id, name, created_at")
       .eq("user_id", user.id)
       .order("created_at", { ascending: false })
       .limit(20)
@@ -46,11 +60,32 @@ export default async function DashboardPage() {
     timestamp: new Date(r.created_at).getTime()
   }));
 
+  const usageToday = usageRes.data?.generations_count ?? 0;
+  let plan = profileRes.data?.plan ?? "free";
+
+  const projects =
+    projectsRes.error || !projectsRes.data
+      ? []
+      : projectsRes.data.map((r) => ({
+          id: r.id,
+          name: r.name,
+          createdAt: new Date(r.created_at).getTime()
+        }));
+
+  if (!profileRes.data) {
+    await supabase
+      .from("profiles")
+      .upsert({ id: user.id, plan: "free" }, { onConflict: "id", ignoreDuplicates: true });
+  }
+
   return (
     <DashboardClient
       userEmail={user.email ?? ""}
       favorites={favorites}
       history={history}
+      projects={projects}
+      usageToday={usageToday}
+      plan={plan}
     />
   );
 }

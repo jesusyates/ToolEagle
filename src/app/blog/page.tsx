@@ -3,14 +3,16 @@ import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { getAllPosts } from "@/lib/blog";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Creator Resources & Tips",
   description:
     "Articles, tips and case studies on how to use ToolEagle tools to publish better content, faster."
 };
 
-export default function BlogPage() {
-  const posts = getAllPosts();
+export default async function BlogPage() {
+  const posts = await getAllPosts();
 
   return (
     <main className="min-h-screen bg-white text-slate-900 flex flex-col">
@@ -29,6 +31,39 @@ export default function BlogPage() {
               Short, practical articles on how real creators use ToolEagle tools to publish better
               content, faster.
             </p>
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-2">
+            <Link
+              href="/blog/tiktok"
+              className="inline-flex rounded-full border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-50 transition"
+            >
+              TikTok
+            </Link>
+            <Link
+              href="/blog/youtube"
+              className="inline-flex rounded-full border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-50 transition"
+            >
+              YouTube
+            </Link>
+            <Link
+              href="/blog/instagram"
+              className="inline-flex rounded-full border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-50 transition"
+            >
+              Instagram
+            </Link>
+            <Link
+              href="/blog/creator-tips"
+              className="inline-flex rounded-full border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-50 transition"
+            >
+              Creator Tips
+            </Link>
+            <Link
+              href="/blog/ai-tools"
+              className="inline-flex rounded-full border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-50 transition"
+            >
+              AI Tools
+            </Link>
           </div>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

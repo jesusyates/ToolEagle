@@ -208,6 +208,178 @@ export const tools: ToolConfig[] = [
     category: "Titles",
     icon: Type
   },
+  // P1 expansion: TikTok
+  {
+    slug: "tiktok-hook-generator",
+    name: "TikTok Hook Generator",
+    description: "Create viral hooks for TikTok videos that stop the scroll.",
+    category: "Hooks",
+    icon: Zap
+  },
+  {
+    slug: "tiktok-comment-reply-generator",
+    name: "TikTok Comment Reply Generator",
+    description: "Generate engaging replies to TikTok comments.",
+    category: "Captions",
+    icon: MessageSquareText
+  },
+  {
+    slug: "tiktok-story-generator",
+    name: "TikTok Story Generator",
+    description: "Create TikTok story ideas and captions.",
+    category: "Captions",
+    icon: MessageSquareText
+  },
+  {
+    slug: "tiktok-trend-caption-generator",
+    name: "TikTok Trend Caption Generator",
+    description: "Generate captions for trending TikTok sounds and formats.",
+    category: "Captions",
+    icon: MessageSquareText
+  },
+  {
+    slug: "tiktok-video-idea-generator",
+    name: "TikTok Video Idea Generator",
+    description: "Get viral TikTok video ideas for your niche.",
+    category: "Ideas",
+    icon: Lightbulb
+  },
+  // P1 expansion: YouTube
+  {
+    slug: "youtube-shorts-title-generator",
+    name: "YouTube Shorts Title Generator",
+    description: "Generate titles for YouTube Shorts that get views.",
+    category: "Titles",
+    icon: Type
+  },
+  {
+    slug: "youtube-thumbnail-text-generator",
+    name: "YouTube Thumbnail Text Generator",
+    description: "Create punchy text for YouTube thumbnails.",
+    category: "Titles",
+    icon: Type
+  },
+  {
+    slug: "youtube-hook-generator",
+    name: "YouTube Hook Generator",
+    description: "Create hooks that grab viewers in the first 5 seconds.",
+    category: "Hooks",
+    icon: Zap
+  },
+  // P1 expansion: Instagram
+  {
+    slug: "instagram-reels-caption-generator",
+    name: "Instagram Reels Caption Generator",
+    description: "Create captions for Instagram Reels that boost engagement.",
+    category: "Captions",
+    icon: MessageSquareText
+  },
+  {
+    slug: "instagram-bio-generator",
+    name: "Instagram Bio Generator",
+    description: "Create a catchy Instagram bio that attracts followers.",
+    category: "Bios",
+    icon: User
+  },
+  {
+    slug: "instagram-comment-reply-generator",
+    name: "Instagram Comment Reply Generator",
+    description: "Generate engaging replies to Instagram comments.",
+    category: "Captions",
+    icon: MessageSquareText
+  },
+  {
+    slug: "instagram-story-caption-generator",
+    name: "Instagram Story Caption Generator",
+    description: "Create captions and text for Instagram Stories.",
+    category: "Captions",
+    icon: MessageSquareText
+  },
+  // P1 expansion to 50: additional tools
+  {
+    slug: "tiktok-transition-generator",
+    name: "TikTok Transition Generator",
+    description: "Get smooth transition ideas for your TikTok videos.",
+    category: "Ideas",
+    icon: Video
+  },
+  {
+    slug: "youtube-community-post-generator",
+    name: "YouTube Community Post Generator",
+    description: "Create engaging YouTube Community tab posts.",
+    category: "Captions",
+    icon: MessageSquareText
+  },
+  {
+    slug: "instagram-carousel-caption-generator",
+    name: "Instagram Carousel Caption Generator",
+    description: "Write captions for Instagram carousel posts.",
+    category: "Captions",
+    icon: MessageSquareText
+  },
+  {
+    slug: "tiktok-duet-idea-generator",
+    name: "TikTok Duet Idea Generator",
+    description: "Get viral TikTok duet and stitch ideas.",
+    category: "Ideas",
+    icon: Lightbulb
+  },
+  {
+    slug: "youtube-end-screen-generator",
+    name: "YouTube End Screen Generator",
+    description: "Create end screen CTAs for your YouTube videos.",
+    category: "Captions",
+    icon: Video
+  },
+  {
+    slug: "instagram-dm-generator",
+    name: "Instagram DM Generator",
+    description: "Generate Instagram DM templates and icebreakers.",
+    category: "Captions",
+    icon: MessageSquareText
+  },
+  {
+    slug: "tiktok-challenge-idea-generator",
+    name: "TikTok Challenge Idea Generator",
+    description: "Get viral TikTok challenge ideas for your niche.",
+    category: "Ideas",
+    icon: Lightbulb
+  },
+  {
+    slug: "youtube-playlist-title-generator",
+    name: "YouTube Playlist Title Generator",
+    description: "Generate titles for YouTube playlists.",
+    category: "Titles",
+    icon: Type
+  },
+  {
+    slug: "instagram-poll-idea-generator",
+    name: "Instagram Poll Idea Generator",
+    description: "Get Instagram Story poll and question ideas.",
+    category: "Ideas",
+    icon: Lightbulb
+  },
+  {
+    slug: "short-form-script-generator",
+    name: "Short-Form Script Generator",
+    description: "Create scripts for TikTok, Reels and Shorts.",
+    category: "Scripts",
+    icon: ScrollText
+  },
+  {
+    slug: "viral-caption-generator",
+    name: "Viral Caption Generator",
+    description: "Generate viral captions for any short-form platform.",
+    category: "Captions",
+    icon: MessageSquareText
+  },
+  {
+    slug: "reel-hook-generator",
+    name: "Reel Hook Generator",
+    description: "Create hooks for Instagram Reels that stop the scroll.",
+    category: "Hooks",
+    icon: Zap
+  },
   // Legacy placeholders
   {
     slug: "content-idea-bank",

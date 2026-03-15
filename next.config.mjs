@@ -5,6 +5,14 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  async redirects() {
+    return [
+      // Legacy SEO pages: /tiktok/funny-captions -> /ideas/tiktok/funny-captions
+      { source: "/:category(tiktok|youtube|instagram)/:topic", destination: "/ideas/:category/:topic", permanent: true },
+      // /tools?tool=X -> /tools/X (backwards compatibility)
+      { source: "/tools", has: [{ type: "query", key: "tool", value: "(?<tool>[^&]+)" }], destination: "/tools/:tool", permanent: true }
+    ];
+  },
   webpack: (config) => {
     config.infrastructureLogging = { level: "error" };
     config.ignoreWarnings = [

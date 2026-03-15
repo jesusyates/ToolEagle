@@ -7,7 +7,7 @@ import { safeCopyToClipboard } from "@/lib/clipboard";
 import { addToHistory, incrementToolUsage } from "@/lib/storage";
 import { tools } from "@/config/tools";
 import { aiPrompts, MAX_INPUT_LENGTH } from "@/config/prompts";
-import { generateAIText } from "@/lib/ai/generateText";
+import { generateAIText, LimitReachedError } from "@/lib/ai/generateText";
 import { DelegatedButton } from "@/components/DelegatedButton";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { ToolInputCard } from "@/components/tools/ToolInputCard";
@@ -16,6 +16,9 @@ import { HistoryPanel } from "@/components/tools/HistoryPanel";
 import { HowItWorksCard } from "@/components/tools/HowItWorksCard";
 import { ExamplesCard } from "@/components/tools/ExamplesCard";
 import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
+import { LimitReachedModal } from "@/components/LimitReachedModal";
+import { LoginPromptModal } from "@/components/LoginPromptModal";
+import { useAuth } from "@/hooks/useAuth";
 
 const TRY_EXAMPLE = "Instagram Reels for small business owners, showing how to turn one video into 5 posts.";
 
@@ -47,6 +50,9 @@ export function HookGeneratorClient({ relatedAside }: Props) {
   const [hooks, setHooks] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [historyTrigger, setHistoryTrigger] = useState(0);
+  const [limitModalOpen, setLimitModalOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const { isLoggedIn } = useAuth();
 
   const toolMeta = tools.find((t) => t.slug === "hook-generator");
 
@@ -98,7 +104,12 @@ export function HookGeneratorClient({ relatedAside }: Props) {
         if (toolMeta) {
           trackEvent("tool_generate_ai", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, input_length: trimmed.length });
         }
-      } catch {
+      } catch (err) {
+        if (err instanceof LimitReachedError) {
+          setLimitModalOpen(true);
+          setIsGenerating(false);
+          return;
+        }
         results = templateGenerate(trimmed);
         if (toolMeta) trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category });
       }
@@ -146,8 +157,45 @@ export function HookGeneratorClient({ relatedAside }: Props) {
     }
   }
 
+  async function handleSaveEditedItem(index: number, newText: string) {
+    const updated = [...hooks];
+    updated[index] = newText;
+    setHooks(updated);
+    if (!isLoggedIn) {
+      setLoginModalOpen(true);
+      return;
+    }
+    addToHistory({
+      toolSlug: "hook-generator",
+      toolName: "Hook Generator",
+      input: topic,
+      items: updated
+    });
+    setHistoryTrigger((prev) => prev + 1);
+    await fetch("/api/history", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        toolSlug: "hook-generator",
+        toolName: "Hook Generator",
+        input: topic,
+        items: updated
+      })
+    });
+  }
+
+  function handleItemsChange(index: number, newText: string) {
+    const updated = [...hooks];
+    updated[index] = newText;
+    setHooks(updated);
+  }
+
   return (
-    <ToolPageShell
+    <>
+      <LimitReachedModal open={limitModalOpen} onClose={() => setLimitModalOpen(false)} />
+      <LoginPromptModal open={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
+      <ToolPageShell
       eyebrow="Tool"
       title="Hook Generator"
       description="Generate punchy first lines for TikToks, Reels, Shorts and carousels so people stop and actually listen."
@@ -193,12 +241,17 @@ export function HookGeneratorClient({ relatedAside }: Props) {
           title="Hook ideas"
           items={hooks}
           isLoading={isGenerating}
+          input={topic}
           onCopyItem={handleCopyItem}
           onCopyAll={handleCopyAll}
           onRegenerate={generateHooks}
+          onSaveEditedItem={handleSaveEditedItem}
+          onItemsChange={handleItemsChange}
           emptyMessage="Your hook ideas will appear here. Keep them short enough to say in 2–3 seconds."
           toolSlug="hook-generator"
           toolName="Hook Generator"
+          isLoggedIn={isLoggedIn}
+          onRequireLogin={() => setLoginModalOpen(true)}
         />
       }
       howItWorks={
@@ -228,5 +281,6 @@ export function HookGeneratorClient({ relatedAside }: Props) {
         </>
       }
     />
+    </>
   );
 }

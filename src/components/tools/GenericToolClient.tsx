@@ -8,7 +8,7 @@ import { addToHistory, incrementToolUsage } from "@/lib/storage";
 import { tools } from "@/config/tools";
 import { generators } from "@/config/generators";
 import { aiPrompts, MAX_INPUT_LENGTH } from "@/config/prompts";
-import { generateAIText } from "@/lib/ai/generateText";
+import { generateAIText, LimitReachedError } from "@/lib/ai/generateText";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { ToolInputCard } from "@/components/tools/ToolInputCard";
 import { ToolResultListCard } from "@/components/tools/ToolResultListCard";
@@ -17,6 +17,9 @@ import { HowItWorksCard } from "@/components/tools/HowItWorksCard";
 import { ExamplesCard } from "@/components/tools/ExamplesCard";
 import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
 import { DelegatedButton } from "@/components/DelegatedButton";
+import { LimitReachedModal } from "@/components/LimitReachedModal";
+import { LoginPromptModal } from "@/components/LoginPromptModal";
+import { useAuth } from "@/hooks/useAuth";
 
 type GenericToolClientProps = {
   slug: string;
@@ -28,6 +31,9 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
   const [items, setItems] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [historyTrigger, setHistoryTrigger] = useState(0);
+  const [limitModalOpen, setLimitModalOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const { isLoggedIn } = useAuth();
 
   const toolMeta = tools.find((t) => t.slug === slug);
   const config = generators[slug];
@@ -71,7 +77,12 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
             input_length: trimmed.length
           });
         }
-      } catch {
+      } catch (err) {
+        if (err instanceof LimitReachedError) {
+          setLimitModalOpen(true);
+          setIsGenerating(false);
+          return;
+        }
         results = config.generate(trimmed);
         if (toolMeta) {
           trackEvent("tool_generate", {
@@ -129,8 +140,46 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
     }
   }
 
+  async function handleSaveEditedItem(index: number, newText: string) {
+    if (!toolMeta) return;
+    const updated = [...items];
+    updated[index] = newText;
+    setItems(updated);
+    if (!isLoggedIn) {
+      setLoginModalOpen(true);
+      return;
+    }
+    addToHistory({
+      toolSlug: toolMeta.slug,
+      toolName: toolMeta.name,
+      input,
+      items: updated
+    });
+    setHistoryTrigger((prev) => prev + 1);
+    await fetch("/api/history", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        toolSlug: toolMeta.slug,
+        toolName: toolMeta.name,
+        input,
+        items: updated
+      })
+    });
+  }
+
+  function handleItemsChange(index: number, newText: string) {
+    const updated = [...items];
+    updated[index] = newText;
+    setItems(updated);
+  }
+
   return (
-    <ToolPageShell
+    <>
+      <LimitReachedModal open={limitModalOpen} onClose={() => setLimitModalOpen(false)} />
+      <LoginPromptModal open={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
+      <ToolPageShell
       title={toolMeta.name}
       description={toolMeta.description}
       input={
@@ -177,12 +226,17 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
           title={config.resultTitle}
           items={items}
           isLoading={isGenerating}
+          input={input}
           onCopyItem={handleCopyItem}
           onCopyAll={handleCopyAll}
           onRegenerate={handleGenerate}
+          onSaveEditedItem={handleSaveEditedItem}
+          onItemsChange={handleItemsChange}
           emptyMessage={config.emptyMessage}
           toolSlug={slug}
           toolName={toolMeta.name}
+          isLoggedIn={isLoggedIn}
+          onRequireLogin={() => setLoginModalOpen(true)}
         />
       }
       howItWorks={<HowItWorksCard steps={config.howItWorks} />}
@@ -195,5 +249,6 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
         </>
       }
     />
+    </>
   );
 }

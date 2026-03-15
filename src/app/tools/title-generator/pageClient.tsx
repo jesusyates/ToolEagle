@@ -7,7 +7,7 @@ import { safeCopyToClipboard } from "@/lib/clipboard";
 import { addToHistory, incrementToolUsage } from "@/lib/storage";
 import { tools } from "@/config/tools";
 import { aiPrompts, MAX_INPUT_LENGTH } from "@/config/prompts";
-import { generateAIText } from "@/lib/ai/generateText";
+import { generateAIText, LimitReachedError } from "@/lib/ai/generateText";
 import { DelegatedButton } from "@/components/DelegatedButton";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { ToolInputCard } from "@/components/tools/ToolInputCard";
@@ -16,6 +16,9 @@ import { HistoryPanel } from "@/components/tools/HistoryPanel";
 import { HowItWorksCard } from "@/components/tools/HowItWorksCard";
 import { ExamplesCard } from "@/components/tools/ExamplesCard";
 import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
+import { LimitReachedModal } from "@/components/LimitReachedModal";
+import { LoginPromptModal } from "@/components/LoginPromptModal";
+import { useAuth } from "@/hooks/useAuth";
 
 const TRY_EXAMPLE = "how to edit vertical videos faster using CapCut templates";
 
@@ -47,6 +50,9 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
   const [titles, setTitles] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [historyTrigger, setHistoryTrigger] = useState(0);
+  const [limitModalOpen, setLimitModalOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const { isLoggedIn } = useAuth();
 
   const toolMeta = tools.find((t) => t.slug === "title-generator");
 
@@ -96,7 +102,12 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
         if (toolMeta) {
           trackEvent("tool_generate_ai", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, input_length: trimmed.length });
         }
-      } catch {
+      } catch (err) {
+        if (err instanceof LimitReachedError) {
+          setLimitModalOpen(true);
+          setIsGenerating(false);
+          return;
+        }
         results = templateGenerate(trimmed);
         if (toolMeta) trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category });
       }
@@ -144,8 +155,45 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
     }
   }
 
+  async function handleSaveEditedItem(index: number, newText: string) {
+    const updated = [...titles];
+    updated[index] = newText;
+    setTitles(updated);
+    if (!isLoggedIn) {
+      setLoginModalOpen(true);
+      return;
+    }
+    addToHistory({
+      toolSlug: "title-generator",
+      toolName: "Title Generator",
+      input: topic,
+      items: updated
+    });
+    setHistoryTrigger((prev) => prev + 1);
+    await fetch("/api/history", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        toolSlug: "title-generator",
+        toolName: "Title Generator",
+        input: topic,
+        items: updated
+      })
+    });
+  }
+
+  function handleItemsChange(index: number, newText: string) {
+    const updated = [...titles];
+    updated[index] = newText;
+    setTitles(updated);
+  }
+
   return (
-    <ToolPageShell
+    <>
+      <LimitReachedModal open={limitModalOpen} onClose={() => setLimitModalOpen(false)} />
+      <LoginPromptModal open={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
+      <ToolPageShell
       eyebrow="Tool"
       title="Title Generator"
       description="Generate click‑worthy titles for YouTube, TikTok, Reels and Shorts based on your topic or niche."
@@ -191,12 +239,17 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
           title="Title ideas"
           items={titles}
           isLoading={isGenerating}
+          input={topic}
           onCopyItem={handleCopyItem}
           onCopyAll={handleCopyAll}
           onRegenerate={generateTitles}
+          onSaveEditedItem={handleSaveEditedItem}
+          onItemsChange={handleItemsChange}
           emptyMessage="Your title ideas will appear here. Use them as a starting point, then tweak for your voice."
           toolSlug="title-generator"
           toolName="Title Generator"
+          isLoggedIn={isLoggedIn}
+          onRequireLogin={() => setLoginModalOpen(true)}
         />
       }
       howItWorks={
@@ -226,5 +279,6 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
         </>
       }
     />
+    </>
   );
 }

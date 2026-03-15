@@ -9,6 +9,9 @@ const navPaths = [
   { href: "/", key: "home" as const },
   { href: "/tools", key: "tools" as const },
   { href: "/favorites", key: "favorites" as const },
+  { href: "/dashboard", key: "dashboard" as const },
+  { href: "/creator", key: "creator" as const },
+  { href: "/pricing", key: "pricing" as const },
   { href: "/blog", key: "blog" as const },
   { href: "/about", key: "about" as const }
 ];

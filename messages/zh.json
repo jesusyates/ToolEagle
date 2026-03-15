@@ -8,13 +8,22 @@
     "regenerate": "重新生成",
     "shareLink": "分享链接",
     "linkCopied": "链接已复制 ✓",
-    "shareToTwitter": "分享到 Twitter",
+    "shareToTwitter": "打开 Twitter",
+    "shareToPlatform": "打开 {platform}",
     "tryExample": "试试示例",
     "login": "登录",
     "account": "账户",
     "use": "使用",
     "useAgain": "再次使用",
-    "unsave": "取消收藏"
+    "unsave": "取消收藏",
+    "edit": "编辑",
+    "cancel": "取消",
+    "saveToFavorites": "收藏",
+    "saveToProject": "保存到项目",
+    "makeShorter": "更简短",
+    "makeFunnier": "更有趣",
+    "makeViral": "更吸睛",
+    "addEmojis": "添加表情"
   },
   "error": {
     "somethingWentWrong": "出了一点问题",
@@ -25,6 +34,9 @@
     "tools": "工具",
     "favorites": "收藏夹",
     "blog": "博客",
-    "about": "关于"
+    "about": "关于",
+    "pricing": "定价",
+    "dashboard": "仪表盘",
+    "creator": "创作者模式"
   }
 }

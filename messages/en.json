@@ -8,13 +8,22 @@
     "regenerate": "Regenerate",
     "shareLink": "Share link",
     "linkCopied": "Link copied ✓",
-    "shareToTwitter": "Share to Twitter",
+    "shareToTwitter": "Open Twitter",
+    "shareToPlatform": "Open {platform}",
     "tryExample": "Try example",
     "login": "Login",
     "account": "Account",
     "use": "Use",
     "useAgain": "Use again",
-    "unsave": "Unsave"
+    "unsave": "Unsave",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "saveToFavorites": "Save to Favorites",
+    "saveToProject": "Save to Project",
+    "makeShorter": "Make it shorter",
+    "makeFunnier": "Make it funnier",
+    "makeViral": "Make it more viral",
+    "addEmojis": "Add emojis"
   },
   "error": {
     "somethingWentWrong": "Something went wrong",
@@ -25,6 +34,9 @@
     "tools": "Tools",
     "favorites": "Favorites",
     "blog": "Blog",
-    "about": "About"
+    "about": "About",
+    "pricing": "Pricing",
+    "dashboard": "Dashboard",
+    "creator": "Creator Mode"
   }
 }

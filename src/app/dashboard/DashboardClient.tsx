@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
+import { FREE_DAILY_LIMIT } from "@/lib/usage";
 import { ToolCopyButton } from "@/components/tools/ToolCopyButton";
 import { useSyncOnLogin } from "@/hooks/useSyncOnLogin";
 import { safeCopyToClipboard } from "@/lib/clipboard";
 import { createClient } from "@/lib/supabase/client";
-import { Star, History } from "lucide-react";
+import { Star, History, FolderOpen } from "lucide-react";
 
 type Favorite = {
   id: string;
@@ -26,14 +27,26 @@ type HistoryEntry = {
   timestamp: number;
 };
 
+type Project = {
+  id: string;
+  name: string;
+  createdAt: number;
+};
+
 export function DashboardClient({
   userEmail,
   favorites: initialFavorites,
-  history: initialHistory
+  history: initialHistory,
+  projects: initialProjects,
+  usageToday,
+  plan
 }: {
   userEmail: string;
   favorites: Favorite[];
   history: HistoryEntry[];
+  projects: Project[];
+  usageToday: number;
+  plan: "free" | "pro";
 }) {
   useSyncOnLogin();
 
@@ -53,9 +66,70 @@ export function DashboardClient({
               </h1>
               <p className="text-sm text-slate-600 mt-1">{userEmail}</p>
             </div>
+            <div className="flex items-center gap-3">
+              <Link
+                href="/dashboard/new-post"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                Write post
+              </Link>
+              {plan === "free" && (
+                <Link
+                  href="/pricing"
+                  className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800"
+                >
+                  Upgrade to Pro
+                </Link>
+              )}
+            </div>
           </div>
 
+          {plan === "free" && (
+            <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/50 p-4">
+              <p className="text-sm font-medium text-slate-700">AI usage today</p>
+              <p className="mt-1 text-2xl font-semibold text-slate-900">
+                {usageToday} / {FREE_DAILY_LIMIT}
+              </p>
+            </div>
+          )}
+
           <div className="mt-10 grid gap-10 lg:grid-cols-2">
+            <div className="lg:col-span-2">
+              <div className="flex items-center gap-2 mb-4">
+                <FolderOpen className="h-5 w-5 text-slate-500" />
+                <h2 className="text-lg font-semibold text-slate-900">My Projects</h2>
+              </div>
+              {initialProjects.length === 0 ? (
+                <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-8 text-center">
+                  <p className="text-slate-600">No projects yet</p>
+                  <p className="text-sm text-slate-500 mt-1">
+                    Save content from tools to projects to organize your work.
+                  </p>
+                  <Link
+                    href="/tools"
+                    className="mt-4 inline-flex rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                  >
+                    Browse tools
+                  </Link>
+                </div>
+              ) : (
+                <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {initialProjects.map((p) => (
+                    <li key={p.id}>
+                      <Link
+                        href={`/projects/${p.id}`}
+                        className="block rounded-xl border border-slate-200 bg-white p-4 shadow-sm hover:border-slate-300 hover:shadow-md"
+                      >
+                        <p className="font-medium text-slate-900">{p.name}</p>
+                        <p className="text-xs text-slate-500 mt-1">
+                          {new Date(p.createdAt).toLocaleDateString()}
+                        </p>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Star className="h-5 w-5 text-amber-500" />

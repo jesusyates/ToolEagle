@@ -1,21 +1,41 @@
 /**
  * Client-side AI text generation.
  * Calls the /api/generate route. Falls back to template if AI fails.
+ * Sends credentials so usage limits apply to logged-in users.
  */
+
+export class LimitReachedError extends Error {
+  constructor(
+    message: string,
+    public readonly used: number,
+    public readonly limit: number
+  ) {
+    super(message);
+    this.name = "LimitReachedError";
+  }
+}
 
 export async function generateAIText(prompt: string): Promise<string[]> {
   const res = await fetch("/api/generate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
     body: JSON.stringify({ prompt })
   });
 
+  const data = await res.json().catch(() => ({}));
+
   if (!res.ok) {
-    const data = await res.json().catch(() => ({}));
+    if (res.status === 429 && data.limitReached) {
+      throw new LimitReachedError(
+        data.error ?? "You've reached today's free limit.",
+        data.used ?? 30,
+        data.limit ?? 30
+      );
+    }
     throw new Error(data.error ?? "AI generation failed");
   }
 
-  const data = await res.json();
   if (!data.results || !Array.isArray(data.results)) {
     throw new Error("Invalid AI response");
   }

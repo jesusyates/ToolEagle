@@ -101,5 +101,109 @@ export const toolSeo: Record<
   "shorts-title-generator": {
     title: "Shorts Title Generator – Titles That Get Views",
     description: "Generate titles for YouTube Shorts that get views. Free Shorts title generator."
+  },
+  "tiktok-hook-generator": {
+    title: "TikTok Hook Generator – Viral Hooks for TikTok",
+    description: "Create viral TikTok hooks that stop the scroll. Free TikTok hook generator."
+  },
+  "tiktok-comment-reply-generator": {
+    title: "TikTok Comment Reply Generator – Engage Your Audience",
+    description: "Generate engaging replies to TikTok comments. Free comment reply generator."
+  },
+  "tiktok-story-generator": {
+    title: "TikTok Story Generator – Story Ideas & Captions",
+    description: "Create TikTok story ideas and captions. Free story generator."
+  },
+  "tiktok-trend-caption-generator": {
+    title: "TikTok Trend Caption Generator – Trendy Captions",
+    description: "Generate captions for trending TikTok sounds and formats. Free trend caption generator."
+  },
+  "tiktok-video-idea-generator": {
+    title: "TikTok Video Idea Generator – Viral Content Ideas",
+    description: "Get viral TikTok video ideas for your niche. Free video idea generator."
+  },
+  "youtube-shorts-title-generator": {
+    title: "YouTube Shorts Title Generator – Titles That Get Views",
+    description: "Generate titles for YouTube Shorts that get views. Free Shorts title generator."
+  },
+  "youtube-thumbnail-text-generator": {
+    title: "YouTube Thumbnail Text Generator – Punchy Thumbnail Text",
+    description: "Create punchy text for YouTube thumbnails. Free thumbnail text generator."
+  },
+  "youtube-hook-generator": {
+    title: "YouTube Hook Generator – Grab Viewers in 5 Seconds",
+    description: "Create hooks that grab viewers in the first 5 seconds. Free YouTube hook generator."
+  },
+  "instagram-reels-caption-generator": {
+    title: "Instagram Reels Caption Generator – Boost Engagement",
+    description: "Create captions for Instagram Reels that boost engagement. Free Reel caption generator."
+  },
+  "instagram-bio-generator": {
+    title: "Instagram Bio Generator – Catchy Bio Ideas",
+    description: "Create a catchy Instagram bio that attracts followers. Free bio generator."
+  },
+  "instagram-comment-reply-generator": {
+    title: "Instagram Comment Reply Generator – Engage Followers",
+    description: "Generate engaging replies to Instagram comments. Free comment reply generator."
+  },
+  "instagram-story-caption-generator": {
+    title: "Instagram Story Caption Generator – Story Text Ideas",
+    description: "Create captions and text for Instagram Stories. Free story caption generator."
+  },
+  "content-idea-bank": {
+    title: "Content Idea Bank – Save & Organize Ideas",
+    description: "Save, organize and recycle content ideas. Free content idea generator."
+  },
+  "script-outline-generator": {
+    title: "Script Outline Generator – Short-Form Scripts",
+    description: "Create short-form scripts: hook, beats, CTA. Free script outline generator."
+  },
+  "tiktok-transition-generator": {
+    title: "TikTok Transition Generator – Smooth Transition Ideas",
+    description: "Get smooth transition ideas for your TikTok videos. Free transition generator."
+  },
+  "youtube-community-post-generator": {
+    title: "YouTube Community Post Generator – Engage Your Audience",
+    description: "Create engaging YouTube Community tab posts. Free Community post generator."
+  },
+  "instagram-carousel-caption-generator": {
+    title: "Instagram Carousel Caption Generator – Swipe-Worthy Captions",
+    description: "Write captions for Instagram carousel posts. Free carousel caption generator."
+  },
+  "tiktok-duet-idea-generator": {
+    title: "TikTok Duet Idea Generator – Viral Duet & Stitch Ideas",
+    description: "Get viral TikTok duet and stitch ideas. Free duet idea generator."
+  },
+  "youtube-end-screen-generator": {
+    title: "YouTube End Screen Generator – End Screen CTAs",
+    description: "Create end screen CTAs for your YouTube videos. Free end screen generator."
+  },
+  "instagram-dm-generator": {
+    title: "Instagram DM Generator – DM Templates & Icebreakers",
+    description: "Generate Instagram DM templates and icebreakers. Free DM generator."
+  },
+  "tiktok-challenge-idea-generator": {
+    title: "TikTok Challenge Idea Generator – Viral Challenges",
+    description: "Get viral TikTok challenge ideas for your niche. Free challenge generator."
+  },
+  "youtube-playlist-title-generator": {
+    title: "YouTube Playlist Title Generator – Playlist Titles",
+    description: "Generate titles for YouTube playlists. Free playlist title generator."
+  },
+  "instagram-poll-idea-generator": {
+    title: "Instagram Poll Idea Generator – Story Polls & Questions",
+    description: "Get Instagram Story poll and question ideas. Free poll generator."
+  },
+  "short-form-script-generator": {
+    title: "Short-Form Script Generator – TikTok, Reels, Shorts",
+    description: "Create scripts for TikTok, Reels and Shorts. Free script generator."
+  },
+  "viral-caption-generator": {
+    title: "Viral Caption Generator – Captions for Any Platform",
+    description: "Generate viral captions for any short-form platform. Free caption generator."
+  },
+  "reel-hook-generator": {
+    title: "Reel Hook Generator – Hooks That Stop the Scroll",
+    description: "Create hooks for Instagram Reels that stop the scroll. Free Reel hook generator."
   }
 };

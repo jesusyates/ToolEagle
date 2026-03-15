@@ -7,7 +7,7 @@ import { safeCopyToClipboard } from "@/lib/clipboard";
 import { addToHistory, incrementToolUsage } from "@/lib/storage";
 import { tools } from "@/config/tools";
 import { aiPrompts, MAX_INPUT_LENGTH } from "@/config/prompts";
-import { generateAIText } from "@/lib/ai/generateText";
+import { generateAIText, LimitReachedError } from "@/lib/ai/generateText";
 import { DelegatedButton } from "@/components/DelegatedButton";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { ToolInputCard } from "@/components/tools/ToolInputCard";
@@ -16,6 +16,9 @@ import { HistoryPanel } from "@/components/tools/HistoryPanel";
 import { HowItWorksCard } from "@/components/tools/HowItWorksCard";
 import { ExamplesCard } from "@/components/tools/ExamplesCard";
 import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
+import { LimitReachedModal } from "@/components/LimitReachedModal";
+import { LoginPromptModal } from "@/components/LoginPromptModal";
+import { useAuth } from "@/hooks/useAuth";
 
 const TRY_EXAMPLE = "A video about a morning productivity routine";
 
@@ -38,6 +41,9 @@ export function TikTokCaptionGeneratorClient({ relatedAside }: Props) {
   const [captions, setCaptions] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [historyTrigger, setHistoryTrigger] = useState(0);
+  const [limitModalOpen, setLimitModalOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const { isLoggedIn } = useAuth();
 
   const toolMeta = tools.find((t) => t.slug === "tiktok-caption-generator");
 
@@ -106,7 +112,12 @@ export function TikTokCaptionGeneratorClient({ relatedAside }: Props) {
             input_length: trimmed.length
           });
         }
-      } catch {
+      } catch (err) {
+        if (err instanceof LimitReachedError) {
+          setLimitModalOpen(true);
+          setIsGenerating(false);
+          return;
+        }
         results = templateGenerate(trimmed);
         if (toolMeta) {
           trackEvent("tool_generate", {
@@ -164,8 +175,45 @@ export function TikTokCaptionGeneratorClient({ relatedAside }: Props) {
     }
   }
 
+  async function handleSaveEditedItem(index: number, newText: string) {
+    const updated = [...captions];
+    updated[index] = newText;
+    setCaptions(updated);
+    if (!isLoggedIn) {
+      setLoginModalOpen(true);
+      return;
+    }
+    addToHistory({
+      toolSlug: "tiktok-caption-generator",
+      toolName: "TikTok Caption Generator",
+      input: idea,
+      items: updated
+    });
+    setHistoryTrigger((prev) => prev + 1);
+    await fetch("/api/history", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        toolSlug: "tiktok-caption-generator",
+        toolName: "TikTok Caption Generator",
+        input: idea,
+        items: updated
+      })
+    });
+  }
+
+  function handleItemsChange(index: number, newText: string) {
+    const updated = [...captions];
+    updated[index] = newText;
+    setCaptions(updated);
+  }
+
   return (
-    <ToolPageShell
+    <>
+      <LimitReachedModal open={limitModalOpen} onClose={() => setLimitModalOpen(false)} />
+      <LoginPromptModal open={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
+      <ToolPageShell
       eyebrow="Tool #1"
       title="TikTok Caption Generator"
       description="Turn a quick idea into a ready-to-post TikTok caption with hooks, emojis and hashtags. Built for creators who want to move fast without overthinking the text."
@@ -215,12 +263,17 @@ export function TikTokCaptionGeneratorClient({ relatedAside }: Props) {
           title="Preview"
           items={captions}
           isLoading={isGenerating}
+          input={idea}
           onCopyItem={handleCopyItem}
           onCopyAll={handleCopyAll}
           onRegenerate={generateCaption}
+          onSaveEditedItem={handleSaveEditedItem}
+          onItemsChange={handleItemsChange}
           emptyMessage="Your captions will appear here. Once you're happy, copy one and paste into TikTok, Instagram Reels or YouTube Shorts."
           toolSlug="tiktok-caption-generator"
           toolName="TikTok Caption Generator"
+          isLoggedIn={isLoggedIn}
+          onRequireLogin={() => setLoginModalOpen(true)}
         />
       }
       howItWorks={
@@ -250,5 +303,6 @@ export function TikTokCaptionGeneratorClient({ relatedAside }: Props) {
         </>
       }
     />
+    </>
   );
 }

@@ -11,6 +11,43 @@ const popularTools = popularToolSlugs
   .filter((t): t is ToolConfig => t != null)
   .slice(0, 6);
 
+// Platform tools: link to SEO pages (guaranteed to exist) which have CTA to AI tools
+const PLATFORM_OPEN_URLS: Record<string, string> = {
+  tiktok: "https://www.tiktok.com/",
+  youtube: "https://www.youtube.com/",
+  instagram: "https://www.instagram.com/"
+};
+
+const PLATFORM_DISPLAY_NAMES: Record<string, string> = {
+  tiktok: "TikTok",
+  youtube: "YouTube",
+  instagram: "Instagram"
+};
+
+const platformTools: Record<string, { href: string; name: string }[]> = {
+  tiktok: [
+    { href: "/tiktok/captions/funny", name: "Caption Generator" },
+    { href: "/tiktok/hashtags/funny", name: "Hashtag Generator" },
+    { href: "/tiktok/titles/gaming", name: "Title Generator" },
+    { href: "/tiktok/hooks/funny", name: "Hook Generator" },
+    { href: "/tiktok/bio/aesthetic", name: "Bio Generator" }
+  ],
+  youtube: [
+    { href: "/youtube/titles/gaming", name: "Title Generator" },
+    { href: "/youtube/captions/funny", name: "Caption Generator" },
+    { href: "/youtube/hashtags/funny", name: "Hashtag Generator" },
+    { href: "/youtube/hooks/funny", name: "Hook Generator" },
+    { href: "/youtube/bio/aesthetic", name: "Bio Generator" }
+  ],
+  instagram: [
+    { href: "/instagram/captions/funny", name: "Caption Generator" },
+    { href: "/instagram/hashtags/funny", name: "Hashtag Generator" },
+    { href: "/instagram/titles/gaming", name: "Title Generator" },
+    { href: "/instagram/hooks/funny", name: "Hook Generator" },
+    { href: "/instagram/bio/aesthetic", name: "Bio Generator" }
+  ]
+};
+
 const latestArticles = [
   {
     href: "/blog/tiktok-caption-ideas",
@@ -35,44 +72,42 @@ export default function HomePage() {
       <SiteHeader />
 
       <div className="flex-1">
+        {/* Hero: Creator Mode as primary CTA */}
         <section className="container pt-10 pb-12">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] items-start">
-            <div className="space-y-6">
+          <div className="max-w-3xl space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                 AI Tools for TikTok, YouTube and Instagram creators
               </div>
 
               <div className="space-y-3">
-                <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight">
-                  ToolEagle
+                <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-slate-900">
+                  Generate full creator content in one go
                 </h1>
                 <p className="text-xl text-slate-700 leading-relaxed max-w-2xl">
-                  <span className="font-semibold text-slate-900">
-                    AI Tools for TikTok, YouTube and Instagram creators.
-                  </span>{" "}
-                  Generate captions, hashtags, hooks and titles in seconds—so you can spend less
-                  time writing and more time creating.
+                  Enter your topic, pick platform and tone—get hook, caption, hashtags and video idea.
+                  All editable. No sign-up.
                 </p>
               </div>
 
-              <p className="text-base text-slate-600 max-w-2xl leading-relaxed">
-                A clean, creator-first toolkit powered by AI. Fast, scannable, and easy to use on
-                mobile. No sign-ups. No distractions.
-              </p>
-
               <div className="flex flex-wrap gap-3 pt-1">
                 <Link
-                  href="/tools/tiktok-caption-generator"
-                  className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition duration-150 w-full sm:w-auto text-center"
+                  href="/creator"
+                  className="inline-flex items-center justify-center rounded-xl bg-sky-600 px-6 py-4 text-base font-semibold text-white shadow-sm hover:bg-sky-700 transition duration-150 w-full sm:w-auto text-center"
                 >
-                  Start with TikTok captions
+                  Try Creator Mode →
                 </Link>
                 <Link
                   href="/tools"
                   className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-50 transition duration-150 w-full sm:w-auto text-center"
                 >
                   Browse all tools
+                </Link>
+                <Link
+                  href="/pricing"
+                  className="inline-flex items-center justify-center rounded-xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm font-semibold text-sky-700 hover:bg-sky-100 transition duration-150 w-full sm:w-auto text-center"
+                >
+                  View pricing
                 </Link>
               </div>
 
@@ -133,32 +168,113 @@ export default function HomePage() {
                   </p>
                 </div>
               </div>
-            </div>
+          </div>
+        </section>
 
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
-              <p className="text-xs font-semibold text-sky-700 uppercase tracking-[0.2em]">
-                Product
-              </p>
-              <h2 className="mt-2 text-xl font-semibold text-slate-900">
-                Built like a real toolkit
-              </h2>
-              <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                Every tool is designed as a quick workflow: input → generate → copy → post.
-              </p>
-              <div className="mt-4 rounded-2xl bg-white border border-slate-200 p-4">
-                <p className="text-sm font-semibold text-slate-900">What you can generate</p>
-                <ul className="mt-2 space-y-2 text-sm text-slate-700">
-                  <li>• Captions and hashtags that fit your niche</li>
-                  <li>• Hooks that stop the scroll in the first 2 seconds</li>
-                  <li>• Titles built for clicks on YouTube and Shorts</li>
-                </ul>
+        {/* Creator Mode Demo */}
+        <section className="bg-slate-50 border-y border-slate-200">
+          <div className="container py-12">
+            <h2 className="text-lg font-semibold text-slate-900">Creator Mode Demo</h2>
+            <p className="mt-2 text-sm text-slate-600 max-w-2xl">
+              Enter topic, pick platform and tone—get hook, caption, hashtags and video idea in one go.
+            </p>
+            <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Input</p>
+                  <div className="mt-3 space-y-2">
+                    <div className="rounded-lg bg-slate-50 px-3 py-2 text-sm">
+                      <span className="text-slate-500">Topic:</span> morning routine for busy people
+                    </div>
+                    <div className="rounded-lg bg-slate-50 px-3 py-2 text-sm">
+                      <span className="text-slate-500">Platform:</span> TikTok
+                    </div>
+                    <div className="rounded-lg bg-slate-50 px-3 py-2 text-sm">
+                      <span className="text-slate-500">Tone:</span> Casual, relatable
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Output</p>
+                  <div className="mt-3 space-y-2">
+                    <div className="rounded-lg border border-sky-100 bg-sky-50/50 px-3 py-2 text-sm">
+                      <span className="font-medium text-sky-800">Hook:</span> Stop scrolling if you want a morning that actually works
+                    </div>
+                    <div className="rounded-lg border border-slate-100 px-3 py-2 text-sm">
+                      <span className="font-medium text-slate-800">Caption:</span> 5 min routine that changed everything ☀️ #morningroutine #productivity
+                    </div>
+                    <div className="rounded-lg border border-slate-100 px-3 py-2 text-sm">
+                      <span className="font-medium text-slate-800">Hashtags:</span> #morningroutine #productivity #busy #5min
+                    </div>
+                    <div className="rounded-lg border border-slate-100 px-3 py-2 text-sm">
+                      <span className="font-medium text-slate-800">Video idea:</span> POV: your 5-min morning that actually sticks
+                    </div>
+                  </div>
+                </div>
               </div>
+              <Link
+                href="/creator"
+                className="mt-6 inline-flex items-center justify-center rounded-xl bg-sky-600 px-5 py-3 text-sm font-semibold text-white hover:bg-sky-700 transition"
+              >
+                Try Creator Mode →
+              </Link>
             </div>
           </div>
         </section>
 
+        {/* Platform Tools: TikTok, YouTube, Instagram */}
         <section className="bg-slate-50 border-y border-slate-200">
           <div className="container py-12">
+            <h2 className="text-lg font-semibold text-slate-900">Platform tools</h2>
+            <p className="mt-2 text-sm text-slate-600 max-w-2xl">
+              Pick your platform and use the right tool for captions, titles, hooks and more.
+            </p>
+            <div className="mt-6 grid gap-6 sm:grid-cols-3">
+              {(["tiktok", "youtube", "instagram"] as const).map((platform) => (
+                <div
+                  key={platform}
+                  className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                >
+                  <Link href={`/${platform}`} className="group block">
+                    <h3 className="text-base font-semibold text-slate-900 group-hover:text-sky-700 transition">
+                      {PLATFORM_DISPLAY_NAMES[platform]} Tools →
+                    </h3>
+                  </Link>
+                  <ul className="mt-3 space-y-2">
+                    {platformTools[platform].map(({ href, name }) => (
+                      <li key={`${platform}-${name}`}>
+                        <Link
+                          href={href}
+                          className="text-sm text-sky-700 hover:text-sky-800 hover:underline"
+                        >
+                          {name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <Link
+                      href={`/${platform}/captions/funny`}
+                      className="text-xs font-medium text-slate-600 hover:text-slate-900"
+                    >
+                      Browse {platform} ideas →
+                    </Link>
+                    <a
+                      href={PLATFORM_OPEN_URLS[platform]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-medium text-sky-600 hover:text-sky-800"
+                    >
+                      Open {PLATFORM_DISPLAY_NAMES[platform]} →
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="container py-12">
           <h2 className="text-lg font-semibold text-slate-900">
             Popular tools
           </h2>
@@ -177,7 +293,6 @@ export default function HomePage() {
                 category={tool.category}
               />
             ))}
-          </div>
           </div>
         </section>
 

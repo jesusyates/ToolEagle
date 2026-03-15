@@ -17,11 +17,12 @@ function scorePost(
   ).length;
 }
 
-export function RelatedArticlesCard({
+export async function RelatedArticlesCard({
   tags = [],
   limit = 3
 }: RelatedArticlesCardProps) {
-  const posts = getAllPosts()
+  const allPosts = await getAllPosts();
+  const posts = allPosts
     .map((post) => ({ post, score: scorePost(post, tags) }))
     .filter(({ score }) => score > 0)
     .sort((a, b) => b.score - a.score)
@@ -29,7 +30,7 @@ export function RelatedArticlesCard({
     .map(({ post }) => post);
 
   if (posts.length === 0) {
-    const fallback = getAllPosts().slice(0, limit);
+    const fallback = allPosts.slice(0, limit);
     if (fallback.length === 0) return null;
     return (
       <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5 sm:p-6 shadow-sm">

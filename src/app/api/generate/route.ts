@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
+import { FREE_DAILY_LIMIT } from "@/lib/usage";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 const RESULT_SEPARATOR = "\n---\n";
+const LIMIT_MESSAGE =
+  "You've reached today's free limit. Upgrade to Pro for unlimited AI generation.";
 
 function parseAIResponse(text: string): string[] {
   const raw = text.trim();
@@ -19,6 +23,65 @@ function parseAIResponse(text: string): string[] {
   return raw ? [raw] : [];
 }
 
+async function checkAndRecordUsage(userId: string): Promise<{ allowed: boolean; used: number }> {
+  const supabase = await createClient();
+  const today = new Date().toISOString().slice(0, 10);
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("plan")
+    .eq("id", userId)
+    .single();
+
+  if (!profile) {
+    await supabase.from("profiles").insert({ id: userId, plan: "free" });
+  }
+
+  const plan = profile?.plan ?? "free";
+  if (plan === "pro") {
+    return { allowed: true, used: 0 };
+  }
+
+  const { data: usage } = await supabase
+    .from("usage_stats")
+    .select("generations_count")
+    .eq("user_id", userId)
+    .eq("date", today)
+    .single();
+
+  const used = usage?.generations_count ?? 0;
+  if (used >= FREE_DAILY_LIMIT) {
+    return { allowed: false, used };
+  }
+
+  return { allowed: true, used };
+}
+
+async function incrementUsage(userId: string): Promise<void> {
+  const supabase = await createClient();
+  const today = new Date().toISOString().slice(0, 10);
+
+  const { data: existing } = await supabase
+    .from("usage_stats")
+    .select("id, generations_count")
+    .eq("user_id", userId)
+    .eq("date", today)
+    .single();
+
+  if (existing) {
+    await supabase
+      .from("usage_stats")
+      .update({ generations_count: existing.generations_count + 1 })
+      .eq("id", existing.id);
+  } else {
+    await supabase.from("usage_stats").insert({
+      user_id: userId,
+      date: today,
+      generations_count: 1
+    });
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { prompt } = await request.json();
@@ -29,6 +92,21 @@ export async function POST(request: NextRequest) {
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
       return NextResponse.json({ error: "AI not configured" }, { status: 503 });
+    }
+
+    const supabase = await createClient();
+    const {
+      data: { user }
+    } = await supabase.auth.getUser();
+
+    if (user) {
+      const { allowed, used } = await checkAndRecordUsage(user.id);
+      if (!allowed) {
+        return NextResponse.json(
+          { error: LIMIT_MESSAGE, limitReached: true, used, limit: FREE_DAILY_LIMIT },
+          { status: 429 }
+        );
+      }
     }
 
     const response = await fetch(OPENAI_API_URL, {
@@ -65,6 +143,10 @@ export async function POST(request: NextRequest) {
     const results = parseAIResponse(content);
     if (results.length < 3) {
       return NextResponse.json({ error: "Insufficient results" }, { status: 502 });
+    }
+
+    if (user) {
+      await incrementUsage(user.id);
     }
 
     return NextResponse.json({ results });

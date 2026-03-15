@@ -18,6 +18,7 @@ import {
 import { getAllPosts } from "@/lib/blog";
 
 const BASE_URL = "https://www.tooleagle.com";
+const IDEAS_PREFIX = "/ideas";
 
 type Props = {
   params: Promise<{ category: string; topic: string }>;
@@ -37,16 +38,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = `${topicLabel} ${categoryLabel} – 100+ Ideas for Your Videos`;
   const description = `Free AI generator for ${topicLabel.toLowerCase()} ${categoryLabel}. Get 100+ ideas, examples, and templates. Create scroll-stopping content in seconds.`;
 
+  const url = `${BASE_URL}${IDEAS_PREFIX}/${category}/${topic}`;
   return {
     title,
     description,
     alternates: {
-      canonical: `${BASE_URL}/${category}/${topic}`
+      canonical: url
     },
     openGraph: {
       title,
       description,
-      url: `${BASE_URL}/${category}/${topic}`
+      url
     }
   };
 }
@@ -63,7 +65,7 @@ export default async function SeoTopicPage({ params }: Props) {
   const relatedBlogSlugs = getRelatedBlogSlugs(category, topic);
   const relatedSeoPages = getRelatedSeoPages(category, topic);
   const writingTips = getWritingTips(topic);
-  const allPosts = getAllPosts();
+  const allPosts = await getAllPosts();
   const relatedPosts = relatedBlogSlugs
     .map((slug) => allPosts.find((p) => p.frontmatter.slug === slug))
     .filter(Boolean);
@@ -167,7 +169,7 @@ export default async function SeoTopicPage({ params }: Props) {
                   {relatedSeoPages.map(({ category: c, topic: t }) => (
                     <li key={`${c}-${t}`}>
                       <Link
-                        href={`/${c}/${t}`}
+                        href={`${IDEAS_PREFIX}/${c}/${t}`}
                         className="text-sm text-sky-700 hover:text-sky-800 hover:underline"
                       >
                         {formatTopicLabel(t)} {getCategoryLabel(c)}

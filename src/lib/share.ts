@@ -56,3 +56,18 @@ export function getTwitterShareUrl(text: string, url?: string): string {
   if (url) params.set("url", url);
   return `https://twitter.com/intent/tweet?${params.toString()}`;
 }
+
+/** Map tool slug to primary platform for share button */
+export function getToolPlatform(toolSlug: string): "tiktok" | "youtube" | "instagram" | null {
+  if (toolSlug.includes("tiktok")) return "tiktok";
+  if (toolSlug.includes("youtube")) return "youtube";
+  if (toolSlug.includes("instagram") || toolSlug.includes("reel")) return "instagram";
+  return null;
+}
+
+/** Platform official website URLs for share button */
+export const PLATFORM_URLS: Record<string, string> = {
+  tiktok: "https://www.tiktok.com/",
+  youtube: "https://www.youtube.com/",
+  instagram: "https://www.instagram.com/"
+};

@@ -1,7 +1,8 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { getAllPostsFromMdx, getAllPosts, getPostBySlug } from "@/lib/blog";
 import { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents } from "@/components/mdx";
@@ -14,8 +15,8 @@ type Params = {
 };
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
-  return posts.map((post) => ({
+  const mdxPosts = getAllPostsFromMdx();
+  return mdxPosts.map((post) => ({
     slug: post.frontmatter.slug
   }));
 }
@@ -25,7 +26,7 @@ export async function generateMetadata({
 }: {
   params: Params;
 }): Promise<Metadata> {
-  const post = getPostBySlug(params.slug);
+  const post = await getPostBySlug(params.slug);
 
   if (!post) {
     return {
@@ -57,8 +58,8 @@ export async function generateMetadata({
   };
 }
 
-export default function BlogPostPage({ params }: { params: Params }) {
-  const post = getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: { params: Params }) {
+  const post = await getPostBySlug(params.slug);
 
   if (!post) {
     notFound();
@@ -102,8 +103,9 @@ export default function BlogPostPage({ params }: { params: Params }) {
           </p>
           <h1>{frontmatter.title}</h1>
           <p className="text-sm text-slate-500">
-            {new Date(frontmatter.date).toLocaleDateString()} ·{" "}
-            {frontmatter.tags?.join(", ")}
+            {new Date(frontmatter.date).toLocaleDateString()}
+            {frontmatter.author_name && ` · ${frontmatter.author_name}`}
+            {frontmatter.tags?.length ? ` · ${frontmatter.tags.join(", ")}` : ""}
           </p>
           <p className="mt-2 text-sm text-slate-600">
             {frontmatter.description}
@@ -118,11 +120,32 @@ export default function BlogPostPage({ params }: { params: Params }) {
           <MDXRemote source={content} components={mdxComponents} />
 
           <hr className="my-6 border-slate-200" />
-          {frontmatter.recommendedTools?.length ? (
-            <TryToolsCard toolSlugs={frontmatter.recommendedTools} />
-          ) : (
-            <TryToolCard tags={frontmatter.tags} />
-          )}
+
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-4">
+            <p className="text-sm font-semibold text-slate-900">Try our tools</p>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/creator"
+                className="inline-flex items-center justify-center rounded-xl bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-700"
+              >
+                Creator Mode →
+              </Link>
+              <Link
+                href="/tools"
+                className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                AI Tools →
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            {frontmatter.recommendedTools?.length ? (
+              <TryToolsCard toolSlugs={frontmatter.recommendedTools} />
+            ) : (
+              <TryToolCard tags={frontmatter.tags} />
+            )}
+          </div>
         </article>
 
         <script

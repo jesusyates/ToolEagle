@@ -12,6 +12,7 @@ const hasSupabase = !!(
 );
 
 export function AuthButton() {
+  const t = useTranslations("common");
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(hasSupabase);
 
@@ -34,15 +35,22 @@ export function AuthButton() {
     return () => subscription.unsubscribe();
   }, []);
 
-  if (!hasSupabase) return null;
+  if (!hasSupabase) {
+    return (
+      <Link
+        href="/login"
+        className="inline-flex items-center rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+      >
+        {t("login")}
+      </Link>
+    );
+  }
 
   if (loading) {
     return (
       <span className="h-9 w-20 rounded-lg bg-slate-100 animate-pulse" />
     );
   }
-
-  const t = useTranslations("common");
 
   if (user) {
     return (

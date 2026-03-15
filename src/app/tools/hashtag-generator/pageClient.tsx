@@ -7,7 +7,7 @@ import { safeCopyToClipboard } from "@/lib/clipboard";
 import { addToHistory, incrementToolUsage } from "@/lib/storage";
 import { tools } from "@/config/tools";
 import { aiPrompts, MAX_INPUT_LENGTH } from "@/config/prompts";
-import { generateAIText } from "@/lib/ai/generateText";
+import { generateAIText, LimitReachedError } from "@/lib/ai/generateText";
 import { DelegatedButton } from "@/components/DelegatedButton";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { ToolInputCard } from "@/components/tools/ToolInputCard";
@@ -16,6 +16,9 @@ import { HistoryPanel } from "@/components/tools/HistoryPanel";
 import { HowItWorksCard } from "@/components/tools/HowItWorksCard";
 import { ExamplesCard } from "@/components/tools/ExamplesCard";
 import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
+import { LimitReachedModal } from "@/components/LimitReachedModal";
+import { LoginPromptModal } from "@/components/LoginPromptModal";
+import { useAuth } from "@/hooks/useAuth";
 
 const TRY_EXAMPLE = "cozy desk setup, aesthetic workspace, productivity tips for students";
 
@@ -38,6 +41,9 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
   const [results, setResults] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [historyTrigger, setHistoryTrigger] = useState(0);
+  const [limitModalOpen, setLimitModalOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const { isLoggedIn } = useAuth();
 
   const toolMeta = tools.find((t) => t.slug === "hashtag-generator");
 
@@ -84,7 +90,12 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
         if (toolMeta) {
           trackEvent("tool_generate_ai", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, input_length: trimmed.length });
         }
-      } catch {
+      } catch (err) {
+        if (err instanceof LimitReachedError) {
+          setLimitModalOpen(true);
+          setIsGenerating(false);
+          return;
+        }
         genResults = templateGenerate(trimmed);
         if (toolMeta) trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category });
       }
@@ -132,8 +143,45 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
     }
   }
 
+  async function handleSaveEditedItem(index: number, newText: string) {
+    const updated = [...results];
+    updated[index] = newText;
+    setResults(updated);
+    if (!isLoggedIn) {
+      setLoginModalOpen(true);
+      return;
+    }
+    addToHistory({
+      toolSlug: "hashtag-generator",
+      toolName: "Hashtag Generator",
+      input: topic,
+      items: updated
+    });
+    setHistoryTrigger((prev) => prev + 1);
+    await fetch("/api/history", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        toolSlug: "hashtag-generator",
+        toolName: "Hashtag Generator",
+        input: topic,
+        items: updated
+      })
+    });
+  }
+
+  function handleItemsChange(index: number, newText: string) {
+    const updated = [...results];
+    updated[index] = newText;
+    setResults(updated);
+  }
+
   return (
-    <ToolPageShell
+    <>
+      <LimitReachedModal open={limitModalOpen} onClose={() => setLimitModalOpen(false)} />
+      <LoginPromptModal open={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
+      <ToolPageShell
       eyebrow="Tool"
       title="Hashtag Generator"
       description="Generate hashtags for TikTok, Reels and Shorts based on your niche or video topic. Keep them relevant, not spammy."
@@ -179,12 +227,17 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
           title="Result"
           items={results}
           isLoading={isGenerating}
+          input={topic}
           onCopyItem={handleCopyItem}
           onCopyAll={handleCopyAll}
           onRegenerate={generateHashtags}
+          onSaveEditedItem={handleSaveEditedItem}
+          onItemsChange={handleItemsChange}
           emptyMessage="Your hashtags will appear here. Mix 1–2 broad tags with a few niche‑specific ones for best results."
           toolSlug="hashtag-generator"
           toolName="Hashtag Generator"
+          isLoggedIn={isLoggedIn}
+          onRequireLogin={() => setLoginModalOpen(true)}
         />
       }
       howItWorks={
@@ -214,5 +267,6 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
         </>
       }
     />
+    </>
   );
 }

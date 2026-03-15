@@ -4,6 +4,7 @@ import { tools } from "@/config/tools";
 import { ToolCard } from "@/components/tools/ToolCard";
 import { contentTypes, CONTENT_TYPE_LABELS } from "@/config/seo/content-types";
 import { formatTopicLabel } from "@/config/seo/topics";
+import type { BlogPost } from "@/lib/blog";
 
 const PLATFORM_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   tiktok: Video,
@@ -11,21 +12,31 @@ const PLATFORM_ICONS: Record<string, React.ComponentType<{ className?: string }>
   instagram: Instagram
 };
 
+const POPULAR_SEO_TOPICS = ["funny", "aesthetic", "savage", "cute", "gaming", "viral", "fitness", "travel"];
+
 type PlatformToolsPageProps = {
   platform: string;
   platformLabel: string;
   platformUrl: string;
+  latestPosts?: BlogPost[];
 };
+
+function matchesPlatform(post: BlogPost, platform: string): boolean {
+  const tags = post.frontmatter.tags ?? [];
+  const cat = post.frontmatter.category?.toLowerCase();
+  const p = platform.toLowerCase();
+  if (cat === p) return true;
+  return tags.some((t) => t.toLowerCase().includes(p));
+}
 
 export function PlatformToolsPage({
   platform,
   platformLabel,
-  platformUrl
+  platformUrl,
+  latestPosts = []
 }: PlatformToolsPageProps) {
   const allTools = tools.filter((t) => t.slug.startsWith(`${platform}-`));
-
-  const seoTypes = contentTypes.slice(0, 3);
-  const sampleTopics = ["funny", "aesthetic", "gaming", "fitness", "viral"];
+  const platformPosts = latestPosts.filter((p) => matchesPlatform(p, platform)).slice(0, 6);
 
   return (
     <div className="flex-1">
@@ -95,16 +106,16 @@ export function PlatformToolsPage({
         </div>
       </section>
 
-      <section className="container pb-12">
+      <section className="container py-12">
         <h2 className="text-lg font-semibold text-slate-900">
-          Browse {platformLabel} ideas
+          Popular {platformLabel} SEO Pages
         </h2>
         <p className="mt-2 text-sm text-slate-600">
-          Explore {platformLabel} captions, hashtags and more by topic.
+          Explore {platformLabel} captions, hashtags, titles and hooks by topic.
         </p>
         <div className="mt-6 flex flex-wrap gap-2">
-          {seoTypes.map((type) =>
-            sampleTopics.slice(0, 2).map((topic) => (
+          {contentTypes.slice(0, 4).map((type) =>
+            POPULAR_SEO_TOPICS.slice(0, 3).map((topic) => (
               <Link
                 key={`${type}-${topic}`}
                 href={`/${platform}/${type}/${topic}`}
@@ -122,6 +133,36 @@ export function PlatformToolsPage({
           Browse all {platformLabel} ideas →
         </Link>
       </section>
+
+      {platformPosts.length > 0 && (
+        <section className="container pb-12">
+          <h2 className="text-lg font-semibold text-slate-900">
+            Latest {platformLabel} Blog Posts
+          </h2>
+          <p className="mt-2 text-sm text-slate-600">
+            Tips, ideas and guides for {platformLabel} creators.
+          </p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {platformPosts.map((post) => (
+              <Link
+                key={post.frontmatter.slug}
+                href={`/blog/${post.frontmatter.slug}`}
+                className="block rounded-xl border border-slate-200 bg-white p-4 hover:border-sky-300 hover:shadow-md transition"
+              >
+                <h3 className="font-semibold text-slate-900">{post.frontmatter.title}</h3>
+                <p className="mt-1 text-sm text-slate-600 line-clamp-2">{post.frontmatter.description}</p>
+                <span className="mt-2 inline-block text-xs text-sky-600">Read article →</span>
+              </Link>
+            ))}
+          </div>
+          <Link
+            href="/blog"
+            className="mt-4 inline-block text-sm font-medium text-sky-600 hover:text-sky-800"
+          >
+            All blog posts →
+          </Link>
+        </section>
+      )}
     </div>
   );
 }

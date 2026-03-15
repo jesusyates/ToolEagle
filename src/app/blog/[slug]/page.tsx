@@ -8,6 +8,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents } from "@/components/mdx";
 import { TryToolCard } from "@/components/blog/TryToolCard";
 import { TryToolsCard } from "@/components/blog/TryToolsCard";
+import { BlogToolCTA } from "@/components/blog/BlogToolCTA";
 import { TableOfContents } from "@/components/blog/TableOfContents";
 
 type Params = {
@@ -118,6 +119,10 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           )}
 
           <MDXRemote source={content} components={mdxComponents} />
+
+          <hr className="my-6 border-slate-200" />
+
+          <BlogToolCTA frontmatter={frontmatter} />
 
           <hr className="my-6 border-slate-200" />
 

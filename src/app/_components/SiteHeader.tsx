@@ -35,12 +35,12 @@ export function SiteHeader() {
         </Link>
 
         <div className="flex items-center gap-2">
-          <nav className="hidden sm:flex items-center gap-2 text-sm text-slate-700">
+            <nav className="hidden sm:flex items-center gap-2 text-sm text-slate-700">
             {navPaths.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="px-3 py-2 rounded-full hover:bg-slate-100 hover:underline transition duration-150"
+                className="px-3 py-2 rounded-full hover:bg-sky-50 hover:text-sky-700 hover:underline transition duration-150"
               >
                 {t(item.key)}
               </Link>

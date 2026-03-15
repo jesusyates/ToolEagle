@@ -131,9 +131,19 @@ export function DashboardClient({
               )}
             </div>
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Star className="h-5 w-5 text-amber-500" />
-                <h2 className="text-lg font-semibold text-slate-900">Favorites</h2>
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <div className="flex items-center gap-2">
+                  <Star className="h-5 w-5 text-amber-500" />
+                  <h2 className="text-lg font-semibold text-slate-900">Favorites</h2>
+                </div>
+                {initialFavorites.length > 0 && (
+                  <Link
+                    href="/dashboard/favorites"
+                    className="text-sm font-medium text-sky-600 hover:underline"
+                  >
+                    View all →
+                  </Link>
+                )}
               </div>
               {initialFavorites.length === 0 ? (
                 <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-8 text-center">
@@ -185,7 +195,7 @@ export function DashboardClient({
               )}
               {initialFavorites.length > 10 && (
                 <Link
-                  href="/favorites"
+                  href="/dashboard/favorites"
                   className="mt-4 inline-block text-sm font-medium text-sky-600 hover:underline"
                 >
                   View all {initialFavorites.length} favorites →
@@ -194,11 +204,21 @@ export function DashboardClient({
             </div>
 
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <History className="h-5 w-5 text-slate-500" />
-                <h2 className="text-lg font-semibold text-slate-900">
-                  Recent generations
-                </h2>
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <div className="flex items-center gap-2">
+                  <History className="h-5 w-5 text-slate-500" />
+                  <h2 className="text-lg font-semibold text-slate-900">
+                    Recent generations
+                  </h2>
+                </div>
+                {initialHistory.length > 0 && (
+                  <Link
+                    href="/dashboard/history"
+                    className="text-sm font-medium text-sky-600 hover:underline"
+                  >
+                    View all →
+                  </Link>
+                )}
               </div>
               {initialHistory.length === 0 ? (
                 <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-8 text-center">

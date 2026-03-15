@@ -24,7 +24,7 @@ const TAG_TO_SLUG: Record<string, string> = {
   shorts: "shorts-title-generator"
 };
 
-function getRecommendedToolSlug(tags: string[] = []): string {
+export function getRecommendedToolSlug(tags: string[] = []): string {
   const lower = tags.map((t) => t.toLowerCase());
   for (const tag of lower) {
     const slug = TAG_TO_SLUG[tag];

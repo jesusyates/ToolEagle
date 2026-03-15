@@ -15,22 +15,22 @@ export function SiteFooter() {
             </p>
             <ul className="space-y-2 text-sm text-slate-600">
               <li>
-                <Link href="/tools/tiktok-caption-generator" className="hover:underline hover:text-slate-900 transition duration-150">
+                <Link href="/tools/tiktok-caption-generator" className="hover:underline hover:text-sky-600 transition duration-150">
                   TikTok Caption Generator
                 </Link>
               </li>
               <li>
-                <Link href="/tools/hashtag-generator" className="hover:underline hover:text-slate-900 transition duration-150">
+                <Link href="/tools/hashtag-generator" className="hover:underline hover:text-sky-600 transition duration-150">
                   Hashtag Generator
                 </Link>
               </li>
               <li>
-                <Link href="/tools/hook-generator" className="hover:underline hover:text-slate-900 transition duration-150">
+                <Link href="/tools/hook-generator" className="hover:underline hover:text-sky-600 transition duration-150">
                   Hook Generator
                 </Link>
               </li>
               <li>
-                <Link href="/tools/title-generator" className="hover:underline hover:text-slate-900 transition duration-150">
+                <Link href="/tools/title-generator" className="hover:underline hover:text-sky-600 transition duration-150">
                   Title Generator
                 </Link>
               </li>
@@ -42,22 +42,22 @@ export function SiteFooter() {
             </p>
             <ul className="space-y-2 text-sm text-slate-600">
               <li>
-                <Link href="/tiktok-captions" className="hover:underline hover:text-slate-900 transition duration-150">
+                <Link href="/tiktok-captions" className="hover:underline hover:text-sky-600 transition duration-150">
                   TikTok Captions
                 </Link>
               </li>
               <li>
-                <Link href="/youtube-titles" className="hover:underline hover:text-slate-900 transition duration-150">
+                <Link href="/youtube-titles" className="hover:underline hover:text-sky-600 transition duration-150">
                   YouTube Titles
                 </Link>
               </li>
               <li>
-                <Link href="/instagram-captions" className="hover:underline hover:text-slate-900 transition duration-150">
+                <Link href="/instagram-captions" className="hover:underline hover:text-sky-600 transition duration-150">
                   Instagram Captions
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:underline hover:text-slate-900 transition duration-150">
+                <Link href="/blog" className="hover:underline hover:text-sky-600 transition duration-150">
                   Blog
                 </Link>
               </li>
@@ -73,7 +73,7 @@ export function SiteFooter() {
               href="https://www.tiktok.com/"
               target="_blank"
               rel="noreferrer"
-              className="hover:underline hover:text-slate-900 transition duration-150"
+              className="hover:underline hover:text-sky-600 transition duration-150"
             >
               TikTok
             </a>
@@ -81,7 +81,7 @@ export function SiteFooter() {
               href="https://www.instagram.com/"
               target="_blank"
               rel="noreferrer"
-              className="hover:underline hover:text-slate-900 transition duration-150"
+              className="hover:underline hover:text-sky-600 transition duration-150"
             >
               Instagram
             </a>
@@ -89,7 +89,7 @@ export function SiteFooter() {
               href="https://x.com/"
               target="_blank"
               rel="noreferrer"
-              className="hover:underline hover:text-slate-900 transition duration-150"
+              className="hover:underline hover:text-sky-600 transition duration-150"
             >
               X
             </a>

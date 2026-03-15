@@ -2,6 +2,7 @@
  * SEO Engine v2 - Content templates
  * 1 template + topic replacement = many pages
  */
+import { getBaseTopic } from "./intents";
 
 export function getCaptionExamples(topic: string): string[] {
   const t = topic.replace(/-/g, " ");
@@ -113,22 +114,45 @@ export function getBioExamples(topic: string): string[] {
   ];
 }
 
+export function getSeoFaq(
+  platformLabel: string,
+  typeLabel: string,
+  topicLabel: string
+): { question: string; answer: string }[] {
+  const typeLower = typeLabel.toLowerCase();
+  return [
+    {
+      question: `What is a good ${platformLabel} ${typeLower}?`,
+      answer: `A good ${platformLabel} ${typeLower} is short, engaging, and matches your content. ${topicLabel} ${typeLower} work best when they feel authentic and add value—whether that's humor, curiosity, or a clear call to action. Use our AI generator to create multiple options and pick the one that fits your voice.`
+    },
+    {
+      question: `How long should a ${platformLabel} ${typeLower} be?`,
+      answer: `For ${platformLabel}, keep ${typeLower} under 150 characters for best visibility. Shorter ${typeLower} (under 100 characters) often perform better because they're easier to read and don't get cut off. Our generator creates options in different lengths so you can choose what works.`
+    },
+    {
+      question: `Do ${typeLower} affect ${platformLabel} views?`,
+      answer: `Yes. Strong ${typeLower} can improve engagement, which signals to the algorithm to show your content to more people. ${topicLabel} ${typeLower} that spark curiosity or invite comments tend to get more views. Try our free AI tool to generate ${typeLower} optimized for engagement.`
+    }
+  ];
+}
+
 export function getExamples(
   contentType: string,
   topic: string
 ): string[] {
+  const baseTopic = getBaseTopic(topic);
   switch (contentType) {
     case "captions":
-      return getCaptionExamples(topic);
+      return getCaptionExamples(baseTopic);
     case "hashtags":
-      return getHashtagExamples(topic);
+      return getHashtagExamples(baseTopic);
     case "titles":
-      return getTitleExamples(topic);
+      return getTitleExamples(baseTopic);
     case "hooks":
-      return getHookExamples(topic);
+      return getHookExamples(baseTopic);
     case "bio":
-      return getBioExamples(topic);
+      return getBioExamples(baseTopic);
     default:
-      return getCaptionExamples(topic);
+      return getCaptionExamples(baseTopic);
   }
 }

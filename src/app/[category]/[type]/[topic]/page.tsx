@@ -13,9 +13,11 @@ import {
   getAllSeoParams,
   TOOL_MAP
 } from "@/config/seo/index";
-import { getExamples } from "@/config/seo/content-templates";
+import { getExamples, getSeoFaq } from "@/config/seo/content-templates";
 import { tools } from "@/config/tools";
+import { Video } from "lucide-react";
 import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
+import { RelatedTopics } from "@/components/seo/RelatedTopics";
 
 const BASE_URL = "https://www.tooleagle.com";
 
@@ -64,17 +66,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function getRelatedTopics(currentTopic: string, count: number): string[] {
-  const idx = topics.indexOf(currentTopic as any);
-  if (idx < 0) return topics.slice(0, count);
-  const result: string[] = [];
-  for (let i = 1; i <= count; i++) {
-    const j = (idx + i) % topics.length;
-    if (!result.includes(topics[j])) result.push(topics[j]);
-  }
-  return result.slice(0, count);
-}
-
 function getRelatedTypes(currentType: string): string[] {
   return contentTypes.filter((t) => t !== currentType).slice(0, 3);
 }
@@ -96,7 +87,7 @@ export default async function SeoV2Page({ params }: Props) {
   const examples = getExamples(type, topic);
   const toolSlug = TOOL_MAP[`${category}_${type}`] ?? "tiktok-caption-generator";
   const tool = tools.find((t) => t.slug === toolSlug);
-  const relatedTopics = getRelatedTopics(topic, 5);
+  const ToolIcon = tool?.icon ?? Video;
   const relatedTypes = getRelatedTypes(type);
 
   return (
@@ -121,6 +112,15 @@ export default async function SeoV2Page({ params }: Props) {
 
             <section className="mt-10">
               <h2 className="text-lg font-semibold text-slate-900">
+                What are {topicLabel.toLowerCase()} {platformLabel} {typeLabel.toLowerCase()}?
+              </h2>
+              <p className="mt-3 text-slate-600 leading-relaxed">
+                {topicLabel} {platformLabel} {typeLabel.toLowerCase()} are {typeLabel.toLowerCase()} that match the {topicLabel.toLowerCase()} vibe—whether that's humor, aesthetics, or a specific niche. They help your content stand out, get more engagement, and connect with your audience. The best {typeLabel.toLowerCase()} feel natural and add value instead of feeling forced.
+              </p>
+            </section>
+
+            <section className="mt-10">
+              <h2 className="text-lg font-semibold text-slate-900">
                 Example {topicLabel} {typeLabel}
               </h2>
               <ul className="mt-3 space-y-2">
@@ -135,33 +135,45 @@ export default async function SeoV2Page({ params }: Props) {
               </ul>
             </section>
 
-            <SeoToolCTA
-              toolSlug={toolSlug}
-              title={tool?.name}
-              description={`Generate ${topicLabel.toLowerCase()} ${typeLabel.toLowerCase()} instantly. No sign-up required.`}
-              buttonLabel="Generate with AI"
-            />
-
-            <section className="mt-12">
+            <section className="mt-10">
               <h2 className="text-lg font-semibold text-slate-900">
-                Related Topics
+                Tips for writing {topicLabel.toLowerCase()} {typeLabel.toLowerCase()}
               </h2>
-              <p className="mt-1 text-sm text-slate-600">
-                Explore more {platformLabel} {typeLabel.toLowerCase()} by topic.
-              </p>
-              <ul className="mt-3 space-y-2">
-                {relatedTopics.map((t) => (
-                  <li key={t}>
-                    <Link
-                      href={`/${category}/${type}/${t}`}
-                      className="text-sm text-sky-700 hover:text-sky-800 hover:underline"
-                    >
-                      {formatTopicLabel(t)} {typeLabel.toLowerCase()}
-                    </Link>
-                  </li>
-                ))}
+              <ul className="mt-3 space-y-2 text-slate-600">
+                <li className="pl-4 border-l-2 border-slate-200">Keep it short—under 150 characters works best for most platforms.</li>
+                <li className="pl-4 border-l-2 border-slate-200">Match the tone of your video. A funny video needs a funny caption.</li>
+                <li className="pl-4 border-l-2 border-slate-200">Use emojis sparingly to add personality without cluttering.</li>
+                <li className="pl-4 border-l-2 border-slate-200">End with a question or CTA to encourage comments and shares.</li>
+                <li className="pl-4 border-l-2 border-slate-200">Test different options. Use our AI generator to create multiple versions and see what performs.</li>
               </ul>
             </section>
+
+            <section className="mt-10">
+              <h2 className="text-lg font-semibold text-slate-900">
+                Common mistakes to avoid
+              </h2>
+              <ul className="mt-3 space-y-2 text-slate-600">
+                <li className="pl-4 border-l-2 border-slate-200">Writing captions that don't match the video—viewers notice the disconnect.</li>
+                <li className="pl-4 border-l-2 border-slate-200">Using too many hashtags or irrelevant ones. Focus on 3–5 niche-specific tags.</li>
+                <li className="pl-4 border-l-2 border-slate-200">Being too generic. {topicLabel} {typeLabel.toLowerCase()} should feel specific to your content.</li>
+                <li className="pl-4 border-l-2 border-slate-200">Ignoring the first line. On many platforms, only the first line shows before "more"—make it count.</li>
+              </ul>
+            </section>
+
+            <SeoToolCTA
+              toolName={tool?.name ?? "TikTok Caption Generator"}
+              toolSlug={toolSlug}
+              description={`Generate viral ${topicLabel.toLowerCase()} ${typeLabel.toLowerCase()} instantly with AI`}
+              icon={<ToolIcon className="h-6 w-6 text-sky-700" />}
+            />
+
+            <RelatedTopics
+              platform={category}
+              type={type}
+              currentTopic={topic}
+              platformLabel={platformLabel}
+              typeLabel={typeLabel}
+            />
 
             <section className="mt-12">
               <h2 className="text-lg font-semibold text-slate-900">
@@ -179,6 +191,18 @@ export default async function SeoV2Page({ params }: Props) {
                   </li>
                 ))}
               </ul>
+            </section>
+
+            <section className="mt-12">
+              <h2 className="text-lg font-semibold text-slate-900">FAQ</h2>
+              <dl className="mt-4 space-y-4">
+                {getSeoFaq(platformLabel, typeLabel, topicLabel).map((faq, i) => (
+                  <div key={i} className="rounded-lg border border-slate-200 bg-slate-50/50 p-4">
+                    <dt className="font-medium text-slate-900">{faq.question}</dt>
+                    <dd className="mt-2 text-sm text-slate-600 leading-relaxed">{faq.answer}</dd>
+                  </div>
+                ))}
+              </dl>
             </section>
 
             <div className="mt-10 flex flex-wrap gap-4">
@@ -205,6 +229,23 @@ export default async function SeoV2Page({ params }: Props) {
         </article>
       </div>
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: getSeoFaq(platformLabel, typeLabel, topicLabel).map((faq) => ({
+              "@type": "Question",
+              name: faq.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.answer
+              }
+            }))
+          })
+        }}
+      />
       <SiteFooter />
     </main>
   );

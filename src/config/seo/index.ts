@@ -9,6 +9,7 @@ export {
   type ContentType
 } from "./content-types";
 export { topics, formatTopicLabel, type Topic } from "./topics";
+export { getBaseTopic, getIntent, intents, INTENT_LABELS } from "./intents";
 
 import { platforms } from "./platforms";
 import { contentTypes } from "./content-types";

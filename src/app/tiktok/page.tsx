@@ -1,6 +1,7 @@
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { PlatformToolsPage } from "@/components/platform/PlatformToolsPage";
+import { getAllPosts } from "@/lib/blog";
 
 export const metadata = {
   title: "TikTok Tools – Captions, Hooks, Hashtags & More",
@@ -8,7 +9,8 @@ export const metadata = {
     "Free TikTok tools for creators: caption generator, hook generator, hashtag generator, script generator and more. No sign-up required."
 };
 
-export default function TikTokToolsPage() {
+export default async function TikTokToolsPage() {
+  const posts = await getAllPosts();
   return (
     <main className="min-h-screen bg-white text-slate-900 flex flex-col">
       <SiteHeader />
@@ -16,6 +18,7 @@ export default function TikTokToolsPage() {
         platform="tiktok"
         platformLabel="TikTok"
         platformUrl="https://www.tiktok.com/"
+        latestPosts={posts}
       />
       <SiteFooter />
     </main>

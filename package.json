@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "db:migrate": "node scripts/run-migration.js"
+    "db:migrate": "node scripts/run-migration.js",
+    "blog:generate": "node scripts/generate-seo-blog.js",
+    "blog:generate:50": "node scripts/generate-seo-blog.js --limit 50",
+    "blog:generate:dry": "node scripts/generate-seo-blog.js --dry-run"
   },
   "dependencies": {
     "@mdx-js/mdx": "^3.1.1",

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { tools, toolCategories, popularToolSlugs, type ToolConfig } from "@/config/tools";
@@ -76,6 +77,35 @@ export function ToolsPageClient() {
               className="w-full max-w-md rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/70 focus:border-sky-400/80 transition duration-150"
             />
           </div>
+
+          <section className="mt-10">
+            <h2 className="text-lg font-semibold text-slate-900">Browse by platform</h2>
+            <p className="mt-2 text-sm text-slate-600">
+              Find the right tool for TikTok, YouTube or Instagram.
+            </p>
+            <div className="mt-6 grid gap-8 sm:grid-cols-3">
+              {[
+                { platform: "tiktok", label: "TikTok", href: "/tiktok" },
+                { platform: "youtube", label: "YouTube", href: "/youtube" },
+                { platform: "instagram", label: "Instagram", href: "/instagram" }
+              ].map(({ platform, label, href }) => {
+                const platformTools = tools.filter((t) => t.slug.startsWith(`${platform}-`));
+                return (
+                  <Link
+                    key={platform}
+                    href={href}
+                    className="block rounded-2xl border border-slate-200 bg-white p-6 hover:border-sky-300 hover:shadow-md transition"
+                  >
+                    <h3 className="font-semibold text-slate-900">{label} Tools</h3>
+                    <p className="mt-1 text-sm text-slate-600">
+                      {platformTools.length} tools for {label} creators
+                    </p>
+                    <span className="mt-3 inline-block text-sm font-medium text-sky-600">View all →</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
 
           <section className="mt-10">
             <div className="flex items-center gap-2">

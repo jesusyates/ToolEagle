@@ -39,7 +39,7 @@ export function AuthButton() {
     return (
       <Link
         href="/login"
-        className="inline-flex items-center rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+        className="inline-flex items-center rounded-lg border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-medium text-sky-700 hover:bg-sky-100 hover:border-sky-300 transition duration-150"
       >
         {t("login")}
       </Link>
@@ -56,7 +56,7 @@ export function AuthButton() {
     return (
       <Link
         href="/dashboard"
-        className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800 transition duration-150"
+        className="inline-flex items-center gap-2 rounded-lg bg-sky-600 px-4 py-2 text-sm font-medium text-white hover:bg-sky-700 transition duration-150"
       >
         {t("account")}
       </Link>
@@ -66,7 +66,7 @@ export function AuthButton() {
   return (
     <Link
       href="/login"
-      className="inline-flex items-center rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition duration-150"
+      className="inline-flex items-center rounded-lg border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-medium text-sky-700 hover:bg-sky-100 hover:border-sky-300 transition duration-150"
     >
       {t("login")}
     </Link>

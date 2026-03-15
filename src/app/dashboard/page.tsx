@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { DashboardClient } from "./DashboardClient";
@@ -34,7 +35,7 @@ export default async function DashboardPage() {
       .eq("user_id", user.id)
       .eq("date", today)
       .single(),
-    supabase.from("profiles").select("plan").eq("id", user.id).single(),
+    supabase.from("profiles").select("plan, onboarding_completed").eq("id", user.id).single(),
     supabase
       .from("projects")
       .select("id, name, created_at")
@@ -62,6 +63,7 @@ export default async function DashboardPage() {
 
   const usageToday = usageRes.data?.generations_count ?? 0;
   let plan = profileRes.data?.plan ?? "free";
+  const onboardingCompleted = (profileRes.data as { onboarding_completed?: boolean } | null)?.onboarding_completed ?? true;
 
   const projects =
     projectsRes.error || !projectsRes.data
@@ -79,13 +81,16 @@ export default async function DashboardPage() {
   }
 
   return (
-    <DashboardClient
-      userEmail={user.email ?? ""}
-      favorites={favorites}
-      history={history}
-      projects={projects}
-      usageToday={usageToday}
-      plan={plan}
-    />
+    <Suspense fallback={<div className="min-h-screen bg-white animate-pulse" />}>
+      <DashboardClient
+        userEmail={user.email ?? ""}
+        favorites={favorites}
+        history={history}
+        projects={projects}
+        usageToday={usageToday}
+        plan={plan}
+        onboardingCompleted={onboardingCompleted}
+      />
+    </Suspense>
   );
 }

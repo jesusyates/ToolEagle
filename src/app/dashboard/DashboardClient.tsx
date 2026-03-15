@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { FREE_DAILY_LIMIT } from "@/lib/usage";
@@ -8,6 +10,7 @@ import { ToolCopyButton } from "@/components/tools/ToolCopyButton";
 import { useSyncOnLogin } from "@/hooks/useSyncOnLogin";
 import { safeCopyToClipboard } from "@/lib/clipboard";
 import { createClient } from "@/lib/supabase/client";
+import { trackConversion } from "@/lib/analytics";
 import { Star, History, FolderOpen } from "lucide-react";
 
 type Favorite = {
@@ -39,7 +42,8 @@ export function DashboardClient({
   history: initialHistory,
   projects: initialProjects,
   usageToday,
-  plan
+  plan,
+  onboardingCompleted = true
 }: {
   userEmail: string;
   favorites: Favorite[];
@@ -47,8 +51,22 @@ export function DashboardClient({
   projects: Project[];
   usageToday: number;
   plan: "free" | "pro";
+  onboardingCompleted?: boolean;
 }) {
   useSyncOnLogin();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const fromSignup = searchParams.get("from") === "signup";
+    if (fromSignup) {
+      trackConversion("signup");
+      if (!onboardingCompleted) {
+        window.location.href = "/onboarding";
+        return;
+      }
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, [searchParams, onboardingCompleted]);
 
   return (
     <main className="min-h-screen bg-white text-slate-900 flex flex-col">
@@ -67,6 +85,12 @@ export function DashboardClient({
               <p className="text-sm text-slate-600 mt-1">{userEmail}</p>
             </div>
             <div className="flex items-center gap-3">
+              <Link
+                href="/dashboard/settings"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                Creator profile
+              </Link>
               <Link
                 href="/dashboard/new-post"
                 className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"

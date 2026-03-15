@@ -141,6 +141,18 @@ export default function HomePage() {
                 >
                   Hashtags
                 </Link>
+                <Link
+                  href="/ai-prompts"
+                  className="inline-flex items-center rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm text-sky-700 hover:bg-sky-100 transition duration-150"
+                >
+                  AI Prompts
+                </Link>
+                <Link
+                  href="/ai-prompt-improver"
+                  className="inline-flex items-center rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm text-sky-700 hover:bg-sky-100 transition duration-150"
+                >
+                  Prompt Improver
+                </Link>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-3 pt-2">
@@ -174,6 +186,90 @@ export default function HomePage() {
 
         <CreatorModeDemo />
 
+        {/* Three Entry Blocks */}
+        <section className="container py-12">
+          <div className="grid gap-6 sm:grid-cols-3">
+            <div className="rounded-2xl border-2 border-slate-200 bg-white p-6 shadow-sm hover:border-sky-300 hover:shadow-md transition">
+              <h2 className="text-lg font-semibold text-slate-900">Create Viral Content</h2>
+              <p className="mt-2 text-sm text-slate-600">
+                Generate captions, hooks and titles for your videos.
+              </p>
+              <div className="mt-4 flex flex-col gap-2">
+                <Link
+                  href="/tools/tiktok-caption-generator"
+                  className="inline-flex items-center justify-center rounded-xl bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-700 transition"
+                >
+                  TikTok Captions
+                </Link>
+                <Link
+                  href="/tools/hook-generator"
+                  className="inline-flex items-center justify-center rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
+                >
+                  YouTube Hooks
+                </Link>
+                <Link
+                  href="/tools/instagram-caption-generator"
+                  className="inline-flex items-center justify-center rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
+                >
+                  Instagram Captions
+                </Link>
+              </div>
+            </div>
+            <div className="rounded-2xl border-2 border-slate-200 bg-white p-6 shadow-sm hover:border-sky-300 hover:shadow-md transition">
+              <h2 className="text-lg font-semibold text-slate-900">Learn to Talk to AI</h2>
+              <p className="mt-2 text-sm text-slate-600">
+                Improve your prompts and get better AI results.
+              </p>
+              <div className="mt-4 flex flex-col gap-2">
+                <Link
+                  href="/ai-prompt-improver"
+                  className="inline-flex items-center justify-center rounded-xl border border-sky-200 bg-sky-50 px-4 py-2.5 text-sm font-semibold text-sky-700 hover:bg-sky-100 transition"
+                >
+                  Prompt Improver
+                </Link>
+                <Link
+                  href="/ai-prompts"
+                  className="inline-flex items-center justify-center rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
+                >
+                  AI Prompts Library
+                </Link>
+                <Link
+                  href="/learn-ai"
+                  className="inline-flex items-center justify-center rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
+                >
+                  Learn AI
+                </Link>
+              </div>
+            </div>
+            <div className="rounded-2xl border-2 border-slate-200 bg-white p-6 shadow-sm hover:border-sky-300 hover:shadow-md transition">
+              <h2 className="text-lg font-semibold text-slate-900">Creator Inspiration</h2>
+              <p className="mt-2 text-sm text-slate-600">
+                See what other creators are making. Get featured.
+              </p>
+              <div className="mt-4 flex flex-col gap-2">
+                <Link
+                  href="/examples"
+                  className="inline-flex items-center justify-center rounded-xl border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm font-semibold text-amber-800 hover:bg-amber-100 transition"
+                >
+                  Creator Examples
+                </Link>
+                <Link
+                  href="/creators"
+                  className="inline-flex items-center justify-center rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
+                >
+                  Creators
+                </Link>
+                <Link
+                  href="/leaderboard"
+                  className="inline-flex items-center justify-center rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
+                >
+                  Leaderboard
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Platform Tools: TikTok, YouTube, Instagram */}
         <section className="bg-slate-50 border-y border-slate-200">
           <div className="container py-12">
@@ -187,7 +283,7 @@ export default function HomePage() {
                   key={platform}
                   className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
                 >
-                  <Link href={`/${platform}`} className="group block">
+                  <Link href={`/${platform}-tools`} className="group block">
                     <h3 className="text-base font-semibold text-slate-900 group-hover:text-sky-700 transition">
                       {PLATFORM_DISPLAY_NAMES[platform]} Tools →
                     </h3>

@@ -5,6 +5,7 @@ import { GenericToolClient } from "@/components/tools/GenericToolClient";
 import { ToolStructuredData } from "@/components/seo/ToolStructuredData";
 import { RelatedToolsCard } from "@/components/tools/RelatedToolsCard";
 import { RelatedArticlesCard } from "@/components/tools/RelatedArticlesCard";
+import { LearnAiLinkCard } from "@/components/tools/LearnAiLinkCard";
 import { tools } from "@/config/tools";
 import { generators } from "@/config/generators";
 import { toolSeo } from "@/config/seo";
@@ -75,10 +76,11 @@ export default function DynamicToolPage({ params }: { params: { slug: string } }
       <div className="flex-1">
         <GenericToolClient
           slug={slug}
-          relatedAside={
+            relatedAside={
             <>
               <RelatedToolsCard currentSlug={slug} category={tool.category} />
               <RelatedArticlesCard tags={toolToBlogTags[slug] ?? []} />
+              <LearnAiLinkCard />
             </>
           }
         />

@@ -8,7 +8,13 @@ import { AuthButton } from "@/components/auth/AuthButton";
 const navPaths = [
   { href: "/", key: "home" as const },
   { href: "/tools", key: "tools" as const },
+  { href: "/discover", key: "discover" as const },
+  { href: "/ai-prompts", key: "aiPrompts" as const },
+  { href: "/learn-ai", key: "learnAi" as const },
+  { href: "/answers", key: "answers" as const },
+  { href: "/creators", key: "creators" as const },
   { href: "/favorites", key: "favorites" as const },
+  { href: "/me", key: "me" as const },
   { href: "/dashboard", key: "dashboard" as const },
   { href: "/creator", key: "creator" as const },
   { href: "/pricing", key: "pricing" as const },

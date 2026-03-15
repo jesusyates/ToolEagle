@@ -16,6 +16,7 @@ import { HistoryPanel } from "@/components/tools/HistoryPanel";
 import { HowItWorksCard } from "@/components/tools/HowItWorksCard";
 import { ExamplesCard } from "@/components/tools/ExamplesCard";
 import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
+import { AnswerLinksCard } from "@/components/tools/AnswerLinksCard";
 import { DelegatedButton } from "@/components/DelegatedButton";
 import { LimitReachedModal } from "@/components/LimitReachedModal";
 import { LoginPromptModal } from "@/components/LoginPromptModal";
@@ -245,6 +246,7 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
           <HistoryPanel toolSlug={slug} refreshTrigger={historyTrigger} />
           <ExamplesCard examples={config.examples} onUseExample={(i) => setInput(i)} />
           <ToolProTipsCard tips={config.proTips} />
+          <AnswerLinksCard toolSlug={slug} limit={3} />
           {relatedAside}
         </>
       }

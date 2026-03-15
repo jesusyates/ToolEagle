@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import Script from "next/script";
+import PlausibleProvider from "next-plausible";
 import "./globals.css";
 import { Analytics } from "./Analytics";
+
+const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.tooleagle.com"),
@@ -47,16 +50,28 @@ export default async function RootLayout({
 }>) {
   const messages = await getMessages();
 
+  const content = (
+    <>
+      <Script id="translate-resilience" strategy="beforeInteractive">
+        {`(function(){if(typeof Node==="undefined"||!Node.prototype)return;var r=Node.prototype.removeChild;Node.prototype.removeChild=function(c){if(c.parentNode!==this)return c;return r.apply(this,arguments)};var i=Node.prototype.insertBefore;Node.prototype.insertBefore=function(n,ref){if(ref&&ref.parentNode!==this)return n;return i.apply(this,arguments)}})();`}
+      </Script>
+      <NextIntlClientProvider messages={messages}>
+        <Analytics />
+        {children}
+      </NextIntlClientProvider>
+    </>
+  );
+
   return (
     <html lang="en">
       <body>
-        <Script id="translate-resilience" strategy="beforeInteractive">
-          {`(function(){if(typeof Node==="undefined"||!Node.prototype)return;var r=Node.prototype.removeChild;Node.prototype.removeChild=function(c){if(c.parentNode!==this)return c;return r.apply(this,arguments)};var i=Node.prototype.insertBefore;Node.prototype.insertBefore=function(n,ref){if(ref&&ref.parentNode!==this)return n;return i.apply(this,arguments)}})();`}
-        </Script>
-        <NextIntlClientProvider messages={messages}>
-          <Analytics />
-          {children}
-        </NextIntlClientProvider>
+        {PLAUSIBLE_DOMAIN ? (
+          <PlausibleProvider domain={PLAUSIBLE_DOMAIN} trackLocalhost={process.env.NODE_ENV === "development"}>
+            {content}
+          </PlausibleProvider>
+        ) : (
+          content
+        )}
       </body>
     </html>
   );

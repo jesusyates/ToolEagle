@@ -7,6 +7,8 @@ const nextConfig = {
   reactStrictMode: true,
   async redirects() {
     return [
+      // Creator profile: /creator/[username] -> /creators/[username]
+      { source: "/creator/:username", destination: "/creators/:username", permanent: true },
       // Legacy SEO pages: /tiktok/funny-captions -> /ideas/tiktok/funny-captions
       { source: "/:category(tiktok|youtube|instagram)/:topic", destination: "/ideas/:category/:topic", permanent: true },
       // /tools?tool=X -> /tools/X (backwards compatibility)

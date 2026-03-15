@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Star, Pencil } from "lucide-react";
+import Link from "next/link";
+import { Star, Pencil, Share2 } from "lucide-react";
 import { ToolCopyButton } from "./ToolCopyButton";
-import { ShareButtons } from "./ShareButtons";
+import { ShareResultButtons } from "./ShareResultButtons";
 import { DelegatedButton } from "@/components/DelegatedButton";
 import { getFavorites } from "@/lib/storage";
 import { improveText, type ImproveAction } from "@/lib/ai/improveText";
@@ -56,6 +57,7 @@ export function ToolResultListCard({
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [projectModalOpen, setProjectModalOpen] = useState(false);
   const [projectModalContent, setProjectModalContent] = useState("");
+  const [sharedToExamples, setSharedToExamples] = useState<Set<string>>(new Set());
 
   const showContent = !isLoading && items.length > 0;
   const showSkeletons = isLoading;
@@ -86,6 +88,27 @@ export function ToolResultListCard({
     }
     setProjectModalContent(text);
     setProjectModalOpen(true);
+  }
+
+  async function handleShareToExamples(text: string) {
+    if (!toolSlug || !toolName) return;
+    if (!isLoggedIn) {
+      onRequireLogin?.() ?? setLoginModalOpen(true);
+      return;
+    }
+    const res = await fetch("/api/share-to-examples", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        toolSlug,
+        toolName,
+        input: input || "(no prompt)",
+        result: text
+      })
+    });
+    if (res.ok) setSharedToExamples((prev) => new Set(prev).add(text));
+    else if (res.status === 401) setLoginModalOpen(true);
   }
 
   async function handleSelectProject(projectId: string) {
@@ -164,7 +187,7 @@ export function ToolResultListCard({
           <p className="text-sm font-semibold text-slate-900">{title}</p>
           {showContent && (
             <div className="flex items-center gap-2 flex-wrap">
-              {toolSlug && <ShareButtons toolSlug={toolSlug} items={items} />}
+              {toolSlug && <ShareResultButtons toolSlug={toolSlug} items={items} />}
               {onRegenerate && (
                 <DelegatedButton
                   onClick={onRegenerate}
@@ -194,6 +217,22 @@ export function ToolResultListCard({
             </div>
           )}
         </div>
+        {showContent && toolSlug && (
+          <Link
+            href="/examples"
+            className="mb-4 block rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 hover:bg-amber-100 transition"
+          >
+            <div className="flex items-center gap-2">
+              <span className="text-amber-600">⭐</span>
+              <span className="text-sm font-medium text-amber-900">
+                Share your best result
+              </span>
+            </div>
+            <span className="text-xs text-amber-800">
+              Get featured on ToolEagle examples
+            </span>
+          </Link>
+        )}
         <div className="space-y-5 min-h-[80px]">
           {showSkeletons && (
             <>
@@ -312,6 +351,20 @@ export function ToolResultListCard({
                         >
                           {t("saveToProject")}
                         </DelegatedButton>
+                        {toolSlug && (
+                          <DelegatedButton
+                            onClick={() => handleShareToExamples(displayText)}
+                            className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition duration-150 ${
+                              sharedToExamples.has(displayText)
+                                ? "bg-sky-100 text-sky-700"
+                                : "border border-slate-300 bg-white text-slate-600 hover:border-sky-400/80 hover:bg-sky-50 hover:text-sky-700"
+                            }`}
+                            title={sharedToExamples.has(displayText) ? t("shared") : t("shareToExamples")}
+                          >
+                            <Share2 className="h-4 w-4" />
+                            {sharedToExamples.has(displayText) ? t("shared") : t("shareToExamples")}
+                          </DelegatedButton>
+                        )}
                         <ToolCopyButton
                           onClick={() => onCopyItem(index)}
                           variant="primary"

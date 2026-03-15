@@ -2,69 +2,88 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
-import { getAllPostsFromMdx, getAllPosts, getPostBySlug } from "@/lib/blog";
+import { getAllPostsFromMdx, getPostBySlug } from "@/lib/blog";
 import { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents } from "@/components/mdx";
 import { TryToolCard } from "@/components/blog/TryToolCard";
 import { TryToolsCard } from "@/components/blog/TryToolsCard";
 import { BlogToolCTA } from "@/components/blog/BlogToolCTA";
+import { BlogAnswerLinks } from "@/components/blog/BlogAnswerLinks";
 import { TableOfContents } from "@/components/blog/TableOfContents";
+import { ProgrammaticBlogPost } from "@/components/blog/ProgrammaticBlogPost";
+import {
+  getAllProgrammaticBlogParams,
+  getProgrammaticBlogSlug,
+  parseProgrammaticBlogSlug,
+  formatTopicForBlog,
+  PLATFORM_LABELS,
+  TYPE_LABELS
+} from "@/config/programmatic-blog";
 
-type Params = {
-  slug: string;
-};
+type Params = Promise<{ slug: string }>;
 
 export async function generateStaticParams() {
   const mdxPosts = getAllPostsFromMdx();
-  return mdxPosts.map((post) => ({
-    slug: post.frontmatter.slug
+  const programmaticParams = getAllProgrammaticBlogParams().map(({ topic, platform, type }) => ({
+    slug: getProgrammaticBlogSlug(topic, platform, type)
   }));
+  return [...mdxPosts.map((post) => ({ slug: post.frontmatter.slug })), ...programmaticParams];
 }
 
-export async function generateMetadata({
-  params
-}: {
-  params: Params;
-}): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { slug } = await params;
 
-  if (!post) {
+  const programmatic = parseProgrammaticBlogSlug(slug);
+  if (programmatic) {
+    const { topic, platform, type } = programmatic;
+    const topicLabel = formatTopicForBlog(topic);
+    const platformLabel = PLATFORM_LABELS[platform] ?? platform;
+    const typeLabel = TYPE_LABELS[type] ?? type;
+    const title = `Best ${topicLabel} ${platformLabel} ${typeLabel} (2026)`;
+    const description = `200+ best ${topicLabel.toLowerCase()} ${platformLabel} ${typeLabel.toLowerCase()}. Copy and use or generate more with our free AI tool.`;
+    const url = `https://www.tooleagle.com/blog/${slug}`;
     return {
-      title: "Article not found"
+      title,
+      description,
+      alternates: { canonical: url },
+      openGraph: { title, description, url, type: "article", siteName: "ToolEagle" },
+      twitter: { card: "summary_large_image", title, description }
     };
   }
 
-  const { title, description, slug } = post.frontmatter;
-  const url = `https://www.tooleagle.com/blog/${slug}`;
+  const post = await getPostBySlug(slug);
+  if (!post) return { title: "Article not found" };
 
+  const { title, description, slug: postSlug } = post.frontmatter;
+  const url = `https://www.tooleagle.com/blog/${postSlug}`;
   return {
     title,
     description,
-    alternates: {
-      canonical: url
-    },
-    openGraph: {
-      title,
-      description,
-      url,
-      type: "article",
-      siteName: "ToolEagle"
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description
-    }
+    alternates: { canonical: url },
+    openGraph: { title, description, url, type: "article", siteName: "ToolEagle" },
+    twitter: { card: "summary_large_image", title, description }
   };
 }
 
 export default async function BlogPostPage({ params }: { params: Params }) {
-  const post = await getPostBySlug(params.slug);
+  const { slug } = await params;
 
-  if (!post) {
-    notFound();
+  const programmatic = parseProgrammaticBlogSlug(slug);
+  if (programmatic) {
+    return (
+      <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+        <SiteHeader />
+        <div className="flex-1">
+          <ProgrammaticBlogPost slug={slug} />
+        </div>
+        <SiteFooter />
+      </main>
+    );
   }
+
+  const post = await getPostBySlug(slug);
+  if (!post) notFound();
 
   const { frontmatter, content } = post;
 
@@ -105,7 +124,18 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           <h1>{frontmatter.title}</h1>
           <p className="text-sm text-slate-500">
             {new Date(frontmatter.date).toLocaleDateString()}
-            {frontmatter.author_name && ` · ${frontmatter.author_name}`}
+            {frontmatter.author_name && (
+              <>
+                {" · "}
+                {frontmatter.author_username ? (
+                  <Link href={`/creators/${frontmatter.author_username}`} className="text-sky-600 hover:underline">
+                    {frontmatter.author_name}
+                  </Link>
+                ) : (
+                  frontmatter.author_name
+                )}
+              </>
+            )}
             {frontmatter.tags?.length ? ` · ${frontmatter.tags.join(", ")}` : ""}
           </p>
           <p className="mt-2 text-sm text-slate-600">
@@ -141,6 +171,18 @@ export default async function BlogPostPage({ params }: { params: Params }) {
               >
                 AI Tools →
               </Link>
+              <Link
+                href="/trending"
+                className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                Trending content →
+              </Link>
+              <Link
+                href="/examples"
+                className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                Creator Examples →
+              </Link>
             </div>
           </div>
 
@@ -151,6 +193,9 @@ export default async function BlogPostPage({ params }: { params: Params }) {
               <TryToolCard tags={frontmatter.tags} />
             )}
           </div>
+
+          <hr className="my-8 border-slate-200" />
+          <BlogAnswerLinks />
         </article>
 
         <script

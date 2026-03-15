@@ -11,13 +11,18 @@ import {
   CONTENT_TYPE_LABELS,
   formatTopicLabel,
   getAllSeoParams,
-  TOOL_MAP
+  TOOL_MAP,
+  getIntent
 } from "@/config/seo/index";
-import { getExamples, getSeoFaq } from "@/config/seo/content-templates";
+import { getRealExamples, getSeoFaq } from "@/config/seo/content-templates";
 import { tools } from "@/config/tools";
 import { Video } from "lucide-react";
 import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
+import { SeoToolLinks } from "@/components/seo/SeoToolLinks";
 import { RelatedTopics } from "@/components/seo/RelatedTopics";
+import { AnswerLinks } from "@/components/seo/AnswerLinks";
+import { SeoClusterLinks } from "@/components/seo/SeoClusterLinks";
+import { SeoExampleBlock } from "@/components/seo/SeoExampleBlock";
 
 const BASE_URL = "https://www.tooleagle.com";
 
@@ -52,16 +57,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = `${topicLabel} ${platformLabel} ${typeLabel} (2026)`;
   const description = `200+ ${topicLabel} ${platformLabel} ${typeLabel.toLowerCase()} for your videos. Copy and use instantly or generate more with AI.`;
 
+  const intent = getIntent(topic);
+  const noindex = intent === "questions" || intent === "templates";
+
+  const ogImageUrl = `${BASE_URL}/og/${category}-${type}-${topic}.png`;
+
   return {
     title,
     description,
+    robots: noindex ? { index: false, follow: true } : undefined,
     alternates: {
       canonical: `${BASE_URL}/${category}/${type}/${topic}`
     },
     openGraph: {
       title,
       description,
-      url: `${BASE_URL}/${category}/${type}/${topic}`
+      url: `${BASE_URL}/${category}/${type}/${topic}`,
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImageUrl]
     }
   };
 }
@@ -84,7 +102,7 @@ export default async function SeoV2Page({ params }: Props) {
   const topicLabel = formatTopicLabel(topic);
   const platformLabel = PLATFORM_LABELS[category as keyof typeof PLATFORM_LABELS];
   const typeLabel = CONTENT_TYPE_LABELS[type as keyof typeof CONTENT_TYPE_LABELS];
-  const examples = getExamples(type, topic);
+  const realExamples = getRealExamples(type, topic);
   const toolSlug = TOOL_MAP[`${category}_${type}`] ?? "tiktok-caption-generator";
   const tool = tools.find((t) => t.slug === toolSlug);
   const ToolIcon = tool?.icon ?? Video;
@@ -97,6 +115,13 @@ export default async function SeoV2Page({ params }: Props) {
       <div className="flex-1">
         <article className="container py-12">
           <div className="max-w-3xl">
+            <SeoClusterLinks
+              platform={category}
+              type={type}
+              currentTopic={topic}
+              platformLabel={platformLabel}
+              typeLabel={typeLabel}
+            />
             <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-slate-900">
               {topicLabel} {platformLabel} {typeLabel}
             </h1>
@@ -105,10 +130,23 @@ export default async function SeoV2Page({ params }: Props) {
               Use our free AI generator to create multiple options in seconds.
             </p>
             <p className="mt-6 text-base text-slate-600 leading-relaxed">
-              Great {topicLabel.toLowerCase()} {typeLabel.toLowerCase()} hook viewers, add personality,
-              and fit your niche. Generate ideas with our AI tool—then pick the one that fits your
-              voice.
+              Great {topicLabel.toLowerCase()} {platformLabel} {typeLabel.toLowerCase()} hook viewers, add personality,
+              and fit your niche. Whether you're creating for TikTok, Reels, or Shorts,               the right {typeLabel.toLowerCase()} can boost engagement and make your content more discoverable. Generate ideas
+              with our free AI tool—then pick the one that fits your voice.
             </p>
+            <p className="mt-4 text-base text-slate-600 leading-relaxed">
+              The best {topicLabel.toLowerCase()} {typeLabel.toLowerCase()} feel authentic and match your content vibe.
+              They invite comments, encourage saves, and help your videos reach new audiences. Use the
+              examples below as inspiration, or create your own in seconds with our AI generator.
+            </p>
+
+            <SeoExampleBlock
+              examples={realExamples}
+              topicLabel={topicLabel}
+              platformLabel={platformLabel}
+              typeLabel={typeLabel}
+              toolSlug={toolSlug}
+            />
 
             <section className="mt-10">
               <h2 className="text-lg font-semibold text-slate-900">
@@ -117,22 +155,6 @@ export default async function SeoV2Page({ params }: Props) {
               <p className="mt-3 text-slate-600 leading-relaxed">
                 {topicLabel} {platformLabel} {typeLabel.toLowerCase()} are {typeLabel.toLowerCase()} that match the {topicLabel.toLowerCase()} vibe—whether that's humor, aesthetics, or a specific niche. They help your content stand out, get more engagement, and connect with your audience. The best {typeLabel.toLowerCase()} feel natural and add value instead of feeling forced.
               </p>
-            </section>
-
-            <section className="mt-10">
-              <h2 className="text-lg font-semibold text-slate-900">
-                Example {topicLabel} {typeLabel}
-              </h2>
-              <ul className="mt-3 space-y-2">
-                {examples.slice(0, 30).map((ex, i) => (
-                  <li
-                    key={i}
-                    className="text-sm text-slate-700 pl-4 border-l-2 border-slate-200"
-                  >
-                    {ex}
-                  </li>
-                ))}
-              </ul>
             </section>
 
             <section className="mt-10">
@@ -167,6 +189,8 @@ export default async function SeoV2Page({ params }: Props) {
               icon={<ToolIcon className="h-6 w-6 text-sky-700" />}
             />
 
+            <SeoToolLinks />
+
             <RelatedTopics
               platform={category}
               type={type}
@@ -174,6 +198,32 @@ export default async function SeoV2Page({ params }: Props) {
               platformLabel={platformLabel}
               typeLabel={typeLabel}
             />
+
+            <AnswerLinks
+              platform={category}
+              type={type}
+              platformLabel={platformLabel}
+              typeLabel={typeLabel}
+              limit={3}
+            />
+
+            <section className="mt-12">
+              <h2 className="text-lg font-semibold text-slate-900">More resources</h2>
+              <div className="mt-3 flex flex-wrap gap-4">
+                <Link href={`/tools/${toolSlug}`} className="text-sm font-medium text-sky-600 hover:underline">
+                  {tool?.name ?? "AI Generator"} →
+                </Link>
+                <Link href="/examples" className="text-sm font-medium text-sky-600 hover:underline">
+                  Creator Examples →
+                </Link>
+                <Link href="/trending" className="text-sm font-medium text-sky-600 hover:underline">
+                  Trending content →
+                </Link>
+                <Link href="/answers" className="text-sm font-medium text-sky-600 hover:underline">
+                  Creator Answers →
+                </Link>
+              </div>
+            </section>
 
             <section className="mt-12">
               <h2 className="text-lg font-semibold text-slate-900">
@@ -211,6 +261,18 @@ export default async function SeoV2Page({ params }: Props) {
                 className="text-sm font-medium text-sky-700 hover:text-sky-800 underline-offset-2 hover:underline"
               >
                 Browse all tools →
+              </Link>
+              <Link
+                href="/examples"
+                className="text-sm font-medium text-sky-700 hover:text-sky-800 underline-offset-2 hover:underline"
+              >
+                Creator Examples →
+              </Link>
+              <Link
+                href="/trending"
+                className="text-sm font-medium text-sky-700 hover:text-sky-800 underline-offset-2 hover:underline"
+              >
+                Trending content →
               </Link>
               <Link
                 href="/creator"

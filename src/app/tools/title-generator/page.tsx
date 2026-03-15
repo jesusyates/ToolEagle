@@ -4,6 +4,7 @@ import { TitleGeneratorClient } from "./pageClient";
 import { ToolStructuredData } from "@/components/seo/ToolStructuredData";
 import { RelatedToolsCard } from "@/components/tools/RelatedToolsCard";
 import { RelatedArticlesCard } from "@/components/tools/RelatedArticlesCard";
+import { LearnAiLinkCard } from "@/components/tools/LearnAiLinkCard";
 import { toolSeo } from "@/config/seo";
 import { toolToBlogTags } from "@/lib/seo";
 
@@ -39,6 +40,7 @@ export default function TitleGeneratorPage() {
             <>
               <RelatedToolsCard currentSlug={slug} category="Titles" />
               <RelatedArticlesCard tags={toolToBlogTags[slug] ?? []} />
+              <LearnAiLinkCard />
             </>
           }
         />

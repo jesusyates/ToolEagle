@@ -57,6 +57,21 @@ export function getTwitterShareUrl(text: string, url?: string): string {
   return `https://twitter.com/intent/tweet?${params.toString()}`;
 }
 
+/** Reddit share URL for link submission. Title and url are auto-generated. */
+export function getRedditShareUrl(url: string, title: string): string {
+  const params = new URLSearchParams();
+  params.set("url", url);
+  params.set("title", title.slice(0, 300));
+  return `https://www.reddit.com/submit?${params.toString()}`;
+}
+
+/** LinkedIn share URL */
+export function getLinkedInShareUrl(url: string): string {
+  const params = new URLSearchParams();
+  params.set("url", url);
+  return `https://www.linkedin.com/sharing/share-offsite/?${params.toString()}`;
+}
+
 /** Map tool slug to primary platform for share button */
 export function getToolPlatform(toolSlug: string): "tiktok" | "youtube" | "instagram" | null {
   if (toolSlug.includes("tiktok")) return "tiktok";

@@ -15,6 +15,7 @@ export type BlogFrontmatter = {
   toc?: TocItem[];
   recommendedTools?: string[];
   author_name?: string;
+  author_username?: string;
   category?: string;
 };
 
@@ -69,6 +70,7 @@ export const getAllPosts = cache(async (): Promise<BlogPost[]> => {
       slug: p.slug,
       recommendedTools: p.recommended_tools,
       author_name: p.author_name,
+      author_username: p.author_username ?? undefined,
       category: p.category ?? undefined
     },
     content: p.content,
@@ -92,7 +94,8 @@ export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null
       tags: supabasePost.tags,
       slug: supabasePost.slug,
       recommendedTools: supabasePost.recommended_tools,
-      author_name: supabasePost.author_name
+      author_name: supabasePost.author_name,
+      author_username: supabasePost.author_username ?? undefined
     },
     content: supabasePost.content,
     source: "supabase"

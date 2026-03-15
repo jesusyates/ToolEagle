@@ -20,14 +20,26 @@ async function run() {
     process.exit(1);
   }
 
-  const migrationPath = path.join(__dirname, "..", "supabase", "migrations", "0001_init.sql");
-  const sql = fs.readFileSync(migrationPath, "utf8");
+  const migrationsDir = path.join(__dirname, "..", "supabase", "migrations");
+  const files = fs.readdirSync(migrationsDir).filter((f) => f.endsWith(".sql")).sort();
 
   const client = new Client({ connectionString: dbUrl });
   try {
     await client.connect();
-    await client.query(sql);
-    console.log("✓ Migration 0001_init.sql applied successfully.");
+    for (const file of files) {
+      const migrationPath = path.join(migrationsDir, file);
+      const sql = fs.readFileSync(migrationPath, "utf8");
+      try {
+        await client.query(sql);
+        console.log("✓ " + file + " applied successfully.");
+      } catch (err) {
+        if (err.message.includes("already exists")) {
+          console.log("○ " + file + " skipped (already applied).");
+        } else {
+          throw err;
+        }
+      }
+    }
   } catch (err) {
     console.error("Migration failed:", err.message);
     process.exit(1);

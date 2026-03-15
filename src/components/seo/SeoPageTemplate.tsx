@@ -70,12 +70,24 @@ export function SeoPageTemplate({ page }: Props) {
               </div>
             </section>
 
-            <div className="mt-10">
+            <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/tools"
                 className="text-sm font-medium text-sky-700 hover:text-sky-800 underline-offset-2 hover:underline"
               >
                 Browse all tools →
+              </Link>
+              <Link
+                href="/examples"
+                className="text-sm font-medium text-sky-700 hover:text-sky-800 underline-offset-2 hover:underline"
+              >
+                Creator Examples →
+              </Link>
+              <Link
+                href="/trending"
+                className="text-sm font-medium text-sky-700 hover:text-sky-800 underline-offset-2 hover:underline"
+              >
+                Trending content →
               </Link>
             </div>
           </div>

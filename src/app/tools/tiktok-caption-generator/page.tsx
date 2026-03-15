@@ -4,6 +4,7 @@ import { TikTokCaptionGeneratorClient } from "./pageClient";
 import { ToolStructuredData } from "@/components/seo/ToolStructuredData";
 import { RelatedToolsCard } from "@/components/tools/RelatedToolsCard";
 import { RelatedArticlesCard } from "@/components/tools/RelatedArticlesCard";
+import { LearnAiLinkCard } from "@/components/tools/LearnAiLinkCard";
 import { toolSeo } from "@/config/seo";
 import { toolToBlogTags } from "@/lib/seo";
 
@@ -39,6 +40,7 @@ export default function TikTokCaptionGeneratorPage() {
             <>
               <RelatedToolsCard currentSlug={slug} category="Captions" />
               <RelatedArticlesCard tags={toolToBlogTags[slug] ?? []} />
+              <LearnAiLinkCard />
             </>
           }
         />

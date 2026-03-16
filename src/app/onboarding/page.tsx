@@ -27,6 +27,9 @@ export default function OnboardingPage() {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [checking, setChecking] = useState(true);
+  const [platform, setPlatform] = useState<string>("");
+  const [niche, setNiche] = useState<string>("");
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     createClient()
@@ -44,9 +47,6 @@ export default function OnboardingPage() {
       </main>
     );
   }
-  const [platform, setPlatform] = useState<string>("");
-  const [niche, setNiche] = useState<string>("");
-  const [saving, setSaving] = useState(false);
 
   async function handleComplete() {
     setSaving(true);

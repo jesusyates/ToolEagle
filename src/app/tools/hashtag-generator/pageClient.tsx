@@ -53,7 +53,7 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
       tool_slug: toolMeta.slug,
       tool_category: toolMeta.category
     });
-  }, []);
+  }, [toolMeta]);
 
   function templateGenerate(trimmed: string): string[] {
     const baseTags = ["tiktok", "reels", "shorts", "contentcreator", "creator", "viral", "fyp", "tooleagle"];

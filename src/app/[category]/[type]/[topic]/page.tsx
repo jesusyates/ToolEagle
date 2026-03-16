@@ -131,7 +131,7 @@ export default async function SeoV2Page({ params }: Props) {
             </p>
             <p className="mt-6 text-base text-slate-600 leading-relaxed">
               Great {topicLabel.toLowerCase()} {platformLabel} {typeLabel.toLowerCase()} hook viewers, add personality,
-              and fit your niche. Whether you're creating for TikTok, Reels, or Shorts,               the right {typeLabel.toLowerCase()} can boost engagement and make your content more discoverable. Generate ideas
+              and fit your niche. Whether you&apos;re creating for TikTok, Reels, or Shorts, the right {typeLabel.toLowerCase()} can boost engagement and make your content more discoverable. Generate ideas
               with our free AI tool—then pick the one that fits your voice.
             </p>
             <p className="mt-4 text-base text-slate-600 leading-relaxed">
@@ -153,7 +153,7 @@ export default async function SeoV2Page({ params }: Props) {
                 What are {topicLabel.toLowerCase()} {platformLabel} {typeLabel.toLowerCase()}?
               </h2>
               <p className="mt-3 text-slate-600 leading-relaxed">
-                {topicLabel} {platformLabel} {typeLabel.toLowerCase()} are {typeLabel.toLowerCase()} that match the {topicLabel.toLowerCase()} vibe—whether that's humor, aesthetics, or a specific niche. They help your content stand out, get more engagement, and connect with your audience. The best {typeLabel.toLowerCase()} feel natural and add value instead of feeling forced.
+                {topicLabel} {platformLabel} {typeLabel.toLowerCase()} are {typeLabel.toLowerCase()} that match the {topicLabel.toLowerCase()} vibe—whether that&apos;s humor, aesthetics, or a specific niche. They help your content stand out, get more engagement, and connect with your audience. The best {typeLabel.toLowerCase()} feel natural and add value instead of feeling forced.
               </p>
             </section>
 
@@ -175,10 +175,10 @@ export default async function SeoV2Page({ params }: Props) {
                 Common mistakes to avoid
               </h2>
               <ul className="mt-3 space-y-2 text-slate-600">
-                <li className="pl-4 border-l-2 border-slate-200">Writing captions that don't match the video—viewers notice the disconnect.</li>
+                <li className="pl-4 border-l-2 border-slate-200">Writing captions that don&apos;t match the video—viewers notice the disconnect.</li>
                 <li className="pl-4 border-l-2 border-slate-200">Using too many hashtags or irrelevant ones. Focus on 3–5 niche-specific tags.</li>
                 <li className="pl-4 border-l-2 border-slate-200">Being too generic. {topicLabel} {typeLabel.toLowerCase()} should feel specific to your content.</li>
-                <li className="pl-4 border-l-2 border-slate-200">Ignoring the first line. On many platforms, only the first line shows before "more"—make it count.</li>
+                <li className="pl-4 border-l-2 border-slate-200">Ignoring the first line. On many platforms, only the first line shows before &quot;more&quot;—make it count.</li>
               </ul>
             </section>
 

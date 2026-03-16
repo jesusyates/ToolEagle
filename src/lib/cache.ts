@@ -19,7 +19,7 @@ function getRedis(): RedisClient | null {
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
   if (!url || !token) return null;
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    // eslint-disable-next-line global-require -- dynamic require for optional Redis
     const { Redis } = require("@upstash/redis");
     redis = new Redis({ url, token }) as RedisClient;
     return redis;

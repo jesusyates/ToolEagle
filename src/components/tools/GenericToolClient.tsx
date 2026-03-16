@@ -35,6 +35,7 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
   const [limitModalOpen, setLimitModalOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const { isLoggedIn } = useAuth();
+  const t = useTranslations("common");
 
   const toolMeta = tools.find((t) => t.slug === slug);
   const config = generators[slug];
@@ -48,8 +49,6 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
   }, [toolMeta]);
 
   if (!toolMeta || !config) return null;
-
-  const t = useTranslations("common");
 
   async function handleGenerate() {
     const trimmed = input.trim();

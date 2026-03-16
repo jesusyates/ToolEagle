@@ -11,9 +11,9 @@ export const dynamic = "force-dynamic";
 export const revalidate = 3600;
 
 export async function GET() {
-  const now = new Date();
-
-  const urls = [
+  try {
+    const now = new Date();
+    const urls = [
     { url: `${BASE_URL}/ai-tools`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9 },
     ...getAllAIToolSlugs().map((slug) => ({
       url: `${BASE_URL}/ai-tools/${slug}`,
@@ -41,12 +41,15 @@ export async function GET() {
       priority: 0.75
     }))
   ];
-
-  const xml = sitemapToXml(urls);
-  return new NextResponse(xml, {
-    headers: {
-      "Content-Type": "application/xml",
-      "Cache-Control": "public, max-age=3600, s-maxage=3600"
-    }
-  });
+    const xml = sitemapToXml(urls);
+    return new NextResponse(xml, {
+      headers: {
+        "Content-Type": "application/xml; charset=utf-8",
+        "Cache-Control": "public, max-age=3600, s-maxage=3600"
+      }
+    });
+  } catch (err) {
+    console.error("[sitemap-tools]", err);
+    return new NextResponse("Sitemap temporarily unavailable", { status: 500 });
+  }
 }

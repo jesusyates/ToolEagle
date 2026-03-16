@@ -3,8 +3,7 @@ import Link from "next/link";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { SubmitAiToolForm } from "./SubmitAiToolForm";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Submit Your AI Tool | ToolEagle Directory",

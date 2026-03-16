@@ -23,8 +23,7 @@ import { RelatedTopics } from "@/components/seo/RelatedTopics";
 import { AnswerLinks } from "@/components/seo/AnswerLinks";
 import { SeoClusterLinks } from "@/components/seo/SeoClusterLinks";
 import { SeoExampleBlock } from "@/components/seo/SeoExampleBlock";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 type Props = {
   params: Promise<{ category: string; type: string; topic: string }>;

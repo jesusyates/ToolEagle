@@ -8,7 +8,6 @@ import { generators } from "@/config/generators";
 import { getSeoPageSlugs } from "@/config/seoPages";
 import { getSeoPageParams } from "@/config/seo-pages";
 import { getAllSeoParams } from "@/config/seo/index";
-import { createAdminClient } from "@/lib/supabase/admin";
 import { BACKLINK_MAGNETS } from "@/config/backlink-magnets";
 import { PROMPT_CATEGORIES } from "@/config/prompt-library";
 import { getAllLearnAiSlugs } from "@/config/learn-ai";
@@ -24,8 +23,11 @@ import { getAllLibrarySlugs } from "@/config/library-pages";
 import { getVariationSlugs } from "@/lib/example-variations";
 import { getAllSeoExpansionParams } from "@/config/seo-expansion";
 import { getAllCaptionStyleParams } from "@/config/caption-styles";
+import { getAllGuideParams } from "@/config/traffic-topics";
+import { SITE_URL } from "@/config/site";
+import { createAdminClient } from "@/lib/supabase/admin";
 
-export const BASE_URL = "https://www.tooleagle.com";
+export const BASE_URL = SITE_URL;
 
 export type SitemapEntry = {
   url: string;
@@ -64,6 +66,10 @@ export function staticAndToolUrls(): SitemapEntry[] {
     { url: `${BASE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
     { url: `${BASE_URL}/pricing`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/creators`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
+    { url: `${BASE_URL}/community`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
+    { url: `${BASE_URL}/community/prompts`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE_URL}/community/ideas`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE_URL}/community/guides`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE_URL}/ai-tools`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE_URL}/ai-tools-directory`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE_URL}/examples`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
@@ -206,6 +212,45 @@ const SEO_EXPANSION_PATHS = [
   "post-ideas"
 ];
 
+export async function promptsUrls(): Promise<SitemapEntry[]> {
+  const now = new Date();
+  try {
+    const supabase = createAdminClient();
+    const { data: prompts } = await supabase
+      .from("generated_content")
+      .select("id, topic, platform")
+      .eq("type", "prompt");
+    const topicSet = new Set<string>();
+    const entries: SitemapEntry[] = [];
+    (prompts ?? []).forEach((p) => {
+      if (p.topic) topicSet.add(p.topic);
+      if (p.platform) topicSet.add(p.platform);
+    });
+    topicSet.forEach((topic) => {
+      entries.push({
+        url: `${BASE_URL}/prompts/${topic}`,
+        lastModified: now,
+        changeFrequency: "weekly" as const,
+        priority: 0.75
+      });
+    });
+    (prompts ?? []).forEach((p) => {
+      const topic = p.platform || p.topic;
+      if (topic && p.id) {
+        entries.push({
+          url: `${BASE_URL}/prompts/${topic}/${p.id}`,
+          lastModified: now,
+          changeFrequency: "weekly" as const,
+          priority: 0.7
+        });
+      }
+    });
+    return entries.slice(0, MAX_URLS_PER_SITEMAP);
+  } catch {
+    return [];
+  }
+}
+
 export function ideasUrls(): SitemapEntry[] {
   const now = new Date();
   return [
@@ -234,6 +279,27 @@ export function ideasUrls(): SitemapEntry[] {
       priority: 0.72
     }))
   ].slice(0, MAX_URLS_PER_SITEMAP);
+}
+
+export async function generatedIdeaDetailUrls(): Promise<SitemapEntry[]> {
+  const now = new Date();
+  try {
+    const supabase = createAdminClient();
+    const { data: ideas } = await supabase
+      .from("generated_content")
+      .select("id, topic")
+      .eq("type", "idea");
+    return (ideas ?? [])
+      .map((p) => ({
+        url: `${BASE_URL}/ideas/${p.topic}/${p.id}`,
+        lastModified: now,
+        changeFrequency: "weekly" as const,
+        priority: 0.7
+      }))
+      .slice(0, MAX_URLS_PER_SITEMAP);
+  } catch {
+    return [];
+  }
 }
 
 export function libraryUrls(): SitemapEntry[] {
@@ -286,6 +352,20 @@ export async function blogUrls(): Promise<SitemapEntry[]> {
   } catch {
     return programmaticUrls;
   }
+}
+
+export function guideUrls(): SitemapEntry[] {
+  const now = new Date();
+  const params = getAllGuideParams();
+  return params.map(({ pageType, topic }) => {
+    const basePath = pageType === "how-to" ? "/how-to" : pageType === "ai-prompts" ? "/ai-prompts-for" : pageType === "content-strategy" ? "/content-strategy" : "/viral-examples";
+    return {
+      url: `${BASE_URL}${basePath}/${topic}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.75
+    };
+  });
 }
 
 export async function creatorUrls(): Promise<SitemapEntry[]> {

@@ -9,8 +9,7 @@ import {
   BEST_AI_TOOLS_CATEGORIES,
   type AIToolCategory
 } from "@/config/ai-tools-marketplace";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 type Props = { params: Promise<{ category: string }> };
 

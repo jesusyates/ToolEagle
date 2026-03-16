@@ -10,10 +10,15 @@ const SITEMAPS = [
   { loc: `${BASE_URL}/sitemap-main.xml`, lastmod: now },
   { loc: `${BASE_URL}/sitemap-topics.xml`, lastmod: now },
   { loc: `${BASE_URL}/sitemap-examples.xml`, lastmod: now },
+  { loc: `${BASE_URL}/sitemap-prompts.xml`, lastmod: now },
   { loc: `${BASE_URL}/sitemap-ideas.xml`, lastmod: now },
   { loc: `${BASE_URL}/sitemap-library.xml`, lastmod: now },
   { loc: `${BASE_URL}/sitemap-answers.xml`, lastmod: now },
-  { loc: `${BASE_URL}/sitemap-tools.xml`, lastmod: now }
+  { loc: `${BASE_URL}/sitemap-ai-tools.xml`, lastmod: now },
+  { loc: `${BASE_URL}/sitemap-tools.xml`, lastmod: now },
+  { loc: `${BASE_URL}/sitemap-compare.xml`, lastmod: now },
+  { loc: `${BASE_URL}/sitemap-community.xml`, lastmod: now },
+  { loc: `${BASE_URL}/sitemap-guides.xml`, lastmod: now }
 ];
 
 export async function GET() {

@@ -5,11 +5,12 @@ import Script from "next/script";
 import PlausibleProvider from "next-plausible";
 import "./globals.css";
 import { Analytics } from "./Analytics";
+import { SITE_URL } from "@/config/site";
 
 const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.tooleagle.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "ToolEagle - Free Tools for Creators",
     template: "%s | ToolEagle"
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     description:
       "AI Tools for TikTok, YouTube and Instagram creators. Generate captions, hashtags, hooks and titles in seconds. Free and no sign-up.",
     type: "website",
-    url: "https://www.tooleagle.com",
+    url: SITE_URL,
     siteName: "ToolEagle"
   },
   twitter: {

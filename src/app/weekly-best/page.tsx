@@ -6,8 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import { TRENDING_CATEGORIES } from "@/config/trending";
 import { ExamplesClient } from "../examples/ExamplesClient";
 import { Trophy } from "lucide-react";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Weekly Best Content | ToolEagle",

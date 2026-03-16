@@ -16,48 +16,74 @@ import {
   getWritingTips
 } from "@/config/seo-pages";
 import { getAllPosts } from "@/lib/blog";
+import { getIdeaById, getIdeasByTopic } from "@/lib/generated-content";
+import type { GeneratedContentRow } from "@/lib/generated-content";
+import { IdeaViewTracker } from "./IdeaViewTracker";
+import { BASE_URL } from "@/config/site";
 
-const BASE_URL = "https://www.tooleagle.com";
 const IDEAS_PREFIX = "/ideas";
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 type Props = {
   params: Promise<{ slug: string; topic: string }>;
 };
 
 export async function generateStaticParams() {
-  return getSeoPageParams().map(({ category, topic }) => ({ slug: category, topic }));
+  const seoParams = getSeoPageParams().map(({ category, topic }) => ({ slug: category, topic }));
+  // v47: idea detail pages are dynamic - skip for static params
+  return seoParams;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug: category, topic } = await params;
   const entry = getSeoPageEntry(category, topic);
-  if (!entry) return { title: "Not Found" };
-
-  const topicLabel = formatTopicLabel(topic);
-  const categoryLabel = getCategoryLabel(category);
-  const title = `${topicLabel} ${categoryLabel} – 100+ Ideas for Your Videos`;
-  const description = `Free AI generator for ${topicLabel.toLowerCase()} ${categoryLabel}. Get 100+ ideas, examples, and templates. Create scroll-stopping content in seconds.`;
-
-  const url = `${BASE_URL}${IDEAS_PREFIX}/${category}/${topic}`;
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: url
-    },
-    openGraph: {
+  if (entry) {
+    const topicLabel = formatTopicLabel(topic);
+    const categoryLabel = getCategoryLabel(category);
+    const title = `${topicLabel} ${categoryLabel} – 100+ Ideas for Your Videos`;
+    const description = `Free AI generator for ${topicLabel.toLowerCase()} ${categoryLabel}. Get 100+ ideas, examples, and templates. Create scroll-stopping content in seconds.`;
+    const url = `${BASE_URL}${IDEAS_PREFIX}/${category}/${topic}`;
+    return {
       title,
       description,
-      url
+      alternates: { canonical: url },
+      openGraph: { title, description, url }
+    };
+  }
+  // v47: idea detail (topic = UUID)
+  if (UUID_REGEX.test(topic)) {
+    const item = await getIdeaById(topic);
+    if (item && item.topic === category) {
+      const label = formatTopicLabel(category);
+      const title = `${label} Content Idea | ToolEagle`;
+      const description = (item.content ?? "").slice(0, 160);
+      const url = `${BASE_URL}${IDEAS_PREFIX}/${category}/${topic}`;
+      return {
+        title,
+        description,
+        alternates: { canonical: url },
+        openGraph: { title, description, url }
+      };
     }
-  };
+  }
+  return { title: "Not Found" };
 }
 
 export default async function SeoTopicPage({ params }: Props) {
   const { slug: category, topic } = await params;
   const entry = getSeoPageEntry(category, topic);
+
+  // v47: idea detail page when topic is UUID
+  if (!entry && UUID_REGEX.test(topic)) {
+    const item = await getIdeaById(topic);
+    if (item && item.topic === category) {
+      return <IdeaDetailPage slug={category} id={topic} item={item} />;
+    }
+  }
+
   if (!entry) notFound();
 
+  // Existing SEO page
   const tool = tools.find((t) => t.slug === entry.tool);
   const topicLabel = formatTopicLabel(topic);
   const categoryLabel = getCategoryLabel(category);
@@ -220,6 +246,110 @@ export default async function SeoTopicPage({ params }: Props) {
         </article>
       </div>
 
+      <SiteFooter />
+    </main>
+  );
+}
+
+// v47 - Idea detail page from generated_content
+async function IdeaDetailPage({
+  slug,
+  id,
+  item
+}: {
+  slug: string;
+  id: string;
+  item: GeneratedContentRow;
+}) {
+  const label = formatTopicLabel(slug);
+  const { items: related } = await getIdeasByTopic(slug, 0);
+  const relatedIdeas = related.filter((p) => p.id !== id).slice(0, 5);
+  const relatedTools = tools
+    .filter((t) =>
+      ["tiktok-idea-generator", "hook-generator", "tiktok-caption-generator"].includes(t.slug)
+    )
+    .slice(0, 3);
+
+  return (
+    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+      <IdeaViewTracker slug={slug} id={id} />
+      <SiteHeader />
+      <div className="flex-1">
+        <article className="container max-w-3xl py-12">
+          <Link href={`/ideas/${slug}`} className="text-sm font-medium text-sky-600 hover:underline">
+            ← {label} Ideas
+          </Link>
+          <h1 className="mt-4 text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
+            {label} Content Idea
+          </h1>
+
+          <section className="mt-8">
+            <h2 className="text-lg font-semibold text-slate-900">Idea</h2>
+            <div className="mt-2 rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <p className="text-slate-800 whitespace-pre-wrap">{item.content}</p>
+            </div>
+          </section>
+
+          <section className="mt-8 rounded-2xl border-2 border-sky-200 bg-sky-50 p-6">
+            <h2 className="text-lg font-semibold text-slate-900">Generate more with AI</h2>
+            <p className="mt-2 text-sm text-slate-600">
+              Use our free AI tool to create more {label.toLowerCase()} ideas in seconds.
+            </p>
+            <Link
+              href="/tools/tiktok-idea-generator"
+              className="mt-4 inline-flex items-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800 transition"
+            >
+              Try TikTok Idea Generator →
+            </Link>
+          </section>
+
+          {relatedIdeas.length > 0 && (
+            <section className="mt-10">
+              <h2 className="text-lg font-semibold text-slate-900">Related Ideas</h2>
+              <ul className="mt-3 space-y-2">
+                {relatedIdeas.map((p) => (
+                  <li key={p.id}>
+                    <Link
+                      href={`/ideas/${slug}/${p.id}`}
+                      className="block rounded-lg border border-slate-200 px-4 py-3 hover:border-sky-300 transition"
+                    >
+                      <p className="text-sm text-slate-800 line-clamp-2">{p.content}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          <section className="mt-10">
+            <h2 className="text-lg font-semibold text-slate-900">Related Tools</h2>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              {relatedTools.map((t) => (
+                <ToolCard
+                  key={t.slug}
+                  href={`/tools/${t.slug}`}
+                  icon={t.icon}
+                  name={t.name}
+                  description={t.description}
+                  category={t.category}
+                />
+              ))}
+            </div>
+          </section>
+
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Link href={`/ideas/${slug}`} className="text-sm font-medium text-sky-600 hover:underline">
+              More {label} Ideas
+            </Link>
+            <Link href="/topics" className="text-sm font-medium text-sky-600 hover:underline">
+              All Topics
+            </Link>
+            <Link href="/tools" className="text-sm font-medium text-sky-600 hover:underline">
+              AI Tools
+            </Link>
+          </div>
+        </article>
+      </div>
       <SiteFooter />
     </main>
   );

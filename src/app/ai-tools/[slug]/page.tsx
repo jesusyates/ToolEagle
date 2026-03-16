@@ -4,8 +4,7 @@ import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { getAITool, getAllAIToolSlugs } from "@/config/ai-tools-marketplace";
 import { AIToolPage } from "@/components/tools/AIToolPage";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 type Props = { params: Promise<{ slug: string }> };
 

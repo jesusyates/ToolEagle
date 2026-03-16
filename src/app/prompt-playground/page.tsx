@@ -2,8 +2,7 @@ import { Metadata } from "next";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { PromptPlaygroundClient } from "./PromptPlaygroundClient";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Prompt Playground | Learn to Write Better Prompts",

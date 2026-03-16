@@ -4,8 +4,7 @@ import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { LEARN_AI_ARTICLES } from "@/config/learn-ai";
 import { BookOpen } from "lucide-react";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Learn to Talk to AI | Prompt Guide & Tips",

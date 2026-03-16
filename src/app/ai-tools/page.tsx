@@ -63,8 +63,9 @@ export default function AiToolsPage() {
 
           <section className="mt-16">
             <h2 className="text-2xl font-semibold text-slate-900">All tools</h2>
+            <p className="mt-2 text-slate-600">{AI_TOOLS_MARKETPLACE.length} AI tools for creators</p>
             <ul className="mt-6 space-y-3">
-              {AI_TOOLS_MARKETPLACE.map((t) => (
+              {AI_TOOLS_MARKETPLACE.slice(0, 100).map((t) => (
                 <li key={t.slug}>
                   <Link
                     href={t.isTooleagle && t.toolSlug ? `/tools/${t.toolSlug}` : `/ai-tools/${t.slug}`}
@@ -86,6 +87,11 @@ export default function AiToolsPage() {
                 </li>
               ))}
             </ul>
+            {AI_TOOLS_MARKETPLACE.length > 100 && (
+              <p className="mt-4 text-sm text-slate-600">
+                Showing 100 of {AI_TOOLS_MARKETPLACE.length}. Browse by category above for more tools.
+              </p>
+            )}
           </section>
 
           <section className="mt-16 rounded-2xl border-2 border-sky-200 bg-sky-50 p-6">

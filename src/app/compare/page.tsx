@@ -4,8 +4,7 @@ import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { COMPARE_PAGES } from "@/config/compare-pages";
 import { Scale } from "lucide-react";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "AI Tool Comparisons | ToolEagle",

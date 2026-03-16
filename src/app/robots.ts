@@ -1,6 +1,5 @@
 import { MetadataRoute } from "next";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {

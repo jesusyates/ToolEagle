@@ -11,8 +11,8 @@ import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { RelatedLinks } from "@/components/seo/RelatedLinks";
 import { LibraryExampleCard } from "@/components/save/LibraryExampleCard";
 import { MessageSquareText, Zap } from "lucide-react";
+import { BASE_URL } from "@/config/site";
 
-const BASE_URL = "https://www.tooleagle.com";
 const MIN_EXAMPLES = 100;
 
 type Props = {

@@ -10,8 +10,7 @@ import { RelatedLinks } from "@/components/seo/RelatedLinks";
 import { PageShareButtons } from "@/components/share/PageShareButtons";
 import { AnswerSaveButton } from "@/components/save/AnswerSaveButton";
 import { Video } from "lucide-react";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 type Props = {
   params: Promise<{ slug: string }>;

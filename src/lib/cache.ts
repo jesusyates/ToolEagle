@@ -50,6 +50,6 @@ export async function cacheSet<T>(key: string, value: T): Promise<void> {
   }
 }
 
-export function cacheKey(type: "trending" | "search" | "topic_examples", ...parts: string[]): string {
+export function cacheKey(type: "trending" | "search" | "topic_examples" | "prompt_topic" | "idea_topic", ...parts: string[]): string {
   return `te:${type}:${parts.join(":")}`;
 }

@@ -1,4 +1,4 @@
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 type ToolStructuredDataProps = {
   slug: string;

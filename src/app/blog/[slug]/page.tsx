@@ -20,6 +20,7 @@ import {
   PLATFORM_LABELS,
   TYPE_LABELS
 } from "@/config/programmatic-blog";
+import { SITE_URL } from "@/config/site";
 
 type Params = Promise<{ slug: string }>;
 
@@ -42,7 +43,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     const typeLabel = TYPE_LABELS[type] ?? type;
     const title = `Best ${topicLabel} ${platformLabel} ${typeLabel} (2026)`;
     const description = `200+ best ${topicLabel.toLowerCase()} ${platformLabel} ${typeLabel.toLowerCase()}. Copy and use or generate more with our free AI tool.`;
-    const url = `https://www.tooleagle.com/blog/${slug}`;
+    const url = `${SITE_URL}/blog/${slug}`;
     return {
       title,
       description,
@@ -87,7 +88,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
   const { frontmatter, content } = post;
 
-  const blogUrl = `https://www.tooleagle.com/blog/${frontmatter.slug}`;
+  const blogUrl = `${SITE_URL}/blog/${frontmatter.slug}`;
 
   const blogPosting = {
     "@context": "https://schema.org",
@@ -106,8 +107,8 @@ export default async function BlogPostPage({ params }: { params: Params }) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.tooleagle.com/" },
-      { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.tooleagle.com/blog" },
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
       { "@type": "ListItem", position: 3, name: frontmatter.title, item: blogUrl }
     ]
   };

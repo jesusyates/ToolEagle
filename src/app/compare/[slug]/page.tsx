@@ -4,41 +4,58 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { getComparePage, getAllCompareSlugs } from "@/config/compare-pages";
+import { getComparePair, getAllComparePairSlugs } from "@/lib/generate-comparisons";
+import { ToolComparisonPage } from "@/components/compare/ToolComparisonPage";
 import { Check, X } from "lucide-react";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  return getAllCompareSlugs().map((slug) => ({ slug }));
+  const legacy = getAllCompareSlugs().map((slug) => ({ slug }));
+  const pairs = getAllComparePairSlugs().map((slug) => ({ slug }));
+  return [...legacy, ...pairs];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const page = getComparePage(slug);
-  if (!page) return { title: "Not Found" };
-
-  return {
-    title: `${page.title} | ToolEagle`,
-    description: page.intro.slice(0, 160),
-    alternates: { canonical: `${BASE_URL}/compare/${slug}` },
-    openGraph: {
+  if (page) {
+    return {
       title: `${page.title} | ToolEagle`,
       description: page.intro.slice(0, 160),
-      url: `${BASE_URL}/compare/${slug}`
-    }
-  };
+      alternates: { canonical: `${BASE_URL}/compare/${slug}` },
+      openGraph: {
+        title: `${page.title} | ToolEagle`,
+        description: page.intro.slice(0, 160),
+        url: `${BASE_URL}/compare/${slug}`
+      }
+    };
+  }
+  const pair = getComparePair(slug);
+  if (pair) {
+    const desc = `${pair.toolA.name} vs ${pair.toolB.name}: Compare features, pricing, and use cases.`;
+    return {
+      title: `${pair.toolA.name} vs ${pair.toolB.name} | ToolEagle`,
+      description: desc.slice(0, 160),
+      alternates: { canonical: `${BASE_URL}/compare/${slug}` },
+      openGraph: {
+        title: `${pair.toolA.name} vs ${pair.toolB.name} | ToolEagle`,
+        description: desc.slice(0, 160),
+        url: `${BASE_URL}/compare/${slug}`
+      }
+    };
+  }
+  return { title: "Not Found" };
 }
 
 export default async function CompareSlugPage({ params }: Props) {
   const { slug } = await params;
   const page = getComparePage(slug);
-  if (!page) notFound();
-
-  return (
+  if (page) {
+    return (
     <main className="min-h-screen bg-white text-slate-900 flex flex-col">
       <SiteHeader />
 
@@ -158,4 +175,18 @@ export default async function CompareSlugPage({ params }: Props) {
       <SiteFooter />
     </main>
   );
+  }
+  const pair = getComparePair(slug);
+  if (pair) {
+    return (
+      <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+        <SiteHeader />
+        <div className="flex-1">
+          <ToolComparisonPage toolA={pair.toolA} toolB={pair.toolB} slug={slug} />
+        </div>
+        <SiteFooter />
+      </main>
+    );
+  }
+  notFound();
 }

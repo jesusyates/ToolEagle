@@ -21,8 +21,7 @@ import {
   getVariationSlugs,
   VARIATION_COUNT
 } from "@/lib/example-variations";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 const EXAMPLE_TIPS = [
   "Hook in the first line—under 150 characters works best",

@@ -4,8 +4,7 @@ import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { PROMPT_CATEGORIES } from "@/config/prompt-library";
 import { Sparkles } from "lucide-react";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "AI Prompt Library | 50+ Ready-to-Use Prompts",

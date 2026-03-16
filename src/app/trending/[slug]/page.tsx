@@ -10,8 +10,8 @@ import { cacheGet, cacheSet, cacheKey } from "@/lib/cache";
 import { tools } from "@/config/tools";
 import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { Video, MessageSquareText, Zap, User } from "lucide-react";
+import { BASE_URL } from "@/config/site";
 
-const BASE_URL = "https://www.tooleagle.com";
 const CAPTION_SLUGS = ["tiktok-caption-generator", "instagram-caption-generator"];
 const HOOK_SLUGS = ["hook-generator", "youtube-hook-generator"];
 

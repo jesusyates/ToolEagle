@@ -10,8 +10,8 @@ import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { RelatedContentCard } from "@/components/related/RelatedContentCard";
 import { getRelatedContent } from "@/lib/related-content";
 import { Zap } from "lucide-react";
+import { BASE_URL } from "@/config/site";
 
-const BASE_URL = "https://www.tooleagle.com";
 const HOOK_TOOLS = ["hook-generator", "youtube-hook-generator"];
 
 type Props = { params: Promise<{ topic: string }> };

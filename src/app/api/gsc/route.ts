@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { google } from "googleapis";
+import { BASE_URL } from "@/config/site";
 
 export const dynamic = "force-dynamic";
 
@@ -22,7 +23,7 @@ export async function GET(): Promise<NextResponse<GscData>> {
 
   const clientEmail = process.env.GSC_CLIENT_EMAIL;
   const privateKey = process.env.GSC_PRIVATE_KEY?.replace(/\\n/g, "\n");
-  const siteUrl = process.env.GSC_SITE_URL ?? "https://www.tooleagle.com/";
+  const siteUrl = process.env.GSC_SITE_URL ?? `${BASE_URL}/`;
 
   if (!clientEmail || !privateKey) {
     return NextResponse.json({

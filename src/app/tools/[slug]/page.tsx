@@ -11,8 +11,7 @@ import { generators } from "@/config/generators";
 import { toolSeo } from "@/config/seo";
 import { toolToBlogTags } from "@/lib/seo";
 import type { Metadata } from "next";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 const STATIC_TOOL_SLUGS = [
   "tiktok-caption-generator",

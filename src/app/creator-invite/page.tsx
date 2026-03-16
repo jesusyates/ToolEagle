@@ -3,8 +3,7 @@ import Link from "next/link";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { CreatorInviteForm } from "./CreatorInviteForm";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Creator Invite | Free Pro Plan for Feedback",

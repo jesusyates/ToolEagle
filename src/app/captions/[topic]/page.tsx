@@ -15,8 +15,8 @@ import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { RelatedLinks } from "@/components/seo/RelatedLinks";
 import { CaptionHookExampleCard } from "@/components/save/CaptionHookExampleCard";
 import { MessageSquareText } from "lucide-react";
+import { BASE_URL } from "@/config/site";
 
-const BASE_URL = "https://www.tooleagle.com";
 const CAPTION_TOOL_SLUGS = ["tiktok-caption-generator", "instagram-caption-generator"];
 
 type Props = {

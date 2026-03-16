@@ -1,4 +1,5 @@
 import createNextIntlPlugin from "next-intl/plugin";
+import { withSentryConfig } from "@sentry/nextjs";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
@@ -11,10 +12,15 @@ const nextConfig = {
       { source: "/sitemap-main.xml", destination: "/api/sitemap-main" },
       { source: "/sitemap-topics.xml", destination: "/api/sitemap-topics" },
       { source: "/sitemap-examples.xml", destination: "/api/sitemap-examples" },
+      { source: "/sitemap-prompts.xml", destination: "/api/sitemap-prompts" },
       { source: "/sitemap-ideas.xml", destination: "/api/sitemap-ideas" },
       { source: "/sitemap-library.xml", destination: "/api/sitemap-library" },
       { source: "/sitemap-answers.xml", destination: "/api/sitemap-answers" },
-      { source: "/sitemap-tools.xml", destination: "/api/sitemap-tools" }
+      { source: "/sitemap-ai-tools.xml", destination: "/api/sitemap-ai-tools" },
+      { source: "/sitemap-tools.xml", destination: "/api/sitemap-tools" },
+      { source: "/sitemap-compare.xml", destination: "/api/sitemap-compare" },
+      { source: "/sitemap-community.xml", destination: "/api/sitemap-community" },
+      { source: "/sitemap-guides.xml", destination: "/api/sitemap-guides" }
     ];
   },
   async redirects() {
@@ -39,5 +45,12 @@ const nextConfig = {
   }
 };
 
-export default withNextIntl(nextConfig);
+const sentryConfig = {
+  org: process.env.SENTRY_ORG || "tool-eagle",
+  project: process.env.SENTRY_PROJECT || "tooleagle",
+  silent: !process.env.CI,
+  widenClientFileUpload: true
+};
+
+export default withSentryConfig(withNextIntl(nextConfig), sentryConfig);
 

@@ -16,8 +16,7 @@ import { tools } from "@/config/tools";
 import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { TopicViewTracker } from "@/components/analytics/TopicViewTracker";
 import { Video } from "lucide-react";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 type Props = {
   params: Promise<{ slug: string }>;

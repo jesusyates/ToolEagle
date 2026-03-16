@@ -4,8 +4,7 @@ import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { TRENDING_CATEGORIES } from "@/config/trending";
 import { TrendingUp } from "lucide-react";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Trending Captions & Hooks | ToolEagle",

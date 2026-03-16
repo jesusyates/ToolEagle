@@ -5,8 +5,7 @@ import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { PROMPT_CATEGORIES, PROMPTS, type PromptCategory } from "@/config/prompt-library";
 import { PromptCard } from "./PromptCard";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 type Props = {
   params: Promise<{ category: string }>;

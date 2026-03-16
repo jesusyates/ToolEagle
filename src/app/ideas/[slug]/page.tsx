@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { getIdeasByTopic } from "@/lib/generated-content";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { getTopic, getAllTopicSlugs } from "@/config/topics";
@@ -10,8 +11,7 @@ import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { RelatedContentCard } from "@/components/related/RelatedContentCard";
 import { getRelatedContent } from "@/lib/related-content";
 import { Lightbulb } from "lucide-react";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -52,6 +52,7 @@ export default async function IdeasTopicPage({ params }: Props) {
     .limit(12);
 
   const displayExamples = examples ?? [];
+  const { items: generatedIdeas } = await getIdeasByTopic(slug, 0);
   const related = await getRelatedContent({ topic: slug, limit: 6 });
   const tool = tools.find((x) => x.slug === t.toolSlug);
 
@@ -67,6 +68,29 @@ export default async function IdeasTopicPage({ params }: Props) {
           <p className="mt-6 text-slate-600 leading-relaxed">
             {t.intro}
           </p>
+
+          {generatedIdeas.length > 0 && (
+            <section className="mt-10">
+              <h2 className="text-lg font-semibold text-slate-900">AI-generated ideas</h2>
+              <ul className="mt-3 space-y-2">
+                {generatedIdeas.slice(0, 12).map((idea) => (
+                  <li key={idea.id}>
+                    <Link
+                      href={`/ideas/${slug}/${idea.id}`}
+                      className="block rounded-lg border border-slate-200 px-4 py-3 hover:border-sky-300 transition"
+                    >
+                      <p className="text-sm text-slate-800 line-clamp-2">{idea.content}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              {generatedIdeas.length > 12 && (
+                <p className="mt-2 text-sm text-slate-600">
+                  + {generatedIdeas.length - 12} more ideas. Click any to view full detail.
+                </p>
+              )}
+            </section>
+          )}
 
           <section className="mt-10">
             <h2 className="text-lg font-semibold text-slate-900">Example content</h2>

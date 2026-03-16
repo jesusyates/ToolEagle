@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
     await cacheSet(cacheKeyStr, payload);
     return NextResponse.json(payload);
   } catch (err) {
-    console.error("search error:", err);
+    console.error("[api/search] API Error:", err);
     return NextResponse.json({ results: [] });
   }
 }

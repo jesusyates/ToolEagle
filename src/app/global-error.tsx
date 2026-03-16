@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+import * as Sentry from "@sentry/nextjs";
 import { DelegatedButton } from "@/components/DelegatedButton";
 
 export default function GlobalError({
@@ -9,6 +11,12 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  useEffect(() => {
+    if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
+      Sentry.captureException(error);
+    }
+  }, [error]);
+
   return (
     <html lang="en">
       <body>

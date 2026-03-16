@@ -3,6 +3,10 @@
     {
       "path": "/api/generate-examples",
       "schedule": "0 2 * * *"
+    },
+    {
+      "path": "/api/generate-content",
+      "schedule": "0 3 * * *"
     }
   ]
 }

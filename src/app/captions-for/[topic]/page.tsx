@@ -11,8 +11,8 @@ import { RelatedContentCard } from "@/components/related/RelatedContentCard";
 import { RelatedAITools } from "@/components/tools/RelatedAITools";
 import { getRelatedContent } from "@/lib/related-content";
 import { MessageSquareText } from "lucide-react";
+import { BASE_URL } from "@/config/site";
 
-const BASE_URL = "https://www.tooleagle.com";
 const CAPTION_TOOLS = ["tiktok-caption-generator", "instagram-caption-generator"];
 
 type Props = { params: Promise<{ topic: string }> };

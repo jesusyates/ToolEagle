@@ -5,8 +5,7 @@ import Link from "next/link";
 import { DelegatedButton } from "@/components/DelegatedButton";
 import { safeCopyToClipboard } from "@/lib/clipboard";
 import { getTwitterShareUrl, getRedditShareUrl, getLinkedInShareUrl } from "@/lib/share";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 function generateTwitterPost(content: string, pageUrl?: string): string {
   const preview = content.slice(0, 200).trim();

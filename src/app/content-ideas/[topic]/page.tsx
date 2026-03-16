@@ -4,8 +4,7 @@ import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { getSeoExpansionConfig, getSeoExpansionSlugsForPageType } from "@/config/seo-expansion";
 import { SeoExpansionTemplate } from "@/components/seo/SeoExpansionTemplate";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 type Props = { params: Promise<{ topic: string }> };
 

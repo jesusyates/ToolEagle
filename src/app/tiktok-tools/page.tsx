@@ -3,8 +3,7 @@ import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { PlatformToolsPage } from "@/components/platform/PlatformToolsPage";
 import { getAllPosts } from "@/lib/blog";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "TikTok Tools – Free AI Caption, Hook & Hashtag Generators",

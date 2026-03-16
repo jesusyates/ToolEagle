@@ -4,8 +4,7 @@ import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { getAnswersByPlatform } from "@/config/answers";
 import { HelpCircle } from "lucide-react";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Creator Answers – How to Write Captions, Hooks & Titles",

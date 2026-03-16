@@ -10,8 +10,8 @@ import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { RelatedContentCard } from "@/components/related/RelatedContentCard";
 import { getRelatedContent } from "@/lib/related-content";
 import { Hash } from "lucide-react";
+import { BASE_URL } from "@/config/site";
 
-const BASE_URL = "https://www.tooleagle.com";
 const HASHTAG_TOOLS = ["hashtag-generator", "tiktok-hashtag-generator", "instagram-hashtag-generator"];
 
 type Props = { params: Promise<{ topic: string }> };

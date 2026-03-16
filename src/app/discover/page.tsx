@@ -5,8 +5,8 @@ import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { DiscoverClient } from "./DiscoverClient";
 import { Compass } from "lucide-react";
+import { BASE_URL } from "@/config/site";
 
-const BASE_URL = "https://www.tooleagle.com";
 const PAGE_SIZE = 24;
 
 export const metadata: Metadata = {

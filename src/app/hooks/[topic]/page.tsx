@@ -15,8 +15,8 @@ import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { RelatedLinks } from "@/components/seo/RelatedLinks";
 import { CaptionHookExampleCard } from "@/components/save/CaptionHookExampleCard";
 import { Zap } from "lucide-react";
+import { BASE_URL } from "@/config/site";
 
-const BASE_URL = "https://www.tooleagle.com";
 const HOOK_TOOL_SLUGS = ["hook-generator", "youtube-hook-generator"];
 
 type Props = {

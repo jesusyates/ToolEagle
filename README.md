@@ -19,9 +19,29 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000)
 
+## Required Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `NEXT_PUBLIC_SITE_URL` | Site URL (e.g. `https://www.tooleagle.com`) |
+| `OPENAI_API_KEY` | OpenAI API key for AI generation |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role (sitemap, admin) |
+| `UPSTASH_REDIS_REST_URL` | Upstash Redis REST URL |
+| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis REST token |
+| `CRON_SECRET` | Secret for cron jobs (generate-examples) |
+| `GSC_CLIENT_EMAIL` | (Optional) Google Search Console |
+| `GSC_PRIVATE_KEY` | (Optional) Google Search Console |
+| `GSC_SITE_URL` | (Optional) Override site URL for GSC |
+| `CRON_SECRET` | Required for /api/generate-examples and /api/generate-content cron |
+| `NEXT_PUBLIC_SENTRY_DSN` | (Optional) Sentry DSN for error monitoring |
+| `SENTRY_ORG` | (Optional) Sentry org slug |
+| `SENTRY_PROJECT` | (Optional) Sentry project slug |
+
 ## Deploy
 
-Deploy to [Vercel](https://vercel.com) by connecting this repo. Add environment variables for Supabase, OpenAI, Upstash Redis as needed (see `.env.example`).
+Deploy to [Vercel](https://vercel.com) by connecting this repo. Add environment variables as listed above.
 
 ## Tech Stack
 

@@ -8,8 +8,7 @@ import { getAnswerPage } from "@/config/answers";
 import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { tools } from "@/config/tools";
 import { Video } from "lucide-react";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 type Props = {
   params: Promise<{ slug: string }>;

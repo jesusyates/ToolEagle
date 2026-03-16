@@ -7,8 +7,7 @@ import { getRealExamples } from "@/config/seo/content-templates";
 import { EXAMPLE_CATEGORIES } from "@/config/example-categories";
 import { RelatedLinks } from "@/components/seo/RelatedLinks";
 import { ExamplesClient } from "./ExamplesClient";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Creator Examples – Best Captions & Hooks Generated",

@@ -5,8 +5,7 @@ import { SiteFooter } from "../_components/SiteFooter";
 import { tools } from "@/config/tools";
 import { AI_DIRECTORY_CATEGORIES, TOOL_CATEGORY_TO_DIRECTORY, DESIGN_TOOL_SLUGS } from "@/config/ai-tools-directory";
 import { ToolCard } from "@/components/tools/ToolCard";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "AI Tools Directory for Creators – Video, Writing, Design & Marketing",

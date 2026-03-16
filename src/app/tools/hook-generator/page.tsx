@@ -8,9 +8,10 @@ import { LearnAiLinkCard } from "@/components/tools/LearnAiLinkCard";
 import { toolSeo } from "@/config/seo";
 import { toolToBlogTags } from "@/lib/seo";
 
+import { BASE_URL } from "@/config/site";
+
 const slug = "hook-generator";
 const seo = toolSeo[slug];
-const BASE_URL = "https://www.tooleagle.com";
 
 export const metadata = {
   title: seo.title,

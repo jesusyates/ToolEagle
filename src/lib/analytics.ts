@@ -6,6 +6,12 @@ declare global {
 }
 
 type ToolEvent =
+  | "guide_view"
+  | "prompt_copy"
+  | "prompt_view"
+  | "idea_view"
+  | "tool_click"
+  | "cta_click"
   | "tool_page_view"
   | "tool_generate"
   | "tool_generate_ai"
@@ -24,6 +30,7 @@ export type ToolAnalyticsPayload = {
   tool_category?: string;
   example_slug?: string;
   topic_slug?: string;
+  prompt_id?: string;
   [key: string]: string | number | undefined;
 };
 
@@ -38,9 +45,11 @@ export function trackEvent(action: ToolEvent, params?: ToolAnalyticsPayload) {
     const props: Record<string, string | number> = {};
     const p = params ?? {};
     if (p.tool_slug) props.tool_slug = String(p.tool_slug);
-    if (p.tool_category) props.tool_category = String(p.tool_category);
+  if (p.page_type) props.page_type = String(p.page_type);
+  if (p.tool_category) props.tool_category = String(p.tool_category);
     if (p.example_slug) props.example_slug = String(p.example_slug);
     if (p.topic_slug) props.topic_slug = String(p.topic_slug);
+    if (p.prompt_id) props.prompt_id = String(p.prompt_id);
     if (p.input_length !== undefined) props.input_length = Number(p.input_length);
     if (p.conversion_label) props.conversion_label = String(p.conversion_label);
     if (p.conversion_value !== undefined) props.conversion_value = Number(p.conversion_value);

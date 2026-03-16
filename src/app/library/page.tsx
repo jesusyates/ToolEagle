@@ -5,8 +5,7 @@ import { SiteFooter } from "../_components/SiteFooter";
 import { LIBRARY_PAGES } from "@/config/library-pages";
 import { MessageSquareText, Zap } from "lucide-react";
 import { RelatedLinks } from "@/components/seo/RelatedLinks";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Content Library | ToolEagle",

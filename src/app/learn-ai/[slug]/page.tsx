@@ -5,8 +5,7 @@ import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { getLearnAiArticle, getAllLearnAiSlugs } from "@/config/learn-ai";
 import { LearnAiContent } from "./LearnAiContent";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 type Props = {
   params: Promise<{ slug: string }>;

@@ -13,6 +13,7 @@ const navPaths = [
   { href: "/learn-ai", key: "learnAi" as const },
   { href: "/answers", key: "answers" as const },
   { href: "/creators", key: "creators" as const },
+  { href: "/community", key: "community" as const },
   { href: "/favorites", key: "favorites" as const },
   { href: "/me", key: "me" as const },
   { href: "/dashboard", key: "dashboard" as const },

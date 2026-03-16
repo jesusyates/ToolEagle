@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
-import { ideasUrls, sitemapToXml } from "@/lib/sitemap-data";
+import { ideasUrls, generatedIdeaDetailUrls, sitemapToXml } from "@/lib/sitemap-data";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 3600;
 
 export async function GET() {
   try {
-    const urls = ideasUrls();
+    const [staticUrls, generatedUrls] = await Promise.all([
+      Promise.resolve(ideasUrls()),
+      generatedIdeaDetailUrls()
+    ]);
+    const urls = [...staticUrls, ...generatedUrls];
     const xml = sitemapToXml(urls);
     return new NextResponse(xml, {
       headers: {

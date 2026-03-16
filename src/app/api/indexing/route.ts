@@ -12,8 +12,7 @@ import { getSeoPageSlugs } from "@/config/seoPages";
 import { getSeoPageParams } from "@/config/seo-pages";
 import { PROMPT_CATEGORIES } from "@/config/prompt-library";
 import { BACKLINK_MAGNETS } from "@/config/backlink-magnets";
-
-const BASE_URL = "https://www.tooleagle.com";
+import { BASE_URL } from "@/config/site";
 
 function getTotalPagesEstimate(): number {
   const staticCount = 50;
@@ -70,7 +69,7 @@ export async function GET() {
         scopes: ["https://www.googleapis.com/auth/webmasters.readonly"]
       });
       const searchconsole = google.searchconsole({ version: "v1", auth });
-      const siteUrl = process.env.GSC_SITE_URL ?? "https://www.tooleagle.com/";
+      const siteUrl = process.env.GSC_SITE_URL ?? `${BASE_URL}/`;
 
       const sitemapsRes = await searchconsole.sitemaps.list({ siteUrl }).catch(() => ({ data: {} }));
       const sitemaps = (sitemapsRes.data as any)?.sitemap;

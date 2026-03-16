@@ -106,6 +106,58 @@ export const COMPARE_PAGES: ComparePageConfig[] = [
     ctaToolName: "TikTok Caption Generator"
   },
   {
+    slug: "chatgpt-vs-jasper",
+    title: "ChatGPT vs Jasper for Creators",
+    intro:
+      "Both are powerful AI writing tools. Here's how they compare for caption generation, hooks, and creator content.",
+    tools: [
+      {
+        name: "ChatGPT",
+        pros: ["Free tier", "Flexible", "Conversation memory"],
+        cons: ["Requires prompt engineering", "No built-in hashtags", "Generic without instructions"],
+        bestFor: "Custom one-off content"
+      },
+      {
+        name: "Jasper",
+        pros: ["Brand voice", "Templates", "Marketing focus"],
+        cons: ["Paid only", "Overkill for short captions"],
+        bestFor: "Marketing teams with budget"
+      }
+    ],
+    examples: [
+      "POV: You finally understand the assignment 😭✨",
+      "Nobody talks about this... Save this for later 📌"
+    ],
+    ctaToolSlug: "tiktok-caption-generator",
+    ctaToolName: "TikTok Caption Generator"
+  },
+  {
+    slug: "runway-vs-pika",
+    title: "Runway vs Pika for AI Video",
+    intro:
+      "Two leading AI video generators. Compare features, pricing, and which is best for creator content.",
+    tools: [
+      {
+        name: "Runway",
+        pros: ["Gen-2, Gen-3", "Professional", "Editing tools"],
+        cons: ["Credits limit", "Paid for full access"],
+        bestFor: "Professional creators"
+      },
+      {
+        name: "Pika",
+        pros: ["Creative", "Easy to use", "Growing features"],
+        cons: ["Newer", "Less established"],
+        bestFor: "Quick AI video experiments"
+      }
+    ],
+    examples: [
+      "Text-to-video in seconds",
+      "Image-to-video animation"
+    ],
+    ctaToolSlug: "hook-generator",
+    ctaToolName: "Hook Generator"
+  },
+  {
     slug: "best-tiktok-caption-generator",
     title: "Best TikTok Caption Generator",
     intro:

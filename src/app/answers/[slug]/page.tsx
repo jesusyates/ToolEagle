@@ -8,6 +8,7 @@ import { tools } from "@/config/tools";
 import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { RelatedLinks } from "@/components/seo/RelatedLinks";
 import { PageShareButtons } from "@/components/share/PageShareButtons";
+import { AnswerSaveButton } from "@/components/save/AnswerSaveButton";
 import { Video } from "lucide-react";
 
 const BASE_URL = "https://www.tooleagle.com";
@@ -84,7 +85,8 @@ export default async function AnswerPage({ params }: Props) {
           <h1 className="mt-4 text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
             {page.question}
           </h1>
-          <div className="mt-4">
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <AnswerSaveButton answerSlug={slug} content={page.shortAnswer} variant="button" />
             <PageShareButtons
               pageUrl={`${BASE_URL}/answers/${slug}`}
               redditTitle={`${page.question} | ToolEagle Creator Answers`}

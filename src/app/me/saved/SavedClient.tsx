@@ -10,6 +10,7 @@ type Save = {
   id: string;
   item_type: string;
   example_slug: string | null;
+  answer_slug: string | null;
   tool_slug: string | null;
   tool_name: string | null;
   content: string;
@@ -57,6 +58,11 @@ export function SavedClient({
   async function handleUnsaveByExample(exampleSlug: string) {
     const res = await fetch(`/api/saves?exampleSlug=${exampleSlug}`, { method: "DELETE" });
     if (res.ok) setSaves((s) => s.filter((x) => x.example_slug !== exampleSlug));
+  }
+
+  async function handleUnsaveByAnswer(answerSlug: string) {
+    const res = await fetch(`/api/saves?answerSlug=${answerSlug}`, { method: "DELETE" });
+    if (res.ok) setSaves((s) => s.filter((x) => x.answer_slug !== answerSlug));
   }
 
   if (saves.length === 0) {
@@ -138,7 +144,9 @@ export function SavedClient({
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0 flex-1">
                   <p className="text-xs font-medium text-slate-500">
-                    {save.item_type} {save.tool_name && `· ${save.tool_name}`}
+                    {save.item_type}
+                    {save.tool_name && ` · ${save.tool_name}`}
+                    {save.answer_slug && " · Answer"}
                   </p>
                   <p className="mt-2 text-sm text-slate-800 line-clamp-3" data-copy-source>
                     {save.content}
@@ -158,6 +166,14 @@ export function SavedClient({
                       View
                     </Link>
                   )}
+                  {save.answer_slug && (
+                    <Link
+                      href={`/answers/${save.answer_slug}`}
+                      className="text-sm font-medium text-sky-600 hover:underline"
+                    >
+                      Answer
+                    </Link>
+                  )}
                   {save.tool_slug && (
                     <Link
                       href={`/tools/${save.tool_slug}`}
@@ -168,7 +184,11 @@ export function SavedClient({
                   )}
                   <button
                     onClick={() =>
-                      save.example_slug ? handleUnsaveByExample(save.example_slug) : handleUnsave(save.id)
+                      save.example_slug
+                        ? handleUnsaveByExample(save.example_slug)
+                        : save.answer_slug
+                          ? handleUnsaveByAnswer(save.answer_slug)
+                          : handleUnsave(save.id)
                     }
                     className="text-sm text-slate-500 hover:text-red-600"
                     title="Remove"

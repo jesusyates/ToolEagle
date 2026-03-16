@@ -33,7 +33,27 @@ const CAPTION_PREFIXES = [
   "Literally me. ",
   "Same energy. ",
   "Mood. ",
-  "Vibe check ✅ "
+  "Vibe check ✅ ",
+  "Low-key obsessed with this ",
+  "Can't stop thinking about ",
+  "This is your sign to ",
+  "Plot twist: ",
+  "Not me over here ",
+  "The way I ",
+  "Tell me why ",
+  "Unmatched energy ",
+  "Living for this ",
+  "Obsessed doesn't even cover it ",
+  "The duality of ",
+  "Why is nobody talking about ",
+  "This unlocked something ",
+  "Core memory unlocked ",
+  "The serotonin hit different ",
+  "IYKYK ",
+  "No explanation needed ",
+  "Just a reminder that ",
+  "Screenshot this ",
+  "Saving this for later "
 ];
 
 const HOOK_PREFIXES = [
@@ -66,7 +86,23 @@ const HOOK_PREFIXES = [
   "One minute. ",
   "Quick tip: ",
   "No one talks about this. ",
-  "Underrated tip: "
+  "Underrated tip: ",
+  "The one thing that changed everything: ",
+  "I wish I knew this sooner: ",
+  "This is the secret: ",
+  "Most people miss this: ",
+  "The real reason: ",
+  "Here's what actually works: ",
+  "Skip this at your own risk: ",
+  "The hack that changed my life: ",
+  "Why this matters more than you think: ",
+  "The truth they don't tell you: ",
+  "Before you do anything else: ",
+  "This one tip: ",
+  "The shortcut nobody uses: ",
+  "What they don't teach you: ",
+  "The real tea: ",
+  "Pro tip from someone who learned the hard way: "
 ];
 
 const EMOJI_SUFFIXES = ["", " ✨", " 🔥", " 👇", " 💀", " 😂", " 📌", " 👀", " 💪", " 🎯"];
@@ -85,7 +121,7 @@ export function parseExampleSlug(slug: string): { baseSlug: string; variationInd
   if (match) {
     const baseSlug = match[1];
     const n = parseInt(match[2], 10);
-    if (n >= 1 && n <= 30) {
+    if (n >= 1 && n <= 50) {
       return { baseSlug, variationIndex: n };
     }
   }
@@ -115,7 +151,7 @@ export function generateVariation(
   return `${prefix}${core}${emojiSuffix}`.trim();
 }
 
-export const VARIATION_COUNT = 20;
+export const VARIATION_COUNT = 50;
 
 export function getVariationSlugs(baseSlug: string): string[] {
   return Array.from({ length: VARIATION_COUNT }, (_, i) => `${baseSlug}-${i + 1}`);

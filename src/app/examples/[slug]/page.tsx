@@ -9,7 +9,11 @@ import { ExampleEmbed } from "@/components/examples/ExampleEmbed";
 import { PageShareButtons } from "@/components/share/PageShareButtons";
 import { getExampleCategory } from "@/config/example-categories";
 import { RelatedLinks } from "@/components/seo/RelatedLinks";
-import { SaveButton } from "@/components/save/SaveButton";
+import { RelatedContentCard } from "@/components/related/RelatedContentCard";
+import { RelatedAITools } from "@/components/tools/RelatedAITools";
+import { getRelatedContent } from "@/lib/related-content";
+import { ExampleReactions } from "@/components/example/ExampleReactions";
+import { ExampleViewTracker } from "@/components/analytics/ExampleViewTracker";
 import { RemixButton } from "@/components/remix/RemixButton";
 import {
   parseExampleSlug,
@@ -243,14 +247,22 @@ export default async function ExampleSlugPage({ params }: Props) {
 
   const toolSlug = example.tool_slug ?? "tiktok-caption-generator";
 
-  const { data: relatedExamples } = await supabase
-    .from("public_examples")
-    .select("slug, tool_name, result, creator_username")
-    .eq("tool_slug", toolSlug)
-    .not("slug", "is", null)
-    .neq("slug", lookupSlug)
-    .order("created_at", { ascending: false })
-    .limit(6);
+  const [relatedExamplesRes, relatedContent] = await Promise.all([
+    supabase
+      .from("public_examples")
+      .select("slug, tool_name, result, creator_username")
+      .eq("tool_slug", toolSlug)
+      .not("slug", "is", null)
+      .neq("slug", lookupSlug)
+      .order("created_at", { ascending: false })
+      .limit(6),
+    getRelatedContent({
+      topic: example.result?.slice(0, 50).replace(/\s+/g, "-").toLowerCase(),
+      toolSlug,
+      limit: 6
+    })
+  ]);
+  const relatedExamples = relatedExamplesRes.data ?? [];
 
   const creativeWorkSchema = {
     "@context": "https://schema.org",
@@ -277,6 +289,7 @@ export default async function ExampleSlugPage({ params }: Props) {
             ← Creator Examples
           </Link>
 
+          <ExampleViewTracker exampleSlug={lookupSlug} />
           <h1 className="mt-4 text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
             {example.tool_name} Example
             {variationIndex !== null && (
@@ -292,7 +305,7 @@ export default async function ExampleSlugPage({ params }: Props) {
               {displayResult}
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-4">
-              <SaveButton exampleSlug={lookupSlug} content={displayResult} />
+              <ExampleReactions exampleSlug={lookupSlug} content={displayResult} />
               <RemixButton
                 content={displayResult}
                 toolSlug={toolSlug}
@@ -386,6 +399,11 @@ export default async function ExampleSlugPage({ params }: Props) {
             </div>
           </section>
 
+          <RelatedContentCard
+            examples={relatedContent.examples}
+            answers={relatedContent.answers}
+          />
+          <RelatedAITools limit={4} />
           <RelatedLinks examples={false} />
 
           {(relatedExamples?.length ?? 0) > 0 && (

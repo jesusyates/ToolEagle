@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Bookmark } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 type Props = {
   exampleSlug: string;
@@ -47,7 +48,10 @@ export function SaveButton({ exampleSlug, content, variant = "button" }: Props) 
         window.location.href = `/login?next=${encodeURIComponent(window.location.pathname)}`;
         return;
       }
-      if (res.ok && data.saved) setSaved(true);
+      if (res.ok && data.saved) {
+        setSaved(true);
+        trackEvent("example_save", { example_slug: exampleSlug });
+      }
     }
     setLoading(false);
   }

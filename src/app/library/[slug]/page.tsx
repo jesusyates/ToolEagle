@@ -9,6 +9,7 @@ import { getMagnetExamples } from "@/config/seo/content-templates";
 import { tools } from "@/config/tools";
 import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { RelatedLinks } from "@/components/seo/RelatedLinks";
+import { LibraryExampleCard } from "@/components/save/LibraryExampleCard";
 import { MessageSquareText, Zap } from "lucide-react";
 
 const BASE_URL = "https://www.tooleagle.com";
@@ -99,21 +100,14 @@ export default async function LibraryPage({ params }: Props) {
             <ul className="mt-4 grid gap-3 sm:grid-cols-2">
               {examples.map((ex, i) => (
                 <li key={ex.slug ?? `curated-${i}`}>
-                  {ex.slug ? (
-                    <Link
-                      href={`/examples/${ex.slug}`}
-                      className="block rounded-lg border border-slate-200 px-4 py-3 hover:border-sky-300 transition"
-                    >
-                      <p className="text-sm text-slate-800 line-clamp-2">{ex.result}</p>
-                      {ex.creator_username && (
-                        <span className="mt-1 text-xs text-slate-500">@{ex.creator_username}</span>
-                      )}
-                    </Link>
-                  ) : (
-                    <div className="rounded-lg border border-slate-200 px-4 py-3">
-                      <p className="text-sm text-slate-800 line-clamp-2">{ex.result}</p>
-                    </div>
-                  )}
+                  <LibraryExampleCard
+                    slug={ex.slug}
+                    result={ex.result}
+                    toolName={page.toolName}
+                    toolSlug={page.toolSlug}
+                    creatorUsername={ex.creator_username}
+                    itemType={isCaption ? "caption" : "hook"}
+                  />
                 </li>
               ))}
             </ul>

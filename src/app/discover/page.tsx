@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-async function getDiscoverFeed(page: number = 0) {
+async function getDiscoverFeed(page: number = 0, sort: string = "latest") {
   const supabase = await createClient();
   const from = page * PAGE_SIZE;
   const to = from + PAGE_SIZE - 1;
@@ -47,13 +47,14 @@ async function getDiscoverFeed(page: number = 0) {
 }
 
 type Props = {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string; sort?: string }>;
 };
 
 export default async function DiscoverPage({ searchParams }: Props) {
-  const { page } = await searchParams;
+  const { page, sort } = await searchParams;
   const pageNum = Math.max(0, parseInt(page ?? "0", 10) || 0);
-  const { items, hasMore } = await getDiscoverFeed(pageNum);
+  const sortVal = ["latest", "trending", "popular"].includes(sort ?? "") ? sort! : "latest";
+  const { items, hasMore } = await getDiscoverFeed(pageNum, sortVal);
 
   return (
     <main className="min-h-screen bg-white text-slate-900 flex flex-col">
@@ -78,6 +79,7 @@ export default async function DiscoverPage({ searchParams }: Props) {
           initialItems={items}
           initialPage={pageNum}
           hasMore={hasMore}
+          initialSort={sortVal}
         />
       </div>
 

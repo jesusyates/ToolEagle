@@ -5,6 +5,8 @@ import { createClient } from "@/lib/supabase/server";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { getTrendingCategory, getAllTrendingSlugs, TRENDING_PERIODS } from "@/config/trending";
+import { sortByTrendingScore } from "@/lib/trending-score";
+import { cacheGet, cacheSet, cacheKey } from "@/lib/cache";
 import { tools } from "@/config/tools";
 import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { Video, MessageSquareText, Zap, User } from "lucide-react";
@@ -59,35 +61,71 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 async function getTrendingByPeriod(period: "today" | "week") {
+  const key = cacheKey("trending", period);
+  const cached = await cacheGet<{
+    topCaptions: { slug: string; tool_name: string; result: string; creator_username: string | null; created_at: string }[];
+    topHooks: { slug: string; tool_name: string; result: string; creator_username: string | null; created_at: string }[];
+    topCreators: string[];
+  }>(key);
+  if (cached) return cached;
+  const data = await fetchTrendingByPeriod(period);
+  await cacheSet(key, data);
+  return data;
+}
+
+async function fetchTrendingByPeriod(period: "today" | "week") {
   const supabase = await createClient();
   const since = new Date();
   if (period === "today") since.setDate(since.getDate() - 1);
   else since.setDate(since.getDate() - 7);
   const sinceStr = since.toISOString();
 
-  const [captionsRes, hooksRes, creatorsRes] = await Promise.all([
+  const [captionsRes, hooksRes, creatorsRes, likesRes, savesRes] = await Promise.all([
     supabase
       .from("public_examples")
-      .select("slug, tool_name, result, creator_username")
+      .select("slug, tool_name, result, creator_username, created_at")
       .in("tool_slug", CAPTION_SLUGS)
       .gte("created_at", sinceStr)
       .not("slug", "is", null)
-      .order("created_at", { ascending: false })
-      .limit(15),
+      .limit(50),
     supabase
       .from("public_examples")
-      .select("slug, tool_name, result, creator_username")
+      .select("slug, tool_name, result, creator_username, created_at")
       .in("tool_slug", HOOK_SLUGS)
       .gte("created_at", sinceStr)
       .not("slug", "is", null)
-      .order("created_at", { ascending: false })
-      .limit(15),
+      .limit(50),
     supabase
       .from("public_examples")
       .select("creator_username")
       .gte("created_at", sinceStr)
-      .not("creator_username", "is", null)
+      .not("creator_username", "is", null),
+    supabase.from("example_likes").select("example_slug"),
+    supabase
+      .from("user_saves")
+      .select("example_slug")
+      .not("example_slug", "is", null)
   ]);
+
+  const likesMap: Record<string, number> = {};
+  for (const r of likesRes.data ?? []) {
+    if (r.example_slug) likesMap[r.example_slug] = (likesMap[r.example_slug] ?? 0) + 1;
+  }
+  const savesMap: Record<string, number> = {};
+  for (const r of savesRes.data ?? []) {
+    if (r.example_slug) savesMap[r.example_slug] = (savesMap[r.example_slug] ?? 0) + 1;
+  }
+
+  const topCaptions = sortByTrendingScore(
+    (captionsRes.data ?? []).map((r) => ({ ...r, created_at: r.created_at ?? new Date().toISOString() })),
+    likesMap,
+    savesMap
+  ).slice(0, 15);
+  const topHooks = sortByTrendingScore(
+    (hooksRes.data ?? []).map((r) => ({ ...r, created_at: r.created_at ?? new Date().toISOString() })),
+    likesMap,
+    savesMap
+  ).slice(0, 15);
 
   const creatorCounts: Record<string, number> = {};
   for (const r of creatorsRes.data ?? []) {
@@ -101,11 +139,12 @@ async function getTrendingByPeriod(period: "today" | "week") {
     .map(([username]) => username);
 
   return {
-    topCaptions: captionsRes.data ?? [],
-    topHooks: hooksRes.data ?? [],
+    topCaptions,
+    topHooks,
     topCreators
   };
 }
+
 
 export default async function TrendingCategoryPage({ params }: Props) {
   const { slug } = await params;

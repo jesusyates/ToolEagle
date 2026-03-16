@@ -6,16 +6,25 @@ const PAGE_SIZE = 24;
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const page = Math.max(0, parseInt(searchParams.get("page") ?? "0", 10) || 0);
+  const sort = searchParams.get("sort") ?? "latest";
   const from = page * PAGE_SIZE;
   const to = from + PAGE_SIZE - 1;
 
   const supabase = await createClient();
-  const { data, error } = await supabase
+  let query = supabase
     .from("public_examples")
     .select("slug, tool_name, tool_slug, result, creator_username, created_at")
-    .not("slug", "is", null)
-    .order("created_at", { ascending: false })
-    .range(from, to);
+    .not("slug", "is", null);
+
+  if (sort === "popular") {
+    query = query.order("created_at", { ascending: false });
+  } else if (sort === "trending") {
+    query = query.order("created_at", { ascending: false });
+  } else {
+    query = query.order("created_at", { ascending: false });
+  }
+
+  const { data, error } = await query.range(from, to);
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 

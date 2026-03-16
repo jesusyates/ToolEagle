@@ -21,15 +21,15 @@ const BASE_URL = "https://www.tooleagle.com";
 const IDEAS_PREFIX = "/ideas";
 
 type Props = {
-  params: Promise<{ category: string; topic: string }>;
+  params: Promise<{ slug: string; topic: string }>;
 };
 
 export async function generateStaticParams() {
-  return getSeoPageParams();
+  return getSeoPageParams().map(({ category, topic }) => ({ slug: category, topic }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { category, topic } = await params;
+  const { slug: category, topic } = await params;
   const entry = getSeoPageEntry(category, topic);
   if (!entry) return { title: "Not Found" };
 
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function SeoTopicPage({ params }: Props) {
-  const { category, topic } = await params;
+  const { slug: category, topic } = await params;
   const entry = getSeoPageEntry(category, topic);
   if (!entry) notFound();
 

@@ -13,6 +13,7 @@ import { getRealExamples } from "@/config/seo/content-templates";
 import { tools } from "@/config/tools";
 import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { RelatedLinks } from "@/components/seo/RelatedLinks";
+import { CaptionHookExampleCard } from "@/components/save/CaptionHookExampleCard";
 import { MessageSquareText } from "lucide-react";
 
 const BASE_URL = "https://www.tooleagle.com";
@@ -78,10 +79,10 @@ export default async function CaptionTopicPage({ params }: Props) {
   }
 
   const curated = getRealExamples("captions", topic);
-  const examples =
-    (dbExamples?.length ?? 0) > 0
-      ? dbExamples!.map((ex: any) => ex.result)
-      : curated.slice(0, 12);
+  const hasDb = (dbExamples?.length ?? 0) > 0;
+  const examples = hasDb
+    ? dbExamples!.map((ex: any) => ({ text: ex.result, slug: ex.slug, creator: ex.creator_username }))
+    : curated.slice(0, 12).map((text) => ({ text, slug: null as string | null, creator: null as string | null }));
 
   const tool = tools.find((t) => t.slug === "tiktok-caption-generator");
 
@@ -106,16 +107,16 @@ export default async function CaptionTopicPage({ params }: Props) {
             <h2 className="text-lg font-semibold text-slate-900">Example captions</h2>
             {examples.length > 0 ? (
               <ul className="mt-3 space-y-2">
-                {examples.map((text, i) => (
+                {examples.map((ex, i) => (
                   <li key={i}>
-                    <div className="rounded-lg border border-slate-200 px-4 py-3 hover:border-slate-300 transition">
-                      <p className="text-sm text-slate-800 line-clamp-3">{text}</p>
-                      {dbExamples?.[i]?.creator_username && (
-                        <span className="mt-1 text-xs text-slate-500">
-                          @{dbExamples[i].creator_username}
-                        </span>
-                      )}
-                    </div>
+                    <CaptionHookExampleCard
+                      text={ex.text}
+                      slug={ex.slug}
+                      toolSlug="tiktok-caption-generator"
+                      toolName="TikTok Caption Generator"
+                      itemType="caption"
+                      creatorUsername={ex.creator}
+                    />
                   </li>
                 ))}
               </ul>

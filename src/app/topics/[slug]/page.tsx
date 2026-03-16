@@ -14,6 +14,7 @@ import {
 import { answerQuestions } from "@/config/answer-questions";
 import { tools } from "@/config/tools";
 import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
+import { TopicViewTracker } from "@/components/analytics/TopicViewTracker";
 import { Video } from "lucide-react";
 
 const BASE_URL = "https://www.tooleagle.com";
@@ -41,7 +42,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ? " Hooks"
         : cluster?.clusterType === "ideas"
           ? " Ideas"
-          : "";
+          : cluster?.clusterType === "quotes"
+            ? " Quotes"
+            : cluster?.clusterType === "hashtags"
+              ? " Hashtags"
+              : cluster?.clusterType === "scripts"
+                ? " Scripts"
+                : "";
   const title = `${topic.title}${clusterLabel} | ToolEagle`;
 
   return {
@@ -58,6 +65,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const CAPTION_TOOL_SLUGS = ["tiktok-caption-generator", "instagram-caption-generator"];
 const HOOK_TOOL_SLUGS = ["hook-generator", "youtube-hook-generator"];
+const HASHTAG_TOOL_SLUGS = ["hashtag-generator", "tiktok-hashtag-generator", "instagram-hashtag-generator"];
+const SCRIPT_TOOL_SLUGS = ["tiktok-script-generator", "short-form-script-generator", "script-outline-generator"];
 
 export default async function TopicPage({ params }: Props) {
   const { slug } = await params;
@@ -66,13 +75,37 @@ export default async function TopicPage({ params }: Props) {
   const topic = getTopic(baseSlug);
   if (!topic) notFound();
 
+  return (
+    <>
+      <TopicViewTracker topicSlug={slug} />
+      <TopicPageContent slug={slug} baseSlug={baseSlug} topic={topic} cluster={cluster} />
+    </>
+  );
+}
+
+async function TopicPageContent({
+  slug,
+  baseSlug,
+  topic,
+  cluster
+}: {
+  slug: string;
+  baseSlug: string;
+  topic: { title: string; intro: string; toolSlug: string; toolName: string };
+  cluster: { clusterType: string; baseSlug: string } | null;
+}) {
+
   const clusterType = cluster?.clusterType;
   const toolSlugs =
-    clusterType === "captions"
+    clusterType === "captions" || clusterType === "quotes"
       ? CAPTION_TOOL_SLUGS
       : clusterType === "hooks"
         ? HOOK_TOOL_SLUGS
-        : [...CAPTION_TOOL_SLUGS, ...HOOK_TOOL_SLUGS];
+        : clusterType === "hashtags"
+          ? HASHTAG_TOOL_SLUGS
+          : clusterType === "scripts"
+            ? SCRIPT_TOOL_SLUGS
+            : [...CAPTION_TOOL_SLUGS, ...HOOK_TOOL_SLUGS];
 
   const tool = tools.find((t) => t.slug === topic.toolSlug);
   const ToolIcon = tool?.icon ?? Video;

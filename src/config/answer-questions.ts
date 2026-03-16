@@ -1,7 +1,10 @@
 /**
- * Answer Engine - Question data config (60 pages)
- * TikTok: 20 | YouTube: 20 | Instagram: 20
+ * Answer Engine - Question data config (500 pages) v38
+ * TikTok | YouTube | Instagram | Cross-platform
+ * Types: how many hashtags, best time to post, how to go viral, caption length, hook strategies, algorithm tips
  */
+
+import { getExpandedAnswerQuestions } from "./answer-questions-expansion";
 
 export type AnswerQuestion = {
   slug: string;
@@ -11,7 +14,7 @@ export type AnswerQuestion = {
   isPopular?: boolean;
 };
 
-export const answerQuestions: AnswerQuestion[] = [
+const BASE_QUESTIONS: AnswerQuestion[] = [
   // TikTok (20)
   { slug: "how-to-write-tiktok-captions", question: "How to Write TikTok Captions That Get Engagement?", platform: "tiktok", tool: "tiktok-caption-generator", isPopular: true },
   { slug: "tiktok-caption-length", question: "What's the Best TikTok Caption Length?", platform: "tiktok", tool: "tiktok-caption-generator", isPopular: true },
@@ -76,6 +79,25 @@ export const answerQuestions: AnswerQuestion[] = [
   // Cross-platform (1)
   { slug: "best-caption-length", question: "What's the Best Caption Length for TikTok, Instagram & YouTube?", platform: "tiktok", tool: "tiktok-caption-generator" }
 ];
+
+/** v38: Merge base + expanded = 500 questions */
+export const answerQuestions: AnswerQuestion[] = (() => {
+  const seen = new Set<string>();
+  const out: AnswerQuestion[] = [];
+  for (const q of BASE_QUESTIONS) {
+    if (!seen.has(q.slug)) {
+      seen.add(q.slug);
+      out.push(q);
+    }
+  }
+  for (const q of getExpandedAnswerQuestions()) {
+    if (!seen.has(q.slug)) {
+      seen.add(q.slug);
+      out.push(q as AnswerQuestion);
+    }
+  }
+  return out.slice(0, 500);
+})();
 
 export function getAnswerQuestion(slug: string): AnswerQuestion | undefined {
   return answerQuestions.find((q) => q.slug === slug);

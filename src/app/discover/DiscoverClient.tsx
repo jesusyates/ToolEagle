@@ -18,14 +18,17 @@ type Item = {
 export function DiscoverClient({
   initialItems,
   initialPage,
-  hasMore
+  hasMore,
+  initialSort = "latest"
 }: {
   initialItems: Item[];
   initialPage: number;
   hasMore: boolean;
+  initialSort?: string;
 }) {
   const [items, setItems] = useState(initialItems);
   const [page, setPage] = useState(initialPage);
+  const [sort, setSort] = useState(initialSort);
   const [loading, setLoading] = useState(false);
   const [moreItems, setMoreItems] = useState<Item[]>([]);
   const [moreHasMore, setMoreHasMore] = useState(hasMore);
@@ -34,7 +37,7 @@ export function DiscoverClient({
     if (loading || !moreHasMore) return;
     setLoading(true);
     const nextPage = page + 1;
-    const res = await fetch(`/api/discover?page=${nextPage}`);
+    const res = await fetch(`/api/discover?page=${nextPage}&sort=${sort}`);
     const data = await res.json();
     setMoreItems((m) => [...m, ...(data.items ?? [])]);
     setMoreHasMore(data.hasMore ?? false);
@@ -65,6 +68,21 @@ export function DiscoverClient({
 
   return (
     <section className="container py-12">
+      <div className="mb-6 flex gap-2">
+        {(["latest", "trending", "popular"] as const).map((s) => (
+          <a
+            key={s}
+            href={`/discover?sort=${s}`}
+            className={`rounded-lg px-4 py-2 text-sm font-medium ${
+              sort === s
+                ? "bg-sky-600 text-white"
+                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+            }`}
+          >
+            {s.charAt(0).toUpperCase() + s.slice(1)}
+          </a>
+        ))}
+      </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {allItems.map((item) => (
           <div

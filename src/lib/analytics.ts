@@ -13,11 +13,17 @@ type ToolEvent =
   | "conversion"
   | "prompt_improved"
   | "prompt_copied"
-  | "prompt_playground_used";
+  | "prompt_playground_used"
+  | "example_view"
+  | "example_like"
+  | "example_save"
+  | "topic_view";
 
 export type ToolAnalyticsPayload = {
   tool_slug?: string;
   tool_category?: string;
+  example_slug?: string;
+  topic_slug?: string;
   [key: string]: string | number | undefined;
 };
 
@@ -33,6 +39,8 @@ export function trackEvent(action: ToolEvent, params?: ToolAnalyticsPayload) {
     const p = params ?? {};
     if (p.tool_slug) props.tool_slug = String(p.tool_slug);
     if (p.tool_category) props.tool_category = String(p.tool_category);
+    if (p.example_slug) props.example_slug = String(p.example_slug);
+    if (p.topic_slug) props.topic_slug = String(p.topic_slug);
     if (p.input_length !== undefined) props.input_length = Number(p.input_length);
     if (p.conversion_label) props.conversion_label = String(p.conversion_label);
     if (p.conversion_value !== undefined) props.conversion_value = Number(p.conversion_value);

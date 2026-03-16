@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/generate-examples",
+      "schedule": "0 2 * * *"
+    }
+  ]
+}

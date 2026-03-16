@@ -23,7 +23,7 @@ export default async function MeSavedPage() {
 
   const { data: saves } = await supabase
     .from("user_saves")
-    .select("id, item_type, example_slug, tool_slug, tool_name, content, created_at")
+    .select("id, item_type, example_slug, answer_slug, tool_slug, tool_name, content, created_at")
     .eq("user_id", user.id)
     .order("created_at", { ascending: false })
     .limit(200);

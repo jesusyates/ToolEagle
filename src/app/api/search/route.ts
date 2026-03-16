@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { cacheGet, cacheSet, cacheKey } from "@/lib/cache";
 
 export const dynamic = "force-dynamic";
 
@@ -9,6 +10,10 @@ export async function GET(req: NextRequest) {
   if (!q) {
     return NextResponse.json({ results: [] });
   }
+
+  const cacheKeyStr = cacheKey("search", q.toLowerCase());
+  const cached = await cacheGet<{ results: unknown[] }>(cacheKeyStr);
+  if (cached) return NextResponse.json(cached);
 
   try {
     const supabase = await createClient();
@@ -21,7 +26,9 @@ export async function GET(req: NextRequest) {
       .order("created_at", { ascending: false })
       .limit(20);
 
-    return NextResponse.json({ results: data ?? [] });
+    const payload = { results: data ?? [] };
+    await cacheSet(cacheKeyStr, payload);
+    return NextResponse.json(payload);
   } catch (err) {
     console.error("search error:", err);
     return NextResponse.json({ results: [] });

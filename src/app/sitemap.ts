@@ -4,7 +4,7 @@ import { generators } from "@/config/generators";
 import { getSeoPageSlugs } from "@/config/seoPages";
 import { getSeoPageParams } from "@/config/seo-pages";
 import { getAllSeoParams } from "@/config/seo/index";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { BACKLINK_MAGNETS } from "@/config/backlink-magnets";
 import { PROMPT_CATEGORIES } from "@/config/prompt-library";
 import { getAllLearnAiSlugs } from "@/config/learn-ai";
@@ -171,15 +171,15 @@ function toolUrls(): SitemapEntry[] {
 }
 
 async function blogUrls(): Promise<SitemapEntry[]> {
+  const programmaticUrls = getAllProgrammaticBlogParams().map(({ topic, platform, type }) => ({
+    url: `${BASE_URL}/blog/${getProgrammaticBlogSlug(topic, platform, type)}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7
+  }));
   try {
     const { getAllPosts } = await import("@/lib/blog");
     const posts = await getAllPosts();
-    const programmaticUrls = getAllProgrammaticBlogParams().map(({ topic, platform, type }) => ({
-      url: `${BASE_URL}/blog/${getProgrammaticBlogSlug(topic, platform, type)}`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.7
-    }));
     return [
       ...posts.map((post) => ({
         url: `${BASE_URL}/blog/${post.frontmatter.slug}`,
@@ -190,13 +190,13 @@ async function blogUrls(): Promise<SitemapEntry[]> {
       ...programmaticUrls
     ];
   } catch {
-    return [];
+    return programmaticUrls;
   }
 }
 
 async function creatorUrls(): Promise<SitemapEntry[]> {
   try {
-    const supabase = await createClient();
+    const supabase = createAdminClient();
     const { data: profiles } = await supabase
       .from("profiles")
       .select("username, updated_at")
@@ -214,7 +214,7 @@ async function creatorUrls(): Promise<SitemapEntry[]> {
 
 async function exampleUrls(): Promise<SitemapEntry[]> {
   try {
-    const supabase = await createClient();
+    const supabase = createAdminClient();
     const { data: examples } = await supabase
       .from("public_examples")
       .select("slug, created_at")
@@ -248,18 +248,27 @@ function seoUrls(): SitemapEntry[] {
   }));
 }
 
+const FALLBACK_URLS: SitemapEntry[] = [
+  { url: BASE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
+  { url: `${BASE_URL}/tools`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+  { url: `${BASE_URL}/creator`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.95 }
+];
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [blog, creators, examples] = await Promise.all([
-    blogUrls(),
-    creatorUrls(),
-    exampleUrls()
-  ]);
-  return [
-    ...staticUrls(),
-    ...toolUrls(),
-    ...blog,
-    ...creators,
-    ...examples,
-    ...seoUrls()
-  ];
+  try {
+    const urls: SitemapEntry[] = [...staticUrls(), ...toolUrls(), ...seoUrls()];
+    try {
+      const [blog, creators, examples] = await Promise.all([
+        blogUrls(),
+        creatorUrls(),
+        exampleUrls()
+      ]);
+      urls.push(...blog, ...creators, ...examples);
+    } catch {
+      // DB/blog optional
+    }
+    return urls;
+  } catch {
+    return FALLBACK_URLS;
+  }
 }

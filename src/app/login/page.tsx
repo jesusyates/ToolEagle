@@ -163,7 +163,10 @@ export default function LoginPage() {
         <main className="min-h-screen bg-white text-slate-900 flex flex-col">
           <SiteHeader />
           <div className="flex-1 flex items-center justify-center py-12">
-            <div className="animate-pulse text-slate-400">Loading...</div>
+            <div className="text-center">
+              <h1 className="text-2xl font-semibold text-slate-900">Sign in</h1>
+              <p className="mt-2 text-sm text-slate-500">Loading sign-in options...</p>
+            </div>
           </div>
           <SiteFooter />
         </main>

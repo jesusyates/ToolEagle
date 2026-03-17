@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { tools, toolCategories, popularToolSlugs, type ToolConfig } from "@/config/tools";
@@ -36,6 +37,7 @@ function getBadgeForTool(
 }
 
 export function ToolsPageClient() {
+  const t = useTranslations("tools");
   const [search, setSearch] = useState("");
   const [usageCounts, setUsageCounts] = useState<Record<string, number>>({});
 
@@ -57,10 +59,10 @@ export function ToolsPageClient() {
         <section className="container pt-10 pb-16">
           <div className="space-y-2 max-w-xl">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">
-              Tools
+              {t("title")}
             </p>
             <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
-              Free tools for every creator
+              {t("subtitle")}
             </h1>
             <p className="text-base text-slate-600 leading-relaxed">
               ToolEagle is building a creator-first toolkit you can scan quickly: captions, hooks,

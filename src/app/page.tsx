@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { SiteHeader } from "./_components/SiteHeader";
 import { SiteFooter } from "./_components/SiteFooter";
 import { tools, popularToolSlugs, type ToolConfig } from "@/config/tools";
@@ -50,24 +51,15 @@ const platformTools: Record<string, { href: string; name: string }[]> = {
 };
 
 const latestArticles = [
-  {
-    href: "/blog/tiktok-caption-ideas",
-    title: "50 TikTok Caption Ideas that Actually Work",
-    tag: "TikTok"
-  },
-  {
-    href: "/blog/how-to-go-viral-on-tiktok",
-    title: "How to Go Viral on TikTok in 2026",
-    tag: "Strategy"
-  },
-  {
-    href: "/blog/youtube-title-formulas",
-    title: "YouTube Title Formulas that Drive Clicks",
-    tag: "YouTube"
-  }
+  { href: "/blog/tiktok-caption-ideas", titleKey: "article1Title", tagKey: "article1Tag" },
+  { href: "/blog/how-to-go-viral-on-tiktok", titleKey: "article2Title", tagKey: "article2Tag" },
+  { href: "/blog/youtube-title-formulas", titleKey: "article3Title", tagKey: "article3Tag" }
 ];
 
 export default function HomePage() {
+  const t = useTranslations("home");
+  const tLearn = useTranslations("learnAi");
+  const tNav = useTranslations("nav");
   return (
     <main className="min-h-screen bg-white text-slate-900 flex flex-col">
       <SiteHeader />
@@ -78,16 +70,15 @@ export default function HomePage() {
           <div className="max-w-3xl space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                AI Tools for TikTok, YouTube and Instagram creators
+                {t("heroTagline")}
               </div>
 
               <div className="space-y-3">
                 <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-slate-900">
-                  Generate full creator content in one go
+                  {t("heroTitle")}
                 </h1>
                 <p className="text-xl text-slate-700 leading-relaxed max-w-2xl">
-                  Enter your topic, pick platform and tone—get hook, caption, hashtags and video idea.
-                  All editable. No sign-up.
+                  {t("heroSubtitle")}
                 </p>
               </div>
 
@@ -96,88 +87,94 @@ export default function HomePage() {
                   href="/creator"
                   className="inline-flex items-center justify-center rounded-xl bg-sky-600 px-6 py-4 text-base font-semibold text-white shadow-sm hover:bg-sky-700 transition duration-150 w-full sm:w-auto text-center"
                 >
-                  Try Creator Mode →
+                  {t("tryCreatorMode")}
                 </Link>
                 <Link
                   href="/tools"
                   className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-50 transition duration-150 w-full sm:w-auto text-center"
                 >
-                  Browse all tools
+                  {t("browseTools")}
                 </Link>
                 <Link
                   href="/pricing"
                   className="inline-flex items-center justify-center rounded-xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm font-semibold text-sky-700 hover:bg-sky-100 transition duration-150 w-full sm:w-auto text-center"
                 >
-                  View pricing
+                  {t("viewPricing")}
                 </Link>
               </div>
 
               <div className="flex flex-wrap gap-3 mt-4">
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-600">
-                  ⚡ 12,000+ captions generated
+                  ⚡ {t("statsCaptions")}
                 </span>
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-600">
-                  🚀 Used by creators on TikTok & YouTube
+                  🚀 {t("statsUsedBy")}
                 </span>
               </div>
 
-              <p className="text-xs text-slate-500 mt-3">Popular for creators</p>
+              <p className="text-xs text-slate-500 mt-3">{t("popularForCreators")}</p>
               <div className="flex flex-wrap gap-2">
                 <Link
                   href="/tools/tiktok-caption-generator"
                   className="inline-flex items-center rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition duration-150"
                 >
-                  TikTok Captions
+                  {t("tiktokCaptions")}
                 </Link>
                 <Link
                   href="/tools/hook-generator"
                   className="inline-flex items-center rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition duration-150"
                 >
-                  Hooks
+                  {t("hooks")}
                 </Link>
                 <Link
                   href="/tools/hashtag-generator"
                   className="inline-flex items-center rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition duration-150"
                 >
-                  Hashtags
+                  {t("hashtags")}
                 </Link>
                 <Link
                   href="/ai-prompts"
                   className="inline-flex items-center rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm text-sky-700 hover:bg-sky-100 transition duration-150"
                 >
-                  AI Prompts
+                  {t("aiPrompts")}
                 </Link>
                 <Link
                   href="/ai-prompt-improver"
                   className="inline-flex items-center rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm text-sky-700 hover:bg-sky-100 transition duration-150"
                 >
-                  Prompt Improver
+                  {t("promptImprover")}
+                </Link>
+                <Link
+                  href="/zh/recent"
+                  className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm text-emerald-700 hover:bg-emerald-100 transition duration-150"
+                >
+                  最新中文指南
                 </Link>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-3 pt-2">
                 <div className="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm hover:shadow-md transition duration-150">
                   <p className="text-sm font-semibold text-slate-900">
-                    No sign‑up
+                    {t("noSignup")}
                   </p>
                   <p className="mt-1 text-sm text-slate-600 leading-relaxed">
-                    Open, use and close. No accounts, no onboarding flows.
+                    {t("noSignupDesc")}
                   </p>
                 </div>
                 <div className="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm hover:shadow-md transition duration-150">
                   <p className="text-sm font-semibold text-slate-900">
-                    Creator‑first
+                    {t("creatorFirst")}
                   </p>
                   <p className="mt-1 text-sm text-slate-600 leading-relaxed">
-                    Built around TikTok, Reels, Shorts and YouTube, not generic marketing.
+                    {t("creatorFirstDesc")}
                   </p>
                 </div>
                 <div className="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm hover:shadow-md transition duration-150">
                   <p className="text-sm font-semibold text-slate-900">
-                    Always free
+                    {t("alwaysFree")}
                   </p>
                   <p className="mt-1 text-sm text-slate-600 leading-relaxed">
-                    Start small, grow the toolkit over time with community feedback.
+                    {t("alwaysFreeDesc")}
                   </p>
                 </div>
               </div>
@@ -190,80 +187,80 @@ export default function HomePage() {
         <section className="container py-12">
           <div className="grid gap-6 sm:grid-cols-3">
             <div className="rounded-2xl border-2 border-slate-200 bg-white p-6 shadow-sm hover:border-sky-300 hover:shadow-md transition">
-              <h2 className="text-lg font-semibold text-slate-900">Create Viral Content</h2>
+              <h2 className="text-lg font-semibold text-slate-900">{t("createViralContent")}</h2>
               <p className="mt-2 text-sm text-slate-600">
-                Generate captions, hooks and titles for your videos.
+                {t("createViralDesc")}
               </p>
               <div className="mt-4 flex flex-col gap-2">
                 <Link
                   href="/tools/tiktok-caption-generator"
                   className="inline-flex items-center justify-center rounded-xl bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-700 transition"
                 >
-                  TikTok Captions
+                  {t("tiktokCaptions")}
                 </Link>
                 <Link
                   href="/tools/hook-generator"
                   className="inline-flex items-center justify-center rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
                 >
-                  YouTube Hooks
+                  {t("youtubeHooks")}
                 </Link>
                 <Link
                   href="/tools/instagram-caption-generator"
                   className="inline-flex items-center justify-center rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
                 >
-                  Instagram Captions
+                  {t("instagramCaptions")}
                 </Link>
               </div>
             </div>
             <div className="rounded-2xl border-2 border-slate-200 bg-white p-6 shadow-sm hover:border-sky-300 hover:shadow-md transition">
-              <h2 className="text-lg font-semibold text-slate-900">Learn to Talk to AI</h2>
+              <h2 className="text-lg font-semibold text-slate-900">{tLearn("title")}</h2>
               <p className="mt-2 text-sm text-slate-600">
-                Improve your prompts and get better AI results.
+                {tLearn("cardSubtitle")}
               </p>
               <div className="mt-4 flex flex-col gap-2">
                 <Link
                   href="/ai-prompt-improver"
                   className="inline-flex items-center justify-center rounded-xl border border-sky-200 bg-sky-50 px-4 py-2.5 text-sm font-semibold text-sky-700 hover:bg-sky-100 transition"
                 >
-                  Prompt Improver
+                  {tLearn("improvePrompts")}
                 </Link>
                 <Link
                   href="/ai-prompts"
                   className="inline-flex items-center justify-center rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
                 >
-                  AI Prompts Library
+                  {tLearn("promptLibrary")}
                 </Link>
                 <Link
                   href="/learn-ai"
                   className="inline-flex items-center justify-center rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
                 >
-                  Learn AI
+                  {tNav("learnAi")}
                 </Link>
               </div>
             </div>
             <div className="rounded-2xl border-2 border-slate-200 bg-white p-6 shadow-sm hover:border-sky-300 hover:shadow-md transition">
-              <h2 className="text-lg font-semibold text-slate-900">Creator Inspiration</h2>
+              <h2 className="text-lg font-semibold text-slate-900">{t("creatorInspiration")}</h2>
               <p className="mt-2 text-sm text-slate-600">
-                See what other creators are making. Get featured.
+                {t("creatorInspirationDesc")}
               </p>
               <div className="mt-4 flex flex-col gap-2">
                 <Link
                   href="/examples"
                   className="inline-flex items-center justify-center rounded-xl border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm font-semibold text-amber-800 hover:bg-amber-100 transition"
                 >
-                  Creator Examples
+                  {t("creatorExamples")}
                 </Link>
                 <Link
                   href="/creators"
                   className="inline-flex items-center justify-center rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
                 >
-                  Creators
+                  {tNav("creators")}
                 </Link>
                 <Link
                   href="/leaderboard"
                   className="inline-flex items-center justify-center rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
                 >
-                  Leaderboard
+                  {t("leaderboard")}
                 </Link>
               </div>
             </div>
@@ -273,9 +270,9 @@ export default function HomePage() {
         {/* Platform Tools: TikTok, YouTube, Instagram */}
         <section className="bg-slate-50 border-y border-slate-200">
           <div className="container py-12">
-            <h2 className="text-lg font-semibold text-slate-900">Platform tools</h2>
+            <h2 className="text-lg font-semibold text-slate-900">{t("platformTools")}</h2>
             <p className="mt-2 text-sm text-slate-600 max-w-2xl">
-              Pick your platform and use the right tool for captions, titles, hooks and more.
+              {t("platformToolsDesc")}
             </p>
             <div className="mt-6 grid gap-6 sm:grid-cols-3">
               {(["tiktok", "youtube", "instagram"] as const).map((platform) => (
@@ -285,27 +282,30 @@ export default function HomePage() {
                 >
                   <Link href={`/${platform}-tools`} className="group block">
                     <h3 className="text-base font-semibold text-slate-900 group-hover:text-sky-700 transition">
-                      {PLATFORM_DISPLAY_NAMES[platform]} Tools →
+                      {PLATFORM_DISPLAY_NAMES[platform]} {tNav("tools")} →
                     </h3>
                   </Link>
                   <ul className="mt-3 space-y-2">
-                    {platformTools[platform].map(({ href, name }) => (
-                      <li key={`${platform}-${name}`}>
-                        <Link
-                          href={href}
-                          className="text-sm text-sky-700 hover:text-sky-800 hover:underline"
-                        >
-                          {name}
-                        </Link>
-                      </li>
-                    ))}
+                    {platformTools[platform].map(({ href, name }) => {
+                      const key = name === "Caption Generator" ? "captionGenerator" : name === "Hashtag Generator" ? "hashtagGenerator" : name === "Title Generator" ? "titleGenerator" : name === "Hook Generator" ? "hookGenerator" : "bioGenerator";
+                      return (
+                        <li key={`${platform}-${name}`}>
+                          <Link
+                            href={href}
+                            className="text-sm text-sky-700 hover:text-sky-800 hover:underline"
+                          >
+                            {t(key)}
+                          </Link>
+                        </li>
+                      );
+                    })}
                   </ul>
                   <div className="mt-4 flex flex-wrap gap-3">
                     <Link
                       href={`/${platform}/captions/funny`}
                       className="text-xs font-medium text-slate-600 hover:text-slate-900"
                     >
-                      Browse {platform} ideas →
+                      {t("browseIdeas", { platform: PLATFORM_DISPLAY_NAMES[platform] })}
                     </Link>
                     <a
                       href={PLATFORM_OPEN_URLS[platform]}
@@ -313,7 +313,7 @@ export default function HomePage() {
                       rel="noopener noreferrer"
                       className="text-xs font-medium text-sky-600 hover:text-sky-800"
                     >
-                      Open {PLATFORM_DISPLAY_NAMES[platform]} →
+                      {t("openPlatform", { platform: PLATFORM_DISPLAY_NAMES[platform] })}
                     </a>
                   </div>
                 </div>
@@ -324,10 +324,10 @@ export default function HomePage() {
 
         <section className="container py-12">
           <h2 className="text-lg font-semibold text-slate-900">
-            Popular tools
+            {t("popularTools")}
           </h2>
           <p className="mt-2 text-sm text-slate-600 max-w-2xl">
-            Most used by creators. Quick, scannable workflow—pick one and ship.
+            {t("popularToolsDesc")}
           </p>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -346,28 +346,28 @@ export default function HomePage() {
 
         <section className="container py-12">
           <h2 className="text-lg font-semibold text-slate-900">
-            Why ToolEagle
+            {t("whyToolEagle")}
           </h2>
           <p className="mt-2 text-sm text-slate-600 max-w-2xl">
-            Strong visual hierarchy, clean cards, and fast workflows—so you can stay in creator mode.
+            {t("whyToolEagleDesc")}
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-sm font-semibold text-slate-900">Built for speed</p>
+              <p className="text-sm font-semibold text-slate-900">{t("builtForSpeed")}</p>
               <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                Open a tool, paste an idea, get text you can ship in under 30 seconds.
+                {t("builtForSpeedDesc")}
               </p>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-sm font-semibold text-slate-900">Creator‑native UX</p>
+              <p className="text-sm font-semibold text-slate-900">{t("creatorNativeUx")}</p>
               <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                Interfaces optimised for vertical video workflows, not generic marketing funnels.
+                {t("creatorNativeUxDesc")}
               </p>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-sm font-semibold text-slate-900">Always improving</p>
+              <p className="text-sm font-semibold text-slate-900">{t("alwaysImproving")}</p>
               <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                New tools and playbooks get added over time based on what creators actually use.
+                {t("alwaysImprovingDesc")}
               </p>
             </div>
           </div>
@@ -378,17 +378,17 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
             <div>
               <h2 className="text-lg font-semibold text-slate-900">
-                Latest articles
+                {t("latestArticles")}
               </h2>
               <p className="mt-2 text-sm text-slate-600">
-                Learn lightweight tactics to get more from every post.
+                {t("latestArticlesDesc")}
               </p>
             </div>
             <Link
               href="/blog"
               className="text-sm text-sky-700 hover:text-sky-800 underline-offset-2 hover:underline transition duration-150"
             >
-              View all articles
+              {t("viewAllArticles")}
             </Link>
           </div>
 
@@ -401,12 +401,12 @@ export default function HomePage() {
               >
                 <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
                   <span className="px-2 py-1 rounded-full border border-slate-200 bg-slate-50">
-                    {article.tag}
+                    {t(article.tagKey)}
                   </span>
-                  <span>Playbook</span>
+                  <span>{t("playbook")}</span>
                 </div>
                 <p className="text-base font-semibold text-slate-900">
-                  {article.title}
+                  {t(article.titleKey)}
                 </p>
               </Link>
             ))}

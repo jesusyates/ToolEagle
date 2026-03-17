@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
+// Use Node.js runtime to avoid Edge 1MB size limit (ImageResponse + deps exceed it)
 
 const PLATFORM_LABELS: Record<string, string> = {
   tiktok: "TikTok",

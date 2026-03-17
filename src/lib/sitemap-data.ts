@@ -7,7 +7,7 @@ import { tools } from "@/config/tools";
 import { generators } from "@/config/generators";
 import { getSeoPageSlugs } from "@/config/seoPages";
 import { getSeoPageParams } from "@/config/seo-pages";
-import { getAllSeoParams } from "@/config/seo/index";
+import { getIndexableSeoParams } from "@/config/seo/index";
 import { BACKLINK_MAGNETS } from "@/config/backlink-magnets";
 import { PROMPT_CATEGORIES } from "@/config/prompt-library";
 import { getAllLearnAiSlugs } from "@/config/learn-ai";
@@ -121,7 +121,7 @@ export function staticAndToolUrls(): SitemapEntry[] {
       changeFrequency: "weekly" as const,
       priority: 0.8
     })),
-    ...getAllSeoParams().map(({ platform, type, topic }) => ({
+    ...getIndexableSeoParams().map(({ platform, type, topic }) => ({
       url: `${BASE_URL}/${platform}/${type}/${topic}`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,

@@ -10,7 +10,7 @@ import {
   PLATFORM_LABELS,
   CONTENT_TYPE_LABELS,
   formatTopicLabel,
-  getAllSeoParams,
+  getIndexableSeoParams,
   TOOL_MAP,
   getIntent
 } from "@/config/seo/index";
@@ -23,6 +23,9 @@ import { RelatedTopics } from "@/components/seo/RelatedTopics";
 import { AnswerLinks } from "@/components/seo/AnswerLinks";
 import { SeoClusterLinks } from "@/components/seo/SeoClusterLinks";
 import { SeoExampleBlock } from "@/components/seo/SeoExampleBlock";
+import { BestGuidesSection } from "@/components/seo/BestGuidesSection";
+import { PopularGuidesSection } from "@/components/seo/PopularGuidesSection";
+import { HubLinksSection } from "@/components/seo/HubLinksSection";
 import { BASE_URL } from "@/config/site";
 
 type Props = {
@@ -32,7 +35,7 @@ type Props = {
 export const revalidate = 86400; // ISR: 24h
 
 export async function generateStaticParams() {
-  return getAllSeoParams().map(({ platform, type, topic }) => ({
+  return getIndexableSeoParams().map(({ platform, type, topic }) => ({
     category: platform,
     type,
     topic
@@ -57,7 +60,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = `200+ ${topicLabel} ${platformLabel} ${typeLabel.toLowerCase()} for your videos. Copy and use instantly or generate more with AI.`;
 
   const intent = getIntent(topic);
-  const noindex = intent === "questions" || intent === "templates";
+  const noindex =
+    intent === "questions" ||
+    intent === "templates" ||
+    intent === "ideas" ||
+    intent === "examples";
 
   const ogImageUrl = `${BASE_URL}/og/${category}-${type}-${topic}.png`;
 
@@ -114,6 +121,7 @@ export default async function SeoV2Page({ params }: Props) {
       <div className="flex-1">
         <article className="container py-12">
           <div className="max-w-3xl">
+            <BestGuidesSection platform={category} />
             <SeoClusterLinks
               platform={category}
               type={type}
@@ -196,14 +204,17 @@ export default async function SeoV2Page({ params }: Props) {
               currentTopic={topic}
               platformLabel={platformLabel}
               typeLabel={typeLabel}
+              count={8}
             />
+
+            <HubLinksSection platform={category} />
 
             <AnswerLinks
               platform={category}
               type={type}
               platformLabel={platformLabel}
               typeLabel={typeLabel}
-              limit={3}
+              limit={5}
             />
 
             <section className="mt-12">
@@ -211,6 +222,12 @@ export default async function SeoV2Page({ params }: Props) {
               <div className="mt-3 flex flex-wrap gap-4">
                 <Link href={`/tools/${toolSlug}`} className="text-sm font-medium text-sky-600 hover:underline">
                   {tool?.name ?? "AI Generator"} →
+                </Link>
+                <Link href="/how-to/write-viral-captions" className="text-sm font-medium text-sky-600 hover:underline">
+                  How to Write Viral Captions →
+                </Link>
+                <Link href="/how-to/create-viral-hooks" className="text-sm font-medium text-sky-600 hover:underline">
+                  How to Create Viral Hooks →
                 </Link>
                 <Link href="/examples" className="text-sm font-medium text-sky-600 hover:underline">
                   Creator Examples →
@@ -220,6 +237,9 @@ export default async function SeoV2Page({ params }: Props) {
                 </Link>
                 <Link href="/answers" className="text-sm font-medium text-sky-600 hover:underline">
                   Creator Answers →
+                </Link>
+                <Link href="/content-strategy/content-creator" className="text-sm font-medium text-sky-600 hover:underline">
+                  Content Creator Strategy →
                 </Link>
               </div>
             </section>
@@ -241,6 +261,8 @@ export default async function SeoV2Page({ params }: Props) {
                 ))}
               </ul>
             </section>
+
+            <PopularGuidesSection />
 
             <section className="mt-12">
               <h2 className="text-lg font-semibold text-slate-900">FAQ</h2>

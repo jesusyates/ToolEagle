@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { getAnswersByPlatform } from "@/config/answers";
@@ -20,7 +21,8 @@ export const metadata: Metadata = {
 
 const PLATFORM_LABELS = { tiktok: "TikTok", youtube: "YouTube", instagram: "Instagram" } as const;
 
-export default function AnswersIndexPage() {
+export default async function AnswersIndexPage() {
+  const t = await getTranslations("answers");
   const { tiktok, youtube, instagram } = getAnswersByPlatform();
 
   return (
@@ -33,7 +35,7 @@ export default function AnswersIndexPage() {
             <div className="flex items-center gap-2">
               <HelpCircle className="h-8 w-8 text-sky-500" />
               <h1 className="text-3xl font-semibold tracking-tight text-slate-900">
-                Creator Answers
+                {t("title")}
               </h1>
             </div>
             <p className="mt-3 text-lg text-slate-600 max-w-2xl">

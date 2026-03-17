@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getLocale, getMessages } from "next-intl/server";
 import Script from "next/script";
 import PlausibleProvider from "next-plausible";
 import "./globals.css";
@@ -49,6 +49,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
   const messages = await getMessages();
 
   const content = (
@@ -64,7 +65,7 @@ export default async function RootLayout({
   );
 
   return (
-    <html lang="en">
+    <html lang={locale} suppressHydrationWarning>
       <body>
         {PLAUSIBLE_DOMAIN ? (
           <PlausibleProvider domain={PLAUSIBLE_DOMAIN} trackLocalhost={process.env.NODE_ENV === "development"}>

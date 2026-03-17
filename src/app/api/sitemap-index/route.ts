@@ -18,7 +18,8 @@ const SITEMAPS = [
   { loc: `${BASE_URL}/sitemap-tools.xml`, lastmod: now },
   { loc: `${BASE_URL}/sitemap-compare.xml`, lastmod: now },
   { loc: `${BASE_URL}/sitemap-community.xml`, lastmod: now },
-  { loc: `${BASE_URL}/sitemap-guides.xml`, lastmod: now }
+  { loc: `${BASE_URL}/sitemap-guides.xml`, lastmod: now },
+  { loc: `${BASE_URL}/sitemap-zh.xml`, lastmod: now }
 ];
 
 export async function GET() {

@@ -14,6 +14,7 @@ export { getBaseTopic, getIntent, intents, INTENT_LABELS } from "./intents";
 import { platforms } from "./platforms";
 import { contentTypes } from "./content-types";
 import { topics } from "./topics";
+import { getIntent } from "./intents";
 
 export function getAllSeoParams(): { platform: string; type: string; topic: string }[] {
   const params: { platform: string; type: string; topic: string }[] = [];
@@ -25,4 +26,12 @@ export function getAllSeoParams(): { platform: string; type: string; topic: stri
     }
   }
   return params;
+}
+
+/** Params for indexable pages only (guide intent + base topics). Excludes ideas, examples, templates, questions. */
+export function getIndexableSeoParams(): { platform: string; type: string; topic: string }[] {
+  return getAllSeoParams().filter(({ topic }) => {
+    const intent = getIntent(topic);
+    return !intent || intent === "guide";
+  });
 }

@@ -12,7 +12,15 @@
     "blog:generate": "node scripts/generate-seo-blog.js",
     "blog:generate:50": "node scripts/generate-seo-blog.js --limit 50",
     "blog:generate:dry": "node scripts/generate-seo-blog.js --dry-run",
-    "content-factory": "node scripts/run-content-factory.js"
+    "content-factory": "node scripts/run-content-factory.js",
+    "zh:generate": "node scripts/generate-zh-seo-content.js",
+    "zh:generate:limit": "node scripts/generate-zh-seo-content.js --limit=10",
+    "zh:publish": "node scripts/publish-zh-content.js",
+    "zh:stats": "node scripts/stats-zh-content.js",
+    "zh:deploy-plan": "node scripts/stats-zh-content.js && node scripts/deploy-reminder.js",
+    "zh:deploy-auto": "node scripts/deploy-zh-auto.js",
+    "deploy:auto": "node scripts/deploy-auto.js",
+    "deploy:prep": "node scripts/deploy-prep.js"
   },
   "dependencies": {
     "@mdx-js/mdx": "^3.1.1",

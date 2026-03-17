@@ -1,0 +1,44 @@
+---
+description: 统一 SEO 自动部署规则（英文 + 中文）
+globs: scripts/deploy-auto.js, scripts/deploy-zh-auto.js, scripts/setup-auto-deploy-task.ps1, scripts/publish-zh-content.js
+alwaysApply: false
+---
+
+# 统一 SEO 自动部署规则（EN + ZH）
+
+## 核心原则
+
+1. **用户只管本地**：用户只负责本地内容生成，部署全自动
+2. **先检测后部署**：必须先通过本地验证，确认无问题才自动上传
+3. **执行时间**：每 3 天**晚上 21:00** 自动执行
+4. **统一入口**：无论英文或中文，都走 `deploy:auto`
+
+## 自动部署流程
+
+1. **本地检测**：validateLocal 检查即将发布的 ZH 页面
+   - 无空内容（intro、guide 必填）
+   - 无缺失章节（stepByStep、faq 等）
+   - 内容不少于 800 字
+2. **有问题则不部署**：检测到问题则 exit(1)，不执行 git push
+3. **无问题则**：ZH publish → git add → commit → push
+4. **EN**：一并纳入本次推送（data/core-pages-en.json、.deploy-state.json）
+
+## 计划任务配置
+
+- 时间：**晚上 21:00**（9pm）
+- 间隔：每 3 天
+- 脚本：`scripts/run-deploy-auto.bat` → `npm run deploy:auto`
+- 任务名：`SEO-Auto-Deploy`
+
+## 脚本说明
+
+| 脚本 | 说明 |
+|------|------|
+| `deploy-auto.js` | 统一入口，EN + ZH |
+| `deploy-zh-auto.js` | 仅中文（保留兼容） |
+| `deploy-prep.js` | 部署前验证（EN + ZH） |
+
+## 修改时务必
+
+- 改时间：改 `setup-auto-deploy-task.ps1` 中的 `-At 21:00`
+- 改检测逻辑：改 `deploy-auto.js` 中的 `validateZhLocal`

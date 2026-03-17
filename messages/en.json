@@ -31,6 +31,133 @@
     "somethingWentWrong": "Something went wrong",
     "tryAgain": "Try again"
   },
+  "home": {
+    "heroTagline": "AI Tools for TikTok, YouTube and Instagram creators",
+    "heroTitle": "Generate full creator content in one go",
+    "heroSubtitle": "Enter your topic, pick platform and tone—get hook, caption, hashtags and video idea. All editable. No sign-up.",
+    "tryCreatorMode": "Try Creator Mode →",
+    "browseTools": "Browse all tools",
+    "viewPricing": "View pricing",
+    "popularForCreators": "Popular for creators",
+    "creatorAnswers": "Creator Answers",
+    "creatorMode": "Creator Mode",
+    "statsCaptions": "12,000+ captions generated",
+    "statsUsedBy": "Used by creators on TikTok & YouTube",
+    "tiktokCaptions": "TikTok Captions",
+    "hooks": "Hooks",
+    "hashtags": "Hashtags",
+    "aiPrompts": "AI Prompts",
+    "promptImprover": "Prompt Improver",
+    "noSignup": "No sign‑up",
+    "noSignupDesc": "Open, use and close. No accounts, no onboarding flows.",
+    "creatorFirst": "Creator‑first",
+    "creatorFirstDesc": "Built around TikTok, Reels, Shorts and YouTube, not generic marketing.",
+    "alwaysFree": "Always free",
+    "alwaysFreeDesc": "Start small, grow the toolkit over time with community feedback.",
+    "createViralContent": "Create Viral Content",
+    "createViralDesc": "Generate captions, hooks and titles for your videos.",
+    "youtubeHooks": "YouTube Hooks",
+    "instagramCaptions": "Instagram Captions",
+    "creatorInspiration": "Creator Inspiration",
+    "creatorInspirationDesc": "See what other creators are making. Get featured.",
+    "creatorExamples": "Creator Examples",
+    "leaderboard": "Leaderboard",
+    "platformTools": "Platform tools",
+    "platformToolsDesc": "Pick your platform and use the right tool for captions, titles, hooks and more.",
+    "browseIdeas": "Browse {platform} ideas →",
+    "openPlatform": "Open {platform} →",
+    "popularTools": "Popular tools",
+    "popularToolsDesc": "Most used by creators. Quick, scannable workflow—pick one and ship.",
+    "whyToolEagle": "Why ToolEagle",
+    "whyToolEagleDesc": "Strong visual hierarchy, clean cards, and fast workflows—so you can stay in creator mode.",
+    "builtForSpeed": "Built for speed",
+    "builtForSpeedDesc": "Open a tool, paste an idea, get text you can ship in under 30 seconds.",
+    "creatorNativeUx": "Creator‑native UX",
+    "creatorNativeUxDesc": "Interfaces optimised for vertical video workflows, not generic marketing funnels.",
+    "alwaysImproving": "Always improving",
+    "alwaysImprovingDesc": "New tools and playbooks get added over time based on what creators actually use.",
+    "latestArticles": "Latest articles",
+    "latestArticlesDesc": "Learn lightweight tactics to get more from every post.",
+    "viewAllArticles": "View all articles",
+    "playbook": "Playbook",
+    "captionGenerator": "Caption Generator",
+    "hashtagGenerator": "Hashtag Generator",
+    "titleGenerator": "Title Generator",
+    "hookGenerator": "Hook Generator",
+    "bioGenerator": "Bio Generator",
+    "article1Title": "50 TikTok Caption Ideas that Actually Work",
+    "article1Tag": "TikTok",
+    "article2Title": "How to Go Viral on TikTok in 2026",
+    "article2Tag": "Strategy",
+    "article3Title": "YouTube Title Formulas that Drive Clicks",
+    "article3Tag": "YouTube"
+  },
+  "footer": {
+    "launch": "Launch",
+    "productHuntLaunch": "Product Hunt Launch",
+    "creatorInvite": "Creator Invite",
+    "tools": "Tools",
+    "tiktokCaptionGenerator": "TikTok Caption Generator",
+    "hashtagGenerator": "Hashtag Generator",
+    "hookGenerator": "Hook Generator",
+    "titleGenerator": "Title Generator",
+    "aiPrompts": "AI & Prompts",
+    "promptLibrary": "Prompt Library",
+    "promptImprover": "Prompt Improver",
+    "promptPlayground": "Prompt Playground",
+    "platformTools": "Platform Tools",
+    "tiktokTools": "TikTok Tools",
+    "youtubeTools": "YouTube Tools",
+    "instagramTools": "Instagram Tools",
+    "aiToolsDirectory": "AI Tools Directory",
+    "creatorExamples": "Creator Examples",
+    "resources": "Resources",
+    "trendingContent": "Trending Content",
+    "creatorQuestions": "Creator Questions",
+    "tiktokCaptions": "TikTok Captions",
+    "youtubeTitles": "YouTube Titles",
+    "instagramCaptions": "Instagram Captions",
+    "blog": "Blog",
+    "builtForCreators": "Built for creators"
+  },
+  "tools": {
+    "title": "Tools",
+    "subtitle": "Free tools for every creator"
+  },
+  "answers": {
+    "title": "Creator Answers"
+  },
+  "learnAi": {
+    "title": "Learn to Talk to AI",
+    "subtitle": "Guides on how to write better prompts, use frameworks, and get more from ChatGPT and other AI tools.",
+    "cardSubtitle": "Improve your prompts and get better AI results.",
+    "readArticle": "Read article →",
+    "improvePrompts": "Improve your prompts →",
+    "promptLibrary": "Prompt Library →",
+    "useTools": "Use ToolEagle tools →",
+    "articles": {
+      "how-to-talk-to-ai": {
+        "title": "How to Talk to AI: A Beginner's Guide",
+        "description": "Learn the basics of communicating with AI. Clear instructions get better results."
+      },
+      "how-to-prompt-chatgpt": {
+        "title": "How to Prompt ChatGPT for Better Results",
+        "description": "Get more useful outputs from ChatGPT with structured prompts and clear instructions."
+      },
+      "prompt-tips": {
+        "title": "10 Prompt Tricks That Actually Work",
+        "description": "Proven techniques to get better AI outputs: role-playing, examples, constraints, and more."
+      },
+      "prompt-frameworks": {
+        "title": "Prompt Frameworks: ROLE, TASK, CONTEXT, FORMAT",
+        "description": "Use the RTCF framework to structure prompts for consistent, high-quality AI outputs."
+      },
+      "common-prompt-mistakes": {
+        "title": "Common Prompt Mistakes and How to Fix Them",
+        "description": "Avoid vague prompts, missing context, and unclear formats. Fix these to get better AI results."
+      }
+    }
+  },
   "nav": {
     "home": "Home",
     "tools": "Tools",
@@ -46,6 +173,7 @@
     "about": "About",
     "pricing": "Pricing",
     "dashboard": "Dashboard",
-    "creator": "Creator Mode"
+    "creator": "Creator Mode",
+    "slogan": "Free Tools for Creators"
   }
 }

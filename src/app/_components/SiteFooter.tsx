@@ -1,7 +1,13 @@
-import Link from "next/link";
+"use client";
+
+import { TranslateAwareLink } from "@/components/TranslateAwareLink";
 import { NewsletterCapture } from "@/components/NewsletterCapture";
+import { useTranslations } from "next-intl";
 
 export function SiteFooter() {
+  const t = useTranslations("footer");
+  const tLearn = useTranslations("learnAi");
+  const tAnswers = useTranslations("answers");
   return (
     <footer className="border-t border-slate-200 bg-white mt-8">
       <div className="container py-8">
@@ -11,153 +17,190 @@ export function SiteFooter() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-6">
           <div>
             <p className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-3">
-              Launch
+              {t("launch")}
             </p>
             <ul className="space-y-2 text-sm text-slate-600">
               <li>
-                <Link href="/launch" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Product Hunt Launch
-                </Link>
+                <TranslateAwareLink href="/launch" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("productHuntLaunch")}
+                </TranslateAwareLink>
               </li>
               <li>
-                <Link href="/creator-invite" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Creator Invite
-                </Link>
+                <TranslateAwareLink href="/creator-invite" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("creatorInvite")}
+                </TranslateAwareLink>
               </li>
             </ul>
           </div>
           <div>
             <p className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-3">
-              Tools
+              {t("tools")}
             </p>
             <ul className="space-y-2 text-sm text-slate-600">
               <li>
-                <Link href="/tools/tiktok-caption-generator" className="hover:underline hover:text-sky-600 transition duration-150">
-                  TikTok Caption Generator
-                </Link>
+                <TranslateAwareLink href="/tools/tiktok-caption-generator" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("tiktokCaptionGenerator")}
+                </TranslateAwareLink>
               </li>
               <li>
-                <Link href="/tools/hashtag-generator" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Hashtag Generator
-                </Link>
+                <TranslateAwareLink href="/tools/hashtag-generator" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("hashtagGenerator")}
+                </TranslateAwareLink>
               </li>
               <li>
-                <Link href="/tools/hook-generator" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Hook Generator
-                </Link>
+                <TranslateAwareLink href="/tools/hook-generator" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("hookGenerator")}
+                </TranslateAwareLink>
               </li>
               <li>
-                <Link href="/tools/title-generator" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Title Generator
-                </Link>
+                <TranslateAwareLink href="/tools/title-generator" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("titleGenerator")}
+                </TranslateAwareLink>
               </li>
             </ul>
           </div>
           <div>
             <p className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-3">
-              AI & Prompts
+              {t("aiPrompts")}
             </p>
             <ul className="space-y-2 text-sm text-slate-600">
               <li>
-                <Link href="/ai-prompts" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Prompt Library
-                </Link>
+                <TranslateAwareLink href="/ai-prompts" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("promptLibrary")}
+                </TranslateAwareLink>
               </li>
               <li>
-                <Link href="/ai-prompt-improver" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Prompt Improver
-                </Link>
+                <TranslateAwareLink href="/ai-prompt-improver" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("promptImprover")}
+                </TranslateAwareLink>
               </li>
               <li>
-                <Link href="/learn-ai" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Learn to Talk to AI
-                </Link>
+                <TranslateAwareLink href="/learn-ai" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {tLearn("title")}
+                </TranslateAwareLink>
               </li>
               <li>
-                <Link href="/answers" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Creator Answers
-                </Link>
+                <TranslateAwareLink href="/answers" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {tAnswers("title")}
+                </TranslateAwareLink>
               </li>
               <li>
-                <Link href="/prompt-playground" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Prompt Playground
-                </Link>
+                <TranslateAwareLink href="/prompt-playground" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("promptPlayground")}
+                </TranslateAwareLink>
               </li>
             </ul>
           </div>
           <div>
             <p className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-3">
-              Platform Tools
+              {t("platformTools")}
             </p>
             <ul className="space-y-2 text-sm text-slate-600">
               <li>
-                <Link href="/tiktok-tools" className="hover:underline hover:text-sky-600 transition duration-150">
-                  TikTok Tools
-                </Link>
+                <TranslateAwareLink href="/tiktok-tools" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("tiktokTools")}
+                </TranslateAwareLink>
               </li>
               <li>
-                <Link href="/youtube-tools" className="hover:underline hover:text-sky-600 transition duration-150">
-                  YouTube Tools
-                </Link>
+                <TranslateAwareLink href="/youtube-tools" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("youtubeTools")}
+                </TranslateAwareLink>
               </li>
               <li>
-                <Link href="/instagram-tools" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Instagram Tools
-                </Link>
+                <TranslateAwareLink href="/instagram-tools" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("instagramTools")}
+                </TranslateAwareLink>
               </li>
               <li>
-                <Link href="/ai-tools-directory" className="hover:underline hover:text-sky-600 transition duration-150">
-                  AI Tools Directory
-                </Link>
+                <TranslateAwareLink href="/ai-tools-directory" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("aiToolsDirectory")}
+                </TranslateAwareLink>
               </li>
               <li>
-                <Link href="/examples" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Creator Examples
-                </Link>
+                <TranslateAwareLink href="/examples" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("creatorExamples")}
+                </TranslateAwareLink>
               </li>
             </ul>
           </div>
           <div>
             <p className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-3">
-              Resources
+              中文
             </p>
             <ul className="space-y-2 text-sm text-slate-600">
               <li>
-                <Link href="/trending" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Trending Content
-                </Link>
+                <a href="/zh/sitemap" className="hover:underline hover:text-sky-600 transition duration-150">
+                  中文站点地图
+                </a>
               </li>
               <li>
-                <Link href="/questions" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Creator Questions
-                </Link>
+                <a href="/zh/recent" className="hover:underline hover:text-sky-600 transition duration-150">
+                  最新发布
+                </a>
               </li>
               <li>
-                <Link href="/tiktok-captions" className="hover:underline hover:text-sky-600 transition duration-150">
-                  TikTok Captions
-                </Link>
+                <a href="/zh/how-to/tiktok" className="hover:underline hover:text-sky-600 transition duration-150">
+                  TikTok 涨粉指南
+                </a>
               </li>
               <li>
-                <Link href="/youtube-titles" className="hover:underline hover:text-sky-600 transition duration-150">
-                  YouTube Titles
-                </Link>
+                <a href="/zh/how-to/youtube" className="hover:underline hover:text-sky-600 transition duration-150">
+                  YouTube 涨粉指南
+                </a>
               </li>
               <li>
-                <Link href="/instagram-captions" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Instagram Captions
-                </Link>
+                <a href="/zh/how-to/instagram" className="hover:underline hover:text-sky-600 transition duration-150">
+                  Instagram 涨粉指南
+                </a>
               </li>
               <li>
-                <Link href="/blog" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Blog
-                </Link>
+                <a href="/zh/ai-prompts-for/tiktok" className="hover:underline hover:text-sky-600 transition duration-150">
+                  TikTok AI 提示词
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-3">
+              {t("resources")}
+            </p>
+            <ul className="space-y-2 text-sm text-slate-600">
+              <li>
+                <TranslateAwareLink href="/trending" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("trendingContent")}
+                </TranslateAwareLink>
+              </li>
+              <li>
+                <TranslateAwareLink href="/questions" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("creatorQuestions")}
+                </TranslateAwareLink>
+              </li>
+              <li>
+                <TranslateAwareLink href="/tiktok-captions" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("tiktokCaptions")}
+                </TranslateAwareLink>
+              </li>
+              <li>
+                <TranslateAwareLink href="/youtube-titles" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("youtubeTitles")}
+                </TranslateAwareLink>
+              </li>
+              <li>
+                <TranslateAwareLink href="/instagram-captions" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("instagramCaptions")}
+                </TranslateAwareLink>
+              </li>
+              <li>
+                <TranslateAwareLink href="/blog" className="hover:underline hover:text-sky-600 transition duration-150">
+                  {t("blog")}
+                </TranslateAwareLink>
               </li>
             </ul>
           </div>
         </div>
         <div className="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} ToolEagle. Built for creators.
+          <p className="text-xs text-slate-500" suppressHydrationWarning>
+            © {new Date().getFullYear()} ToolEagle. {t("builtForCreators")}
           </p>
           <div className="flex items-center gap-4 text-xs text-slate-600">
             <a

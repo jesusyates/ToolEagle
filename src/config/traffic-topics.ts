@@ -83,3 +83,59 @@ export function getAllGuideParams(): { pageType: GuidePageType; topic: string }[
   }
   return params;
 }
+
+/** Modifiers for topic expansion (v55). Each base topic → 3-5 variant slugs. */
+export const ZH_TOPIC_MODIFIERS = ["fast", "beginners", "2026", "strategy", "tips"] as const;
+
+/** Parse slug into baseTopic + modifier. e.g. "grow-on-tiktok-fast" → { baseTopic: "grow-on-tiktok", modifier: "fast" } */
+export function parseZhSlug(slug: string): { baseTopic: string; modifier: string | null } {
+  for (const mod of ZH_TOPIC_MODIFIERS) {
+    const suffix = `-${mod}`;
+    if (slug.endsWith(suffix)) {
+      return { baseTopic: slug.slice(0, -suffix.length), modifier: mod };
+    }
+  }
+  return { baseTopic: slug, modifier: null };
+}
+
+/** Check if baseTopic is valid for the given page type. */
+export function isBaseTopicValid(pageType: GuidePageType, baseTopic: string): boolean {
+  const config = GUIDE_PAGE_CONFIG[pageType];
+  return config.topics.includes(baseTopic);
+}
+
+/** Unique base topic slugs. */
+export function getBaseTopicSlugs(): string[] {
+  const topics = new Set<string>();
+  for (const config of Object.values(GUIDE_PAGE_CONFIG)) {
+    for (const topic of config.topics) {
+      topics.add(topic);
+    }
+  }
+  return [...topics];
+}
+
+/** All topic slugs including variants. Base + base-fast, base-beginners, etc. Max 800. */
+export function getAllPromptTopicSlugs(): string[] {
+  const baseTopics = getBaseTopicSlugs();
+  const slugs = new Set<string>(baseTopics);
+  for (const base of baseTopics) {
+    for (const mod of ZH_TOPIC_MODIFIERS) {
+      slugs.add(`${base}-${mod}`);
+    }
+  }
+  return [...slugs].slice(0, 800);
+}
+
+/** v56: Extract platform from topic slug. grow-on-tiktok → tiktok */
+export const ZH_PLATFORMS = ["tiktok", "youtube", "instagram"] as const;
+export type ZhPlatform = (typeof ZH_PLATFORMS)[number];
+
+export function extractPlatformFromTopic(topicSlug: string): ZhPlatform | "general" {
+  const base = parseZhSlug(topicSlug).baseTopic;
+  if (base.includes("tiktok")) return "tiktok";
+  if (base.includes("youtube")) return "youtube";
+  if (base.includes("instagram")) return "instagram";
+  if (base === "tiktok" || base === "youtube" || base === "instagram") return base;
+  return "general";
+}

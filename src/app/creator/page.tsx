@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { ToolInputCard } from "@/components/tools/ToolInputCard";
@@ -19,6 +20,7 @@ type CreatorOutput = {
 };
 
 export default function CreatorPage() {
+  const t = useTranslations("home");
   const [topic, setTopic] = useState("");
   const [platform, setPlatform] = useState("TikTok");
   const [tone, setTone] = useState("casual");
@@ -75,7 +77,7 @@ export default function CreatorPage() {
         <section className="container pt-10 pb-16">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">
-              Creator Mode
+              {t("creatorMode")}
             </p>
             <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-1">
               Generate full creator content

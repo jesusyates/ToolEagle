@@ -14,6 +14,9 @@
     "blog:generate:dry": "node scripts/generate-seo-blog.js --dry-run",
     "content-factory": "node scripts/run-content-factory.js",
     "zh:generate": "node scripts/generate-zh-seo-content.js",
+    "zh:keywords": "node scripts/generate-zh-keywords.js",
+    "zh:keywords:v63": "node scripts/generate-zh-keywords-v63.js",
+    "zh:auto": "node scripts/auto-generate-zh.js",
     "zh:generate:limit": "node scripts/generate-zh-seo-content.js --limit=10",
     "zh:publish": "node scripts/publish-zh-content.js",
     "zh:stats": "node scripts/stats-zh-content.js",
@@ -36,7 +39,9 @@
     "next-mdx-remote": "^6.0.0",
     "next-plausible": "^3.12.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "resend": "^6.9.4",
+    "undici": "^7.24.4"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",

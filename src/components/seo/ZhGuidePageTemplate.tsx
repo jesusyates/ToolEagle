@@ -3,7 +3,18 @@ import { SiteHeader } from "@/app/_components/SiteHeader";
 import { SiteFooter } from "@/app/_components/SiteFooter";
 import { ToolCard } from "@/components/tools/ToolCard";
 import { tools } from "@/config/tools";
+import { getMatchingAffiliateTools, type AffiliateTool } from "@/config/affiliate-tools";
 import { formatTopicLabel, parseZhSlug, extractPlatformFromTopic, ZH_PLATFORMS } from "@/config/traffic-topics";
+import { ZhToolRecommendationBlock } from "@/components/zh/ZhToolRecommendationBlock";
+import { ZhCtaCaptureBlock } from "@/components/zh/ZhCtaCaptureBlock";
+import { ZhStickyCta } from "@/components/zh/ZhStickyCta";
+import { ZhFreeVsPaidSection } from "@/components/zh/ZhFreeVsPaidSection";
+import { ZhPageViewTracker } from "@/components/zh/ZhPageViewTracker";
+import { ZhComparisonTable } from "@/components/zh/ZhComparisonTable";
+import { ZhCaseProofBlock } from "@/components/zh/ZhCaseProofBlock";
+import { ZhExitIntentPopup } from "@/components/zh/ZhExitIntentPopup";
+import { ZhAuthorBlock } from "@/components/zh/ZhAuthorBlock";
+import { ZhFreshnessBlock } from "@/components/zh/ZhFreshnessBlock";
 import { getGuidePrompts } from "@/config/guide-content";
 import type { GuidePageType } from "@/config/traffic-topics";
 import type { ZhPageContent } from "@/lib/generate-zh-content";
@@ -15,8 +26,10 @@ import {
   getZhFeaturedQuestion,
   parseZhFaqForSchema,
   buildZhFaqSchema,
+  buildZhArticleSchema,
   getZhCuriosityLinks
 } from "@/lib/zh-ctr";
+import { buildBreadcrumbSchema } from "@/lib/zh-breadcrumb-schema";
 import { BASE_URL } from "@/config/site";
 
 type ExampleRow = {
@@ -101,6 +114,7 @@ type Props = {
   content: ZhPageContent;
   examples: ExampleRow[];
   primaryTool?: string;
+  affiliateTools?: AffiliateTool[];
 };
 
 export function ZhGuidePageTemplate({
@@ -108,7 +122,8 @@ export function ZhGuidePageTemplate({
   topic,
   content,
   examples,
-  primaryTool = "tiktok-caption-generator"
+  primaryTool = "tiktok-caption-generator",
+  affiliateTools
 }: Props) {
   const { baseTopic } = parseZhSlug(topic);
   const topicLabel = formatTopicLabel(baseTopic);
@@ -128,19 +143,45 @@ export function ZhGuidePageTemplate({
   const pageUrl = `${BASE_URL}${ZH_BASE_PATHS[pageType]}/${topic}`;
   const faqSchema = buildZhFaqSchema(faqItems, pageUrl);
   const ctrTitle = getZhCtrTitle(content, pageType, topic);
+  const toolsForPage = affiliateTools ?? getMatchingAffiliateTools(ctrTitle, platform, 3);
+  const articleSchema = buildZhArticleSchema(
+    ctrTitle,
+    content.description || content.directAnswer || "",
+    pageUrl
+  );
+
+  const breadcrumbItems: { name: string; url: string }[] = [
+    { name: "首页", url: "/" },
+    { name: "中文指南", url: "/zh/sitemap" },
+    ...(platform !== "general" && ZH_PLATFORMS.includes(platform)
+      ? [{ name: PLATFORM_NAMES[platform], url: `${ZH_BASE_PATHS[pageType]}/${platform}` }]
+      : []),
+    { name: ctrTitle, url: `${ZH_BASE_PATHS[pageType]}/${topic}` }
+  ];
+  const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-white text-slate-900 flex flex-col relative">
+      <ZhPageViewTracker keyword={ctrTitle} slug={topic} />
+      <ZhStickyCta />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       {Object.keys(faqSchema).length > 0 && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <SiteHeader />
 
       <div className="flex-1">
-        <article className="container py-12">
+        <article className="container py-12 lg:pr-32">
           <div className="max-w-3xl">
             <nav className="text-sm text-slate-500 mb-6" aria-label="面包屑">
               <Link href="/" className="hover:text-slate-700">
@@ -165,6 +206,8 @@ export function ZhGuidePageTemplate({
               {ctrTitle}
             </h1>
 
+            <ZhFreshnessBlock />
+
             <section className="mt-6 rounded-xl border-2 border-sky-200 bg-sky-50 p-5" aria-label="精选摘要">
               <p className="text-sm font-medium text-slate-600">Q：{featuredQuestion}</p>
               <p className="mt-2 text-base font-semibold text-slate-900">
@@ -175,6 +218,8 @@ export function ZhGuidePageTemplate({
             <div className="mt-6 prose prose-slate max-w-none">
               <p className="text-lg text-slate-700 leading-relaxed">{content.intro}</p>
             </div>
+
+            <ZhToolRecommendationBlock tools={toolsForPage} keyword={ctrTitle} />
 
             {content.guide && (
               <section className="mt-10 prose prose-slate max-w-none">
@@ -232,6 +277,12 @@ export function ZhGuidePageTemplate({
               </section>
             )}
 
+            <ZhToolRecommendationBlock tools={toolsForPage} keyword={ctrTitle} ctaIndex={1} />
+
+            <ZhCtaCaptureBlock keyword={ctrTitle} />
+
+            <ZhFreeVsPaidSection keyword={ctrTitle} />
+
             {content.faq && (
               <section className="mt-12">
                 <h2 className="text-xl font-semibold text-slate-900">常见问题</h2>
@@ -276,6 +327,8 @@ export function ZhGuidePageTemplate({
                 ))}
               </div>
             </section>
+
+            <ZhToolRecommendationBlock tools={toolsForPage} keyword={ctrTitle} ctaIndex={2} />
 
             <section className="mt-12 rounded-2xl border-2 border-sky-200 bg-sky-50 p-6">
               <h2 className="text-lg font-semibold text-slate-900">用 AI 生成爆款内容</h2>
@@ -360,6 +413,8 @@ export function ZhGuidePageTemplate({
               </section>
             )}
 
+            <ZhAuthorBlock />
+
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/tools"
@@ -378,6 +433,7 @@ export function ZhGuidePageTemplate({
         </article>
       </div>
 
+      <ZhExitIntentPopup keyword={ctrTitle} />
       <SiteFooter />
     </main>
   );

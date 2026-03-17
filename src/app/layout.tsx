@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import Script from "next/script";
@@ -11,6 +12,13 @@ const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  // v62.1: Baidu site verification (set BAIDU_SITE_VERIFICATION env or replace placeholder)
+  verification: {
+    other: {
+      "baidu-site-verification":
+        process.env.BAIDU_SITE_VERIFICATION || "code-placeholder"
+    }
+  },
   title: {
     default: "ToolEagle - Free Tools for Creators",
     template: "%s | ToolEagle"
@@ -51,6 +59,10 @@ export default async function RootLayout({
 }>) {
   const locale = await getLocale();
   const messages = await getMessages();
+  // v62.1: zh-CN for /zh/* pages (Baidu SEO)
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") ?? "";
+  const htmlLang = pathname.startsWith("/zh") ? "zh-CN" : locale;
 
   const content = (
     <>
@@ -65,8 +77,11 @@ export default async function RootLayout({
   );
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body>
+    <html lang={htmlLang} suppressHydrationWarning translate="no">
+      <head>
+        <meta charSet="utf-8" />
+      </head>
+      <body suppressHydrationWarning>
         {PLAUSIBLE_DOMAIN ? (
           <PlausibleProvider domain={PLAUSIBLE_DOMAIN} trackLocalhost={process.env.NODE_ENV === "development"}>
             {content}

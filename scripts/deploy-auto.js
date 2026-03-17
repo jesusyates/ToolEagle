@@ -119,27 +119,57 @@ function getEnStats() {
 }
 
 // ----- Git -----
+const REMINDER_PATH = path.join(CWD, ".deploy-reminder.txt");
+
+function writeReminder(msg) {
+  try {
+    fs.writeFileSync(
+      REMINDER_PATH,
+      `[${new Date().toISOString()}] ${msg}\n\n请联网后运行: npm run deploy:auto`,
+      "utf8"
+    );
+  } catch {}
+}
+
 function runGit(message) {
   const addPaths = [
     "data/zh-seo.json",
+    "data/zh-keywords.json",
     "data/core-pages-en.json",
     ".deploy-state.json"
   ].filter((p) => {
     const full = path.join(CWD, p);
     return fs.existsSync(full);
   });
-  if (addPaths.length === 0) return false;
+  if (addPaths.length === 0) return { ok: false, reason: "nochange" };
   try {
     addPaths.forEach((p) => execSync(`git add -f "${p}"`, { cwd: CWD, stdio: "pipe" }));
     const status = execSync("git status --porcelain", { cwd: CWD, encoding: "utf8" }).trim();
-    if (!status) return false;
+    if (!status) return { ok: false, reason: "nochange" };
     execSync("git", ["commit", "-m", message], { cwd: CWD, stdio: "inherit" });
     execSync("git push", { cwd: CWD, stdio: "inherit" });
-    return true;
+    try {
+      if (fs.existsSync(REMINDER_PATH)) fs.unlinkSync(REMINDER_PATH);
+    } catch {}
+    return { ok: true };
   } catch (e) {
-    if (e.status === 1 && e.stderr && e.stderr.includes("nothing to commit")) return false;
-    console.error("Git 操作失败:", e.message);
-    return false;
+    const isNetwork =
+      e.message?.includes("Could not resolve host") ||
+      e.message?.includes("Connection refused") ||
+      e.message?.includes("fetch failed") ||
+      e.message?.includes("ECONNREFUSED") ||
+      e.message?.includes("ENOTFOUND") ||
+      e.message?.includes("ETIMEDOUT") ||
+      (e.stderr && String(e.stderr).toLowerCase().includes("network"));
+    console.error("Git 推送失败:", e.message);
+    if (isNetwork) {
+      writeReminder("部署因网络连接失败未完成。");
+      console.log("\n⚠ 检测到网络问题，已写入 .deploy-reminder.txt");
+      console.log("  联网后任务会自动重试（每 15 分钟，最多 5 次）");
+      console.log("  或手动运行: npm run deploy:auto\n");
+      process.exit(1);
+    }
+    return { ok: false, reason: "error" };
   }
 }
 
@@ -212,14 +242,16 @@ function main() {
     ? `deploy: ${state.zh.lastPublished} zh pages (batch ${state.zh.batchNumber}) + en`
     : "deploy: en + config";
   console.log("\n执行 Git 提交与推送...");
-  const pushed = runGit(msg);
+  const result = runGit(msg);
 
-  if (pushed) {
+  if (result.ok) {
     console.log(`\n✓ 统一部署完成`);
     if (hasZh) console.log(`  中文: ${state.zh.lastPublished} 页已发布`);
     console.log(`  英文: 已纳入本次推送`);
+  } else if (result.reason === "nochange") {
+    console.log("\n✓ 本地已更新，Git 推送未执行（无变更）");
   } else {
-    console.log("\n✓ 本地已更新，Git 推送未执行（可能无变更或需手动 push）");
+    console.log("\n⚠ Git 推送未成功，请检查网络后手动运行: npm run deploy:auto");
   }
   console.log(`下次自动部署时间: ${new Date(now.getTime() + BATCH_INTERVAL_DAYS * 86400000).toLocaleDateString()}\n`);
 }

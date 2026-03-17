@@ -21,7 +21,8 @@ const nextConfig = {
       { source: "/sitemap-compare.xml", destination: "/api/sitemap-compare" },
       { source: "/sitemap-community.xml", destination: "/api/sitemap-community" },
       { source: "/sitemap-guides.xml", destination: "/api/sitemap-guides" },
-      { source: "/sitemap-zh.xml", destination: "/api/sitemap-zh" }
+      { source: "/sitemap-zh.xml", destination: "/api/sitemap-zh" },
+      { source: "/baidu-sitemap.xml", destination: "/api/sitemap-zh" }
     ];
   },
   async redirects() {

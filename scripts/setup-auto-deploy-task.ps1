@@ -8,11 +8,20 @@ $taskName = "SEO-Auto-Deploy"
 
 $action = New-ScheduledTaskAction -Execute $batPath -WorkingDirectory $projectPath
 $trigger = New-ScheduledTaskTrigger -Daily -At "21:00" -DaysInterval 3
-$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable
+$settings = New-ScheduledTaskSettingsSet `
+  -AllowStartIfOnBatteries `
+  -DontStopIfGoingOnBatteries `
+  -StartWhenAvailable `
+  -RestartCount 5 `
+  -RestartInterval (New-TimeSpan -Minutes 15)
 
 Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Force
 
-Write-Host "`n计划任务已创建: $taskName"
-Write-Host "每 3 天晚上 21:00 自动运行 deploy:auto（英文 + 中文）"
-Write-Host "查看任务: taskschd.msc -> 任务计划程序库"
-Write-Host "删除任务: Unregister-ScheduledTask -TaskName '$taskName'`n"
+Write-Host ""
+Write-Host "Plan task created: $taskName"
+Write-Host "Runs every 3 days at 21:00 - deploy:auto (EN + ZH)"
+Write-Host "If missed (offline/no network): runs when PC is back online"
+Write-Host "On push failure: retries every 15 min, max 5 times"
+Write-Host "View task: taskschd.msc -> Task Scheduler Library"
+Write-Host "Remove task: Unregister-ScheduledTask -TaskName $taskName"
+Write-Host ""

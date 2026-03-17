@@ -2,38 +2,38 @@
  * v54 Generate Chinese SEO content via AI.
  * Run: node scripts/generate-zh-seo-content.js
  * Requires: OPENAI_API_KEY
+ * Optional: OPENAI_BASE_URL (for proxy, e.g. https://your-proxy/v1)
  *
  * Generates top 200 topics × 4 page types. Use --limit N to limit.
  */
 
+require("dotenv").config({ path: ".env.local" });
+require("dotenv").config();
+
 const path = require("path");
 const fs = require("fs");
+const { openaiChatCompletions, getModel } = require("./lib/openai-fetch");
 
 const CACHE_PATH = path.join(process.cwd(), "data", "zh-seo.json");
 
 async function generateWithOpenAI(prompt, apiKey) {
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      model: "gpt-4o-mini",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.7,
-      max_tokens: 4000
-    })
-  });
-
-  if (!response.ok) throw new Error(`OpenAI API error: ${response.status}`);
-  const data = await response.json();
-  const content = data.choices?.[0]?.message?.content?.trim();
-  if (!content) throw new Error("Empty response");
-
-  const jsonMatch = content.match(/```(?:json)?\s*([\s\S]*?)```/) ?? [null, content];
-  const jsonStr = (jsonMatch[1] || content).trim();
-  return JSON.parse(jsonStr);
+  try {
+    const content = await openaiChatCompletions(
+      {
+        model: getModel(),
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.7,
+        max_tokens: 4000
+      },
+      apiKey
+    );
+    const jsonMatch = content.match(/```(?:json)?\s*([\s\S]*?)```/) ?? [null, content];
+    const jsonStr = (jsonMatch[1] || content).trim();
+    return JSON.parse(jsonStr);
+  } catch (e) {
+    console.error("OpenAI error:", e.message);
+    throw e;
+  }
 }
 
 function formatTopicLabel(slug) {

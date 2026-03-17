@@ -4,10 +4,10 @@ import { ZhGuidePageTemplate } from "@/components/seo/ZhGuidePageTemplate";
 import { ZhHubPageTemplate } from "@/components/seo/ZhHubPageTemplate";
 import { parseZhSlug, isBaseTopicValid, ZH_PLATFORMS } from "@/config/traffic-topics";
 import { getZhContent, getAllZhGuideParams, shouldNoindexZhPage } from "@/lib/generate-zh-content";
-import { getZhCtrTitle, getZhCtrDescription } from "@/lib/zh-ctr";
 import { getAllHubParams } from "@/lib/zh-hub-data";
 import { getExamplesForTopic } from "@/lib/guide-data";
 import { BASE_URL } from "@/config/site";
+import { getZhPageMetadata, getZhGuideKeyword } from "@/lib/zh-metadata";
 
 type Props = { params: Promise<{ topic: string }> };
 
@@ -22,31 +22,18 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { topic } = await params;
+  const url = `${BASE_URL}/zh/how-to/${topic}`;
   if (ZH_PLATFORMS.includes(topic as (typeof ZH_PLATFORMS)[number])) {
-    const platform = topic as (typeof ZH_PLATFORMS)[number];
-    const pNames: Record<string, string> = { tiktok: "TikTok", youtube: "YouTube", instagram: "Instagram" };
-    const pName = pNames[platform] ?? platform;
-    const title = `${pName}涨粉的7个方法（2026最新完整指南合集）`;
-    const description = `想在 ${pName} 快速涨粉？本文整理了7个最有效的方法，适合新手和进阶创作者，附带实操技巧。`;
-    const url = `${BASE_URL}/zh/how-to/${topic}`;
-    return { title, description, alternates: { canonical: url }, openGraph: { title, description, url } };
+    const keyword = getZhGuideKeyword("how-to", topic);
+    return getZhPageMetadata(keyword, url);
   }
   const { baseTopic } = parseZhSlug(topic);
   if (!isBaseTopicValid("how-to", baseTopic)) return { title: "Not Found" };
 
   const content = getZhContent("how-to", topic);
-  const title = getZhCtrTitle(content ?? null, "how-to", topic);
-  const description = getZhCtrDescription(content ?? null, "how-to", topic);
-  const url = `${BASE_URL}/zh/how-to/${topic}`;
+  const keyword = getZhGuideKeyword("how-to", topic);
   const noindex = shouldNoindexZhPage(content);
-
-  return {
-    title,
-    description,
-    alternates: { canonical: url },
-    openGraph: { title, description, url },
-    ...(noindex && { robots: { index: false, follow: true } })
-  };
+  return getZhPageMetadata(keyword, url, noindex);
 }
 
 export default async function ZhHowToPage({ params }: Props) {

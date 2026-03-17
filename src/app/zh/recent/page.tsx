@@ -1,15 +1,26 @@
 import Link from "next/link";
 import { SiteHeader } from "@/app/_components/SiteHeader";
 import { SiteFooter } from "@/app/_components/SiteFooter";
-import { getRecentZhPages } from "@/lib/zh-sitemap-data";
+import { getRecentZhPagesWithKeywords } from "@/lib/zh-sitemap-data";
+import { ZhRelatedRecommendations } from "@/components/zh/ZhRelatedRecommendations";
+import { getZhPageMetadata } from "@/lib/zh-metadata";
+import { BASE_URL } from "@/config/site";
 
-export const metadata = {
-  title: "最新发布 | 中文创作者指南",
-  description: "ToolEagle 最新发布的中文创作者指南，涵盖 TikTok、YouTube、Instagram 涨粉、内容策略、AI 提示词与爆款案例。"
-};
+export const metadata = getZhPageMetadata("最新发布", `${BASE_URL}/zh/recent`);
 
-export default function ZhRecentPage() {
-  const recent = getRecentZhPages(100);
+const PER_PAGE = 30;
+
+type Props = { searchParams: Promise<{ page?: string }> };
+
+export default async function ZhRecentPage({ searchParams }: Props) {
+  const { page } = await searchParams;
+  const pageNum = Math.max(1, parseInt(page ?? "1", 10) || 1);
+  const all = getRecentZhPagesWithKeywords(100);
+  const total = all.length;
+  const totalPages = Math.ceil(total / PER_PAGE);
+  const currentPage = Math.min(pageNum, totalPages);
+  const start = (currentPage - 1) * PER_PAGE;
+  const recent = all.slice(start, start + PER_PAGE);
 
   return (
     <main className="min-h-screen bg-white text-slate-900 flex flex-col">
@@ -28,7 +39,7 @@ export default function ZhRecentPage() {
               最新发布
             </h1>
             <p className="mt-4 text-slate-600">
-              最新 {recent.length} 篇中文创作者指南
+              最新 {total} 篇中文创作者指南（第 {currentPage}/{totalPages || 1} 页）
             </p>
 
             <ul className="mt-8 columns-2 sm:columns-3 gap-4 space-y-2">
@@ -43,6 +54,50 @@ export default function ZhRecentPage() {
                 </li>
               ))}
             </ul>
+
+            <ZhRelatedRecommendations limit={15} />
+
+            {totalPages > 1 && (
+              <nav className="mt-8 flex flex-wrap gap-2" aria-label="分页">
+                {currentPage > 1 && (
+                  <Link
+                    href={`/zh/recent?page=${currentPage - 1}`}
+                    className="rounded-lg border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                  >
+                    上一页
+                  </Link>
+                )}
+                {Array.from({ length: totalPages }, (_, i) => i + 1)
+                  .filter((p) => p === 1 || p === totalPages || Math.abs(p - currentPage) <= 2)
+                  .map((p, i, arr) => (
+                    <span key={p}>
+                      {i > 0 && arr[i - 1] !== p - 1 && (
+                        <span className="px-2 text-slate-400">…</span>
+                      )}
+                      {p === currentPage ? (
+                        <span className="rounded-lg border border-sky-300 bg-sky-50 px-4 py-2 text-sm font-medium text-sky-700">
+                          {p}
+                        </span>
+                      ) : (
+                        <Link
+                          href={`/zh/recent?page=${p}`}
+                          className="rounded-lg border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                        >
+                          {p}
+                        </Link>
+                      )}
+                    </span>
+                  ))}
+                {currentPage < totalPages && (
+                  <Link
+                    href={`/zh/recent?page=${currentPage + 1}`}
+                    className="rounded-lg border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                  >
+                    下一页
+                  </Link>
+                )}
+              </nav>
+            )}
 
             <div className="mt-10">
               <Link href="/zh/sitemap" className="text-sky-700 hover:underline">

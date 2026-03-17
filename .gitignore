@@ -32,3 +32,9 @@ yarn-error.log*
 
 # local data (newsletter emails)
 /data
+
+# deploy reminder (created when push fails due to network)
+.deploy-reminder.txt
+
+# auto-gen logs
+/logs

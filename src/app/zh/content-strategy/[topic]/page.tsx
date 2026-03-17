@@ -4,8 +4,8 @@ import { ZhGuidePageTemplate } from "@/components/seo/ZhGuidePageTemplate";
 import { ZhHubPageTemplate } from "@/components/seo/ZhHubPageTemplate";
 import { parseZhSlug, isBaseTopicValid, ZH_PLATFORMS } from "@/config/traffic-topics";
 import { getZhContent, getAllZhGuideParams, shouldNoindexZhPage } from "@/lib/generate-zh-content";
-import { getZhCtrTitle, getZhCtrDescription } from "@/lib/zh-ctr";
 import { getAllHubParams } from "@/lib/zh-hub-data";
+import { getZhPageMetadata, getZhGuideKeyword } from "@/lib/zh-metadata";
 import { getExamplesForTopic } from "@/lib/guide-data";
 import { BASE_URL } from "@/config/site";
 
@@ -22,31 +22,18 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { topic } = await params;
+  const url = `${BASE_URL}/zh/content-strategy/${topic}`;
   if (ZH_PLATFORMS.includes(topic as (typeof ZH_PLATFORMS)[number])) {
-    const platform = topic as (typeof ZH_PLATFORMS)[number];
-    const names: Record<string, string> = { tiktok: "TikTok", youtube: "YouTube", instagram: "Instagram" };
-    const pName = names[platform] ?? platform;
-    const title = `${pName}内容策略的5个方法（2026最新完整指南）`;
-    const description = `想做好 ${pName} 内容策略？本文整理了5个最有效的方法，适合新手和进阶创作者，附带实操技巧。`;
-    const url = `${BASE_URL}/zh/content-strategy/${topic}`;
-    return { title, description, alternates: { canonical: url }, openGraph: { title, description, url } };
+    const keyword = getZhGuideKeyword("content-strategy", topic);
+    return getZhPageMetadata(keyword, url);
   }
   const { baseTopic } = parseZhSlug(topic);
   if (!isBaseTopicValid("content-strategy", baseTopic)) return { title: "Not Found" };
 
   const content = getZhContent("content-strategy", topic);
-  const title = getZhCtrTitle(content ?? null, "content-strategy", topic);
-  const description = getZhCtrDescription(content ?? null, "content-strategy", topic);
-  const url = `${BASE_URL}/zh/content-strategy/${topic}`;
+  const keyword = getZhGuideKeyword("content-strategy", topic);
   const noindex = shouldNoindexZhPage(content);
-
-  return {
-    title,
-    description,
-    alternates: { canonical: url },
-    openGraph: { title, description, url },
-    ...(noindex && { robots: { index: false, follow: true } })
-  };
+  return getZhPageMetadata(keyword, url, noindex);
 }
 
 export default async function ZhContentStrategyPage({ params }: Props) {

@@ -29,6 +29,8 @@ alwaysApply: false
 - 间隔：每 3 天
 - 脚本：`scripts/run-deploy-auto.bat` → `npm run deploy:auto`
 - 任务名：`SEO-Auto-Deploy`
+- **错过时间**：关机/无网络时，开机或联网后会自动补跑（StartWhenAvailable）
+- **推送失败**：网络问题会每 15 分钟重试，最多 5 次；并写入 `.deploy-reminder.txt` 提醒
 
 ## 脚本说明
 

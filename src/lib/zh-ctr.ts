@@ -123,7 +123,7 @@ export function parseZhFaqForSchema(faq: string): { question: string; answer: st
       });
     }
   }
-  return items.slice(0, 3);
+  return items.slice(0, 5);
 }
 
 /** Build FAQPage JSON-LD schema. */
@@ -143,6 +143,32 @@ export function buildZhFaqSchema(
         text: answer
       }
     }))
+  };
+}
+
+/** Build Article JSON-LD schema for zh pages. */
+export function buildZhArticleSchema(
+  headline: string,
+  description: string,
+  url: string,
+  datePublished?: string,
+  dateModified?: string
+): object {
+  const now = new Date().toISOString().split("T")[0];
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline,
+    description,
+    url,
+    datePublished: datePublished ?? now,
+    dateModified: dateModified ?? now,
+    author: { "@type": "Organization", name: "ToolEagle" },
+    publisher: {
+      "@type": "Organization",
+      name: "ToolEagle",
+      logo: { "@type": "ImageObject", url: "https://www.tooleagle.com/og/zh-default.png" }
+    }
   };
 }
 

@@ -27,7 +27,122 @@ export async function GET(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
-  const parts = slug.replace(/\.png$/, "").split("-");
+  const cleanSlug = slug.replace(/\.png$/, "");
+
+  // V66: zh keyword OG - /og/tiktok-zhangfen-ruhe etc.
+  try {
+    const { getKeywordBySlug } = await import("@/lib/keyword-patterns");
+    const { getKeywordContent } = await import("@/lib/zh-keyword-content");
+    const entry = getKeywordBySlug(cleanSlug);
+    const content = getKeywordContent(cleanSlug);
+    if (entry && content) {
+      const title = content.title || content.h1 || entry.keyword;
+      return new ImageResponse(
+        (
+          <div
+            style={{
+              height: "100%",
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#0f172a",
+              background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)"
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: 48
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 42,
+                  fontWeight: 700,
+                  color: "white",
+                  textAlign: "center",
+                  maxWidth: 1000
+                }}
+              >
+                {title}
+              </div>
+              <div
+                style={{
+                  fontSize: 22,
+                  color: "#94a3b8",
+                  marginTop: 16
+                }}
+              >
+                ToolEagle · 中文创作者指南
+              </div>
+            </div>
+          </div>
+        ),
+        { width: 1200, height: 630 }
+      );
+    }
+  } catch {
+    // fall through
+  }
+
+  // zh default OG image for Chinese pages
+  if (cleanSlug === "zh-default" || cleanSlug.startsWith("zh-")) {
+    return new ImageResponse(
+      (
+        <div
+          style={{
+            height: "100%",
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#0f172a",
+            background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 48
+            }}
+          >
+            <div
+              style={{
+                fontSize: 48,
+                fontWeight: 700,
+                color: "white",
+                textAlign: "center",
+                maxWidth: 1000
+              }}
+            >
+              中文创作者指南（2026最新）
+            </div>
+            <div
+              style={{
+                fontSize: 24,
+                color: "#94a3b8",
+                marginTop: 16
+              }}
+            >
+              ToolEagle · TikTok、YouTube、Instagram 涨粉与内容策略
+            </div>
+          </div>
+        </div>
+      ),
+      { width: 1200, height: 630 }
+    );
+  }
+
+  const parts = cleanSlug.split("-");
   let platform = "tiktok";
   let type = "captions";
   let topic = "funny";

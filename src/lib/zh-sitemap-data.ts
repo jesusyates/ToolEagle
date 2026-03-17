@@ -156,3 +156,40 @@ export function getTopZhTopics(limit = 10): { href: string; label: string }[] {
 export function getRecentZhLinks(count = 8): { href: string; label: string }[] {
   return getRecentZhPages(count).map((e) => ({ href: e.href, label: e.label }));
 }
+
+/** v62: Recent pages including keyword pages, sorted by createdAt DESC */
+export type RecentZhPageWithMeta = { href: string; label: string; createdAt: number };
+export function getRecentZhPagesWithKeywords(limit = 100): RecentZhPageWithMeta[] {
+  const guideEntries = getRecentZhPagesWithMeta();
+  const keywordEntries = getRecentKeywordPagesWithMeta();
+  const combined = [...keywordEntries, ...guideEntries];
+  return combined
+    .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
+    .slice(0, limit);
+}
+
+function getRecentZhPagesWithMeta(): RecentZhPageWithMeta[] {
+  const cache = loadZhCacheWithMeta();
+  const entries: RecentZhPageWithMeta[] = [];
+  for (const [pageType, topics] of Object.entries(cache)) {
+    if (typeof topics !== "object") continue;
+    for (const [topic, data] of Object.entries(topics as Record<string, { lastModified?: number }>)) {
+      const ts = (data as { lastModified?: number })?.lastModified ?? 0;
+      entries.push({
+        href: `${ZH_BASE_PATHS[pageType as GuidePageType]}/${topic}`,
+        label: topic.replace(/-/g, " "),
+        createdAt: ts
+      });
+    }
+  }
+  return entries;
+}
+
+function getRecentKeywordPagesWithMeta(): RecentZhPageWithMeta[] {
+  const { getLatestKeywordPages } = require("./zh-keyword-data");
+  return getLatestKeywordPages(200).map((e: { slug: string; keyword: string; createdAt: number }) => ({
+    href: `/zh/search/${e.slug}`,
+    label: e.keyword,
+    createdAt: e.createdAt
+  }));
+}

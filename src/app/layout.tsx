@@ -16,7 +16,8 @@ export const metadata: Metadata = {
   verification: {
     other: {
       "baidu-site-verification":
-        process.env.BAIDU_SITE_VERIFICATION || "code-placeholder"
+        process.env.BAIDU_SITE_VERIFICATION || "code-placeholder",
+      "impact-site-verification": "a49e2a8e-2bee-41df-a1ae-b88fa1e7f575"
     }
   },
   title: {

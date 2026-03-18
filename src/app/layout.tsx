@@ -66,6 +66,8 @@ export default async function RootLayout({
   const pathname = headersList.get("x-pathname") ?? "";
   const htmlLang = pathname.startsWith("/zh") ? "zh-CN" : locale;
 
+  const baiduCode = process.env.BAIDU_SITE_VERIFICATION;
+
   const content = (
     <>
       <Script id="translate-resilience" strategy="beforeInteractive">
@@ -83,6 +85,9 @@ export default async function RootLayout({
     <html lang={htmlLang} suppressHydrationWarning translate="no">
       <head>
         <meta charSet="utf-8" />
+        {baiduCode && (
+          <meta name="baidu-site-verification" content={baiduCode} />
+        )}
       </head>
       <body suppressHydrationWarning>
         {PLAUSIBLE_DOMAIN ? (

@@ -37,6 +37,8 @@ export async function GET(
     const content = getKeywordContent(cleanSlug);
     if (entry && content) {
       const title = content.title || content.h1 || entry.keyword;
+      // V67: Viral OG - 大标题 + 强情绪词 (🔥 2026 爆款)
+      const badge = cleanSlug.includes("2026") ? "2026爆款" : "🔥 2026 爆款指南";
       return new ImageResponse(
         (
           <div
@@ -62,11 +64,23 @@ export async function GET(
             >
               <div
                 style={{
-                  fontSize: 42,
-                  fontWeight: 700,
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: "#f59e0b",
+                  marginBottom: 12,
+                  letterSpacing: 2
+                }}
+              >
+                {badge}
+              </div>
+              <div
+                style={{
+                  fontSize: 52,
+                  fontWeight: 800,
                   color: "white",
                   textAlign: "center",
-                  maxWidth: 1000
+                  maxWidth: 1000,
+                  lineHeight: 1.2
                 }}
               >
                 {title}
@@ -75,7 +89,7 @@ export async function GET(
                 style={{
                   fontSize: 22,
                   color: "#94a3b8",
-                  marginTop: 16
+                  marginTop: 20
                 }}
               >
                 ToolEagle · 中文创作者指南

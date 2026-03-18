@@ -20,13 +20,17 @@ import { getKeywordContent, type ZhKeywordContent } from "@/lib/zh-keyword-conte
 import { ZH_BASE_PATHS } from "@/lib/zh-hub-data";
 import { getRecentZhLinks } from "@/lib/zh-sitemap-data";
 import { ZhRelatedRecommendations } from "@/components/zh/ZhRelatedRecommendations";
-import { parseZhFaqForSchema, buildZhFaqSchema, buildZhArticleSchema } from "@/lib/zh-ctr";
+import { parseZhFaqForSchema, buildZhFaqSchema, buildZhArticleSchema, buildZhHowToSchema } from "@/lib/zh-ctr";
 import { buildBreadcrumbSchema } from "@/lib/zh-breadcrumb-schema";
 import { getIntroVariant, getCtaVariant } from "@/lib/zh-uniqueness";
 import { getExpansionBlock } from "@/lib/zh-content-expansion";
 import { getRelatedBlogSlugs } from "@/lib/zh-blog-data";
 import { ZhAuthorBlock } from "@/components/zh/ZhAuthorBlock";
 import { ZhFreshnessBlock } from "@/components/zh/ZhFreshnessBlock";
+import { ZhShareSnippetGenerator } from "@/components/zh/ZhShareSnippetGenerator";
+import { ZhCopySharePackWithLog } from "@/components/zh/ZhCopySharePackWithLog";
+import { ZhRedditReadyBlock } from "@/components/zh/ZhRedditReadyBlock";
+import { ZhCopyButton } from "@/components/zh/ZhCopyButton";
 import { BASE_URL } from "@/config/site";
 
 function renderMarkdownBlock(text: string) {
@@ -103,6 +107,10 @@ export function ZhKeywordPageTemplate({ entry, content, existingSlugs }: Props) 
     ...related.map((r) => ({ href: `/zh/search/${r.slug}`, label: r.keyword })),
     { href: "/zh/how-to/grow-on-tiktok", label: "TikTok 涨粉指南" },
     { href: "/zh/how-to/get-youtube-subscribers", label: "YouTube 涨粉指南" },
+    { href: "/zh/tools/title-generator", label: "免费标题生成器" },
+    { href: "/zh/tools/hook-generator", label: "免费钩子生成器" },
+    { href: "/zh/tools/idea-generator", label: "免费选题生成器" },
+    { href: "/zh/sitemap", label: "中文站点地图" },
     { href: "/tools", label: "免费 AI 工具" }
   ];
 
@@ -118,6 +126,14 @@ export function ZhKeywordPageTemplate({ entry, content, existingSlugs }: Props) 
     { name: headline, url: `/zh/search/${entry.slug}` }
   ];
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
+  const howToSchema = content.stepByStep
+    ? buildZhHowToSchema(
+        headline,
+        content.directAnswer || content.description || "",
+        pageUrl,
+        content.stepByStep
+      )
+    : null;
 
   return (
     <main className="min-h-screen bg-white text-slate-900 flex flex-col relative">
@@ -137,6 +153,12 @@ export function ZhKeywordPageTemplate({ entry, content, existingSlugs }: Props) 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {howToSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+        />
+      )}
       <SiteHeader />
 
       <div className="flex-1">
@@ -161,11 +183,12 @@ export function ZhKeywordPageTemplate({ entry, content, existingSlugs }: Props) 
             {content.resultPreview && content.resultPreview.length > 0 && (
               <section className="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-5" aria-label="效果预览">
                 <h2 className="text-sm font-semibold text-amber-900 mb-3">效果预览示例</h2>
-                <ul className="space-y-2">
+                <ul className="space-y-3">
                   {content.resultPreview.map((ex, i) => (
-                    <li key={i} className="flex gap-2 text-slate-700">
+                    <li key={i} className="flex flex-wrap gap-2 items-start text-slate-700">
                       <span className="text-amber-600 shrink-0">👉</span>
-                      <span>{ex}</span>
+                      <span className="flex-1 min-w-0">{ex}</span>
+                      <ZhCopyButton text={ex} label="复制" className="shrink-0" />
                     </li>
                   ))}
                 </ul>
@@ -266,6 +289,26 @@ export function ZhKeywordPageTemplate({ entry, content, existingSlugs }: Props) 
 
             <ZhAuthorBlock />
 
+            <ZhCopySharePackWithLog
+              title={headline}
+              oneLiner={content.directAnswer || content.description || content.intro?.slice(0, 120) || ""}
+              pageUrl={pageUrl}
+              keyword={entry.keyword}
+            />
+
+            <ZhShareSnippetGenerator
+              title={headline}
+              oneLiner={content.directAnswer || content.description || content.intro?.slice(0, 120) || ""}
+              pageUrl={pageUrl}
+              slug={entry.slug}
+            />
+
+            <ZhRedditReadyBlock
+              title={headline}
+              oneLiner={content.directAnswer || content.description || content.intro?.slice(0, 120) || ""}
+              pageUrl={pageUrl}
+            />
+
             <section className="mt-12">
               <h2 className="text-xl font-semibold text-slate-900">相关指南</h2>
               <ul className="mt-4 space-y-2">
@@ -295,6 +338,26 @@ export function ZhKeywordPageTemplate({ entry, content, existingSlugs }: Props) 
                     </Link>
                   </li>
                 ))}
+              </ul>
+            </section>
+
+            <section className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-5">
+              <h2 className="text-lg font-semibold text-slate-900">更多资源</h2>
+              <ul className="mt-3 space-y-2 text-sm">
+                <li>
+                  <Link href="/zh/tools/title-generator" className="text-sky-700 hover:underline">免费标题生成器</Link>
+                </li>
+                <li>
+                  <Link href="/zh/tools/hook-generator" className="text-sky-700 hover:underline">免费钩子生成器</Link>
+                </li>
+                <li>
+                  <Link href="/zh/sitemap" className="text-sky-700 hover:underline">中文站点地图</Link>
+                </li>
+                <li>
+                  <Link href="/zh/privacy" className="text-slate-600 hover:underline">隐私政策</Link>
+                  {" · "}
+                  <Link href="/zh/terms" className="text-slate-600 hover:underline">服务条款</Link>
+                </li>
               </ul>
             </section>
           </div>

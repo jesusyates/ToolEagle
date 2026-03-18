@@ -97,6 +97,12 @@ export function DashboardClient({
               >
                 Write post
               </Link>
+              <Link
+                href="/dashboard/distribution"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                🚀 分发
+              </Link>
               {plan === "free" && (
                 <Link
                   href="/pricing"

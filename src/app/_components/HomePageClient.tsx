@@ -85,7 +85,7 @@ export function HomePageClient({ children }: Props) {
             <div className="flex flex-wrap gap-3 pt-1">
               <Link
                 href="/creator"
-                className="inline-flex items-center justify-center rounded-xl bg-sky-600 px-6 py-4 text-base font-semibold text-white shadow-sm hover:bg-sky-700 transition duration-150 w-full sm:w-auto text-center"
+                className="inline-flex items-center justify-center rounded-xl btn-accent px-6 py-4 text-base font-semibold text-white shadow-sm transition duration-150 w-full sm:w-auto text-center"
               >
                 {t("tryCreatorMode")}
               </Link>

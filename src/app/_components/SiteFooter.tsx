@@ -158,6 +158,16 @@ export function SiteFooter() {
                   TikTok AI 提示词
                 </a>
               </li>
+              <li>
+                <a href="/zh/privacy" className="hover:underline hover:text-sky-600 transition duration-150">
+                  隐私政策
+                </a>
+              </li>
+              <li>
+                <a href="/zh/terms" className="hover:underline hover:text-sky-600 transition duration-150">
+                  服务条款
+                </a>
+              </li>
             </ul>
           </div>
           <div>
@@ -200,7 +210,14 @@ export function SiteFooter() {
         </div>
         <div className="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-slate-500" suppressHydrationWarning>
-            © {new Date().getFullYear()} ToolEagle. {t("builtForCreators")}
+            © {new Date().getFullYear()} ToolEagle. {t("builtForCreators")}{" "}
+            <TranslateAwareLink href="/privacy" className="hover:underline hover:text-sky-600">
+              {t("privacy")}
+            </TranslateAwareLink>
+            {" · "}
+            <TranslateAwareLink href="/terms" className="hover:underline hover:text-sky-600">
+              {t("terms")}
+            </TranslateAwareLink>
           </p>
           <div className="flex items-center gap-4 text-xs text-slate-600">
             <a

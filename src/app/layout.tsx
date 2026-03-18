@@ -6,6 +6,7 @@ import Script from "next/script";
 import PlausibleProvider from "next-plausible";
 import "./globals.css";
 import { Analytics } from "./Analytics";
+import { CookieConsent } from "@/components/CookieConsent";
 import { SITE_URL } from "@/config/site";
 
 const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
@@ -73,6 +74,7 @@ export default async function RootLayout({
       <NextIntlClientProvider messages={messages}>
         <Analytics />
         {children}
+        <CookieConsent />
       </NextIntlClientProvider>
     </>
   );

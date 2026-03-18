@@ -23,7 +23,11 @@
     "zh:deploy-plan": "node scripts/stats-zh-content.js && node scripts/deploy-reminder.js",
     "zh:deploy-auto": "node scripts/deploy-zh-auto.js",
     "deploy:auto": "node scripts/deploy-auto.js",
-    "deploy:prep": "node scripts/deploy-prep.js"
+    "deploy:prep": "node scripts/deploy-prep.js",
+    "share:generate": "node scripts/generate-share-content.js",
+    "share:daily": "node scripts/generate-share-content.js",
+    "baidu:submit": "node scripts/baidu-submit.js",
+    "baidu:check": "node scripts/baidu-check.js"
   },
   "dependencies": {
     "@mdx-js/mdx": "^3.1.1",

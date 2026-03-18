@@ -10,6 +10,10 @@ import { ZhToolRecommendationBlock } from "@/components/zh/ZhToolRecommendationB
 import { ZhCtaCaptureBlock } from "@/components/zh/ZhCtaCaptureBlock";
 import { ZhAuthorBlock } from "@/components/zh/ZhAuthorBlock";
 import { ZhFreshnessBlock } from "@/components/zh/ZhFreshnessBlock";
+import { ZhShareSnippetGenerator } from "@/components/zh/ZhShareSnippetGenerator";
+import { ZhCopySharePackWithLog } from "@/components/zh/ZhCopySharePackWithLog";
+import { ZhRedditReadyBlock } from "@/components/zh/ZhRedditReadyBlock";
+import { ZhCopyButton } from "@/components/zh/ZhCopyButton";
 import { getIntroVariant, getCtaVariant } from "@/lib/zh-uniqueness";
 import { getExpansionBlock } from "@/lib/zh-content-expansion";
 import { buildBreadcrumbSchema } from "@/lib/zh-breadcrumb-schema";
@@ -157,11 +161,12 @@ export function ZhBlogPageTemplate({ entry, content, relatedBlogs }: Props) {
             {content.resultPreview && content.resultPreview.length > 0 && (
               <section className="mt-10">
                 <h2 className="text-xl font-semibold text-slate-900">示例</h2>
-                <ul className="mt-4 space-y-2">
+                <ul className="mt-4 space-y-3">
                   {content.resultPreview.map((ex, i) => (
-                    <li key={i} className="flex gap-2 text-slate-700 pl-4 border-l-2 border-slate-200">
+                    <li key={i} className="flex flex-wrap gap-2 items-start text-slate-700 pl-4 border-l-2 border-slate-200">
                       <span className="text-amber-600 shrink-0">→</span>
-                      <span>{ex}</span>
+                      <span className="flex-1 min-w-0">{ex}</span>
+                      <ZhCopyButton text={ex} label="复制" className="shrink-0" />
                     </li>
                   ))}
                 </ul>
@@ -226,6 +231,26 @@ export function ZhBlogPageTemplate({ entry, content, relatedBlogs }: Props) {
             )}
 
             <ZhAuthorBlock />
+
+            <ZhCopySharePackWithLog
+              title={headline}
+              oneLiner={content.directAnswer || content.description || content.intro?.slice(0, 120) || ""}
+              pageUrl={pageUrl}
+              keyword={entry.keyword}
+            />
+
+            <ZhShareSnippetGenerator
+              title={headline}
+              oneLiner={content.directAnswer || content.description || content.intro?.slice(0, 120) || ""}
+              pageUrl={pageUrl}
+              slug={entry.slug}
+            />
+
+            <ZhRedditReadyBlock
+              title={headline}
+              oneLiner={content.directAnswer || content.description || content.intro?.slice(0, 120) || ""}
+              pageUrl={pageUrl}
+            />
           </div>
         </article>
       </div>

@@ -43,7 +43,9 @@ export async function GET() {
     const zhStaticUrls = [
       { url: `${BASE_URL}/zh/recent`, lastModified: now, changeFrequency: "daily" as const, priority: 0.9 },
       { url: `${BASE_URL}/zh/sitemap`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9 },
-      { url: `${BASE_URL}/zh/blog`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.85 }
+      { url: `${BASE_URL}/zh/blog`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.85 },
+      { url: `${BASE_URL}/zh/privacy`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.4 },
+      { url: `${BASE_URL}/zh/terms`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.4 }
     ];
 
     const keywordUrls = keywordSlugs.map((slug) => ({

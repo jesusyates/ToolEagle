@@ -118,7 +118,10 @@
     "youtubeTitles": "YouTube 标题",
     "instagramCaptions": "Instagram 文案",
     "blog": "博客",
-    "builtForCreators": "为创作者打造"
+    "builtForCreators": "为创作者打造",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "latestChineseGuides": "最新中文指南"
   },
   "tools": {
     "title": "工具",

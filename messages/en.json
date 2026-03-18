@@ -118,7 +118,10 @@
     "youtubeTitles": "YouTube Titles",
     "instagramCaptions": "Instagram Captions",
     "blog": "Blog",
-    "builtForCreators": "Built for creators"
+    "builtForCreators": "Built for creators",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "latestChineseGuides": "Latest Chinese Guides"
   },
   "tools": {
     "title": "Tools",

@@ -59,6 +59,29 @@ export function ZhHomepageKeywordSections() {
             </Link>
           </div>
         )}
+        <div>
+          <h2 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
+            🛠 免费工具
+          </h2>
+          <p className="mt-1 text-sm text-slate-600">标题、钩子、选题一键生成</p>
+          <ul className="mt-4 space-y-2">
+            <li>
+              <Link href="/zh/tools/title-generator" className="text-sm text-sky-700 hover:text-sky-800 hover:underline">
+                标题生成器
+              </Link>
+            </li>
+            <li>
+              <Link href="/zh/tools/hook-generator" className="text-sm text-sky-700 hover:text-sky-800 hover:underline">
+                钩子生成器
+              </Link>
+            </li>
+            <li>
+              <Link href="/zh/tools/idea-generator" className="text-sm text-sky-700 hover:text-sky-800 hover:underline">
+                选题生成器
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
   );

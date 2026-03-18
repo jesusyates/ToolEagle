@@ -25,6 +25,40 @@ const nextConfig = {
       { source: "/baidu-sitemap.xml", destination: "/api/sitemap-zh" }
     ];
   },
+  async headers() {
+    const securityHeaders = [
+      { key: "X-XSS-Protection", value: "1; mode=block" },
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+      {
+        key: "Content-Security-Policy",
+        value: [
+          "default-src 'self'",
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io https://*.plausible.io https://*.sentry.io https://challenges.cloudflare.com",
+          "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+          "font-src 'self' https://fonts.gstatic.com data:",
+          "img-src 'self' data: blob: https:",
+          "frame-src 'self' https:",
+          "connect-src 'self' https://plausible.io https://*.plausible.io https://*.sentry.io https://*.supabase.co https://*.supabase.in wss: https:"
+        ].join("; ")
+      }
+    ];
+    return [
+      {
+        source: "/embed/:path*",
+        headers: [
+          { key: "Content-Security-Policy", value: "frame-ancestors *" }
+        ]
+      },
+      {
+        source: "/(.*)",
+        headers: [
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          ...securityHeaders
+        ]
+      }
+    ];
+  },
   async redirects() {
     return [
       // Creator profile: /creator/[username] -> /creators/[username]

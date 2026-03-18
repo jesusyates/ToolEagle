@@ -146,6 +146,37 @@ export function buildZhFaqSchema(
   };
 }
 
+/** Build HowTo JSON-LD schema from step-by-step content. */
+export function buildZhHowToSchema(
+  name: string,
+  description: string,
+  url: string,
+  stepByStep: string
+): object | null {
+  const steps: string[] = [];
+  // Match: ### 第一步：xxx or ### 第二步：xxx (Chinese format)
+  const stepMatches = stepByStep.matchAll(/(?:###\s*)?第[一二三四五六七八九十百\d]+步[：:]\s*([^\n]+)(?:\n([\s\S]*?))?(?=\n###\s*第|\n##|$)/g);
+  for (const m of stepMatches) {
+    const title = m[1].trim();
+    const body = (m[2] || "").trim().replace(/\n+/g, " ").slice(0, 150);
+    const text = body ? `${title} ${body}` : title;
+    if (text) steps.push(text.slice(0, 300));
+  }
+  if (steps.length === 0) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name,
+    description,
+    url,
+    step: steps.map((text, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      text
+    }))
+  };
+}
+
 /** Build Article JSON-LD schema for zh pages. */
 export function buildZhArticleSchema(
   headline: string,

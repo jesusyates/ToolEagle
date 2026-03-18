@@ -88,6 +88,7 @@ export default async function RootLayout({
         {baiduCode && (
           <meta name="baidu-site-verification" content={baiduCode} />
         )}
+        <meta name="impact-site-verification" content="a49e2a8e-2bee-41df-a1ae-b88fa1e7f575" />
       </head>
       <body suppressHydrationWarning>
         {PLAUSIBLE_DOMAIN ? (

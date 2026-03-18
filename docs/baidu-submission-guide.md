@@ -11,12 +11,12 @@
 
 选择「HTML 标签验证」方式：
 
-1. 复制百度提供的 meta 标签中的 `content` 值
-2. 在 Vercel 环境变量中设置：
-   ```
-   BAIDU_SITE_VERIFICATION=你复制的code值
-   ```
-3. 重新部署后，在百度站长平台点击「完成验证」
+1. 复制百度提供的 meta 标签中的 `content` 值（如 `codeva-YhXkkhmTxS`，仅 content 部分）
+2. 在 Vercel → Project → Settings → Environment Variables 中设置：
+   - Name: `BAIDU_SITE_VERIFICATION`
+   - Value: 你复制的 code 值（不要带 `<meta>` 等标签）
+3. **重要**：添加环境变量后，必须触发一次 Redeploy，新值才会在构建时生效
+4. 部署完成后，在百度站长平台点击「完成验证」
 
 ## 3. 提交 Sitemap
 

@@ -7,10 +7,12 @@
  * 2. 完成 HTML 标签验证（meta baidu-site-verification）
  * 3. 在「普通收录」→「API 提交」中获取 token
  *
- * 运行：BAIDU_TOKEN=your_token node scripts/baidu-submit.js
- *
- * 或：在 .env 中设置 BAIDU_TOKEN，然后 node scripts/baidu-submit.js
+ * 运行：npm run baidu:submit
+ * 或在 .env.local 中设置 BAIDU_TOKEN
  */
+
+require("dotenv").config({ path: ".env.local" });
+require("dotenv").config();
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tooleagle.com";
 const TOKEN = process.env.BAIDU_TOKEN;

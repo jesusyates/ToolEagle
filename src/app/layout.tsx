@@ -66,6 +66,20 @@ export default async function RootLayout({
   const pathname = headersList.get("x-pathname") ?? "";
   const htmlLang = pathname.startsWith("/zh") ? "zh-CN" : locale;
 
+  // V74.3: Disable browser translation on Tool/Dashboard/Auth/Admin (revenue-critical, stability first)
+  const disableTranslation =
+    pathname.startsWith("/tools") ||
+    pathname.startsWith("/zh/tools") ||
+    pathname === "/tiktok-caption-generator" ||
+    pathname === "/youtube-title-generator" ||
+    pathname === "/hook-generator" ||
+    pathname.startsWith("/dashboard") ||
+    pathname === "/login" ||
+    pathname.startsWith("/auth") ||
+    pathname.startsWith("/admin") ||
+    pathname === "/ai-prompt-improver" ||
+    pathname === "/prompt-playground";
+
   const baiduCode = process.env.BAIDU_SITE_VERIFICATION;
 
   const content = (
@@ -73,7 +87,7 @@ export default async function RootLayout({
       <Script id="translate-resilience" strategy="beforeInteractive">
         {`(function(){if(typeof Node==="undefined"||!Node.prototype)return;var r=Node.prototype.removeChild;Node.prototype.removeChild=function(c){if(c.parentNode!==this)return c;return r.apply(this,arguments)};var i=Node.prototype.insertBefore;Node.prototype.insertBefore=function(n,ref){if(ref&&ref.parentNode!==this)return n;return i.apply(this,arguments)}})();`}
       </Script>
-      <NextIntlClientProvider messages={messages}>
+      <NextIntlClientProvider messages={messages} locale={locale}>
         <Analytics />
         {children}
         <CookieConsent />
@@ -82,7 +96,7 @@ export default async function RootLayout({
   );
 
   return (
-    <html lang={htmlLang} suppressHydrationWarning translate="no">
+    <html lang={htmlLang} translate={disableTranslation ? "no" : undefined} suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         {baiduCode && (

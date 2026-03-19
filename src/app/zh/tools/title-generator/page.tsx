@@ -1,5 +1,7 @@
 import { Metadata } from "next";
-import { ZhTitleGeneratorClient } from "./ZhTitleGeneratorClient";
+import { SiteHeader } from "@/app/_components/SiteHeader";
+import { SiteFooter } from "@/app/_components/SiteFooter";
+import { TitleGeneratorClient } from "@/app/tools/title-generator/pageClient";
 import { getLatestKeywordPages } from "@/lib/zh-keyword-data";
 import { BASE_URL } from "@/config/site";
 
@@ -22,6 +24,12 @@ export default async function ZhTitleGeneratorPage() {
   }));
 
   return (
-    <ZhTitleGeneratorClient ctaLinks={ctaLinks} />
+    <main className="min-h-screen bg-slate-950 text-slate-50 flex flex-col">
+      <SiteHeader />
+      <div className="flex-1">
+        <TitleGeneratorClient ctaLinks={ctaLinks} />
+      </div>
+      <SiteFooter />
+    </main>
   );
 }

@@ -1,5 +1,7 @@
 import { Metadata } from "next";
-import { ZhHookGeneratorClient } from "./ZhHookGeneratorClient";
+import { SiteHeader } from "@/app/_components/SiteHeader";
+import { SiteFooter } from "@/app/_components/SiteFooter";
+import { HookGeneratorClient } from "@/app/tools/hook-generator/pageClient";
 import { getLatestKeywordPages } from "@/lib/zh-keyword-data";
 import { BASE_URL } from "@/config/site";
 
@@ -21,5 +23,13 @@ export default async function ZhHookGeneratorPage() {
     label: k.keyword
   }));
 
-  return <ZhHookGeneratorClient ctaLinks={ctaLinks} />;
+  return (
+    <main className="min-h-screen bg-slate-950 text-slate-50 flex flex-col">
+      <SiteHeader />
+      <div className="flex-1">
+        <HookGeneratorClient ctaLinks={ctaLinks} />
+      </div>
+      <SiteFooter />
+    </main>
+  );
 }

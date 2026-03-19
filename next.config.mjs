@@ -6,6 +6,8 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Hide dev overlay "1 error" toast in development for cleaner UI
+  devIndicators: false,
   async rewrites() {
     return [
       { source: "/sitemap.xml", destination: "/api/sitemap-index" },
@@ -66,7 +68,9 @@ const nextConfig = {
       // Legacy SEO pages: /tiktok/funny-captions -> /ideas/tiktok/funny-captions
       { source: "/:category(tiktok|youtube|instagram)/:topic", destination: "/ideas/:category/:topic", permanent: true },
       // /tools?tool=X -> /tools/X (backwards compatibility)
-      { source: "/tools", has: [{ type: "query", key: "tool", value: "(?<tool>[^&]+)" }], destination: "/tools/:tool", permanent: true }
+      { source: "/tools", has: [{ type: "query", key: "tool", value: "(?<tool>[^&]+)" }], destination: "/tools/:tool", permanent: true },
+      // V72: /result/[id] -> /share/[id] (shareable result URL)
+      { source: "/result/:id", destination: "/share/:id", permanent: true }
     ];
   },
   webpack: (config) => {

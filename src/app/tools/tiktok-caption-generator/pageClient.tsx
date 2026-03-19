@@ -1,7 +1,8 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
 import { trackEvent } from "@/lib/analytics";
 import { safeCopyToClipboard } from "@/lib/clipboard";
 import { addToHistory, incrementToolUsage } from "@/lib/storage";
@@ -18,7 +19,9 @@ import { ExamplesCard } from "@/components/tools/ExamplesCard";
 import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
 import { LimitReachedModal } from "@/components/LimitReachedModal";
 import { LoginPromptModal } from "@/components/LoginPromptModal";
+import { ExitIntentCta } from "@/components/tools/ExitIntentCta";
 import { useAuth } from "@/hooks/useAuth";
+import { useCountry } from "@/hooks/useCountry";
 
 const TRY_EXAMPLE = "A video about a morning productivity routine";
 
@@ -37,7 +40,11 @@ type Props = { relatedAside?: ReactNode };
 
 export function TikTokCaptionGeneratorClient({ relatedAside }: Props) {
   const t = useTranslations("common");
-  const [idea, setIdea] = useState("");
+  const locale = useLocale();
+  const country = useCountry();
+  const searchParams = useSearchParams();
+  const q = searchParams.get("q") ?? "";
+  const [idea, setIdea] = useState(q);
   const [captions, setCaptions] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [historyTrigger, setHistoryTrigger] = useState(0);
@@ -49,11 +56,9 @@ export function TikTokCaptionGeneratorClient({ relatedAside }: Props) {
 
   useEffect(() => {
     if (!toolMeta) return;
-    trackEvent("tool_page_view", {
-      tool_slug: toolMeta.slug,
-      tool_category: toolMeta.category
-    });
-  }, [toolMeta]);
+    trackEvent("tool_page_view", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
+  }, [toolMeta, country]);
+
 
   function templateGenerate(trimmed: string): string[] {
     const hooks = [
@@ -104,12 +109,13 @@ export function TikTokCaptionGeneratorClient({ relatedAside }: Props) {
     if (aiPrompt) {
       try {
         const prompt = aiPrompt.replace(/\{input\}/g, trimmed);
-        results = await generateAIText(prompt);
+        results = await generateAIText(prompt, { locale });
         if (toolMeta) {
           trackEvent("tool_generate_ai", {
             tool_slug: toolMeta.slug,
             tool_category: toolMeta.category,
-            input_length: trimmed.length
+            input_length: trimmed.length,
+            country
           });
         }
       } catch (err) {
@@ -120,19 +126,13 @@ export function TikTokCaptionGeneratorClient({ relatedAside }: Props) {
         }
         results = templateGenerate(trimmed);
         if (toolMeta) {
-          trackEvent("tool_generate", {
-            tool_slug: toolMeta.slug,
-            tool_category: toolMeta.category
-          });
+          trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
         }
       }
     } else {
       results = templateGenerate(trimmed);
       if (toolMeta) {
-        trackEvent("tool_generate", {
-          tool_slug: toolMeta.slug,
-          tool_category: toolMeta.category
-        });
+        trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
       }
     }
 
@@ -156,10 +156,7 @@ export function TikTokCaptionGeneratorClient({ relatedAside }: Props) {
     if (!text) return;
     await safeCopyToClipboard(text);
     if (toolMeta) {
-      trackEvent("tool_copy", {
-        tool_slug: toolMeta.slug,
-        tool_category: toolMeta.category
-      });
+      trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
     }
   }
 
@@ -168,10 +165,7 @@ export function TikTokCaptionGeneratorClient({ relatedAside }: Props) {
     const text = captions.join("\n\n---\n\n");
     await safeCopyToClipboard(text);
     if (toolMeta) {
-      trackEvent("tool_copy", {
-        tool_slug: toolMeta.slug,
-        tool_category: toolMeta.category
-      });
+      trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
     }
   }
 
@@ -213,6 +207,9 @@ export function TikTokCaptionGeneratorClient({ relatedAside }: Props) {
     <>
       <LimitReachedModal open={limitModalOpen} onClose={() => setLimitModalOpen(false)} />
       <LoginPromptModal open={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
+      {captions.length > 0 && (
+        <ExitIntentCta toolSlug="tiktok-caption-generator" toolName="TikTok Caption Generator" />
+      )}
       <ToolPageShell
       eyebrow="Tool #1"
       title="TikTok Caption Generator"
@@ -266,6 +263,7 @@ export function TikTokCaptionGeneratorClient({ relatedAside }: Props) {
           input={idea}
           onCopyItem={handleCopyItem}
           onCopyAll={handleCopyAll}
+          onCopyTrack={() => toolMeta && trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country })}
           onRegenerate={generateCaption}
           onSaveEditedItem={handleSaveEditedItem}
           onItemsChange={handleItemsChange}

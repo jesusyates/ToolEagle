@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { trackEvent } from "@/lib/analytics";
 import { safeCopyToClipboard } from "@/lib/clipboard";
 import { addToHistory, incrementToolUsage } from "@/lib/storage";
@@ -18,7 +18,9 @@ import { ExamplesCard } from "@/components/tools/ExamplesCard";
 import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
 import { LimitReachedModal } from "@/components/LimitReachedModal";
 import { LoginPromptModal } from "@/components/LoginPromptModal";
+import { ExitIntentCta } from "@/components/tools/ExitIntentCta";
 import { useAuth } from "@/hooks/useAuth";
+import { useCountry } from "@/hooks/useCountry";
 
 const TRY_EXAMPLE = "cozy desk setup, aesthetic workspace, productivity tips for students";
 
@@ -37,6 +39,8 @@ type Props = { relatedAside?: ReactNode };
 
 export function HashtagGeneratorClient({ relatedAside }: Props) {
   const t = useTranslations("common");
+  const locale = useLocale();
+  const country = useCountry();
   const [topic, setTopic] = useState("");
   const [results, setResults] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -49,11 +53,8 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
 
   useEffect(() => {
     if (!toolMeta) return;
-    trackEvent("tool_page_view", {
-      tool_slug: toolMeta.slug,
-      tool_category: toolMeta.category
-    });
-  }, [toolMeta]);
+    trackEvent("tool_page_view", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
+  }, [toolMeta, country]);
 
   function templateGenerate(trimmed: string): string[] {
     const baseTags = ["tiktok", "reels", "shorts", "contentcreator", "creator", "viral", "fyp", "tooleagle"];
@@ -86,9 +87,9 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
     if (aiPrompt) {
       try {
         const prompt = aiPrompt.replace(/\{input\}/g, trimmed);
-        genResults = await generateAIText(prompt);
+        genResults = await generateAIText(prompt, { locale });
         if (toolMeta) {
-          trackEvent("tool_generate_ai", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, input_length: trimmed.length });
+          trackEvent("tool_generate_ai", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, input_length: trimmed.length, country });
         }
       } catch (err) {
         if (err instanceof LimitReachedError) {
@@ -97,7 +98,7 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
           return;
         }
         genResults = templateGenerate(trimmed);
-        if (toolMeta) trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category });
+        if (toolMeta) trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
       }
     } else {
       genResults = templateGenerate(trimmed);
@@ -124,10 +125,7 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
     if (!text) return;
     await navigator.clipboard.writeText(text);
     if (toolMeta) {
-      trackEvent("tool_copy", {
-        tool_slug: toolMeta.slug,
-        tool_category: toolMeta.category
-      });
+      trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
     }
   }
 
@@ -136,10 +134,7 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
     const text = results.join("\n\n");
     await safeCopyToClipboard(text);
     if (toolMeta) {
-      trackEvent("tool_copy", {
-        tool_slug: toolMeta.slug,
-        tool_category: toolMeta.category
-      });
+      trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
     }
   }
 
@@ -181,6 +176,7 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
     <>
       <LimitReachedModal open={limitModalOpen} onClose={() => setLimitModalOpen(false)} />
       <LoginPromptModal open={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
+      {results.length > 0 && <ExitIntentCta toolSlug="hashtag-generator" toolName="Hashtag Generator" />}
       <ToolPageShell
       eyebrow="Tool"
       title="Hashtag Generator"
@@ -230,6 +226,7 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
           input={topic}
           onCopyItem={handleCopyItem}
           onCopyAll={handleCopyAll}
+          onCopyTrack={() => toolMeta && trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country })}
           onRegenerate={generateHashtags}
           onSaveEditedItem={handleSaveEditedItem}
           onItemsChange={handleItemsChange}

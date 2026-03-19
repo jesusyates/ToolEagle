@@ -47,7 +47,7 @@ export function decodeResultFromShare(encoded: string): { toolSlug: string; item
 export function getResultShareUrl(toolSlug: string, items: string[]): string {
   if (typeof window === "undefined") return "";
   const encoded = encodeResultForShare(toolSlug, items);
-  return `${window.location.origin}/result/${encoded}`;
+  return `${window.location.origin}/share/${encoded}`;
 }
 
 export function getTwitterShareUrl(text: string, url?: string): string {

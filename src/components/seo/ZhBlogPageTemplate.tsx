@@ -3,6 +3,7 @@ import { SiteHeader } from "@/app/_components/SiteHeader";
 import { SiteFooter } from "@/app/_components/SiteFooter";
 import {
   getMatchingAffiliateTools,
+  getAffiliateTools,
   type AffiliateTool
 } from "@/config/affiliate-tools";
 import { PLATFORM_NAMES } from "@/lib/keyword-patterns";
@@ -18,6 +19,8 @@ import { getIntroVariant, getCtaVariant } from "@/lib/zh-uniqueness";
 import { getExpansionBlock } from "@/lib/zh-content-expansion";
 import { buildBreadcrumbSchema } from "@/lib/zh-breadcrumb-schema";
 import { buildZhArticleSchema } from "@/lib/zh-ctr";
+import { DirectAnswerBlock } from "@/components/seo/DirectAnswerBlock";
+import { ZhToolEmbeddingSentence } from "@/components/seo/ZhToolEmbeddingSentence";
 import { BASE_URL } from "@/config/site";
 import type { KeywordEntry } from "@/lib/keyword-patterns";
 import type { ZhKeywordContent } from "@/lib/zh-keyword-content";
@@ -80,6 +83,7 @@ export function ZhBlogPageTemplate({ entry, content, relatedBlogs }: Props) {
   const headline = content.h1 || content.title || entry.keyword;
   const platformName = PLATFORM_NAMES[entry.platform];
   const affiliateTools = getMatchingAffiliateTools(entry.keyword, entry.platform, 3);
+  const hasAffiliate = getAffiliateTools().length > 0;
   const introVariant = getIntroVariant(entry.slug);
   const ctaVariant = getCtaVariant(entry.slug);
   const expansionBlock = getExpansionBlock(entry.slug);
@@ -128,18 +132,19 @@ export function ZhBlogPageTemplate({ entry, content, relatedBlogs }: Props) {
               {headline}
             </h1>
 
+            <DirectAnswerBlock answer={content.directAnswer || ""} lang="zh" />
+
             <ZhFreshnessBlock />
 
             <div className="mt-6 prose prose-slate max-w-none">
               <p className="text-slate-600">{introVariant}</p>
               <p className="text-lg text-slate-700 leading-relaxed mt-4">{content.intro}</p>
+              <ZhToolEmbeddingSentence
+                toolSlug={entry.platform === "tiktok" ? "tiktok-caption-generator" : entry.platform === "youtube" ? "youtube-title-generator" : "instagram-caption-generator"}
+                keyword="爆款文案"
+                useZhPath
+              />
             </div>
-
-            {content.directAnswer && (
-              <section className="mt-8 rounded-xl border-2 border-sky-200 bg-sky-50 p-5">
-                <p className="text-base font-semibold text-slate-900">{content.directAnswer}</p>
-              </section>
-            )}
 
             {content.stepByStep && (
               <section className="mt-10">
@@ -186,7 +191,7 @@ export function ZhBlogPageTemplate({ entry, content, relatedBlogs }: Props) {
               </section>
             )}
 
-            <ZhToolRecommendationBlock tools={affiliateTools} keyword={entry.keyword} ctaIndex={0} />
+            <ZhToolRecommendationBlock tools={affiliateTools} keyword={entry.keyword} pageSlug={entry.slug} ctaIndex={0} hasAffiliate={hasAffiliate} />
 
             <section className="mt-10 rounded-2xl border-2 border-sky-200 bg-sky-50 p-6">
               <h2 className="text-lg font-semibold text-slate-900">用 AI 生成爆款内容</h2>

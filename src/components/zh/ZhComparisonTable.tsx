@@ -1,14 +1,31 @@
 "use client";
 
+import { useEffect } from "react";
 import type { AffiliateTool } from "@/config/affiliate-tools";
 
 type Props = {
   tools: AffiliateTool[];
   keyword?: string;
+  pageSlug?: string;
   onToolClick?: (tool: AffiliateTool) => void;
 };
 
-export function ZhComparisonTable({ tools, keyword, onToolClick }: Props) {
+function trackToolView(toolId: string, keyword?: string, pageSlug?: string) {
+  fetch("/api/zh/analytics", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      event_type: "tool_view",
+      event_data: { tool_id: toolId, source: "comparison_table", keyword: keyword || null, page_slug: pageSlug || null }
+    })
+  }).catch(() => {});
+}
+
+export function ZhComparisonTable({ tools, keyword, pageSlug, onToolClick }: Props) {
+  useEffect(() => {
+    tools?.forEach((t) => trackToolView(t.id, keyword, pageSlug));
+  }, [tools, keyword, pageSlug]);
+
   if (!tools || tools.length === 0) return null;
 
   const handleClick = (tool: AffiliateTool) => {
@@ -18,7 +35,7 @@ export function ZhComparisonTable({ tools, keyword, onToolClick }: Props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         event_type: "tool_click",
-        event_data: { tool_id: tool.id, source: "comparison_table", keyword: keyword || null }
+        event_data: { tool_id: tool.id, source: "comparison_table", keyword: keyword || null, page_slug: pageSlug || null }
       })
     }).catch(() => {});
     if (tool.url) window.open(tool.url, "_blank", "noopener,noreferrer");

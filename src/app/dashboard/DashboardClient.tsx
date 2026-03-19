@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { AuthSuccessBroadcast } from "@/components/auth/AuthSuccessBroadcast";
 import { useSearchParams } from "next/navigation";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
@@ -55,6 +57,7 @@ export function DashboardClient({
 }) {
   useSyncOnLogin();
   const searchParams = useSearchParams();
+  const t = useTranslations("dashboard");
 
   useEffect(() => {
     const fromSignup = searchParams.get("from") === "signup";
@@ -70,6 +73,7 @@ export function DashboardClient({
 
   return (
     <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+      <AuthSuccessBroadcast />
       <SiteHeader />
 
       <div className="flex-1">
@@ -77,10 +81,10 @@ export function DashboardClient({
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">
-                Dashboard
+                {t("title")}
               </p>
               <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-1">
-                Your workspace
+                {t("yourWorkspace")}
               </h1>
               <p className="text-sm text-slate-600 mt-1">{userEmail}</p>
             </div>
@@ -89,26 +93,32 @@ export function DashboardClient({
                 href="/dashboard/settings"
                 className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
               >
-                Creator profile
+                {t("creatorProfile")}
               </Link>
               <Link
                 href="/dashboard/new-post"
                 className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
               >
-                Write post
+                {t("writePost")}
               </Link>
               <Link
                 href="/dashboard/distribution"
                 className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
               >
-                🚀 分发
+                🚀 {t("distribution")}
+              </Link>
+              <Link
+                href="/dashboard/revenue"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                💰 {t("revenue")}
               </Link>
               {plan === "free" && (
                 <Link
                   href="/pricing"
                   className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800"
                 >
-                  Upgrade to Pro
+                  {t("upgradeToPro")}
                 </Link>
               )}
             </div>
@@ -116,7 +126,7 @@ export function DashboardClient({
 
           {plan === "free" && (
             <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/50 p-4">
-              <p className="text-sm font-medium text-slate-700">AI usage today</p>
+              <p className="text-sm font-medium text-slate-700">{t("aiUsageToday")}</p>
               <p className="mt-1 text-2xl font-semibold text-slate-900">
                 {usageToday} / {FREE_DAILY_LIMIT}
               </p>
@@ -127,19 +137,19 @@ export function DashboardClient({
             <div className="lg:col-span-2">
               <div className="flex items-center gap-2 mb-4">
                 <FolderOpen className="h-5 w-5 text-slate-500" />
-                <h2 className="text-lg font-semibold text-slate-900">My Projects</h2>
+                <h2 className="text-lg font-semibold text-slate-900">{t("myProjects")}</h2>
               </div>
               {initialProjects.length === 0 ? (
                 <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-8 text-center">
-                  <p className="text-slate-600">No projects yet</p>
+                  <p className="text-slate-600">{t("noProjectsYet")}</p>
                   <p className="text-sm text-slate-500 mt-1">
-                    Save content from tools to projects to organize your work.
+                    {t("noProjectsHint")}
                   </p>
                   <Link
                     href="/tools"
                     className="mt-4 inline-flex rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
                   >
-                    Browse tools
+                    {t("browseTools")}
                   </Link>
                 </div>
               ) : (
@@ -164,28 +174,28 @@ export function DashboardClient({
               <div className="flex items-center justify-between gap-2 mb-4">
                 <div className="flex items-center gap-2">
                   <Star className="h-5 w-5 text-amber-500" />
-                  <h2 className="text-lg font-semibold text-slate-900">Favorites</h2>
+                  <h2 className="text-lg font-semibold text-slate-900">{t("favorites")}</h2>
                 </div>
                 {initialFavorites.length > 0 && (
                   <Link
                     href="/dashboard/favorites"
                     className="text-sm font-medium text-sky-600 hover:underline"
                   >
-                    View all →
+                    {t("viewAll")} →
                   </Link>
                 )}
               </div>
               {initialFavorites.length === 0 ? (
                 <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-8 text-center">
-                  <p className="text-slate-600">No favorites yet</p>
+                  <p className="text-slate-600">{t("noFavoritesYet")}</p>
                   <p className="text-sm text-slate-500 mt-1">
-                    Save results from any tool to see them here.
+                    {t("noFavoritesHint")}
                   </p>
                   <Link
                     href="/tools"
                     className="mt-4 inline-flex rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
                   >
-                    Browse tools
+                    {t("browseTools")}
                   </Link>
                 </div>
               ) : (
@@ -216,7 +226,7 @@ export function DashboardClient({
                           href={`/tools/${fav.toolSlug}`}
                           className="text-sm font-medium text-sky-600 hover:underline"
                         >
-                          Use tool
+                          {t("useTool")}
                         </Link>
                       </div>
                     </li>
@@ -228,7 +238,7 @@ export function DashboardClient({
                   href="/dashboard/favorites"
                   className="mt-4 inline-block text-sm font-medium text-sky-600 hover:underline"
                 >
-                  View all {initialFavorites.length} favorites →
+                  {t("viewAll")} {initialFavorites.length} {t("favorites")} →
                 </Link>
               )}
             </div>
@@ -238,7 +248,7 @@ export function DashboardClient({
                 <div className="flex items-center gap-2">
                   <History className="h-5 w-5 text-slate-500" />
                   <h2 className="text-lg font-semibold text-slate-900">
-                    Recent generations
+                    {t("recentGenerations")}
                   </h2>
                 </div>
                 {initialHistory.length > 0 && (
@@ -246,21 +256,21 @@ export function DashboardClient({
                     href="/dashboard/history"
                     className="text-sm font-medium text-sky-600 hover:underline"
                   >
-                    View all →
+                    {t("viewAll")} →
                   </Link>
                 )}
               </div>
               {initialHistory.length === 0 ? (
                 <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-8 text-center">
-                  <p className="text-slate-600">No history yet</p>
+                  <p className="text-slate-600">{t("noHistoryYet")}</p>
                   <p className="text-sm text-slate-500 mt-1">
-                    Generate something to see it here.
+                    {t("noHistoryHint")}
                   </p>
                   <Link
                     href="/tools"
                     className="mt-4 inline-flex rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
                   >
-                    Browse tools
+                    {t("browseTools")}
                   </Link>
                 </div>
               ) : (
@@ -280,7 +290,7 @@ export function DashboardClient({
                         href={`/tools/${h.toolSlug}`}
                         className="text-sm font-medium text-sky-600 hover:underline"
                       >
-                        Use again
+                        {t("useAgain")}
                       </Link>
                     </li>
                   ))}

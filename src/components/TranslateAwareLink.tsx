@@ -10,7 +10,7 @@ type Props = ComponentProps<"a"> & { href: string };
 
 export function TranslateAwareLink({ href, children, className, ...rest }: Props) {
   return (
-    <a href={href} className={className} suppressHydrationWarning {...rest}>
+    <a href={href} className={className} {...rest}>
       {children}
     </a>
   );

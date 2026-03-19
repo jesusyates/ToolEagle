@@ -5,6 +5,7 @@ import { ToolStructuredData } from "@/components/seo/ToolStructuredData";
 import { RelatedToolsCard } from "@/components/tools/RelatedToolsCard";
 import { RelatedArticlesCard } from "@/components/tools/RelatedArticlesCard";
 import { LearnAiLinkCard } from "@/components/tools/LearnAiLinkCard";
+import { ToolContentLinksCard } from "@/components/tools/ToolContentLinksCard";
 import { toolSeo } from "@/config/seo";
 import { toolToBlogTags } from "@/lib/seo";
 
@@ -42,6 +43,7 @@ export default function HashtagGeneratorPage() {
               <RelatedToolsCard currentSlug={slug} category="Hashtags" />
               <RelatedArticlesCard tags={toolToBlogTags[slug] ?? []} />
               <LearnAiLinkCard />
+              <ToolContentLinksCard toolSlug={slug} />
             </>
           }
         />

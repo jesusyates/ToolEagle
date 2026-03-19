@@ -10,6 +10,7 @@ import {
 } from "@/lib/zh-hub-data";
 import { getRecentZhLinks } from "@/lib/zh-sitemap-data";
 import { getZhHubCuriosityLinks } from "@/lib/zh-ctr";
+import { DirectAnswerBlock } from "@/components/seo/DirectAnswerBlock";
 import type { GuidePageType } from "@/config/traffic-topics";
 import type { ZhPlatform } from "@/config/traffic-topics";
 
@@ -62,9 +63,7 @@ export function ZhHubPageTemplate({ pageType, platform }: Props) {
               {title}
             </h1>
 
-            <p className="mt-6 text-lg text-slate-700 leading-relaxed">
-              {overview}
-            </p>
+            <DirectAnswerBlock answer={overview} lang="zh" />
 
             <section className="mt-12">
               <h2 className="text-xl font-semibold text-slate-900">最新发布</h2>

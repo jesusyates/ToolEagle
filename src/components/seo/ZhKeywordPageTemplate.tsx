@@ -7,8 +7,13 @@ import {
   PLATFORM_NAMES,
   type KeywordEntry
 } from "@/lib/keyword-patterns";
-import { getMatchingAffiliateTools } from "@/config/affiliate-tools";
+import { getMatchingAffiliateTools, getAffiliateTools, getToolsForStack } from "@/config/affiliate-tools";
+import { getZhToolMetrics } from "@/lib/zh-tool-metrics";
+import { sortToolsByRevenueScore, applyLosingToolSuppression } from "@/lib/revenue-optimizer";
 import { ZhToolRecommendationBlock } from "@/components/zh/ZhToolRecommendationBlock";
+import { ZhMultiToolStack } from "@/components/zh/ZhMultiToolStack";
+import { ZhUseCaseFunnel } from "@/components/zh/ZhUseCaseFunnel";
+import { ZhValueAnchorPricing } from "@/components/zh/ZhValueAnchorPricing";
 import { ZhCtaCaptureBlock } from "@/components/zh/ZhCtaCaptureBlock";
 import { ZhStickyCta } from "@/components/zh/ZhStickyCta";
 import { ZhFreeVsPaidSection } from "@/components/zh/ZhFreeVsPaidSection";
@@ -20,7 +25,7 @@ import { getKeywordContent, type ZhKeywordContent } from "@/lib/zh-keyword-conte
 import { ZH_BASE_PATHS } from "@/lib/zh-hub-data";
 import { getRecentZhLinks } from "@/lib/zh-sitemap-data";
 import { ZhRelatedRecommendations } from "@/components/zh/ZhRelatedRecommendations";
-import { parseZhFaqForSchema, buildZhFaqSchema, buildZhArticleSchema, buildZhHowToSchema } from "@/lib/zh-ctr";
+import { parseZhFaqForSchema, buildZhFaqSchemaWithDirectAnswer, buildZhArticleSchema, buildZhHowToSchema } from "@/lib/zh-ctr";
 import { buildBreadcrumbSchema } from "@/lib/zh-breadcrumb-schema";
 import { getIntroVariant, getCtaVariant } from "@/lib/zh-uniqueness";
 import { getExpansionBlock } from "@/lib/zh-content-expansion";
@@ -31,6 +36,8 @@ import { ZhShareSnippetGenerator } from "@/components/zh/ZhShareSnippetGenerator
 import { ZhCopySharePackWithLog } from "@/components/zh/ZhCopySharePackWithLog";
 import { ZhRedditReadyBlock } from "@/components/zh/ZhRedditReadyBlock";
 import { ZhCopyButton } from "@/components/zh/ZhCopyButton";
+import { DirectAnswerBlock } from "@/components/seo/DirectAnswerBlock";
+import { ZhToolEmbeddingSentence } from "@/components/seo/ZhToolEmbeddingSentence";
 import { BASE_URL } from "@/config/site";
 
 function renderMarkdownBlock(text: string) {
@@ -86,16 +93,32 @@ type Props = {
   existingSlugs?: Set<string>;
 };
 
-export function ZhKeywordPageTemplate({ entry, content, existingSlugs }: Props) {
+/** V68/V70: High intent keywords - 赚钱/变现/引流/工具/软件 */
+function isHighIntentKeyword(keyword: string): boolean {
+  return /赚钱|变现|引流|工具|软件/.test(keyword || "");
+}
+
+export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: Props) {
   const slugs = existingSlugs ?? new Set<string>();
   const related = getRelatedKeywordsFiltered(entry, slugs, 12);
   const recentLinks = getRecentZhLinks(6);
   const platformName = PLATFORM_NAMES[entry.platform];
   const headline = content.h1 || content.title || entry.keyword;
-  const affiliateTools = getMatchingAffiliateTools(entry.keyword, entry.platform, 3);
+  const rawTools = getMatchingAffiliateTools(entry.keyword, entry.platform, 5);
+  const metrics = await getZhToolMetrics();
+  const revenueSorted = sortToolsByRevenueScore(rawTools, metrics);
+  const suppressed = applyLosingToolSuppression(revenueSorted, metrics, true);
+  const affiliateTools = suppressed.slice(0, 3);
+  const stackTools = getToolsForStack(suppressed, metrics).slice(0, 3);
+  const isHighIntent = isHighIntentKeyword(entry.keyword);
+  const hasAffiliate = getAffiliateTools().length > 0;
   const pageUrl = `${BASE_URL}/zh/search/${entry.slug}`;
   const faqItems = parseZhFaqForSchema(content.faq);
-  const faqSchema = buildZhFaqSchema(faqItems, pageUrl);
+  const faqSchema = buildZhFaqSchemaWithDirectAnswer(
+    faqItems,
+    content.directAnswer || "",
+    headline
+  );
   const articleSchema = buildZhArticleSchema(
     headline,
     content.description || content.directAnswer || "",
@@ -180,6 +203,29 @@ export function ZhKeywordPageTemplate({ entry, content, existingSlugs }: Props) 
               {content.h1 || entry.keyword}
             </h1>
 
+            <DirectAnswerBlock answer={content.directAnswer || ""} lang="zh" />
+
+            {isHighIntent && (
+              <>
+                <ZhMultiToolStack
+                  tools={stackTools}
+                  keyword={entry.keyword}
+                  pageSlug={entry.slug}
+                  ctaIndex={0}
+                  hasAffiliate={hasAffiliate}
+                />
+                <ZhUseCaseFunnel tools={affiliateTools} keyword={entry.keyword} pageSlug={entry.slug} hasAffiliate={hasAffiliate} />
+                <ZhToolRecommendationBlock
+                  pageSlug={entry.slug}
+                  tools={affiliateTools}
+                  keyword={entry.keyword}
+                  ctaIndex={0}
+                  isHighIntent
+                  hasAffiliate={hasAffiliate}
+                />
+              </>
+            )}
+
             {content.resultPreview && content.resultPreview.length > 0 && (
               <section className="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-5" aria-label="效果预览">
                 <h2 className="text-sm font-semibold text-amber-900 mb-3">效果预览示例</h2>
@@ -197,20 +243,55 @@ export function ZhKeywordPageTemplate({ entry, content, existingSlugs }: Props) 
 
             <ZhFreshnessBlock />
 
-            {content.directAnswer && (
-              <section className="mt-6 rounded-xl border-2 border-sky-200 bg-sky-50 p-5" aria-label="精选摘要">
-                <p className="text-base font-semibold text-slate-900">{content.directAnswer}</p>
-              </section>
-            )}
-
             <div className="mt-6 prose prose-slate max-w-none">
               <p className="text-slate-600">{introVariant}</p>
               <p className="text-lg text-slate-700 leading-relaxed mt-4">{content.intro}</p>
+              <ZhToolEmbeddingSentence
+                toolSlug={entry.platform === "tiktok" ? "tiktok-caption-generator" : entry.platform === "youtube" ? "youtube-title-generator" : "instagram-caption-generator"}
+                keyword="爆款文案"
+                useZhPath
+              />
             </div>
 
-            <ZhToolRecommendationBlock tools={affiliateTools} keyword={entry.keyword} ctaIndex={0} />
+            {!isHighIntent && (
+              <ZhToolRecommendationBlock
+                pageSlug={entry.slug}
+                tools={affiliateTools}
+                keyword={entry.keyword}
+                ctaIndex={0}
+                isHighIntent={false}
+                hasAffiliate={hasAffiliate}
+              />
+            )}
 
-            <ZhComparisonTable tools={affiliateTools} keyword={entry.keyword} />
+            {!isHighIntent && (
+              <ZhMultiToolStack
+                tools={stackTools}
+                keyword={entry.keyword}
+                pageSlug={entry.slug}
+                ctaIndex={0}
+                hasAffiliate={hasAffiliate}
+              />
+            )}
+
+            {!isHighIntent && (
+              <ZhUseCaseFunnel tools={affiliateTools} keyword={entry.keyword} pageSlug={entry.slug} hasAffiliate={hasAffiliate} />
+            )}
+
+            <ZhValueAnchorPricing keyword={entry.keyword} />
+
+            <ZhComparisonTable tools={affiliateTools} keyword={entry.keyword} pageSlug={entry.slug} />
+
+            {isHighIntent && (
+              <ZhToolRecommendationBlock
+                pageSlug={entry.slug}
+                tools={affiliateTools}
+                keyword={entry.keyword}
+                ctaIndex={1}
+                isHighIntent
+                hasAffiliate={hasAffiliate}
+              />
+            )}
 
             <ZhCaseProofBlock keyword={entry.keyword} />
 
@@ -231,7 +312,14 @@ export function ZhKeywordPageTemplate({ entry, content, existingSlugs }: Props) 
               </section>
             )}
 
-            <ZhToolRecommendationBlock tools={affiliateTools} keyword={entry.keyword} ctaIndex={1} />
+            <ZhToolRecommendationBlock
+              pageSlug={entry.slug}
+              tools={affiliateTools}
+              keyword={entry.keyword}
+              ctaIndex={isHighIntent ? 2 : 1}
+              isHighIntent={isHighIntent}
+              hasAffiliate={hasAffiliate}
+            />
 
             <ZhCtaCaptureBlock keyword={entry.keyword} />
 
@@ -277,7 +365,14 @@ export function ZhKeywordPageTemplate({ entry, content, existingSlugs }: Props) 
               </section>
             )}
 
-            <ZhToolRecommendationBlock tools={affiliateTools} keyword={entry.keyword} ctaIndex={2} />
+            <ZhToolRecommendationBlock
+              pageSlug={entry.slug}
+              tools={affiliateTools}
+              keyword={entry.keyword}
+              ctaIndex={isHighIntent ? 3 : 2}
+              isHighIntent={isHighIntent}
+              hasAffiliate={hasAffiliate}
+            />
 
             <section className="mt-12 rounded-2xl border-2 border-sky-200 bg-sky-50 p-6">
               <h2 className="text-lg font-semibold text-slate-900">用 AI 生成爆款内容</h2>

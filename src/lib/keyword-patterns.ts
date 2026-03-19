@@ -47,7 +47,13 @@ export const KEYWORD_PATTERNS = [
   { id: "kuaisu", template: "{platform} 快速 {goal}", slug: "kuaisu" },
   { id: "shizhan", template: "{platform} {goal} 实战", slug: "shizhan" },
   { id: "wanzheng", template: "{platform} {goal} 完整指南", slug: "wanzheng" },
-  { id: "jinjie", template: "{platform} {goal} 进阶", slug: "jinjie" }
+  { id: "jinjie", template: "{platform} {goal} 进阶", slug: "jinjie" },
+  // V77: Question expansion for AI citation
+  { id: "zenmezuo", template: "{platform} {goal} 怎么做？", slug: "zenmezuo" },
+  { id: "xuyaoduojiu", template: "{platform} {goal} 需要多久？", slug: "xuyaoduojiu" },
+  { id: "kaopuma", template: "{platform} {goal} 靠谱吗？", slug: "kaopuma" },
+  { id: "nengzhuanqianma", template: "{platform} {goal} 能赚钱吗？", slug: "nengzhuanqianma" },
+  { id: "xinshouzenme", template: "{platform} {goal} 新手怎么开始？", slug: "xinshouzenme" }
 ] as const;
 
 export type KeywordPatternId = (typeof KEYWORD_PATTERNS)[number]["id"];

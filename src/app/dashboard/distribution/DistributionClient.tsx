@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ZhCopyButton } from "@/components/zh/ZhCopyButton";
 
@@ -17,13 +18,71 @@ type Item = {
   embedUrl: string;
 };
 
+type BestKeyword = { keyword: string; views: number; clicks: number; generates: number };
+
 type Props = {
   items: Item[];
 };
 
 export function DistributionClient({ items }: Props) {
+  const [bestKeywords, setBestKeywords] = useState<BestKeyword[]>([]);
+
+  useEffect(() => {
+    fetch("/api/distribution/keywords")
+      .then((r) => r.json())
+      .then((d) => setBestKeywords(d.keywords ?? []))
+      .catch(() => {});
+  }, []);
+
+  const todayPlan = [
+    "Post 3 keywords",
+    "Platforms: Reddit, X, Quora"
+  ];
+
   return (
-    <div className="mt-8 space-y-6">
+    <div className="mt-8 space-y-8">
+      {/* Daily Posting Plan */}
+      <div className="rounded-xl border border-sky-200 bg-sky-50 p-5">
+        <h3 className="font-semibold text-slate-900">Today&apos;s plan</h3>
+        <ul className="mt-2 space-y-1 text-sm text-slate-700">
+          {todayPlan.map((line, i) => (
+            <li key={i}>• {line}</li>
+          ))}
+        </ul>
+        <Link
+          href="/dashboard/distribution/generate"
+          className="mt-3 inline-block text-sm font-medium text-sky-700 hover:text-sky-800"
+        >
+          Generate content →
+        </Link>
+      </div>
+
+      {/* Best Performing Keywords */}
+      {bestKeywords.length > 0 && (
+        <div className="rounded-xl border border-slate-200 bg-white p-5">
+          <h3 className="font-semibold text-slate-900">Best performing keywords</h3>
+          <p className="mt-1 text-sm text-slate-600">
+            From revenue + tool usage. Use these for posting.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {bestKeywords.slice(0, 10).map((k) => (
+              <Link
+                key={k.keyword}
+                href={`/dashboard/distribution/generate?keyword=${encodeURIComponent(k.keyword)}`}
+                className="inline-flex items-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-700 hover:border-sky-300 hover:bg-sky-50 hover:text-sky-800"
+              >
+                {k.keyword}
+                <span className="ml-1.5 text-xs text-slate-500">
+                  ({k.clicks} clicks)
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Latest Keywords */}
+      <div className="space-y-6">
       {items.map((item) => {
         const redditTitle = truncate(item.title, 300);
         const redditBody = `${item.oneLiner}\n\n来源：${item.pageUrl}`;
@@ -69,6 +128,7 @@ export function DistributionClient({ items }: Props) {
           </div>
         );
       })}
+      </div>
     </div>
   );
 }

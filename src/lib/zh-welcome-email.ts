@@ -1,9 +1,33 @@
 /**
  * V65 Welcome email content - 5条爆款内容模板 + 1个工具推荐
+ * V69: Add affiliate tool links for email monetization
  */
 export const WELCOME_EMAIL_SUBJECT = "你的免费爆款内容模板已送达 🎉";
 
-export function getWelcomeEmailHtml(): string {
+type AffiliateLink = { name: string; url: string };
+
+export function getWelcomeEmailHtml(affiliateLinks?: AffiliateLink[]): string {
+  const toolSection =
+    affiliateLinks && affiliateLinks.length > 0
+      ? `
+  <h2 style="color:#0f172a;font-size:1.1em">🛠 推荐工具（提高效率）</h2>
+  <p>以下工具可大幅提升创作效率，限时免费：</p>
+  <ul style="list-style:none;padding:0">
+    ${affiliateLinks
+      .slice(0, 3)
+      .map(
+        (t) =>
+          `<li style="margin:8px 0"><a href="${t.url}" style="color:#0284c7;font-weight:600">${t.name}</a> - 一键生成爆款内容</li>`
+      )
+      .join("")}
+  </ul>
+  <p style="margin-top:12px">点击上方链接即可使用，无需注册。</p>
+  `
+      : `
+  <h2 style="color:#0f172a;font-size:1.1em">🛠 工具推荐</h2>
+  <p>使用 <a href="https://www.tooleagle.com" style="color:#0284c7">ToolEagle</a> 免费 AI 工具，一键生成爆款文案、钩子和标题，无需注册。</p>
+  `;
+
   return `
 <!DOCTYPE html>
 <html>
@@ -27,8 +51,7 @@ export function getWelcomeEmailHtml(): string {
   <h2 style="color:#0f172a;font-size:1.1em">📌 模板 5 - 好奇悬念</h2>
   <p style="background:#f8fafc;padding:12px;border-radius:8px">「最后一个方法，大多数人不知道...」</p>
   
-  <h2 style="color:#0f172a;font-size:1.1em">🛠 工具推荐</h2>
-  <p>使用 <a href="https://www.tooleagle.com" style="color:#0284c7">ToolEagle</a> 免费 AI 工具，一键生成爆款文案、钩子和标题，无需注册。</p>
+  ${toolSection}
   
   <p style="margin-top:24px;font-size:0.9em;color:#64748b">— ToolEagle 团队</p>
 </body>

@@ -2,12 +2,26 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { createClient } from "@/lib/supabase/server";
 import { getWelcomeEmailHtml, WELCOME_EMAIL_SUBJECT } from "@/lib/zh-welcome-email";
+import { getAffiliateTools } from "@/config/affiliate-tools";
 
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
 
-async function sendWelcomeEmail(to: string): Promise<boolean> {
+async function sendWelcomeEmail(to: string, keyword?: string | null): Promise<boolean> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return false;
+
+  const allTools = getAffiliateTools();
+  const isMonetizationIntent = keyword && /赚钱|变现|引流|增长|涨粉/.test(keyword);
+  const affiliateLinks = (isMonetizationIntent
+    ? [...allTools].sort((a, b) => {
+        const aHigh = a.priceTier === "high-ticket" ? 1 : 0;
+        const bHigh = b.priceTier === "high-ticket" ? 1 : 0;
+        return bHigh - aHigh;
+      })
+    : allTools
+  )
+    .slice(0, 3)
+    .map((t) => ({ name: t.name, url: t.url }));
 
   try {
     const resend = new Resend(apiKey);
@@ -15,7 +29,7 @@ async function sendWelcomeEmail(to: string): Promise<boolean> {
       from: FROM_EMAIL,
       to,
       subject: WELCOME_EMAIL_SUBJECT,
-      html: getWelcomeEmailHtml()
+      html: getWelcomeEmailHtml(affiliateLinks)
     });
     if (error) {
       console.error("[zh/leads] Resend error:", error);
@@ -50,7 +64,8 @@ export async function POST(request: NextRequest) {
     }
 
     // V65: Send welcome email (5条爆款内容模板 + 1个工具推荐)
-    await sendWelcomeEmail(email);
+    // V70: Pass keyword for monetization-intent tool ordering
+    await sendWelcomeEmail(email, keyword);
 
     return NextResponse.json({ ok: true });
   } catch (e) {

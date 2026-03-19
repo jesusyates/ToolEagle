@@ -27,7 +27,9 @@
     "share:generate": "node scripts/generate-share-content.js",
     "share:daily": "node scripts/generate-share-content.js",
     "baidu:submit": "node scripts/baidu-submit.js",
-    "baidu:check": "node scripts/baidu-check.js"
+    "baidu:check": "node scripts/baidu-check.js",
+    "revenue:summary": "node scripts/revenue-summary.js",
+    "db:push": "npx supabase db push"
   },
   "dependencies": {
     "@mdx-js/mdx": "^3.1.1",

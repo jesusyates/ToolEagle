@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { TranslateAwareLink } from "@/components/TranslateAwareLink";
 import { useTranslations } from "next-intl";
 import { Bird } from "lucide-react";
@@ -25,6 +26,8 @@ const navPaths = [
 
 export function SiteHeader() {
   const t = useTranslations("nav");
+  const pathname = usePathname();
+  const isZh = pathname.startsWith("/zh");
 
   return (
     <header className="border-b border-slate-200 bg-white/80 backdrop-blur">
@@ -37,14 +40,27 @@ export function SiteHeader() {
             <p className="text-lg font-semibold tracking-tight text-slate-900" translate="no">
               ToolEagle
             </p>
-            <p className="text-xs text-slate-600" suppressHydrationWarning>
-              {t("slogan")}
-            </p>
+            <p className="text-xs text-slate-600">{t("slogan")}</p>
           </div>
         </TranslateAwareLink>
 
         <div className="flex items-center gap-2">
-            <nav className="hidden sm:flex items-center gap-2 text-sm text-slate-700">
+          <div className="flex items-center gap-1 text-xs text-slate-600">
+            <a
+              href="/"
+              className={`px-2 py-1 rounded ${!isZh ? "font-semibold text-sky-600 bg-sky-50" : "hover:text-sky-600"}`}
+            >
+              EN
+            </a>
+            <span className="text-slate-300">|</span>
+            <a
+              href="/zh/sitemap"
+              className={`px-2 py-1 rounded ${isZh ? "font-semibold text-sky-600 bg-sky-50" : "hover:text-sky-600"}`}
+            >
+              中文
+            </a>
+          </div>
+          <nav className="hidden sm:flex items-center gap-2 text-sm text-slate-700">
             {navPaths.map((item) => (
               <TranslateAwareLink
                 key={item.href}

@@ -15,12 +15,18 @@ export class LimitReachedError extends Error {
   }
 }
 
-export async function generateAIText(prompt: string): Promise<string[]> {
+export type GenerateOptions = { locale?: string };
+
+export async function generateAIText(
+  prompt: string,
+  options?: GenerateOptions
+): Promise<string[]> {
+  const locale = options?.locale ?? "en";
   const res = await fetch("/api/generate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
-    body: JSON.stringify({ prompt })
+    body: JSON.stringify({ prompt, locale })
   });
 
   const data = await res.json().catch(() => ({}));

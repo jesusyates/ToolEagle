@@ -7,6 +7,8 @@ import { SiteFooter } from "./SiteFooter";
 import { tools, popularToolSlugs, type ToolConfig } from "@/config/tools";
 import { ToolCard } from "@/components/tools/ToolCard";
 import { CreatorModeDemo } from "@/components/CreatorModeDemo";
+import { HomeHeroGenerate } from "./HomeHeroGenerate";
+import { TopResultsShowcase } from "./TopResultsShowcase";
 
 const popularTools = popularToolSlugs
   .map((slug) => tools.find((t) => t.slug === slug))
@@ -66,54 +68,14 @@ export function HomePageClient({ children }: Props) {
       <SiteHeader />
 
       <div className="flex-1">
-        <section className="container pt-10 pb-12">
-          <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              {t("heroTagline")}
-            </div>
+        <HomeHeroGenerate />
 
-            <div className="space-y-3">
-              <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-slate-900">
-                {t("heroTitle")}
-              </h1>
-              <p className="text-xl text-slate-700 leading-relaxed max-w-2xl">
-                {t("heroSubtitle")}
-              </p>
-            </div>
+        <TopResultsShowcase />
 
-            <div className="flex flex-wrap gap-3 pt-1">
-              <Link
-                href="/creator"
-                className="inline-flex items-center justify-center rounded-xl btn-accent px-6 py-4 text-base font-semibold text-white shadow-sm transition duration-150 w-full sm:w-auto text-center"
-              >
-                {t("tryCreatorMode")}
-              </Link>
-              <Link
-                href="/tools"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-50 transition duration-150 w-full sm:w-auto text-center"
-              >
-                {t("browseTools")}
-              </Link>
-              <Link
-                href="/pricing"
-                className="inline-flex items-center justify-center rounded-xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm font-semibold text-sky-700 hover:bg-sky-100 transition duration-150 w-full sm:w-auto text-center"
-              >
-                {t("viewPricing")}
-              </Link>
-            </div>
-
-            <div className="flex flex-wrap gap-3 mt-4">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-600">
-                ⚡ {t("statsCaptions")}
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-600">
-                🚀 {t("statsUsedBy")}
-              </span>
-            </div>
-
-            <p className="text-xs text-slate-500 mt-3">{t("popularForCreators")}</p>
-            <div className="flex flex-wrap gap-2">
+        <section className="container pt-4 pb-8">
+          <div className="max-w-3xl">
+            <p className="text-xs text-slate-500">{t("popularForCreators")}</p>
+            <div className="flex flex-wrap gap-2 mt-2">
               <Link
                 href="/tools/tiktok-caption-generator"
                 className="inline-flex items-center rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition duration-150"

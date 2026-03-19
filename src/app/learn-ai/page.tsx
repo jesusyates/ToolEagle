@@ -34,9 +34,7 @@ export default async function LearnAiPage() {
                 {t("title")}
               </h1>
             </div>
-            <p className="mt-3 text-slate-600">
-              {t("subtitle")}
-            </p>
+            <p className="mt-3 text-slate-600">{t("subtitle")}</p>
 
             <div className="mt-10 space-y-4">
               {LEARN_AI_ARTICLES.map((article) => (

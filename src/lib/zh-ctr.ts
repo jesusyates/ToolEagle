@@ -146,6 +146,40 @@ export function buildZhFaqSchema(
   };
 }
 
+/** V77: Build FAQ schema with direct answer as first mainEntity for AI citation. */
+export function buildZhFaqSchemaWithDirectAnswer(
+  faqItems: { question: string; answer: string }[],
+  directAnswer: string,
+  question: string
+): object {
+  const mainItems = [];
+  if (directAnswer?.trim() && question?.trim()) {
+    mainItems.push({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: directAnswer.trim().slice(0, 500)
+      }
+    });
+  }
+  for (const { question: q, answer } of faqItems) {
+    if (q && answer && !mainItems.some((m: { name: string }) => m.name === q)) {
+      mainItems.push({
+        "@type": "Question",
+        name: q,
+        acceptedAnswer: { "@type": "Answer", text: answer }
+      });
+    }
+  }
+  if (mainItems.length === 0) return {};
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: mainItems.slice(0, 6)
+  };
+}
+
 /** Build HowTo JSON-LD schema from step-by-step content. */
 export function buildZhHowToSchema(
   name: string,

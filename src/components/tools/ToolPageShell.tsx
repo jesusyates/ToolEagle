@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { CommunityProofBadge } from "./CommunityProofBadge";
 
 type ToolPageShellProps = {
   eyebrow?: string;
@@ -9,6 +10,8 @@ type ToolPageShellProps = {
   howItWorks?: ReactNode;
   proTips?: ReactNode;
   aside?: ReactNode;
+  toolSlug?: string;
+  toolName?: string;
 };
 
 export function ToolPageShell({
@@ -19,7 +22,9 @@ export function ToolPageShell({
   result,
   howItWorks,
   proTips,
-  aside
+  aside,
+  toolSlug,
+  toolName
 }: ToolPageShellProps) {
   return (
     <section className="container pt-10 pb-16">
@@ -35,6 +40,9 @@ export function ToolPageShell({
         <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
           {description}
         </p>
+        <div className="pt-2">
+          <CommunityProofBadge />
+        </div>
       </div>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] items-start">

@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { trackEvent } from "@/lib/analytics";
 import { safeCopyToClipboard } from "@/lib/clipboard";
 import { addToHistory, incrementToolUsage } from "@/lib/storage";
@@ -20,7 +20,9 @@ import { AnswerLinksCard } from "@/components/tools/AnswerLinksCard";
 import { DelegatedButton } from "@/components/DelegatedButton";
 import { LimitReachedModal } from "@/components/LimitReachedModal";
 import { LoginPromptModal } from "@/components/LoginPromptModal";
+import { ExitIntentCta } from "@/components/tools/ExitIntentCta";
 import { useAuth } from "@/hooks/useAuth";
+import { useCountry } from "@/hooks/useCountry";
 
 type GenericToolClientProps = {
   slug: string;
@@ -36,17 +38,16 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const { isLoggedIn } = useAuth();
   const t = useTranslations("common");
+  const locale = useLocale();
+  const country = useCountry();
 
   const toolMeta = tools.find((t) => t.slug === slug);
   const config = generators[slug];
 
   useEffect(() => {
     if (!toolMeta) return;
-    trackEvent("tool_page_view", {
-      tool_slug: toolMeta.slug,
-      tool_category: toolMeta.category
-    });
-  }, [toolMeta]);
+    trackEvent("tool_page_view", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
+  }, [toolMeta, country]);
 
   if (!toolMeta || !config) return null;
 
@@ -69,12 +70,13 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
     if (aiPrompt) {
       try {
         const prompt = aiPrompt.replace(/\{input\}/g, trimmed);
-        results = await generateAIText(prompt);
+        results = await generateAIText(prompt, { locale });
         if (toolMeta) {
           trackEvent("tool_generate_ai", {
             tool_slug: toolMeta.slug,
             tool_category: toolMeta.category,
-            input_length: trimmed.length
+            input_length: trimmed.length,
+            country
           });
         }
       } catch (err) {
@@ -85,19 +87,13 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
         }
         results = config.generate(trimmed);
         if (toolMeta) {
-          trackEvent("tool_generate", {
-            tool_slug: toolMeta.slug,
-            tool_category: toolMeta.category
-          });
+          trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
         }
       }
     } else {
       results = config.generate(trimmed);
       if (toolMeta) {
-        trackEvent("tool_generate", {
-          tool_slug: toolMeta.slug,
-          tool_category: toolMeta.category
-        });
+      trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
       }
     }
 
@@ -121,10 +117,7 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
     if (!text) return;
     await safeCopyToClipboard(text);
     if (toolMeta) {
-      trackEvent("tool_copy", {
-        tool_slug: toolMeta.slug,
-        tool_category: toolMeta.category
-      });
+    trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
     }
   }
 
@@ -133,10 +126,7 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
     const text = items.join("\n\n---\n\n");
     await safeCopyToClipboard(text);
     if (toolMeta) {
-      trackEvent("tool_copy", {
-        tool_slug: toolMeta.slug,
-        tool_category: toolMeta.category
-      });
+    trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
     }
   }
 
@@ -179,6 +169,9 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
     <>
       <LimitReachedModal open={limitModalOpen} onClose={() => setLimitModalOpen(false)} />
       <LoginPromptModal open={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
+      {items.length > 0 && (
+        <ExitIntentCta toolSlug={slug} toolName={toolMeta.name} />
+      )}
       <ToolPageShell
       title={toolMeta.name}
       description={toolMeta.description}
@@ -229,6 +222,7 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
           input={input}
           onCopyItem={handleCopyItem}
           onCopyAll={handleCopyAll}
+          onCopyTrack={() => toolMeta && trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country })}
           onRegenerate={handleGenerate}
           onSaveEditedItem={handleSaveEditedItem}
           onItemsChange={handleItemsChange}

@@ -3,7 +3,7 @@ import { SiteHeader } from "@/app/_components/SiteHeader";
 import { SiteFooter } from "@/app/_components/SiteFooter";
 import { ToolCard } from "@/components/tools/ToolCard";
 import { tools } from "@/config/tools";
-import { getMatchingAffiliateTools, type AffiliateTool } from "@/config/affiliate-tools";
+import { getMatchingAffiliateTools, getAffiliateTools, type AffiliateTool } from "@/config/affiliate-tools";
 import { formatTopicLabel, parseZhSlug, extractPlatformFromTopic, ZH_PLATFORMS } from "@/config/traffic-topics";
 import { ZhToolRecommendationBlock } from "@/components/zh/ZhToolRecommendationBlock";
 import { ZhCtaCaptureBlock } from "@/components/zh/ZhCtaCaptureBlock";
@@ -25,10 +25,12 @@ import {
   getZhCtrTitle,
   getZhFeaturedQuestion,
   parseZhFaqForSchema,
-  buildZhFaqSchema,
+  buildZhFaqSchemaWithDirectAnswer,
   buildZhArticleSchema,
   getZhCuriosityLinks
 } from "@/lib/zh-ctr";
+import { DirectAnswerBlock } from "@/components/seo/DirectAnswerBlock";
+import { ZhToolEmbeddingSentence } from "@/components/seo/ZhToolEmbeddingSentence";
 import { buildBreadcrumbSchema } from "@/lib/zh-breadcrumb-schema";
 import { BASE_URL } from "@/config/site";
 
@@ -138,12 +140,17 @@ export function ZhGuidePageTemplate({
   const curiosityLinks = getZhCuriosityLinks(pageType, topic, 6);
   const platform = extractPlatformFromTopic(topic);
   const hubLabel = HUB_SECTION_LABELS[pageType];
-  const featuredQuestion = getZhFeaturedQuestion(pageType, topic);
   const faqItems = parseZhFaqForSchema(content.faq);
   const pageUrl = `${BASE_URL}${ZH_BASE_PATHS[pageType]}/${topic}`;
-  const faqSchema = buildZhFaqSchema(faqItems, pageUrl);
+  const featuredQuestion = getZhFeaturedQuestion(pageType, topic);
+  const faqSchema = buildZhFaqSchemaWithDirectAnswer(
+    faqItems,
+    content.directAnswer || "",
+    featuredQuestion
+  );
   const ctrTitle = getZhCtrTitle(content, pageType, topic);
   const toolsForPage = affiliateTools ?? getMatchingAffiliateTools(ctrTitle, platform, 3);
+  const hasAffiliate = getAffiliateTools().length > 0;
   const articleSchema = buildZhArticleSchema(
     ctrTitle,
     content.description || content.directAnswer || "",
@@ -208,18 +215,17 @@ export function ZhGuidePageTemplate({
 
             <ZhFreshnessBlock />
 
-            <section className="mt-6 rounded-xl border-2 border-sky-200 bg-sky-50 p-5" aria-label="精选摘要">
-              <p className="text-sm font-medium text-slate-600">Q：{featuredQuestion}</p>
-              <p className="mt-2 text-base font-semibold text-slate-900">
-                A：{(content.directAnswer || "").slice(0, 60)}
-                {(content.directAnswer?.length ?? 0) > 60 ? "…" : ""}
-              </p>
-            </section>
+            <DirectAnswerBlock answer={content.directAnswer || ""} lang="zh" />
             <div className="mt-6 prose prose-slate max-w-none">
               <p className="text-lg text-slate-700 leading-relaxed">{content.intro}</p>
+              <ZhToolEmbeddingSentence
+                toolSlug={primaryTool}
+                keyword={primaryTool.includes("caption") ? "爆款文案" : primaryTool.includes("hook") ? "钩子" : primaryTool.includes("title") ? "标题" : "内容"}
+                useZhPath
+              />
             </div>
 
-            <ZhToolRecommendationBlock tools={toolsForPage} keyword={ctrTitle} />
+            <ZhToolRecommendationBlock tools={toolsForPage} keyword={ctrTitle} pageSlug={`${pageType}-${topic}`} hasAffiliate={hasAffiliate} />
 
             {content.guide && (
               <section className="mt-10 prose prose-slate max-w-none">
@@ -277,7 +283,7 @@ export function ZhGuidePageTemplate({
               </section>
             )}
 
-            <ZhToolRecommendationBlock tools={toolsForPage} keyword={ctrTitle} ctaIndex={1} />
+            <ZhToolRecommendationBlock tools={toolsForPage} keyword={ctrTitle} pageSlug={`${pageType}-${topic}`} ctaIndex={1} hasAffiliate={hasAffiliate} />
 
             <ZhCtaCaptureBlock keyword={ctrTitle} />
 
@@ -328,7 +334,7 @@ export function ZhGuidePageTemplate({
               </div>
             </section>
 
-            <ZhToolRecommendationBlock tools={toolsForPage} keyword={ctrTitle} ctaIndex={2} />
+            <ZhToolRecommendationBlock tools={toolsForPage} keyword={ctrTitle} pageSlug={`${pageType}-${topic}`} ctaIndex={2} hasAffiliate={hasAffiliate} />
 
             <section className="mt-12 rounded-2xl border-2 border-sky-200 bg-sky-50 p-6">
               <h2 className="text-lg font-semibold text-slate-900">用 AI 生成爆款内容</h2>

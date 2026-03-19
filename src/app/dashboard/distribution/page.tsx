@@ -49,7 +49,7 @@ export default async function DistributionDashboardPage() {
 
       <div className="flex-1">
         <section className="container pt-10 pb-16">
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center justify-between gap-4 flex-wrap">
             <div>
               <Link
                 href="/dashboard"
@@ -64,6 +64,12 @@ export default async function DistributionDashboardPage() {
                 最新 20 个关键词，一键复制分享到 Reddit、X、Quora
               </p>
             </div>
+            <Link
+              href="/dashboard/distribution/generate"
+              className="inline-flex items-center justify-center rounded-xl bg-sky-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-sky-700"
+            >
+              📝 生成分发内容
+            </Link>
           </div>
 
           <DistributionClient items={items} />

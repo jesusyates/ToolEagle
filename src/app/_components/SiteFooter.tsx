@@ -209,7 +209,7 @@ export function SiteFooter() {
           </div>
         </div>
         <div className="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-slate-500" suppressHydrationWarning>
+          <p className="text-xs text-slate-500">
             © {new Date().getFullYear()} ToolEagle. {t("builtForCreators")}{" "}
             <TranslateAwareLink href="/privacy" className="hover:underline hover:text-sky-600">
               {t("privacy")}

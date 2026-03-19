@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { trackEvent } from "@/lib/analytics";
 import { safeCopyToClipboard } from "@/lib/clipboard";
 import { addToHistory, incrementToolUsage } from "@/lib/storage";
@@ -16,9 +16,12 @@ import { HistoryPanel } from "@/components/tools/HistoryPanel";
 import { HowItWorksCard } from "@/components/tools/HowItWorksCard";
 import { ExamplesCard } from "@/components/tools/ExamplesCard";
 import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
+import { CtaLinksSection } from "@/components/tools/CtaLinksSection";
 import { LimitReachedModal } from "@/components/LimitReachedModal";
 import { LoginPromptModal } from "@/components/LoginPromptModal";
+import { ExitIntentCta } from "@/components/tools/ExitIntentCta";
 import { useAuth } from "@/hooks/useAuth";
+import { useCountry } from "@/hooks/useCountry";
 
 const TRY_EXAMPLE = "Instagram Reels for small business owners, showing how to turn one video into 5 posts.";
 
@@ -42,10 +45,14 @@ const HOOK_EXAMPLES = [
   }
 ];
 
-type Props = { relatedAside?: ReactNode };
+type Props = { relatedAside?: ReactNode; ctaLinks?: { href: string; label: string }[] };
 
-export function HookGeneratorClient({ relatedAside }: Props) {
+export function HookGeneratorClient({ relatedAside, ctaLinks }: Props) {
   const t = useTranslations("common");
+  const tTool = useTranslations("toolPages");
+  const tHook = useTranslations("toolPages.hookGenerator");
+  const locale = useLocale();
+  const country = useCountry();
   const [topic, setTopic] = useState("");
   const [hooks, setHooks] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -60,9 +67,10 @@ export function HookGeneratorClient({ relatedAside }: Props) {
     if (!toolMeta) return;
     trackEvent("tool_page_view", {
       tool_slug: toolMeta.slug,
-      tool_category: toolMeta.category
+      tool_category: toolMeta.category,
+      country
     });
-  }, [toolMeta]);
+  }, [toolMeta, country]);
 
   function templateGenerate(trimmed: string): string[] {
     const replacements: Record<string, string> = {
@@ -89,7 +97,7 @@ export function HookGeneratorClient({ relatedAside }: Props) {
       return;
     }
     if (trimmed.length > MAX_INPUT_LENGTH) {
-      setHooks([`Please keep your input under ${MAX_INPUT_LENGTH} characters.`]);
+      setHooks([tTool("maxLengthError", { max: MAX_INPUT_LENGTH })]);
       return;
     }
 
@@ -100,9 +108,9 @@ export function HookGeneratorClient({ relatedAside }: Props) {
     if (aiPrompt) {
       try {
         const prompt = aiPrompt.replace(/\{input\}/g, trimmed);
-        results = await generateAIText(prompt);
+        results = await generateAIText(prompt, { locale });
         if (toolMeta) {
-          trackEvent("tool_generate_ai", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, input_length: trimmed.length });
+          trackEvent("tool_generate_ai", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, input_length: trimmed.length, country });
         }
       } catch (err) {
         if (err instanceof LimitReachedError) {
@@ -111,7 +119,7 @@ export function HookGeneratorClient({ relatedAside }: Props) {
           return;
         }
         results = templateGenerate(trimmed);
-        if (toolMeta) trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category });
+        if (toolMeta) trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
       }
     } else {
       results = templateGenerate(trimmed);
@@ -138,10 +146,7 @@ export function HookGeneratorClient({ relatedAside }: Props) {
     if (!text) return;
     await safeCopyToClipboard(text);
     if (toolMeta) {
-      trackEvent("tool_copy", {
-        tool_slug: toolMeta.slug,
-        tool_category: toolMeta.category
-      });
+      trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
     }
   }
 
@@ -150,10 +155,7 @@ export function HookGeneratorClient({ relatedAside }: Props) {
     const text = hooks.join("\n\n");
     await safeCopyToClipboard(text);
     if (toolMeta) {
-      trackEvent("tool_copy", {
-        tool_slug: toolMeta.slug,
-        tool_category: toolMeta.category
-      });
+      trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
     }
   }
 
@@ -167,7 +169,7 @@ export function HookGeneratorClient({ relatedAside }: Props) {
     }
     addToHistory({
       toolSlug: "hook-generator",
-      toolName: "Hook Generator",
+      toolName: tHook("title"),
       input: topic,
       items: updated
     });
@@ -178,7 +180,7 @@ export function HookGeneratorClient({ relatedAside }: Props) {
       credentials: "include",
       body: JSON.stringify({
         toolSlug: "hook-generator",
-        toolName: "Hook Generator",
+        toolName: tHook("title"),
         input: topic,
         items: updated
       })
@@ -195,12 +197,13 @@ export function HookGeneratorClient({ relatedAside }: Props) {
     <>
       <LimitReachedModal open={limitModalOpen} onClose={() => setLimitModalOpen(false)} />
       <LoginPromptModal open={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
+      {hooks.length > 0 && <ExitIntentCta toolSlug="hook-generator" toolName={tHook("title")} />}
       <ToolPageShell
-      eyebrow="Tool"
-      title="Hook Generator"
-      description="Generate punchy first lines for TikToks, Reels, Shorts and carousels so people stop and actually listen."
+      eyebrow={tTool("eyebrow")}
+      title={tHook("title")}
+      description={tHook("description")}
       input={
-        <ToolInputCard label="Video topic">
+        <ToolInputCard label={tHook("inputLabel")}>
           <DelegatedButton
             onClick={() => setTopic(TRY_EXAMPLE)}
             className="text-xs font-medium text-sky-700 hover:underline mb-2 block"
@@ -212,10 +215,10 @@ export function HookGeneratorClient({ relatedAside }: Props) {
             onChange={(e) => setTopic(e.target.value)}
             maxLength={MAX_INPUT_LENGTH + 50}
             className="w-full min-h-[100px] resize-none rounded-2xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner shadow-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-500/70 focus:border-sky-400/80"
-            placeholder="Example: Instagram Reels for small business owners, showing how to turn one video into 5 posts."
+            placeholder={tHook("placeholder")}
           />
           {topic.length > MAX_INPUT_LENGTH && (
-            <p className="text-xs text-amber-600 mt-1">Please keep under {MAX_INPUT_LENGTH} characters.</p>
+            <p className="text-xs text-amber-600 mt-1">{tTool("maxLengthError", { max: MAX_INPUT_LENGTH })}</p>
           )}
           <DelegatedButton
             onClick={generateHooks}
@@ -225,11 +228,11 @@ export function HookGeneratorClient({ relatedAside }: Props) {
             {isGenerating ? (
               <>
                 <span className="inline-block h-3 w-3 rounded-full border-2 border-white border-t-transparent animate-spin" />
-                Generating...
+                {tTool("generating")}
               </>
             ) : (
               <>
-                Generate Hooks
+                {tHook("generateButton")}
                 <span className="text-slate-400">→</span>
               </>
             )}
@@ -238,18 +241,19 @@ export function HookGeneratorClient({ relatedAside }: Props) {
       }
       result={
         <ToolResultListCard
-          title="Hook ideas"
+          title={tHook("resultTitle")}
           items={hooks}
           isLoading={isGenerating}
           input={topic}
           onCopyItem={handleCopyItem}
           onCopyAll={handleCopyAll}
+          onCopyTrack={() => toolMeta && trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country })}
           onRegenerate={generateHooks}
           onSaveEditedItem={handleSaveEditedItem}
           onItemsChange={handleItemsChange}
-          emptyMessage="Your hook ideas will appear here. Keep them short enough to say in 2–3 seconds."
+          emptyMessage={tHook("emptyMessage")}
           toolSlug="hook-generator"
-          toolName="Hook Generator"
+          toolName={tHook("title")}
           isLoggedIn={isLoggedIn}
           onRequireLogin={() => setLoginModalOpen(true)}
         />
@@ -257,9 +261,9 @@ export function HookGeneratorClient({ relatedAside }: Props) {
       howItWorks={
         <HowItWorksCard
           steps={[
-            { step: 1, text: "Enter your video or post topic above." },
-            { step: 2, text: "Generate hooks that stop the scroll." },
-            { step: 3, text: "Copy and post—use in your script or caption." }
+            { step: 1, text: tHook("howItWorks1") },
+            { step: 2, text: tHook("howItWorks2") },
+            { step: 3, text: tHook("howItWorks3") }
           ]}
         />
       }
@@ -271,12 +275,9 @@ export function HookGeneratorClient({ relatedAside }: Props) {
             onUseExample={(input) => setTopic(input)}
           />
           <ToolProTipsCard
-            tips={[
-              "Say your hook out loud; if it's hard to say, it's hard to listen to.",
-              "Record the hook twice: one calm, one high‑energy—test which performs better.",
-              "Match the hook to the first frame visually so they feel like one idea."
-            ]}
+            tips={[tHook("proTip1"), tHook("proTip2"), tHook("proTip3")]}
           />
+          {ctaLinks && ctaLinks.length > 0 && <CtaLinksSection links={ctaLinks} />}
           {relatedAside}
         </>
       }

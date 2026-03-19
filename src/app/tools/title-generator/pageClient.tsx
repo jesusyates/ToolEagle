@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { trackEvent } from "@/lib/analytics";
 import { safeCopyToClipboard } from "@/lib/clipboard";
 import { addToHistory, incrementToolUsage } from "@/lib/storage";
@@ -16,9 +16,12 @@ import { HistoryPanel } from "@/components/tools/HistoryPanel";
 import { HowItWorksCard } from "@/components/tools/HowItWorksCard";
 import { ExamplesCard } from "@/components/tools/ExamplesCard";
 import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
+import { CtaLinksSection } from "@/components/tools/CtaLinksSection";
 import { LimitReachedModal } from "@/components/LimitReachedModal";
 import { LoginPromptModal } from "@/components/LoginPromptModal";
+import { ExitIntentCta } from "@/components/tools/ExitIntentCta";
 import { useAuth } from "@/hooks/useAuth";
+import { useCountry } from "@/hooks/useCountry";
 
 const TRY_EXAMPLE = "how to edit vertical videos faster using CapCut templates";
 
@@ -42,10 +45,14 @@ const TITLE_EXAMPLES = [
   }
 ];
 
-type Props = { relatedAside?: ReactNode };
+type Props = { relatedAside?: ReactNode; ctaLinks?: { href: string; label: string }[] };
 
-export function TitleGeneratorClient({ relatedAside }: Props) {
+export function TitleGeneratorClient({ relatedAside, ctaLinks }: Props) {
   const tCommon = useTranslations("common");
+  const tTool = useTranslations("toolPages");
+  const tTitle = useTranslations("toolPages.titleGenerator");
+  const locale = useLocale();
+  const country = useCountry();
   const [topic, setTopic] = useState("");
   const [titles, setTitles] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -58,11 +65,8 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
 
   useEffect(() => {
     if (!toolMeta) return;
-    trackEvent("tool_page_view", {
-      tool_slug: toolMeta.slug,
-      tool_category: toolMeta.category
-    });
-  }, [toolMeta]);
+    trackEvent("tool_page_view", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
+  }, [toolMeta, country]);
 
   function templateGenerate(trimmed: string): string[] {
     const replacements: Record<string, string> = {
@@ -87,7 +91,7 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
       return;
     }
     if (trimmed.length > MAX_INPUT_LENGTH) {
-      setTitles([`Please keep your input under ${MAX_INPUT_LENGTH} characters.`]);
+      setTitles([tTool("maxLengthError", { max: MAX_INPUT_LENGTH })]);
       return;
     }
 
@@ -98,9 +102,9 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
     if (aiPrompt) {
       try {
         const prompt = aiPrompt.replace(/\{input\}/g, trimmed);
-        results = await generateAIText(prompt);
+        results = await generateAIText(prompt, { locale });
         if (toolMeta) {
-          trackEvent("tool_generate_ai", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, input_length: trimmed.length });
+          trackEvent("tool_generate_ai", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, input_length: trimmed.length, country });
         }
       } catch (err) {
         if (err instanceof LimitReachedError) {
@@ -109,7 +113,7 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
           return;
         }
         results = templateGenerate(trimmed);
-        if (toolMeta) trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category });
+        if (toolMeta) trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
       }
     } else {
       results = templateGenerate(trimmed);
@@ -136,10 +140,7 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
     if (!text) return;
     await safeCopyToClipboard(text);
     if (toolMeta) {
-      trackEvent("tool_copy", {
-        tool_slug: toolMeta.slug,
-        tool_category: toolMeta.category
-      });
+      trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
     }
   }
 
@@ -148,10 +149,7 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
     const text = titles.join("\n\n");
     await safeCopyToClipboard(text);
     if (toolMeta) {
-      trackEvent("tool_copy", {
-        tool_slug: toolMeta.slug,
-        tool_category: toolMeta.category
-      });
+      trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
     }
   }
 
@@ -193,12 +191,13 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
     <>
       <LimitReachedModal open={limitModalOpen} onClose={() => setLimitModalOpen(false)} />
       <LoginPromptModal open={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
+      {titles.length > 0 && <ExitIntentCta toolSlug="title-generator" toolName={tTitle("title")} />}
       <ToolPageShell
-      eyebrow="Tool"
-      title="Title Generator"
-      description="Generate click‑worthy titles for YouTube, TikTok, Reels and Shorts based on your topic or niche."
+      eyebrow={tTool("eyebrow")}
+      title={tTitle("title")}
+      description={tTitle("description")}
       input={
-        <ToolInputCard label="Video topic">
+        <ToolInputCard label={tTitle("inputLabel")}>
           <DelegatedButton
             onClick={() => setTopic(TRY_EXAMPLE)}
             className="text-xs font-medium text-sky-700 hover:underline mb-2 block"
@@ -210,10 +209,10 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
             onChange={(e) => setTopic(e.target.value)}
             maxLength={MAX_INPUT_LENGTH + 50}
             className="w-full min-h-[100px] resize-none rounded-2xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner shadow-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-500/70 focus:border-sky-400/80"
-            placeholder="Example: how to edit vertical videos faster using CapCut templates"
+            placeholder={tTitle("placeholder")}
           />
           {topic.length > MAX_INPUT_LENGTH && (
-            <p className="text-xs text-amber-600 mt-1">Please keep under {MAX_INPUT_LENGTH} characters.</p>
+            <p className="text-xs text-amber-600 mt-1">{tTool("maxLengthError", { max: MAX_INPUT_LENGTH })}</p>
           )}
           <DelegatedButton
             onClick={generateTitles}
@@ -223,11 +222,11 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
             {isGenerating ? (
               <>
                 <span className="inline-block h-3 w-3 rounded-full border-2 border-white border-t-transparent animate-spin" />
-                Generating...
+                {tTool("generating")}
               </>
             ) : (
               <>
-                Generate Titles
+                {tTitle("generateButton")}
                 <span className="text-slate-400">→</span>
               </>
             )}
@@ -236,18 +235,19 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
       }
       result={
         <ToolResultListCard
-          title="Title ideas"
+          title={tTitle("resultTitle")}
           items={titles}
           isLoading={isGenerating}
           input={topic}
           onCopyItem={handleCopyItem}
           onCopyAll={handleCopyAll}
+          onCopyTrack={() => toolMeta && trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country })}
           onRegenerate={generateTitles}
           onSaveEditedItem={handleSaveEditedItem}
           onItemsChange={handleItemsChange}
-          emptyMessage="Your title ideas will appear here. Use them as a starting point, then tweak for your voice."
+          emptyMessage={tTitle("emptyMessage")}
           toolSlug="title-generator"
-          toolName="Title Generator"
+          toolName={tTitle("title")}
           isLoggedIn={isLoggedIn}
           onRequireLogin={() => setLoginModalOpen(true)}
         />
@@ -255,9 +255,9 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
       howItWorks={
         <HowItWorksCard
           steps={[
-            { step: 1, text: "Enter your video topic or niche above." },
-            { step: 2, text: "Generate title ideas you can use as-is or tweak." },
-            { step: 3, text: "Copy and post—paste into your upload screen or planning doc." }
+            { step: 1, text: tTitle("howItWorks1") },
+            { step: 2, text: tTitle("howItWorks2") },
+            { step: 3, text: tTitle("howItWorks3") }
           ]}
         />
       }
@@ -269,12 +269,9 @@ export function TitleGeneratorClient({ relatedAside }: Props) {
             onUseExample={(input) => setTopic(input)}
           />
           <ToolProTipsCard
-            tips={[
-              "Write for humans first, algorithm second.",
-              "Front‑load the most interesting word in the first 3–4 words.",
-              "Pair strong titles with clean thumbnails or first frames."
-            ]}
+            tips={[tTitle("proTip1"), tTitle("proTip2"), tTitle("proTip3")]}
           />
+          {ctaLinks && ctaLinks.length > 0 && <CtaLinksSection links={ctaLinks} />}
           {relatedAside}
         </>
       }

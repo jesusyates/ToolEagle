@@ -83,6 +83,9 @@ export function staticAndToolUrls(): SitemapEntry[] {
     { url: `${BASE_URL}/leaderboard`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE_URL}/ai-prompt-improver`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE_URL}/ai-prompts`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
+    { url: `${BASE_URL}/tiktok-caption-generator`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE_URL}/youtube-title-generator`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE_URL}/hook-generator`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     ...PROMPT_CATEGORIES.map((c) => ({
       url: `${BASE_URL}/ai-prompts/${c.slug}`,
       lastModified: new Date(),

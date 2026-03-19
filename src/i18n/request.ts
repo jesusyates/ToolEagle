@@ -1,12 +1,15 @@
 import { getRequestConfig } from "next-intl/server";
+import { headers } from "next/headers";
 
 /**
- * English-only. No locale detection - default is always English.
- * /zh/* pages are standalone Chinese SEO content (body only); header/nav stay English.
+ * V75: Locale from pathname. /zh/* => zh, otherwise en.
+ * Loads messages/{locale}.json.
  */
 export default getRequestConfig(async () => {
-  return {
-    locale: "en",
-    messages: (await import("../../messages/en.json")).default
-  };
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") ?? "";
+  const locale = pathname.startsWith("/zh") ? "zh" : "en";
+
+  const messages = (await import(`../../messages/${locale}.json`)).default;
+  return { locale, messages };
 });

@@ -13,6 +13,8 @@ type ToolCopyButtonProps = {
   variant?: "default" | "primary";
   /** When provided, copies displayed text from DOM (supports browser translation). Falls back to onClick if null. */
   getTextToCopy?: (buttonElement: Element) => string | null;
+  /** V72: Called after any successful copy (for analytics). Use when getTextToCopy is used so onClick isn't called. */
+  onCopied?: () => void;
 };
 
 const COPIED_DURATION_MS = 1500;
@@ -22,7 +24,8 @@ export function ToolCopyButton({
   onClick,
   disabled,
   variant = "default",
-  getTextToCopy
+  getTextToCopy,
+  onCopied
 }: ToolCopyButtonProps) {
   const t = useTranslations("common");
   const copiedRef = useRef(false);
@@ -39,6 +42,7 @@ export function ToolCopyButton({
             if (ok) {
               copiedRef.current = true;
               btn.dataset.copied = "true";
+              onCopied?.();
               setTimeout(() => {
                 copiedRef.current = false;
                 btn.dataset.copied = "false";
@@ -60,7 +64,7 @@ export function ToolCopyButton({
         // no feedback on error
       }
     },
-    [disabled, onClick, getTextToCopy]
+    [disabled, onClick, getTextToCopy, onCopied]
   );
 
   const delegatedProps = useDelegatedClick(handleClick);

@@ -82,12 +82,22 @@ async function incrementUsage(userId: string): Promise<void> {
   }
 }
 
+const LOCALE_INSTRUCTIONS: Record<string, string> = {
+  zh: "Output in Simplified Chinese. ",
+  es: "Output in Spanish. ",
+  pt: "Output in Portuguese. ",
+  id: "Output in Indonesian. "
+};
+
 export async function POST(request: NextRequest) {
   try {
-    const { prompt } = await request.json();
+    const { prompt, locale = "en" } = await request.json();
     if (!prompt || typeof prompt !== "string") {
       return NextResponse.json({ error: "Missing prompt" }, { status: 400 });
     }
+
+    const localePrefix = typeof locale === "string" ? LOCALE_INSTRUCTIONS[locale] ?? "" : "";
+    const finalPrompt = localePrefix + prompt;
 
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
@@ -120,7 +130,7 @@ export async function POST(request: NextRequest) {
         messages: [
           {
             role: "user",
-            content: prompt
+            content: finalPrompt
           }
         ],
         temperature: 0.8,

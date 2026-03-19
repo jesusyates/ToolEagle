@@ -1,5 +1,8 @@
 import { Metadata } from "next";
-import { ZhIdeaGeneratorClient } from "./ZhIdeaGeneratorClient";
+import { SiteHeader } from "@/app/_components/SiteHeader";
+import { SiteFooter } from "@/app/_components/SiteFooter";
+import { GenericToolClient } from "@/components/tools/GenericToolClient";
+import { CtaLinksSection } from "@/components/tools/CtaLinksSection";
 import { getLatestKeywordPages } from "@/lib/zh-keyword-data";
 import { BASE_URL } from "@/config/site";
 
@@ -21,5 +24,16 @@ export default async function ZhIdeaGeneratorPage() {
     label: k.keyword
   }));
 
-  return <ZhIdeaGeneratorClient ctaLinks={ctaLinks} />;
+  return (
+    <main className="min-h-screen bg-slate-950 text-slate-50 flex flex-col">
+      <SiteHeader />
+      <div className="flex-1">
+        <GenericToolClient
+          slug="tiktok-idea-generator"
+          relatedAside={ctaLinks.length > 0 ? <CtaLinksSection links={ctaLinks} /> : undefined}
+        />
+      </div>
+      <SiteFooter />
+    </main>
+  );
 }

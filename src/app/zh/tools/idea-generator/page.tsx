@@ -1,17 +1,18 @@
 import { Metadata } from "next";
-import { SiteHeader } from "@/app/_components/SiteHeader";
-import { SiteFooter } from "@/app/_components/SiteFooter";
 import { GenericToolClient } from "@/components/tools/GenericToolClient";
 import { CtaLinksSection } from "@/components/tools/CtaLinksSection";
 import { getLatestKeywordPages } from "@/lib/zh-keyword-data";
 import { BASE_URL } from "@/config/site";
+import { zhSeoTitle } from "@/config/zh-brand";
+
+const pageTitle = zhSeoTitle("免费选题生成器");
 
 export const metadata: Metadata = {
-  title: "免费选题生成器",
+  title: { absolute: pageTitle },
   description:
     "输入领域，一键生成 TikTok、YouTube 爆款视频选题。免费无需注册。",
   openGraph: {
-    title: "免费选题生成器 | ToolEagle",
+    title: pageTitle,
     description: "输入领域，一键生成爆款视频选题。免费无需注册。",
     url: `${BASE_URL}/zh/tools/idea-generator`
   }
@@ -26,14 +27,12 @@ export default async function ZhIdeaGeneratorPage() {
 
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50 flex flex-col">
-      <SiteHeader />
       <div className="flex-1">
         <GenericToolClient
           slug="tiktok-idea-generator"
           relatedAside={ctaLinks.length > 0 ? <CtaLinksSection links={ctaLinks} /> : undefined}
         />
       </div>
-      <SiteFooter />
     </main>
   );
 }

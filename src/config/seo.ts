@@ -10,6 +10,11 @@ export const toolSeo: Record<
     title: "TikTok Caption Generator – Create Viral Captions Instantly",
     description: "Generate engaging TikTok captions in seconds. Free caption generator for creators. Add hooks, emojis and hashtags."
   },
+  "ai-caption-generator": {
+    title: "AI Caption Generator – Full Post Packages for Short-Form Video",
+    description:
+      "Generate hooks, talking points, captions, CTAs, hashtags, and why-it-works notes in one run. Built for TikTok, Reels, and Shorts."
+  },
   "hashtag-generator": {
     title: "Hashtag Generator – Free Hashtags for TikTok, Reels & Shorts",
     description: "Generate niche-friendly hashtags for TikTok, Reels and Shorts. Free hashtag generator for creators."

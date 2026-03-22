@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
 import type { AffiliateTool } from "@/config/affiliate-tools";
+import { getGoUrl } from "@/config/affiliate-tools";
 
 type Props = {
   tools: AffiliateTool[];
@@ -38,7 +40,6 @@ export function ZhComparisonTable({ tools, keyword, pageSlug, onToolClick }: Pro
         event_data: { tool_id: tool.id, source: "comparison_table", keyword: keyword || null, page_slug: pageSlug || null }
       })
     }).catch(() => {});
-    if (tool.url) window.open(tool.url, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -91,13 +92,15 @@ export function ZhComparisonTable({ tools, keyword, pageSlug, onToolClick }: Pro
                   )}
                 </td>
                 <td className="py-3 px-4">
-                  <button
-                    type="button"
+                  <Link
+                    href={getGoUrl(tool)}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => handleClick(tool)}
-                    className="rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-slate-800"
+                    className="inline-block rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-slate-800"
                   >
-                    立即试用
-                  </button>
+                    Try this tool
+                  </Link>
                 </td>
               </tr>
             ))}

@@ -20,6 +20,7 @@ import { CtaLinksSection } from "@/components/tools/CtaLinksSection";
 import { LimitReachedModal } from "@/components/LimitReachedModal";
 import { LoginPromptModal } from "@/components/LoginPromptModal";
 import { ExitIntentCta } from "@/components/tools/ExitIntentCta";
+import { ZhCtaCaptureBlock } from "@/components/zh/ZhCtaCaptureBlock";
 import { useAuth } from "@/hooks/useAuth";
 import { useCountry } from "@/hooks/useCountry";
 
@@ -45,9 +46,9 @@ const TITLE_EXAMPLES = [
   }
 ];
 
-type Props = { relatedAside?: ReactNode; ctaLinks?: { href: string; label: string }[] };
+type Props = { relatedAside?: ReactNode; ctaLinks?: { href: string; label: string }[]; showZhInlineLead?: boolean };
 
-export function TitleGeneratorClient({ relatedAside, ctaLinks }: Props) {
+export function TitleGeneratorClient({ relatedAside, ctaLinks, showZhInlineLead }: Props) {
   const tCommon = useTranslations("common");
   const tTool = useTranslations("toolPages");
   const tTitle = useTranslations("toolPages.titleGenerator");
@@ -272,6 +273,7 @@ export function TitleGeneratorClient({ relatedAside, ctaLinks }: Props) {
             tips={[tTitle("proTip1"), tTitle("proTip2"), tTitle("proTip3")]}
           />
           {ctaLinks && ctaLinks.length > 0 && <CtaLinksSection links={ctaLinks} />}
+          {showZhInlineLead && <ZhCtaCaptureBlock keyword="爆款标题" inline />}
           {relatedAside}
         </>
       }

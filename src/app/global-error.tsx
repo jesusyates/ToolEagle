@@ -20,7 +20,7 @@ export default function GlobalError({
   return (
     <html lang="en">
       <body>
-        <div className="min-h-screen flex flex-col items-center justify-center gap-4 p-8 bg-white text-slate-900">
+        <div className="min-h-screen flex flex-col items-center justify-center gap-4 p-8 bg-page text-slate-900">
           <h1 className="text-xl font-semibold">Something went wrong</h1>
           <DelegatedButton
             onClick={reset}

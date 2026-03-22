@@ -11,7 +11,7 @@ export function getWelcomeEmailHtml(affiliateLinks?: AffiliateLink[]): string {
     affiliateLinks && affiliateLinks.length > 0
       ? `
   <h2 style="color:#0f172a;font-size:1.1em">🛠 推荐工具（提高效率）</h2>
-  <p>以下工具可大幅提升创作效率，限时免费：</p>
+  <p>以下工具由 ToolEagle 精选推荐，可大幅提升创作效率，限时免费：</p>
   <ul style="list-style:none;padding:0">
     ${affiliateLinks
       .slice(0, 3)

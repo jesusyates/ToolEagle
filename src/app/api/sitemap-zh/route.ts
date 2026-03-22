@@ -40,7 +40,45 @@ export async function GET() {
       priority: 0.85
     }));
 
+    const douyinClusterUrls = [
+      "/zh/douyin",
+      "/zh/douyin/hub",
+      "/zh/douyin-caption-generator",
+      "/zh/douyin-hook-generator",
+      "/zh/douyin-script-generator",
+      "/zh/douyin-topic-generator",
+      "/zh/douyin-comment-cta-generator",
+      "/zh/douyin-structure-generator",
+      "/zh/douyin-hooks",
+      "/zh/douyin-caption-examples",
+      "/zh/douyin-script-templates",
+      "/zh/douyin-topic-ideas",
+      "/zh/douyin-content-ideas",
+      "/zh/douyin-viral-hooks"
+    ].map((path) => ({
+      url: `${BASE_URL}${path}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.92
+    }));
+
     const zhStaticUrls = [
+      { url: `${BASE_URL}/zh`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.95 },
+      { url: `${BASE_URL}/zh/pricing`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.85 },
+      {
+        url: `${BASE_URL}/zh/tiktok-caption-generator`,
+        lastModified: now,
+        changeFrequency: "weekly" as const,
+        priority: 0.9
+      },
+      { url: `${BASE_URL}/zh/hook-generator`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9 },
+      { url: `${BASE_URL}/zh/ai-caption-generator`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9 },
+      {
+        url: `${BASE_URL}/zh/tiktok-growth-kit`,
+        lastModified: now,
+        changeFrequency: "weekly" as const,
+        priority: 0.88
+      },
       { url: `${BASE_URL}/zh/recent`, lastModified: now, changeFrequency: "daily" as const, priority: 0.9 },
       { url: `${BASE_URL}/zh/sitemap`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9 },
       { url: `${BASE_URL}/zh/blog`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.85 },
@@ -62,7 +100,15 @@ export async function GET() {
       priority: 0.75
     }));
 
-    const urls = [...hubUrls, ...platformHubUrls, ...zhStaticUrls, ...childUrls, ...keywordUrls, ...blogUrls];
+    const urls = [
+      ...hubUrls,
+      ...platformHubUrls,
+      ...douyinClusterUrls,
+      ...zhStaticUrls,
+      ...childUrls,
+      ...keywordUrls,
+      ...blogUrls
+    ];
     const xml = sitemapToXml(urls);
 
     return new NextResponse(xml, {

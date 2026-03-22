@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { SiteHeader } from "@/app/_components/SiteHeader";
-import { SiteFooter } from "@/app/_components/SiteFooter";
 import {
   getMatchingAffiliateTools,
   getAffiliateTools,
@@ -11,16 +9,19 @@ import { ZhToolRecommendationBlock } from "@/components/zh/ZhToolRecommendationB
 import { ZhCtaCaptureBlock } from "@/components/zh/ZhCtaCaptureBlock";
 import { ZhAuthorBlock } from "@/components/zh/ZhAuthorBlock";
 import { ZhFreshnessBlock } from "@/components/zh/ZhFreshnessBlock";
-import { ZhShareSnippetGenerator } from "@/components/zh/ZhShareSnippetGenerator";
-import { ZhCopySharePackWithLog } from "@/components/zh/ZhCopySharePackWithLog";
-import { ZhRedditReadyBlock } from "@/components/zh/ZhRedditReadyBlock";
+import { TrustFooterBlock } from "@/components/seo/TrustFooterBlock";
+import { ShareStrategyBlockWithLog } from "@/components/seo/ShareStrategyBlockWithLog";
+import { CreatorsUsingBlock } from "@/components/seo/CreatorsUsingBlock";
 import { ZhCopyButton } from "@/components/zh/ZhCopyButton";
 import { getIntroVariant, getCtaVariant } from "@/lib/zh-uniqueness";
 import { getExpansionBlock } from "@/lib/zh-content-expansion";
+import { getSourceCitation } from "@/lib/source-citations";
 import { buildBreadcrumbSchema } from "@/lib/zh-breadcrumb-schema";
 import { buildZhArticleSchema } from "@/lib/zh-ctr";
 import { DirectAnswerBlock } from "@/components/seo/DirectAnswerBlock";
+import { DataSignalBlock } from "@/components/seo/DataSignalBlock";
 import { ZhToolEmbeddingSentence } from "@/components/seo/ZhToolEmbeddingSentence";
+import { getDataSignals, inferDataSignalTopic } from "@/lib/data-signals";
 import { BASE_URL } from "@/config/site";
 import type { KeywordEntry } from "@/lib/keyword-patterns";
 import type { ZhKeywordContent } from "@/lib/zh-keyword-content";
@@ -87,6 +88,7 @@ export function ZhBlogPageTemplate({ entry, content, relatedBlogs }: Props) {
   const introVariant = getIntroVariant(entry.slug);
   const ctaVariant = getCtaVariant(entry.slug);
   const expansionBlock = getExpansionBlock(entry.slug);
+  const sourceCitation = getSourceCitation(entry.slug, "zh");
 
   const pageUrl = `${BASE_URL}/zh/blog/${entry.slug}`;
   const articleSchema = buildZhArticleSchema(
@@ -104,7 +106,7 @@ export function ZhBlogPageTemplate({ entry, content, relatedBlogs }: Props) {
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col relative">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col relative">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -113,7 +115,6 @@ export function ZhBlogPageTemplate({ entry, content, relatedBlogs }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <SiteHeader />
 
       <div className="flex-1">
         <article className="container py-12">
@@ -133,11 +134,15 @@ export function ZhBlogPageTemplate({ entry, content, relatedBlogs }: Props) {
             </h1>
 
             <DirectAnswerBlock answer={content.directAnswer || ""} lang="zh" />
+            <DataSignalBlock
+              signals={getDataSignals(inferDataSignalTopic(entry.slug, entry.keyword), "zh", 2, entry.slug)}
+              lang="zh"
+            />
 
             <ZhFreshnessBlock />
 
             <div className="mt-6 prose prose-slate max-w-none">
-              <p className="text-slate-600">{introVariant}</p>
+              <p className="text-slate-600">{sourceCitation}{introVariant}</p>
               <p className="text-lg text-slate-700 leading-relaxed mt-4">{content.intro}</p>
               <ZhToolEmbeddingSentence
                 toolSlug={entry.platform === "tiktok" ? "tiktok-caption-generator" : entry.platform === "youtube" ? "youtube-title-generator" : "instagram-caption-generator"}
@@ -236,31 +241,21 @@ export function ZhBlogPageTemplate({ entry, content, relatedBlogs }: Props) {
             )}
 
             <ZhAuthorBlock />
+            <TrustFooterBlock lang="zh" />
 
-            <ZhCopySharePackWithLog
-              title={headline}
-              oneLiner={content.directAnswer || content.description || content.intro?.slice(0, 120) || ""}
-              pageUrl={pageUrl}
-              keyword={entry.keyword}
-            />
-
-            <ZhShareSnippetGenerator
+            <ShareStrategyBlockWithLog
               title={headline}
               oneLiner={content.directAnswer || content.description || content.intro?.slice(0, 120) || ""}
               pageUrl={pageUrl}
               slug={entry.slug}
+              lang="zh"
+              keyword={entry.keyword}
             />
 
-            <ZhRedditReadyBlock
-              title={headline}
-              oneLiner={content.directAnswer || content.description || content.intro?.slice(0, 120) || ""}
-              pageUrl={pageUrl}
-            />
+            <CreatorsUsingBlock slug={entry.slug} pathType="zh-search" lang="zh" />
           </div>
         </article>
       </div>
-
-      <SiteFooter />
     </main>
   );
 }

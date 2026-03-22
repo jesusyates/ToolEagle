@@ -56,7 +56,7 @@ export default async function CompareSlugPage({ params }: Props) {
   const page = getComparePage(slug);
   if (page) {
     return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
 
       <div className="flex-1">
@@ -179,7 +179,7 @@ export default async function CompareSlugPage({ params }: Props) {
   const pair = getComparePair(slug);
   if (pair) {
     return (
-      <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+      <main className="min-h-screen bg-page text-slate-900 flex flex-col">
         <SiteHeader />
         <div className="flex-1">
           <ToolComparisonPage toolA={pair.toolA} toolB={pair.toolB} slug={slug} />

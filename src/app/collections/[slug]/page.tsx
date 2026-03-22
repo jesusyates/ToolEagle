@@ -21,7 +21,7 @@ export default async function CollectionPage({ params }: Props) {
 
   if (!user) {
     return (
-      <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+      <main className="min-h-screen bg-page text-slate-900 flex flex-col">
         <SiteHeader />
         <div className="flex-1 container pt-10">
           <p className="text-slate-600">Please log in to view your collection.</p>
@@ -66,7 +66,7 @@ export default async function CollectionPage({ params }: Props) {
     .filter(Boolean) as typeof saves;
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
 
       <div className="flex-1">

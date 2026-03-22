@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { SiteHeader } from "@/app/_components/SiteHeader";
-import { SiteFooter } from "@/app/_components/SiteFooter";
 import { getRecentZhPagesWithKeywords } from "@/lib/zh-sitemap-data";
 import { ZhRelatedRecommendations } from "@/components/zh/ZhRelatedRecommendations";
 import { getZhPageMetadata } from "@/lib/zh-metadata";
@@ -23,8 +21,7 @@ export default async function ZhRecentPage({ searchParams }: Props) {
   const recent = all.slice(start, start + PER_PAGE);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
-      <SiteHeader />
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
 
       <div className="flex-1">
         <article className="container py-12">
@@ -108,7 +105,6 @@ export default async function ZhRecentPage({ searchParams }: Props) {
         </article>
       </div>
 
-      <SiteFooter />
     </main>
   );
 }

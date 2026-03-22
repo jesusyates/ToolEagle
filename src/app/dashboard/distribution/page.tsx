@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { buildLoginRedirect } from "@/lib/auth/login-redirect";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { DistributionClient } from "./DistributionClient";
@@ -22,7 +23,7 @@ export default async function DistributionDashboardPage() {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect("/login?next=/dashboard/distribution");
+    redirect(buildLoginRedirect("/dashboard/distribution"));
   }
 
   const keywords = getLatestKeywordPages(20);
@@ -44,7 +45,7 @@ export default async function DistributionDashboardPage() {
   });
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
 
       <div className="flex-1">

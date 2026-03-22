@@ -3,7 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getAffiliateTools, getPayoutPerClick } from "@/config/affiliate-tools";
 
-const ALLOWED_EVENTS = ["tool_click", "tool_view", "email_submit", "page_view"] as const;
+const ALLOWED_EVENTS = ["tool_click", "tool_view", "email_submit", "page_view", "share_click"] as const;
 
 export async function POST(request: NextRequest) {
   try {

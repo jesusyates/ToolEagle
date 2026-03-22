@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
 import type { AffiliateTool } from "@/config/affiliate-tools";
-import { getCtaVariant } from "@/config/zh-cta-variants";
+import { useCountry } from "@/hooks/useCountry";
+import { getToolCtaLabel, getCtaBenefit } from "@/config/zh-cta-variants";
+import { getGoUrl } from "@/config/affiliate-tools";
 
 type Props = {
   tools: AffiliateTool[];
@@ -13,46 +16,38 @@ type Props = {
   ctaIndex?: number;
   /** V68: High intent page - stronger styling */
   isHighIntent?: boolean;
-  /** V68: Whether affiliate tools are configured (for debug warning) */
+  /** V68: Whether affiliate env is configured */
   hasAffiliate?: boolean;
 };
 
-function trackToolView(toolId: string, keyword?: string, pageSlug?: string) {
+function trackToolView(toolId: string, keyword?: string, pageSlug?: string, country?: string) {
   fetch("/api/zh/analytics", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       event_type: "tool_view",
-      event_data: { tool_id: toolId, keyword: keyword || null, page_slug: pageSlug || null }
+      event_data: { tool_id: toolId, keyword: keyword || null, page_slug: pageSlug || null, country: country || null }
     })
   }).catch(() => {});
 }
 
 export function ZhToolRecommendationBlock({ tools, keyword, pageSlug, ctaIndex = 0, isHighIntent, hasAffiliate }: Props) {
+  const country = useCountry();
   useEffect(() => {
-    tools?.forEach((t) => trackToolView(t.id, keyword, pageSlug));
-  }, [tools, keyword, pageSlug]);
+    tools?.forEach((t) => trackToolView(t.id, keyword, pageSlug, country));
+  }, [tools, keyword, pageSlug, country]);
 
-  if (!tools || tools.length === 0) {
-    if (hasAffiliate) return null;
-    return (
-      <section className="mt-10 rounded-2xl border-2 border-amber-200 bg-amber-50/80 p-6" aria-label="联盟工具">
-        <p className="text-amber-800 font-medium">⚠️ 未配置联盟链接，当前无法产生收入</p>
-        <p className="mt-1 text-sm text-slate-600">请在 Vercel 环境变量中配置 AFFILIATE_TOOL_1～5</p>
-      </section>
-    );
-  }
+  if (!tools || tools.length === 0) return null;
 
-  const handleClick = (tool: AffiliateTool) => {
+  const handleClick = (tool: AffiliateTool, ctaLabel: string) => {
     fetch("/api/zh/analytics", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         event_type: "tool_click",
-        event_data: { tool_id: tool.id, keyword: keyword || null, page_slug: pageSlug || null }
+        event_data: { tool_id: tool.id, keyword: keyword || null, page_slug: pageSlug || null, cta_variant: ctaLabel, country: country || null }
       })
     }).catch(() => {});
-    if (tool.url) window.open(tool.url, "_blank", "noopener,noreferrer");
   };
 
   const displayTools = tools.slice(0, 3);
@@ -70,10 +65,14 @@ export function ZhToolRecommendationBlock({ tools, keyword, pageSlug, ctaIndex =
       <p className="mt-2 text-sm text-slate-600">
         {keyword ? `实现「${keyword}」更高效，试试这些工具：` : "以下工具可大幅提升创作效率："}
       </p>
-      <p className="mt-1 text-xs text-amber-700 font-medium">限时免费 · 正在被 10,000+ 创作者使用</p>
+      <p className="mt-1 text-xs text-amber-700 font-medium">
+        Recommended by ToolEagle · Used by creators · Popular for TikTok growth
+        {displayTools[0] && (displayTools[0].isBestChoice || displayTools[0].stackRole === "primary") && " · Most creators use this tool"}
+      </p>
       <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {displayTools.map((tool, i) => {
-          const ctaText = getCtaVariant(ctaIndex + i);
+          const ctaLabel = getToolCtaLabel(ctaIndex + i);
+          const benefit = getCtaBenefit(i);
           const isBest = i === 0;
 
           return (
@@ -116,13 +115,16 @@ export function ZhToolRecommendationBlock({ tools, keyword, pageSlug, ctaIndex =
                 )}
               </div>
               <p className="mt-2 text-sm text-slate-600">{tool.description}</p>
-              <button
-                type="button"
-                onClick={() => handleClick(tool)}
-                className="mt-3 w-full rounded-lg bg-amber-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-amber-600 transition"
+              <Link
+                href={getGoUrl(tool)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => handleClick(tool, ctaLabel)}
+                className="mt-3 block w-full rounded-lg bg-amber-500 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-amber-600 transition"
               >
-                👉 {ctaText}
-              </button>
+                👉 {ctaLabel}
+              </Link>
+              <p className="mt-1.5 text-xs text-slate-500 text-center">{benefit}</p>
             </div>
           );
         })}

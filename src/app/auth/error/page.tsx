@@ -4,7 +4,7 @@ import { SiteFooter } from "../../_components/SiteFooter";
 
 export default function AuthErrorPage() {
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
       <div className="flex-1 flex items-center justify-center">
         <div className="text-center px-4">

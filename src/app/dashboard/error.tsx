@@ -13,7 +13,7 @@ export default function DashboardError({
   const isProjects = error.message?.includes("projects") || error.message?.includes("relation");
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-white">
+    <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-page">
       <div className="max-w-md w-full text-center">
         <h1 className="text-xl font-semibold text-slate-900">Something went wrong</h1>
         <p className="mt-2 text-sm text-slate-600">

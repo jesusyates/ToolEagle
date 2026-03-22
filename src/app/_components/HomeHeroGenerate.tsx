@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { UpgradeLink } from "@/components/monetization/UpgradeLink";
 
 /**
  * V71: Homepage focus shift - direct input + generate button as first screen
@@ -48,13 +49,19 @@ export function HomeHeroGenerate() {
             onClick={handleGenerate}
             className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-sky-600 px-5 py-3.5 text-base font-semibold text-white shadow-sm hover:bg-sky-700 transition duration-150"
           >
-            Generate TikTok Captions
+            {t("heroGenerateCta")}
             <span className="text-sky-200">→</span>
           </button>
+          <div className="mt-3 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+            <p className="text-xs font-medium text-slate-700">{t("heroUpgradeTeaser")}</p>
+            <UpgradeLink className="inline-flex justify-center rounded-xl border-2 border-slate-900 bg-white px-4 py-2 text-sm font-bold text-slate-900 hover:bg-slate-50">
+              {t("heroUpgradeLink")}
+            </UpgradeLink>
+          </div>
         </div>
 
         <p className="mt-3 text-xs text-slate-500">
-          No signup required · Free to use · Copy & share to Reddit / X
+          {t("heroFootnote")}
         </p>
 
         <div className="mt-6 flex flex-wrap gap-2">

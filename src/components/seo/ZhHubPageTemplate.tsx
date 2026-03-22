@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { SiteHeader } from "@/app/_components/SiteHeader";
-import { SiteFooter } from "@/app/_components/SiteFooter";
 import {
   getHubOverview,
   getHubChildTopics,
@@ -39,9 +37,7 @@ export function ZhHubPageTemplate({ pageType, platform }: Props) {
   const title = getHubTitle(pageType, platform);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
-      <SiteHeader />
-
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <div className="flex-1">
         <article className="container py-12">
           <div className="max-w-3xl">
@@ -153,8 +149,6 @@ export function ZhHubPageTemplate({ pageType, platform }: Props) {
           </div>
         </article>
       </div>
-
-      <SiteFooter />
     </main>
   );
 }

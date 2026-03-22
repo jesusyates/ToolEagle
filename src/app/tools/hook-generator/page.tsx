@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { HookGeneratorClient } from "./pageClient";
@@ -37,6 +38,7 @@ export default function HookGeneratorPage() {
     <main className="min-h-screen bg-slate-950 text-slate-50 flex flex-col">
       <SiteHeader />
       <div className="flex-1">
+        <Suspense fallback={<div className="container pt-10 pb-16 min-h-[400px]" />}>
         <HookGeneratorClient
           relatedAside={
             <>
@@ -47,6 +49,7 @@ export default function HookGeneratorPage() {
             </>
           }
         />
+        </Suspense>
         <ToolStructuredData
           slug={slug}
           name="Hook Generator"

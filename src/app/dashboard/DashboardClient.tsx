@@ -7,6 +7,7 @@ import { AuthSuccessBroadcast } from "@/components/auth/AuthSuccessBroadcast";
 import { useSearchParams } from "next/navigation";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
+import { ZH } from "@/lib/zh-site/paths";
 import { FREE_DAILY_LIMIT } from "@/lib/usage";
 import { ToolCopyButton } from "@/components/tools/ToolCopyButton";
 import { useSyncOnLogin } from "@/hooks/useSyncOnLogin";
@@ -14,6 +15,7 @@ import { safeCopyToClipboard } from "@/lib/clipboard";
 import { createClient } from "@/lib/supabase/client";
 import { trackConversion } from "@/lib/analytics";
 import { Star, History, FolderOpen } from "lucide-react";
+import { GrowthMissionBlock } from "@/components/dashboard/GrowthMissionBlock";
 
 type Favorite = {
   id: string;
@@ -45,7 +47,9 @@ export function DashboardClient({
   projects: initialProjects,
   usageToday,
   plan,
-  onboardingCompleted = true
+  onboardingCompleted = true,
+  variant = "en",
+  showRevenueNav = false
 }: {
   userEmail: string;
   favorites: Favorite[];
@@ -54,10 +58,16 @@ export function DashboardClient({
   usageToday: number;
   plan: "free" | "pro";
   onboardingCompleted?: boolean;
+  /** `zh`：中文顶栏/底栏，链接走 `/zh/dashboard/*` */
+  variant?: "en" | "zh";
+  /** 全站收入 / 联盟运营页，仅 `OPERATOR_*` 用户显示 */
+  showRevenueNav?: boolean;
 }) {
   useSyncOnLogin();
   const searchParams = useSearchParams();
   const t = useTranslations("dashboard");
+  const isZh = variant === "zh";
+  const dashPrefix = isZh ? "/zh" : "";
 
   useEffect(() => {
     const fromSignup = searchParams.get("from") === "signup";
@@ -72,9 +82,9 @@ export function DashboardClient({
   }, [searchParams, onboardingCompleted]);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <AuthSuccessBroadcast />
-      <SiteHeader />
+      {!isZh ? <SiteHeader /> : null}
 
       <div className="flex-1">
         <section className="container pt-10 pb-16">
@@ -90,32 +100,40 @@ export function DashboardClient({
             </div>
             <div className="flex items-center gap-3">
               <Link
-                href="/dashboard/settings"
+                href={`${dashPrefix}/dashboard/settings`}
                 className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
               >
                 {t("creatorProfile")}
               </Link>
               <Link
-                href="/dashboard/new-post"
+                href={`${dashPrefix}/dashboard/billing`}
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                {isZh ? "算力 / 订单" : "Credits / orders"}
+              </Link>
+              <Link
+                href={`${dashPrefix}/dashboard/new-post`}
                 className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
               >
                 {t("writePost")}
               </Link>
               <Link
-                href="/dashboard/distribution"
+                href={isZh ? "/zh/dashboard/distribution" : "/dashboard/distribution"}
                 className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
               >
                 🚀 {t("distribution")}
               </Link>
-              <Link
-                href="/dashboard/revenue"
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-              >
-                💰 {t("revenue")}
-              </Link>
+              {showRevenueNav && (
+                <Link
+                  href={isZh ? "/zh/dashboard/revenue" : "/dashboard/revenue"}
+                  className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+                >
+                  💰 {t("revenue")}
+                </Link>
+              )}
               {plan === "free" && (
                 <Link
-                  href="/pricing"
+                  href={isZh ? ZH.pricing : "/pricing"}
                   className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800"
                 >
                   {t("upgradeToPro")}
@@ -123,6 +141,10 @@ export function DashboardClient({
               )}
             </div>
           </div>
+
+          {!isZh && (
+            <GrowthMissionBlock distributionHref="/dashboard/distribution" />
+          )}
 
           {plan === "free" && (
             <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/50 p-4">
@@ -146,7 +168,7 @@ export function DashboardClient({
                     {t("noProjectsHint")}
                   </p>
                   <Link
-                    href="/tools"
+                    href={isZh ? ZH.douyin : "/tools"}
                     className="mt-4 inline-flex rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
                   >
                     {t("browseTools")}
@@ -192,7 +214,7 @@ export function DashboardClient({
                     {t("noFavoritesHint")}
                   </p>
                   <Link
-                    href="/tools"
+                    href={isZh ? ZH.douyin : "/tools"}
                     className="mt-4 inline-flex rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
                   >
                     {t("browseTools")}
@@ -267,7 +289,7 @@ export function DashboardClient({
                     {t("noHistoryHint")}
                   </p>
                   <Link
-                    href="/tools"
+                    href={isZh ? ZH.douyin : "/tools"}
                     className="mt-4 inline-flex rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
                   >
                     {t("browseTools")}
@@ -301,7 +323,7 @@ export function DashboardClient({
         </section>
       </div>
 
-      <SiteFooter />
+      {!isZh ? <SiteFooter /> : null}
     </main>
   );
 }

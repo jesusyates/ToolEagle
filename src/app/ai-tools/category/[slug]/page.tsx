@@ -47,7 +47,7 @@ export default async function AIToolsCategoryPage({ params }: Props) {
   const relatedCategories = AI_TOOL_CATEGORIES.filter((c) => c.slug !== slug).slice(0, 6);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
       <div className="flex-1">
         <article className="container max-w-3xl py-12">

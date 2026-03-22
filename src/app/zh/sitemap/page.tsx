@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { SiteHeader } from "@/app/_components/SiteHeader";
-import { SiteFooter } from "@/app/_components/SiteFooter";
 import { getAllZhSitemapEntries, getZhSitemapByPlatform } from "@/lib/zh-sitemap-data";
 import { ZhRelatedRecommendations } from "@/components/zh/ZhRelatedRecommendations";
 import { getKeywordsByPlatformGroupedByGoal, getAllKeywordPagesWithMeta } from "@/lib/zh-keyword-data";
@@ -26,8 +24,7 @@ export default function ZhSitemapPage() {
   const total = guideCount + keywordCount;
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
-      <SiteHeader />
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
 
       <div className="flex-1">
         <article className="container py-12">
@@ -142,7 +139,6 @@ export default function ZhSitemapPage() {
         </article>
       </div>
 
-      <SiteFooter />
     </main>
   );
 }

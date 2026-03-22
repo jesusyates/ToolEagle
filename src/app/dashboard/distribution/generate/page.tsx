@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { buildLoginRedirect } from "@/lib/auth/login-redirect";
 import { SiteHeader } from "../../../_components/SiteHeader";
 import { SiteFooter } from "../../../_components/SiteFooter";
 import { DistributionGenerateClient } from "./DistributionGenerateClient";
@@ -20,11 +21,11 @@ export default async function DistributionGeneratePage() {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect("/login?next=/dashboard/distribution/generate");
+    redirect(buildLoginRedirect("/dashboard/distribution/generate"));
   }
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
 
       <div className="flex-1">

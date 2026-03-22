@@ -4,8 +4,6 @@
  */
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SiteHeader } from "@/app/_components/SiteHeader";
-import { SiteFooter } from "@/app/_components/SiteFooter";
 import {
   getKeywordsByPlatformGroupedByGoal,
   getKeywordsByPlatformGroupedByAudience,
@@ -59,8 +57,7 @@ export default async function ZhPlatformHubPage({ params }: Props) {
   const pName = PLATFORM_NAMES[platform as keyof typeof PLATFORM_NAMES];
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
-      <SiteHeader />
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
 
       <div className="flex-1">
         <article className="container py-12">
@@ -169,7 +166,6 @@ export default async function ZhPlatformHubPage({ params }: Props) {
         </article>
       </div>
 
-      <SiteFooter />
     </main>
   );
 }

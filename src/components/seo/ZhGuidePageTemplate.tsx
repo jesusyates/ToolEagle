@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { SiteHeader } from "@/app/_components/SiteHeader";
-import { SiteFooter } from "@/app/_components/SiteFooter";
 import { ToolCard } from "@/components/tools/ToolCard";
 import { tools } from "@/config/tools";
 import { getMatchingAffiliateTools, getAffiliateTools, type AffiliateTool } from "@/config/affiliate-tools";
@@ -15,6 +13,9 @@ import { ZhCaseProofBlock } from "@/components/zh/ZhCaseProofBlock";
 import { ZhExitIntentPopup } from "@/components/zh/ZhExitIntentPopup";
 import { ZhAuthorBlock } from "@/components/zh/ZhAuthorBlock";
 import { ZhFreshnessBlock } from "@/components/zh/ZhFreshnessBlock";
+import { TrustFooterBlock } from "@/components/seo/TrustFooterBlock";
+import { getExpansionBlock } from "@/lib/zh-content-expansion";
+import { getSourceCitation } from "@/lib/source-citations";
 import { getGuidePrompts } from "@/config/guide-content";
 import type { GuidePageType } from "@/config/traffic-topics";
 import type { ZhPageContent } from "@/lib/generate-zh-content";
@@ -30,7 +31,9 @@ import {
   getZhCuriosityLinks
 } from "@/lib/zh-ctr";
 import { DirectAnswerBlock } from "@/components/seo/DirectAnswerBlock";
+import { DataSignalBlock } from "@/components/seo/DataSignalBlock";
 import { ZhToolEmbeddingSentence } from "@/components/seo/ZhToolEmbeddingSentence";
+import { getDataSignals, inferDataSignalTopic } from "@/lib/data-signals";
 import { buildBreadcrumbSchema } from "@/lib/zh-breadcrumb-schema";
 import { BASE_URL } from "@/config/site";
 
@@ -166,9 +169,10 @@ export function ZhGuidePageTemplate({
     { name: ctrTitle, url: `${ZH_BASE_PATHS[pageType]}/${topic}` }
   ];
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
+  const sourceCitation = getSourceCitation(topic, "zh");
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col relative">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col relative">
       <ZhPageViewTracker keyword={ctrTitle} slug={topic} />
       <ZhStickyCta />
       <script
@@ -185,7 +189,6 @@ export function ZhGuidePageTemplate({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <SiteHeader />
 
       <div className="flex-1">
         <article className="container py-12 lg:pr-32">
@@ -216,8 +219,13 @@ export function ZhGuidePageTemplate({
             <ZhFreshnessBlock />
 
             <DirectAnswerBlock answer={content.directAnswer || ""} lang="zh" />
+            <DataSignalBlock
+              signals={getDataSignals(inferDataSignalTopic(topic), "zh", 2, topic)}
+              lang="zh"
+            />
+
             <div className="mt-6 prose prose-slate max-w-none">
-              <p className="text-lg text-slate-700 leading-relaxed">{content.intro}</p>
+              <p className="text-lg text-slate-700 leading-relaxed">{sourceCitation}{content.intro}</p>
               <ZhToolEmbeddingSentence
                 toolSlug={primaryTool}
                 keyword={primaryTool.includes("caption") ? "爆款文案" : primaryTool.includes("hook") ? "钩子" : primaryTool.includes("title") ? "标题" : "内容"}
@@ -226,6 +234,8 @@ export function ZhGuidePageTemplate({
             </div>
 
             <ZhToolRecommendationBlock tools={toolsForPage} keyword={ctrTitle} pageSlug={`${pageType}-${topic}`} hasAffiliate={hasAffiliate} />
+
+            <ZhCaseProofBlock keyword={ctrTitle} />
 
             {content.guide && (
               <section className="mt-10 prose prose-slate max-w-none">
@@ -314,6 +324,10 @@ export function ZhGuidePageTemplate({
               </section>
             )}
 
+            <section className="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-5">
+              <p className="text-slate-700 leading-relaxed">{getExpansionBlock(topic)}</p>
+            </section>
+
             <section className="mt-12">
               <h2 className="text-xl font-semibold text-slate-900">工具</h2>
               <p className="mt-2 text-slate-600">
@@ -327,8 +341,10 @@ export function ZhGuidePageTemplate({
                     icon={t.icon}
                     name={t.name}
                     description={t.description}
+                    descriptionZh={t.descriptionZh}
                     category={t.category}
                     badge={t.isPopular ? "Popular" : undefined}
+                    locale="zh"
                   />
                 ))}
               </div>
@@ -420,6 +436,7 @@ export function ZhGuidePageTemplate({
             )}
 
             <ZhAuthorBlock />
+            <TrustFooterBlock lang="zh" />
 
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
@@ -440,7 +457,6 @@ export function ZhGuidePageTemplate({
       </div>
 
       <ZhExitIntentPopup keyword={ctrTitle} />
-      <SiteFooter />
     </main>
   );
 }

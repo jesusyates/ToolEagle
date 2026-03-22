@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default async function InstagramToolsLandingPage() {
   const posts = await getAllPosts();
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
       <PlatformToolsPage
         platform="instagram"

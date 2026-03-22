@@ -12,16 +12,20 @@ async function sendWelcomeEmail(to: string, keyword?: string | null): Promise<bo
 
   const allTools = getAffiliateTools();
   const isMonetizationIntent = keyword && /赚钱|变现|引流|增长|涨粉/.test(keyword);
-  const affiliateLinks = (isMonetizationIntent
+  const sorted = isMonetizationIntent
     ? [...allTools].sort((a, b) => {
         const aHigh = a.priceTier === "high-ticket" ? 1 : 0;
         const bHigh = b.priceTier === "high-ticket" ? 1 : 0;
         return bHigh - aHigh;
       })
-    : allTools
-  )
+    : allTools;
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://www.tooleagle.com";
+  const affiliateLinks = sorted
     .slice(0, 3)
-    .map((t) => ({ name: t.name, url: t.url }));
+    .map((t) => ({
+      name: t.name,
+      url: t.goSlug ? `${baseUrl}/go/${t.goSlug}` : t.url
+    }));
 
   try {
     const resend = new Resend(apiKey);

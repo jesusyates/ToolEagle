@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { buildLoginRedirect } from "@/lib/auth/login-redirect";
 import Link from "next/link";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
@@ -14,7 +15,7 @@ export default async function SettingsPage() {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect("/login?next=/dashboard/settings");
+    redirect(buildLoginRedirect("/dashboard/settings"));
   }
 
   const { data: profile } = await supabase
@@ -24,7 +25,7 @@ export default async function SettingsPage() {
     .single();
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
 
       <div className="flex-1">

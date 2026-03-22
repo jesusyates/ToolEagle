@@ -1,5 +1,6 @@
 import { redirect, notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { buildLoginRedirect } from "@/lib/auth/login-redirect";
 import { ProjectDetailClient } from "./ProjectDetailClient";
 
 export const dynamic = "force-dynamic";
@@ -15,7 +16,7 @@ export default async function ProjectPage({
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect("/login?next=/projects/" + (await params).id);
+    redirect(buildLoginRedirect("/projects/" + (await params).id));
   }
 
   const { id } = await params;

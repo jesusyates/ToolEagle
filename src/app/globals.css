@@ -9,6 +9,8 @@
   --color-accent: #0284c7;
   --color-accent-hover: #0369a1;
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+  /** Page canvas — soft neutral (not pure white) for long reading sessions */
+  --page-bg: hsl(220 14% 96%);
 }
 
 *,
@@ -23,9 +25,15 @@ body {
   margin: 0;
 }
 
+html {
+  background-color: var(--page-bg);
+  /* 减少纵向滚动条出现/消失时整页宽度抖动（顶栏 flex 换行感） */
+  scrollbar-gutter: stable;
+}
+
 body {
   font-family: var(--font-sans);
-  background: #ffffff;
+  background-color: var(--page-bg);
   color: var(--color-brand);
 }
 

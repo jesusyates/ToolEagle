@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SiteHeader } from "@/app/_components/SiteHeader";
-import { SiteFooter } from "@/app/_components/SiteFooter";
 import { getZhSitemapByPlatform, getAllZhSitemapEntries } from "@/lib/zh-sitemap-data";
 import { PLATFORM_NAMES } from "@/lib/zh-hub-data";
 import type { GuidePageType } from "@/config/traffic-topics";
@@ -39,8 +37,7 @@ export default async function ZhSitemapTypePage({ params }: Props) {
   const total = allForType.length;
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
-      <SiteHeader />
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
 
       <div className="flex-1">
         <article className="container py-12">
@@ -97,7 +94,6 @@ export default async function ZhSitemapTypePage({ params }: Props) {
         </article>
       </div>
 
-      <SiteFooter />
     </main>
   );
 }

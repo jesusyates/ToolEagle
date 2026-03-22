@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { buildLoginRedirect } from "@/lib/auth/login-redirect";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { SavedClient } from "./SavedClient";
@@ -19,7 +20,7 @@ export default async function MeSavedPage() {
     data: { user }
   } = await supabase.auth.getUser();
 
-  if (!user) redirect("/login?next=/me/saved");
+  if (!user) redirect(buildLoginRedirect("/me/saved"));
 
   const { data: saves } = await supabase
     .from("user_saves")
@@ -34,7 +35,7 @@ export default async function MeSavedPage() {
     .eq("user_id", user.id);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
 
       <div className="flex-1">

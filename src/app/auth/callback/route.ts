@@ -1,6 +1,15 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
+function loginUrlWithError(origin: string, next: string) {
+  const loginPath = next.startsWith("/zh") ? "/zh/login" : "/login";
+  const defaultNext = loginPath === "/zh/login" ? "/zh" : "/dashboard";
+  const loginUrl = new URL(loginPath, origin);
+  loginUrl.searchParams.set("error", "signin_failed");
+  if (next !== defaultNext) loginUrl.searchParams.set("next", next);
+  return loginUrl.toString();
+}
+
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
@@ -8,10 +17,7 @@ export async function GET(request: Request) {
   const next = searchParams.get("next") ?? "/dashboard";
 
   if (errorParam) {
-    const loginUrl = new URL("/login", origin);
-    loginUrl.searchParams.set("error", "signin_failed");
-    if (next !== "/dashboard") loginUrl.searchParams.set("next", next);
-    return NextResponse.redirect(loginUrl.toString());
+    return NextResponse.redirect(loginUrlWithError(origin, next));
   }
 
   if (code) {
@@ -23,8 +29,5 @@ export async function GET(request: Request) {
     }
   }
 
-  const loginUrl = new URL("/login", origin);
-  loginUrl.searchParams.set("error", "signin_failed");
-  if (next !== "/dashboard") loginUrl.searchParams.set("next", next);
-  return NextResponse.redirect(loginUrl.toString());
+  return NextResponse.redirect(loginUrlWithError(origin, next));
 }

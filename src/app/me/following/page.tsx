@@ -20,7 +20,7 @@ export default async function MeFollowingPage() {
 
   if (!user) {
     return (
-      <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+      <main className="min-h-screen bg-page text-slate-900 flex flex-col">
         <SiteHeader />
         <div className="flex-1 container pt-10">
           <p className="text-slate-600">Please log in to view your following.</p>
@@ -40,7 +40,7 @@ export default async function MeFollowingPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
 
       <div className="flex-1">

@@ -9,6 +9,7 @@ import { ToolCard } from "@/components/tools/ToolCard";
 import { CreatorModeDemo } from "@/components/CreatorModeDemo";
 import { HomeHeroGenerate } from "./HomeHeroGenerate";
 import { TopResultsShowcase } from "./TopResultsShowcase";
+import { ValueProofBlock } from "@/components/value/ValueProofBlock";
 
 const popularTools = popularToolSlugs
   .map((slug) => tools.find((t) => t.slug === slug))
@@ -57,20 +58,44 @@ const latestArticles = [
   { href: "/blog/youtube-title-formulas", titleKey: "article3Title", tagKey: "article3Tag" }
 ];
 
-type Props = { children?: React.ReactNode };
+type Props = {
+  children?: React.ReactNode;
+  /** V91: Traffic injection block (e.g. TrendingMakeMoneySection) — rendered after hero showcase */
+  trendingInjection?: React.ReactNode;
+};
 
-export function HomePageClient({ children }: Props) {
+export function HomePageClient({ children, trendingInjection }: Props) {
   const t = useTranslations("home");
   const tLearn = useTranslations("learnAi");
   const tNav = useTranslations("nav");
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
 
       <div className="flex-1">
         <HomeHeroGenerate />
 
         <TopResultsShowcase />
+
+        <section className="container py-8 max-w-3xl">
+          <ValueProofBlock variant="home" />
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Link
+              href="/tiktok-growth-kit"
+              className="inline-flex rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-bold text-white hover:bg-slate-800"
+            >
+              TikTok Growth Kit — workflow →
+            </Link>
+            <Link
+              href="/ai-caption-generator"
+              className="inline-flex rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-800 hover:bg-slate-50"
+            >
+              AI Caption Generator
+            </Link>
+          </div>
+        </section>
+
+        {trendingInjection}
 
         <section className="container pt-4 pb-8">
           <div className="max-w-3xl">

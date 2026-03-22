@@ -27,6 +27,12 @@ export interface AffiliateTool {
   description: string;
   /** @deprecated Use affiliateLinks for country-aware. Kept for backward compat. */
   url: string;
+  /** V84: Slug for /go/[slug] redirect (e.g. copy-ai) */
+  goSlug?: string;
+  /** V84: Direct link with ref param when affiliate not configured */
+  directLink?: string;
+  /** V84: Fallback link without ref */
+  fallbackLink?: string;
   /** V76.5: Country-specific links. Use getAffiliateLink(tool, country). */
   affiliateLinks?: AffiliateLinks;
   category: AffiliateToolCategory;
@@ -66,9 +72,14 @@ const TOOL_ENV_KEYS = [
 
 const PAYOUT_BY_TIER: Record<string, number> = { low: 0.1, medium: 0.5, high: 1.5 };
 
+const REF_PARAM = "ref=tooleagle";
+
 const TOOL_CONFIGS: Omit<AffiliateTool, "url">[] = [
   {
     id: "ai-writing-1",
+    goSlug: "copy-ai",
+    directLink: "https://www.copy.ai?ref=tooleagle",
+    fallbackLink: "https://www.copy.ai",
     name: "AI写作工具",
     description: "一键生成爆款文案，提升创作效率10倍",
     category: "ai-writing",
@@ -88,6 +99,9 @@ const TOOL_CONFIGS: Omit<AffiliateTool, "url">[] = [
   },
   {
     id: "video-gen-1",
+    goSlug: "runway",
+    directLink: "https://runwayml.com?ref=tooleagle",
+    fallbackLink: "https://runwayml.com",
     name: "视频生成工具",
     description: "AI自动生成短视频，省时省力",
     category: "video-gen",
@@ -106,6 +120,9 @@ const TOOL_CONFIGS: Omit<AffiliateTool, "url">[] = [
   },
   {
     id: "growth-1",
+    goSlug: "hypefury",
+    directLink: "https://hypefury.com?ref=tooleagle",
+    fallbackLink: "https://hypefury.com",
     name: "增长工具",
     description: "精准分析数据，快速涨粉变现",
     category: "growth",
@@ -124,6 +141,9 @@ const TOOL_CONFIGS: Omit<AffiliateTool, "url">[] = [
   },
   {
     id: "ai-writing-2",
+    goSlug: "jasper",
+    directLink: "https://www.jasper.ai?ref=tooleagle",
+    fallbackLink: "https://www.jasper.ai",
     name: "文案生成器",
     description: "AI智能生成爆款标题和钩子",
     category: "ai-writing",
@@ -142,6 +162,9 @@ const TOOL_CONFIGS: Omit<AffiliateTool, "url">[] = [
   },
   {
     id: "growth-2",
+    goSlug: "convertkit",
+    directLink: "https://convertkit.com?ref=tooleagle",
+    fallbackLink: "https://convertkit.com",
     name: "流量变现工具",
     description: "从0到1实现账号变现，专业版 $20–100/月",
     category: "growth",
@@ -169,16 +192,31 @@ export function getPayoutPerClick(tool: AffiliateTool): number {
 function getAffiliateTools(): AffiliateTool[] {
   const result: AffiliateTool[] = [];
   for (let i = 0; i < Math.min(TOOL_ENV_KEYS.length, TOOL_CONFIGS.length); i++) {
-    const url = process.env[TOOL_ENV_KEYS[i]];
-    if (url) {
-      result.push({
-        ...TOOL_CONFIGS[i],
-        url,
-        affiliateLinks: buildAffiliateLinks(TOOL_ENV_KEYS[i], url)
-      });
-    }
+    const cfg = TOOL_CONFIGS[i];
+    const envUrl = process.env[TOOL_ENV_KEYS[i]];
+    const url = envUrl || cfg.directLink || cfg.fallbackLink || "#";
+    result.push({
+      ...cfg,
+      url,
+      affiliateLinks: envUrl ? buildAffiliateLinks(TOOL_ENV_KEYS[i], envUrl) : undefined
+    });
   }
   return result;
+}
+
+/** V84: Get tool by /go/[slug]. Returns directLink with ref or fallbackLink */
+export function getToolByGoSlug(slug: string): { url: string; name: string } | null {
+  const tools = getAffiliateTools();
+  const tool = tools.find((t) => t.goSlug === slug);
+  if (!tool) return null;
+  const url = tool.directLink || tool.url || tool.fallbackLink;
+  return url ? { url, name: tool.name } : null;
+}
+
+/** V84: Get /go/[slug] URL for a tool (for link href) */
+export function getGoUrl(tool: AffiliateTool): string {
+  if (tool.goSlug) return `/go/${tool.goSlug}`;
+  return tool.url || "#";
 }
 
 /** Build affiliateLinks from env: AFFILIATE_TOOL_1, AFFILIATE_TOOL_1_US, AFFILIATE_TOOL_1_CN, etc. */
@@ -202,7 +240,33 @@ export function getAffiliateLink(tool: AffiliateTool, country: CountryCode): str
   return tool.url;
 }
 
-/** Get tools matching keyword context (platform + intent) */
+/** V88: Country-based tool priority. US → tool A, BR → tool B, IN → tool C. */
+export const COUNTRY_TOOL_PRIORITY: Partial<Record<CountryCode, string[]>> = {
+  US: ["ai-writing-1", "video-gen-1", "growth-1"],
+  BR: ["ai-writing-1", "growth-1", "video-gen-1"],
+  IN: ["growth-1", "ai-writing-1", "video-gen-1"],
+  CN: ["ai-writing-1", "video-gen-1", "growth-1"]
+};
+
+/** V88: Select tools for country. Reorders by country priority when available. */
+export function getAffiliateToolsForCountry(
+  tools: AffiliateTool[],
+  country: CountryCode
+): AffiliateTool[] {
+  const priority = COUNTRY_TOOL_PRIORITY[String(country).toUpperCase()];
+  if (!priority || tools.length === 0) return tools;
+  const sorted: AffiliateTool[] = [];
+  for (const id of priority) {
+    const t = tools.find((x) => x.id === id);
+    if (t) sorted.push(t);
+  }
+  for (const t of tools) {
+    if (!sorted.includes(t)) sorted.push(t);
+  }
+  return sorted;
+}
+
+/** Get tools matching keyword context (platform + intent). V88: EN keyword support. */
 export function getMatchingAffiliateTools(
   keyword: string,
   platform?: string,
@@ -222,6 +286,9 @@ export function getMatchingAffiliateTools(
     if (/instagram|ins/.test(kw) && t.platforms.includes("instagram")) score += 2;
     if (/变现|赚钱/.test(kw) && t.intents.includes("变现")) score += 2;
     if (/引流/.test(kw) && t.intents.includes("引流")) score += 2;
+    /** V88: EN money keywords */
+    if (/monetiz|make money|earn|revenue|creator fund|brand deal|affiliate/.test(kw) && t.intents.includes("变现")) score += 2;
+    if (/growth|grow|followers|views|traffic|viral/.test(kw) && t.intents.includes("引流")) score += 2;
     if (score === 0) score = 1;
     return { tool: t, score };
   });

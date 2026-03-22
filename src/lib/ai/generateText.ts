@@ -4,6 +4,8 @@
  * Sends credentials so usage limits apply to logged-in users.
  */
 
+import { FREE_DAILY_LIMIT } from "@/lib/usage";
+
 export class LimitReachedError extends Error {
   constructor(
     message: string,
@@ -35,8 +37,8 @@ export async function generateAIText(
     if (res.status === 429 && data.limitReached) {
       throw new LimitReachedError(
         data.error ?? "You've reached today's free limit.",
-        data.used ?? 30,
-        data.limit ?? 30
+        data.used ?? FREE_DAILY_LIMIT,
+        data.limit ?? FREE_DAILY_LIMIT
       );
     }
     throw new Error(data.error ?? "AI generation failed");

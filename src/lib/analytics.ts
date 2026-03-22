@@ -23,7 +23,44 @@ type ToolEvent =
   | "example_view"
   | "example_like"
   | "example_save"
-  | "topic_view";
+  | "topic_view"
+  /** V100.2 — CN support funnel */
+  | "support_prompt_view"
+  | "support_prompt_click"
+  | "support_drawer_open"
+  | "support_page_view"
+  | "donation_record_create"
+  /** V100.3 feedback */
+  | "feedback_modal_open"
+  | "feedback_submit_success"
+  /** V100.4 support contact */
+  | "support_contact_view"
+  | "support_contact_click"
+  | "support_channel_click"
+  /** V101 CN aggregator checkout */
+  | "payment_order_created"
+  | "payment_qr_shown"
+  | "payment_success"
+  | "payment_failed"
+  /** V101.1 donation checkout */
+  | "donation_order_created"
+  | "donation_payment_success"
+  /** V104.2 — Douyin conversion funnel (CN stack, isolated from generic zh) */
+  | "douyin_tool_view"
+  | "douyin_generate"
+  | "douyin_locked_content_view"
+  | "douyin_upgrade_click"
+  | "douyin_payment_success"
+  /** V105.2 — share URL copied (China / zh UI) */
+  | "tool_share_link_copy"
+  /** V106.2 — external share blocks */
+  | "v1062_share_block_copy"
+  /** V107 — CN credits */
+  | "credit_used"
+  | "credit_balance"
+  /** IA — market switcher + auth entry */
+  | "market_switch"
+  | "login_click";
 
 export type ToolAnalyticsPayload = {
   tool_slug?: string;
@@ -80,6 +117,17 @@ export function trackEvent(action: ToolEvent, params?: ToolAnalyticsPayload) {
     if (p.conversion_label) props.conversion_label = String(p.conversion_label);
     if (p.conversion_value !== undefined) props.conversion_value = Number(p.conversion_value);
     if (p.country) props.country = String(p.country);
+    if (p.route) props.route = String(p.route);
+    if (p.market) props.market = String(p.market);
+    if (p.locale) props.locale = String(p.locale);
+    if (p.source_page) props.source_page = String(p.source_page);
+    if (p.supporter_id) props.supporter_id = String(p.supporter_id);
+    if (p.channel) props.channel = String(p.channel);
+    if (p.milestone !== undefined) props.milestone = Number(p.milestone);
+    if (p.support_channel) props.support_channel = String(p.support_channel);
+    if (p.provider) props.provider = String(p.provider);
+    if (p.plan) props.plan = String(p.plan);
+    if (p.amount !== undefined) props.amount = Number(p.amount);
     window.plausible(action, { props: Object.keys(props).length ? props : undefined });
   }
 }

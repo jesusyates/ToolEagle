@@ -37,7 +37,7 @@ export default async function CommunityPage() {
   const posts = await getLatestCreatorPosts(48);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
       <div className="flex-1">
         <section className="container py-12">

@@ -27,7 +27,7 @@ export default async function ResultPage({ params }: Props) {
 
   if (!decoded || !tool) {
     return (
-      <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+      <main className="min-h-screen bg-page text-slate-900 flex flex-col">
         <SiteHeader />
         <div className="flex-1 container py-16 text-center">
           <h1 className="text-xl font-semibold text-slate-900">Result not found</h1>
@@ -45,7 +45,7 @@ export default async function ResultPage({ params }: Props) {
   }
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
       <div className="flex-1 container py-12">
         <div className="max-w-2xl mx-auto">

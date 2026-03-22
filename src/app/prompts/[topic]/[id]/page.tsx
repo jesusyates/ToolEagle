@@ -53,7 +53,7 @@ export default async function PromptDetailPage({ params }: Props) {
     .slice(0, 3);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <PromptViewTracker topic={topic} id={id} />
       <SiteHeader />
       <div className="flex-1">

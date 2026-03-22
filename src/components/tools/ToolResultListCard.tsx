@@ -6,12 +6,15 @@ import Link from "next/link";
 import { Star, Pencil, Share2 } from "lucide-react";
 import { ToolCopyButton } from "./ToolCopyButton";
 import { ShareResultButtons } from "./ShareResultButtons";
+import { UgcSubmitBlock } from "./UgcSubmitBlock";
+import { getResultShareUrl } from "@/lib/share";
 import { DelegatedButton } from "@/components/DelegatedButton";
 import { getFavorites } from "@/lib/storage";
 import { textWithCopyBranding } from "@/lib/branding";
 import { improveText, type ImproveAction } from "@/lib/ai/improveText";
 import { LoginPromptModal } from "@/components/LoginPromptModal";
 import { ProjectSelectorModal } from "@/components/ProjectSelectorModal";
+import { ToolResultMoneyCta } from "@/components/traffic/ToolResultMoneyCta";
 
 type ToolResultListCardProps = {
   title: string;
@@ -224,20 +227,46 @@ export function ToolResultListCard({
           )}
         </div>
         {showContent && toolSlug && (
-          <Link
-            href="/examples"
-            className="mb-4 block rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 hover:bg-amber-100 transition"
-          >
-            <div className="flex items-center gap-2">
-              <span className="text-amber-600">⭐</span>
-              <span className="text-sm font-medium text-amber-900">
-                Share your best result
+          <>
+            <ToolResultMoneyCta />
+            <Link
+              href="/examples"
+              className="mb-4 block rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 hover:bg-amber-100 transition"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-amber-600">⭐</span>
+                <span className="text-sm font-medium text-amber-900">
+                  Share your best result
+                </span>
+              </div>
+              <span className="text-xs text-amber-800">
+                Get featured on ToolEagle examples
               </span>
+            </Link>
+            <div className="mb-4">
+              <UgcSubmitBlock
+                toolSlug={toolSlug}
+                toolName={toolName}
+                defaultContent={items[0]}
+              />
             </div>
-            <span className="text-xs text-amber-800">
-              Get featured on ToolEagle examples
-            </span>
-          </Link>
+            <a
+              href={getResultShareUrl(toolSlug, items)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mb-4 block rounded-xl border border-sky-200 bg-sky-50 px-4 py-3 hover:bg-sky-100 transition"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-sky-600">📤</span>
+                <span className="text-sm font-medium text-sky-900">
+                  Share this to get more templates
+                </span>
+              </div>
+              <span className="text-xs text-sky-800">
+                Get 50 more ideas by sharing
+              </span>
+            </a>
+          </>
         )}
         <div className="space-y-5 min-h-[80px]">
           {showSkeletons && (

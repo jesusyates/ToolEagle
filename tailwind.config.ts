@@ -6,7 +6,12 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {}
+    extend: {
+      colors: {
+        /** Matches globals.css --page-bg; use for full-page shells (cards stay bg-white). */
+        page: "var(--page-bg)"
+      }
+    }
   },
   plugins: []
 };

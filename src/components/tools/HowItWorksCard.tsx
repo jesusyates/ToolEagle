@@ -2,13 +2,14 @@ type Step = { step: number; text: string };
 
 type HowItWorksCardProps = {
   steps: Step[];
+  title?: string;
 };
 
-export function HowItWorksCard({ steps }: HowItWorksCardProps) {
+export function HowItWorksCard({ steps, title = "How it works" }: HowItWorksCardProps) {
   return (
     <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5 sm:p-6 shadow-sm">
       <p className="text-xs font-semibold text-slate-800 uppercase tracking-wide">
-        How it works
+        {title}
       </p>
       <ol className="mt-3 space-y-3">
         {steps.map(({ step, text }) => (

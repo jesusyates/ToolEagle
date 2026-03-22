@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { buildLoginRedirect } from "@/lib/auth/login-redirect";
+import { isOperatorUser } from "@/lib/auth/operator";
 import { DashboardClient } from "./DashboardClient";
 
 export const dynamic = "force-dynamic";
@@ -12,7 +14,7 @@ export default async function DashboardPage() {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect("/login?next=/dashboard");
+    redirect(buildLoginRedirect("/dashboard"));
   }
 
   const today = new Date().toISOString().slice(0, 10);
@@ -35,7 +37,7 @@ export default async function DashboardPage() {
       .eq("user_id", user.id)
       .eq("date", today)
       .single(),
-    supabase.from("profiles").select("plan, onboarding_completed").eq("id", user.id).single(),
+    supabase.from("profiles").select("plan, plan_expire_at, onboarding_completed").eq("id", user.id).single(),
     supabase
       .from("projects")
       .select("id, name, created_at")
@@ -63,6 +65,10 @@ export default async function DashboardPage() {
 
   const usageToday = usageRes.data?.generations_count ?? 0;
   let plan = profileRes.data?.plan ?? "free";
+  const exp = (profileRes.data as { plan_expire_at?: string | null } | null)?.plan_expire_at;
+  if (plan === "pro" && exp) {
+    if (new Date(exp).getTime() <= Date.now()) plan = "free";
+  }
   const onboardingCompleted = (profileRes.data as { onboarding_completed?: boolean } | null)?.onboarding_completed ?? true;
 
   const projects =
@@ -81,7 +87,7 @@ export default async function DashboardPage() {
   }
 
   return (
-    <Suspense fallback={<div className="min-h-screen bg-white animate-pulse" />}>
+    <Suspense fallback={<div className="min-h-screen bg-page animate-pulse" />}>
       <DashboardClient
         userEmail={user.email ?? ""}
         favorites={favorites}
@@ -90,6 +96,7 @@ export default async function DashboardPage() {
         usageToday={usageToday}
         plan={plan}
         onboardingCompleted={onboardingCompleted}
+        showRevenueNav={isOperatorUser(user)}
       />
     </Suspense>
   );

@@ -12,7 +12,7 @@ export const metadata = {
 export default async function TikTokToolsPage() {
   const posts = await getAllPosts();
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
       <PlatformToolsPage
         platform="tiktok"

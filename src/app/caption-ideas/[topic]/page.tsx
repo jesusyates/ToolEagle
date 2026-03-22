@@ -30,7 +30,7 @@ export default async function CaptionIdeasPage({ params }: Props) {
   if (!config) notFound();
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
       <div className="flex-1">
         <SeoExpansionTemplate config={config} backHref="/captions" backLabel="Captions" />

@@ -42,7 +42,7 @@ export default function OnboardingPage() {
 
   if (checking) {
     return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
+      <main className="min-h-screen bg-page flex items-center justify-center">
         <div className="animate-pulse text-slate-400">Loading...</div>
       </main>
     );
@@ -75,7 +75,7 @@ export default function OnboardingPage() {
   }
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
 
       <div className="flex-1 flex items-center justify-center py-12">

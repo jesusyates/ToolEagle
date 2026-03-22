@@ -1,15 +1,16 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { SiteHeader } from "@/app/_components/SiteHeader";
-import { SiteFooter } from "@/app/_components/SiteFooter";
 import { SITE_URL, CONTACT_EMAIL } from "@/config/site";
+import { zhSeoTitle } from "@/config/zh-brand";
+
+const termsTitle = zhSeoTitle("服务条款");
 
 export const metadata: Metadata = {
-  title: "服务条款",
+  title: { absolute: termsTitle },
   description:
     "ToolEagle 服务条款。使用我们免费创作者工具的规则与指南。",
   openGraph: {
-    title: "服务条款 | ToolEagle",
+    title: termsTitle,
     description: "使用我们免费创作者工具的规则与指南。",
     url: `${SITE_URL}/zh/terms`
   }
@@ -17,8 +18,7 @@ export const metadata: Metadata = {
 
 export default function ZhTermsPage() {
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
-      <SiteHeader />
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
 
       <article className="flex-1 container py-12 max-w-3xl">
         <h1 className="text-3xl font-semibold text-slate-900 mb-6">服务条款</h1>
@@ -75,7 +75,6 @@ export default function ZhTermsPage() {
         </div>
       </article>
 
-      <SiteFooter />
     </main>
   );
 }

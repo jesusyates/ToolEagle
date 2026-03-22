@@ -7,6 +7,8 @@ import PlausibleProvider from "next-plausible";
 import "./globals.css";
 import { Analytics } from "./Analytics";
 import { CookieConsent } from "@/components/CookieConsent";
+import { FloatingUpgradeCTA } from "@/components/monetization/FloatingUpgradeCTA";
+import { OrganizationSchema } from "@/components/seo/OrganizationSchema";
 import { SITE_URL } from "@/config/site";
 
 const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
@@ -75,6 +77,7 @@ export default async function RootLayout({
     pathname === "/hook-generator" ||
     pathname.startsWith("/dashboard") ||
     pathname === "/login" ||
+    pathname === "/zh/login" ||
     pathname.startsWith("/auth") ||
     pathname.startsWith("/admin") ||
     pathname === "/ai-prompt-improver" ||
@@ -84,12 +87,14 @@ export default async function RootLayout({
 
   const content = (
     <>
+      <OrganizationSchema />
       <Script id="translate-resilience" strategy="beforeInteractive">
         {`(function(){if(typeof Node==="undefined"||!Node.prototype)return;var r=Node.prototype.removeChild;Node.prototype.removeChild=function(c){if(c.parentNode!==this)return c;return r.apply(this,arguments)};var i=Node.prototype.insertBefore;Node.prototype.insertBefore=function(n,ref){if(ref&&ref.parentNode!==this)return n;return i.apply(this,arguments)}})();`}
       </Script>
       <NextIntlClientProvider messages={messages} locale={locale}>
         <Analytics />
         {children}
+        <FloatingUpgradeCTA />
         <CookieConsent />
       </NextIntlClientProvider>
     </>

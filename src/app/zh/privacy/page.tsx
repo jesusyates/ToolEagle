@@ -1,15 +1,16 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { SiteHeader } from "@/app/_components/SiteHeader";
-import { SiteFooter } from "@/app/_components/SiteFooter";
 import { SITE_URL, CONTACT_EMAIL } from "@/config/site";
+import { zhSeoTitle } from "@/config/zh-brand";
+
+const privacyTitle = zhSeoTitle("隐私政策");
 
 export const metadata: Metadata = {
-  title: "隐私政策",
+  title: { absolute: privacyTitle },
   description:
     "ToolEagle 隐私政策。我们如何收集、使用和保护您的数据。符合 GDPR 和 CCPA 要求。",
   openGraph: {
-    title: "隐私政策 | ToolEagle",
+    title: privacyTitle,
     description: "我们如何收集、使用和保护您的数据。",
     url: `${SITE_URL}/zh/privacy`
   }
@@ -17,8 +18,7 @@ export const metadata: Metadata = {
 
 export default function ZhPrivacyPage() {
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
-      <SiteHeader />
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
 
       <article className="flex-1 container py-12 max-w-3xl">
         <h1 className="text-3xl font-semibold text-slate-900 mb-6">隐私政策</h1>
@@ -93,7 +93,6 @@ export default function ZhPrivacyPage() {
         </div>
       </article>
 
-      <SiteFooter />
     </main>
   );
 }

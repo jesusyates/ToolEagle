@@ -98,7 +98,7 @@ function buildGenerationPrompt(pageType: GuidePageType, topic: string): string {
   "title": "SEO 标题",
   "description": "meta description，150字内",
   "h1": "页面主标题",
-  "directAnswer": "直接回答，40-80字，一句话概括核心答案",
+  "directAnswer": "直接回答，V78格式：开篇概括句 + 编号列表(2-4条) + 可选时间/结果预期。例：要在X涨粉，最有效的方法有3个：\\n1. 每天发布1-2条\\n2. 使用强钩子\\n3. 使用热门标签\\n新账号通常7-14天可见增长。",
   "intro": "引言，2-3句",
   "guide": "指南正文 Markdown",
   "stepByStep": "分步骤指南 Markdown，如：第一步...第二步...",

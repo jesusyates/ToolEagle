@@ -87,7 +87,7 @@ export default async function HookTopicPage({ params }: Props) {
   const tool = tools.find((t) => t.slug === "hook-generator");
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
 
       <div className="flex-1">

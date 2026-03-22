@@ -1,17 +1,18 @@
 /**
  * zh page metadata - unified title, description, OG format
- * Format: {keyword}（2026最新指南） | ToolEagle
+ * Title: zhSeoTitle(`{keyword}（2026最新指南）`) → 主文案 · 品牌 slogan | ToolEagle
  * Description: 想了解{keyword}？本文提供完整方法、技巧和实操指南，适合新手和进阶用户。
  */
 
 import type { GuidePageType } from "@/config/traffic-topics";
 import { formatTopicLabel, parseZhSlug, extractPlatformFromTopic } from "@/config/traffic-topics";
 import { BASE_URL } from "@/config/site";
+import { zhSeoTitle } from "@/config/zh-brand";
 
 export const ZH_DEFAULT_OG_IMAGE = `${BASE_URL}/og/zh-default`;
 
 export function getZhPageTitle(keyword: string): string {
-  return `${keyword}（2026最新指南） | ToolEagle`;
+  return zhSeoTitle(`${keyword}（2026最新指南）`);
 }
 
 export function getZhPageDescription(keyword: string): string {
@@ -52,7 +53,7 @@ export function getZhPageMetadata(
   const description = overrides?.description ?? getZhPageDescription(keyword);
   const ogImage = overrides?.ogImage ?? ZH_DEFAULT_OG_IMAGE;
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: { canonical: url },
     openGraph: {

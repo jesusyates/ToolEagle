@@ -9,6 +9,7 @@
     "lint": "next lint",
     "test": "jest",
     "db:migrate": "node scripts/run-migration.js",
+    "db:migrate:one": "node scripts/run-single-migration.js",
     "blog:generate": "node scripts/generate-seo-blog.js",
     "blog:generate:50": "node scripts/generate-seo-blog.js --limit 50",
     "blog:generate:dry": "node scripts/generate-seo-blog.js --dry-run",
@@ -17,6 +18,10 @@
     "zh:keywords": "node scripts/generate-zh-keywords.js",
     "zh:keywords:v63": "node scripts/generate-zh-keywords-v63.js",
     "zh:auto": "node scripts/auto-generate-zh.js",
+    "en:auto": "node scripts/en-auto.js",
+    "auto-distribute": "node scripts/auto-distribute.js",
+    "daily-pipeline": "node scripts/run-daily-pipeline.js",
+    "growth-report": "node scripts/growth-report.js",
     "zh:generate:limit": "node scripts/generate-zh-seo-content.js --limit=10",
     "zh:publish": "node scripts/publish-zh-content.js",
     "zh:stats": "node scripts/stats-zh-content.js",
@@ -29,6 +34,7 @@
     "baidu:submit": "node scripts/baidu-submit.js",
     "baidu:check": "node scripts/baidu-check.js",
     "revenue:summary": "node scripts/revenue-summary.js",
+    "revenue:expand": "node scripts/revenue-expand.js",
     "db:push": "npx supabase db push"
   },
   "dependencies": {

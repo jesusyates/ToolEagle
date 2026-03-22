@@ -5,9 +5,11 @@ import { useEffect, useRef } from "react";
 type Props = {
   keyword?: string;
   slug?: string;
+  /** V89: page_type for AI visibility tracking (en-how-to, zh-search, etc.) */
+  pageType?: string;
 };
 
-export function ZhPageViewTracker({ keyword, slug }: Props) {
+export function ZhPageViewTracker({ keyword, slug, pageType }: Props) {
   const sent = useRef(false);
 
   useEffect(() => {
@@ -19,10 +21,10 @@ export function ZhPageViewTracker({ keyword, slug }: Props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         event_type: "page_view",
-        event_data: { keyword: keyword || null, slug: slug || null }
+        event_data: { keyword: keyword || null, slug: slug || null, page_type: pageType || null }
       })
     }).catch(() => {});
-  }, [keyword, slug]);
+  }, [keyword, slug, pageType]);
 
   return null;
 }

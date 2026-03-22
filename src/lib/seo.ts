@@ -3,6 +3,7 @@
  */
 export const toolToBlogTags: Record<string, string[]> = {
   "tiktok-caption-generator": ["tiktok", "captions"],
+  "ai-caption-generator": ["tiktok", "captions", "reels", "shorts"],
   "hashtag-generator": ["hashtags", "instagram", "reels"],
   "hook-generator": ["hooks", "viral", "strategy"],
   "title-generator": ["youtube", "titles", "formulas"],

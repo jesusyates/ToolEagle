@@ -103,7 +103,7 @@ export default async function SeoTopicPage({ params }: Props) {
   ).slice(0, 4);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
 
       <div className="flex-1">
@@ -271,7 +271,7 @@ async function IdeaDetailPage({
     .slice(0, 3);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <IdeaViewTracker slug={slug} id={id} />
       <SiteHeader />
       <div className="flex-1">

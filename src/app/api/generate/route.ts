@@ -1,6 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { FREE_DAILY_LIMIT } from "@/lib/usage";
+import { ANON_AI_COOKIE, applyAnonAiCookie, parseAnonAiCookie } from "@/lib/anon-ai-cookie";
+import {
+  checkSignedInFreeUsageWithSupporterBonus,
+  getSupporterLimitContext
+} from "@/lib/api/generation-usage";
+import { sharedContentSafetyPrompt } from "@/lib/ai/prompts/shared/content-safety-prompt";
+import { applyContentSafetyToStringArray } from "@/lib/content-safety/filter";
+import { resolveSafetyMarket } from "@/lib/content-safety/resolve-market";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 const RESULT_SEPARATOR = "\n---\n";
@@ -21,40 +28,6 @@ function parseAIResponse(text: string): string[] {
   if (lines.length >= 3) return lines.slice(0, 5);
 
   return raw ? [raw] : [];
-}
-
-async function checkAndRecordUsage(userId: string): Promise<{ allowed: boolean; used: number }> {
-  const supabase = await createClient();
-  const today = new Date().toISOString().slice(0, 10);
-
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("plan")
-    .eq("id", userId)
-    .single();
-
-  if (!profile) {
-    await supabase.from("profiles").insert({ id: userId, plan: "free" });
-  }
-
-  const plan = profile?.plan ?? "free";
-  if (plan === "pro") {
-    return { allowed: true, used: 0 };
-  }
-
-  const { data: usage } = await supabase
-    .from("usage_stats")
-    .select("generations_count")
-    .eq("user_id", userId)
-    .eq("date", today)
-    .single();
-
-  const used = usage?.generations_count ?? 0;
-  if (used >= FREE_DAILY_LIMIT) {
-    return { allowed: false, used };
-  }
-
-  return { allowed: true, used };
 }
 
 async function incrementUsage(userId: string): Promise<void> {
@@ -91,13 +64,20 @@ const LOCALE_INSTRUCTIONS: Record<string, string> = {
 
 export async function POST(request: NextRequest) {
   try {
-    const { prompt, locale = "en" } = await request.json();
+    const body = await request.json();
+    const { prompt, locale = "en", market: bodyMarket } = body as {
+      prompt?: string;
+      locale?: string;
+      market?: string;
+    };
     if (!prompt || typeof prompt !== "string") {
       return NextResponse.json({ error: "Missing prompt" }, { status: 400 });
     }
 
-    const localePrefix = typeof locale === "string" ? LOCALE_INSTRUCTIONS[locale] ?? "" : "";
+    const loc = typeof locale === "string" ? locale : "en";
+    const localePrefix = LOCALE_INSTRUCTIONS[loc] ?? "";
     const finalPrompt = localePrefix + prompt;
+    const safetyMarket = resolveSafetyMarket(request, { locale: loc, market: bodyMarket });
 
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
@@ -109,11 +89,29 @@ export async function POST(request: NextRequest) {
       data: { user }
     } = await supabase.auth.getUser();
 
+    const anonCount = parseAnonAiCookie(request.cookies.get(ANON_AI_COOKIE)?.value);
+    const { effectiveFreeLimit } = await getSupporterLimitContext(request, user?.id ?? null);
+
     if (user) {
-      const { allowed, used } = await checkAndRecordUsage(user.id);
+      const { allowed, used } = await checkSignedInFreeUsageWithSupporterBonus(
+        user.id,
+        effectiveFreeLimit
+      );
       if (!allowed) {
         return NextResponse.json(
-          { error: LIMIT_MESSAGE, limitReached: true, used, limit: FREE_DAILY_LIMIT },
+          { error: LIMIT_MESSAGE, limitReached: true, used, limit: effectiveFreeLimit },
+          { status: 429 }
+        );
+      }
+    } else {
+      if (anonCount >= effectiveFreeLimit) {
+        return NextResponse.json(
+          {
+            error: LIMIT_MESSAGE,
+            limitReached: true,
+            used: anonCount,
+            limit: effectiveFreeLimit
+          },
           { status: 429 }
         );
       }
@@ -128,10 +126,8 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         model: "gpt-4o-mini",
         messages: [
-          {
-            role: "user",
-            content: finalPrompt
-          }
+          { role: "system", content: sharedContentSafetyPrompt() },
+          { role: "user", content: finalPrompt }
         ],
         temperature: 0.8,
         max_tokens: 1000
@@ -150,16 +146,38 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Empty AI response" }, { status: 502 });
     }
 
-    const results = parseAIResponse(content);
+    let results = parseAIResponse(content);
     if (results.length < 3) {
       return NextResponse.json({ error: "Insufficient results" }, { status: 502 });
     }
 
-    if (user) {
-      await incrementUsage(user.id);
+    const cse = applyContentSafetyToStringArray(results, safetyMarket);
+    results = cse.parts;
+    try {
+      console.info(
+        "[cse_plain]",
+        JSON.stringify({
+          route: "/api/generate",
+          market: safetyMarket,
+          profile: cse.profile,
+          content_safety_filtered_count: cse.filteredCount,
+          content_safety_risk_detected: cse.riskDetected,
+          ts: new Date().toISOString()
+        })
+      );
+    } catch {
+      /* ignore */
     }
 
-    return NextResponse.json({ results });
+    const json = NextResponse.json({ results });
+
+    if (user) {
+      await incrementUsage(user.id);
+    } else {
+      applyAnonAiCookie(json, anonCount + 1);
+    }
+
+    return json;
   } catch (error) {
     console.error("Generate API error:", error);
     return NextResponse.json({ error: "Generation failed" }, { status: 500 });

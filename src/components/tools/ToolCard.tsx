@@ -5,16 +5,27 @@ export function ToolCard({
   icon: Icon,
   name,
   description,
+  descriptionZh,
   category,
-  badge
+  categoryLabel,
+  badge,
+  locale = "en"
 }: {
   href: string;
   icon: React.ComponentType<{ className?: string }>;
   name: string;
   description: string;
+  /** 与 `config/tools` 中 `descriptionZh` 一致；`locale=zh` 时优先于 description */
+  descriptionZh?: string;
   category: string;
+  /** 覆盖 category 展示（如中文场景标签） */
+  categoryLabel?: string;
   badge?: "Popular" | "Trending";
+  locale?: "en" | "zh";
 }) {
+  const cat = categoryLabel ?? category;
+  const body =
+    locale === "zh" && descriptionZh?.trim() ? descriptionZh : description;
   return (
     <Link
       href={href}
@@ -26,8 +37,12 @@ export function ToolCard({
         </div>
         <div className="min-w-0 space-y-1 flex-1">
           <div className="flex items-center gap-2 flex-wrap">
-            <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">
-              {category}
+            <p
+              className={`text-xs font-medium text-slate-500 tracking-wide ${
+                locale === "zh" ? "" : "uppercase"
+              }`}
+            >
+              {cat}
             </p>
             {badge && (
               <span
@@ -48,13 +63,15 @@ export function ToolCard({
       </div>
 
       <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-        {description}
+        {body}
       </p>
 
-      <div className="mt-4 flex items-center justify-between">
-        <span className="text-xs text-slate-500">Open the tool to start creating</span>
-        <span className="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 text-[11px] font-semibold text-white group-hover:bg-slate-800">
-          Open tool
+      <div className="mt-4 flex items-center justify-between gap-2">
+        <span className="text-xs text-slate-500">
+          {locale === "zh" ? "打开工具即可开始创作" : "Open the tool to start creating"}
+        </span>
+        <span className="inline-flex shrink-0 items-center rounded-full bg-slate-900 px-3 py-1 text-[11px] font-semibold text-white group-hover:bg-slate-800">
+          {locale === "zh" ? "打开工具" : "Open tool"}
         </span>
       </div>
     </Link>

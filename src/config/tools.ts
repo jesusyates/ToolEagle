@@ -1,8 +1,11 @@
 import {
   AtSign,
   Hash,
+  LayoutList,
   Lightbulb,
+  ListOrdered,
   MessageSquareText,
+  MessagesSquare,
   ScrollText,
   Sparkles,
   Type,
@@ -26,6 +29,8 @@ export type ToolConfig = {
   slug: string;
   name: string;
   description: string;
+  /** 中文站 `ToolCard`（locale=zh）优先展示；英文站仍用 description */
+  descriptionZh?: string;
   category: ToolCategory;
   icon: React.ComponentType<{ className?: string }>;
   isPopular?: boolean;
@@ -43,6 +48,15 @@ export const tools: ToolConfig[] = [
     isPopular: true
   },
   {
+    slug: "ai-caption-generator",
+    name: "AI Caption Generator",
+    description:
+      "Turn any topic into a full short-form post package: hook, script beats, caption, CTA, hashtags, and strategy.",
+    category: "Captions",
+    icon: Sparkles,
+    isPopular: true
+  },
+  {
     slug: "hashtag-generator",
     name: "Hashtag Generator",
     description: "Generate niche-friendly hashtags for TikTok, Reels and Shorts.",
@@ -57,6 +71,58 @@ export const tools: ToolConfig[] = [
     category: "Hooks",
     icon: Zap,
     isPopular: true
+  },
+  /** V102.1 — Douyin CN platform tools (same engine, Douyin-native positioning) */
+  {
+    slug: "douyin-caption-generator",
+    name: "抖音文案包生成器",
+    description:
+      "Douyin-focused full post package: hook, script beats, caption, CTA, hashtags for CN creators.",
+    descriptionZh:
+      "面向抖音的完整发布包：钩子、口播气口、描述区、互动引导与话题标签，贴合国内创作者语境。",
+    category: "Captions",
+    icon: MessageSquareText
+  },
+  {
+    slug: "douyin-hook-generator",
+    name: "抖音钩子生成器",
+    description: "Stop-scroll openers tuned for Douyin completion and comment patterns.",
+    descriptionZh: "停滑开头句式，贴合抖音完播与评论区互动习惯。",
+    category: "Hooks",
+    icon: Zap
+  },
+  {
+    slug: "douyin-script-generator",
+    name: "抖音口播脚本生成器",
+    description: "Talking-script structure for Douyin vertical video and live-style delivery.",
+    descriptionZh: "竖屏口播结构：分段、气口与可念全文，适配抖音短视频与直播感表达。",
+    category: "Scripts",
+    icon: ScrollText
+  },
+  /** V105.1 — Douyin growth pipeline */
+  {
+    slug: "douyin-topic-generator",
+    name: "抖音选题生成器",
+    description: "Batch topic ideas with niche/category and why they work on Douyin.",
+    descriptionZh: "按赛道与角度批量产出选题，并说明为何适合在抖音测。",
+    category: "Ideas",
+    icon: ListOrdered
+  },
+  {
+    slug: "douyin-comment-cta-generator",
+    name: "抖音评论引导生成器",
+    description: "Engagement phrases and comment triggers for Douyin replays and DMs.",
+    descriptionZh: "高互动评论引导与私信话术，适配回放种草与私信收口。",
+    category: "Captions",
+    icon: MessagesSquare
+  },
+  {
+    slug: "douyin-structure-generator",
+    name: "抖音内容结构生成器",
+    description: "Hook, content flow, and ending CTA skeleton for Douyin shorts.",
+    descriptionZh: "开头—中段—结尾的内容流与收口引导骨架，适合抖音短视频节奏。",
+    category: "Scripts",
+    icon: LayoutList
   },
   {
     slug: "title-generator",
@@ -402,6 +468,7 @@ export const tools: ToolConfig[] = [
  */
 export const popularToolSlugs: string[] = [
   "tiktok-caption-generator",
+  "ai-caption-generator",
   "hashtag-generator",
   "hook-generator",
   "title-generator",

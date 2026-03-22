@@ -2,6 +2,8 @@
 
 import { TranslateAwareLink } from "@/components/TranslateAwareLink";
 import { NewsletterCapture } from "@/components/NewsletterCapture";
+import { DonationBox } from "@/components/DonationBox";
+import { FeedbackFooterTrigger } from "@/components/feedback/FeedbackFooterTrigger";
 import { useTranslations } from "next-intl";
 
 export function SiteFooter() {
@@ -9,10 +11,13 @@ export function SiteFooter() {
   const tLearn = useTranslations("learnAi");
   const tAnswers = useTranslations("answers");
   return (
-    <footer className="border-t border-slate-200 bg-white mt-8">
+    <footer className="border-t border-slate-200 bg-page mt-8">
       <div className="container py-8">
-        <div className="mb-8 max-w-md">
-          <NewsletterCapture />
+        <div className="mb-8 flex flex-col lg:flex-row gap-8 lg:items-start lg:justify-between">
+          <div className="max-w-md">
+            <NewsletterCapture />
+          </div>
+          <DonationBox />
         </div>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-6">
           <div>
@@ -246,6 +251,9 @@ export function SiteFooter() {
             </a>
           </div>
         </div>
+      </div>
+      <div className="container pb-6 text-xs text-slate-500 border-t border-slate-100 pt-4">
+        <FeedbackFooterTrigger localeUi="en" />
       </div>
     </footer>
   );

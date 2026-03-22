@@ -73,7 +73,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   const programmatic = parseProgrammaticBlogSlug(slug);
   if (programmatic) {
     return (
-      <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+      <main className="min-h-screen bg-page text-slate-900 flex flex-col">
         <SiteHeader />
         <div className="flex-1">
           <ProgrammaticBlogPost slug={slug} />
@@ -114,7 +114,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   };
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
 
       <div className="flex-1">

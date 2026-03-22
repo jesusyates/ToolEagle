@@ -71,7 +71,7 @@ export default async function LibraryPage({ params }: Props) {
   const Icon = slug.includes("hook") ? Zap : MessageSquareText;
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
 
       <div className="flex-1">

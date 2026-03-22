@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { SiteHeader } from "@/app/_components/SiteHeader";
-import { SiteFooter } from "@/app/_components/SiteFooter";
 import {
   getKeywordBySlug,
   getRelatedKeywordsFiltered,
@@ -8,6 +6,7 @@ import {
   type KeywordEntry
 } from "@/lib/keyword-patterns";
 import { getMatchingAffiliateTools, getAffiliateTools, getToolsForStack } from "@/config/affiliate-tools";
+import { getHighIntentCtaVariant, getHighIntentCtaIndexForSlug } from "@/config/zh-cta-variants";
 import { getZhToolMetrics } from "@/lib/zh-tool-metrics";
 import { sortToolsByRevenueScore, applyLosingToolSuppression } from "@/lib/revenue-optimizer";
 import { ZhToolRecommendationBlock } from "@/components/zh/ZhToolRecommendationBlock";
@@ -19,6 +18,9 @@ import { ZhStickyCta } from "@/components/zh/ZhStickyCta";
 import { ZhFreeVsPaidSection } from "@/components/zh/ZhFreeVsPaidSection";
 import { ZhPageViewTracker } from "@/components/zh/ZhPageViewTracker";
 import { ZhComparisonTable } from "@/components/zh/ZhComparisonTable";
+import { ZhToolComparisonMonetizationBlock } from "@/components/zh/ZhToolComparisonMonetizationBlock";
+import { ZhHighIntentCtaButton } from "@/components/zh/ZhHighIntentCtaButton";
+import { ZhNextRecommendedPage } from "@/components/zh/ZhNextRecommendedPage";
 import { ZhCaseProofBlock } from "@/components/zh/ZhCaseProofBlock";
 import { ZhExitIntentPopup } from "@/components/zh/ZhExitIntentPopup";
 import { getKeywordContent, type ZhKeywordContent } from "@/lib/zh-keyword-content";
@@ -29,16 +31,23 @@ import { parseZhFaqForSchema, buildZhFaqSchemaWithDirectAnswer, buildZhArticleSc
 import { buildBreadcrumbSchema } from "@/lib/zh-breadcrumb-schema";
 import { getIntroVariant, getCtaVariant } from "@/lib/zh-uniqueness";
 import { getExpansionBlock } from "@/lib/zh-content-expansion";
+import { getSourceCitation } from "@/lib/source-citations";
 import { getRelatedBlogSlugs } from "@/lib/zh-blog-data";
 import { ZhAuthorBlock } from "@/components/zh/ZhAuthorBlock";
 import { ZhFreshnessBlock } from "@/components/zh/ZhFreshnessBlock";
-import { ZhShareSnippetGenerator } from "@/components/zh/ZhShareSnippetGenerator";
-import { ZhCopySharePackWithLog } from "@/components/zh/ZhCopySharePackWithLog";
-import { ZhRedditReadyBlock } from "@/components/zh/ZhRedditReadyBlock";
+import { TrustFooterBlock } from "@/components/seo/TrustFooterBlock";
+import { ShareStrategyBlockWithLog } from "@/components/seo/ShareStrategyBlockWithLog";
+import { CreatorsUsingBlock } from "@/components/seo/CreatorsUsingBlock";
 import { ZhCopyButton } from "@/components/zh/ZhCopyButton";
 import { DirectAnswerBlock } from "@/components/seo/DirectAnswerBlock";
+import { DataSignalBlock } from "@/components/seo/DataSignalBlock";
 import { ZhToolEmbeddingSentence } from "@/components/seo/ZhToolEmbeddingSentence";
+import { RelatedQuestionsBlock } from "@/components/seo/RelatedQuestionsBlock";
+import { AnswerIndexBlock } from "@/components/seo/AnswerIndexBlock";
+import { getRelatedQuestionLinks, getAnswerIndexLinks } from "@/lib/related-questions-data";
+import { getDataSignals, inferDataSignalTopic } from "@/lib/data-signals";
 import { BASE_URL } from "@/config/site";
+import { PeopleReadingMoneyBlock } from "@/components/traffic/PeopleReadingMoneyBlock";
 
 function renderMarkdownBlock(text: string) {
   const blocks = text.split(/\n(?=## |### )/).filter(Boolean);
@@ -93,9 +102,9 @@ type Props = {
   existingSlugs?: Set<string>;
 };
 
-/** V68/V70: High intent keywords - 赚钱/变现/引流/工具/软件 */
+/** V68/V70/V84: High intent keywords - 赚钱/变现/引流/工具/软件/make money */
 function isHighIntentKeyword(keyword: string): boolean {
-  return /赚钱|变现|引流|工具|软件/.test(keyword || "");
+  return /赚钱|变现|引流|工具|软件|make money/i.test(keyword || "");
 }
 
 export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: Props) {
@@ -141,6 +150,7 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
   const introVariant = getIntroVariant(entry.slug);
   const ctaVariant = getCtaVariant(entry.slug);
   const expansionBlock = getExpansionBlock(entry.slug);
+  const sourceCitation = getSourceCitation(entry.slug, "zh");
 
   const breadcrumbItems = [
     { name: "首页", url: "/" },
@@ -159,7 +169,7 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
     : null;
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 flex flex-col relative">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col relative">
       <ZhPageViewTracker keyword={entry.keyword} slug={entry.slug} />
       <ZhStickyCta />
       <script
@@ -182,7 +192,6 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
           dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
         />
       )}
-      <SiteHeader />
 
       <div className="flex-1">
         <article className="container py-12 lg:pr-32">
@@ -204,6 +213,22 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
             </h1>
 
             <DirectAnswerBlock answer={content.directAnswer || ""} lang="zh" />
+            <DataSignalBlock
+              signals={getDataSignals(inferDataSignalTopic(entry.slug, entry.keyword), "zh", 2, entry.slug)}
+              lang="zh"
+            />
+
+            <PeopleReadingMoneyBlock excludeSlug={entry.slug} lang="zh" />
+
+            {isHighIntent && affiliateTools.length > 0 && (
+              <section className="mt-6 rounded-2xl border-2 border-amber-300 bg-gradient-to-r from-amber-50 to-amber-100 p-6" aria-label="高意向变现 CTA">
+                <h2 className="text-lg font-semibold text-amber-900">
+                  {getHighIntentCtaVariant(getHighIntentCtaIndexForSlug(entry.slug))}
+                </h2>
+                <p className="mt-2 text-sm text-slate-700">推荐工具，一键试用，无需注册</p>
+                <ZhHighIntentCtaButton tool={affiliateTools[0]} ctaLabel={getHighIntentCtaVariant(getHighIntentCtaIndexForSlug(entry.slug))} />
+              </section>
+            )}
 
             {isHighIntent && (
               <>
@@ -223,6 +248,7 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
                   isHighIntent
                   hasAffiliate={hasAffiliate}
                 />
+                <ZhToolComparisonMonetizationBlock tools={affiliateTools} keyword={entry.keyword} pageSlug={entry.slug} />
               </>
             )}
 
@@ -244,7 +270,7 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
             <ZhFreshnessBlock />
 
             <div className="mt-6 prose prose-slate max-w-none">
-              <p className="text-slate-600">{introVariant}</p>
+              <p className="text-slate-600">{sourceCitation}{introVariant}</p>
               <p className="text-lg text-slate-700 leading-relaxed mt-4">{content.intro}</p>
               <ZhToolEmbeddingSentence
                 toolSlug={entry.platform === "tiktok" ? "tiktok-caption-generator" : entry.platform === "youtube" ? "youtube-title-generator" : "instagram-caption-generator"}
@@ -281,6 +307,9 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
             <ZhValueAnchorPricing keyword={entry.keyword} />
 
             <ZhComparisonTable tools={affiliateTools} keyword={entry.keyword} pageSlug={entry.slug} />
+            {!isHighIntent && (
+              <ZhToolComparisonMonetizationBlock tools={affiliateTools} keyword={entry.keyword} pageSlug={entry.slug} />
+            )}
 
             {isHighIntent && (
               <ZhToolRecommendationBlock
@@ -338,6 +367,11 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
               <p className="text-slate-700 leading-relaxed">{expansionBlock}</p>
             </section>
 
+            <RelatedQuestionsBlock
+              links={getRelatedQuestionLinks(entry, slugs, 20)}
+              lang="zh"
+            />
+
             <ZhRelatedRecommendations
               context={{
                 platform: entry.platform,
@@ -383,26 +417,30 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
             </section>
 
             <ZhAuthorBlock />
+            <TrustFooterBlock lang="zh" />
 
-            <ZhCopySharePackWithLog
-              title={headline}
-              oneLiner={content.directAnswer || content.description || content.intro?.slice(0, 120) || ""}
-              pageUrl={pageUrl}
-              keyword={entry.keyword}
-            />
-
-            <ZhShareSnippetGenerator
+            <ShareStrategyBlockWithLog
               title={headline}
               oneLiner={content.directAnswer || content.description || content.intro?.slice(0, 120) || ""}
               pageUrl={pageUrl}
               slug={entry.slug}
+              lang="zh"
+              keyword={entry.keyword}
             />
 
-            <ZhRedditReadyBlock
-              title={headline}
-              oneLiner={content.directAnswer || content.description || content.intro?.slice(0, 120) || ""}
-              pageUrl={pageUrl}
-            />
+            {(isHighIntent || related.length > 0) && (
+              <ZhCtaCaptureBlock keyword={entry.keyword} inline />
+            )}
+
+            {related.length > 0 && (
+              <ZhNextRecommendedPage
+                href={`/zh/search/${related[0].slug}`}
+                label={related[0].keyword}
+                description="推荐继续阅读"
+              />
+            )}
+
+            <CreatorsUsingBlock slug={entry.slug} pathType="zh-search" lang="zh" />
 
             <section className="mt-12">
               <h2 className="text-xl font-semibold text-slate-900">相关指南</h2>
@@ -436,6 +474,12 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
               </ul>
             </section>
 
+            <AnswerIndexBlock
+              topic={entry.keyword}
+              links={getAnswerIndexLinks(entry, slugs, 20)}
+              lang="zh"
+            />
+
             <section className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-5">
               <h2 className="text-lg font-semibold text-slate-900">更多资源</h2>
               <ul className="mt-3 space-y-2 text-sm">
@@ -460,7 +504,6 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
       </div>
 
       <ZhExitIntentPopup keyword={entry.keyword} />
-      <SiteFooter />
     </main>
   );
 }

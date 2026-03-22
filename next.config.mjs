@@ -6,11 +6,8 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Hide dev overlay "1 error" toast in development for cleaner UI
-  devIndicators: false,
   async rewrites() {
     return [
-      { source: "/sitemap.xml", destination: "/api/sitemap-index" },
       { source: "/sitemap-main.xml", destination: "/api/sitemap-main" },
       { source: "/sitemap-topics.xml", destination: "/api/sitemap-topics" },
       { source: "/sitemap-examples.xml", destination: "/api/sitemap-examples" },
@@ -24,7 +21,13 @@ const nextConfig = {
       { source: "/sitemap-community.xml", destination: "/api/sitemap-community" },
       { source: "/sitemap-guides.xml", destination: "/api/sitemap-guides" },
       { source: "/sitemap-zh.xml", destination: "/api/sitemap-zh" },
-      { source: "/baidu-sitemap.xml", destination: "/api/sitemap-zh" }
+      { source: "/baidu-sitemap.xml", destination: "/api/sitemap-zh" },
+      { source: "/sitemap-ai.xml", destination: "/api/sitemap-ai" },
+      { source: "/sitemap-en.xml", destination: "/api/sitemap-en" },
+      { source: "/sitemap-questions.xml", destination: "/api/sitemap-questions" },
+      { source: "/sitemap-pseo.xml", destination: "/api/sitemap-programmatic?part=0" },
+      { source: "/sitemap-programmatic.xml", destination: "/api/sitemap-programmatic?part=0" },
+      { source: "/sitemap-pseo-:part.xml", destination: "/api/sitemap-programmatic?part=:part" }
     ];
   },
   async headers() {
@@ -70,7 +73,11 @@ const nextConfig = {
       // /tools?tool=X -> /tools/X (backwards compatibility)
       { source: "/tools", has: [{ type: "query", key: "tool", value: "(?<tool>[^&]+)" }], destination: "/tools/:tool", permanent: true },
       // V72: /result/[id] -> /share/[id] (shareable result URL)
-      { source: "/result/:id", destination: "/share/:id", permanent: true }
+      { source: "/result/:id", destination: "/share/:id", permanent: true },
+      // 工具索引并入抖音场景页；子路径 /zh/tools/* 仍保留
+      { source: "/zh/tools", destination: "/zh/douyin", permanent: true },
+      // 原「写给中国创作者」页已合并为 `/zh` 首页
+      { source: "/zh/about", destination: "/zh", permanent: true }
     ];
   },
   webpack: (config) => {

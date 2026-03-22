@@ -36,7 +36,8 @@ export type SitemapEntry = {
   priority?: number;
 };
 
-const MAX_URLS_PER_SITEMAP = 50000;
+/** Max URLs per sitemap file (sitemaps.org limit). */
+export const MAX_URLS_PER_SITEMAP = 50000;
 
 export function staticAndToolUrls(): SitemapEntry[] {
   const toolSlugs = tools
@@ -69,6 +70,95 @@ export function staticAndToolUrls(): SitemapEntry[] {
     { url: `${BASE_URL}/zh/privacy`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.4 },
     { url: `${BASE_URL}/zh/terms`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.4 },
     { url: `${BASE_URL}/pricing`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE_URL}/zh`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.95 },
+    { url: `${BASE_URL}/zh/pricing`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.85 },
+    {
+      url: `${BASE_URL}/zh/tiktok-caption-generator`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9
+    },
+    { url: `${BASE_URL}/zh/hook-generator`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE_URL}/zh/ai-caption-generator`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+    {
+      url: `${BASE_URL}/zh/tiktok-growth-kit`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.88
+    },
+    { url: `${BASE_URL}/zh/douyin`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+    {
+      url: `${BASE_URL}/zh/douyin-caption-generator`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.89
+    },
+    {
+      url: `${BASE_URL}/zh/douyin-hook-generator`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.89
+    },
+    {
+      url: `${BASE_URL}/zh/douyin-script-generator`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.89
+    },
+    {
+      url: `${BASE_URL}/zh/douyin-topic-generator`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.89
+    },
+    {
+      url: `${BASE_URL}/zh/douyin-comment-cta-generator`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.89
+    },
+    {
+      url: `${BASE_URL}/zh/douyin-structure-generator`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.89
+    },
+    {
+      url: `${BASE_URL}/zh/douyin-hooks`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.88
+    },
+    {
+      url: `${BASE_URL}/zh/douyin-caption-examples`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.88
+    },
+    {
+      url: `${BASE_URL}/zh/douyin-script-templates`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.88
+    },
+    {
+      url: `${BASE_URL}/zh/douyin-topic-ideas`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.88
+    },
+    {
+      url: `${BASE_URL}/zh/douyin-content-ideas`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.88
+    },
+    {
+      url: `${BASE_URL}/zh/douyin-viral-hooks`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.88
+    },
     { url: `${BASE_URL}/creators`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE_URL}/community`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE_URL}/community/prompts`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },

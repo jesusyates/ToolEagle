@@ -45,11 +45,15 @@ export async function POST(request: NextRequest) {
       const today = new Date().toISOString().slice(0, 10);
       const { data: profile } = await supabase
         .from("profiles")
-        .select("plan")
+        .select("plan, plan_expire_at")
         .eq("id", user.id)
         .single();
 
-      const plan = profile?.plan ?? "free";
+      let plan: "free" | "pro" = "free";
+      if (profile?.plan === "pro") {
+        const exp = profile.plan_expire_at as string | null | undefined;
+        if (exp == null || exp === "" || new Date(exp).getTime() > Date.now()) plan = "pro";
+      }
       if (plan === "free") {
         const { data: usage } = await supabase
           .from("usage_stats")

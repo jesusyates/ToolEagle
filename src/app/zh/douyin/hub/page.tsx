@@ -167,18 +167,18 @@ export default function ZhDouyinHubPage() {
 
           <section className="mt-12" aria-labelledby="douyin-monetize">
             <h2 id="douyin-monetize" className="text-lg font-bold text-slate-900">
-              免费验证选题 · Pro 拿「能拍、能发、能复盘」的完整包
+              免费验证选题 · 算力包拿「能拍、能发、能复盘」的完整包
             </h2>
             <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-              抖音工具免费档用于<strong>快速试方向</strong>；需要<strong>更高 AI 算力次数、更完整结果、更多变体与策略拆解</strong>时，升级 Pro 更适合日更与持续做内容。支付走微信/支付宝，自动开通。
+              抖音工具免费档用于<strong>快速试方向</strong>；需要<strong>更高 AI 算力次数、更完整结果、更多变体与策略拆解</strong>时，购买算力包更适合日更与持续做内容。支付走微信/支付宝，自动开通。
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               <ZhPricingLink
-                hash="#cn-pro-checkout"
+                hash="#cn-credits-checkout"
                 conversionSource="zh_douyin_hub_section"
                 className="inline-flex rounded-xl bg-red-700 px-4 py-2.5 text-sm font-bold text-white hover:bg-red-800"
               >
-                查看 Pro 定价与开通 →
+                查看算力包定价与开通 →
               </ZhPricingLink>
             </div>
           </section>

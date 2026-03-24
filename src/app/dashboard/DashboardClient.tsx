@@ -16,6 +16,7 @@ import { createClient } from "@/lib/supabase/client";
 import { trackConversion } from "@/lib/analytics";
 import { Star, History, FolderOpen } from "lucide-react";
 import { GrowthMissionBlock } from "@/components/dashboard/GrowthMissionBlock";
+import { ZhCreditsSnapshotCard } from "@/components/zh/ZhCreditsSnapshotCard";
 
 type Favorite = {
   id: string;
@@ -144,6 +145,12 @@ export function DashboardClient({
 
           {!isZh && (
             <GrowthMissionBlock distributionHref="/dashboard/distribution" />
+          )}
+
+          {isZh && (
+            <div className="mt-8">
+              <ZhCreditsSnapshotCard />
+            </div>
           )}
 
           {plan === "free" && (

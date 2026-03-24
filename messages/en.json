@@ -79,9 +79,16 @@
     "tryAgain": "Try again"
   },
   "home": {
-    "heroTagline": "AI Tools for TikTok, YouTube and Instagram creators",
-    "heroTitle": "Generate full creator content in one go",
-    "heroSubtitle": "Get results faster — enter your topic and save hours with AI. Hooks, captions, hashtags, titles. No sign-up.",
+    "heroBrand": "ToolEagle",
+    "heroEyebrow": "Short-form · creators · growth",
+    "heroSlogan": "Let content bring you results directly",
+    "heroIntro": "AI tools and playbooks for short-form creators — free to try, no signup to start",
+    "heroTagline": "Global creator hub",
+    "heroTitle": "ToolEagle — AI that helps you ship content faster",
+    "heroSubtitle": "The global home for short-form creators — browse tools and playbooks, then ship hooks, captions, and scripts you can use on any platform.",
+    "heroPrimaryCta": "Explore tools",
+    "heroSecondaryCta": "Browse guides",
+    "heroTrustLine": "Free to try · No signup required",
     "heroGenerateCta": "Generate TikTok Captions",
     "heroUpgradeTeaser": "Get results faster — save hours with AI.",
     "heroUpgradeLink": "Grow faster with Pro",
@@ -120,7 +127,7 @@
     "popularTools": "Popular tools",
     "popularToolsDesc": "Most used by creators. Quick, scannable workflow—pick one and ship.",
     "whyToolEagle": "Why ToolEagle",
-    "whyToolEagleDesc": "Strong visual hierarchy, clean cards, and fast workflows—so you can stay in creator mode.",
+    "whyToolEagleDesc": "One brand and one front door for creators worldwide — then choose the workflow that fits your platform.",
     "builtForSpeed": "Built for speed",
     "builtForSpeedDesc": "Open a tool, paste an idea, get text you can ship in under 30 seconds.",
     "creatorNativeUx": "Creator‑native UX",
@@ -141,7 +148,32 @@
     "article2Title": "How to Go Viral on TikTok in 2026",
     "article2Tag": "Strategy",
     "article3Title": "YouTube Title Formulas that Drive Clicks",
-    "article3Tag": "YouTube"
+    "article3Tag": "YouTube",
+    "quickToolsHeading": "Start creating in seconds",
+    "quickToolsIntro": "Default path: build a full short-form post package in one run. Use the tools below when you only need one piece.",
+    "quickToolsRecommended": "Recommended",
+    "quickToolsPrimaryName": "Post Package Generator",
+    "quickToolsPrimaryBlurb": "Hook, beats, caption, hashtags — one full package.",
+    "quickToolsPrimaryHint": "Best first run for new visitors.",
+    "quickToolsMore": "More generators",
+    "ctaGeneratePackage": "Generate a post package",
+    "ctaOpenTool": "Open tool",
+    "startHereHeading": "Start here",
+    "startHereIntro": "Pick a path — everything below links to focused pages so this home screen stays a portal, not a tool directory.",
+    "startHereToolsTitle": "Tools",
+    "startHereToolsDesc": "Search and browse every generator by category and platform.",
+    "startHereToolsCta": "Browse tools →",
+    "startHereGuidesTitle": "Guides",
+    "startHereGuidesDesc": "Step-by-step English how-tos — growth, packaging, and distribution.",
+    "startHereGuidesCta": "Browse guides →",
+    "startHerePricingTitle": "Pricing",
+    "startHerePricingDesc": "Free tier, Pro, and supporter options when you’re ready.",
+    "startHerePricingCta": "View pricing →",
+    "examplesHeading": "What the output feels like",
+    "examplesSubtitle": "Illustrative samples — your real runs will match your niche and tone.",
+    "examplesHookLabel": "Hook",
+    "examplesCaptionLabel": "Caption",
+    "examplesScriptLabel": "Script beats"
   },
   "footer": {
     "launch": "Launch",
@@ -172,11 +204,62 @@
     "builtForCreators": "Built for creators",
     "privacy": "Privacy",
     "terms": "Terms",
-    "latestChineseGuides": "Latest Chinese Guides"
+    "latestChineseGuides": "Latest Chinese Guides",
+    "chinaSite": "China site",
+    "chinaSiteBlurb": "Simplified Chinese experience for creators in China.",
+    "chinaSiteLink": "Enter China site →"
   },
   "tools": {
     "title": "Tools",
-    "subtitle": "Free tools for every creator"
+    "subtitle": "Pick a tool and start generating",
+    "intro": "Choose a category to see every tool in that group — each tool lives in one place. Or search by keyword; partial words match names, slugs, and descriptions.",
+    "searchLabel": "Search tools",
+    "searchPlaceholder": "Search by keyword (e.g. caption, hook, title)…",
+    "searchHintHub": "Matches tool names, URL slugs, descriptions, and categories. Use the list below to browse every category.",
+    "searchHintShort": "Partial words match names, slugs, and descriptions.",
+    "searchSuggestionsLabel": "Matching tools",
+    "searchNoResults": "No tools match that search. Try another word or open a category below.",
+    "browseByCategory": "Browse by category",
+    "browseByCategorySub": "Only categories that currently have tools listed here (cross‑platform; TikTok / YouTube / Instagram slug tools are under the platform hubs above).",
+    "categoryBlurbs": {
+      "Captions": "Post lines, on-screen text, and captions for Shorts, Reels, and feeds.",
+      "Titles": "Click-worthy titles for videos, Shorts, Reels, and carousel covers.",
+      "Hooks": "Scroll-stopping openers for the first 1–3 seconds.",
+      "Ideas": "Angles, topics, and prompts to plan your next posts.",
+      "Scripts": "Beats, outlines, and talking flows for short video.",
+      "Bios": "Profile bios and one-line positioning for creator accounts.",
+      "Usernames": "Handle and @username ideas that fit your niche.",
+      "Hashtags": "Tag sets and discovery-friendly hashtags for reach.",
+      "Descriptions": "Long-form descriptions, SEO blurbs, and channel copy."
+    },
+    "platformLabels": {
+      "tiktok": "TikTok",
+      "youtube": "YouTube",
+      "instagram": "Instagram"
+    },
+    "platformCardTitle": {
+      "tiktok": "TikTok Tools",
+      "youtube": "YouTube Tools",
+      "instagram": "Instagram Tools"
+    },
+    "platformBlurbs": {
+      "tiktok": "Caption, hook, hashtag, and idea tools built for TikTok slugs.",
+      "youtube": "Titles, tags, descriptions, and Shorts-focused generators.",
+      "instagram": "Reels, Stories, bios, and carousel copy under instagram-* tools."
+    },
+    "categoryPlatformHint": "TikTok-, YouTube-, and Instagram-specific tools are listed under each platform hub (/tiktok, /youtube, /instagram), not here.",
+    "categoryEmptySemantic": "Every tool in this category uses a TikTok, YouTube, or Instagram slug — open the matching platform hub below.",
+    "categoryCardCount": "{count} tools",
+    "categoryCardCta": "Open category →",
+    "browseByPlatform": "Browse by platform",
+    "browseByPlatformSub": "TikTok, YouTube, and Instagram tool hubs (platform-specific listings).",
+    "platformCardCount": "{count} tools for {label} creators",
+    "platformCardCta": "View all →",
+    "categoryPageHeading": "{category} tools",
+    "categoryPageIntro": "Tools that help with your {category}.",
+    "categoryToolCountAll": "{count} tools in this category",
+    "categoryToolCountFiltered": "{count} matching (of {total} in this category)",
+    "backToToolsHub": "All categories"
   },
   "answers": {
     "title": "Creator Answers"
@@ -419,6 +502,12 @@
   },
   "nav": {
     "home": "Home",
+    "homeLogoAria": "ToolEagle — home",
+    "marketSelectorLabel": "Region",
+    "marketSelectorAria": "Choose region or language",
+    "marketOptionEn": "English (Global)",
+    "marketOptionZh": "Simplified Chinese (China)",
+    "marketOptionEs": "Spanish",
     "tools": "Tools",
     "discover": "Discover",
     "aiPrompts": "AI Prompts",
@@ -431,9 +520,10 @@
     "blog": "Blog",
     "about": "About",
     "pricing": "Pricing",
+    "guides": "Guides",
     "upgrade": "Pro — Grow faster",
     "dashboard": "Dashboard",
     "creator": "Creator Mode",
-    "slogan": "Free Tools for Creators"
+    "slogan": "Global AI tools for creators"
   }
 }

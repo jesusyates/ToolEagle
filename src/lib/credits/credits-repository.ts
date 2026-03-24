@@ -23,10 +23,13 @@ export async function getCnCreditsBalance(
   if (!process.env.SUPABASE_SERVICE_ROLE_KEY?.trim()) return null;
   try {
     const supabase = admin();
-    const q = supabase.from("user_credits").select("remaining_credits, expire_at, total_credits");
     const { data, error } = userId
-      ? await q.eq("user_id", userId).maybeSingle()
-      : await q.eq("anonymous_user_id", anonymousUserId as string).maybeSingle();
+      ? await supabase.from("user_credits").select("remaining_credits, expire_at, total_credits").eq("user_id", userId).maybeSingle()
+      : await supabase
+          .from("anonymous_credit_wallets")
+          .select("remaining_credits, expire_at, total_credits")
+          .eq("anonymous_user_id", anonymousUserId as string)
+          .maybeSingle();
     if (error || !data) return null;
     const rem = Number(data.remaining_credits ?? 0);
     const exp = data.expire_at as string | null;
@@ -57,10 +60,17 @@ async function upsertUserCreditsRow(params: {
   const supabase = admin();
   const now = Date.now();
 
-  const q = supabase.from("user_credits").select("id, remaining_credits, expire_at, total_credits");
   const { data: row } = userId
-    ? await q.eq("user_id", userId).maybeSingle()
-    : await q.eq("anonymous_user_id", anonymousUserId as string).maybeSingle();
+    ? await supabase
+        .from("user_credits")
+        .select("id, remaining_credits, expire_at, total_credits")
+        .eq("user_id", userId)
+        .maybeSingle()
+    : await supabase
+        .from("anonymous_credit_wallets")
+        .select("anonymous_user_id, remaining_credits, expire_at, total_credits")
+        .eq("anonymous_user_id", anonymousUserId as string)
+        .maybeSingle();
 
   const currentExp = row?.expire_at ? new Date(row.expire_at as string).getTime() : 0;
   const expired = !row?.expire_at || currentExp <= now;
@@ -76,15 +86,26 @@ async function upsertUserCreditsRow(params: {
     updated_at: new Date().toISOString()
   };
 
-  if (row?.id) {
-    const { error } = await supabase.from("user_credits").update(patch).eq("id", row.id);
+  if (userId && (row as { id?: string } | null)?.id) {
+    const { error } = await supabase.from("user_credits").update(patch).eq("id", (row as { id: string }).id);
+    if (error) return { ok: false, error: error.message };
+  } else if (!userId && row) {
+    const { error } = await supabase
+      .from("anonymous_credit_wallets")
+      .update(patch)
+      .eq("anonymous_user_id", anonymousUserId as string);
     if (error) return { ok: false, error: error.message };
   } else {
-    const { error } = await supabase.from("user_credits").insert({
-      user_id: userId,
-      anonymous_user_id: anonymousUserId,
-      ...patch
-    });
+    const { error } = userId
+      ? await supabase.from("user_credits").insert({
+          user_id: userId,
+          anonymous_user_id: null,
+          ...patch
+        })
+      : await supabase.from("anonymous_credit_wallets").insert({
+          anonymous_user_id: anonymousUserId,
+          ...patch
+        });
     if (error) return { ok: false, error: error.message };
   }
   return { ok: true, newExpire };
@@ -119,7 +140,9 @@ export async function grantCreditsFromPaidOrder(
       .update({
         credits_total: credits,
         credits_remaining: credits,
-        credits_expire_at: up.newExpire
+        credits_expire_at: up.newExpire,
+        expire_at: up.newExpire,
+        updated_at: new Date().toISOString()
       })
       .eq("id", order.id);
 
@@ -134,9 +157,11 @@ export async function deductCnCredits(params: {
   anonymousUserId: string | null;
   cost: number;
   toolSlug: string;
+  market?: "cn" | "global";
+  requestType?: string;
   meta?: Record<string, unknown>;
 }): Promise<{ ok: true; remaining: number } | { ok: false; error: string; remaining?: number }> {
-  const { userId, anonymousUserId, cost, toolSlug, meta } = params;
+  const { userId, anonymousUserId, cost, toolSlug, market = "global", requestType = "generate_package", meta } = params;
   if (cost <= 0) return { ok: true, remaining: 0 };
   if (!userId && !anonymousUserId) return { ok: false, error: "no_identity" };
 
@@ -144,7 +169,11 @@ export async function deductCnCredits(params: {
 
   const { data: row } = userId
     ? await supabase.from("user_credits").select("*").eq("user_id", userId).maybeSingle()
-    : await supabase.from("user_credits").select("*").eq("anonymous_user_id", anonymousUserId as string).maybeSingle();
+    : await supabase
+        .from("anonymous_credit_wallets")
+        .select("*")
+        .eq("anonymous_user_id", anonymousUserId as string)
+        .maybeSingle();
 
   if (!row) return { ok: false, error: "no_credits_row", remaining: 0 };
 
@@ -157,23 +186,35 @@ export async function deductCnCredits(params: {
   if (rem < cost) return { ok: false, error: "insufficient_credits", remaining: rem };
 
   const next = rem - cost;
-  const { error: upErr } = await supabase
-    .from("user_credits")
-    .update({
-      remaining_credits: next,
-      updated_at: new Date().toISOString()
-    })
-    .eq("id", row.id)
-    .gte("remaining_credits", cost);
+  const { error: upErr } = userId
+    ? await supabase
+        .from("user_credits")
+        .update({
+          remaining_credits: next,
+          updated_at: new Date().toISOString()
+        })
+        .eq("id", row.id)
+        .gte("remaining_credits", cost)
+    : await supabase
+        .from("anonymous_credit_wallets")
+        .update({
+          remaining_credits: next,
+          updated_at: new Date().toISOString()
+        })
+        .eq("anonymous_user_id", anonymousUserId as string)
+        .gte("remaining_credits", cost);
 
   if (upErr) return { ok: false, error: upErr.message, remaining: rem };
 
   await supabase.from("credit_usage_logs").insert({
     user_id: userId,
     anonymous_user_id: anonymousUserId,
+    market,
     tool_slug: toolSlug,
+    tool: toolSlug,
     credits_used: cost,
     remaining_after: next,
+    request_type: requestType,
     meta: meta ?? {}
   });
 
@@ -187,6 +228,9 @@ export async function listCreditUsageLogs(
 ): Promise<
   Array<{
     id: string;
+    market: string;
+    tool: string;
+    request_type: string;
     tool_slug: string;
     credits_used: number;
     remaining_after: number;
@@ -198,7 +242,7 @@ export async function listCreditUsageLogs(
   const supabase = admin();
   const q = supabase
     .from("credit_usage_logs")
-    .select("id, tool_slug, credits_used, remaining_after, created_at, meta")
+    .select("id, market, tool, request_type, tool_slug, credits_used, remaining_after, created_at, meta")
     .order("created_at", { ascending: false })
     .limit(limit);
   const { data, error } = userId
@@ -207,6 +251,9 @@ export async function listCreditUsageLogs(
   if (error || !data) return [];
   return data as Array<{
     id: string;
+    market: string;
+    tool: string;
+    request_type: string;
     tool_slug: string;
     credits_used: number;
     remaining_after: number;

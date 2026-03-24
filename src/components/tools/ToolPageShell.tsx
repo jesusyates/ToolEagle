@@ -8,6 +8,9 @@ type ToolPageShellProps = {
   eyebrow?: string;
   title: string;
   description: string;
+  /** V109.5 — First-screen clarity (global EN): what problem + who it’s for */
+  introProblem?: string;
+  introAudience?: string;
   input: ReactNode;
   result: ReactNode;
   howItWorks?: ReactNode;
@@ -23,6 +26,8 @@ export function ToolPageShell({
   eyebrow,
   title,
   description,
+  introProblem,
+  introAudience,
   input,
   result,
   howItWorks,
@@ -55,24 +60,42 @@ export function ToolPageShell({
             {eyebrow}
           </p>
         )}
-        <h1
-          className={
-            headerOnDark
-              ? "text-3xl sm:text-4xl font-semibold tracking-tight text-white drop-shadow-sm"
-              : "text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900"
-          }
-        >
-          {title}
+        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">
+          <span
+            className={
+              headerOnDark
+                ? "inline-block rounded-xl bg-slate-900/70 px-2.5 py-1 text-white shadow-[0_6px_16px_rgba(0,0,0,0.35)]"
+                : "inline-block rounded-xl bg-sky-100 px-2.5 py-1 text-sky-950 shadow-[0_2px_8px_rgba(2,132,199,0.18)]"
+            }
+          >
+            {title}
+          </span>
         </h1>
         <p
           className={
             headerOnDark
-              ? "text-sm sm:text-base text-slate-300 leading-relaxed"
-              : "text-sm sm:text-base text-slate-600 leading-relaxed"
+              ? "inline-block rounded-xl bg-slate-900/65 px-3 py-2 text-sm sm:text-base text-slate-100 leading-relaxed shadow-[0_6px_16px_rgba(0,0,0,0.32)]"
+              : "inline-block rounded-xl bg-sky-50 px-3 py-2 text-sm sm:text-base text-slate-800 leading-relaxed shadow-[0_2px_8px_rgba(2,132,199,0.12)]"
           }
         >
           {description}
         </p>
+        {!headerOnDark && (introProblem || introAudience) ? (
+          <div className="mt-4 space-y-2 rounded-2xl border border-slate-200 bg-slate-50/90 p-4 text-sm text-slate-800">
+            {introProblem ? (
+              <p>
+                <span className="font-semibold text-slate-900">What it solves: </span>
+                {introProblem}
+              </p>
+            ) : null}
+            {introAudience ? (
+              <p>
+                <span className="font-semibold text-slate-900">Best for: </span>
+                {introAudience}
+              </p>
+            ) : null}
+          </div>
+        ) : null}
         <div className="pt-2">
           <CommunityProofBadge />
         </div>

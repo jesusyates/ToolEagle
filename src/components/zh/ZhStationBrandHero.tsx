@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Heart, Shield, Compass } from "lucide-react";
 import { ZH } from "@/lib/zh-site/paths";
 import { ZhPricingLink } from "@/components/monetization/ZhPricingLink";
+import { ZhGlobalCreativeEntry } from "@/components/zh/ZhGlobalCreativeEntry";
 import { ZH_BRAND_SUBLINE, ZH_BRAND_TAGLINE } from "@/config/zh-brand";
 
 const pillars = [
@@ -89,6 +90,8 @@ export function ZhStationBrandHero() {
           ))}
         </ul>
 
+        <ZhGlobalCreativeEntry />
+
         <div id="zh-station-explore" className="relative mt-20 scroll-mt-20 pt-2">
           <div
             className="pointer-events-none absolute left-1/2 top-0 h-px w-[min(100%,20rem)] -translate-x-1/2 bg-gradient-to-r from-transparent via-amber-400/40 to-transparent"
@@ -99,20 +102,20 @@ export function ZhStationBrandHero() {
           </h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             <Link href={ZH.douyin} className={exploreCardClass}>
-              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-red-900/90">专栏</span>
-              <span className="mt-2 text-lg font-bold text-stone-900">抖音 · 场景与工具</span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-red-900/90">主战场</span>
+              <span className="mt-2 text-lg font-bold text-stone-900">抖音 · 从选题到发布</span>
               <span className="mt-2 flex-1 text-sm leading-relaxed text-stone-600">
-                按场景分组；原「工具」索引已并入本页。
+                场景化工具与工作流入口；本土语境优先，其次才是通用短视频能力。
               </span>
               <span className="mt-4 text-sm font-semibold text-red-800 transition group-hover:text-red-700 group-hover:underline">
                 前往 →
               </span>
             </Link>
             <Link href={ZH.growthKit} className={exploreCardClass}>
-              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-900/90">方法论</span>
-              <span className="mt-2 text-lg font-bold text-stone-900">增长指南</span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-900/90">开工</span>
+              <span className="mt-2 text-lg font-bold text-stone-900">增长指南 · 可执行路径</span>
               <span className="mt-2 flex-1 text-sm leading-relaxed text-stone-600">
-                工作流与通用短视频思路。
+                把钩子、文案与标签串成闭环；示例与入口偏抖音日更节奏。
               </span>
               <span className="mt-4 text-sm font-semibold text-amber-900 transition group-hover:text-amber-800 group-hover:underline">
                 前往 →
@@ -120,11 +123,11 @@ export function ZhStationBrandHero() {
             </Link>
             <ZhPricingLink
               conversionSource="zh_home_explore_grid"
-              hash="#cn-pro-checkout"
+              hash="#cn-credits-checkout"
               className={exploreCardClass}
             >
               <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-950/85">付费</span>
-              <span className="mt-2 text-lg font-bold text-stone-900">定价与 Pro</span>
+              <span className="mt-2 text-lg font-bold text-stone-900">定价与算力包</span>
               <span className="mt-2 flex-1 text-sm leading-relaxed text-stone-600">
                 次数、权益与开通方式一览。
               </span>

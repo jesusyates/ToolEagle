@@ -1,10 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { UpgradeLink } from "@/components/monetization/UpgradeLink";
-import { hasPaymentLink } from "@/config/payment";
 import { trackEvent } from "@/lib/analytics";
 import { trackConversion } from "@/lib/analytics/conversionClient";
 import { listCreditPacksForUi, type CnCreditPackId } from "@/lib/credits/credit-packs";
@@ -14,7 +13,7 @@ type Phase = "idle" | "loading" | "paying" | "success" | "error";
 /**
  * V101 — CN aggregator checkout · V107 — credit packs (按次 + 有效期)
  */
-export function ZhProPaymentPanel() {
+export function ZhProPaymentPanel({ paymentEnabled = true }: { paymentEnabled?: boolean }) {
   const router = useRouter();
   const pathname = usePathname() || "/zh/pricing";
   const [phase, setPhase] = useState<Phase>("idle");
@@ -23,7 +22,8 @@ export function ZhProPaymentPanel() {
   const [qrUrl, setQrUrl] = useState<string | null>(null);
   const [payUrl, setPayUrl] = useState<string | null>(null);
   const [errMsg, setErrMsg] = useState<string | null>(null);
-  const [selected, setSelected] = useState<CnCreditPackId>("credits_standard");
+  const [selected, setSelected] = useState<CnCreditPackId>("cn_advanced");
+  const [successMeta, setSuccessMeta] = useState<{ added: number; balance: number; expireAt: string | null } | null>(null);
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const packs = listCreditPacksForUi();
@@ -41,6 +41,12 @@ export function ZhProPaymentPanel() {
   }, [stopPoll]);
 
   const startCheckout = async () => {
+    if (!paymentEnabled) {
+      setErrMsg("aggregator_not_configured");
+      setPhase("error");
+      setModalOpen(true);
+      return;
+    }
     setErrMsg(null);
     setPhase("loading");
     setModalOpen(true);
@@ -49,7 +55,7 @@ export function ZhProPaymentPanel() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ plan: selected, market: "cn" })
+        body: JSON.stringify({ package_id: selected, market: "cn", order_type: "credits" })
       });
       const data = await res.json().catch(() => ({}));
 
@@ -125,6 +131,13 @@ export function ZhProPaymentPanel() {
             amount: typeof j.amount === "number" ? j.amount : current.cny,
             route: "/zh/pricing"
           });
+          const balRes = await fetch("/api/credits/balance", { credentials: "include" });
+          const bal = await balRes.json().catch(() => ({}));
+          setSuccessMeta({
+            added: current.credits,
+            balance: Number(bal?.remaining_credits ?? 0),
+            expireAt: typeof bal?.expire_at === "string" ? bal.expire_at : null
+          });
           try {
             if (typeof window !== "undefined") {
               const amt = typeof j.amount === "number" ? j.amount : current.cny;
@@ -185,7 +198,7 @@ export function ZhProPaymentPanel() {
   }, [phase, orderId, selected, current.cny, stopPoll]);
 
   return (
-    <div id="cn-pro-checkout" className="scroll-mt-28 space-y-4">
+    <div id="cn-credits-checkout" className="scroll-mt-28 h-full flex flex-col">
       <div className="grid gap-3 sm:grid-cols-2">
         {packs.map((p) => (
           <button
@@ -198,9 +211,9 @@ export function ZhProPaymentPanel() {
                 : "border-slate-200 bg-white hover:border-slate-300"
             }`}
           >
-            {p.id === "credits_standard" ? (
+            {p.id === "cn_advanced" ? (
               <span className="inline-block rounded-full bg-amber-600 px-2 py-0.5 text-[10px] font-bold text-white mb-1">
-                主推
+                推荐
               </span>
             ) : (
               <span className="block h-5" />
@@ -217,32 +230,23 @@ export function ZhProPaymentPanel() {
         ))}
       </div>
 
-      <button
-        type="button"
-        onClick={() => void startCheckout()}
-        disabled={phase === "loading"}
-        className="inline-flex w-full justify-center rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-70"
-      >
-        {phase === "loading"
-          ? "正在创建订单…"
-          : `微信 / 支付宝购买 · ¥${current.cny}（${current.credits} 次 / ${current.days} 天）`}
-      </button>
-      <p className="text-center text-[11px] text-slate-500 leading-relaxed">
-        支付成功后自动到账，算力次数与有效期可在「控制台 → 算力/订单」查看。
-      </p>
-      {hasPaymentLink() ? (
-        <p className="text-center text-[11px] text-slate-500">
-          更习惯海外信用卡？{" "}
-          <UpgradeLink
-            className="text-red-800 font-medium underline"
-            conversionSource="zh_pricing_overseas_card"
-            external
-          >
-            Lemon 订阅（美元）
-          </UpgradeLink>
+      <div className="mt-auto pt-12">
+        <button
+          type="button"
+          onClick={() => void startCheckout()}
+          disabled={phase === "loading" || !paymentEnabled}
+          className="inline-flex w-full justify-center rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-70"
+        >
+          {phase === "loading"
+            ? "正在创建订单…"
+            : paymentEnabled
+              ? `立即购买 · ¥${current.cny}（${current.credits}次 / ${current.days}天）`
+              : `支付通道维护中 · ¥${current.cny}（${current.credits}次 / ${current.days}天）`}
+        </button>
+        <p className="mt-4 text-center text-[11px] text-slate-500 leading-relaxed">
+          支付成功后自动到账，算力次数与有效期可在「控制台 → 算力/订单」查看。
         </p>
-      ) : null}
-
+      </div>
       {modalOpen ? (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
@@ -268,7 +272,7 @@ export function ZhProPaymentPanel() {
                 <p className="text-sm font-semibold text-slate-900">暂时无法拉起支付</p>
                 <p className="text-xs text-slate-600">
                   {errMsg === "aggregator_not_configured"
-                    ? "站点尚未配置聚合支付，请联系管理员或改用海外订阅。"
+                    ? "站点尚未配置国内聚合支付（微信/支付宝），请联系管理员完成配置。"
                     : `原因：${errMsg ?? "unknown"}`}
                 </p>
                 <div className="flex flex-col gap-2">
@@ -282,14 +286,6 @@ export function ZhProPaymentPanel() {
                   >
                     关闭
                   </button>
-                  {hasPaymentLink() ? (
-                    <UpgradeLink
-                      className="rounded-xl bg-slate-900 px-4 py-2 text-center text-sm font-semibold text-white"
-                      conversionSource="zh_pricing_modal_fallback"
-                    >
-                      使用海外信用卡订阅
-                    </UpgradeLink>
-                  ) : null}
                 </div>
               </div>
             ) : null}
@@ -299,7 +295,14 @@ export function ZhProPaymentPanel() {
                 <p className="text-sm font-bold text-slate-900">请扫码支付</p>
                 <p className="text-xs text-slate-600">支付完成后将自动检测，请稍候…</p>
                 {qrUrl ? (
-                  <img src={qrUrl} alt="支付二维码" className="mx-auto max-w-[200px] rounded-lg border border-slate-200" />
+                  <Image
+                    src={qrUrl}
+                    alt="支付二维码"
+                    width={200}
+                    height={200}
+                    className="mx-auto rounded-lg border border-slate-200"
+                    unoptimized
+                  />
                 ) : null}
                 {payUrl && !qrUrl ? (
                   <a
@@ -312,7 +315,7 @@ export function ZhProPaymentPanel() {
                   </a>
                 ) : null}
                 {!qrUrl && !payUrl ? (
-                  <p className="text-xs text-amber-800">未收到二维码链接，请检查聚合支付接口响应字段。</p>
+                  <p className="text-xs text-amber-800">暂时无法显示支付二维码，请稍后重试。</p>
                 ) : null}
                 <button
                   type="button"
@@ -331,13 +334,23 @@ export function ZhProPaymentPanel() {
             {phase === "success" ? (
               <div className="text-center space-y-3">
                 <p className="text-lg font-bold text-emerald-800">支付成功</p>
-                <p className="text-sm text-slate-600">算力次数已入账，刷新页面即可查看剩余次数与有效期。</p>
+                <p className="text-sm text-slate-600">
+                  已获得 {successMeta?.added ?? current.credits} 次，当前余额 {successMeta?.balance ?? 0} 次，
+                  有效期至 {successMeta?.expireAt ? new Date(successMeta.expireAt).toLocaleDateString() : "—"}。
+                </p>
                 <Link
                   href="/zh/tiktok-caption-generator"
                   className="inline-flex w-full justify-center rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white"
                   onClick={() => setModalOpen(false)}
                 >
                   去生成文案
+                </Link>
+                <Link
+                  href="/zh/dashboard/billing"
+                  className="inline-flex w-full justify-center rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700"
+                  onClick={() => setModalOpen(false)}
+                >
+                  查看账单
                 </Link>
               </div>
             ) : null}

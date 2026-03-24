@@ -23,6 +23,8 @@ import { LoginPromptModal } from "@/components/LoginPromptModal";
 import { ExitIntentCta } from "@/components/tools/ExitIntentCta";
 import { useAuth } from "@/hooks/useAuth";
 import { useCountry } from "@/hooks/useCountry";
+import { getEnToolJourney } from "@/config/en-tool-journey";
+import { ToolNextSteps } from "@/components/tools/ToolNextSteps";
 
 type GenericToolClientProps = {
   slug: string;
@@ -50,6 +52,9 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
   }, [toolMeta, country]);
 
   if (!toolMeta || !config) return null;
+
+  const enJourney = locale === "en" ? getEnToolJourney(slug) : null;
+  const primaryCtaLabel = enJourney?.generateCta ?? config.buttonLabel;
 
   async function handleGenerate() {
     const trimmed = input.trim();
@@ -175,6 +180,8 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
       <ToolPageShell
       title={toolMeta.name}
       description={toolMeta.description}
+      introProblem={enJourney?.introProblem}
+      introAudience={enJourney?.introAudience}
       input={
         <ToolInputCard label={config.inputLabel}>
           <DelegatedButton
@@ -207,7 +214,7 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
               </>
             ) : (
               <>
-                {config.buttonLabel}
+                {primaryCtaLabel}
                 <span className="text-slate-400">→</span>
               </>
             )}
@@ -215,23 +222,28 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
         </ToolInputCard>
       }
       result={
-        <ToolResultListCard
-          title={config.resultTitle}
-          items={items}
-          isLoading={isGenerating}
-          input={input}
-          onCopyItem={handleCopyItem}
-          onCopyAll={handleCopyAll}
-          onCopyTrack={() => toolMeta && trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country })}
-          onRegenerate={handleGenerate}
-          onSaveEditedItem={handleSaveEditedItem}
-          onItemsChange={handleItemsChange}
-          emptyMessage={config.emptyMessage}
-          toolSlug={slug}
-          toolName={toolMeta.name}
-          isLoggedIn={isLoggedIn}
-          onRequireLogin={() => setLoginModalOpen(true)}
-        />
+        <>
+          <ToolResultListCard
+            title={config.resultTitle}
+            items={items}
+            isLoading={isGenerating}
+            input={input}
+            onCopyItem={handleCopyItem}
+            onCopyAll={handleCopyAll}
+            onCopyTrack={() => toolMeta && trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country })}
+            onRegenerate={handleGenerate}
+            onSaveEditedItem={handleSaveEditedItem}
+            onItemsChange={handleItemsChange}
+            emptyMessage={config.emptyMessage}
+            toolSlug={slug}
+            toolName={toolMeta.name}
+            isLoggedIn={isLoggedIn}
+            onRequireLogin={() => setLoginModalOpen(true)}
+          />
+          {locale === "en" ? (
+            <ToolNextSteps toolSlug={slug} hasOutput={items.length > 0} />
+          ) : null}
+        </>
       }
       howItWorks={<HowItWorksCard steps={config.howItWorks} />}
       aside={

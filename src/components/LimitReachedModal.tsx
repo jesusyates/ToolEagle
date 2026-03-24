@@ -7,10 +7,10 @@ import { trackConversion } from "@/lib/analytics/conversionClient";
 import { Check } from "lucide-react";
 
 const MESSAGE_DEFAULT =
-  "You've reached today's free limit. Get results faster — upgrade to Pro for unlimited AI and save hours every week.";
+  "You've reached today's free limit. Get results faster — top up credits and keep creating.";
 
 const MESSAGE_QUALITY =
-  "You've hit today's free limit. Pro unlocks unlimited runs plus full post packages: more variants, deeper “why it works” and posting strategy — not just more lines of text.";
+  "You've hit today's free limit. Credits unlock more runs plus full post packages: more variants, deeper “why it works” and posting strategy.";
 
 const MESSAGE_QUALITY_ZH =
   "今天的免费次数已用完。充值算力包后，在有效期内按剩余次数生成完整爆款文案包：涨粉更快、提高完播率、直接可用文案、爆款结构——不只是多几行字。";
@@ -41,9 +41,9 @@ export function LimitReachedModal({ open, onClose, variant = "default", locale =
         "提高完播率：爆款结构、强互动、转化型开头一包搞定"
       ]
     : [
-        "Unlimited generations — no daily cap",
+        "Pay-per-use credits — no monthly subscription required",
         "5 full post packages per run (hook → script → caption → CTA → tags + strategy)",
-        "Unlock blurred Pro-only variants you already saw in results"
+        "Unlock blurred full-package variants you already saw in results"
       ];
 
   return (
@@ -87,9 +87,9 @@ export function LimitReachedModal({ open, onClose, variant = "default", locale =
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
           {zh ? (
             <Link
-              href="/zh/pricing#cn-pro-checkout"
+              href="/zh/pricing#cn-credits-checkout"
               className="flex-1 rounded-xl bg-slate-900 px-4 py-3 text-center text-sm font-bold text-white hover:bg-slate-800"
-              onClick={() => trackConversion("pricing_open", { source: "limit_modal_cn_pro" })}
+              onClick={() => trackConversion("pricing_open", { source: "limit_modal_cn_credits" })}
             >
               解锁全部爆款文案 — 去充值算力 →
             </Link>

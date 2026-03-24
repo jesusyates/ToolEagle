@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Bird } from "lucide-react";
 import { MarketSelector } from "@/components/locale/MarketSelector";
+import { ToolEagleLogoMark } from "@/components/brand/ToolEagleLogoMark";
 import { AuthButton } from "@/components/auth/AuthButton";
 import { ZH } from "@/lib/zh-site/paths";
 import { CN_PLATFORMS } from "@/lib/zh-site/cn-platforms/config";
@@ -36,80 +36,55 @@ function navLinkClass(item: NavItem) {
   return "px-2.5 py-1.5 rounded-full hover:bg-red-50 hover:text-red-800 transition";
 }
 
-function navLinkClassMobile(item: NavItem) {
-  if (item.brand) {
-    return "px-2 py-1 rounded-lg font-semibold text-amber-950 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-300/70";
-  }
-  if (item.comingSoon) {
-    return "px-2 py-1 rounded-lg text-slate-600 border border-dashed border-slate-200";
-  }
-  return "px-2 py-1 rounded-lg bg-slate-50 hover:bg-red-50";
-}
-
 const douyinNavClass =
   "px-2.5 py-1.5 rounded-full font-bold text-red-900 bg-red-50 border border-red-200/80 hover:bg-red-100 transition";
-const douyinNavClassMobile =
-  "px-2 py-1 rounded-lg font-bold text-red-900 bg-red-50 border border-red-200/80";
 
+/**
+ * 单一 `<nav>` 输出，避免桌面/移动两套相同链接重复出现在 DOM（抓取与无障碍重复）。
+ */
 export function ZhSiteHeader() {
   return (
     <header className="border-b border-slate-200 bg-page/90 backdrop-blur sticky top-0 z-40">
-      <div className="container py-3 flex flex-nowrap items-center justify-between gap-3 min-h-[3.25rem]">
-        <Link href={ZH.home} className="flex items-center gap-2 min-w-0 shrink-0">
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-red-500 via-amber-500 to-sky-500 flex items-center justify-center shadow-sm shrink-0">
-            <Bird className="h-5 w-5 text-white" />
-          </div>
-          <div className="min-w-0">
-            <p className="text-lg font-semibold tracking-tight text-slate-900 truncate" translate="no">
-              ToolEagle
-            </p>
-            <p className="text-xs text-slate-600 truncate">短视频 · 自媒体 · 涨粉效率</p>
-          </div>
-        </Link>
+      <div className="container py-3 flex flex-col gap-3">
+        <div className="flex flex-nowrap items-center justify-between gap-3 min-h-[3.5rem]">
+          <Link href={ZH.home} className="flex items-center gap-2.5 min-w-0 shrink-0">
+            <ToolEagleLogoMark variant="cn" />
+            <div className="min-w-0">
+              <p className="text-lg font-semibold tracking-tight text-slate-900 truncate" translate="no">
+                ToolEagle
+              </p>
+              <p className="text-xs text-slate-600 truncate">短视频 · 自媒体 · 涨粉效率</p>
+            </div>
+          </Link>
 
-        <div className="flex flex-nowrap items-center gap-2 justify-end shrink min-w-0">
-          <nav className="hidden md:flex flex-nowrap items-center gap-1 text-sm text-slate-700">
-            {navRest.slice(0, 1).map((item) => (
-              <Link key={item.href} href={item.href} className={navLinkClass(item)}>
-                {item.label}
-              </Link>
-            ))}
-            <Link href={ZH.douyin} className={douyinNavClass}>
-              抖音
-            </Link>
-            {navRest.slice(1).map((item) => (
-              <Link key={item.href} href={item.href} className={navLinkClass(item)}>
-                {item.label}
-                {item.comingSoon ? (
-                  <span className="ml-1 text-[10px] font-bold text-amber-700">soon</span>
-                ) : null}
-              </Link>
-            ))}
-          </nav>
-          <MarketSelector analyticsSource="zh_header" />
-          <AuthButton
-            loginAnalyticsSource="zh_header"
-            showSignup
-            loginNextPath="/zh"
-            accountHref={ZH.dashboard}
-            settingsHref={ZH.dashboardSettings}
-            signOutRedirectTo="/zh"
-          />
+          <div className="flex flex-nowrap items-center gap-2 justify-end shrink min-w-0">
+            <MarketSelector analyticsSource="zh_header" />
+            <AuthButton
+              loginAnalyticsSource="zh_header"
+              showSignup
+              loginNextPath="/zh"
+              accountHref={ZH.dashboard}
+              billingHref="/zh/dashboard/billing"
+              settingsHref={ZH.dashboardSettings}
+              signOutRedirectTo="/zh"
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="md:hidden border-t border-slate-100 px-3 py-2 space-y-2 bg-page">
-        <nav className="flex flex-wrap gap-1.5 text-xs text-slate-700">
+        <nav
+          className="flex flex-wrap items-center gap-1.5 text-xs text-slate-700 md:text-sm pb-0.5"
+          aria-label="主导航"
+        >
           {navRest.slice(0, 1).map((item) => (
-            <Link key={item.href} href={item.href} className={navLinkClassMobile(item)}>
+            <Link key={item.href} href={item.href} className={navLinkClass(item)}>
               {item.label}
             </Link>
           ))}
-          <Link href={ZH.douyin} className={douyinNavClassMobile}>
+          <Link href={ZH.douyin} className={douyinNavClass}>
             抖音
           </Link>
           {navRest.slice(1).map((item) => (
-            <Link key={item.href} href={item.href} className={navLinkClassMobile(item)}>
+            <Link key={item.href} href={item.href} className={navLinkClass(item)}>
               {item.label}
               {item.comingSoon ? <span className="text-[10px] text-amber-700"> soon</span> : null}
             </Link>

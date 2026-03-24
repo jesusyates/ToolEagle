@@ -2,41 +2,131 @@ import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { createClient } from "@/lib/supabase/server";
 import { getPaymentProvider, isAggregatorConfigured } from "@/lib/payment/router";
-import { amountForPlan } from "@/lib/payment/config";
 import type { OrderPlan, PaymentMarket } from "@/lib/payment/types";
-import { CN_CREDIT_PACK_IDS } from "@/lib/credits/credit-packs";
 import { insertOrder, updateOrderProviderPayload } from "@/lib/payment/orders-repository";
 import { aggregatorCreatePayment } from "@/lib/payment/providers/aggregator";
+import { getCreditPackage } from "@/lib/billing/package-config";
+import {
+  applySupporterIdCookie,
+  newSupporterId,
+  readSupporterIdFromCookieStore
+} from "@/lib/supporter/supporter-id";
+import { DONATION_TIER_AMOUNTS_CNY, isValidDonationAmountCny } from "@/lib/payment/donation-config";
+import { hasServiceRoleKey } from "@/lib/supabase/admin";
 
-const PLANS: OrderPlan[] = ["pro_monthly", ...CN_CREDIT_PACK_IDS];
-
-function orderSubjectForPlan(plan: OrderPlan): string {
-  if (plan === "credits_starter") return "ToolEagle 算力包 · 入门 100 次";
-  if (plan === "credits_standard") return "ToolEagle 算力包 · 标准 500 次";
-  if (plan === "credits_advanced") return "ToolEagle 算力包 · 进阶 1200 次";
-  if (plan === "credits_pro") return "ToolEagle 算力包 · 专业 2500 次";
-  return "ToolEagle Pro 月付";
+function orderSubjectForPackage(displayName: string, orderType: "credits" | "donation") {
+  return orderType === "donation" ? `ToolEagle Donation` : `ToolEagle Credits · ${displayName}`;
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json().catch(() => ({}));
-    const plan = typeof body.plan === "string" ? (body.plan as OrderPlan) : "credits_standard";
-    const market = typeof body.market === "string" ? (body.market as PaymentMarket) : "cn";
-
-    if (!PLANS.includes(plan)) {
-      return NextResponse.json({ error: "invalid_plan" }, { status: 400 });
-    }
-    if (market !== "cn") {
+    if (!hasServiceRoleKey()) {
       return NextResponse.json(
-        { error: "global_checkout_use_payment_link", hint: "Use Lemon/Stripe checkout for non-CN market." },
-        { status: 400 }
+        {
+          error: "order_create_failed",
+          detail: "missing_SUPABASE_SERVICE_ROLE_KEY",
+          hint: "Set SUPABASE_SERVICE_ROLE_KEY in .env.local and restart dev server."
+        },
+        { status: 503 }
       );
     }
 
+    const body = await request.json().catch(() => ({}));
+    const packageId = typeof body.package_id === "string" ? body.package_id : "";
+    const market = typeof body.market === "string" ? (body.market as PaymentMarket) : "cn";
+    const orderType = body.order_type === "donation" ? "donation" : "credits";
+    const returnUrl = typeof body.return_url === "string" ? body.return_url : null;
+
+    const pack = getCreditPackage(market, packageId);
+    if (orderType === "credits" && !pack) {
+      return NextResponse.json({ error: "invalid_package_id" }, { status: 400 });
+    }
+
     const provider = getPaymentProvider(market);
+
+    const supabase = await createClient();
+    const {
+      data: { user }
+    } = await supabase.auth.getUser();
+
+    let userId: string | null = null;
+    let anonymousUserId: string | null = null;
+    let setSupporterCookie = false;
+    if (orderType === "credits") {
+      if (!user) {
+        return NextResponse.json(
+          { error: "login_required", hint: "Sign in before purchasing credits." },
+          { status: 401 }
+        );
+      }
+      userId = user.id;
+    } else {
+      if (user) {
+        userId = user.id;
+      } else {
+        const existing = readSupporterIdFromCookieStore(request.cookies);
+        if (existing) anonymousUserId = existing;
+        else {
+          anonymousUserId = newSupporterId();
+          setSupporterCookie = true;
+        }
+      }
+    }
+
+    const amount = orderType === "donation" ? Number(body.amount ?? 0) : Number(pack?.amount ?? 0);
+    const currency = orderType === "donation" ? (market === "cn" ? "CNY" : "USD") : (pack?.currency ?? (market === "cn" ? "CNY" : "USD"));
+    if (amount <= 0) return NextResponse.json({ error: "invalid_amount" }, { status: 400 });
+    if (orderType === "donation" && market === "cn" && !isValidDonationAmountCny(amount)) {
+      return NextResponse.json({ error: "invalid_amount", allowed: [...DONATION_TIER_AMOUNTS_CNY] }, { status: 400 });
+    }
+    const publicOrderId = `te_${randomUUID().replace(/-/g, "")}`;
+
+    const ins = await insertOrder({
+      order_id: publicOrderId,
+      user_id: userId,
+      anonymous_user_id: anonymousUserId,
+      market,
+      amount,
+      currency,
+      plan: (orderType === "donation" ? "donation" : (packageId as OrderPlan)) as OrderPlan,
+      package_id: packageId || null,
+      credits_total: orderType === "credits" ? pack?.credits_total ?? null : null,
+      order_type: orderType,
+      status: "pending",
+      provider,
+      provider_payload: {}
+    });
+
+    if (!ins.ok) {
+      return NextResponse.json({ error: "order_create_failed", detail: ins.error }, { status: 503 });
+    }
+
     if (provider !== "aggregator") {
-      return NextResponse.json({ error: "unexpected_provider" }, { status: 500 });
+      const paymentUrl = (process.env.NEXT_PUBLIC_PAYMENT_LINK || "").trim() || returnUrl || "";
+      if (!paymentUrl) {
+        return NextResponse.json(
+          {
+            error: "global_checkout_not_configured",
+            detail: "missing_NEXT_PUBLIC_PAYMENT_LINK",
+            hint: "Set NEXT_PUBLIC_PAYMENT_LINK to your global checkout URL."
+          },
+          { status: 503 }
+        );
+      }
+      await updateOrderProviderPayload(ins.id, { payment_url: paymentUrl, return_url: returnUrl });
+      const response = NextResponse.json({
+        ok: true,
+        orderId: publicOrderId,
+        amount,
+        currency,
+        package_id: packageId,
+        market,
+        order_type: orderType,
+        provider,
+        paymentUrl
+      });
+      if (setSupporterCookie && anonymousUserId) applySupporterIdCookie(response, anonymousUserId);
+      return response;
     }
 
     if (!isAggregatorConfigured()) {
@@ -49,49 +139,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = await createClient();
-    const {
-      data: { user }
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-      return NextResponse.json(
-        { error: "login_required", hint: "Sign in before purchasing credits or Pro." },
-        { status: 401 }
-      );
-    }
-
-    const userId = user.id;
-
-    const { amount, currency } = amountForPlan(plan, "cn");
-    const publicOrderId = `te_${randomUUID().replace(/-/g, "")}`;
-
-    const orderType = plan.startsWith("credits_") ? "credits" : "pro";
-
-    const ins = await insertOrder({
-      order_id: publicOrderId,
-      user_id: userId,
-      anonymous_user_id: null,
-      market: "cn",
-      amount,
-      currency,
-      plan,
-      order_type: orderType,
-      status: "pending",
-      provider: "aggregator",
-      provider_payload: {}
-    });
-
-    if (!ins.ok) {
-      return NextResponse.json({ error: "order_create_failed", detail: ins.error }, { status: 503 });
-    }
-
     let pay: Awaited<ReturnType<typeof aggregatorCreatePayment>>;
     try {
       pay = await aggregatorCreatePayment({
         merchantOrderId: publicOrderId,
         amountCny: amount,
-        subject: orderSubjectForPlan(plan)
+        subject: orderSubjectForPackage(pack?.display_name ?? packageId, orderType)
       });
     } catch (e) {
       const msg = e instanceof Error ? e.message : "aggregator_error";
@@ -105,20 +158,22 @@ export async function POST(request: NextRequest) {
       _resolved_qr: pay.paymentQrUrl,
       _resolved_pay_url: pay.paymentUrl
     };
-
     await updateOrderProviderPayload(ins.id, payload, pay.providerOrderRef);
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       ok: true,
       orderId: publicOrderId,
       amount,
       currency,
-      plan,
-      market: "cn",
-      provider: "aggregator",
+      package_id: packageId,
+      market,
+      order_type: orderType,
+      provider,
       paymentQrUrl: pay.paymentQrUrl,
       paymentUrl: pay.paymentUrl
     });
+    if (setSupporterCookie && anonymousUserId) applySupporterIdCookie(response, anonymousUserId);
+    return response;
   } catch (e) {
     console.error("[payment/create-order]", e);
     return NextResponse.json({ error: "internal_error" }, { status: 500 });

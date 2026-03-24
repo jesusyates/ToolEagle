@@ -50,18 +50,15 @@ export default function PtHowToHubPage() {
 
             <section className="mt-12">
               <h2 className="text-xl font-semibold text-slate-900">Guias</h2>
-              <ul className="mt-4 space-y-3">
+              <ul className="mt-4 space-y-2">
                 {items.map((item) => (
                   <li key={item.slug}>
                     <Link
                       href={`/pt/how-to/${item.slug}`}
-                      className="text-sky-700 hover:text-sky-800 hover:underline font-medium"
+                      className="block rounded-xl border border-slate-200 bg-white px-4 py-3 text-sky-700 hover:text-sky-800 hover:border-sky-200 hover:bg-sky-50/40 font-medium transition"
                     >
                       {item.title}
                     </Link>
-                    <p className="text-sm text-slate-600 mt-1">
-                      {item.description.slice(0, 120)}…
-                    </p>
                   </li>
                 ))}
               </ul>

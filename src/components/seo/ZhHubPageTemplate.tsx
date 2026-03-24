@@ -6,6 +6,7 @@ import {
   PLATFORM_NAMES,
   ZH_BASE_PATHS
 } from "@/lib/zh-hub-data";
+import { ZH } from "@/lib/zh-site/paths";
 import { getRecentZhLinks } from "@/lib/zh-sitemap-data";
 import { getZhHubCuriosityLinks } from "@/lib/zh-ctr";
 import { DirectAnswerBlock } from "@/components/seo/DirectAnswerBlock";
@@ -42,7 +43,7 @@ export function ZhHubPageTemplate({ pageType, platform }: Props) {
         <article className="container py-12">
           <div className="max-w-3xl">
             <nav className="text-sm text-slate-500 mb-6" aria-label="面包屑">
-              <Link href="/" className="hover:text-slate-700">
+              <Link href="/zh" className="hover:text-slate-700">
                 首页
               </Link>
               <span className="mx-2">/</span>
@@ -58,6 +59,27 @@ export function ZhHubPageTemplate({ pageType, platform }: Props) {
             <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-slate-900">
               {title}
             </h1>
+
+            {platform === "tiktok" ? (
+              <div className="mt-6 rounded-xl border border-red-200 bg-red-50/70 p-4 text-sm leading-relaxed text-slate-800">
+                <p className="font-semibold text-red-950">给抖音创作者的一句话</p>
+                <p className="mt-2 text-slate-700">
+                  本合集保留「TikTok」命名便于搜索与对照海外方法论；若你主要做<strong>抖音</strong>，建议同步使用{" "}
+                  <Link href={ZH.douyin} className="font-bold text-red-900 underline">
+                    抖音专栏
+                  </Link>
+                  、
+                  <Link href={ZH.tiktokCaption} className="font-bold text-red-900 underline">
+                    抖音文案包
+                  </Link>
+                  与{" "}
+                  <Link href={ZH.growthKit} className="font-bold text-red-900 underline">
+                    开工工作流
+                  </Link>
+                  ，把结构迁移到本土语境与节奏。
+                </p>
+              </div>
+            ) : null}
 
             <DirectAnswerBlock answer={overview} lang="zh" />
 

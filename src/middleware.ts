@@ -46,6 +46,30 @@ export async function middleware(request: NextRequest) {
     request.cookies.get(COOKIE_PREFERRED_LOCALE)?.value ||
     request.cookies.get(COOKIE_PREFERRED_MARKET)?.value;
 
+  /**
+   * 顶栏语言切换（纯 `<a href>`，不依赖客户端写 cookie）：
+   * - `?te_locale=en` → en / global（覆盖旧 zh 偏好）
+   * - `?te_locale=zh` → zh / cn（覆盖旧 en 偏好，否则「中文」链过去仍带 en cookie）
+   * 服务端 Set-Cookie 后 302 到去掉 query 的同一 pathname。
+   */
+  if (request.method === "GET") {
+    const teLocale = request.nextUrl.searchParams.get("te_locale");
+    if (teLocale === "en" || teLocale === "zh") {
+      const clean = request.nextUrl.clone();
+      clean.searchParams.delete("te_locale");
+      const redirect = NextResponse.redirect(clean);
+      copyCookies(response, redirect);
+      if (teLocale === "en") {
+        redirect.cookies.set(COOKIE_PREFERRED_LOCALE, "en", MARKET_COOKIE_OPTIONS);
+        redirect.cookies.set(COOKIE_PREFERRED_MARKET, "global", MARKET_COOKIE_OPTIONS);
+      } else {
+        redirect.cookies.set(COOKIE_PREFERRED_LOCALE, "zh", MARKET_COOKIE_OPTIONS);
+        redirect.cookies.set(COOKIE_PREFERRED_MARKET, "cn", MARKET_COOKIE_OPTIONS);
+      }
+      return redirect;
+    }
+  }
+
   if (pathname === "/" && request.method === "GET") {
     const target = resolveRootHomePath(request);
 
@@ -97,7 +121,9 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
+  /** 显式包含 `/`，避免部分环境下根路径未进入 middleware（如部分 HEAD / 边缘探测） */
   matcher: [
+    "/",
     "/((?!api/sitemap|sitemap|robots\\.txt|_next|favicon\\.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"
   ]
 };

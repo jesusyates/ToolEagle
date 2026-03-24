@@ -62,7 +62,7 @@ export function SeoExampleBlock({
 
       <div className="mt-6 rounded-xl border-2 border-sky-200 bg-sky-50 p-4">
         <p className="text-sm font-medium text-slate-600">
-          Need more options? Generate unlimited {topicLabel.toLowerCase()} {typeLower} with AI.
+          Need more options? Generate more {topicLabel.toLowerCase()} {typeLower} with credit-based AI usage.
         </p>
         <Link
           href={`/tools/${toolSlug}`}

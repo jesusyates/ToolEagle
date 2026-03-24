@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { EnglishHomeLink } from "@/components/locale/EnglishHomeLink";
 import {
   getMatchingAffiliateTools,
   getAffiliateTools,
@@ -98,7 +99,7 @@ export function ZhBlogPageTemplate({ entry, content, relatedBlogs }: Props) {
   );
 
   const breadcrumbItems = [
-    { name: "首页", url: "/" },
+    { name: "首页", url: "/zh" },
     { name: "中文博客", url: "/zh/blog" },
     { name: platformName, url: `/zh/how-to/${entry.platform}` },
     { name: headline, url: `/zh/blog/${entry.slug}` }
@@ -201,12 +202,9 @@ export function ZhBlogPageTemplate({ entry, content, relatedBlogs }: Props) {
             <section className="mt-10 rounded-2xl border-2 border-sky-200 bg-sky-50 p-6">
               <h2 className="text-lg font-semibold text-slate-900">用 AI 生成爆款内容</h2>
               <p className="mt-2 text-sm text-slate-600">几秒钟生成文案和钩子，无需注册。</p>
-              <Link
-                href="/"
-                className="mt-4 inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition"
-              >
+              <EnglishHomeLink className="mt-4 inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition">
                 {ctaVariant}
-              </Link>
+              </EnglishHomeLink>
             </section>
 
             <ZhCtaCaptureBlock keyword={entry.keyword} />

@@ -1,5 +1,9 @@
 # ToolEagle — 项目进度总报告（给 ChatGPT / 外部协作者）
 
+> **ChatGPT 必读**：本文件为 **与仓库同步的当前主报告**（能力、约束、阶段判断）。  
+> 另有一份 **`docs/CHATGPT-PROJECT-REPORT.md`** 仅作 **索引 + 下一步清单 + 历史里程碑速查**，避免与旧版「仅 V76–V78」长文混淆。  
+> **规则正文**始终只有 **`docs/MEMORY.md`**。
+
 > **生成说明**：基于仓库 **`docs/MEMORY.md`（唯一产品/架构规则正文）** 与代码结构整理；用于同步「我们现在做到哪、约束是什么、下一步怎么走」。  
 > **技术栈概览**：Next.js（App Router）、TypeScript、Supabase、多市场 AI Router（OpenAI + 可选 DeepSeek CN）、全站 Content Safety Engine（CSE）。
 
@@ -108,7 +112,8 @@
 
 ### 4.4 地理与语言
 
-- **Middleware**：根路径 `/` 可按 IP + `Accept-Language` + 调试参数决定落地 `/` 或 `/zh`；**尊重**用户已选 cookie，避免反复覆盖（见记忆本第三节）。
+- **Middleware**：根路径 `/` 可按 IP + `Accept-Language` + `geo_debug` 等决定落地 `/` 或 `/zh`；**优先尊重** `te_preferred_locale`（zh/en），避免与调试/geo 打架（见 `src/config/geo-redirect.ts`、`src/middleware.ts`、记忆本）。
+- **中文站 → 英文首页**：客户端需走 **`/?te_locale=en`**（或由 `navigateToEnglishHome` / `EnglishHomeLink` 触发），由 middleware **Set-Cookie** 后再回到 `/`；勿依赖裸 `<Link href="/">` 从 `/zh` 进全球站（否则仍可能因 `zh` cookie 被重定向回 `/zh`）。
 
 ---
 
@@ -144,4 +149,5 @@
 
 ---
 
-*文件路径：`docs/PROJECT-STATUS-REPORT-FOR-CHATGPT.md`*
+*文件路径：`docs/PROJECT-STATUS-REPORT-FOR-CHATGPT.md`*  
+*正文更新：2026-03-22（增加与 `CHATGPT-PROJECT-REPORT.md` 分工说明、middleware/跨站跳转要点）*

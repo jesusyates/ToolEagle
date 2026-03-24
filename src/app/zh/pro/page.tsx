@@ -6,7 +6,7 @@ import { Check } from "lucide-react";
 
 export const metadata = buildZhPageMetadata({
   zhPath: "/zh/pro",
-  title: zhSeoTitle("Pro 算力 — 价值与场景"),
+  title: zhSeoTitle("算力包 — 价值与场景"),
   description:
     `${ZH_BRAND_TAGLINE}。免费与付费对比、真实使用场景、你能拿到的结果。定价见定价页。`
 });
@@ -15,7 +15,7 @@ export default function ZhProValuePage() {
   return (
     <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <article className="flex-1 container max-w-3xl py-10 pb-16">
-        <p className="text-xs font-semibold uppercase tracking-widest text-red-800">Pro · 价值</p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-red-800">算力包 · 价值</p>
         <p className="mt-3 text-xl font-semibold text-slate-900 tracking-tight">{ZH_BRAND_TAGLINE}</p>
         <p className="mt-2 text-sm text-slate-600 whitespace-pre-line leading-relaxed">{ZH_BRAND_SUBLINE}</p>
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mt-8">为什么付费：把时间花在「能发的结果」上</h1>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { EnglishHomeLink } from "@/components/locale/EnglishHomeLink";
 import { FeedbackFooterTrigger } from "@/components/feedback/FeedbackFooterTrigger";
 import { SupportContactFooterTrigger } from "@/components/support/SupportContactFooterTrigger";
 import { ZH } from "@/lib/zh-site/paths";
@@ -29,9 +30,9 @@ export function ZhSiteFooter() {
               {l.label}
             </Link>
           ))}
-          <Link href="/" className="text-slate-500 hover:text-slate-800" title="ToolEagle 英文主站">
+          <EnglishHomeLink className="text-slate-500 hover:text-slate-800" title="ToolEagle 英文主站">
             英文主站 →
-          </Link>
+          </EnglishHomeLink>
         </div>
 
         <p className="text-xs text-slate-500 flex flex-wrap items-center gap-x-2 gap-y-1">

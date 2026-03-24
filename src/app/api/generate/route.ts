@@ -12,7 +12,7 @@ import { resolveSafetyMarket } from "@/lib/content-safety/resolve-market";
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 const RESULT_SEPARATOR = "\n---\n";
 const LIMIT_MESSAGE =
-  "You've reached today's free limit. Upgrade to Pro for unlimited AI generation.";
+  "You've reached today's free limit. Buy credits to continue AI generation.";
 
 function parseAIResponse(text: string): string[] {
   const raw = text.trim();

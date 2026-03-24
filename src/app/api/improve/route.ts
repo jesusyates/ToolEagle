@@ -10,7 +10,7 @@ import { isAnonymousProEntitlement } from "@/lib/payment/anon-pro-entitlement";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 const LIMIT_MESSAGE =
-  "You've reached today's free limit. Upgrade to Pro for unlimited AI generation.";
+  "You've reached today's free limit. Buy credits to continue AI generation.";
 
 const IMPROVE_ACTIONS = {
   shorter: "Make it shorter. Keep the same meaning and tone. Return only the improved text, nothing else.",

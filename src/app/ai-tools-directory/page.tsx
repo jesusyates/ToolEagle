@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
-import { tools } from "@/config/tools";
+import { toolsForEnglishSite } from "@/config/tools";
 import { AI_DIRECTORY_CATEGORIES, TOOL_CATEGORY_TO_DIRECTORY, DESIGN_TOOL_SLUGS } from "@/config/ai-tools-directory";
 import { ToolCard } from "@/components/tools/ToolCard";
 import { BASE_URL } from "@/config/site";
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function AiToolsDirectoryPage() {
   const toolsByCategory = AI_DIRECTORY_CATEGORIES.map((cat) => ({
     ...cat,
-    tools: tools.filter((t) => {
+    tools: toolsForEnglishSite.filter((t) => {
       if (cat.id === "design") return DESIGN_TOOL_SLUGS.includes(t.slug);
       return TOOL_CATEGORY_TO_DIRECTORY[t.category] === cat.id;
     })

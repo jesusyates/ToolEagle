@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1600" viewBox="0 0 2400 1600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0f9ff"/>
+      <stop offset="35%" stop-color="#e0f2fe"/>
+      <stop offset="70%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#eef2ff"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="30%" cy="15%" r="55%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
+      <stop offset="45%" stop-color="#38bdf8" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="85%" cy="70%" r="45%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.28"/>
+      <stop offset="50%" stop-color="#818cf8" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow3" cx="50%" cy="100%" r="50%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="24" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="2400" height="1600" fill="url(#sky)"/>
+  <rect width="2400" height="1600" fill="url(#glow1)"/>
+  <rect width="2400" height="1600" fill="url(#glow2)"/>
+  <rect width="2400" height="1600" fill="url(#glow3)"/>
+  <g opacity="0.14" stroke="#64748b" stroke-width="1" fill="none">
+    <path d="M0 200 H2400 M0 400 H2400 M0 600 H2400 M0 800 H2400 M0 1000 H2400 M0 1200 H2400 M0 1400 H2400"/>
+    <path d="M200 0 V1600 M400 0 V1600 M600 0 V1600 M800 0 V1600 M1000 0 V1600 M1200 0 V1600 M1400 0 V1600 M1600 0 V1600 M1800 0 V1600 M2000 0 V1600 M2200 0 V1600"/>
+  </g>
+  <ellipse cx="1750" cy="1220" rx="520" ry="380" fill="#bae6fd" opacity="0.12" filter="url(#soft)"/>
+</svg>

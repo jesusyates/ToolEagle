@@ -185,7 +185,7 @@ export const COMPARISON_PAGE_DATA: Record<string, ComparisonData> = {
       {
         name: "Paid",
         pros: ["Full features", "Bulk generation", "Priority support", "Integrations"],
-        cons: ["$10–50/month", "Commitment", "May overpay for light use"]
+        cons: ["Higher spend at scale", "Needs usage planning", "May overpay for light use"]
       }
     ],
     winner: "Free for <5 posts/week, paid for more",

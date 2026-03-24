@@ -5,7 +5,7 @@
 
 export type UpgradeMarket = "cn" | "global";
 
-/** ToolEagle Pro checkout URL (e.g. Lemon Squeezy product link). */
+/** ToolEagle global credits checkout URL (e.g. Lemon Squeezy product link). */
 export function getPaymentLink(): string {
   return (process.env.NEXT_PUBLIC_PAYMENT_LINK || "").trim();
 }
@@ -21,7 +21,7 @@ export function hasPaymentLink(): boolean {
  */
 export function getUpgradeHref(market: UpgradeMarket = "global"): string {
   if (market === "cn") {
-    return "/zh/pricing#cn-pro-checkout";
+    return "/zh/pricing#cn-credits-checkout";
   }
   return hasPaymentLink() ? getPaymentLink() : "/pricing";
 }

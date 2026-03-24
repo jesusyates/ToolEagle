@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { EnglishHomeLink } from "@/components/locale/EnglishHomeLink";
 import {
   getKeywordBySlug,
   getRelatedKeywordsFiltered,
@@ -153,7 +154,7 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
   const sourceCitation = getSourceCitation(entry.slug, "zh");
 
   const breadcrumbItems = [
-    { name: "首页", url: "/" },
+    { name: "首页", url: "/zh" },
     { name: "中文指南", url: "/zh/sitemap" },
     { name: platformName, url: `/zh/how-to/${entry.platform}` },
     { name: headline, url: `/zh/search/${entry.slug}` }
@@ -197,7 +198,7 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
         <article className="container py-12 lg:pr-32">
           <div className="max-w-3xl">
             <nav className="text-sm text-slate-500 mb-6" aria-label="面包屑">
-              <Link href="/" className="hover:text-slate-700">
+              <Link href="/zh" className="hover:text-slate-700">
                 首页
               </Link>
               <span className="mx-2">/</span>
@@ -411,9 +412,9 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
             <section className="mt-12 rounded-2xl border-2 border-sky-200 bg-sky-50 p-6">
               <h2 className="text-lg font-semibold text-slate-900">用 AI 生成爆款内容</h2>
               <p className="mt-2 text-sm text-slate-600">几秒钟生成文案和钩子，无需注册。</p>
-              <Link href="/" className="mt-4 inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition">
+              <EnglishHomeLink className="mt-4 inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition">
                 {ctaVariant}
-              </Link>
+              </EnglishHomeLink>
             </section>
 
             <ZhAuthorBlock />

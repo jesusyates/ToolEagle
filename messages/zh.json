@@ -79,6 +79,10 @@
     "tryAgain": "再试一次"
   },
   "home": {
+    "heroBrand": "ToolEagle",
+    "heroEyebrow": "短视频 · 自媒体 · 创作者增长",
+    "heroSlogan": "面向创作者的全球 AI 工具",
+    "heroIntro": "ToolEagle 英文主站面向全球短视频与社交创作者：需要效率时用 AI 工具，需要方法时读指南，把想法落成可发布的钩子、文案与脚本。免费试用，多数功能无需注册即可开始。",
     "heroTagline": "面向 TikTok、YouTube 和 Instagram 创作者的 AI 工具",
     "heroTitle": "一次性生成完整的创作者内容",
     "heroSubtitle": "更快出结果 — 输入主题，用 AI 节省数小时。钩子、文案、标签、标题一应俱全。无需注册。",
@@ -141,7 +145,35 @@
     "article2Title": "2026 年 TikTok 爆款攻略",
     "article2Tag": "策略",
     "article3Title": "提升点击的 YouTube 标题公式",
-    "article3Tag": "YouTube"
+    "article3Tag": "YouTube",
+    "heroTrustLine": "免费试用 · 无需注册",
+    "ctaGeneratePackage": "生成发布包",
+    "ctaOpenTool": "打开工具",
+    "quickToolsHeading": "几秒开始创作",
+    "quickToolsIntro": "默认路径：一次生成完整短视频发布包。若只需其中一环，请用下方工具。",
+    "quickToolsRecommended": "推荐",
+    "quickToolsPrimaryName": "发布包生成器",
+    "quickToolsPrimaryBlurb": "钩子、分段、文案、话题标签 — 一次成包。",
+    "quickToolsPrimaryHint": "新访客建议先从这里开始。",
+    "quickToolsMore": "更多生成器",
+    "heroPrimaryCta": "浏览工具",
+    "heroSecondaryCta": "浏览指南",
+    "startHereHeading": "从这里开始",
+    "startHereIntro": "三条主路径 — 下方卡片链到独立页面，让首页保持门户感，而不是工具目录。",
+    "startHereToolsTitle": "工具",
+    "startHereToolsDesc": "按分类与平台浏览全部生成器。",
+    "startHereToolsCta": "浏览工具 →",
+    "startHereGuidesTitle": "指南",
+    "startHereGuidesDesc": "英文实操指南：增长、包装与分发。",
+    "startHereGuidesCta": "浏览指南 →",
+    "startHerePricingTitle": "定价",
+    "startHerePricingDesc": "免费档、Pro 与支持者方案。",
+    "startHerePricingCta": "查看定价 →",
+    "examplesHeading": "输出长什么样",
+    "examplesSubtitle": "示例仅供参考 — 实际生成会贴合你的赛道与语气。",
+    "examplesHookLabel": "钩子",
+    "examplesCaptionLabel": "文案",
+    "examplesScriptLabel": "脚本节奏"
   },
   "footer": {
     "launch": "发布",
@@ -172,11 +204,62 @@
     "builtForCreators": "为创作者打造",
     "privacy": "隐私政策",
     "terms": "服务条款",
-    "latestChineseGuides": "最新中文指南"
+    "latestChineseGuides": "最新中文指南",
+    "chinaSite": "中国站",
+    "chinaSiteBlurb": "面向中国创作者的简体中文工具与内容。",
+    "chinaSiteLink": "进入中国站 →"
   },
   "tools": {
     "title": "工具",
-    "subtitle": "为每位创作者提供的免费工具"
+    "subtitle": "选择工具并开始生成",
+    "intro": "先选分类查看该类别下的全部工具（不重复）。也可用关键词搜索：支持部分匹配名称、路径 slug、描述与分类。",
+    "searchLabel": "搜索工具",
+    "searchPlaceholder": "输入关键词（如 caption、hook、title）…",
+    "searchHintHub": "会匹配工具名称、URL slug、描述与分类。下方也可按分类浏览。",
+    "searchHintShort": "支持部分词匹配名称、slug 与描述。",
+    "searchSuggestionsLabel": "匹配的工具",
+    "searchNoResults": "没有匹配的工具。可换一个词，或从下方分类进入。",
+    "browseByCategory": "按分类浏览",
+    "browseByCategorySub": "仅展示当前英文站里「有可列出工具」的分类（跨平台通用；tiktok- / youtube- / instagram- 见上方平台入口）。",
+    "categoryBlurbs": {
+      "Captions": "动态文案、画内字幕与多平台配文。",
+      "Titles": "视频、Shorts、Reels、轮播封面等标题。",
+      "Hooks": "前 1～3 秒停滑开头与开场句式。",
+      "Ideas": "选题、角度与下一批内容灵感。",
+      "Scripts": "口播分段、大纲与短视频脚本结构。",
+      "Bios": "主页简介与一句话人设定位。",
+      "Usernames": "账号昵称与 @ 用户名灵感。",
+      "Hashtags": "话题标签组合与可发现性优化。",
+      "Descriptions": "长描述、SEO 说明区与频道级文案。"
+    },
+    "platformLabels": {
+      "tiktok": "TikTok",
+      "youtube": "YouTube",
+      "instagram": "Instagram"
+    },
+    "platformCardTitle": {
+      "tiktok": "TikTok 工具",
+      "youtube": "YouTube 工具",
+      "instagram": "Instagram 工具"
+    },
+    "platformBlurbs": {
+      "tiktok": "面向 TikTok 路径的文案、钩子、标签与选题工具。",
+      "youtube": "标题、标签、描述与 Shorts 向生成器。",
+      "instagram": "Reels、Story、主页与轮播相关 instagram-* 工具。"
+    },
+    "categoryPlatformHint": "以 tiktok-、youtube-、instagram- 为路径的平台专属工具请在各平台工具页查看，本分类仅列跨平台条目。",
+    "categoryEmptySemantic": "本分类下的工具均为 TikTok / YouTube / Instagram 路径专属，请从对应平台入口进入。",
+    "categoryCardCount": "{count} 个工具",
+    "categoryCardCta": "进入分类 →",
+    "browseByPlatform": "按平台浏览",
+    "browseByPlatformSub": "TikTok / YouTube / Instagram 平台专属工具聚合页。",
+    "platformCardCount": "{label} 创作者共 {count} 个工具",
+    "platformCardCta": "查看全部 →",
+    "categoryPageHeading": "{category} 工具",
+    "categoryPageIntro": "与「{category}」相关的工具。",
+    "categoryToolCountAll": "本分类共 {count} 个工具",
+    "categoryToolCountFiltered": "匹配 {count} 个（本分类共 {total} 个）",
+    "backToToolsHub": "返回全部分类"
   },
   "answers": {
     "title": "创作者回答"
@@ -419,6 +502,12 @@
   },
   "nav": {
     "home": "首页",
+    "homeLogoAria": "ToolEagle — 首页",
+    "marketSelectorLabel": "地区",
+    "marketSelectorAria": "选择地区或语言",
+    "marketOptionEn": "English (Global)",
+    "marketOptionZh": "简体中文（中国）",
+    "marketOptionEs": "Español",
     "tools": "工具",
     "discover": "发现",
     "aiPrompts": "AI 提示词",
@@ -431,6 +520,7 @@
     "blog": "博客",
     "about": "关于",
     "pricing": "定价",
+    "guides": "指南",
     "upgrade": "Pro · 更快增长",
     "dashboard": "仪表盘",
     "creator": "创作者模式",

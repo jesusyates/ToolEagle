@@ -3,7 +3,7 @@ import {
   parseAggregatorCallbackBody,
   verifyAggregatorSignature
 } from "@/lib/payment/providers/aggregator";
-import { getOrderByPublicId, markOrderPaidIfPending } from "@/lib/payment/orders-repository";
+import { getOrderByPublicId, insertPaymentEvent, markOrderPaidIfPending } from "@/lib/payment/orders-repository";
 import { activateMembershipFromPaidOrder } from "@/lib/payment/activateMembership";
 
 /**
@@ -26,6 +26,16 @@ export async function POST(request: NextRequest) {
   const parsed = parseAggregatorCallbackBody(raw, contentType);
   if (!parsed.merchantOrderId) {
     return new NextResponse("missing order", { status: 400 });
+  }
+
+  const existingOrder = await getOrderByPublicId(parsed.merchantOrderId);
+  if (existingOrder) {
+    await insertPaymentEvent({
+      orderId: existingOrder.id,
+      eventType: parsed.paid ? "payment_paid_callback" : "payment_ignored_callback",
+      provider: "aggregator",
+      payload: parsed as unknown as Record<string, unknown>
+    });
   }
 
   if (!parsed.paid) {

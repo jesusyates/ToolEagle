@@ -49,7 +49,7 @@ const COPY = {
     ],
     mistakes: [
       "Treating AI as a one-line vending machine — structure beats single captions.",
-      "Ignoring hooks — the first line is your thumbnail for sound-on feeds.",
+      "Ignoring hooks — the first line is your thumbnail on sound-on feeds.",
       "No workflow — use the growth kit page to chain tools."
     ]
   },

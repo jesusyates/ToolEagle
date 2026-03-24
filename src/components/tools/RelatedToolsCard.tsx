@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { tools } from "@/config/tools";
+import { toolsForEnglishSite } from "@/config/tools";
 
 type RelatedToolsCardProps = {
   currentSlug: string;
@@ -12,7 +12,7 @@ export function RelatedToolsCard({
   category,
   limit = 3
 }: RelatedToolsCardProps) {
-  const related = tools
+  const related = toolsForEnglishSite
     .filter((t) => t.slug !== currentSlug && t.category === category)
     .slice(0, limit);
 

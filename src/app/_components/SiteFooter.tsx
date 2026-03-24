@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { TranslateAwareLink } from "@/components/TranslateAwareLink";
 import { NewsletterCapture } from "@/components/NewsletterCapture";
 import { DonationBox } from "@/components/DonationBox";
@@ -7,18 +8,22 @@ import { FeedbackFooterTrigger } from "@/components/feedback/FeedbackFooterTrigg
 import { useTranslations } from "next-intl";
 
 export function SiteFooter() {
+  const pathname = usePathname() || "";
+  const isAuthSurface = pathname === "/login" || pathname.startsWith("/zh/login");
   const t = useTranslations("footer");
   const tLearn = useTranslations("learnAi");
   const tAnswers = useTranslations("answers");
   return (
     <footer className="border-t border-slate-200 bg-page mt-8">
       <div className="container py-8">
-        <div className="mb-8 flex flex-col lg:flex-row gap-8 lg:items-start lg:justify-between">
-          <div className="max-w-md">
-            <NewsletterCapture />
+        {!isAuthSurface ? (
+          <div className="mb-8 flex flex-col lg:flex-row gap-8 lg:items-start lg:justify-between">
+            <div className="max-w-md">
+              <NewsletterCapture />
+            </div>
+            <DonationBox />
           </div>
-          <DonationBox />
-        </div>
+        ) : null}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-6">
           <div>
             <p className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-3">
@@ -125,53 +130,6 @@ export function SiteFooter() {
                 <TranslateAwareLink href="/examples" className="hover:underline hover:text-sky-600 transition duration-150">
                   {t("creatorExamples")}
                 </TranslateAwareLink>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-3">
-              中文
-            </p>
-            <ul className="space-y-2 text-sm text-slate-600">
-              <li>
-                <a href="/zh/sitemap" className="hover:underline hover:text-sky-600 transition duration-150">
-                  中文站点地图
-                </a>
-              </li>
-              <li>
-                <a href="/zh/recent" className="hover:underline hover:text-sky-600 transition duration-150">
-                  最新发布
-                </a>
-              </li>
-              <li>
-                <a href="/zh/how-to/tiktok" className="hover:underline hover:text-sky-600 transition duration-150">
-                  TikTok 涨粉指南
-                </a>
-              </li>
-              <li>
-                <a href="/zh/how-to/youtube" className="hover:underline hover:text-sky-600 transition duration-150">
-                  YouTube 涨粉指南
-                </a>
-              </li>
-              <li>
-                <a href="/zh/how-to/instagram" className="hover:underline hover:text-sky-600 transition duration-150">
-                  Instagram 涨粉指南
-                </a>
-              </li>
-              <li>
-                <a href="/zh/ai-prompts-for/tiktok" className="hover:underline hover:text-sky-600 transition duration-150">
-                  TikTok AI 提示词
-                </a>
-              </li>
-              <li>
-                <a href="/zh/privacy" className="hover:underline hover:text-sky-600 transition duration-150">
-                  隐私政策
-                </a>
-              </li>
-              <li>
-                <a href="/zh/terms" className="hover:underline hover:text-sky-600 transition duration-150">
-                  服务条款
-                </a>
               </li>
             </ul>
           </div>

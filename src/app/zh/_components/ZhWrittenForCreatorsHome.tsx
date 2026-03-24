@@ -1,4 +1,5 @@
 import { ZhStationBrandHero } from "@/components/zh/ZhStationBrandHero";
+import { ZhHomepageKeywordSections } from "@/components/zh/ZhHomepageKeywordSections";
 import { ZH_STATION_COMMITMENTS } from "@/config/zh-station-commitments";
 
 /**
@@ -34,6 +35,8 @@ export function ZhWrittenForCreatorsHome() {
             </ul>
           </div>
         </section>
+
+        <ZhHomepageKeywordSections />
       </div>
     </main>
   );

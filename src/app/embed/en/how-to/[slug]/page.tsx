@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { EmbedWidgetClient } from "@/app/embed/[keyword]/EmbedWidgetClient";
-import { getEnHowToContent, getAllEnHowToSlugs } from "@/lib/en-how-to-content";
+import { getEnHowToContent, getAllEnHowToSlugs, resolveEnHowToSlug } from "@/lib/en-how-to-content";
 import { BASE_URL } from "@/config/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -15,10 +15,11 @@ export const metadata = {
 
 export default async function EmbedEnHowToPage({ params }: Props) {
   const { slug } = await params;
-  const content = getEnHowToContent(slug);
+  const resolvedSlug = resolveEnHowToSlug(slug);
+  const content = getEnHowToContent(resolvedSlug);
   if (!content) notFound();
 
-  const pageUrl = `${BASE_URL}/en/how-to/${slug}`;
+  const pageUrl = `${BASE_URL}/en/how-to/${resolvedSlug}`;
   const sample =
     content.directAnswer?.slice(0, 120) ||
     content.intro?.slice(0, 120) ||
@@ -26,7 +27,7 @@ export default async function EmbedEnHowToPage({ params }: Props) {
 
   return (
     <EmbedWidgetClient
-      slug={slug}
+      slug={resolvedSlug}
       title={content.title}
       sample={sample}
       pageUrl={pageUrl}

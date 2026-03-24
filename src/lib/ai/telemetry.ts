@@ -11,6 +11,16 @@ export type AiTelemetryPayload = {
   model: string;
   user_plan: "free" | "pro";
   latency_ms: number;
+  risk_score?: number;
+  risk_level?: "low" | "mid" | "high" | "ban";
+  rate_limited?: boolean;
+  blocked?: boolean;
+  abuse_reason?: string[];
+  dynamic_credit_cost?: number;
+  global_guard?: boolean;
+  daily_limit_hit?: boolean;
+  anomaly_detected?: boolean;
+  degraded?: boolean;
   /** Wall time until first model completion when applicable */
   model_latency_ms?: number;
   fallback_used: boolean;
@@ -28,6 +38,10 @@ export type AiTelemetryPayload = {
   content_safety_filtered_count?: number;
   content_safety_risk_detected?: number;
   content_safety_profile?: string;
+  model_tier?: string;
+  estimated_cost_usd?: number;
+  actual_cost_usd?: number;
+  max_tokens_applied?: number;
 };
 
 const PREFIX = "[ai_telemetry]";

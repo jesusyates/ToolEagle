@@ -19,7 +19,7 @@ import { getCnCreditsBalance, deductCnCredits } from "@/lib/credits/credits-repo
 import type { RoutedMarket } from "@/lib/ai/router";
 
 export const LIMIT_MESSAGE =
-  "You've reached today's free limit. Upgrade to Pro for unlimited AI and full post packages.";
+  "You've reached today's free limit. Upgrade with credits to continue generating full post packages.";
 
 function isProfilePro(
   plan: string | undefined,
@@ -81,13 +81,6 @@ async function checkAndRecordUsage(
 
   if (!profile) {
     await supabase.from("profiles").insert({ id: userId, plan: "free" });
-  }
-
-  const plan = isProfilePro(profile?.plan, profile?.plan_expire_at as string | null | undefined)
-    ? "pro"
-    : "free";
-  if (plan === "pro") {
-    return { allowed: true, used: 0 };
   }
 
   const { data: usage } = await supabase
@@ -161,27 +154,21 @@ export async function gateGenerationUsage(
   const sid = readSupporterIdFromCookieStore(request.cookies);
   const market = opts?.market ?? "global";
 
-  /** CN: prepaid credits take precedence over daily free limit */
-  if (market === "cn") {
-    const bal = await getCnCreditsBalance(user?.id ?? null, user ? null : sid);
-    if (
-      bal &&
-      bal.remaining > 0 &&
-      (!bal.expire_at || new Date(bal.expire_at).getTime() > Date.now())
-    ) {
-      return {
-        ok: true,
-        userId: user?.id ?? null,
-        plan: "pro",
-        anonCount,
-        supporterPerks: perks,
-        effectiveFreeLimit,
-        creditsMode: true,
-        creditBalance: bal.remaining,
-        creditExpireAt: bal.expire_at,
-        anonymousSupporterId: user ? null : sid
-      };
-    }
+  /** Shared prepaid credits take precedence over daily free limit */
+  const bal = await getCnCreditsBalance(user?.id ?? null, user ? null : sid);
+  if (bal && bal.remaining > 0 && (!bal.expire_at || new Date(bal.expire_at).getTime() > Date.now())) {
+    return {
+      ok: true,
+      userId: user?.id ?? null,
+      plan: "pro",
+      anonCount,
+      supporterPerks: perks,
+      effectiveFreeLimit,
+      creditsMode: true,
+      creditBalance: bal.remaining,
+      creditExpireAt: bal.expire_at,
+      anonymousSupporterId: user ? null : sid
+    };
   }
 
   if (user) {
@@ -236,6 +223,8 @@ export async function finalizeGenerationUsage(
   opts?: {
     creditsCost?: number;
     toolSlug?: string;
+    market?: "cn" | "global";
+    requestType?: string;
     meta?: Record<string, unknown>;
   }
 ): Promise<{ creditsRemaining?: number; creditsUsed?: number } | void> {
@@ -246,6 +235,8 @@ export async function finalizeGenerationUsage(
       anonymousUserId: gate.anonymousSupporterId ?? null,
       cost,
       toolSlug: opts?.toolSlug ?? "post_package",
+      market: opts?.market ?? "global",
+      requestType: opts?.requestType ?? "generate_package",
       meta: opts?.meta
     });
     if (!d.ok) {

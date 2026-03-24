@@ -7,6 +7,7 @@ import {
   MARKET_COOKIE_OPTIONS
 } from "@/config/market";
 import { enPathToZh } from "@/lib/zh-site/paths";
+import { navigateToEnglishHome } from "@/lib/market/navigate-to-english-home";
 
 function setBrowserCookie(name: string, value: string) {
   const secure = typeof window !== "undefined" && window.location.protocol === "https:" ? ";Secure" : "";

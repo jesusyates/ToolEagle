@@ -29,10 +29,10 @@ export function SeoMidUpgradeCta({
             : "提高完播率、强互动结构、转化型开头 — 算力包按次使用，适合日更创作者。"
           : pseo
             ? "Higher limits and repeatable workflows for publishing cadence. Adapt outputs to each platform’s rules."
-            : "Save hours with AI — unlimited daily generations, built for creators who publish daily."}
+            : "Save hours with AI — pay per use with credits, built for creators who publish daily."}
       </p>
       <UpgradeLink className="mt-4 inline-flex rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800">
-        {isZh ? (pseo ? "查看 Pro 方案 →" : "更快增长 — Pro $9/月 →") : pseo ? "View Pro →" : "Grow faster — $9/mo →"}
+        {isZh ? (pseo ? "查看方案 →" : "更快增长 — 查看次数包 →") : pseo ? "View plans →" : "Grow faster — view credit packs →"}
       </UpgradeLink>
     </aside>
   );

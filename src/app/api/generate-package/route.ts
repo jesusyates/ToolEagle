@@ -26,6 +26,19 @@ import { classifyProviderError } from "@/lib/ai/ai-error-classify";
 import { applyContentSafetyToPackages } from "@/lib/content-safety/filter";
 import { resolveSafetyMarket } from "@/lib/content-safety/resolve-market";
 import { cnCreditCostForGeneration } from "@/lib/credits/cn-credit-cost";
+import { getRequestIdentity } from "@/lib/request/get-request-identity";
+import {
+  applyRiskAction,
+  calculateRiskScore,
+  checkBlockedState,
+  detectAnomaly,
+  checkDailyUsageLimit,
+  checkRateLimit,
+  incrementDailyUsage,
+  maybeDelay
+} from "@/lib/risk/anti-abuse";
+import { checkGlobalCostGuard, incrementGlobalCreditsUsed } from "@/lib/risk/cost-guard";
+import { getCnCreditsBalance } from "@/lib/credits/credits-repository";
 
 function sanitizeClientRoute(s: unknown): string | undefined {
   if (typeof s !== "string") return undefined;
@@ -148,6 +161,169 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "AI not configured" }, { status: 503 });
     }
 
+    // 1) resolve identity
+    const identity = await getRequestIdentity(request);
+    const preliminaryBalance = await getCnCreditsBalance(identity.userId, identity.userId ? null : identity.anonymousId);
+    const preliminaryUserType = preliminaryBalance && preliminaryBalance.remaining > 0 ? "paid" : identity.userId ? "free" : "anonymous";
+
+    // 2) blocked-state check
+    const blocked = await checkBlockedState(identity);
+    if (blocked.blocked) {
+      logAiTelemetry({
+        task_type: "post_package",
+        market,
+        locale,
+        provider: "none",
+        model: "none",
+        user_plan: "free",
+        latency_ms: Date.now() - started,
+        fallback_used: false,
+        success: false,
+        error_code: "abuse_suspected",
+        blocked: true,
+        abuse_reason: ["blocked_state"]
+      });
+      return NextResponse.json({ error: "abuse_suspected" }, { status: 403 });
+    }
+
+    // 3) global cost guard
+    const globalGuard = await checkGlobalCostGuard();
+    if (globalGuard.blocked) {
+      logAiTelemetry({
+        task_type: "post_package",
+        market,
+        locale,
+        provider: "none",
+        model: "none",
+        user_plan: "free",
+        latency_ms: Date.now() - started,
+        fallback_used: false,
+        success: false,
+        error_code: "system_busy_try_later",
+        global_guard: true
+      });
+      return NextResponse.json({ error: "system_busy_try_later" }, { status: 503 });
+    }
+
+    // 4) rate-limit check
+    const rate = await checkRateLimit(identity);
+    if (rate.limited) {
+      logAiTelemetry({
+        task_type: "post_package",
+        market,
+        locale,
+        provider: "none",
+        model: "none",
+        user_plan: "free",
+        latency_ms: Date.now() - started,
+        fallback_used: false,
+        success: false,
+        error_code: "rate_limited",
+        rate_limited: true,
+        abuse_reason: [rate.rule ?? "rate_limit"]
+      });
+      return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+    }
+
+    // 5) daily usage limit
+    const daily = await checkDailyUsageLimit(identity, preliminaryUserType);
+    if (daily.limited && preliminaryUserType !== "paid") {
+      logAiTelemetry({
+        task_type: "post_package",
+        market,
+        locale,
+        provider: "none",
+        model: "none",
+        user_plan: "free",
+        latency_ms: Date.now() - started,
+        fallback_used: false,
+        success: false,
+        error_code: "daily_limit_reached",
+        daily_limit_hit: true
+      });
+      return NextResponse.json({ error: "daily_limit_reached" }, { status: 429 });
+    }
+
+    const initialPublishFullPack =
+      preliminaryUserType === "paid" &&
+      (typeof reqBody.publishFullPack === "boolean" ? reqBody.publishFullPack : market === "cn");
+
+    const toolSlug =
+      typeof reqBody.toolSlug === "string" && reqBody.toolSlug.trim()
+        ? reqBody.toolSlug.trim().slice(0, 120)
+        : toolKind;
+
+    // 6) anomaly detection
+    const anomaly = await detectAnomaly(identity);
+
+    // 7) risk-score calculation
+    const risk = await calculateRiskScore({
+      identity,
+      userInput,
+      clientRoute,
+      userType: preliminaryUserType,
+      anomalyHint: anomaly
+    });
+
+    // 8) risk action
+    const riskAction = await applyRiskAction({ identity, riskScore: risk.riskScore });
+    if (!riskAction.allowed) {
+      logAiTelemetry({
+        task_type: "post_package",
+        market,
+        locale,
+        provider: "none",
+        model: "none",
+        user_plan: identity.userId ? "free" : "free",
+        latency_ms: Date.now() - started,
+        fallback_used: false,
+        success: false,
+        error_code: "abuse_suspected",
+        blocked: true,
+        risk_score: risk.riskScore,
+        risk_level: risk.riskLevel,
+        abuse_reason: risk.reasons,
+        anomaly_detected: risk.anomalyDetected
+      });
+      return NextResponse.json(
+        {
+          error: riskAction.requireLogin ? "login_required" : "abuse_suspected"
+        },
+        { status: riskAction.requireLogin ? 401 : 403 }
+      );
+    }
+
+    await maybeDelay(riskAction.delayMs);
+    if (riskAction.delayMs > 0) {
+      logAiTelemetry({
+        task_type: "post_package",
+        market,
+        locale,
+        provider: "none",
+        model: "none",
+        user_plan: identity.userId ? "free" : "free",
+        latency_ms: Date.now() - started,
+        fallback_used: false,
+        success: false,
+        error_code: "abuse_detected",
+        risk_score: risk.riskScore,
+        risk_level: risk.riskLevel,
+        abuse_reason: risk.reasons,
+        anomaly_detected: risk.anomalyDetected
+      });
+    }
+
+    // Risk-based degradation
+    const degraded = risk.riskScore >= 60;
+    const publishFullPack = degraded ? false : initialPublishFullPack;
+    reqBody.disableAdvancedFields = degraded;
+
+    // 9) dynamic credit cost calculation
+    const baseCost = cnCreditCostForGeneration(publishFullPack);
+    const riskDelta = risk.riskScore >= 80 ? 0 : risk.riskScore >= 60 ? 2 : risk.riskScore >= 30 ? 1 : 0;
+    const creditCost = baseCost + riskDelta;
+
+    // 10) gateGenerationUsage
     const gate = await gateGenerationUsage(request, { market });
     if (!gate.ok) {
       return NextResponse.json(
@@ -156,16 +332,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    /** V106.1 — default on for CN; client can disable */
-    const publishFullPack =
-      typeof reqBody.publishFullPack === "boolean" ? reqBody.publishFullPack : market === "cn";
-
-    const toolSlug =
-      typeof reqBody.toolSlug === "string" && reqBody.toolSlug.trim()
-        ? reqBody.toolSlug.trim().slice(0, 120)
-        : toolKind;
-
-    const creditCost = market === "cn" && gate.creditsMode ? cnCreditCostForGeneration(publishFullPack) : 0;
     if (gate.creditsMode && creditCost > 0 && (gate.creditBalance ?? 0) < creditCost) {
       return NextResponse.json(
         {
@@ -191,7 +357,8 @@ export async function POST(request: NextRequest) {
         market,
         locale,
         taskType: "post_package",
-        publishFullPack
+        publishFullPack,
+        riskScore: risk.riskScore
       });
       routerMeta = { ...result.meta, route: clientRoute };
       packages = typeof result.rawText === "string" ? parsePackagesJson(result.rawText) : [];
@@ -226,34 +393,7 @@ export async function POST(request: NextRequest) {
     const safety = applyContentSafetyToPackages(packages, market === "cn" ? "cn" : "global");
     packages = safety.packages;
 
-    const totalRequestMs = Date.now() - started;
     routerMeta = { ...routerMeta, route: clientRoute };
-
-    logAiTelemetry({
-      task_type: "post_package",
-      market,
-      locale,
-      provider: routerMeta.provider_used,
-      model: routerMeta.model_used,
-      user_plan: tier,
-      latency_ms: totalRequestMs,
-      model_latency_ms: modelParseOk || routerMeta.outcome === "heuristic_after_empty_parse" ? routerMeta.latency_ms : undefined,
-      fallback_used: routerMeta.fallback_used,
-      success: modelParseOk,
-      user_fulfilled: true,
-      outcome: routerMeta.outcome,
-      error_class: routerMeta.error_class,
-      route: clientRoute,
-      error_code:
-        !modelParseOk && routerMeta.error_class
-          ? routerMeta.error_class
-          : !modelParseOk
-            ? "heuristic_fallback"
-            : undefined,
-      content_safety_filtered_count: safety.filteredCount,
-      content_safety_risk_detected: safety.riskDetected,
-      content_safety_profile: safety.profile
-    });
 
     const extraVisible = gate.supporterPerks.freeVisibleExtraSlots;
     const douyinTool = market === "cn" && isDouyinToolRoute(clientRoute);
@@ -319,17 +459,102 @@ export async function POST(request: NextRequest) {
       const fin = await finalizeGenerationUsage(gate, dummy, {
         creditsCost: creditCost,
         toolSlug,
+        market,
+        requestType: "generate_package",
         meta: { market, publishFullPack, toolKind }
       });
+      await incrementGlobalCreditsUsed(creditCost);
+      await incrementDailyUsage(identity, creditCost);
       if (fin?.creditsRemaining !== undefined) {
         payload.creditsRemaining = fin.creditsRemaining;
         payload.creditsUsed = fin.creditsUsed;
       }
+      logAiTelemetry({
+        task_type: "post_package",
+        market,
+        locale,
+        provider: routerMeta.provider_used,
+        model: routerMeta.model_used,
+        user_plan: tier,
+        latency_ms: Date.now() - started,
+        model_latency_ms:
+          modelParseOk || routerMeta.outcome === "heuristic_after_empty_parse" ? routerMeta.latency_ms : undefined,
+        fallback_used: routerMeta.fallback_used,
+        success: modelParseOk,
+        user_fulfilled: true,
+        outcome: routerMeta.outcome,
+        error_class: routerMeta.error_class,
+        route: clientRoute,
+        error_code:
+          !modelParseOk && routerMeta.error_class
+            ? routerMeta.error_class
+            : !modelParseOk
+              ? "heuristic_fallback"
+              : undefined,
+        content_safety_filtered_count: safety.filteredCount,
+        content_safety_risk_detected: safety.riskDetected,
+        content_safety_profile: safety.profile,
+        risk_score: risk.riskScore,
+        risk_level: risk.riskLevel,
+        rate_limited: false,
+        blocked: false,
+        abuse_reason: risk.reasons,
+        dynamic_credit_cost: creditCost,
+        global_guard: false,
+        daily_limit_hit: false,
+        anomaly_detected: risk.anomalyDetected,
+        degraded
+        ,
+        model_tier: routerMeta.model_tier,
+        estimated_cost_usd: routerMeta.estimated_cost_usd,
+        max_tokens_applied: routerMeta.max_tokens_applied
+      });
       return NextResponse.json(payload);
     }
 
     const json = NextResponse.json(payload);
     await finalizeGenerationUsage(gate, json);
+    await incrementDailyUsage(identity, 1);
+    logAiTelemetry({
+      task_type: "post_package",
+      market,
+      locale,
+      provider: routerMeta.provider_used,
+      model: routerMeta.model_used,
+      user_plan: tier,
+      latency_ms: Date.now() - started,
+      model_latency_ms:
+        modelParseOk || routerMeta.outcome === "heuristic_after_empty_parse" ? routerMeta.latency_ms : undefined,
+      fallback_used: routerMeta.fallback_used,
+      success: modelParseOk,
+      user_fulfilled: true,
+      outcome: routerMeta.outcome,
+      error_class: routerMeta.error_class,
+      route: clientRoute,
+      error_code:
+        !modelParseOk && routerMeta.error_class
+          ? routerMeta.error_class
+          : !modelParseOk
+            ? "heuristic_fallback"
+            : undefined,
+      content_safety_filtered_count: safety.filteredCount,
+      content_safety_risk_detected: safety.riskDetected,
+      content_safety_profile: safety.profile,
+      risk_score: risk.riskScore,
+      risk_level: risk.riskLevel,
+      rate_limited: false,
+      blocked: false,
+      abuse_reason: risk.reasons,
+      dynamic_credit_cost: 0,
+      global_guard: false,
+      daily_limit_hit: false,
+      anomaly_detected: risk.anomalyDetected,
+      degraded
+      ,
+      model_tier: routerMeta.model_tier,
+      estimated_cost_usd: routerMeta.estimated_cost_usd,
+      max_tokens_applied: routerMeta.max_tokens_applied
+    });
     return json;
   } catch (error) {
     console.error("generate-package error:", error);

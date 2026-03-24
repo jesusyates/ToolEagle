@@ -4,6 +4,7 @@ export function ToolCard({
   href,
   icon: Icon,
   name,
+  nameZh,
   description,
   descriptionZh,
   category,
@@ -14,6 +15,8 @@ export function ToolCard({
   href: string;
   icon: React.ComponentType<{ className?: string }>;
   name: string;
+  /** 与 `config/tools.nameZh` 一致；`locale=zh` 时用作标题 */
+  nameZh?: string;
   description: string;
   /** 与 `config/tools` 中 `descriptionZh` 一致；`locale=zh` 时优先于 description */
   descriptionZh?: string;
@@ -24,6 +27,7 @@ export function ToolCard({
   locale?: "en" | "zh";
 }) {
   const cat = categoryLabel ?? category;
+  const title = locale === "zh" && nameZh?.trim() ? nameZh : name;
   const body =
     locale === "zh" && descriptionZh?.trim() ? descriptionZh : description;
   return (
@@ -57,7 +61,7 @@ export function ToolCard({
             )}
           </div>
           <h3 className="text-base font-semibold text-slate-900 leading-snug">
-            {name}
+            {title}
           </h3>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect } from "react";
 import { trackEvent } from "@/lib/analytics";
 import {
@@ -40,12 +41,14 @@ export function SupportContactBody({ sourcePage, embedStyle = "card" }: Props) {
 
   if (!hasAnySupportChannel()) {
     return (
-      <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50/50 p-5 text-sm text-slate-600">
+      <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-5 text-sm text-slate-600">
         <h2 className="text-sm font-bold text-slate-900">人工支持</h2>
         <p className="mt-2 text-xs leading-relaxed">
-          企业微信 / 客服二维码可在部署时通过环境变量配置（见{" "}
-          <code className="text-[10px]">NEXT_PUBLIC_SUPPORT_*</code>）。
+          线上客服入口暂未开放时，请先到支持页查看说明与留言渠道。
         </p>
+        <Link href="/zh/support" className="mt-3 inline-block text-sm font-medium text-red-800 underline">
+          前往中文站支持页 →
+        </Link>
       </div>
     );
   }
@@ -64,7 +67,7 @@ export function SupportContactBody({ sourcePage, embedStyle = "card" }: Props) {
     <>
       <h2 className="text-sm font-bold text-slate-900">需要人工帮助？</h2>
       <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-        若遇<strong>支付失败、账号/订阅异常、紧急故障</strong>或商务合作，可优先通过企业微信联系；个人微信与 QQ
+        若遇<strong>支付失败、账号/权益异常、紧急故障</strong>或商务合作，可优先通过企业微信联系；个人微信与 QQ
         为补充渠道。请勿在公开群泄露订单隐私。
       </p>
 

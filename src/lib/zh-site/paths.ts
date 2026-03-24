@@ -101,6 +101,8 @@ const EN_TO_ZH_EXACT: Record<string, string> = {
   "/": ZH.home,
   "/about": ZH.home,
   "/pricing": ZH.pricing,
+  /** EN 工具索引无 `/zh/tools` 落地页 → 抖音工具工作台 */
+  "/tools": ZH.douyin,
   "/tiktok-caption-generator": ZH.tiktokCaption,
   "/hook-generator": ZH.hook,
   "/ai-caption-generator": ZH.aiCaption,
@@ -110,7 +112,9 @@ const EN_TO_ZH_EXACT: Record<string, string> = {
   "/login": "/zh/login",
   "/dashboard": "/zh/dashboard",
   "/dashboard/settings": "/zh/dashboard/settings",
-  "/dashboard/distribution": "/zh/dashboard/distribution"
+  "/dashboard/distribution": "/zh/dashboard/distribution",
+  /** 与 `app/en/how-to` 对齐：勿生成 `/zh/en/how-to`（无效路由） */
+  "/en/how-to": "/zh/how-to/tiktok"
 };
 
 /**
@@ -130,7 +134,24 @@ export function enPathToZh(pathname: string): string {
   const p = pathname.replace(/\/$/, "") || "/";
   if (EN_TO_ZH_EXACT[p]) return EN_TO_ZH_EXACT[p];
   if (EN_PATH_LOCALE_SWITCH_TO_ZH_HOME.has(p)) return "/zh";
-  return `/zh${p === "/" ? "" : p}`;
+
+  /** `/en/how-to/[slug]` → `/zh/how-to/[slug]`（与 `app/zh/how-to/[topic]` 对齐） */
+  if (p.startsWith("/en/how-to/")) {
+    const rest = p.slice("/en/how-to/".length);
+    const slug = rest.split("/").filter(Boolean)[0];
+    if (slug) return `/zh/how-to/${encodeURIComponent(slug)}`;
+  }
+
+  const mirrored = `/zh${p === "/" ? "" : p}`;
+  /**
+   * 禁止把 `/en/...`、`/es/...` 直接前缀到 `/zh`（会得到 `/zh/en/...` 等无效路径）。
+   * 未知 EN 路径统一回中文首页，避免空白/404。
+   */
+  if (mirrored.startsWith("/zh/en") || mirrored.startsWith("/zh/es")) {
+    return "/zh";
+  }
+
+  return mirrored;
 }
 
 /** Map /zh/* back to a sensible EN URL when user switches 中文 → EN. */

@@ -100,10 +100,10 @@ export function DouyinLandingHero() {
           </Link>
           <ZhPricingLink
             conversionSource="zh_douyin_landing"
-            hash="#cn-pro-checkout"
+            hash="#cn-credits-checkout"
             className="inline-flex items-center rounded-2xl border border-amber-400/30 bg-amber-500/10 px-6 py-4 text-base font-semibold text-amber-100 transition hover:bg-amber-500/15"
           >
-            Pro 权益
+            算力包权益
           </ZhPricingLink>
         </div>
 

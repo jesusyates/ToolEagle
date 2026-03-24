@@ -32,6 +32,9 @@ import { StructuredExamplesLibrary } from "@/components/value/StructuredExamples
 import { ValueProofBlock } from "@/components/value/ValueProofBlock";
 import { CtaLinksSection } from "@/components/tools/CtaLinksSection";
 import { BASE_URL } from "@/config/site";
+import { ZhDouyinCreditsBar } from "@/components/zh/ZhDouyinCreditsBar";
+import { getEnToolJourney } from "@/config/en-tool-journey";
+import { ToolNextSteps } from "@/components/tools/ToolNextSteps";
 
 const LIFETIME_GEN_KEY = "te_v96_lifetime_pkg_gens";
 
@@ -106,6 +109,7 @@ export function PostPackageToolClient({
   const [cnBilling, setCnBilling] = useState<"free" | "credits" | "legacy_pro" | null>(null);
   const [cnCreditsRemaining, setCnCreditsRemaining] = useState<number | null>(null);
   const [cnCreditsDaysLeft, setCnCreditsDaysLeft] = useState<number | null>(null);
+  const [authenticated, setAuthenticated] = useState(false);
   const [contentSafety, setContentSafety] = useState<ContentSafetyClientMeta | null>(null);
   /** V106.1 — merged publish pack (default on for CN) */
   const [publishFullPack, setPublishFullPack] = useState(siteMode === "china");
@@ -129,6 +133,7 @@ export function PostPackageToolClient({
     if (typeof d.creditsRemaining === "number") setCnCreditsRemaining(d.creditsRemaining);
     setCnCreditsDaysLeft(typeof d.creditsDaysLeft === "number" ? d.creditsDaysLeft : null);
     if (typeof d.remaining === "number") setUsageRemaining(d.remaining);
+    if (typeof d.authenticated === "boolean") setAuthenticated(d.authenticated);
   }
 
   useEffect(() => {
@@ -267,8 +272,11 @@ export function PostPackageToolClient({
     if (!trimmed) return `${base}${path}`;
     return `${base}${path}?${seedFromQueryParam}=${encodeURIComponent(trimmed)}`;
   }, [pathname, idea, seedFromQueryParam]);
+  const enJourney = !zhSite ? getEnToolJourney(toolSlug) : null;
   const generateLabelEffective =
-    zhSite && publishFullPack ? "一键生成完整内容" : generateButtonLabel;
+    zhSite && publishFullPack ? "一键生成完整内容" : enJourney?.generateCta ?? generateButtonLabel;
+
+  const showDouyinMobileSticky = zhSite && isDouyinTool && idea.trim().length > 0 && !isGenerating;
 
   useEffect(() => {
     if (!zhSite || !toolMeta) return;
@@ -303,19 +311,33 @@ export function PostPackageToolClient({
         variant="quality"
         locale={zhSite ? "zh_cn" : "en"}
       />
+      {zhSite && isDouyinTool ? (
+        <ZhDouyinCreditsBar
+          authenticated={authenticated}
+          billing={cnBilling}
+          usageRemaining={usageRemaining}
+          creditsRemaining={cnCreditsRemaining}
+          creditsDaysLeft={cnCreditsDaysLeft}
+          publishFullPack={publishFullPack}
+          loginNextPath={pathname || "/zh"}
+        />
+      ) : null}
       {packages.length > 0 && (
         <ExitIntentCta toolSlug={toolSlug} toolName={title} siteMode={siteMode} />
       )}
+      <div className={showDouyinMobileSticky ? "pb-[5.5rem] md:pb-0" : undefined}>
       <ToolPageShell
         eyebrow={eyebrow}
         title={title}
         description={description}
+        introProblem={enJourney?.introProblem}
+        introAudience={enJourney?.introAudience}
         toolSlug={toolSlug}
         toolName={title}
         siteMode={siteMode}
         input={
           <ToolInputCard label={inputLabel}>
-            {zhSite && cnBilling === "credits" && cnCreditsRemaining !== null && cnCreditsRemaining > 0 ? (
+            {!isDouyinTool && zhSite && cnBilling === "credits" && cnCreditsRemaining !== null && cnCreditsRemaining > 0 ? (
               <div className="mb-3 rounded-xl border border-emerald-200 bg-emerald-50/80 px-3 py-2 text-sm text-emerald-950">
                 <span className="font-semibold">
                   剩余 {cnCreditsRemaining} 次
@@ -326,12 +348,14 @@ export function PostPackageToolClient({
                 </p>
               </div>
             ) : null}
-            {zhSite && cnBilling === "legacy_pro" ? (
+            {!isDouyinTool && zhSite && cnBilling === "legacy_pro" ? (
               <div className="mb-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">
                 当前为 Pro 权益（或已迁移算力包）；生成按次数计费时以剩余次数为准。
               </div>
             ) : null}
-            {usageRemaining !== null && !(zhSite && cnBilling === "credits" && (cnCreditsRemaining ?? 0) > 0) ? (
+            {!isDouyinTool &&
+            usageRemaining !== null &&
+            !(zhSite && cnBilling === "credits" && (cnCreditsRemaining ?? 0) > 0) ? (
               <div className="mb-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm">
                 <span className="font-semibold text-slate-800">
                   {zhSite ? "今日剩余：" : "Today's remaining: "}
@@ -386,7 +410,9 @@ export function PostPackageToolClient({
             <DelegatedButton
               onClick={runGenerate}
               disabled={isGenerating}
-              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-5 py-3.5 text-base font-semibold text-white shadow-sm hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-75 transition duration-150"
+              className={`mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-5 py-3.5 text-base font-semibold text-white shadow-sm hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-75 transition duration-150 ${
+                isDouyinTool ? "min-h-[3.25rem] text-base" : ""
+              }`}
             >
               {isGenerating ? (
                 <>
@@ -403,29 +429,37 @@ export function PostPackageToolClient({
           </ToolInputCard>
         }
         result={
-          <PostPackageResults
-            title={resultTitle}
-            packages={packages}
-            lockedPreview={lockedPreview}
-            isLoading={isGenerating}
-            emptyMessage={emptyMessage}
-            toolSlug={toolSlug}
-            tierApplied={tierApplied}
-            resultQuality={resultQuality}
-            onRegenerate={runGenerate}
-            userInput={idea}
-            lifetimeGenerationCount={lifetimeGenCount}
-            usageRemaining={usageRemaining}
-            uiLocale={zhSite ? "zh" : "en"}
-            upgradeMode={zhSite ? "china" : "global"}
-            supportSourcePath={pathname || undefined}
-            contentSafety={contentSafety}
-            douyinConversionMode={zhSite && isDouyinTool}
-            packageLabelsZh={packageLabelsZh}
-            shareQueryParam={seedFromQueryParam}
-            publishReadyNotice={zhSite && publishFullPackEcho}
-            toolShareUrl={toolShareUrl}
-          />
+          <>
+            <PostPackageResults
+              title={resultTitle}
+              packages={packages}
+              lockedPreview={lockedPreview}
+              isLoading={isGenerating}
+              emptyMessage={emptyMessage}
+              toolSlug={toolSlug}
+              tierApplied={tierApplied}
+              resultQuality={resultQuality}
+              onRegenerate={runGenerate}
+              userInput={idea}
+              lifetimeGenerationCount={lifetimeGenCount}
+              usageRemaining={usageRemaining}
+              uiLocale={zhSite ? "zh" : "en"}
+              upgradeMode={zhSite ? "china" : "global"}
+              supportSourcePath={pathname || undefined}
+              contentSafety={contentSafety}
+              douyinConversionMode={zhSite && isDouyinTool}
+              packageLabelsZh={packageLabelsZh}
+              shareQueryParam={seedFromQueryParam}
+              publishReadyNotice={zhSite && publishFullPackEcho}
+              toolShareUrl={toolShareUrl}
+            />
+            {!zhSite ? (
+              <ToolNextSteps
+                toolSlug={toolSlug}
+                hasOutput={packages.length > 0 || (lockedPreview?.length ?? 0) > 0}
+              />
+            ) : null}
+          </>
         }
         howItWorks={
           <HowItWorksCard
@@ -450,6 +484,28 @@ export function PostPackageToolClient({
           </>
         }
       />
+      </div>
+      {showDouyinMobileSticky ? (
+        <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-700/80 bg-slate-950/95 px-3 pt-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-8px_28px_rgba(0,0,0,0.35)] md:hidden">
+          <DelegatedButton
+            onClick={runGenerate}
+            disabled={isGenerating}
+            className="inline-flex w-full min-h-[3.25rem] items-center justify-center gap-2 rounded-2xl bg-red-600 px-4 py-3 text-base font-bold text-white shadow-md hover:bg-red-500 disabled:opacity-70"
+          >
+            {isGenerating ? (
+              <>
+                <span className="inline-block h-3 w-3 rounded-full border-2 border-white border-t-transparent animate-spin" />
+                生成中…
+              </>
+            ) : (
+              <>
+                {generateLabelEffective}
+                <span className="text-red-100">→</span>
+              </>
+            )}
+          </DelegatedButton>
+        </div>
+      ) : null}
     </>
   );
 }

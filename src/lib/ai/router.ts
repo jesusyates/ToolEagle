@@ -10,6 +10,7 @@ import {
   getOpenAiModel,
   isCnProviderEnabled
 } from "@/config/ai-router";
+import { COST_CONTROL_CONFIG, type ModelTier } from "@/config/cost-control";
 import { getProviderById } from "@/lib/ai/providers";
 import { composePostPackagePrompts, type ComposedMarket } from "@/lib/ai/prompts/composePostPackage";
 import type { AiErrorClass } from "@/lib/ai/ai-error-classify";
@@ -45,6 +46,9 @@ export type GenerationRouterMeta = {
   error_class?: AiErrorClass;
   /** Client pathname for CN perf / diagnostics (set in API route) */
   route?: string;
+  model_tier?: ModelTier;
+  estimated_cost_usd?: number;
+  max_tokens_applied?: number;
 };
 
 type Attempt = { providerId: string; model: string };
@@ -75,6 +79,7 @@ function buildAttemptChain(market: RoutedMarket): Attempt[] {
 
 export type RouterGeneratePostPackageInput = PostPackageRouterContext & {
   userInput: string;
+  riskScore?: number;
 };
 
 /**
@@ -83,7 +88,36 @@ export type RouterGeneratePostPackageInput = PostPackageRouterContext & {
 export async function routerGeneratePostPackage(
   input: RouterGeneratePostPackageInput
 ): Promise<{ rawText: string; meta: GenerationRouterMeta }> {
-  const attempts = buildAttemptChain(input.market);
+  const riskScore = input.riskScore ?? 0;
+  const paid = input.userPlan === "pro";
+  const requestedHigh = paid && input.publishFullPack && riskScore < 30 && COST_CONTROL_CONFIG.model.enableHighCostForPaid;
+  const baseTier: ModelTier = !paid || riskScore >= 60 ? "low_cost" : requestedHigh ? "high_cost" : "standard";
+  const tierModel =
+    baseTier === "high_cost"
+      ? COST_CONTROL_CONFIG.model.highCostModel
+      : baseTier === "standard"
+        ? COST_CONTROL_CONFIG.model.standardModel
+        : COST_CONTROL_CONFIG.model.lowCostModel;
+  let maxTokens: number =
+    !paid ? COST_CONTROL_CONFIG.maxTokens.free : input.publishFullPack ? COST_CONTROL_CONFIG.maxTokens.paidFullPack : COST_CONTROL_CONFIG.maxTokens.paid;
+  if (riskScore >= 60) maxTokens = Math.min(maxTokens, COST_CONTROL_CONFIG.maxTokens.highRiskCap);
+  const rate =
+    baseTier === "high_cost"
+      ? COST_CONTROL_CONFIG.perRequestGuard.highCostPer1k
+      : baseTier === "standard"
+        ? COST_CONTROL_CONFIG.perRequestGuard.standardPer1k
+        : COST_CONTROL_CONFIG.perRequestGuard.lowCostPer1k;
+  let estimatedCost = (maxTokens / 1000) * rate;
+  let finalTier = baseTier;
+  if (estimatedCost > COST_CONTROL_CONFIG.perRequestGuard.maxEstimatedUsd) {
+    finalTier = "low_cost";
+    maxTokens = Math.min(maxTokens, COST_CONTROL_CONFIG.maxTokens.free);
+    estimatedCost = (maxTokens / 1000) * COST_CONTROL_CONFIG.perRequestGuard.lowCostPer1k;
+  }
+  const attempts = buildAttemptChain(input.market).map((a) => ({
+    ...a,
+    model: a.providerId === "openai" ? tierModel : a.model
+  }));
   const { systemPrompt, userPrompt } = composePostPackagePrompts({
     userInput: input.userInput,
     toolKind: input.toolType,
@@ -93,8 +127,6 @@ export async function routerGeneratePostPackage(
     publishFullPack: input.publishFullPack
   });
 
-  /** V103.1 — Pro: larger output for 8–12 packages */
-  const maxTokens = input.userPlan === "pro" ? 8000 : 3400;
   const temperature = 0.75;
 
   const t0 = Date.now();
@@ -140,7 +172,10 @@ export async function routerGeneratePostPackage(
           model_used: out.model,
           fallback_used,
           latency_ms,
-          outcome
+          outcome,
+          model_tier: finalTier,
+          estimated_cost_usd: Number(estimatedCost.toFixed(6)),
+          max_tokens_applied: maxTokens
         }
       };
     } catch (e) {

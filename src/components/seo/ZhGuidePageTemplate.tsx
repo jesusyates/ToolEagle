@@ -161,7 +161,7 @@ export function ZhGuidePageTemplate({
   );
 
   const breadcrumbItems: { name: string; url: string }[] = [
-    { name: "首页", url: "/" },
+    { name: "首页", url: "/zh" },
     { name: "中文指南", url: "/zh/sitemap" },
     ...(platform !== "general" && ZH_PLATFORMS.includes(platform)
       ? [{ name: PLATFORM_NAMES[platform], url: `${ZH_BASE_PATHS[pageType]}/${platform}` }]
@@ -194,7 +194,7 @@ export function ZhGuidePageTemplate({
         <article className="container py-12 lg:pr-32">
           <div className="max-w-3xl">
             <nav className="text-sm text-slate-500 mb-6" aria-label="面包屑">
-              <Link href="/" className="hover:text-slate-700">
+              <Link href="/zh" className="hover:text-slate-700">
                 首页
               </Link>
               <span className="mx-2">/</span>
@@ -340,6 +340,7 @@ export function ZhGuidePageTemplate({
                     href={`/tools/${t.slug}`}
                     icon={t.icon}
                     name={t.name}
+                    nameZh={t.nameZh}
                     description={t.description}
                     descriptionZh={t.descriptionZh}
                     category={t.category}

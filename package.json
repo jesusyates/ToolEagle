@@ -38,6 +38,8 @@
     "db:push": "npx supabase db push"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@iconify/react": "^6.0.2",
     "@mdx-js/mdx": "^3.1.1",
     "@sentry/nextjs": "^10.43.0",
     "@supabase/ssr": "^0.9.0",
@@ -56,6 +58,7 @@
     "undici": "^7.24.4"
   },
   "devDependencies": {
+    "@iconify-json/logos": "^1.2.10",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/jest": "^30.0.0",
@@ -70,6 +73,7 @@
     "jest-environment-jsdom": "^30.3.0",
     "pg": "^8.20.0",
     "postcss": "^8.4.31",
+    "simple-icons": "^16.13.0",
     "tailwindcss": "^3.4.13",
     "typescript": "5.3.3"
   }

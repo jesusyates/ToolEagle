@@ -41,7 +41,7 @@ export function ZhDouyinToolRelatedAside({ currentSlug, variant }: Props) {
                 href={`/zh/${tool.slug}`}
                 className="text-sm text-slate-700 hover:text-sky-700 hover:underline transition duration-150"
               >
-                {tool.name}
+                {tool.nameZh ?? tool.name}
               </Link>
             </li>
           ))}

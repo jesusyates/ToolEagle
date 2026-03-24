@@ -1,5 +1,4 @@
 import { HomePageClient } from "./_components/HomePageClient";
-import { ZhHomepageKeywordSections } from "@/components/zh/ZhHomepageKeywordSections";
 import { TrendingMakeMoneySection } from "@/components/traffic/TrendingMakeMoneySection";
 import { BASE_URL } from "@/config/site";
 
@@ -15,9 +14,5 @@ export const metadata = {
 };
 
 export default function HomePage() {
-  return (
-    <HomePageClient trendingInjection={<TrendingMakeMoneySection />}>
-      <ZhHomepageKeywordSections />
-    </HomePageClient>
-  );
+  return <HomePageClient trendingInjection={<TrendingMakeMoneySection englishOnly />} />;
 }

@@ -14,11 +14,19 @@ export default async function ZhRecentPage({ searchParams }: Props) {
   const { page } = await searchParams;
   const pageNum = Math.max(1, parseInt(page ?? "1", 10) || 1);
   const all = getRecentZhPagesWithKeywords(100);
-  const total = all.length;
+  const douyinBoost = (href: string) =>
+    href.includes("/douyin") ||
+    href.includes("/zh/tiktok-caption-generator") ||
+    href.includes("/zh/how-to/tiktok");
+  const byTime = (a: (typeof all)[0], b: (typeof all)[0]) => (b.createdAt || 0) - (a.createdAt || 0);
+  const douyinFirst = all.filter((e) => douyinBoost(e.href)).sort(byTime);
+  const rest = all.filter((e) => !douyinBoost(e.href)).sort(byTime);
+  const prioritized = [...douyinFirst, ...rest];
+  const total = prioritized.length;
   const totalPages = Math.ceil(total / PER_PAGE);
   const currentPage = Math.min(pageNum, totalPages);
   const start = (currentPage - 1) * PER_PAGE;
-  const recent = all.slice(start, start + PER_PAGE);
+  const recent = prioritized.slice(start, start + PER_PAGE);
 
   return (
     <main className="min-h-screen bg-page text-slate-900 flex flex-col">
@@ -27,7 +35,9 @@ export default async function ZhRecentPage({ searchParams }: Props) {
         <article className="container py-12">
           <div className="max-w-4xl">
             <nav className="text-sm text-slate-500 mb-6">
-              <Link href="/" className="hover:text-slate-700">首页</Link>
+              <Link href="/zh" className="hover:text-slate-700">
+                中文站首页
+              </Link>
               <span className="mx-2">/</span>
               <span className="text-slate-900">最新发布</span>
             </nav>
@@ -36,7 +46,8 @@ export default async function ZhRecentPage({ searchParams }: Props) {
               最新发布
             </h1>
             <p className="mt-4 text-slate-600">
-              最新 {total} 篇中文创作者指南（第 {currentPage}/{totalPages || 1} 页）
+              最新 {total} 条中文站更新（第 {currentPage}/{totalPages || 1} 页）。列表已优先展示{" "}
+              <strong className="text-slate-800">抖音主路径与短视频文案包</strong>相关页，其余按时间排序。
             </p>
 
             <ul className="mt-8 columns-2 sm:columns-3 gap-4 space-y-2">

@@ -63,7 +63,9 @@ export default async function ZhPlatformHubPage({ params }: Props) {
         <article className="container py-12">
           <div className="max-w-4xl">
             <nav className="text-sm text-slate-500 mb-6">
-              <Link href="/" className="hover:text-slate-700">首页</Link>
+              <Link href="/zh" className="hover:text-slate-700">
+                首页
+              </Link>
               <span className="mx-2">/</span>
               <Link href="/zh/sitemap" className="hover:text-slate-700">中文指南</Link>
               <span className="mx-2">/</span>

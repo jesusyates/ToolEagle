@@ -38,7 +38,7 @@ export default function CreatorInvitePage() {
               <h2 className="font-semibold text-slate-900">What you get</h2>
               <ul className="mt-3 space-y-2 text-slate-600">
                 <li>• Free Pro plan for 3 months</li>
-                <li>• Unlimited AI generations</li>
+                <li>• Higher credit quota for AI generation</li>
                 <li>• Early access to new features</li>
               </ul>
               <h2 className="mt-6 font-semibold text-slate-900">What we ask</h2>

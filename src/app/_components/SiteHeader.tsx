@@ -1,64 +1,83 @@
 "use client";
 
-import { TranslateAwareLink } from "@/components/TranslateAwareLink";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Bird } from "lucide-react";
 import { AuthButton } from "@/components/auth/AuthButton";
-import { UpgradeLink } from "@/components/monetization/UpgradeLink";
 import { MarketSelector } from "@/components/locale/MarketSelector";
+import { ToolEagleLogoMark } from "@/components/brand/ToolEagleLogoMark";
+import { englishSwitchHref } from "@/lib/market/locale-switch-href";
 
-const navPaths = [
-  { href: "/", key: "home" as const },
-  { href: "/discover", key: "discover" as const },
-  { href: "/ai-prompts", key: "aiPrompts" as const },
-  { href: "/learn-ai", key: "learnAi" as const },
-  { href: "/answers", key: "answers" as const },
-  { href: "/creators", key: "creators" as const },
-  { href: "/community", key: "community" as const },
-  { href: "/favorites", key: "favorites" as const },
-  { href: "/me", key: "me" as const },
-  { href: "/dashboard", key: "dashboard" as const },
-  { href: "/creator", key: "creator" as const },
-  { href: "/pricing", key: "pricing" as const },
-  { href: "/blog", key: "blog" as const },
-  { href: "/about", key: "about" as const }
+/** 英文首页：须带 `?te_locale=en`，否则 middleware 可能按 zh cookie/geo 把 `/` 重定向到 `/zh`。 */
+const EN_HOME = englishSwitchHref("/");
+
+/** V109.4 / V109.6 — Home + core nav; Pro CTA removed (use /pricing). */
+const primaryNav = [
+  { href: EN_HOME, key: "home" as const },
+  { href: "/tools", key: "tools" as const },
+  { href: "/en/how-to", key: "guides" as const },
+  { href: "/pricing", key: "pricing" as const }
 ];
+
+function isPrimaryNavActive(pathname: string, key: (typeof primaryNav)[number]["key"]): boolean {
+  const p = pathname || "/";
+  if (key === "home") return p === "/" || p === "";
+  if (key === "tools") return p === "/tools" || p.startsWith("/tools/");
+  if (key === "guides") return p.startsWith("/en/how-to");
+  if (key === "pricing") return p === "/pricing" || p.startsWith("/pricing/");
+  return false;
+}
 
 export function SiteHeader() {
   const t = useTranslations("nav");
+  const pathname = usePathname();
 
   return (
-    <header className="border-b border-slate-200 bg-page/85 backdrop-blur">
-      <div className="container py-4 flex items-center justify-between gap-4">
-        <TranslateAwareLink href="/" className="flex items-center gap-2">
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-sky-500 via-cyan-500 to-indigo-500 flex items-center justify-center shadow-sm">
-            <Bird className="h-5 w-5 text-white" />
-          </div>
+    <header className="sticky top-0 z-40 border-b border-slate-200 bg-page/90 backdrop-blur">
+      <div className="container py-3.5 sm:py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+        <Link
+          href={EN_HOME}
+          prefetch
+          className="flex items-center gap-2.5 shrink-0 rounded-lg outline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500/50"
+          aria-label={t("homeLogoAria")}
+        >
+          <ToolEagleLogoMark variant="global" />
           <div>
             <p className="text-lg font-semibold tracking-tight text-slate-900" translate="no">
               ToolEagle
             </p>
             <p className="text-xs text-slate-600">{t("slogan")}</p>
           </div>
-        </TranslateAwareLink>
+        </Link>
 
-        <div className="flex items-center gap-2">
-          <MarketSelector analyticsSource="en_header" presentation="dropdown" />
-          <nav className="hidden sm:flex items-center gap-2 text-sm text-slate-700">
-            {navPaths.map((item) => (
-              <TranslateAwareLink
-                key={item.href}
-                href={item.href}
-                className="px-3 py-2 rounded-full hover:bg-sky-50 hover:text-sky-700 hover:underline transition duration-150"
-              >
-                {t(item.key)}
-              </TranslateAwareLink>
-            ))}
+        <div className="flex flex-wrap items-center justify-between sm:justify-end gap-x-2 gap-y-2 min-w-0 sm:min-w-[min(100%,42rem)]">
+          <nav
+            className="flex flex-wrap items-center gap-0.5 sm:gap-1 text-xs sm:text-sm text-slate-700"
+            aria-label="Primary"
+          >
+            {primaryNav.map((item) => {
+              const active = isPrimaryNavActive(pathname, item.key);
+              return (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                  prefetch
+                  aria-current={active ? "page" : undefined}
+                  className={
+                    active
+                      ? "px-2 sm:px-3 py-1.5 sm:py-2 rounded-full whitespace-nowrap font-semibold text-sky-800 bg-sky-100 ring-1 ring-sky-200/80 shadow-sm"
+                      : "px-2 sm:px-3 py-1.5 sm:py-2 rounded-full text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition duration-150 whitespace-nowrap"
+                  }
+                >
+                  {t(item.key)}
+                </Link>
+              );
+            })}
           </nav>
-          <UpgradeLink className="hidden sm:inline-flex items-center rounded-full bg-slate-900 px-3 py-2 text-xs font-bold text-white hover:bg-slate-800 shrink-0">
-            {t("upgrade")}
-          </UpgradeLink>
-          <AuthButton />
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+            <MarketSelector analyticsSource="en_header" presentation="dropdown" />
+            <AuthButton loginAnalyticsSource="en_header" loginNextPath="/dashboard" billingHref="/dashboard/billing" />
+          </div>
         </div>
       </div>
     </header>

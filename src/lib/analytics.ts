@@ -58,6 +58,16 @@ type ToolEvent =
   /** V107 — CN credits */
   | "credit_used"
   | "credit_balance"
+  | "pricing_view"
+  | "pricing_click"
+  | "purchase_click"
+  | "purchase_success"
+  | "pricing_package_view"
+  | "pricing_package_click"
+  | "credit_purchase"
+  | "donation_purchase"
+  | "billing_page_view"
+  | "billing_tab_view"
   /** IA — market switcher + auth entry */
   | "market_switch"
   | "login_click";

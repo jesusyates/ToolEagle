@@ -1,96 +1,81 @@
 import Link from "next/link";
-import { FREE_DAILY_LIMIT } from "@/lib/usage";
-import { Check } from "lucide-react";
-import { hasPaymentLink } from "@/config/payment";
+import { isCnAggregatorConfigured } from "@/lib/payment/cn-server";
 import { ZhProPaymentPanel } from "@/components/monetization/ZhProPaymentPanel";
 import { PricingConversionTracker } from "@/components/pricing/PricingConversionTracker";
 import { buildZhPageMetadata } from "@/lib/zh-site/seo";
-import { ZH } from "@/lib/zh-site/paths";
-import { ZH_BRAND_SUBLINE, ZH_BRAND_TAGLINE, zhSeoTitle } from "@/config/zh-brand";
-import { listCreditPacksForUi } from "@/lib/credits/credit-packs";
+import { zhSeoTitle } from "@/config/zh-brand";
 import { ZhPricingSupportNote } from "@/components/zh/ZhPricingSupportNote";
+import { FREE_DAILY_LIMIT } from "@/lib/usage";
 
 export const metadata = buildZhPageMetadata({
   zhPath: "/zh/pricing",
   title: zhSeoTitle("定价 — 算力包与价格"),
-  description: `${ZH_BRAND_TAGLINE}。套餐与价格：免费档与算力包；支付在本页完成。`
+  description: "购买创作次数。生成完整内容，按使用次数付费。"
 });
 
 export default function ZhPricingPage() {
-  const packs = listCreditPacksForUi();
+  const cnReady = isCnAggregatorConfigured();
 
   return (
     <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <PricingConversionTracker />
 
       <div className="flex-1">
-        <section className="container pt-10 pb-8">
+        <section className="container pt-10 pb-12">
           <div className="max-w-3xl mx-auto text-center mb-8">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-red-800">定价</p>
-            <p className="text-lg sm:text-xl font-semibold text-slate-900 mt-3 tracking-tight">{ZH_BRAND_TAGLINE}</p>
-            <p className="text-slate-600 mt-2 text-sm whitespace-pre-line leading-relaxed">{ZH_BRAND_SUBLINE}</p>
-            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-6">套餐与价格</h1>
-            <p className="text-slate-600 mt-3 text-sm">
-              价值说明、场景与对比见{" "}
-              <Link href={ZH.pro} className="text-red-800 font-bold underline">
-                Pro 与价值
-              </Link>
-              。
-            </p>
+            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight mt-1">购买创作次数</h1>
+            <p className="text-slate-600 mt-3 text-sm">生成完整内容，按使用次数付费</p>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-2 max-w-5xl mx-auto">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm h-fit">
-              <h2 className="text-lg font-semibold text-slate-900">免费</h2>
-              <p className="mt-1 text-3xl font-bold text-slate-900">¥0</p>
-              <p className="text-sm text-slate-600 mt-1">长期免费</p>
-              <ul className="mt-6 space-y-3">
-                <li className="flex items-start gap-2 text-sm text-slate-700">
-                  <Check className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
-                  每日 {FREE_DAILY_LIMIT} 次生成额度
-                </li>
-                <li className="flex items-start gap-2 text-sm text-slate-700">
-                  <Check className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
-                  精简文案包
-                </li>
-                <li className="flex items-start gap-2 text-sm text-slate-700">
-                  <Check className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
-                  核心工具与结构库
-                </li>
-              </ul>
-              <Link
-                href={ZH.tiktokCaption}
-                className="mt-6 inline-flex w-full justify-center rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-              >
-                开始使用
-              </Link>
+          <div className="max-w-6xl mx-auto grid gap-6 lg:grid-cols-[0.95fr_1.35fr] items-stretch">
+            <div className="space-y-6 flex flex-col h-full">
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+                <h2 className="text-lg font-semibold text-slate-900">为什么选择次数包</h2>
+                <ul className="mt-4 space-y-3 text-sm text-slate-700 leading-relaxed">
+                  <li>按生成复杂度扣除次数，成本和使用量完全对应。</li>
+                  <li>高质量或完整内容包会消耗更多次数，普通生成消耗更低。</li>
+                  <li>
+                    工具页顶部与{" "}
+                    <Link href="/zh/dashboard/billing" className="font-semibold text-red-800 underline">
+                      账单页
+                    </Link>{" "}
+                    可查看剩余次数和使用记录。
+                  </li>
+                </ul>
+              </div>
+
+              <div className="rounded-3xl border border-slate-200 bg-slate-50/80 p-6 shadow-sm mt-auto">
+                <h3 className="text-base font-semibold text-slate-900">免费版说明（先对比）</h3>
+                <p className="mt-2 text-sm text-slate-600">
+                  不充值也能用基础能力；充值后可提升完整度与连续创作效率。
+                </p>
+                <p className="mt-2 inline-flex rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
+                  每天免费 {FREE_DAILY_LIMIT} 次
+                </p>
+                <ul className="mt-4 space-y-2 text-sm text-slate-700">
+                  <li>• 适合偶尔使用、轻量需求</li>
+                  <li>• 生成深度与次数相对有限</li>
+                  <li>• 需要持续产出时建议升级次数包</li>
+                </ul>
+                <Link
+                  href="/zh/tiktok-caption-generator"
+                  className="mt-4 inline-flex w-full justify-center rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+                >
+                  继续免费试用
+                </Link>
+              </div>
             </div>
 
-            <div
-              id="cn-pro-highlight"
-              className="rounded-2xl border-2 border-slate-900 bg-slate-50/30 p-6 shadow-sm relative ring-2 ring-amber-400/50"
-            >
-              <span className="absolute -top-3 left-4 rounded-full bg-amber-600 px-3 py-0.5 text-xs font-bold text-white">
-                算力包
-              </span>
-              <h2 className="text-lg font-semibold text-slate-900">充值算力（微信 / 支付宝）</h2>
-              <ul className="mt-4 space-y-2 text-xs text-slate-600 border-t border-slate-200 pt-4">
-                {packs.map((p) => (
-                  <li key={p.id} className="flex justify-between gap-2">
-                    <span className="font-medium text-slate-800">{p.labelZh}</span>
-                    <span>
-                      ¥{p.cny} · {p.credits} 次 · {p.days} 天
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <ZhProPaymentPanel />
-              {!hasPaymentLink() ? (
-                <p className="mt-2 text-xs text-amber-800">
-                  海外 Lemon 需 <code className="rounded bg-amber-100 px-1">NEXT_PUBLIC_PAYMENT_LINK</code>；国内需{" "}
-                  <code className="rounded bg-amber-100 px-1">AGGREGATOR_*</code>。
-                </p>
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm h-full flex flex-col">
+              {!cnReady ? (
+                <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+                  暂未配置微信/支付宝聚合支付，当前可先查看套餐；完成配置后可立即支付。
+                </div>
               ) : null}
+              <div className="flex-1">
+                <ZhProPaymentPanel paymentEnabled={cnReady} />
+              </div>
             </div>
           </div>
 

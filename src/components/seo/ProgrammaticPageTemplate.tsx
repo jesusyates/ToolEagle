@@ -218,7 +218,7 @@ export function ProgrammaticPageTemplate({
             </Link>
           ))}
           <UpgradeLink className="inline-flex rounded-xl border-2 border-sky-300 bg-sky-50 px-4 py-2.5 text-sm font-semibold text-sky-900 hover:bg-sky-100">
-            {locale === "zh" ? "更快增长 — 升级 Pro →" : "Grow faster — Upgrade Pro →"}
+            {locale === "zh" ? "更快增长 — 获取算力包 →" : "Grow faster — get credits →"}
           </UpgradeLink>
         </section>
       </article>

@@ -4,6 +4,10 @@ import { getLatestKeywordPagesCnSidebarCached } from "@/lib/zh/cn-keyword-sideba
 import { buildZhPageMetadata } from "@/lib/zh-site/seo";
 import { zhSeoTitle } from "@/config/zh-brand";
 import { ZhDouyinToolRelatedAside } from "@/components/zh/cn-platforms/ZhDouyinToolRelatedAside";
+import {
+  ZhDouyinToolIntro,
+  ZhDouyinToolSsrFooter
+} from "@/components/zh/cn-platforms/ZhDouyinToolSsrBody";
 
 export const metadata = buildZhPageMetadata({
   zhPath: "/zh/douyin-caption-generator",
@@ -18,6 +22,7 @@ export default async function ZhDouyinCaptionGeneratorPage() {
 
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50 flex flex-col">
+      <ZhDouyinToolIntro slug="douyin-caption-generator" />
       <div className="flex-1">
         <Suspense fallback={<div className="container pt-10 pb-16 min-h-[400px]" />}>
           <ZhDeferredPostPackageToolClient
@@ -52,6 +57,7 @@ export default async function ZhDouyinCaptionGeneratorPage() {
             />
         </Suspense>
       </div>
+      <ZhDouyinToolSsrFooter slug="douyin-caption-generator" />
     </main>
   );
 }

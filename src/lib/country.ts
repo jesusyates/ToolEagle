@@ -61,7 +61,3 @@ export function resolveCountry(options: ResolveCountryOptions): CountryCode {
   return defaultCountry;
 }
 
-// TODO V76.5: Country selector UI
-// TODO V76.5: Country-specific homepage banners
-// TODO V76.5: Country-based tool ranking
-// TODO V76.5: Country-based pricing

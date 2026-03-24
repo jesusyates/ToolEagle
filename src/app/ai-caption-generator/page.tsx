@@ -46,7 +46,7 @@ export default function AiCaptionGeneratorPage() {
             tryExample="Launching a new Notion template for creators who batch content weekly"
             inputLabel="Topic or offer"
             placeholder="What are you posting about? (product, story, tip, or trend)"
-            generateButtonLabel="Generate AI post packages"
+            generateButtonLabel="Generate a post package"
             resultTitle="Your AI post packages"
             emptyMessage="Add your topic to get structured packages — ready to adapt for TikTok, Reels, or Shorts."
             howItWorksSteps={[

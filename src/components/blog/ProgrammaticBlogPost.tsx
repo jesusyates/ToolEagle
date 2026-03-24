@@ -92,7 +92,7 @@ export function ProgrammaticBlogPost({ slug }: ProgrammaticBlogPostProps) {
           Generate {topicLabel} {typeLabel.toLowerCase()} with AI
         </h2>
         <p className="mt-2 text-sm text-slate-600">
-          Use our free {tool?.name ?? "AI generator"} to create unlimited {topicLabel.toLowerCase()} {typeLabel.toLowerCase()} in seconds.
+          Use our free {tool?.name ?? "AI generator"} to create {topicLabel.toLowerCase()} {typeLabel.toLowerCase()} quickly, then continue with credits as needed.
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
           <Link

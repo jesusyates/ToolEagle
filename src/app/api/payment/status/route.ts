@@ -32,7 +32,8 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({
     orderId: order.order_id,
     status: order.status,
-    plan: order.plan,
+    package_id: order.package_id ?? order.plan,
+    order_type: order.order_type,
     amount: order.amount,
     currency: order.currency,
     paidAt: order.paid_at

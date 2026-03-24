@@ -15,8 +15,7 @@ const hasSupabase = !!(
 );
 
 /**
- * 跨路由保留登录态，避免顶栏反复卸载/挂载时重复进入 loading 骨架（窄块 → 宽按钮）造成整排导航「收拢」抖动。
- * 背景：`/zh` 下顶栏由 `src/app/zh/layout.tsx` 统一挂载，客户端跳转会重挂载 `AuthButton`。
+ * 跨路由保留登录态，避免顶栏反复卸载/挂载时重复请求。
  */
 let authUserCache: User | null | undefined;
 
@@ -30,25 +29,26 @@ export function AuthButton({
   showSignup = false,
   loginNextPath = "/zh",
   accountHref = "/dashboard",
+  billingHref = "/dashboard/billing",
   settingsHref = "/dashboard/settings",
   signOutRedirectTo
 }: {
-  /** 设置后：登录链接触发 login_click，并带 next=loginNextPath */
   loginAnalyticsSource?: string;
   showSignup?: boolean;
   loginNextPath?: string;
-  /** 登录后「账户」入口（与英文站一致，默认工作台） */
   accountHref?: string;
-  /** 登录后「个人资料」入口（默认 /dashboard/settings） */
+  billingHref?: string;
   settingsHref?: string;
-  /** 退出登录后跳转（中文站建议 `/zh`） */
   signOutRedirectTo?: string;
 } = {}) {
   const t = useTranslations("common");
   const router = useRouter();
   const [user, setUser] = useState<User | null>(() => (authUserCache === undefined ? null : authUserCache));
-  const [loading, setLoading] = useState(() => hasSupabase && authUserCache === undefined);
   const [open, setOpen] = useState(false);
+  const [creditsSummary, setCreditsSummary] = useState<{ remaining: number; total: number } | null>(null);
+  const lowCredits = (creditsSummary?.remaining ?? 0) > 0 && (creditsSummary?.remaining ?? 0) < 20;
+  const veryLowCredits = (creditsSummary?.remaining ?? 0) > 0 && (creditsSummary?.remaining ?? 0) < 8;
+
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -57,11 +57,16 @@ export function AuthButton({
     const supabase = createClient();
 
     if (authUserCache === undefined) {
-      supabase.auth.getUser().then(({ data: { user } }) => {
-        authUserCache = user ?? null;
-        setUser(authUserCache);
-        setLoading(false);
-      });
+      supabase.auth
+        .getUser()
+        .then(({ data: { user } }) => {
+          authUserCache = user ?? null;
+          setUser(authUserCache);
+        })
+        .catch(() => {
+          authUserCache = null;
+          setUser(null);
+        });
     }
 
     const {
@@ -69,11 +74,37 @@ export function AuthButton({
     } = supabase.auth.onAuthStateChange((_event, session) => {
       authUserCache = session?.user ?? null;
       setUser(authUserCache);
-      setLoading(false);
     });
 
     return () => subscription.unsubscribe();
   }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    if (!user) {
+      setCreditsSummary(null);
+      return;
+    }
+    const load = async () => {
+      try {
+        const res = await fetch("/api/credits/balance", { credentials: "include" });
+        const json = await res.json().catch(() => ({}));
+        if (cancelled) return;
+        setCreditsSummary({
+          remaining: Number(json?.remaining_credits ?? json?.remaining ?? 0),
+          total: Number(json?.total_credits ?? json?.totalCredits ?? 0)
+        });
+      } catch {
+        if (!cancelled) setCreditsSummary(null);
+      }
+    };
+    void load();
+    const timer = setInterval(load, 45000);
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+    };
+  }, [user?.id]);
 
   useEffect(() => {
     if (!open) return;
@@ -122,7 +153,7 @@ export function AuthButton({
   ) : (
     <Link
       href={loginHref}
-      className="inline-flex items-center rounded-lg border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-medium text-sky-700 hover:bg-sky-100 hover:border-sky-300 transition duration-150"
+      className="inline-flex min-h-[2.5rem] items-center rounded-lg border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-medium text-sky-700 hover:bg-sky-100 hover:border-sky-300 transition duration-150"
       onClick={() => emitLoginClick("login")}
     >
       {t("login")}
@@ -133,38 +164,50 @@ export function AuthButton({
     return guestLinks;
   }
 
-  if (loading) {
-    return (
-      <span
-        className="inline-flex h-9 min-w-[7.5rem] items-center justify-center rounded-lg bg-slate-100 animate-pulse"
-        aria-hidden
-      />
-    );
-  }
-
   if (user) {
     return (
-      <div className="relative" ref={menuRef}>
+      <div className="relative shrink-0" ref={menuRef}>
         <button
           type="button"
           onClick={() => setOpen((o) => !o)}
-          className="inline-flex items-center gap-2 rounded-lg border border-red-200 bg-white px-2 py-1.5 text-sm font-medium text-slate-700 hover:bg-red-50 transition duration-150"
+          className={`inline-flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-medium transition duration-150 ${
+            veryLowCredits
+              ? "border border-rose-300 bg-rose-50 text-rose-800 hover:bg-rose-100"
+              : lowCredits
+                ? "border border-amber-300 bg-amber-50 text-amber-900 hover:bg-amber-100"
+                : "border border-red-200 bg-white text-slate-700 hover:bg-red-50"
+          }`}
           aria-expanded={open}
           aria-haspopup="true"
         >
           <UserCircle className="h-5 w-5 text-red-700 shrink-0" />
-          <span className="max-w-[100px] truncate hidden sm:inline">
-            {userDisplayName(user, t("userDisplayFallback"))}
+          <span className="hidden sm:flex flex-col items-start leading-tight">
+            <span className="max-w-[120px] truncate">{userDisplayName(user, t("userDisplayFallback"))}</span>
+            {creditsSummary ? (
+              <span className={`text-[11px] font-semibold ${veryLowCredits ? "text-rose-700" : lowCredits ? "text-amber-700" : "text-emerald-700"}`}>
+                {creditsSummary.remaining} / {creditsSummary.total}
+              </span>
+            ) : null}
           </span>
           <ChevronDown className={`h-4 w-4 text-slate-500 transition-transform shrink-0 ${open ? "rotate-180" : ""}`} />
         </button>
         {open && (
-          <div className="absolute right-0 top-full z-50 mt-1 min-w-[200px] rounded-lg border border-slate-200 bg-white py-1 shadow-lg">
+          <div className="absolute right-0 top-full z-[120] mt-1 min-w-[200px] rounded-lg border border-slate-200 bg-white py-1 shadow-lg">
             <div className="border-b border-slate-100 px-3 py-2">
               <p className="truncate text-sm font-medium text-slate-900">
                 {userDisplayName(user, t("userDisplayFallback"))}
               </p>
               {user.email && <p className="truncate text-xs text-slate-500">{user.email}</p>}
+              {creditsSummary ? (
+                <p className="truncate text-xs text-emerald-700 mt-1">
+                  Credits: {creditsSummary.remaining} / {creditsSummary.total}
+                </p>
+              ) : null}
+              {lowCredits ? (
+                <p className={`text-xs mt-1 ${veryLowCredits ? "text-rose-700" : "text-amber-700"}`}>
+                  {veryLowCredits ? "Low credits: top up now to avoid interruption." : "Credits running low."}
+                </p>
+              ) : null}
             </div>
             <Link
               href={accountHref}
@@ -173,6 +216,22 @@ export function AuthButton({
             >
               {t("account")}
             </Link>
+            <Link
+              href={billingHref}
+              className="flex items-center gap-2 px-3 py-2 text-sm text-slate-700 hover:bg-red-50"
+              onClick={() => setOpen(false)}
+            >
+              Billing
+            </Link>
+            {lowCredits ? (
+              <Link
+                href={loginNextPath.startsWith("/zh") ? "/zh/pricing" : "/pricing"}
+                className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-amber-800 hover:bg-amber-50"
+                onClick={() => setOpen(false)}
+              >
+                {loginNextPath.startsWith("/zh") ? "低余额，去购买" : "Low credits, top up"}
+              </Link>
+            ) : null}
             <Link
               href={settingsHref}
               className="flex items-center gap-2 px-3 py-2 text-sm text-slate-700 hover:bg-red-50"

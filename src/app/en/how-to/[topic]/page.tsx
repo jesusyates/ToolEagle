@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { EnHowToPageTemplate } from "@/components/seo/EnHowToPageTemplate";
-import { getEnHowToContent, getAllEnHowToSlugs } from "@/lib/en-how-to-content";
+import { getEnHowToContent, getAllEnHowToSlugs, resolveEnHowToSlug } from "@/lib/en-how-to-content";
 import { BASE_URL } from "@/config/site";
 
 type Props = { params: Promise<{ topic: string }> };
@@ -12,11 +12,12 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { topic } = await params;
-  const content = getEnHowToContent(topic);
+  const resolvedTopic = resolveEnHowToSlug(topic);
+  const content = getEnHowToContent(resolvedTopic);
 
   if (!content) return { title: "Not Found" };
 
-  const url = `${BASE_URL}/en/how-to/${topic}`;
+  const url = `${BASE_URL}/en/how-to/${resolvedTopic}`;
 
   return {
     title: content.title,
@@ -33,7 +34,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function EnHowToPage({ params }: Props) {
   const { topic } = await params;
-  const content = getEnHowToContent(topic);
+  const resolvedTopic = resolveEnHowToSlug(topic);
+  if (resolvedTopic !== topic) {
+    redirect(`/en/how-to/${resolvedTopic}`);
+  }
+  const content = getEnHowToContent(resolvedTopic);
 
   if (!content) notFound();
 

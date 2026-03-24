@@ -18,9 +18,11 @@ type DonationBoxProps = {
 
 /**
  * V94: QR display only (V100.2 — use SupportModal / /zh/support for registration flow).
- * Set NEXT_PUBLIC_DONATE_WECHAT_QR and NEXT_PUBLIC_DONATE_ALIPAY_QR (e.g. /donate-wechat.png in public/)
+ * When no QR env is set, renders nothing (no placeholder strings on public pages).
  */
 export function DonationBox({ compact, variant = "en", prominent = false, fallbackUnrecorded = false }: DonationBoxProps) {
+  if (!WECHAT && !ALIPAY) return null;
+
   const zh = variant === "zh";
   const title =
     zh && fallbackUnrecorded
@@ -50,11 +52,11 @@ export function DonationBox({ compact, variant = "en", prominent = false, fallba
       <p className={`font-bold text-slate-900 ${compact ? "text-xs" : "text-sm"}`}>{title}</p>
       <p className={`mt-0.5 text-slate-600 ${compact ? "text-[10px]" : "text-xs"}`}>{sub}</p>
       <div className={`flex flex-wrap ${compact ? "gap-3 mt-2 justify-start" : "gap-6 mt-4"}`}>
-        <div className="text-center">
-          <p className={`font-medium text-slate-700 mb-1 ${compact ? "text-[10px]" : "text-xs mb-2"}`}>
-            WeChat 微信
-          </p>
-          {WECHAT ? (
+        {WECHAT ? (
+          <div className="text-center">
+            <p className={`font-medium text-slate-700 mb-1 ${compact ? "text-[10px]" : "text-xs mb-2"}`}>
+              WeChat 微信
+            </p>
             <Image
               src={WECHAT}
               alt="WeChat donation QR"
@@ -63,21 +65,13 @@ export function DonationBox({ compact, variant = "en", prominent = false, fallba
               className="rounded-lg border border-slate-200 bg-white mx-auto"
               unoptimized={WECHAT.startsWith("http")}
             />
-          ) : (
-            <div
-              className={`rounded-lg border border-dashed border-slate-300 bg-white flex items-center justify-center text-slate-400 mx-auto px-1 ${
-                compact ? "w-[72px] h-[72px] text-[8px]" : "w-[120px] h-[120px] text-[10px] px-2"
-              }`}
-            >
-              Set NEXT_PUBLIC_DONATE_WECHAT_QR
-            </div>
-          )}
-        </div>
-        <div className="text-center">
-          <p className={`font-medium text-slate-700 mb-1 ${compact ? "text-[10px]" : "text-xs mb-2"}`}>
-            Alipay 支付宝
-          </p>
-          {ALIPAY ? (
+          </div>
+        ) : null}
+        {ALIPAY ? (
+          <div className="text-center">
+            <p className={`font-medium text-slate-700 mb-1 ${compact ? "text-[10px]" : "text-xs mb-2"}`}>
+              Alipay 支付宝
+            </p>
             <Image
               src={ALIPAY}
               alt="Alipay donation QR"
@@ -86,16 +80,8 @@ export function DonationBox({ compact, variant = "en", prominent = false, fallba
               className="rounded-lg border border-slate-200 bg-white mx-auto"
               unoptimized={ALIPAY.startsWith("http")}
             />
-          ) : (
-            <div
-              className={`rounded-lg border border-dashed border-slate-300 bg-white flex items-center justify-center text-slate-400 mx-auto px-1 ${
-                compact ? "w-[72px] h-[72px] text-[8px]" : "w-[120px] h-[120px] text-[10px] px-2"
-              }`}
-            >
-              Set NEXT_PUBLIC_DONATE_ALIPAY_QR
-            </div>
-          )}
-        </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );

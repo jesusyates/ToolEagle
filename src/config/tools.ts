@@ -27,13 +27,21 @@ export type ToolCategory =
 
 export type ToolConfig = {
   slug: string;
+  /** 英文站 / 全局默认展示名 */
   name: string;
+  /** 中文站标题；`cnOnly` 工具在中文 UI 优先用此名 */
+  nameZh?: string;
   description: string;
   /** 中文站 `ToolCard`（locale=zh）优先展示；英文站仍用 description */
   descriptionZh?: string;
   category: ToolCategory;
   icon: React.ComponentType<{ className?: string }>;
   isPopular?: boolean;
+  /**
+   * 仅中国站/抖音场景使用；**不出现在**英文站 `/tools` 聚合与全局工具目录。
+   * 路由仍可由中文站直达（如 `/zh/douyin-*`），不删 slug。
+   */
+  cnOnly?: boolean;
 };
 
 export const tools: ToolConfig[] = [
@@ -72,57 +80,69 @@ export const tools: ToolConfig[] = [
     icon: Zap,
     isPopular: true
   },
-  /** V102.1 — Douyin CN platform tools (same engine, Douyin-native positioning) */
+  /** V102.1 — Douyin CN platform tools (listed on China site only; EN /tools excludes `cnOnly`) */
   {
     slug: "douyin-caption-generator",
-    name: "抖音文案包生成器",
+    name: "Douyin Post Package Generator",
+    nameZh: "抖音文案包生成器",
     description:
       "Douyin-focused full post package: hook, script beats, caption, CTA, hashtags for CN creators.",
     descriptionZh:
       "面向抖音的完整发布包：钩子、口播气口、描述区、互动引导与话题标签，贴合国内创作者语境。",
     category: "Captions",
-    icon: MessageSquareText
+    icon: MessageSquareText,
+    cnOnly: true
   },
   {
     slug: "douyin-hook-generator",
-    name: "抖音钩子生成器",
+    name: "Douyin Hook Generator",
+    nameZh: "抖音钩子生成器",
     description: "Stop-scroll openers tuned for Douyin completion and comment patterns.",
     descriptionZh: "停滑开头句式，贴合抖音完播与评论区互动习惯。",
     category: "Hooks",
-    icon: Zap
+    icon: Zap,
+    cnOnly: true
   },
   {
     slug: "douyin-script-generator",
-    name: "抖音口播脚本生成器",
+    name: "Douyin Talking Script Generator",
+    nameZh: "抖音口播脚本生成器",
     description: "Talking-script structure for Douyin vertical video and live-style delivery.",
     descriptionZh: "竖屏口播结构：分段、气口与可念全文，适配抖音短视频与直播感表达。",
     category: "Scripts",
-    icon: ScrollText
+    icon: ScrollText,
+    cnOnly: true
   },
   /** V105.1 — Douyin growth pipeline */
   {
     slug: "douyin-topic-generator",
-    name: "抖音选题生成器",
+    name: "Douyin Topic Ideas Generator",
+    nameZh: "抖音选题生成器",
     description: "Batch topic ideas with niche/category and why they work on Douyin.",
     descriptionZh: "按赛道与角度批量产出选题，并说明为何适合在抖音测。",
     category: "Ideas",
-    icon: ListOrdered
+    icon: ListOrdered,
+    cnOnly: true
   },
   {
     slug: "douyin-comment-cta-generator",
-    name: "抖音评论引导生成器",
+    name: "Douyin Comment & Engagement Generator",
+    nameZh: "抖音评论引导生成器",
     description: "Engagement phrases and comment triggers for Douyin replays and DMs.",
     descriptionZh: "高互动评论引导与私信话术，适配回放种草与私信收口。",
     category: "Captions",
-    icon: MessagesSquare
+    icon: MessagesSquare,
+    cnOnly: true
   },
   {
     slug: "douyin-structure-generator",
-    name: "抖音内容结构生成器",
+    name: "Douyin Content Structure Generator",
+    nameZh: "抖音内容结构生成器",
     description: "Hook, content flow, and ending CTA skeleton for Douyin shorts.",
     descriptionZh: "开头—中段—结尾的内容流与收口引导骨架，适合抖音短视频节奏。",
     category: "Scripts",
-    icon: LayoutList
+    icon: LayoutList,
+    cnOnly: true
   },
   {
     slug: "title-generator",
@@ -462,6 +482,9 @@ export const tools: ToolConfig[] = [
     icon: ScrollText
   }
 ];
+
+/** 英文站 `/tools`、全局目录、Related tools 等：不含 `cnOnly`（抖音系仅中国站露出） */
+export const toolsForEnglishSite: ToolConfig[] = tools.filter((t) => !t.cnOnly);
 
 /**
  * Popular tools for discoverability. Update based on tool_generate_ai analytics when available.

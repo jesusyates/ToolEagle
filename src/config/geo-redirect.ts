@@ -54,13 +54,14 @@ export function inferLocaleMarketFromGeo(request: NextRequest): {
  * extend mapping when new country homes ship.
  */
 export function resolveRootHomePath(request: NextRequest): "/" | "/zh" {
-  const geoDebug = readGeoDebug(request);
-  if (geoDebug === "cn") return "/zh";
-  if (geoDebug === "global") return "/";
-
+  /** 用户显式偏好优先于 geo_debug / IP（否则「选英文」仍会被 te_geo_debug=cn 打回 /zh） */
   const localeCookie = request.cookies.get(COOKIE_PREFERRED_LOCALE)?.value;
   if (localeCookie === "zh") return "/zh";
   if (localeCookie === "en") return "/";
+
+  const geoDebug = readGeoDebug(request);
+  if (geoDebug === "cn") return "/zh";
+  if (geoDebug === "global") return "/";
 
   const { locale } = inferLocaleMarketFromGeo(request);
   return locale === "zh" ? "/zh" : "/";

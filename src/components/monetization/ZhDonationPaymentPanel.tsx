@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { DONATION_TIER_AMOUNTS_CNY } from "@/lib/payment/donation-config";
 import { ZH } from "@/lib/zh-site/paths";
@@ -188,7 +189,14 @@ export function ZhDonationPaymentPanel({ onPaid }: Props) {
                 <p className="text-sm font-bold text-slate-900">请扫码支付 ¥{amount}</p>
                 <p className="text-xs text-slate-600">支付完成后将自动确认…</p>
                 {qrUrl ? (
-                  <img src={qrUrl} alt="支付二维码" className="mx-auto max-w-[200px] rounded-lg border border-slate-200" />
+                  <Image
+                    src={qrUrl}
+                    alt="支付二维码"
+                    width={200}
+                    height={200}
+                    className="mx-auto rounded-lg border border-slate-200"
+                    unoptimized
+                  />
                 ) : null}
                 {payUrl && !qrUrl ? (
                   <a

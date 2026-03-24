@@ -32,7 +32,7 @@ export function DouyinSeoClusterNav({ current }: Props) {
     { href: SEO.topicIdeas.href, label: SEO.topicIdeas.label, active: current === "topicIdeas" },
     { href: SEO.contentIdeas.href, label: SEO.contentIdeas.label, active: current === "contentIdeas" },
     { href: SEO.viralHooksLong.href, label: SEO.viralHooksLong.label, active: current === "viralHooksLong" },
-    { href: `${ZH.pricing}#cn-pro-checkout`, label: "Pro 定价", active: false }
+    { href: `${ZH.pricing}#cn-credits-checkout`, label: "定价与算力包", active: false }
   ];
 
   return (

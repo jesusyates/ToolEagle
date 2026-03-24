@@ -2968,7 +2968,7 @@ TikTok, Reels, Shorts support.`,
     "Compare free and paid tools for creators. When to upgrade, what you get.",
     `Free vs paid creator tools:
 
-Free: $0, good for beginners, core features. Paid: $10–50/month, full features, bulk generation. Based on 100+ creators: start free. Upgrade when posting 5+ times weekly or need bulk exports.`,
+Free: $0, good for beginners, core features. Paid: credit-based usage, full features, bulk generation. Based on 100+ creators: start free. Upgrade when posting 5+ times weekly or need bulk exports.`,
     "Most creators start free and upgrade when they outgrow limits.",
     `## Free Tools
 - $0
@@ -2977,7 +2977,7 @@ Free: $0, good for beginners, core features. Paid: $10–50/month, full features
 - Core caption, hook, title features
 
 ## Paid Tools
-- $10–50/month
+- Credit-based pricing
 - Bulk generation
 - Priority support
 - Integrations
@@ -2996,12 +2996,43 @@ ToolEagle. No signup. Caption, hook, title generators.`,
   )
 };
 
-const ALL_SLUGS = Object.keys(CONTENT);
+const DUPLICATE_EN_HOW_TO_SLUGS = new Set<string>([
+  "grow-on-tiktok-beginner",
+  "grow-on-tiktok-fast",
+  "youtube-for-beginners",
+  "tiktok-make-money",
+  "youtube-make-money",
+  "instagram-make-money",
+  "tiktok-grow-followers",
+  "youtube-grow-followers",
+  "instagram-grow-followers",
+  "tiktok-get-views"
+]);
+
+export const EN_HOW_TO_REDIRECTS: Record<string, string> = {
+  "grow-on-tiktok-beginner": "grow-on-tiktok",
+  "grow-on-tiktok-fast": "tiktok-fast-growth",
+  "youtube-for-beginners": "youtube-beginner-guide",
+  "tiktok-make-money": "tiktok-monetization",
+  "youtube-make-money": "youtube-monetization",
+  "instagram-make-money": "instagram-monetization",
+  "tiktok-grow-followers": "grow-on-tiktok",
+  "youtube-grow-followers": "youtube-growth",
+  "instagram-grow-followers": "instagram-growth",
+  "tiktok-get-views": "get-more-views-tiktok"
+};
+
+const ALL_SLUGS = Object.keys(CONTENT).filter((slug) => !DUPLICATE_EN_HOW_TO_SLUGS.has(slug));
 
 export function getEnHowToContent(slug: string): EnHowToContent | null {
+  if (DUPLICATE_EN_HOW_TO_SLUGS.has(slug)) return null;
   return CONTENT[slug] ?? null;
 }
 
 export function getAllEnHowToSlugs(): string[] {
   return ALL_SLUGS;
+}
+
+export function resolveEnHowToSlug(slug: string): string {
+  return EN_HOW_TO_REDIRECTS[slug] ?? slug;
 }

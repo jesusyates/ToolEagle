@@ -64,46 +64,75 @@ export function ZhDouyinToolsLanding() {
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_55%_at_50%_-25%,rgba(239,68,68,0.11),transparent_58%)]"
           aria-hidden
         />
-        <div className="container relative py-10 md:py-12">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
-            <div className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-2">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-red-100 bg-gradient-to-br from-red-50 to-white shadow-sm md:h-14 md:w-14">
-                <Video className="h-7 w-7 text-red-700 md:h-8 md:w-8" />
+        <div className="container relative py-8 md:py-12">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-10">
+            <div className="min-w-0 max-w-xl">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-red-100 bg-gradient-to-br from-red-50 to-white shadow-sm md:h-14 md:w-14">
+                  <Video className="h-7 w-7 text-red-700 md:h-8 md:w-8" />
+                </div>
+                <h1 className="text-2xl font-bold tracking-tight text-slate-900 md:text-[2rem]">抖音工具</h1>
               </div>
-              <h1 className="text-2xl font-bold tracking-tight text-slate-900 md:text-[2rem]">
-                抖音工具
-              </h1>
-              <p className="max-w-md text-sm leading-relaxed text-slate-600 sm:border-l sm:border-slate-200 sm:pl-3 md:text-base">
-                专为抖音创作者开发
+              <p className="mt-4 text-sm leading-relaxed text-slate-600 md:text-base">
+                从选题、开头、口播结构，到描述区与评论引导——按同一条抖音语境把工作串起来，而不是只用一个单点生成器。
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-2 lg:flex-shrink-0 lg:justify-end">
+
+            <div className="flex w-full min-w-0 flex-col gap-3 lg:max-w-md lg:shrink-0">
               <Link
-                href={ZH.douyinHub}
-                className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-red-900/15 transition hover:bg-red-500"
+                href={ZH.tiktokCaption}
+                className="inline-flex min-h-[3rem] items-center justify-center rounded-2xl bg-red-600 px-5 py-3 text-center text-base font-bold text-white shadow-md shadow-red-900/20 transition hover:bg-red-500"
               >
-                创作者工作台 →
+                从抖音文案包开始 →
               </Link>
+              <div className="flex flex-wrap gap-2">
+                <span className="w-full text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+                  按目标进入场景
+                </span>
+                <Link
+                  href="#scene-traffic"
+                  className="inline-flex flex-1 min-w-[7.5rem] justify-center rounded-xl border border-red-200 bg-white px-3 py-2.5 text-center text-sm font-semibold text-red-900 hover:bg-red-50"
+                >
+                  涨粉 · 流量
+                </Link>
+                <Link
+                  href="#scene-conversion"
+                  className="inline-flex flex-1 min-w-[7.5rem] justify-center rounded-xl border border-red-200 bg-white px-3 py-2.5 text-center text-sm font-semibold text-red-900 hover:bg-red-50"
+                >
+                  带货 · 转化
+                </Link>
+                <Link
+                  href="#scene-account"
+                  className="inline-flex flex-1 min-w-[7.5rem] justify-center rounded-xl border border-red-200 bg-white px-3 py-2.5 text-center text-sm font-semibold text-red-900 hover:bg-red-50"
+                >
+                  账号 · 复盘
+                </Link>
+              </div>
               <Link
-                href={ZH.douyinGuide}
-                className="inline-flex items-center gap-2 rounded-xl border border-red-200 bg-white px-4 py-2.5 text-sm font-medium text-red-900 transition hover:bg-red-50"
+                href={ZH.growthKit}
+                className="inline-flex min-h-[2.75rem] items-center justify-center rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:bg-slate-50"
               >
-                可执行教程
+                查看「选题→发布」工作流 →
               </Link>
-              <Link
-                href={ZH.douyinTools}
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
-              >
-                全部工具索引
-              </Link>
-              <a
-                href="https://www.douyin.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl border border-dashed border-slate-300 bg-transparent px-4 py-2.5 text-sm font-medium text-slate-500 transition hover:border-slate-400 hover:text-slate-700"
-              >
-                打开抖音官网 ↗
-              </a>
+              <div className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-200/80 pt-2.5 text-[11px] sm:text-xs">
+                <Link
+                  href={ZH.douyinHub}
+                  className="font-medium text-slate-600 underline-offset-2 hover:text-red-800 hover:underline"
+                >
+                  工作台
+                </Link>
+                <Link href={ZH.douyinTools} className="text-slate-500 hover:text-slate-800 hover:underline">
+                  全部工具
+                </Link>
+                <a
+                  href="https://www.douyin.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-500 hover:text-slate-700"
+                >
+                  抖音官网 ↗
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -116,7 +145,8 @@ export function ZhDouyinToolsLanding() {
         return (
           <section
             key={scene.id}
-            className={`border-b border-slate-100 py-11 last:border-0 ${
+            id={`scene-${scene.id}`}
+            className={`scroll-mt-28 border-b border-slate-100 py-11 last:border-0 ${
               idx % 2 === 1 ? "bg-slate-50/80" : "bg-white"
             }`}
           >
@@ -134,6 +164,7 @@ export function ZhDouyinToolsLanding() {
                         href={t.href}
                         icon={meta.icon}
                         name={meta.name}
+                        nameZh={meta.nameZh}
                         description={meta.description}
                         descriptionZh={meta.descriptionZh}
                         category={meta.category}

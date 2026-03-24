@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
         if (used >= FREE_DAILY_LIMIT) {
           return NextResponse.json(
             {
-              error: "You've reached today's free limit. Upgrade to Pro for unlimited AI generation.",
+              error: "You've reached today's free limit. Buy credits to continue AI generation.",
               limitReached: true
             },
             { status: 429 }

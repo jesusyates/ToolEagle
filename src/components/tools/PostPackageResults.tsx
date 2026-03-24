@@ -28,6 +28,8 @@ import {
   shouldShowSupportPromptAtCount
 } from "@/lib/supporter/support-prompt-rules";
 import { PACKAGE_SECTION_LABELS_ZH } from "@/lib/zh-site/packageLabels";
+import { DOUYIN_RESULT_LABELS, douyinFieldRoleTag } from "@/lib/zh-site/douyin-result-labels";
+import { ZhDouyinWorkflowNextStep } from "@/components/zh/ZhDouyinWorkflowNextStep";
 import type { ContentSafetyClientMeta } from "@/lib/ai/generatePostPackage";
 import { getCnProMonthlyCny } from "@/lib/payment/config";
 import { BASE_URL } from "@/config/site";
@@ -106,7 +108,11 @@ export function PostPackageResults({
   const showV1062Blocks =
     zh && upgradeMode === "china" && typeof toolShareUrl === "string" && toolShareUrl.length > 0;
   const labels: Partial<Record<keyof CreatorPostPackage, string>> = zh
-    ? { ...PACKAGE_SECTION_LABELS_ZH, ...packageLabelsZh }
+    ? {
+        ...PACKAGE_SECTION_LABELS_ZH,
+        ...packageLabelsZh,
+        ...(douyinConversionMode ? DOUYIN_RESULT_LABELS : {})
+      }
     : PACKAGE_SECTION_LABELS;
 
   /** V103.1 — Rule-based value tag per result · V104.2 — Douyin publish-ready tags */
@@ -172,7 +178,7 @@ export function PostPackageResults({
     if (upgradeMode === "china") {
       return (
         <ZhPricingLink
-          hash="#cn-pro-checkout"
+          hash="#cn-credits-checkout"
           className={props.className}
           conversionSource={props.conversionSource}
           afterClick={
@@ -369,18 +375,34 @@ export function PostPackageResults({
       </div>
 
       {nearLimit && (
-        <div className="px-4 py-3 bg-rose-50 border-b border-rose-100 text-sm text-rose-950">
+        <div
+          className={`px-4 py-3 border-b text-sm ${
+            douyinConversionMode
+              ? "bg-slate-50 border-slate-200 text-slate-800"
+              : "bg-rose-50 border-rose-100 text-rose-950"
+          }`}
+        >
           {zh ? (
-            <>
-              <span className="font-bold">今日剩余次数不多了。</span>
-              充值算力包涨粉更快：按次使用 + <strong>爆款结构</strong>、直接可用文案、提高完播率。{" "}
-              <ProLink className="text-rose-800 font-bold underline" conversionSource="near_limit_banner">
-                解锁全部爆款文案 →
-              </ProLink>
-            </>
+            douyinConversionMode ? (
+              <>
+                <span className="font-semibold">今日免费次数不多。</span>
+                需要继续生成可查看算力包；也可明天再用免费额度。{" "}
+                <ProLink className="text-red-800 font-semibold underline" conversionSource="near_limit_banner">
+                  去充值 →
+                </ProLink>
+              </>
+            ) : (
+              <>
+                <span className="font-bold">今日剩余次数不多了。</span>
+                充值算力包涨粉更快：按次使用 + <strong>爆款结构</strong>、直接可用文案、提高完播率。{" "}
+                <ProLink className="text-rose-800 font-bold underline" conversionSource="near_limit_banner">
+                  解锁全部爆款文案 →
+                </ProLink>
+              </>
+            )
           ) : (
             <>
-              <span className="font-bold">Almost at your daily limit.</span> Upgrade for unlimited runs +{" "}
+              <span className="font-bold">Almost at your daily limit.</span> Top up credits for more runs +{" "}
               <strong>full</strong> packages (all strategy fields + every variant).{" "}
               <ProLink className="text-rose-800 font-bold underline" conversionSource="near_limit_banner">
                 Unlock Pro →
@@ -449,7 +471,7 @@ export function PostPackageResults({
           ) : (
             <>
               <span className="font-semibold">Free preview:</span> 3 full blocks below +{" "}
-              <strong>{lockedPreview.length} Pro-only variants</strong> blurred.{" "}
+              <strong>{lockedPreview.length} full-package variants (locked)</strong> blurred.{" "}
               <ProLink className="text-sky-800 font-bold hover:underline" conversionSource="result_banner">
                 Remove blur — upgrade →
               </ProLink>
@@ -574,18 +596,27 @@ export function PostPackageResults({
                   const val = (pkg[key] ?? "").toString().trim();
                   if (!val) return null;
                   const title = (labels[key] ?? PACKAGE_SECTION_LABELS[key] ?? String(key)) as string;
+                  const role = douyinConversionMode ? douyinFieldRoleTag(key) : null;
                   return (
                     <div
                       key={key}
                       className="rounded-xl border border-slate-200 bg-white px-3 py-2.5 shadow-sm"
                     >
-                      <div className="flex items-start justify-between gap-2 mb-1">
-                        <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wide">{title}</h3>
+                      <div className="flex items-start justify-between gap-2 mb-1.5">
+                        <div className="flex min-w-0 flex-wrap items-center gap-1.5">
+                          {role ? (
+                            <span className="shrink-0 rounded-md bg-red-50 px-1.5 py-0.5 text-[10px] font-bold text-red-800 ring-1 ring-red-200/80">
+                              {role}
+                            </span>
+                          ) : null}
+                          <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wide">{title}</h3>
+                        </div>
                         <button
                           type="button"
                           onClick={() => copyField(key, pkg)}
-                          className="shrink-0 text-xs text-sky-600 hover:underline"
+                          className="shrink-0 inline-flex items-center gap-1 rounded-lg bg-slate-900 px-2.5 py-1.5 text-[11px] font-semibold text-white hover:bg-slate-800 active:scale-[0.98]"
                         >
+                          <Copy className="h-3 w-3" />
                           {zh ? "复制" : "Copy"}
                         </button>
                       </div>
@@ -598,18 +629,27 @@ export function PostPackageResults({
                   const val = (pkg[key] ?? "").toString().trim();
                   if (!val) return null;
                   const title = (labels[key] ?? PACKAGE_SECTION_LABELS[key] ?? String(key)) as string;
+                  const role = douyinConversionMode ? douyinFieldRoleTag(key) : null;
                   return (
                     <div
                       key={key}
                       className="rounded-xl border border-sky-100 bg-sky-50/40 px-3 py-2.5 shadow-sm"
                     >
-                      <div className="flex items-start justify-between gap-2 mb-1">
-                        <h3 className="text-xs font-bold text-sky-900 uppercase tracking-wide">{title}</h3>
+                      <div className="flex items-start justify-between gap-2 mb-1.5">
+                        <div className="flex min-w-0 flex-wrap items-center gap-1.5">
+                          {role ? (
+                            <span className="shrink-0 rounded-md bg-sky-100 px-1.5 py-0.5 text-[10px] font-bold text-sky-900 ring-1 ring-sky-200/80">
+                              {role}
+                            </span>
+                          ) : null}
+                          <h3 className="text-xs font-bold text-sky-900 uppercase tracking-wide">{title}</h3>
+                        </div>
                         <button
                           type="button"
                           onClick={() => copyField(key, pkg)}
-                          className="shrink-0 text-xs text-sky-600 hover:underline"
+                          className="shrink-0 inline-flex items-center gap-1 rounded-lg bg-slate-900 px-2.5 py-1.5 text-[11px] font-semibold text-white hover:bg-slate-800"
                         >
+                          <Copy className="h-3 w-3" />
                           {zh ? "复制" : "Copy"}
                         </button>
                       </div>
@@ -681,12 +721,20 @@ export function PostPackageResults({
 
                 <p className="text-[11px] text-slate-500 pt-1">
                   {zh
-                    ? "下一步：把区块粘进草稿 → 按口播要点开拍 → 再贴正文与话题标签。"
+                    ? douyinConversionMode
+                      ? "建议：先贴描述区与话题，再按口播结构拍摄；评论引导可发后再补置顶。"
+                      : "下一步：把区块粘进草稿 → 按口播要点开拍 → 再贴正文与话题标签。"
                     : "Next steps: copy blocks into your draft → film to the talking points → paste caption + hashtags."}
                 </p>
               </div>
             </article>
           ))}
+
+        {showContent && douyinConversionMode ? (
+          <div className="mt-2">
+            <ZhDouyinWorkflowNextStep toolSlug={toolSlug} />
+          </div>
+        ) : null}
 
         {showV1062Blocks && packages[0] ? (
           <V1062AggregatedTrafficBlocks
@@ -699,7 +747,7 @@ export function PostPackageResults({
         {showLocked && (
           <div className="space-y-3">
             <p className="text-xs font-bold text-slate-700 uppercase tracking-wide">
-              {zh ? "Pro 专属变体" : "Pro-only variants"}
+              {zh ? "付费专属变体" : "full-package variants (locked)"}
             </p>
             {lockedPreview.map((lp, i) => (
               <div
@@ -723,7 +771,7 @@ export function PostPackageResults({
                       className="mt-3 inline-flex rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-bold text-white hover:bg-slate-800"
                       conversionSource={`locked_variant_${i + 1}`}
                     >
-                      {zh ? "去升级解锁 →" : "Unlock with Pro →"}
+                      {zh ? "购买算力包解锁 →" : "Get credits to unlock →"}
                     </ProLink>
                   </div>
                   <p className="p-4 text-sm text-slate-400 blur-sm select-none pointer-events-none">{lp.hookTeaser}</p>
@@ -758,8 +806,8 @@ export function PostPackageResults({
               {zh
                 ? upgradeMode === "china"
                   ? "要爆款级完整打法：算力包内按次生成 + 不截断文案包 +「为什么能爆」与转化/涨粉拆解。免费档只做选题验证。"
-                  : "想让每个变体都有「可执行的完整打法」？Pro 含无限次数 + 完整结构化文案包。"
-                : "Want the full playbook on every variant? Pro includes unlimited runs + full structured packages."}
+                  : "想让每个变体都有「可执行的完整打法」？充值后可按次生成完整结构化文案包。"
+                : "Want the full playbook on every variant? Buy credits for more runs and full structured packages."}
             </p>
             <ProLink
               className="mt-2 inline-flex text-sm font-bold text-sky-800 hover:underline"

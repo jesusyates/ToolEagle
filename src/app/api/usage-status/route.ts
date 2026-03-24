@@ -31,6 +31,7 @@ export async function GET(request: NextRequest) {
       const plan = await getUserPlan(user.id);
       if (cnBal && cnBal.remaining > 0 && (!creditExpireAt || new Date(creditExpireAt).getTime() > Date.now())) {
         return NextResponse.json({
+          authenticated: true,
           plan: "pro",
           used: 0,
           limit: FREE_DAILY_LIMIT,
@@ -42,11 +43,20 @@ export async function GET(request: NextRequest) {
         });
       }
       if (plan === "pro") {
+        const today = new Date().toISOString().slice(0, 10);
+        const { data: usage } = await supabase
+          .from("usage_stats")
+          .select("generations_count")
+          .eq("user_id", user.id)
+          .eq("date", today)
+          .single();
+        const used = usage?.generations_count ?? 0;
         return NextResponse.json({
+          authenticated: true,
           plan: "pro",
-          used: 0,
-          limit: FREE_DAILY_LIMIT,
-          remaining: 999,
+          used,
+          limit: effectiveFreeLimit,
+          remaining: Math.max(0, effectiveFreeLimit - used),
           creditsRemaining: cnBal?.remaining ?? 0,
           creditsExpireAt: creditExpireAt,
           creditsDaysLeft: creditDaysLeft,
@@ -62,6 +72,7 @@ export async function GET(request: NextRequest) {
         .single();
       const used = usage?.generations_count ?? 0;
       return NextResponse.json({
+        authenticated: true,
         plan: "free",
         used,
         limit: effectiveFreeLimit,
@@ -77,6 +88,7 @@ export async function GET(request: NextRequest) {
     const anonPro = await isAnonymousProEntitlement(sid);
     if (cnBal && cnBal.remaining > 0 && (!creditExpireAt || new Date(creditExpireAt).getTime() > Date.now())) {
       return NextResponse.json({
+        authenticated: false,
         plan: "pro",
         used: 0,
         limit: effectiveFreeLimit,
@@ -88,11 +100,13 @@ export async function GET(request: NextRequest) {
       });
     }
     if (anonPro) {
+      const used = anon;
       return NextResponse.json({
+        authenticated: false,
         plan: "pro",
-        used: 0,
+        used,
         limit: effectiveFreeLimit,
-        remaining: 999,
+        remaining: Math.max(0, effectiveFreeLimit - used),
         creditsRemaining: cnBal?.remaining ?? 0,
         creditsExpireAt: creditExpireAt,
         creditsDaysLeft: creditDaysLeft,
@@ -100,6 +114,7 @@ export async function GET(request: NextRequest) {
       });
     }
     return NextResponse.json({
+      authenticated: false,
       plan: "free",
       used: anon,
       limit: effectiveFreeLimit,
@@ -111,7 +126,13 @@ export async function GET(request: NextRequest) {
     });
   } catch {
     return NextResponse.json(
-      { plan: "free", used: 0, limit: FREE_DAILY_LIMIT, remaining: FREE_DAILY_LIMIT },
+      {
+        authenticated: false,
+        plan: "free",
+        used: 0,
+        limit: FREE_DAILY_LIMIT,
+        remaining: FREE_DAILY_LIMIT
+      },
       { status: 200 }
     );
   }

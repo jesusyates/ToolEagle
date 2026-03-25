@@ -34,6 +34,14 @@ async function main() {
     run("en:auto", "node scripts/en-auto.js");
   }
 
+  // Daily SEO ledger: keep operator "in my head" checks automatic.
+  try {
+    const { recordSeoLedger } = require("./seo-ledger");
+    recordSeoLedger({ reason: "daily-pipeline" });
+  } catch (e) {
+    console.warn("[seo-ledger] skipped:", e?.message || String(e));
+  }
+
   console.log("\n===== Pipeline complete =====\n");
 }
 

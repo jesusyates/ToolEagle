@@ -1,0 +1,54 @@
+---
+title: "Sitemaps, robots.txt, and Getting Pages Indexed"
+description: "How sitemaps speed discovery, how robots.txt gates crawlers, and how to combine them without accidents."
+date: "2026-03-23"
+category: "seo"
+tags:
+  - seo
+  - sitemap
+  - indexing
+  - search engine
+slug: "seo-sitemaps-robots-and-indexing"
+toc:
+  - { title: "What a sitemap does", id: "what-a-sitemap-does" }
+  - { title: "What robots.txt does", id: "what-robotstxt-does" }
+  - { title: "Submitting to search consoles", id: "submitting-to-search-consoles" }
+recommendedTools:
+  - title-generator
+  - hook-generator
+---
+
+Discovery is easier when machines can list your URLs and your crawl rules are explicit.
+
+## What a sitemap does
+
+A **sitemap** is an XML (or index) file listing URLs you care about. It does not *force* indexing—it **hints** which URLs exist and when they change.
+
+Best practices:
+
+1. **Include only canonical, public URLs** you want indexed.
+2. **Split large sites** into multiple sitemaps plus a sitemap index if needed.
+3. **Refresh** when you add major sections; automated builds often regenerate sitemaps on deploy.
+
+## What robots.txt does
+
+`robots.txt` lives at the site root. It tells compliant bots **which paths they should not crawl**. It is **not** a security tool—sensitive routes still need authentication.
+
+Typical pattern for apps:
+
+- **Allow** marketing and blog paths.
+- **Disallow** `/api/`, `/dashboard/`, `/auth/` so admin and private surfaces are not wasted on crawl budget.
+
+If you disallow a URL, it may still appear in results *without* a snippet in some edge cases—but generally you should not disallow content you want fully indexed.
+
+## Submitting to search consoles
+
+After verification:
+
+1. Submit your **sitemap URL** in Google Search Console and Baidu Webmaster Tools.
+2. Use **URL inspection** (Google) or **fetch/crawl diagnostics** (Baidu) for important new URLs.
+3. Optional **API or ping** endpoints where supported—useful for large or frequently updated sites.
+
+<TipBox title="One mistake to avoid">Do not block your entire blog in robots.txt and then wonder why posts never rank. Always test `/robots.txt` after deploy.</TipBox>
+
+Strong headlines help click-through once you rank—try the <ToolLink slug="title-generator">Title Generator</ToolLink> for variants, then pick one primary title per URL.

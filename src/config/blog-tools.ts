@@ -6,5 +6,6 @@ export const BLOG_CATEGORY_TOOL: Record<string, string> = {
   youtube: "youtube-title-generator",
   instagram: "instagram-caption-generator",
   "creator-tips": "hook-generator",
-  "ai-tools": "tiktok-caption-generator"
+  "ai-tools": "tiktok-caption-generator",
+  seo: "title-generator"
 };

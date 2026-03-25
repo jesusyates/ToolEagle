@@ -64,6 +64,12 @@ export default async function BlogPage() {
             >
               AI Tools
             </Link>
+            <Link
+              href="/blog/seo"
+              className="inline-flex rounded-full border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-50 transition"
+            >
+              SEO & Search
+            </Link>
           </div>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

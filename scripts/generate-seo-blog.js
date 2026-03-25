@@ -152,6 +152,7 @@ function main() {
   const dryRun = args.includes("--dry-run");
   const limitIdx = args.indexOf("--limit");
   const limit = limitIdx >= 0 ? parseInt(args[limitIdx + 1], 10) : 50;
+  const dateISO = new Date().toISOString().slice(0, 10);
 
   if (!fs.existsSync(BLOG_DIR)) {
     fs.mkdirSync(BLOG_DIR, { recursive: true });
@@ -188,7 +189,17 @@ function main() {
   }
 
   console.log(`SEO Blog Generator: ${generated} created, ${skipped} skipped (already exist)`);
-  if (dryRun) console.log("(dry-run: no files written)");
+  if (dryRun) {
+    console.log("(dry-run: no files written)");
+  } else {
+    // Daily SEO ledger (auto, no manual bookkeeping).
+    try {
+      const { recordSeoLedger } = require("./seo-ledger");
+      recordSeoLedger({ dateISO, reason: `en:generate-seo-blog limit=${limit}` });
+    } catch (e) {
+      console.warn("[seo-ledger] skipped:", e?.message || String(e));
+    }
+  }
 }
 
 main();

@@ -68,6 +68,16 @@ function main() {
 
   saveCache(cache);
 
+  // Daily SEO ledger: record newly published zh topics (diff vs previous snapshot).
+  // This makes "每天发了多少/发了什么" fully automatic.
+  try {
+    const { recordSeoLedger } = require("./seo-ledger");
+    recordSeoLedger({ reason: `zh:publish limit=${limit}` });
+  } catch (e) {
+    // Ledger must never break publishing.
+    console.warn("[seo-ledger] skipped:", e?.message || String(e));
+  }
+
   console.log("\n--- ZH Publish Summary ---");
   console.log(`Total pages: ${entries.length}`);
   console.log(`Published: ${published}`);

@@ -8,7 +8,8 @@ const BLOG_CATEGORIES = [
   { slug: "youtube", label: "YouTube" },
   { slug: "instagram", label: "Instagram" },
   { slug: "creator-tips", label: "Creator Tips" },
-  { slug: "ai-tools", label: "AI Tools" }
+  { slug: "ai-tools", label: "AI Tools" },
+  { slug: "seo", label: "SEO & Search" }
 ] as const;
 
 function matchesCategory(post: BlogPost, categorySlug: string): boolean {
@@ -23,6 +24,16 @@ function matchesCategory(post: BlogPost, categorySlug: string): boolean {
     if (cat === "instagram") return category === "instagram";
     if (cat === "creator-tips") return category === "creator tips";
     if (cat === "ai-tools") return category === "ai tools";
+    if (cat === "seo") return category === "seo";
+  }
+
+  if (cat === "seo") {
+    return (
+      tagLower.includes("seo") ||
+      tagLower.includes("search engine") ||
+      tagLower.includes("indexing") ||
+      tagLower.some((t) => t.includes("sitemap") || t.includes("baidu") || t.includes("google"))
+    );
   }
 
   if (cat === "tiktok") return tagLower.includes("tiktok") || tagLower.some((t) => t.includes("tiktok"));

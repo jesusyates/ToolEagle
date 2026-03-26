@@ -150,7 +150,9 @@ function classifyOutcome(before, after, minImp = 25) {
 function buildLessons(records) {
   const byOutcome = {};
   const byBucket = {};
+  const byBucketOutcome = {};
   const byField = {};
+  const byFieldOutcome = {};
 
   for (const r of records) {
     const o = r.classification?.outcome || "?";
@@ -160,10 +162,16 @@ function buildLessons(records) {
     byBucket[b].total++;
     if (["improved_ctr", "improved_clicks", "improved_position"].includes(o)) byBucket[b].improved++;
 
+    byBucketOutcome[b] = byBucketOutcome[b] || {};
+    byBucketOutcome[b][o] = (byBucketOutcome[b][o] || 0) + 1;
+
     for (const f of r.fieldsChanged || []) {
       byField[f] = byField[f] || { improved: 0, total: 0 };
       byField[f].total++;
       if (["improved_ctr", "improved_clicks", "improved_position"].includes(o)) byField[f].improved++;
+
+      byFieldOutcome[f] = byFieldOutcome[f] || {};
+      byFieldOutcome[f][o] = (byFieldOutcome[f][o] || 0) + 1;
     }
   }
 
@@ -203,7 +211,7 @@ function buildLessons(records) {
     updatedAt: new Date().toISOString(),
     source: "page-optimization-impact.json",
     sampleSize: n,
-    aggregates: { byOutcome, byBucket, byField },
+    aggregates: { byOutcome, byBucket, byBucketOutcome, byField, byFieldOutcome },
     patternsEffective: patterns.filter((p) => !p.includes("No measured")),
     patternsWeakOrRisky: patterns.filter((p) => p.includes("mixed") || p.includes("pause")),
     bucketResponseHints: byBucket,

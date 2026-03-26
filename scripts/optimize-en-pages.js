@@ -13,8 +13,12 @@ const fs = require("fs");
 const path = require("path");
 const matter = require("gray-matter");
 const { BLOG_DIR, safeReadJson } = require("./lib/page-optimization-shared");
+const { buildRolloutStatusFile, defaultPolicyV114, safeReadJson: safeReadPolicyJson } = require("./lib/page-optimization-policy");
 
 const REC_PATH = path.join(process.cwd(), "generated", "page-optimization-recommendations.json");
+const POLICY_PATH = path.join(process.cwd(), "generated", "page-optimization-policy.json");
+const LESSONS_PATH = path.join(process.cwd(), "generated", "page-optimization-lessons.json");
+const ROLLOUT_STATUS_PATH = path.join(process.cwd(), "generated", "page-optimization-rollout-status.json");
 const HISTORY = path.join(process.cwd(), "generated", "page-optimization-history.jsonl");
 const { appendEntries } = require("./lib/page-optimization-registry");
 
@@ -51,6 +55,22 @@ function main() {
     process.exit(1);
   }
 
+  const policy = safeReadPolicyJson(POLICY_PATH) || defaultPolicyV114();
+  const rolloutStatus = buildRolloutStatusFile(POLICY_PATH, LESSONS_PATH, args);
+  fs.mkdirSync(path.dirname(ROLLOUT_STATUS_PATH), { recursive: true });
+  fs.writeFileSync(ROLLOUT_STATUS_PATH, JSON.stringify(rolloutStatus, null, 2), "utf8");
+
+  const recommendedBatchPages = rolloutStatus?.rollout?.overall?.recommendedBatchPages ?? policy.batchLimits.defaultWriteBatch;
+  const hardCap = policy.batchLimits.hardCap ?? 10;
+
+  // Policy-driven write batch size:
+  // - if user passes --limit, still clamp it to both policy recommended and hardCap
+  const requestedLimit = args.limit;
+  const effectiveLimit = requestedLimit
+    ? Math.min(requestedLimit, hardCap, recommendedBatchPages)
+    : recommendedBatchPages;
+  const selectionWindow = Math.min(hardCap, policy.batchLimits.hardCap ?? 10);
+
   if (args.write && args.dryRun) {
     console.error("Use either --write or --dry-run, not both.");
     process.exit(1);
@@ -66,10 +86,33 @@ function main() {
   if (args.only) {
     items = items.filter((it) => shouldInclude(it, args.only));
   }
-  if (args.limit) items = items.slice(0, args.limit);
+  // Keep a bounded selection window; final write is still controlled by effectiveLimit + per-bucket caps.
+  if (items.length > selectionWindow) items = items.slice(0, selectionWindow);
+
+  // Prioritize high_potential bucket to preserve safe rollout discipline.
+  const bucketPriority = policy.prioritization || { high_potential: 1, rising_pages: 0.4 };
+  items.sort((a, b) => (bucketPriority[b.bucket] ?? 0) - (bucketPriority[a.bucket] ?? 0));
 
   let applied = 0;
+  const registryBatch = [];
+  const bucketApplied = { high_potential: 0, rising_pages: 0 };
+  const bucketCaps = { high_potential: 0, rising_pages: 0 };
+  if (args.only === "rising_pages") {
+    bucketCaps.rising_pages = effectiveLimit;
+  } else if (args.only === "high_potential") {
+    bucketCaps.high_potential = effectiveLimit;
+  } else {
+    bucketCaps.rising_pages = Math.min(policy.batchLimits.maxSecondaryBucketPages ?? 2, effectiveLimit);
+    bucketCaps.high_potential = Math.max(0, effectiveLimit - bucketCaps.rising_pages);
+  }
+
+  const secondaryBucket = "rising_pages";
+  let introAppliedCount = 0;
+
+  const rolloutFieldsForBucket = (bucket) => rolloutStatus?.rollout?.buckets?.[bucket]?.fields || {};
+
   for (const item of items) {
+    if (applied >= effectiveLimit) break;
     const slug = item.slug;
     const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
     if (!fs.existsSync(filePath)) {
@@ -82,26 +125,51 @@ function main() {
     const nextData = { ...data };
     let nextContent = content;
     const changes = [];
+    const policyReasonsByField = {};
 
-    const safe = item.safeApply || {};
-    const newDesc = safe.description;
-    if (typeof newDesc === "string" && newDesc.trim() && newDesc.trim() !== String(data.description || "").trim()) {
-      nextData.description = newDesc.trim();
-      changes.push("description");
+    const fieldDecisions = rolloutFieldsForBucket(item.bucket);
+    const descDecision = fieldDecisions.description?.decision;
+    const introDecision = fieldDecisions.intro_prefix?.decision;
+
+    const canApplyDescription = descDecision === "continue" || descDecision === "limited_continue";
+
+    if (canApplyDescription) {
+      const safe = item.safeApply || {};
+      const newDesc = safe.description;
+      if (typeof newDesc === "string" && newDesc.trim() && newDesc.trim() !== String(data.description || "").trim()) {
+        nextData.description = newDesc.trim();
+        changes.push("description");
+        policyReasonsByField.description = fieldDecisions.description?.reason || "policy_reason_missing";
+      }
     }
 
     if (args.includeIntro) {
       const plat = slug.startsWith("youtube-") ? "YouTube" : slug.startsWith("instagram-") ? "Instagram" : "TikTok";
       const prefix = `Practical, copy-ready ${plat} ideas below — use the linked generator to adapt lines to your niche.`;
       const marker = "<!-- v112-intro -->";
-      if (!content.includes(marker) && (item.current?.introWordCount ?? 0) < 45) {
+      const canApplyIntro = introDecision === "limited_continue" || introDecision === "continue";
+      if (
+        canApplyIntro &&
+        introAppliedCount < (policy.batchLimits.maxIntroPrefixPerBatch ?? 2) &&
+        !content.includes(marker) &&
+        (item.current?.introWordCount ?? 0) < 45
+      ) {
         nextContent = `${marker}\n\n${prefix}\n\n${content}`;
         changes.push("intro_prefix");
+        policyReasonsByField.intro_prefix = fieldDecisions.intro_prefix?.reason || "policy_reason_missing";
+        introAppliedCount++;
       }
     }
 
     if (changes.length === 0) {
       console.log(`[noop] ${slug} — no safe field changes (already aligned or empty diff)`);
+      continue;
+    }
+
+    // Per-bucket caps (traceable safe rollout discipline)
+    const bucket = item.bucket;
+    if (bucketApplied[bucket] >= (bucketCaps[bucket] ?? 0)) {
+      console.log(`[skip] ${slug} — bucket cap reached for ${bucket}`);
       continue;
     }
 
@@ -122,7 +190,10 @@ function main() {
       file: path.relative(process.cwd(), filePath),
       changes,
       bucket: item.bucket,
-      ctr: item.ctr
+      ctr: item.ctr,
+      policyVersion: rolloutStatus.policyVersion,
+      policyReasonsByField,
+      rolloutDecision: rolloutStatus.rollout?.overall?.decision ?? null
     });
     registryBatch.push({
       entryId: `${slug}@${optimizedAt}`,
@@ -142,6 +213,8 @@ function main() {
         intro: String(nextContent).slice(0, 1200)
       },
       priorityReason: item.priorityReason ?? null,
+      policyVersion: rolloutStatus.policyVersion,
+      policyReasonsByField,
       sourceRecommendationRef: {
         file: "generated/page-optimization-recommendations.json",
         recommendationsUpdatedAt: doc.updatedAt ?? null
@@ -149,6 +222,7 @@ function main() {
     });
     console.log(`[write] ${preview}`);
     applied++;
+    bucketApplied[item.bucket] = (bucketApplied[item.bucket] ?? 0) + 1;
   }
 
   if (!dry && registryBatch.length) {

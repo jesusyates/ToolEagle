@@ -29,6 +29,7 @@ const {
   writeRejectionLog,
   nowIso
 } = require("./lib/seo-quality-gate");
+const { sanitizeAndValidateMdxForWrite } = require("./lib/mdx-safety");
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 const FINGERPRINT_STORE = path.join(process.cwd(), "generated", "quality-gate", "en-blog-fingerprints.json");
@@ -312,9 +313,18 @@ Return JSON only:
   return bodyLines.join("\n").trim();
 }
 
-function writeMdxFile({ filePath, frontmatterData, body }) {
+function writeMdxFile({ filePath, slug, frontmatterData, body }) {
   const out = matter.stringify(body, frontmatterData);
-  fs.writeFileSync(filePath, out, "utf8");
+  const res = sanitizeAndValidateMdxForWrite({
+    mdxString: out,
+    filePath,
+    slug,
+    failureKind: "en_blog_write_repair_en_blog_mdx_compile_check"
+  });
+  if (!res.ok) {
+    throw new Error(`[mdx-safety] MDX compile failed for slug=${slug}`);
+  }
+  fs.writeFileSync(filePath, res.sanitizedMdx, "utf8");
 }
 
 function getRecommendedToolsFromFrontmatter(frontmatter) {
@@ -453,7 +463,7 @@ async function main() {
         }
 
         // Passed: write file and update fingerprints.
-        writeMdxFile({ filePath, frontmatterData: frontmatter, body: aiBody });
+        writeMdxFile({ filePath, slug, frontmatterData: frontmatter, body: aiBody });
         repaired++;
 
         // Update fingerprint store with new hashes.

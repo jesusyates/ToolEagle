@@ -24,6 +24,7 @@ const {
 } = require("./lib/seo-quality-gate");
 
 const { enqueueIndexingUrl } = require("./lib/indexing-queue");
+const { sanitizeAndValidateMdxForWrite } = require("./lib/mdx-safety");
 
 const {
   buildEnBlogLinkIndex,
@@ -725,15 +726,25 @@ async function main() {
         const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
 
         if (!dryRun) {
-          fs.writeFileSync(filePath, mdx, "utf8");
-          try {
-            const base = (process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://www.tooleagle.com").replace(
-              /\/$/,
-              ""
-            );
-            enqueueIndexingUrl({ url: `${base}/blog/${slug}`, source: "generate-seo-blog" });
-          } catch (e) {
-            console.warn("[indexing-queue] enqueue failed:", e?.message || e);
+          const res = sanitizeAndValidateMdxForWrite({
+            mdxString: mdx,
+            filePath,
+            slug,
+            failureKind: "en_blog_write_generate_seo_blog_mdx_compile_check"
+          });
+          if (res.ok) {
+            fs.writeFileSync(filePath, res.sanitizedMdx, "utf8");
+            try {
+              const base = (process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://www.tooleagle.com").replace(
+                /\/$/,
+                ""
+              );
+              enqueueIndexingUrl({ url: `${base}/blog/${slug}`, source: "generate-seo-blog" });
+            } catch (e) {
+              console.warn("[indexing-queue] enqueue failed:", e?.message || e);
+            }
+          } else {
+            console.warn(`[mdx-safety] skip write (compile failed): slug=${slug}`);
           }
         }
 

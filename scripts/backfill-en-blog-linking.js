@@ -29,6 +29,7 @@ const {
   upsertEnBlogLinksSectionIntoBody,
   upsertEnBlogRelatedToolsSectionIntoBody
 } = require("./lib/en-internal-linking");
+const { sanitizeAndValidateMdxForWrite } = require("./lib/mdx-safety");
 
 function parseEnBlogSlugMeta(slug) {
   const parts = String(slug || "").split("-");
@@ -157,7 +158,18 @@ async function main() {
       updated++;
       if (!dryRun) {
         const out = matter.stringify(body, parsed.data);
-        fs.writeFileSync(filePath, out, "utf8");
+        const res = sanitizeAndValidateMdxForWrite({
+          mdxString: out,
+          filePath,
+          slug,
+          failureKind: "en_blog_backfill_linking_mdx_compile_check"
+        });
+        if (res.ok) {
+          fs.writeFileSync(filePath, res.sanitizedMdx, "utf8");
+        } else {
+          skipped++;
+          updated--;
+        }
       }
     }
   }

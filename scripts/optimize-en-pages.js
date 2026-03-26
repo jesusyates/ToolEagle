@@ -14,6 +14,7 @@ const path = require("path");
 const matter = require("gray-matter");
 const { BLOG_DIR, safeReadJson } = require("./lib/page-optimization-shared");
 const { buildRolloutStatusFile, defaultPolicyV114, safeReadJson: safeReadPolicyJson } = require("./lib/page-optimization-policy");
+const { sanitizeAndValidateMdxForWrite } = require("./lib/mdx-safety");
 
 const REC_PATH = path.join(process.cwd(), "generated", "page-optimization-recommendations.json");
 const POLICY_PATH = path.join(process.cwd(), "generated", "page-optimization-policy.json");
@@ -182,7 +183,18 @@ function main() {
       continue;
     }
 
-    fs.writeFileSync(filePath, outStr, "utf8");
+    const res = sanitizeAndValidateMdxForWrite({
+      mdxString: outStr,
+      filePath,
+      slug,
+      failureKind: "en_blog_optimization_mdx_compile_check"
+    });
+    if (!res.ok) {
+      console.warn(`[mdx-safety] skip write (compile failed): ${slug}`);
+      continue;
+    }
+
+    fs.writeFileSync(filePath, res.sanitizedMdx, "utf8");
     const optimizedAt = new Date().toISOString();
     appendHistory({
       at: optimizedAt,

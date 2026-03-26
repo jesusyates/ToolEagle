@@ -9,8 +9,18 @@
 
 const path = require("path");
 const fs = require("fs");
+const {
+  validateZhGuideContent,
+  computeSimilarityAgainstCorpus,
+  loadFingerprintStore,
+  saveFingerprintStore,
+  writeRejectionLog,
+  nowIso
+} = require("./lib/seo-quality-gate");
 
 const CACHE_PATH = path.join(process.cwd(), "data", "zh-seo.json");
+const FINGERPRINT_STORE = path.join(process.cwd(), "generated", "quality-gate", "zh-guide-fingerprints.json");
+const REJECTION_LOG = path.join(process.cwd(), "logs", "quality-gate-rejections.jsonl");
 
 function loadCache() {
   try {
@@ -38,6 +48,7 @@ function main() {
 
   const cache = loadCache();
   const entries = [];
+  const corpus = loadFingerprintStore(FINGERPRINT_STORE);
 
   for (const [pageType, topics] of Object.entries(cache)) {
     if (typeof topics !== "object" || topics === null) continue;
@@ -52,6 +63,7 @@ function main() {
 
   let published = 0;
   let hidden = 0;
+  let rejected = 0;
 
   if (entries.length === 0) {
     console.log("No zh pages in cache. Run: npm run zh:generate");
@@ -61,12 +73,55 @@ function main() {
 
   entries.forEach(({ pageType, topic, data }, index) => {
     const shouldPublish = index < limit;
-    cache[pageType][topic] = { ...data, published: shouldPublish };
-    if (shouldPublish) published++;
-    else hidden++;
+    if (!shouldPublish) {
+      cache[pageType][topic] = { ...data, published: false };
+      hidden++;
+      return;
+    }
+
+    const textForSim = [
+      data?.title,
+      data?.directAnswer,
+      data?.intro,
+      data?.guide,
+      data?.stepByStep,
+      data?.faq,
+      data?.strategy,
+      data?.tips
+    ]
+      .filter(Boolean)
+      .join("\n");
+    const sim = computeSimilarityAgainstCorpus(textForSim, corpus, { similarityMax: 0.94 });
+    const gate = validateZhGuideContent({
+      pageType,
+      topic,
+      content: data,
+      similarity: sim.bestSimilarity
+    });
+    if (!gate.ok) {
+      cache[pageType][topic] = { ...data, published: false };
+      hidden++;
+      rejected++;
+      writeRejectionLog(
+        {
+          at: nowIso(),
+          ...gate.meta,
+          reasons: gate.reasons,
+          bestSimilarity: sim.bestSimilarity,
+          bestMatchId: sim.bestMatchId
+        },
+        REJECTION_LOG
+      );
+      return;
+    }
+
+    cache[pageType][topic] = { ...data, published: true };
+    published++;
+    corpus.push({ id: `${pageType}:${topic}`, slug: `${pageType}/${topic}`, hashes: sim.hashes });
   });
 
   saveCache(cache);
+  saveFingerprintStore(FINGERPRINT_STORE, corpus);
 
   // Daily SEO ledger: record newly published zh topics (diff vs previous snapshot).
   // This makes "每天发了多少/发了什么" fully automatic.
@@ -82,6 +137,7 @@ function main() {
   console.log(`Total pages: ${entries.length}`);
   console.log(`Published: ${published}`);
   console.log(`Hidden: ${hidden}`);
+  console.log(`Rejected by quality gate: ${rejected}`);
   console.log("-------------------------\n");
 }
 

@@ -35,6 +35,7 @@ import { BASE_URL } from "@/config/site";
 import { ZhDouyinCreditsBar } from "@/components/zh/ZhDouyinCreditsBar";
 import { getEnToolJourney } from "@/config/en-tool-journey";
 import { ToolNextSteps } from "@/components/tools/ToolNextSteps";
+import { recordGenerationComplete } from "@/lib/tool-output-quality";
 
 const LIFETIME_GEN_KEY = "te_v96_lifetime_pkg_gens";
 
@@ -63,6 +64,11 @@ export type PostPackageToolClientProps = {
   seedFromQueryParam?: string;
   /** V97.1 — China-local UI, zh API locale, /zh/pricing upgrade path */
   siteMode?: "global" | "china";
+  /** Overrides EN journey intro in ToolPageShell; CN: shown as 操作步骤 under the description */
+  introProblem?: string;
+  introAudience?: string;
+  /** V99 — show a visible output preview before the first generation */
+  outputPreview?: ReactNode;
 };
 
 export function PostPackageToolClient({
@@ -85,7 +91,10 @@ export function PostPackageToolClient({
   ctaLinks,
   seedFromQueryParam = "q",
   siteMode = "global",
-  packageLabelsZh
+  packageLabelsZh,
+  introProblem: introProblemProp,
+  introAudience: introAudienceProp,
+  outputPreview
 }: PostPackageToolClientProps) {
   const intlLocale = useLocale();
   const locale = siteMode === "china" ? "zh" : intlLocale;
@@ -149,6 +158,7 @@ export function PostPackageToolClient({
   }, [toolMeta, country]);
 
   async function runGenerate() {
+    const hadPrior = packages.length > 0;
     const trimmed = idea.trim();
     if (!trimmed) {
       setPackages([]);
@@ -252,6 +262,8 @@ export function PostPackageToolClient({
             credit_remaining: res.creditsRemaining
           });
         }
+
+        recordGenerationComplete(toolSlug, { wasRegenerate: hadPrior });
       }
     } catch (err) {
       if (err instanceof LimitReachedError || err instanceof CreditsDepletedError) {
@@ -273,6 +285,8 @@ export function PostPackageToolClient({
     return `${base}${path}?${seedFromQueryParam}=${encodeURIComponent(trimmed)}`;
   }, [pathname, idea, seedFromQueryParam]);
   const enJourney = !zhSite ? getEnToolJourney(toolSlug) : null;
+  const shellIntroProblem = introProblemProp ?? enJourney?.introProblem;
+  const shellIntroAudience = introAudienceProp !== undefined ? introAudienceProp : enJourney?.introAudience;
   const generateLabelEffective =
     zhSite && publishFullPack ? "一键生成完整内容" : enJourney?.generateCta ?? generateButtonLabel;
 
@@ -330,11 +344,12 @@ export function PostPackageToolClient({
         eyebrow={eyebrow}
         title={title}
         description={description}
-        introProblem={enJourney?.introProblem}
-        introAudience={enJourney?.introAudience}
+        introProblem={shellIntroProblem}
+        introAudience={shellIntroAudience}
         toolSlug={toolSlug}
         toolName={title}
         siteMode={siteMode}
+        locale={locale}
         input={
           <ToolInputCard label={inputLabel}>
             {!isDouyinTool && zhSite && cnBilling === "credits" && cnCreditsRemaining !== null && cnCreditsRemaining > 0 ? (
@@ -365,14 +380,7 @@ export function PostPackageToolClient({
                   {zhSite ? "次" : " runs"}
                 </span>
                 {usageRemaining <= 1 && usageRemaining >= 0 && (
-                  <p className="mt-1 text-xs text-rose-700 font-medium">
-                    {zhSite ? "免费次数即将用完" : "Almost out of free runs"}
-                  </p>
-                )}
-                {usageRemaining === 0 && (
-                  <p className="mt-1 text-xs text-rose-800 font-bold">
-                    {zhSite ? "已达今日上限 — 升级可继续" : "Limit reached — upgrade to continue"}
-                  </p>
+                  null
                 )}
               </div>
             ) : null}
@@ -407,6 +415,14 @@ export function PostPackageToolClient({
                   : `Please keep under ${MAX_INPUT_LENGTH} characters.`}
               </p>
             )}
+
+            {outputPreview ? (
+              <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-3">
+                <p className="text-xs font-semibold text-slate-900">Preview (ready-to-paste blocks)</p>
+                <div className="mt-2 text-xs text-slate-700 leading-snug">{outputPreview}</div>
+              </div>
+            ) : null}
+
             <DelegatedButton
               onClick={runGenerate}
               disabled={isGenerating}
@@ -467,22 +483,43 @@ export function PostPackageToolClient({
             title={zhSite ? "怎么用" : "How it works"}
           />
         }
-        aside={
-          <>
-            <ValueProofBlock variant={valueProofVariant} locale={zhSite ? "zh" : "en"} />
-            <StructuredExamplesLibrary
-              category={examplesCategory}
-              onPickExample={setIdea}
-              locale={zhSite ? "zh" : "en"}
-            />
-            <HistoryPanel toolSlug={toolSlug} refreshTrigger={historyTrigger} />
-            <ToolProTipsCard tips={proTips} title={zhSite ? "进阶技巧" : "Pro tips"} />
-            {ctaLinks && ctaLinks.length > 0 ? (
-              <CtaLinksSection links={ctaLinks} variant={zhSite ? "zh" : "default"} />
-            ) : null}
-            {relatedAside}
-          </>
-        }
+        proTips={<ToolProTipsCard tips={proTips} title={zhSite ? "进阶技巧" : "Pro tips"} />}
+        extraSections={[
+          {
+            title: zhSite ? "结构化输入示例" : "Structured input examples",
+            content: (
+              <StructuredExamplesLibrary
+                category={examplesCategory}
+                onPickExample={setIdea}
+                locale={zhSite ? "zh" : "en"}
+              />
+            )
+          },
+          {
+            title: zhSite ? "历史生成记录" : "Generation history",
+            content: <HistoryPanel toolSlug={toolSlug} refreshTrigger={historyTrigger} />
+          },
+          {
+            title: zhSite ? "结果价值说明" : "Output value notes",
+            content: <ValueProofBlock variant={valueProofVariant} locale={zhSite ? "zh" : "en"} />
+          },
+          ...(ctaLinks && ctaLinks.length > 0
+            ? [
+                {
+                  title: zhSite ? "相关学习链接" : "Related learning links",
+                  content: <CtaLinksSection links={ctaLinks} variant={zhSite ? "zh" : "default"} />
+                }
+              ]
+            : []),
+          ...(relatedAside
+            ? [
+                {
+                  title: zhSite ? "相关工具与资源" : "Related tools and resources",
+                  content: relatedAside
+                }
+              ]
+            : [])
+        ]}
       />
       </div>
       {showDouyinMobileSticky ? (

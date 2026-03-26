@@ -9,6 +9,7 @@ import { tools } from "@/config/tools";
 import { generators } from "@/config/generators";
 import { aiPrompts, MAX_INPUT_LENGTH } from "@/config/prompts";
 import { generateAIText, LimitReachedError } from "@/lib/ai/generateText";
+import { applyContentSafetyToStringArray } from "@/lib/content-safety/filter";
 import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { ToolInputCard } from "@/components/tools/ToolInputCard";
 import { ToolResultListCard } from "@/components/tools/ToolResultListCard";
@@ -24,12 +25,19 @@ import { ExitIntentCta } from "@/components/tools/ExitIntentCta";
 import { useAuth } from "@/hooks/useAuth";
 import { useCountry } from "@/hooks/useCountry";
 import { getEnToolJourney } from "@/config/en-tool-journey";
+import { resolveToolPageCopy } from "@/config/tool-page-copy-resolve";
 import { ToolNextSteps } from "@/components/tools/ToolNextSteps";
+import { logOutputCopy, mapListCopyToResultType, recordGenerationComplete } from "@/lib/tool-output-quality";
 
 type GenericToolClientProps = {
   slug: string;
   relatedAside?: ReactNode;
 };
+
+function resolveToolMarket(slug: string, locale: string): "cn" | "global" {
+  if (slug.startsWith("douyin-")) return "cn";
+  return locale.startsWith("zh") ? "cn" : "global";
+}
 
 export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps) {
   const [input, setInput] = useState("");
@@ -54,9 +62,22 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
   if (!toolMeta || !config) return null;
 
   const enJourney = locale === "en" ? getEnToolJourney(slug) : null;
+  const pageCopy = resolveToolPageCopy(slug, locale);
+  const descriptionHero =
+    pageCopy?.hero ??
+    (locale.startsWith("zh") && toolMeta.descriptionZh ? toolMeta.descriptionZh : toolMeta.description);
+  const useStepsOnly = Boolean(pageCopy?.steps);
+  const shellIntroProblem = useStepsOnly
+    ? pageCopy!.steps
+    : locale === "en"
+      ? enJourney?.introProblem
+      : undefined;
+  const shellIntroAudience = useStepsOnly ? "" : locale === "en" ? enJourney?.introAudience : undefined;
   const primaryCtaLabel = enJourney?.generateCta ?? config.buttonLabel;
+  const zhUi = locale.startsWith("zh");
 
   async function handleGenerate() {
+    const hadPrior = items.length > 0;
     const trimmed = input.trim();
     if (!trimmed) {
       setItems([`Enter your input above to generate ${config.resultTitle.toLowerCase()}.`]);
@@ -71,6 +92,7 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
     setIsGenerating(true);
 
     const aiPrompt = aiPrompts[slug];
+    const market = resolveToolMarket(slug, locale);
     let results: string[];
     if (aiPrompt) {
       try {
@@ -92,7 +114,11 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
         }
         results = config.generate(trimmed);
         if (toolMeta) {
-          trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
+          trackEvent("tool_generate_ai_fallback", {
+            tool_slug: toolMeta.slug,
+            tool_category: toolMeta.category,
+            country
+          });
         }
       }
     } else {
@@ -101,6 +127,10 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
       trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
       }
     }
+
+    // Enforce the same safety pass on all user-visible outputs (AI and template generators).
+    const cse = applyContentSafetyToStringArray(results, market);
+    results = cse.parts;
 
     setItems(results);
     setIsGenerating(false);
@@ -113,7 +143,16 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
         input: trimmed,
         items: results
       });
+      trackEvent("tool_generate", {
+        tool_slug: toolMeta.slug,
+        market,
+        locale,
+        content_safety_filtered: cse.filteredCount,
+        content_safety_risk_detected: cse.riskDetected,
+        content_safety_profile: cse.profile
+      });
       setHistoryTrigger((t) => t + 1);
+      recordGenerationComplete(toolMeta.slug, { wasRegenerate: hadPrior });
     }
   }
 
@@ -179,9 +218,10 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
       )}
       <ToolPageShell
       title={toolMeta.name}
-      description={toolMeta.description}
-      introProblem={enJourney?.introProblem}
-      introAudience={enJourney?.introAudience}
+      description={descriptionHero}
+      introProblem={shellIntroProblem}
+      introAudience={shellIntroAudience}
+      locale={locale}
       input={
         <ToolInputCard label={config.inputLabel}>
           <DelegatedButton
@@ -230,7 +270,11 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
             input={input}
             onCopyItem={handleCopyItem}
             onCopyAll={handleCopyAll}
-            onCopyTrack={() => toolMeta && trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country })}
+            onCopyTrack={(index) => {
+              if (!toolMeta) return;
+              trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
+              logOutputCopy(toolMeta.slug, mapListCopyToResultType(toolMeta.slug, index));
+            }}
             onRegenerate={handleGenerate}
             onSaveEditedItem={handleSaveEditedItem}
             onItemsChange={handleItemsChange}
@@ -245,16 +289,35 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
           ) : null}
         </>
       }
-      howItWorks={<HowItWorksCard steps={config.howItWorks} />}
-      aside={
-        <>
-          <HistoryPanel toolSlug={slug} refreshTrigger={historyTrigger} />
-          <ExamplesCard examples={config.examples} onUseExample={(i) => setInput(i)} />
-          <ToolProTipsCard tips={config.proTips} />
-          <AnswerLinksCard toolSlug={slug} limit={3} />
-          {relatedAside}
-        </>
+      howItWorks={
+        <HowItWorksCard
+          steps={config.howItWorks}
+          title={zhUi ? "怎么用" : "How it works"}
+        />
       }
+      proTips={<ToolProTipsCard tips={config.proTips} title={zhUi ? "进阶技巧" : "Pro tips"} />}
+      extraSections={[
+        {
+          title: zhUi ? "历史生成记录" : "Generation history",
+          content: <HistoryPanel toolSlug={slug} refreshTrigger={historyTrigger} />
+        },
+        {
+          title: zhUi ? "输入示例" : "Input examples",
+          content: <ExamplesCard examples={config.examples} onUseExample={(i) => setInput(i)} />
+        },
+        {
+          title: zhUi ? "相关问题" : "Related questions",
+          content: <AnswerLinksCard toolSlug={slug} limit={3} />
+        },
+        ...(relatedAside
+          ? [
+              {
+                title: zhUi ? "相关工具与资源" : "Related tools and resources",
+                content: relatedAside
+              }
+            ]
+          : [])
+      ]}
     />
     </>
   );

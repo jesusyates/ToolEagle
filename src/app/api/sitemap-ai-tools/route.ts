@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { BASE_URL, sitemapToXml } from "@/lib/sitemap-data";
-import { getAllAIToolSlugs, AI_TOOL_CATEGORIES } from "@/config/ai-tools-marketplace";
+import { getAllAIToolSlugs, AI_TOOL_CATEGORIES, BEST_AI_TOOLS_CATEGORIES } from "@/config/ai-tools-marketplace";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 3600;
@@ -21,6 +21,12 @@ export async function GET() {
         lastModified: now,
         changeFrequency: "weekly" as const,
         priority: 0.8
+      })),
+      ...BEST_AI_TOOLS_CATEGORIES.map((slug) => ({
+        url: `${BASE_URL}/best-ai-tools/${slug}`,
+        lastModified: now,
+        changeFrequency: "weekly" as const,
+        priority: 0.78
       }))
     ];
     const xml = sitemapToXml(urls);

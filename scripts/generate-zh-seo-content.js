@@ -13,8 +13,18 @@ require("dotenv").config();
 const path = require("path");
 const fs = require("fs");
 const { openaiChatCompletions, getModel } = require("./lib/openai-fetch");
+const {
+  validateZhGuideContent,
+  computeSimilarityAgainstCorpus,
+  loadFingerprintStore,
+  saveFingerprintStore,
+  writeRejectionLog,
+  nowIso
+} = require("./lib/seo-quality-gate");
 
 const CACHE_PATH = path.join(process.cwd(), "data", "zh-seo.json");
+const FINGERPRINT_STORE = path.join(process.cwd(), "generated", "quality-gate", "zh-guide-fingerprints.json");
+const REJECTION_LOG = path.join(process.cwd(), "logs", "quality-gate-rejections.jsonl");
 
 async function generateWithOpenAI(prompt, apiKey) {
   try {
@@ -144,8 +154,10 @@ async function main() {
   console.log(`Generating ${toGenerate.length} Chinese SEO pages...`);
 
   const cache = loadCache();
+  const corpus = loadFingerprintStore(FINGERPRINT_STORE);
   let generated = 0;
   let skipped = 0;
+  let rejected = 0;
 
   for (const { pageType, topic } of toGenerate) {
     if (cache[pageType]?.[topic]) {
@@ -160,16 +172,56 @@ async function main() {
         ? content.titleVariations.slice(0, 3)
         : [];
       if (!cache[pageType]) cache[pageType] = {};
-      cache[pageType][topic] = {
+      const next = {
         ...content,
         titleVariations: titleVariations.length > 0 ? titleVariations : undefined,
         createdAt: Date.now(),
         lastModified: Date.now(),
         published: false
       };
-      saveCache(cache);
-      generated++;
-      console.log(`  ✓ ${pageType}/${topic}`);
+
+      const textForSim = [
+        next.title,
+        next.description,
+        next.directAnswer,
+        next.intro,
+        next.guide,
+        next.stepByStep,
+        next.faq,
+        next.strategy,
+        next.tips
+      ]
+        .filter(Boolean)
+        .join("\n");
+      const sim = computeSimilarityAgainstCorpus(textForSim, corpus, { similarityMax: 0.94 });
+      const gate = validateZhGuideContent({
+        pageType,
+        topic,
+        content: next,
+        similarity: sim.bestSimilarity
+      });
+      if (!gate.ok) {
+        rejected++;
+        cache[pageType][topic] = { ...next, published: false };
+        saveCache(cache);
+        writeRejectionLog(
+          {
+            at: nowIso(),
+            ...gate.meta,
+            reasons: gate.reasons,
+            bestSimilarity: sim.bestSimilarity,
+            bestMatchId: sim.bestMatchId
+          },
+          REJECTION_LOG
+        );
+        console.log(`  ○ rejected ${pageType}/${topic}`);
+      } else {
+        cache[pageType][topic] = next;
+        saveCache(cache);
+        corpus.push({ id: `${pageType}:${topic}`, slug: `${pageType}/${topic}`, hashes: sim.hashes });
+        generated++;
+        console.log(`  ✓ ${pageType}/${topic}`);
+      }
     } catch (err) {
       console.error(`  ✗ ${pageType}/${topic}:`, err.message);
     }
@@ -177,7 +229,8 @@ async function main() {
     await new Promise((r) => setTimeout(r, 500));
   }
 
-  console.log(`Done. Generated: ${generated}, Skipped: ${skipped}`);
+  saveFingerprintStore(FINGERPRINT_STORE, corpus);
+  console.log(`Done. Generated: ${generated}, Rejected: ${rejected}, Skipped: ${skipped}`);
 
   if (generated > 0) {
     const baseUrl = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || "https://www.tooleagle.com";

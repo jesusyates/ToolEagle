@@ -170,6 +170,7 @@ export function ZhDouyinToolsLanding() {
                         category={meta.category}
                         categoryLabel={sceneLabel}
                         locale="zh"
+                        slug={genSlug}
                       />
                     );
                   }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getToolCardBody } from "@/lib/tool-display";
 
 export function ToolCard({
   href,
@@ -10,7 +11,9 @@ export function ToolCard({
   category,
   categoryLabel,
   badge,
-  locale = "en"
+  locale = "en",
+  /** When set, listing copy comes from `tool-page-copy-*` hero (aligned with tool detail). */
+  slug
 }: {
   href: string;
   icon: React.ComponentType<{ className?: string }>;
@@ -25,11 +28,15 @@ export function ToolCard({
   categoryLabel?: string;
   badge?: "Popular" | "Trending";
   locale?: "en" | "zh";
+  slug?: string;
 }) {
   const cat = categoryLabel ?? category;
   const title = locale === "zh" && nameZh?.trim() ? nameZh : name;
-  const body =
-    locale === "zh" && descriptionZh?.trim() ? descriptionZh : description;
+  const body = slug
+    ? getToolCardBody(locale, slug, description, descriptionZh)
+    : locale === "zh" && descriptionZh?.trim()
+      ? descriptionZh
+      : description;
   return (
     <Link
       href={href}

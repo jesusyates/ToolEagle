@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { tools } from "@/config/tools";
+import { getToolCardBody } from "@/lib/tool-display";
 
 const TAG_TO_SLUG: Record<string, string> = {
   tiktok: "tiktok-caption-generator",
@@ -50,7 +51,7 @@ export function TryToolCard({ tags = [] }: TryToolCardProps) {
         {tool.name}
       </h3>
       <p className="mt-1 text-sm text-slate-600">
-        {tool.description}
+        {getToolCardBody("en", tool.slug, tool.description)}
       </p>
       <Link
         href={`/tools/${tool.slug}`}

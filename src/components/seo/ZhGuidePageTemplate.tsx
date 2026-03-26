@@ -344,6 +344,7 @@ export function ZhGuidePageTemplate({
                     description={t.description}
                     descriptionZh={t.descriptionZh}
                     category={t.category}
+                    slug={t.slug}
                     badge={t.isPopular ? "Popular" : undefined}
                     locale="zh"
                   />

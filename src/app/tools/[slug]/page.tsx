@@ -11,6 +11,7 @@ import { tools } from "@/config/tools";
 import { generators } from "@/config/generators";
 import { toolSeo } from "@/config/seo";
 import { toolToBlogTags } from "@/lib/seo";
+import { getToolMetaDescriptionEn } from "@/lib/tool-display";
 import type { Metadata } from "next";
 import { BASE_URL } from "@/config/site";
 
@@ -37,13 +38,14 @@ export async function generateMetadata({
   }
   const seo = toolSeo[slug] ?? { title: tool.name, description: tool.description };
   const url = `${BASE_URL}/tools/${slug}`;
+  const metaDescription = getToolMetaDescriptionEn(slug) ?? seo.description;
   return {
     title: seo.title,
-    description: seo.description,
+    description: metaDescription,
     alternates: { canonical: url },
     openGraph: {
       title: seo.title,
-      description: seo.description,
+      description: metaDescription,
       url,
       type: "website",
       siteName: "ToolEagle"
@@ -51,7 +53,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: seo.title,
-      description: seo.description
+      description: metaDescription
     }
   };
 }
@@ -85,7 +87,11 @@ export default function DynamicToolPage({ params }: { params: { slug: string } }
             </>
           }
         />
-        <ToolStructuredData slug={slug} name={tool.name} description={tool.description} />
+        <ToolStructuredData
+          slug={slug}
+          name={tool.name}
+          description={getToolMetaDescriptionEn(slug) ?? tool.description}
+        />
       </div>
       <SiteFooter />
     </main>

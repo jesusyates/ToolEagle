@@ -85,6 +85,7 @@ export default async function ToolCategoryPage({ params }: Props) {
                   name={tool.name}
                   description={tool.description}
                   category={tool.category}
+                  slug={tool.slug}
                   badge={
                     popularToolSlugs.includes(tool.slug)
                       ? "Popular"

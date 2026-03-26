@@ -35,9 +35,11 @@ export const EN_TOOL_JOURNEY: Record<EnToolJourneySlug, EnToolJourney> = {
   },
   "tiktok-caption-generator": {
     role: "quick_single",
-    introProblem: "Get TikTok-ready packages: hook, talking points, caption, and hashtags from one idea.",
-    introAudience: "Short-form creators who mainly post to TikTok, Reels, or Shorts.",
-    generateCta: "Generate post packages",
+    introProblem:
+      "Turn one idea into a full TikTok package—hook, talking points, caption, CTA, and hashtags—ready to copy block-by-block into the app.",
+    introAudience:
+      "Short-form creators who want the posting path spelled out: generate, paste into Describe your post, post, check Profile.",
+    generateCta: "Start generating now",
     nextSteps: [
       { href: "/ai-caption-generator", label: "Upgrade to full cross-platform package" },
       { href: "/tools/hook-generator", label: "Polish the hook" }

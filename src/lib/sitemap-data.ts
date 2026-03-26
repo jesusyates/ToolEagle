@@ -25,6 +25,7 @@ import { getAllSeoExpansionParams } from "@/config/seo-expansion";
 import { getAllCaptionStyleParams } from "@/config/caption-styles";
 import { getAllGuideParams } from "@/config/traffic-topics";
 import { SITE_URL } from "@/config/site";
+import { getAllEnHowToSlugs } from "@/lib/en-how-to-content";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export const BASE_URL = SITE_URL;
@@ -38,6 +39,28 @@ export type SitemapEntry = {
 
 /** Max URLs per sitemap file (sitemaps.org limit). */
 export const MAX_URLS_PER_SITEMAP = 50000;
+
+/** V106: /tools index + generator tool pages only (for sitemap-tools.xml). */
+export function catalogToolPageUrls(): SitemapEntry[] {
+  const now = new Date();
+  const toolSlugs = tools
+    .filter(
+      (t) =>
+        t.slug in generators ||
+        ["tiktok-caption-generator", "hashtag-generator", "hook-generator", "title-generator"].includes(t.slug)
+    )
+    .map((t) => t.slug);
+
+  return [
+    { url: `${BASE_URL}/tools`, lastModified: now, changeFrequency: "daily", priority: 0.92 },
+    ...toolSlugs.map((slug) => ({
+      url: `${BASE_URL}/tools/${slug}`,
+      lastModified: now,
+      changeFrequency: "daily" as const,
+      priority: 0.88
+    }))
+  ];
+}
 
 export function staticAndToolUrls(): SitemapEntry[] {
   const toolSlugs = tools
@@ -412,10 +435,11 @@ export function libraryUrls(): SitemapEntry[] {
 export function answerUrls(): SitemapEntry[] {
   const now = new Date();
   return [
+    { url: `${BASE_URL}/answers`, lastModified: now, changeFrequency: "daily" as const, priority: 0.88 },
     ...getAllAnswerSlugs().map((slug) => ({
       url: `${BASE_URL}/answers/${slug}`,
       lastModified: now,
-      changeFrequency: "weekly" as const,
+      changeFrequency: "daily" as const,
       priority: 0.8
     })),
     ...getAllLearnAiSlugs().map((slug) => ({
@@ -431,18 +455,19 @@ export async function blogUrls(): Promise<SitemapEntry[]> {
   const programmaticUrls = getAllProgrammaticBlogParams().map(({ topic, platform, type }) => ({
     url: `${BASE_URL}/blog/${getProgrammaticBlogSlug(topic, platform, type)}`,
     lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.7
+    changeFrequency: "daily" as const,
+    priority: 0.72
   }));
   try {
     const { getAllPosts } = await import("@/lib/blog");
     const posts = await getAllPosts();
     return [
+      { url: `${BASE_URL}/blog`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
       ...posts.map((post) => ({
         url: `${BASE_URL}/blog/${post.frontmatter.slug}`,
         lastModified: new Date(post.frontmatter.date),
-        changeFrequency: "monthly" as const,
-        priority: 0.7
+        changeFrequency: "daily" as const,
+        priority: 0.75
       })),
       ...programmaticUrls
     ];
@@ -454,7 +479,7 @@ export async function blogUrls(): Promise<SitemapEntry[]> {
 export function guideUrls(): SitemapEntry[] {
   const now = new Date();
   const params = getAllGuideParams();
-  return params.map(({ pageType, topic }) => {
+  const legacy = params.map(({ pageType, topic }) => {
     const basePath = pageType === "how-to" ? "/how-to" : pageType === "ai-prompts" ? "/ai-prompts-for" : pageType === "content-strategy" ? "/content-strategy" : "/viral-examples";
     return {
       url: `${BASE_URL}${basePath}/${topic}`,
@@ -463,6 +488,13 @@ export function guideUrls(): SitemapEntry[] {
       priority: 0.75
     };
   });
+  const enHowTo = getAllEnHowToSlugs().map((slug) => ({
+    url: `${BASE_URL}/en/how-to/${slug}`,
+    lastModified: now,
+    changeFrequency: "daily" as const,
+    priority: 0.82
+  }));
+  return [...legacy, ...enHowTo];
 }
 
 export async function creatorUrls(): Promise<SitemapEntry[]> {

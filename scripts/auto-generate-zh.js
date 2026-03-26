@@ -17,9 +17,19 @@ const path = require("path");
 const fs = require("fs");
 const { openaiChatCompletions, getBaseUrl, getModel } = require("./lib/openai-fetch");
 const { generateV63Keywords, scoreKeyword } = require("./lib/keyword-expansion-v63");
+const {
+  validateZhKeywordContent,
+  computeSimilarityAgainstCorpus,
+  loadFingerprintStore,
+  saveFingerprintStore,
+  writeRejectionLog,
+  nowIso
+} = require("./lib/seo-quality-gate");
 
 const CACHE_PATH = path.join(process.cwd(), "data", "zh-keywords.json");
 const LOG_PATH = path.join(process.cwd(), "logs", "auto-gen.log");
+const FINGERPRINT_STORE = path.join(process.cwd(), "generated", "quality-gate", "zh-keywords-fingerprints.json");
+const REJECTION_LOG = path.join(process.cwd(), "logs", "quality-gate-rejections.jsonl");
 const NEW_KEYWORDS_LIMIT = 200;
 const RETRY_COUNT = 3;
 
@@ -227,6 +237,7 @@ async function main() {
   log(`OpenAI base: ${getBaseUrl()}`);
 
   const cache = loadCache();
+  const corpus = loadFingerprintStore(FINGERPRINT_STORE);
   const existingSlugs = new Set(Object.keys(cache));
   const existingKeywords = Object.values(cache)
     .filter((c) => c && c.published !== false)
@@ -245,12 +256,13 @@ async function main() {
 
   let success = 0;
   let failed = 0;
+  let rejected = 0;
 
   for (const entry of toGenerate) {
     try {
       const prompt = buildKeywordPrompt(entry);
       const content = await generateWithRetry(prompt, apiKey);
-      cache[entry.slug] = {
+      const next = {
         ...content,
         keyword: entry.keyword,
         platform: entry.platform,
@@ -262,9 +274,50 @@ async function main() {
         lastModified: Date.now(),
         published: true
       };
-      saveCache(cache);
-      success++;
-      log(`  ✓ ${entry.slug} (${entry.keyword})`);
+
+      const textForSim = [
+        next.title,
+        next.description,
+        next.directAnswer,
+        next.intro,
+        next.guide,
+        next.stepByStep,
+        next.faq,
+        next.strategy,
+        next.tips,
+        Array.isArray(next.resultPreview) ? next.resultPreview.join("\n") : ""
+      ]
+        .filter(Boolean)
+        .join("\n");
+      const sim = computeSimilarityAgainstCorpus(textForSim, corpus, { similarityMax: 0.94 });
+      const gate = validateZhKeywordContent({
+        slug: entry.slug,
+        keyword: entry.keyword,
+        content: next,
+        similarity: sim.bestSimilarity
+      });
+      if (!gate.ok) {
+        rejected++;
+        cache[entry.slug] = { ...next, published: false };
+        saveCache(cache);
+        writeRejectionLog(
+          {
+            at: nowIso(),
+            ...gate.meta,
+            reasons: gate.reasons,
+            bestSimilarity: sim.bestSimilarity,
+            bestMatchId: sim.bestMatchId
+          },
+          REJECTION_LOG
+        );
+        log(`  ○ ${entry.slug} rejected by quality gate (${entry.keyword})`, false);
+      } else {
+        cache[entry.slug] = next;
+        saveCache(cache);
+        corpus.push({ id: entry.slug, slug: entry.slug, hashes: sim.hashes });
+        success++;
+        log(`  ✓ ${entry.slug} (${entry.keyword})`);
+      }
     } catch (err) {
       failed++;
       const msg = `  ✗ ${entry.slug}: ${err.message}`;
@@ -274,7 +327,8 @@ async function main() {
     await new Promise((r) => setTimeout(r, 500));
   }
 
-  log(`===== Done: ${success} generated, ${failed} failed =====");
+  saveFingerprintStore(FINGERPRINT_STORE, corpus);
+  log(`===== Done: ${success} generated, ${rejected} rejected, ${failed} failed =====`);
 
   if (success > 0) {
     const baseUrl = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || "https://www.tooleagle.com";

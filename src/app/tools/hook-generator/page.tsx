@@ -9,19 +9,21 @@ import { LearnAiLinkCard } from "@/components/tools/LearnAiLinkCard";
 import { ToolContentLinksCard } from "@/components/tools/ToolContentLinksCard";
 import { toolSeo } from "@/config/seo";
 import { toolToBlogTags } from "@/lib/seo";
+import { getToolMetaDescriptionEn } from "@/lib/tool-display";
 
 import { BASE_URL } from "@/config/site";
 
 const slug = "hook-generator";
 const seo = toolSeo[slug];
+const metaDescription = getToolMetaDescriptionEn(slug) ?? seo.description;
 
 export const metadata = {
   title: seo.title,
-  description: seo.description,
+  description: metaDescription,
   alternates: { canonical: `${BASE_URL}/tools/${slug}` },
   openGraph: {
     title: seo.title,
-    description: seo.description,
+    description: metaDescription,
     url: `${BASE_URL}/tools/${slug}`,
     type: "website" as const,
     siteName: "ToolEagle"
@@ -29,7 +31,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image" as const,
     title: seo.title,
-    description: seo.description
+    description: metaDescription
   }
 };
 
@@ -53,7 +55,7 @@ export default function HookGeneratorPage() {
         <ToolStructuredData
           slug={slug}
           name="Hook Generator"
-          description={seo.description}
+          description={metaDescription}
         />
       </div>
       <SiteFooter />

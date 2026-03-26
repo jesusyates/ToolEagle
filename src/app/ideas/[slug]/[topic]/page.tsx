@@ -181,6 +181,7 @@ export default async function SeoTopicPage({ params }: Props) {
                     name={t.name}
                     description={t.description}
                     category={t.category}
+                    slug={t.slug}
                   />
                 ))}
               </div>
@@ -332,6 +333,7 @@ async function IdeaDetailPage({
                   name={t.name}
                   description={t.description}
                   category={t.category}
+                  slug={t.slug}
                 />
               ))}
             </div>

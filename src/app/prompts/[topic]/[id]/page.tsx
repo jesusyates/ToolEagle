@@ -112,6 +112,7 @@ export default async function PromptDetailPage({ params }: Props) {
                   name={t.name}
                   description={t.description}
                   category={t.category}
+                  slug={t.slug}
                 />
               ))}
             </div>

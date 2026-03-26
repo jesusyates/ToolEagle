@@ -33,6 +33,28 @@ const BIO_TEMPLATES = [
 
 const USERNAME_PREFIXES = ["the", "real", "official", "just", "its", "my"];
 const USERNAME_SUFFIXES = ["hq", "tv", "daily", "vibes", "zone", "life", "world"];
+const USERNAME_BLOCK_TOKENS = [
+  "guaranteed",
+  "hack",
+  "algorithm",
+  "buy",
+  "followers",
+  "whatsapp",
+  "free",
+  "money",
+  "100",
+  "percent"
+];
+
+function sanitizeUsernameBase(raw: string): string {
+  const lowered = raw.toLowerCase().replace(/[^a-z0-9]/g, " ");
+  const cleaned = lowered
+    .split(/\s+/)
+    .filter(Boolean)
+    .filter((t) => !USERNAME_BLOCK_TOKENS.includes(t))
+    .join("");
+  return cleaned || "creator";
+}
 
 export const generators: Record<string, GeneratorConfig> = {
   "tiktok-bio-generator": {
@@ -195,7 +217,7 @@ export const generators: Record<string, GeneratorConfig> = {
       "Check availability before committing."
     ],
     generate: (input) => {
-      const base = input.trim().toLowerCase().replace(/\s+/g, "") || "creator";
+      const base = sanitizeUsernameBase(input.trim());
       const results: string[] = [];
       results.push(base, `the${base}`, `real${base}`);
       pick(USERNAME_PREFIXES, 2).forEach((p) => results.push(`${p}${base}`));
@@ -226,7 +248,7 @@ export const generators: Record<string, GeneratorConfig> = {
       "Make it easy to spell and say."
     ],
     generate: (input) => {
-      const base = input.trim().toLowerCase().replace(/\s+/g, "") || "creator";
+      const base = sanitizeUsernameBase(input.trim());
       const results: string[] = [];
       results.push(base, `the${base}`, `real${base}`);
       pick(USERNAME_PREFIXES, 2).forEach((p) => results.push(`${p}${base}`));
@@ -742,7 +764,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["First 2 seconds decide if they stay.", "Use curiosity or pain point.", "Keep it under 15 words."],
     generate: (input) => {
       const t = input.trim() || "your topic";
-      return [`Stop scrolling if you ${t}`, `POV: ${t} actually works`, `No one talks about ${t}`, `You're doing ${t} wrong`, `I tried ${t} so you don't have to`];
+      const templates = [
+        `Stop scrolling if you care about ${t}`,
+        `POV: ${t} finally makes sense`,
+        `No one talks about ${t} like this`,
+        `You're probably doing ${t} the hard way`,
+        `I tried ${t} so you don't have to`,
+        `If ${t} feels stuck, try this`,
+        `The ${t} angle that gets more saves`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -764,8 +795,15 @@ export const generators: Record<string, GeneratorConfig> = {
     ],
     proTips: ["Reply within 1 hour for best reach.", "Add value or a question.", "Use emojis sparingly."],
     generate: (input) => {
-      const replies = ["Thanks! 🙌", "Appreciate you! ✨", "More coming soon!", "Link in bio!", "Glad it helped!"];
-      return shuffle(replies).slice(0, 5);
+      const ctx = input.trim() || "your question";
+      const replies = [
+        `Thanks! 🙌 On "${ctx}" I'll share a deeper part 2 soon.`,
+        `Appreciate you ✨ For "${ctx}", I can post a quick step-by-step.`,
+        `Great question on "${ctx}" — I'll pin a fuller answer.`,
+        `Glad this helped! If you're trying "${ctx}", start with one small test.`,
+        `Love this comment. Want a template for "${ctx}"? I can drop one next.`
+      ];
+      return pick(replies, 5);
     }
   },
 
@@ -788,7 +826,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Keep it casual.", "Use polls and questions.", "Behind-the-scenes performs well."],
     generate: (input) => {
       const theme = input.trim() || "your day";
-      return [`POV: ${theme} ✨`, `A day in the life`, `BTS of ${theme}`, `No one talks about ${theme}`, `Real talk: ${theme}`];
+      const templates = [
+        `POV: ${theme} ✨`,
+        `A day in the life around ${theme}`,
+        `BTS of ${theme}`,
+        `No one talks about ${theme}`,
+        `Real talk: ${theme}`,
+        `What ${theme} looks like off-camera`,
+        `Tiny moments from ${theme} that matter`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -811,7 +858,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Use trending hashtags.", "Match the trend's vibe.", "First line = hook."],
     generate: (input) => {
       const trend = input.trim() || "trend";
-      return [`POV: ${trend} ✨`, `${trend} but make it…`, `When ${trend} hits different`, `No one: Me: ${trend}`, `${trend} era`];
+      const templates = [
+        `POV: ${trend} ✨`,
+        `${trend} but make it practical`,
+        `When ${trend} hits different`,
+        `No one: Me with ${trend}`,
+        `${trend} era starts now`,
+        `${trend} with a creator twist`,
+        `Tried ${trend} — here is the result`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -834,7 +890,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Trend + your niche = viral.", "Solve a problem in 60 sec.", "Use hooks from the start."],
     generate: (input) => {
       const niche = input.trim() || "your niche";
-      return [`5 ${niche} tips no one talks about`, `${niche} in 60 seconds`, `POV: ${niche} changed`, `The ${niche} hack that works`, `${niche} for beginners`];
+      const templates = [
+        `5 ${niche} tips no one talks about`,
+        `${niche} in 60 seconds`,
+        `POV: ${niche} changed my workflow`,
+        `The ${niche} hack that works`,
+        `${niche} for beginners`,
+        `Before/after: improving ${niche}`,
+        `${niche} mistakes to avoid this week`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -857,7 +922,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Keep it under 60 chars.", "Front-load the hook.", "Curiosity or benefit."],
     generate: (input) => {
       const topic = input.trim() || "your topic";
-      return [`This ${topic} changed everything`, `${topic} in 60 sec`, `You need this ${topic}`, `The ${topic} no one talks about`, `POV: ${topic} works`];
+      const templates = [
+        `This ${topic} changed everything`,
+        `${topic} in 60 sec`,
+        `You need this ${topic}`,
+        `The ${topic} no one talks about`,
+        `POV: ${topic} works`,
+        `${topic}: quick fix that helps`,
+        `Try this ${topic} format today`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -881,7 +955,16 @@ export const generators: Record<string, GeneratorConfig> = {
     generate: (input) => {
       const topic = input.trim() || "topic";
       const words = topic.split(/\s+/).slice(0, 3);
-      return [words.join(" ").toUpperCase(), `HOW TO ${topic.toUpperCase()}`, `THE ${topic.toUpperCase()}`, `${topic.toUpperCase()} REVEALED`, `SECRET: ${topic.toUpperCase()}`];
+      const templates = [
+        words.join(" ").toUpperCase(),
+        `HOW TO ${topic.toUpperCase()}`,
+        `THE ${topic.toUpperCase()}`,
+        `${topic.toUpperCase()} REVEALED`,
+        `SECRET: ${topic.toUpperCase()}`,
+        `${topic.toUpperCase()} IN 60S`,
+        `FIX YOUR ${topic.toUpperCase()}`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -904,7 +987,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["First 5 seconds = retention.", "Use a question or bold claim.", "Promise value."],
     generate: (input) => {
       const topic = input.trim() || "your topic";
-      return [`What if I told you about ${topic}?`, `This ${topic} changed everything.`, `Stop doing ${topic} wrong.`, `The ${topic} no one talks about.`, `I tried ${topic} so you don't have to.`];
+      const templates = [
+        `What if I told you this about ${topic}?`,
+        `This ${topic} changed everything.`,
+        `Stop doing ${topic} the hard way.`,
+        `The ${topic} angle no one talks about.`,
+        `I tried ${topic} so you don't have to.`,
+        `Before you do ${topic}, watch this.`,
+        `One better way to approach ${topic}.`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -951,13 +1043,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Under 150 characters.", "Include one CTA.", "Add emoji for personality."],
     generate: (input) => {
       const niche = input.trim() || "creator";
-      return [
+      const templates = [
         `✨ ${niche} | Link in bio`,
         `${niche} | Your daily dose`,
         `Here for the ${niche} vibes`,
         `${niche} content daily 📌`,
-        `Creating ${niche} ✨`
+        `Creating ${niche} ✨`,
+        `${niche} tips + real results`,
+        `${niche} creator sharing what works`
       ];
+      return pick(templates, 5);
     }
   },
 
@@ -979,8 +1074,15 @@ export const generators: Record<string, GeneratorConfig> = {
     ],
     proTips: ["Reply within 1 hour.", "Add value.", "Use emojis sparingly."],
     generate: (input) => {
-      const replies = ["Thanks! 🙌", "Appreciate you! ✨", "Link in bio!", "Glad it helped!", "More coming soon!"];
-      return shuffle(replies).slice(0, 5);
+      const ctx = input.trim() || "your question";
+      const replies = [
+        `Thanks! 🙌 If you're asking about "${ctx}", I can share a quick checklist.`,
+        `Appreciate you ✨ For "${ctx}", start with one simple version first.`,
+        `Great point on "${ctx}" — I'll post a deeper breakdown soon.`,
+        `Glad it helped! Want a part 2 focused on "${ctx}"?`,
+        `Love this comment. For "${ctx}", timing and hook matter most.`
+      ];
+      return pick(replies, 5);
     }
   },
 
@@ -1003,7 +1105,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Keep it short.", "Use stickers and polls.", "Casual tone works."],
     generate: (input) => {
       const idea = input.trim() || "your story";
-      return [`POV: ${idea} ✨`, `A day in the life`, `BTS of ${idea}`, `Real talk 👀`, `Which one? 👇`];
+      const templates = [
+        `POV: ${idea} ✨`,
+        `A day in the life around ${idea}`,
+        `BTS of ${idea}`,
+        `Real talk on ${idea} 👀`,
+        `Which ${idea} option would you pick? 👇`,
+        `Quick update: ${idea}`,
+        `What I learned from ${idea}`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -1026,7 +1137,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Save ideas in a spreadsheet.", "Revisit seasonal ideas.", "Trend + niche = viral."],
     generate: (input) => {
       const niche = input.trim() || "your niche";
-      return [`5 ${niche} tips`, `${niche} for beginners`, `POV: ${niche}`, `The ${niche} no one talks about`, `${niche} in 60 seconds`];
+      const templates = [
+        `5 ${niche} tips`,
+        `${niche} for beginners`,
+        `POV: ${niche}`,
+        `The ${niche} no one talks about`,
+        `${niche} in 60 seconds`,
+        `${niche} mistakes to avoid`,
+        `Weekly ${niche} content plan`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -1049,7 +1169,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Match transitions to your vibe.", "Keep it simple.", "Trending transitions get more reach."],
     generate: (input) => {
       const theme = input.trim() || "your video";
-      return [`Wipe to ${theme}`, `Object drop ${theme}`, `Flash transition ${theme}`, `Spin into ${theme}`, `Zoom to ${theme}`];
+      const templates = [
+        `Wipe to ${theme}`,
+        `Object drop ${theme}`,
+        `Flash transition ${theme}`,
+        `Spin into ${theme}`,
+        `Zoom to ${theme}`,
+        `Snap cut into ${theme}`,
+        `Hand-cover reveal for ${theme}`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -1072,7 +1201,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Use polls for engagement.", "Ask questions.", "Tease upcoming content."],
     generate: (input) => {
       const topic = input.trim() || "your topic";
-      return [`Poll: ${topic}?`, `Update: ${topic}`, `Question: ${topic}`, `Teaser: ${topic}`, `Behind the scenes: ${topic}`];
+      const templates = [
+        `Poll: ${topic}?`,
+        `Update: ${topic}`,
+        `Question: ${topic}`,
+        `Teaser: ${topic}`,
+        `Behind the scenes: ${topic}`,
+        `Quick vote on ${topic}`,
+        `Need your take on ${topic}`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -1095,7 +1233,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["First slide = hook.", "Use 'swipe' CTA.", "Add value in caption."],
     generate: (input) => {
       const topic = input.trim() || "your carousel";
-      return [`Swipe for ${topic} 👉`, `Save this ${topic} 📌`, `${topic} you need to know`, `The ${topic} guide`, `${topic} that actually work`];
+      const templates = [
+        `Swipe for ${topic} 👉`,
+        `Save this ${topic} 📌`,
+        `${topic} you need to know`,
+        `The ${topic} guide`,
+        `${topic} that actually work`,
+        `${topic}: 5-slide breakdown`,
+        `Before/after with ${topic}`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -1118,7 +1265,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Trend + your twist = viral.", "Credit the original.", "Add value."],
     generate: (input) => {
       const niche = input.trim() || "your niche";
-      return [`Duet: react to ${niche}`, `Stitch: your take on ${niche}`, `Duet: add to ${niche}`, `Stitch: ${niche} but make it yours`, `Duet: ${niche} challenge`];
+      const templates = [
+        `Duet: react to ${niche}`,
+        `Stitch: your take on ${niche}`,
+        `Duet: add context to ${niche}`,
+        `Stitch: ${niche} but make it yours`,
+        `Duet: ${niche} challenge`,
+        `Stitch: fix one ${niche} myth`,
+        `Duet: rate this ${niche} approach`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -1141,7 +1297,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Last 20 seconds.", "Subscribe + 1-2 videos.", "Keep it simple."],
     generate: (input) => {
       const topic = input.trim() || "your content";
-      return [`Subscribe for more ${topic}`, `Watch next: ${topic} part 2`, `Check out my ${topic} playlist`, `Subscribe + like for ${topic}`, `More ${topic} coming soon`];
+      const templates = [
+        `Subscribe for more ${topic}`,
+        `Watch next: ${topic} part 2`,
+        `Check out my ${topic} playlist`,
+        `Subscribe + like for ${topic}`,
+        `More ${topic} coming soon`,
+        `If ${topic} helped, watch this next`,
+        `Next step for ${topic}: open this video`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -1164,7 +1329,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Be genuine.", "Keep it short.", "Clear ask."],
     generate: (input) => {
       const purpose = input.trim() || "connect";
-      return [`Hey! ${purpose} - would love to chat.`, `Hi! ${purpose}. DM me if interested.`, `Love your work! ${purpose}`, `Quick question about ${purpose}`, `${purpose} - let me know!`];
+      const templates = [
+        `Hey! ${purpose} - would love to chat.`,
+        `Hi! ${purpose}. DM me if interested.`,
+        `Love your work! ${purpose}`,
+        `Quick question about ${purpose}`,
+        `${purpose} - let me know!`,
+        `Reaching out re: ${purpose} — open to connect?`,
+        `Would you be open to discussing ${purpose}?`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -1187,7 +1361,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Simple to replicate.", "Create a hashtag.", "Invite others."],
     generate: (input) => {
       const niche = input.trim() || "your niche";
-      return [`${niche} 7-day challenge`, `${niche} in 60 sec challenge`, `Try this ${niche} challenge`, `${niche} no one talks about`, `${niche} challenge tag 3 friends`];
+      const templates = [
+        `${niche} 7-day challenge`,
+        `${niche} in 60 sec challenge`,
+        `Try this ${niche} challenge`,
+        `${niche} no one talks about`,
+        `${niche} challenge: tag 3 friends`,
+        `${niche} before/after challenge`,
+        `Daily ${niche} mini challenge`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -1210,7 +1393,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Include topic.", "Use 'Complete' or 'Full'.", "Add number if relevant."],
     generate: (input) => {
       const topic = input.trim() || "your topic";
-      return [`Complete ${topic} Guide`, `${topic} - Full Series`, `Best of ${topic}`, `${topic} Tutorials`, `Learn ${topic}`];
+      const templates = [
+        `Complete ${topic} Guide`,
+        `${topic} - Full Series`,
+        `Best of ${topic}`,
+        `${topic} Tutorials`,
+        `Learn ${topic}`,
+        `${topic}: beginner to advanced`,
+        `${topic} playbook series`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -1233,7 +1425,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Two clear options.", "Engage your audience.", "Use for content ideas."],
     generate: (input) => {
       const topic = input.trim() || "your topic";
-      return [`Which ${topic}?`, `${topic} - yes or no?`, `Prefer ${topic} A or B?`, `Best ${topic}?`, `${topic} - vote below`];
+      const templates = [
+        `Which ${topic}?`,
+        `${topic} - yes or no?`,
+        `Prefer ${topic}: A or B?`,
+        `Best ${topic}?`,
+        `${topic} - vote below`,
+        `What's your biggest ${topic} blocker?`,
+        `Should I post more about ${topic}?`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -1256,11 +1457,14 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Hook in 2 sec.", "3 beats max.", "Clear CTA."],
     generate: (input) => {
       const idea = input.trim() || "your idea";
-      return [
+      const templates = [
         `Hook: Stop scrolling. Beat 1: ${idea} problem. Beat 2: Fix. CTA: Save.`,
         `Hook: POV ${idea}. Beat 1: Setup. Beat 2: Demo. CTA: Follow.`,
-        `Hook: No one talks about ${idea}. Beat 1: Why. Beat 2: How. CTA: Try.`
+        `Hook: No one talks about ${idea}. Beat 1: Why. Beat 2: How. CTA: Try.`,
+        `Hook: If ${idea} feels hard, do this. Beat 1: Context. Beat 2: Steps. CTA: Comment.`,
+        `Hook: Better ${idea} in 20 seconds. Beat 1: Mistake. Beat 2: Fix. CTA: Save this.`
       ];
+      return pick(templates, 3);
     }
   },
 
@@ -1283,7 +1487,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["First 2 sec = retention.", "Curiosity or pain.", "Under 15 words."],
     generate: (input) => {
       const topic = input.trim() || "your reel";
-      return [`Stop scrolling if ${topic}`, `POV: ${topic} that works`, `No one talks about ${topic}`, `This ${topic} changed everything`, `Save this ${topic}`];
+      const templates = [
+        `Stop scrolling if ${topic}`,
+        `POV: ${topic} that works`,
+        `No one talks about ${topic}`,
+        `This ${topic} changed everything`,
+        `Save this ${topic}`,
+        `Before you post ${topic}, watch this`,
+        `Try this ${topic} hook today`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -1306,7 +1519,16 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["First line = hook.", "Curiosity or emotion.", "Add emojis."],
     generate: (input) => {
       const idea = input.trim() || "your moment";
-      return [`This ${idea} changed everything`, `POV: ${idea}`, `No one talks about ${idea}`, `Stop scrolling if ${idea}`, `${idea} that actually works`];
+      const templates = [
+        `This ${idea} changed everything`,
+        `POV: ${idea}`,
+        `No one talks about ${idea}`,
+        `Stop scrolling if ${idea}`,
+        `${idea} that actually works`,
+        `A simple ${idea} framework you can copy`,
+        `If you're testing ${idea}, start here`
+      ];
+      return pick(templates, 5);
     }
   },
 
@@ -1329,13 +1551,14 @@ export const generators: Record<string, GeneratorConfig> = {
     proTips: ["Hook in first 2 seconds.", "3 beats max for short-form.", "Clear CTA at the end."],
     generate: (input) => {
       const topic = input.trim() || "your topic";
-      return [
+      const templates = [
         `Hook: Stop scrolling. Beat 1: ${topic} problem. Beat 2: Solution. Beat 3: Result. CTA: Try it.`,
         `Hook: POV ${topic}. Beat 1: Setup. Beat 2: Demo. Beat 3: Takeaway. CTA: Save this.`,
         `Hook: No one talks about ${topic}. Beat 1: Why. Beat 2: How. Beat 3: Proof. CTA: Follow.`,
         `Hook: I tried ${topic}. Beat 1: Before. Beat 2: After. Beat 3: Tip. CTA: Link in bio.`,
         `Hook: This ${topic} changed everything. Beat 1: Intro. Beat 2: Steps. Beat 3: Summary. CTA: Comment.`
       ];
+      return pick(templates, 5);
     }
   }
 };

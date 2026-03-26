@@ -28,9 +28,24 @@ export type BlogPost = {
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 
+function loadProtectedEnBlogSlugs(): Set<string> {
+  const p = path.join(process.cwd(), "generated", "quality-gate", "en-blog-protected-slugs.json");
+  try {
+    if (!fs.existsSync(p)) return new Set();
+    const raw = fs.readFileSync(p, "utf8");
+    const parsed = JSON.parse(raw);
+    const slugs: unknown = parsed?.slugs;
+    if (!Array.isArray(slugs)) return new Set();
+    return new Set(slugs.map((s) => String(s)));
+  } catch {
+    return new Set();
+  }
+}
+
 export const getAllPostsFromMdx = cache((): BlogPost[] => {
   if (!fs.existsSync(BLOG_DIR)) return [];
 
+  const protectedSlugs = loadProtectedEnBlogSlugs();
   const files = fs.readdirSync(BLOG_DIR).filter((file) => file.endsWith(".mdx"));
 
   const posts = files
@@ -53,6 +68,7 @@ export const getAllPostsFromMdx = cache((): BlogPost[] => {
 
       return { frontmatter, content, filePath: fullPath, source: "mdx" as const };
     })
+    .filter((p) => !protectedSlugs.has(p.frontmatter.slug))
     .sort((a, b) => (a.frontmatter.date < b.frontmatter.date ? 1 : -1));
 
   return posts;

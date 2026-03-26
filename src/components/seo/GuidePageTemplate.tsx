@@ -138,6 +138,7 @@ export function GuidePageTemplate({
                     name={t.name}
                     description={t.description}
                     category={t.category}
+                    slug={t.slug}
                     badge={t.isPopular ? "Popular" : undefined}
                   />
                 ))}

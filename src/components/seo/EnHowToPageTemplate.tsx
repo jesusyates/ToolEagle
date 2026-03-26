@@ -172,6 +172,7 @@ export async function EnHowToPageTemplate({ content, locale = "en" }: Props) {
                     name={tool.name}
                     description={tool.description}
                     category={tool.category}
+                    slug={tool.slug}
                     badge={tool.isPopular ? "Popular" : undefined}
                   />
                 </div>

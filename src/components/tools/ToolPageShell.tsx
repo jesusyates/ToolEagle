@@ -1,8 +1,4 @@
 import { ReactNode } from "react";
-import { CommunityProofBadge } from "./CommunityProofBadge";
-import { UpgradeToolMidCta } from "@/components/monetization/UpgradeToolMidCta";
-import { ZhUpgradeStrip } from "@/components/monetization/ZhUpgradeStrip";
-import { ZhDouyinTrafficInjectionBanner } from "@/components/zh/ZhDouyinTrafficInjectionBanner";
 
 type ToolPageShellProps = {
   eyebrow?: string;
@@ -16,11 +12,25 @@ type ToolPageShellProps = {
   howItWorks?: ReactNode;
   proTips?: ReactNode;
   aside?: ReactNode;
+  extraSections?: Array<{ title: string; content: ReactNode }>;
   toolSlug?: string;
   toolName?: string;
   /** V97.1 — China-local mid CTA → /zh/pricing */
   siteMode?: "global" | "china";
+  /** next-intl locale — controls Steps vs 操作步骤 and fold titles on global pages */
+  locale?: string;
 };
+
+function FoldSection({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <details className="rounded-2xl border border-slate-200 bg-white">
+      <summary className="cursor-pointer list-none px-4 py-3 text-sm font-semibold text-slate-800">
+        {title}
+      </summary>
+      <div className="border-t border-slate-100 px-4 py-4">{children}</div>
+    </details>
+  );
+}
 
 export function ToolPageShell({
   eyebrow,
@@ -33,21 +43,17 @@ export function ToolPageShell({
   howItWorks,
   proTips,
   aside,
+  extraSections,
   toolSlug,
   toolName,
-  siteMode = "global"
+  siteMode = "global",
+  locale
 }: ToolPageShellProps) {
-  /** 抖音专属工具页外层为 `bg-slate-950`，需浅色字才可读 */
-  const headerOnDark =
-    siteMode === "china" && typeof toolSlug === "string" && toolSlug.startsWith("douyin-");
+  const headerOnDark = siteMode === "china" && typeof toolSlug === "string" && toolSlug.startsWith("douyin-");
+  const zhUi = Boolean(locale?.startsWith("zh"));
 
   return (
     <section className="container pt-10 pb-16">
-      {siteMode === "china" ? (
-        <div className="max-w-2xl mb-6">
-          <ZhDouyinTrafficInjectionBanner compact />
-        </div>
-      ) : null}
       <div className="space-y-2 max-w-2xl">
         {eyebrow && (
           <p
@@ -74,42 +80,69 @@ export function ToolPageShell({
         <p
           className={
             headerOnDark
-              ? "inline-block rounded-xl bg-slate-900/65 px-3 py-2 text-sm sm:text-base text-slate-100 leading-relaxed shadow-[0_6px_16px_rgba(0,0,0,0.32)]"
+              ? "inline-block rounded-xl bg-slate-900/65 px-3 py-2 text-sm sm:text-base text-slate-100 leading-relaxed"
               : "inline-block rounded-xl bg-sky-50 px-3 py-2 text-sm sm:text-base text-slate-800 leading-relaxed shadow-[0_2px_8px_rgba(2,132,199,0.12)]"
           }
         >
           {description}
         </p>
-        {!headerOnDark && (introProblem || introAudience) ? (
+        {!headerOnDark && (siteMode !== "china" || introProblem) ? (
           <div className="mt-4 space-y-2 rounded-2xl border border-slate-200 bg-slate-50/90 p-4 text-sm text-slate-800">
-            {introProblem ? (
+            {siteMode === "china" ? (
               <p>
-                <span className="font-semibold text-slate-900">What it solves: </span>
+                <span className="font-semibold text-slate-900">操作步骤：</span>
                 {introProblem}
               </p>
-            ) : null}
-            {introAudience ? (
+            ) : introAudience === "" && introProblem ? (
               <p>
-                <span className="font-semibold text-slate-900">Best for: </span>
-                {introAudience}
+                <span className="font-semibold text-slate-900">{zhUi ? "操作步骤：" : "Steps: "}</span>
+                {introProblem}
               </p>
-            ) : null}
+            ) : (
+              <>
+                <p>
+                  <span className="font-semibold text-slate-900">What this tool does: </span>
+                  {introProblem || "you want fast, usable output from one clear input."}
+                </p>
+                <p>
+                  <span className="font-semibold text-slate-900">Best for: </span>
+                  {introAudience || "creators who want to go from idea to publish-ready draft quickly."}
+                </p>
+              </>
+            )}
           </div>
         ) : null}
-        <div className="pt-2">
-          <CommunityProofBadge />
-        </div>
       </div>
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] items-start">
+      <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.75fr)] items-start">
         <div className="space-y-4">
           {input}
-          {siteMode === "china" ? <ZhUpgradeStrip /> : <UpgradeToolMidCta />}
           {result}
-          {howItWorks}
-          {proTips}
         </div>
-        {aside && <aside className="space-y-4">{aside}</aside>}
+
+        <div className="space-y-3 lg:sticky lg:top-6">
+          {howItWorks ? (
+            <FoldSection
+              title={
+                siteMode === "china" || zhUi ? "怎么用（含示例）" : "How to use + examples"
+              }
+            >
+              {howItWorks}
+            </FoldSection>
+          ) : null}
+          {proTips ? (
+            <FoldSection title={siteMode === "china" || zhUi ? "进阶技巧" : "Tips"}>{proTips}</FoldSection>
+          ) : null}
+          {extraSections && extraSections.length > 0
+            ? extraSections.map((sec) => (
+                <FoldSection key={sec.title} title={sec.title}>
+                  {sec.content}
+                </FoldSection>
+              ))
+            : aside
+              ? <FoldSection title="More">{aside}</FoldSection>
+              : null}
+        </div>
       </div>
     </section>
   );

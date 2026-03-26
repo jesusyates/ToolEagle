@@ -15,6 +15,8 @@ type ToolEvent =
   | "tool_page_view"
   | "tool_generate"
   | "tool_generate_ai"
+  /** AI path failed (non-limit); template/local fallback used */
+  | "tool_generate_ai_fallback"
   | "tool_copy"
   | "conversion"
   | "prompt_improved"
@@ -70,7 +72,10 @@ type ToolEvent =
   | "billing_tab_view"
   /** IA — market switcher + auth entry */
   | "market_switch"
-  | "login_click";
+  | "login_click"
+  /** V108 — SEO blog → tool funnel */
+  | "blog_tool_click"
+  | "tool_entry_from_blog";
 
 export type ToolAnalyticsPayload = {
   tool_slug?: string;

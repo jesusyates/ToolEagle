@@ -21,6 +21,11 @@ import { LoginPromptModal } from "@/components/LoginPromptModal";
 import { ExitIntentCta } from "@/components/tools/ExitIntentCta";
 import { useAuth } from "@/hooks/useAuth";
 import { useCountry } from "@/hooks/useCountry";
+import { resolveToolPageCopy } from "@/config/tool-page-copy-resolve";
+import { generateHashtagTemplate } from "@/lib/generators/fallback/hashtagTemplate";
+import { applyContentSafetyToStringArray } from "@/lib/content-safety/filter";
+import { normalizeHashtagSets } from "@/lib/tool-output/postprocess";
+import { logOutputCopy, mapListCopyToResultType, recordGenerationComplete } from "@/lib/tool-output-quality";
 
 const TRY_EXAMPLE = "cozy desk setup, aesthetic workspace, productivity tips for students";
 
@@ -50,26 +55,23 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
   const { isLoggedIn } = useAuth();
 
   const toolMeta = tools.find((t) => t.slug === "hashtag-generator");
+  const pageCopy = resolveToolPageCopy("hashtag-generator", locale);
+  const descriptionHero =
+    pageCopy?.hero ??
+    (locale.startsWith("zh") && toolMeta?.descriptionZh ? toolMeta.descriptionZh : toolMeta?.description ?? "");
+  const useSteps = Boolean(pageCopy?.steps);
+  const shellIntroProblem = useSteps ? pageCopy!.steps : undefined;
+  const shellIntroAudience = useSteps ? "" : undefined;
+  const zhUi = locale.startsWith("zh");
+  const market = zhUi ? "cn" : "global";
 
   useEffect(() => {
     if (!toolMeta) return;
     trackEvent("tool_page_view", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
   }, [toolMeta, country]);
 
-  function templateGenerate(trimmed: string): string[] {
-    const baseTags = ["tiktok", "reels", "shorts", "contentcreator", "creator", "viral", "fyp", "tooleagle"];
-    const keywords = trimmed.toLowerCase().split(/\s+/).filter(Boolean).slice(0, 4).map((k) => k.replace(/[^a-z0-9]/g, ""));
-    const all = [...keywords, ...baseTags];
-    const unique = Array.from(new Set(all.filter(Boolean)));
-    const variants: string[] = [];
-    for (let i = 0; i < 4; i++) {
-      const shuffled = [...unique].sort(() => 0.5 - Math.random());
-      variants.push(shuffled.map((t) => `#${t}`).slice(0, 14).join(" "));
-    }
-    return variants;
-  }
-
   async function generateHashtags() {
+    const hadPrior = results.length > 0;
     const trimmed = topic.trim();
     if (!trimmed) {
       setResults(["Describe your niche or video topic above to get tailored hashtags."]);
@@ -97,13 +99,26 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
           setIsGenerating(false);
           return;
         }
-        genResults = templateGenerate(trimmed);
-        if (toolMeta) trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
+        genResults = generateHashtagTemplate(trimmed);
+        if (toolMeta) {
+          trackEvent("tool_generate_ai_fallback", {
+            tool_slug: toolMeta.slug,
+            tool_category: toolMeta.category,
+            country
+          });
+        }
       }
     } else {
-      genResults = templateGenerate(trimmed);
+      genResults = generateHashtagTemplate(trimmed);
       if (toolMeta) trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category });
     }
+
+    // V96: output usability — normalize to 2–3 ready-to-paste hashtag sets when possible.
+    genResults = normalizeHashtagSets(genResults);
+
+    // Keep Content Safety Engine behavior consistent for user-visible output.
+    const cse = applyContentSafetyToStringArray(genResults, market);
+    genResults = cse.parts;
 
     setResults(genResults);
     setIsGenerating(false);
@@ -117,6 +132,7 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
         items: genResults
       });
       setHistoryTrigger((t) => t + 1);
+      recordGenerationComplete(toolMeta.slug, { wasRegenerate: hadPrior });
     }
   }
 
@@ -180,7 +196,10 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
       <ToolPageShell
       eyebrow="Tool"
       title="Hashtag Generator"
-      description="Generate hashtags for TikTok, Reels and Shorts based on your niche or video topic. Keep them relevant, not spammy."
+      description={descriptionHero}
+      introProblem={shellIntroProblem}
+      introAudience={shellIntroAudience}
+      locale={locale}
       input={
         <ToolInputCard label="Niche or topic">
           <DelegatedButton
@@ -194,11 +213,27 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
             onChange={(e) => setTopic(e.target.value)}
             maxLength={MAX_INPUT_LENGTH + 50}
             className="w-full min-h-[100px] resize-none rounded-2xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-inner shadow-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-500/70 focus:border-sky-400/80"
-            placeholder="Example: cozy desk setup, aesthetic workspace, productivity tips for students"
+            placeholder="Example: beginner workout plan + fat-loss moves"
           />
           {topic.length > MAX_INPUT_LENGTH && (
             <p className="text-xs text-amber-600 mt-1">Please keep under {MAX_INPUT_LENGTH} characters.</p>
           )}
+
+          <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-3">
+            <p className="text-xs font-semibold text-slate-900">Preview (hashtag sets)</p>
+            <div className="mt-2 space-y-2 text-xs text-slate-800">
+              <div className="rounded-lg border border-slate-200 bg-white px-3 py-2">
+                #cozydesk #aestheticworkspace #creatorlife #reels #fyp
+              </div>
+              <div className="rounded-lg border border-slate-200 bg-white px-3 py-2">
+                #productivitytips #shorts #contentcreator #viral #tooleagle
+              </div>
+            </div>
+            <p className="mt-2 text-[11px] text-slate-600">
+              Copy 1 set → paste into TikTok/Reels/Shorts caption (or first comment).
+            </p>
+          </div>
+
           <DelegatedButton
             onClick={generateHashtags}
             disabled={isGenerating}
@@ -211,7 +246,7 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
               </>
             ) : (
               <>
-                Generate Hashtags
+                Start generating
                 <span className="text-slate-400">→</span>
               </>
             )}
@@ -226,11 +261,15 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
           input={topic}
           onCopyItem={handleCopyItem}
           onCopyAll={handleCopyAll}
-          onCopyTrack={() => toolMeta && trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country })}
+          onCopyTrack={(index) => {
+            if (!toolMeta) return;
+            trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
+            logOutputCopy(toolMeta.slug, mapListCopyToResultType(toolMeta.slug, index));
+          }}
           onRegenerate={generateHashtags}
           onSaveEditedItem={handleSaveEditedItem}
           onItemsChange={handleItemsChange}
-          emptyMessage="Your hashtags will appear here. Mix 1–2 broad tags with a few niche‑specific ones for best results."
+          emptyMessage="Copy 1–2 sets and paste into your caption (or first comment). Aim for 10–18 tags."
           toolSlug="hashtag-generator"
           toolName="Hashtag Generator"
           isLoggedIn={isLoggedIn}
@@ -239,30 +278,44 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
       }
       howItWorks={
         <HowItWorksCard
+          title={zhUi ? "怎么用" : "How it works"}
           steps={[
             { step: 1, text: "Enter your niche or video topic above." },
             { step: 2, text: "Generate hashtag sets tailored to your content." },
-            { step: 3, text: "Copy and post—paste under your TikTok, Reels or Shorts." }
+            { step: 3, text: "Copy 1 set and paste before you hit publish on TikTok/Reels/Shorts." }
           ]}
         />
       }
-      aside={
-        <>
-          <HistoryPanel toolSlug="hashtag-generator" refreshTrigger={historyTrigger} />
-          <ExamplesCard
-            examples={HASHTAG_EXAMPLES}
-            onUseExample={(input) => setTopic(input)}
-          />
-          <ToolProTipsCard
-            tips={[
-              "Avoid using the full 30 hashtags—10–18 is usually enough.",
-              "Always keep 1–2 branded hashtags unique to your account.",
-              "Rotate hashtags across posts so you don't look spammy."
-            ]}
-          />
-          {relatedAside}
-        </>
+      proTips={
+        <ToolProTipsCard
+          title={zhUi ? "进阶技巧" : "Pro tips"}
+          tips={[
+            "Avoid using the full 30 hashtags—10–18 is usually enough.",
+            "Always keep 1–2 branded hashtags unique to your account.",
+            "Rotate hashtags across posts so you don't look spammy."
+          ]}
+        />
       }
+      extraSections={[
+        {
+          title: zhUi ? "历史生成记录" : "Generation history",
+          content: <HistoryPanel toolSlug="hashtag-generator" refreshTrigger={historyTrigger} />
+        },
+        {
+          title: zhUi ? "输入示例" : "Input examples",
+          content: (
+            <ExamplesCard examples={HASHTAG_EXAMPLES} onUseExample={(input) => setTopic(input)} />
+          )
+        },
+        ...(relatedAside
+          ? [
+              {
+                title: zhUi ? "相关工具与资源" : "Related tools and resources",
+                content: relatedAside
+              }
+            ]
+          : [])
+      ]}
     />
     </>
   );

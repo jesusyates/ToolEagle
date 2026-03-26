@@ -24,8 +24,10 @@ type PlatformToolsPageProps = {
 function matchesPlatform(post: BlogPost, platform: string): boolean {
   const tags = post.frontmatter.tags ?? [];
   const cat = post.frontmatter.category?.toLowerCase();
+  const slug = post.frontmatter.slug?.toLowerCase() ?? "";
   const p = platform.toLowerCase();
   if (cat === p) return true;
+  if (slug.startsWith(`${p}-`)) return true;
   return tags.some((t) => t.toLowerCase().includes(p));
 }
 
@@ -56,7 +58,7 @@ export function PlatformToolsPage({
                 {platformLabel} Tools
               </h1>
               <p className="mt-1 text-slate-600">
-                Free AI tools for {platformLabel} creators. Captions, hooks, hashtags and more.
+                Turn one idea into a publish-ready content package — hook, beats, caption/title, CTA, hashtags, and why it works.
               </p>
             </div>
           </div>
@@ -90,7 +92,7 @@ export function PlatformToolsPage({
           {platformLabel} AI Tools
         </h2>
         <p className="mt-2 text-sm text-slate-600">
-          Generate captions, hooks, titles and more with AI. No sign-up required.
+          Generate publish-ready packages (not toy one-liners). Copy, paste, ship.
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {allTools.map((tool) => (
@@ -101,8 +103,46 @@ export function PlatformToolsPage({
               name={tool.name}
               description={tool.description}
               category={tool.category}
+              slug={tool.slug}
             />
           ))}
+        </div>
+      </section>
+
+      <section className="container py-10 border-t border-slate-100">
+        <h2 className="text-lg font-semibold text-slate-900">Discover &amp; trending</h2>
+        <p className="mt-2 text-sm text-slate-600">Jump to what&apos;s new and what&apos;s working—without hunting through the site map.</p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link
+            href="/trending/today"
+            className="inline-flex rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+          >
+            Trending today
+          </Link>
+          <Link
+            href="/trending/week"
+            className="inline-flex rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+          >
+            This week
+          </Link>
+          <Link
+            href="/discover"
+            className="inline-flex rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+          >
+            Discover
+          </Link>
+          <Link
+            href="/answers"
+            className="inline-flex rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+          >
+            Quick answers
+          </Link>
+          <Link
+            href={`/questions/${platform}`}
+            className="inline-flex rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+          >
+            {platformLabel} Q&amp;A
+          </Link>
         </div>
       </section>
 

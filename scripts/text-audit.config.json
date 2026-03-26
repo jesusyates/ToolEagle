@@ -1,0 +1,73 @@
+{
+  "includeRoots": ["src", "messages"],
+  "includeExtensions": [".ts", ".tsx", ".js", ".jsx", ".json", ".md", ".mdx"],
+  "excludePathSubstrings": [
+    "/node_modules/",
+    "/.next/",
+    "/dist/",
+    "/build/",
+    "/coverage/",
+    "/.git/"
+  ],
+  "rules": {
+    "zhNoEnglishBillingTerms": {
+      "enabled": true,
+      "paths": [
+        "/src/app/zh/pricing/page\\.tsx",
+        "/src/components/monetization/ZhProPaymentPanel\\.tsx",
+        "/src/components/monetization/ZhDonationPaymentPanel\\.tsx",
+        "/messages/zh\\.json"
+      ],
+      "patterns": [
+        "\\bBuy Now\\b",
+        "\\bCheckout\\b",
+        "\\bOpen checkout\\b",
+        "\\bPricing\\b",
+        "\\bUnlimited\\b",
+        "\\bunlimited\\b",
+        "\\bmonthly\\b",
+        "\\bper month\\b"
+      ],
+      "allowPathPatterns": [
+        "/src/app/zh/.*import\\s+.*from\\s+[\"'][^\"']+[\"']",
+        "/src/app/zh/.*export\\s+const\\s+metadata",
+        "/messages/zh\\.json.*\"zh-CN\"",
+        "/messages/zh\\.json.*\"zh-TW\""
+      ]
+    },
+    "enNoChineseChars": {
+      "enabled": true,
+      "paths": [
+        "/src/app/pricing/page\\.tsx",
+        "/src/components/monetization/GlobalCreditsPaymentPanel\\.tsx",
+        "/messages/en\\.json"
+      ],
+      "patterns": [
+        "[\\u4e00-\\u9fff]"
+      ],
+      "allowPathPatterns": [
+        "/src/app/.*import\\s+.*from\\s+[\"'][^\"']+[\"']",
+        "/src/app/.*/metadata",
+        "/src/app/.*/alternates",
+        "/messages/en\\.json.*latestChineseGuides|chinaSite|zhHub|zh\\."
+      ]
+    },
+    "globalNoLegacyUnlimitedMonthly": {
+      "enabled": true,
+      "paths": ["/src/", "/messages/"],
+      "patterns": [
+        "\\bunlimited\\b",
+        "\\bUnlimited\\b",
+        "包月",
+        "月付",
+        "无限次数"
+      ],
+      "allowPathPatterns": [
+        "/src/config/topics\\.ts.*monthly-",
+        "/src/lib/sitemap-data\\.ts.*changeFrequency",
+        "/src/app/api/sitemap-zh/route\\.ts.*changeFrequency",
+        "/src/lib/ai-citation-data\\.ts.*monetization|monetize|money|earn"
+      ]
+    }
+  }
+}

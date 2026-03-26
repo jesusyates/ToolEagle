@@ -9,6 +9,7 @@ const nextConfig = {
   async rewrites() {
     return [
       { source: "/sitemap-main.xml", destination: "/api/sitemap-main" },
+      { source: "/sitemap-blog.xml", destination: "/api/sitemap-blog" },
       { source: "/sitemap-topics.xml", destination: "/api/sitemap-topics" },
       { source: "/sitemap-examples.xml", destination: "/api/sitemap-examples" },
       { source: "/sitemap-prompts.xml", destination: "/api/sitemap-prompts" },

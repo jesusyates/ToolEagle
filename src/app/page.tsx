@@ -1,4 +1,5 @@
 import { HomePageClient } from "./_components/HomePageClient";
+import { HomeLatestBlogStrip } from "./_components/HomeLatestBlogStrip";
 import { TrendingMakeMoneySection } from "@/components/traffic/TrendingMakeMoneySection";
 import { BASE_URL } from "@/config/site";
 
@@ -14,5 +15,9 @@ export const metadata = {
 };
 
 export default function HomePage() {
-  return <HomePageClient trendingInjection={<TrendingMakeMoneySection englishOnly />} />;
+  return (
+    <HomePageClient trendingInjection={<TrendingMakeMoneySection englishOnly />}>
+      <HomeLatestBlogStrip />
+    </HomePageClient>
+  );
 }

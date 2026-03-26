@@ -64,51 +64,128 @@ const TOOL_KINDS: PostPackageToolKind[] = [
 ];
 
 function fallbackPackages(userInput: string, tier: "free" | "pro"): CreatorPostPackage[] {
-  const short = userInput.trim().slice(0, 120) || "your video topic";
+  const short = userInput.trim().slice(0, 120) || "your topic";
+  const action = [
+    `stop doing this with ${short}`,
+    `test this simple ${short} format`,
+    `fix your ${short} in 15 seconds`,
+    `use this ${short} structure today`
+  ];
+  const outcomes = [
+    "higher watch time",
+    "more saves and shares",
+    "clearer message in less time",
+    "faster publish workflow"
+  ];
   const hooks = [
-    `You need to see this 👇 ${short}`,
-    `POV: nobody talks about ${short} like this`,
-    `Stop scrolling — ${short} in 15 seconds`,
-    `If you create content about ${short}, this changes the game`,
-    `Nobody tells you this about ${short} — quick take:`,
-    `3 seconds to hook you on ${short}`,
-    `The ${short} hack nobody shares`,
-    `Why ${short} matters in 2024`,
-    `Real talk about ${short}`,
-    `${short} — beginner to pro`
+    `Most creators miss this in ${short} — quick fix:`,
+    `Before you post about ${short}, do this first:`,
+    `The ${short} format that keeps people watching:`,
+    `If your ${short} feels weak, try this angle:`,
+    `One better way to package ${short} today:`,
+    `${short}: 3 lines that make your post clearer`,
+    `A faster ${short} workflow for busy creators`,
+    `How to make ${short} easier to watch and save`,
+    `The ${short} structure I wish I used earlier`,
+    `Use this ${short} pattern for your next post`
+  ];
+  const ctas = [
+    "Save this and test one variation today.",
+    "Comment your niche and I will tailor one version.",
+    "Follow for more creator workflows like this.",
+    "Share this with a creator who posts weekly."
+  ];
+  const tagSets = [
+    "#creators #contentstrategy #shortformvideo #tiktoktips",
+    "#creatorgrowth #socialmediaideas #videomarketing #reelsstrategy",
+    "#contentcreation #hookformula #captiontips #digitalcreator",
+    "#audiencegrowth #creatorworkflow #postbetter #contentplanning"
   ];
   const n = tier === "pro" ? 10 : 5;
   const out: CreatorPostPackage[] = [];
   for (let i = 0; i < n; i++) {
     const packs = ["Emotional", "Sales", "Educational", "Entertainment"] as const;
     const strengths = ["Strong hook", "Medium hook", "Safe hook"] as const;
+    const variantAction = action[i % action.length];
+    const variantOutcome = outcomes[i % outcomes.length];
+    const variantCta = ctas[i % ctas.length];
+    const variantTag = tagSets[i % tagSets.length];
+    const h = hooks[i % hooks.length];
     out.push(
       emptyPackage({
         topic: short,
-        hook: hooks[i % hooks.length],
-        script_talking_points: `• Open with pattern interrupt\n• Show proof or demo\n• Land the takeaway`,
-        caption: `${hooks[i % hooks.length]}\n\n${short}\n\n✨ Save this.`,
-        cta_line: "Follow for part 2 · comment your niche",
-        hashtags: "#fyp #creators #contentcreator #learnontiktok",
-        why_it_works: "One-line: curiosity + clarity + a reason to follow.",
+        hook: h,
+        script_talking_points:
+          `• Setup: name one problem creators hit with ${short}\n` +
+          `• Shift: ${variantAction}\n` +
+          `• Proof: show one before/after or mini example\n` +
+          `• Wrap: give one next step for ${variantOutcome}`,
+        caption:
+          `${h}\n\n` +
+          `Use this on ${short}: keep one promise, one proof point, one CTA.\n\n` +
+          `${variantCta}`,
+        cta_line: variantCta,
+        hashtags: variantTag,
+        why_it_works: `Clear promise + specific next step helps ${variantOutcome}.`,
         posting_tips:
-          "Post when your audience is awake · Pin a comment with a link · Reply in first 30 min",
-        best_for: "Creators shipping daily short-form who need a fast skeleton to riff on.",
+          "Lead with one concrete claim in the first line · Keep script under 4 beats · Reply to first comments quickly",
+        best_for: `Creators who want faster ${short} drafts without losing clarity.`,
         variation_pack: packs[i % 4],
         hook_strength_label: strengths[i % 3],
-        why_opening_grabs: "Pattern-interrupt in line 1 increases scroll-stops.",
-        why_structure_completion: "Three-beat flow keeps attention through the payoff.",
-        why_copy_growth: "Clear CTA + niche hashtags help saves and profile visits.",
-        context_account: "New creators and growth-focused accounts",
-        context_scenario: "Short tips / story / demo formats",
-        context_audience: "General short-form viewers in your niche",
-        publish_rhythm: "0–2s hook · 2–12s proof/story · 12–18s CTA",
-        version_plain: `${hooks[i % hooks.length]} — straight take on ${short}.`,
-        version_optimized: `${hooks[i % hooks.length]} — tighter promise + clearer proof + stronger CTA on ${short}.`
+        why_opening_grabs: "Specific framing beats vague hype and improves early retention.",
+        why_structure_completion: "Setup -> shift -> proof -> next step is easier to follow than generic bullets.",
+        why_copy_growth: "Actionable CTA and niche tag set increase saves and profile clicks.",
+        context_account: "Solo creators, small teams, and service creators",
+        context_scenario: "Educational posts, quick demos, and before/after content",
+        context_audience: "Viewers looking for practical creator tactics",
+        publish_rhythm: "0-2s hook · 2-8s context · 8-15s proof/demo · 15-20s CTA",
+        version_plain: `${h} - practical angle on ${short}.`,
+        version_optimized: `${h} - same idea with tighter proof and stronger CTA for ${variantOutcome}.`
       })
     );
   }
   return out.filter((p) => packageBlockCount(p) >= 5);
+}
+
+function normalizeForQuality(s: string): string {
+  return s.toLowerCase().replace(/\s+/g, " ").trim();
+}
+
+function estimatePackageQuality(packages: CreatorPostPackage[]): {
+  ok: boolean;
+  score: number;
+  reason: string;
+} {
+  if (packages.length === 0) return { ok: false, score: 0, reason: "empty_packages" };
+  const hooks = packages.map((p) => normalizeForQuality(p.hook || ""));
+  const captions = packages.map((p) => normalizeForQuality(p.caption || ""));
+  const scripts = packages.map((p) => normalizeForQuality(p.script_talking_points || ""));
+
+  const uniqueHooks = new Set(hooks.filter(Boolean)).size;
+  const uniqueCaptions = new Set(captions.filter(Boolean)).size;
+  const uniqueScripts = new Set(scripts.filter(Boolean)).size;
+  const total = Math.max(1, packages.length);
+  const diversity =
+    (uniqueHooks / total) * 0.45 +
+    (uniqueCaptions / total) * 0.35 +
+    (uniqueScripts / total) * 0.2;
+
+  const boilerplatePatterns = [
+    /you need to see this/,
+    /open with pattern interrupt/,
+    /save this\.?$/,
+    /follow for part 2/
+  ];
+  const boilerplateHits = packages.reduce((acc, p) => {
+    const t = `${p.hook || ""}\n${p.caption || ""}\n${p.script_talking_points || ""}`.toLowerCase();
+    return acc + (boilerplatePatterns.some((re) => re.test(t)) ? 1 : 0);
+  }, 0);
+  const boilerplateRatio = boilerplateHits / total;
+
+  const score = diversity - boilerplateRatio * 0.4;
+  if (score >= 0.45) return { ok: true, score, reason: "quality_ok" };
+  if (diversity < 0.35) return { ok: false, score, reason: "low_diversity" };
+  return { ok: false, score, reason: "boilerplate_detected" };
 }
 
 /** V103.1 — Pro: 10 packages; Free: 5 (for locked previews) */
@@ -349,8 +426,8 @@ export async function POST(request: NextRequest) {
     let packages: CreatorPostPackage[] = [];
     let modelParseOk = false;
 
-    try {
-      const result = await routerGeneratePostPackage({
+    const runModelAttempt = async (extraHint?: string) =>
+      routerGeneratePostPackage({
         userInput,
         toolType: toolKind,
         userPlan: tier,
@@ -360,9 +437,41 @@ export async function POST(request: NextRequest) {
         publishFullPack,
         riskScore: risk.riskScore
       });
+
+    try {
+      const result = await runModelAttempt();
       routerMeta = { ...result.meta, route: clientRoute };
       packages = typeof result.rawText === "string" ? parsePackagesJson(result.rawText) : [];
       modelParseOk = packages.length > 0;
+
+      if (modelParseOk) {
+        const quality = estimatePackageQuality(packages);
+        if (!quality.ok) {
+          const retryInput =
+            `${userInput}\n\n` +
+            "Quality constraints: provide materially different variants. Avoid repeated hooks/captions, avoid boilerplate phrases, and use concrete scenario-specific wording.";
+          const retry = await routerGeneratePostPackage({
+            userInput: retryInput,
+            toolType: toolKind,
+            userPlan: tier,
+            market,
+            locale,
+            taskType: "post_package",
+            publishFullPack,
+            riskScore: risk.riskScore
+          });
+          const retryPackages = typeof retry.rawText === "string" ? parsePackagesJson(retry.rawText) : [];
+          const retryQuality = estimatePackageQuality(retryPackages);
+          if (retryPackages.length > 0 && retryQuality.score >= quality.score) {
+            packages = retryPackages;
+            routerMeta = {
+              ...retry.meta,
+              route: clientRoute,
+              fallback_used: true
+            };
+          }
+        }
+      }
     } catch (err) {
       routerMeta = {
         provider_used: "none",

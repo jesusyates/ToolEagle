@@ -9,17 +9,21 @@ import { LearnAiLinkCard } from "@/components/tools/LearnAiLinkCard";
 import { toolSeo } from "@/config/seo";
 import { toolToBlogTags } from "@/lib/seo";
 import { BASE_URL } from "@/config/site";
+import { getToolPageCopyEn } from "@/config/tool-page-copy-en";
+import { getToolMetaDescriptionEn } from "@/lib/tool-display";
 
 const slug = "ai-caption-generator";
+const AI_CAPTION_COPY = getToolPageCopyEn(slug)!;
 const seo = toolSeo[slug];
+const metaDescription = getToolMetaDescriptionEn(slug) ?? seo.description;
 
 export const metadata = {
   title: seo.title,
-  description: seo.description,
+  description: metaDescription,
   alternates: { canonical: `${BASE_URL}/${slug}` },
   openGraph: {
     title: seo.title,
-    description: seo.description,
+    description: metaDescription,
     url: `${BASE_URL}/${slug}`,
     type: "website" as const,
     siteName: "ToolEagle"
@@ -27,7 +31,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image" as const,
     title: seo.title,
-    description: seo.description
+    description: metaDescription
   }
 };
 
@@ -42,7 +46,9 @@ export default function AiCaptionGeneratorPage() {
             toolKind="ai_caption"
             eyebrow="V95 · Cross-platform"
             title="AI Caption Generator"
-            description="One idea → full short-form post package: hook, talking points, caption, CTA, hashtags, why it works, and posting tips. Built for creators who sell with content, not just post."
+            description={AI_CAPTION_COPY.hero}
+            introProblem={AI_CAPTION_COPY.steps}
+            introAudience=""
             tryExample="Launching a new Notion template for creators who batch content weekly"
             inputLabel="Topic or offer"
             placeholder="What are you posting about? (product, story, tip, or trend)"
@@ -70,7 +76,7 @@ export default function AiCaptionGeneratorPage() {
             }
           />
         </Suspense>
-        <ToolStructuredData slug={slug} name="AI Caption Generator" description={seo.description} />
+        <ToolStructuredData slug={slug} name="AI Caption Generator" description={metaDescription} />
       </div>
       <SiteFooter />
     </main>

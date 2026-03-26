@@ -8,6 +8,7 @@ export const revalidate = 3600;
 
 const STATIC_SITEMAPS = [
   "sitemap-main.xml",
+  "sitemap-blog.xml",
   "sitemap-topics.xml",
   "sitemap-examples.xml",
   "sitemap-prompts.xml",

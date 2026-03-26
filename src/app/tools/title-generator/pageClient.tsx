@@ -23,17 +23,13 @@ import { ExitIntentCta } from "@/components/tools/ExitIntentCta";
 import { ZhCtaCaptureBlock } from "@/components/zh/ZhCtaCaptureBlock";
 import { useAuth } from "@/hooks/useAuth";
 import { useCountry } from "@/hooks/useCountry";
+import { resolveToolPageCopy } from "@/config/tool-page-copy-resolve";
+import { generateTitleTemplate } from "@/lib/generators/fallback/titleTemplate";
+import { applyContentSafetyToStringArray } from "@/lib/content-safety/filter";
+import { normalizeTitleCandidates } from "@/lib/tool-output/postprocess";
+import { logOutputCopy, mapListCopyToResultType, recordGenerationComplete } from "@/lib/tool-output-quality";
 
 const TRY_EXAMPLE = "how to edit vertical videos faster using CapCut templates";
-
-const titlePatterns = [
-  "I Tried {topic} So You Don't Have To",
-  "{number} {topic} No One Talks About",
-  "Stop Doing {wrong} (Do This Instead)",
-  "{topic} in {time}: Full Guide",
-  "The Truth About {topic}",
-  "{number} Mistakes Killing Your {topic}"
-];
 
 const TITLE_EXAMPLES = [
   {
@@ -63,25 +59,21 @@ export function TitleGeneratorClient({ relatedAside, ctaLinks, showZhInlineLead 
   const { isLoggedIn } = useAuth();
 
   const toolMeta = tools.find((t) => t.slug === "title-generator");
+  const pageCopy = resolveToolPageCopy("title-generator", locale);
+  const descriptionHero = pageCopy?.hero ?? tTitle("description");
+  const useSteps = Boolean(pageCopy?.steps);
+  const shellIntroProblem = useSteps ? pageCopy!.steps : undefined;
+  const shellIntroAudience = useSteps ? "" : undefined;
+  const zhUi = locale.startsWith("zh");
+  const market = zhUi ? "cn" : "global";
 
   useEffect(() => {
     if (!toolMeta) return;
     trackEvent("tool_page_view", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
   }, [toolMeta, country]);
 
-  function templateGenerate(trimmed: string): string[] {
-    const replacements: Record<string, string> = {
-      "{topic}": trimmed,
-      "{number}": "7",
-      "{time}": "10 Minutes",
-      "{wrong}": trimmed.toLowerCase()
-    };
-    return titlePatterns.map((pattern) =>
-      pattern.replace(/\{[^}]+\}/g, (match) => replacements[match] ?? trimmed)
-    ).slice(0, 6);
-  }
-
   async function generateTitles() {
+    const hadPrior = titles.length > 0;
     const trimmed = topic.trim();
     if (!trimmed) {
       setTitles([
@@ -113,13 +105,24 @@ export function TitleGeneratorClient({ relatedAside, ctaLinks, showZhInlineLead 
           setIsGenerating(false);
           return;
         }
-        results = templateGenerate(trimmed);
-        if (toolMeta) trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
+        results = generateTitleTemplate(trimmed);
+        if (toolMeta) {
+          trackEvent("tool_generate_ai_fallback", {
+            tool_slug: toolMeta.slug,
+            tool_category: toolMeta.category,
+            country
+          });
+        }
       }
     } else {
-      results = templateGenerate(trimmed);
+      results = generateTitleTemplate(trimmed);
       if (toolMeta) trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category });
     }
+
+    // V96: output usability — keep titles deduped and directly usable.
+    results = normalizeTitleCandidates(results);
+    const cse = applyContentSafetyToStringArray(results, market);
+    results = cse.parts;
 
     setTitles(results);
     setIsGenerating(false);
@@ -133,6 +136,7 @@ export function TitleGeneratorClient({ relatedAside, ctaLinks, showZhInlineLead 
         items: results
       });
       setHistoryTrigger((t) => t + 1);
+      recordGenerationComplete(toolMeta.slug, { wasRegenerate: hadPrior });
     }
   }
 
@@ -196,7 +200,10 @@ export function TitleGeneratorClient({ relatedAside, ctaLinks, showZhInlineLead 
       <ToolPageShell
       eyebrow={tTool("eyebrow")}
       title={tTitle("title")}
-      description={tTitle("description")}
+      description={descriptionHero}
+      introProblem={shellIntroProblem}
+      introAudience={shellIntroAudience}
+      locale={locale}
       input={
         <ToolInputCard label={tTitle("inputLabel")}>
           <DelegatedButton
@@ -215,6 +222,16 @@ export function TitleGeneratorClient({ relatedAside, ctaLinks, showZhInlineLead 
           {topic.length > MAX_INPUT_LENGTH && (
             <p className="text-xs text-amber-600 mt-1">{tTool("maxLengthError", { max: MAX_INPUT_LENGTH })}</p>
           )}
+
+          <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-3">
+            <p className="text-xs font-semibold text-slate-900">Preview (titles you can paste)</p>
+            <ul className="mt-2 space-y-2 text-xs text-slate-800">
+              <li className="rounded-lg border border-slate-200 bg-white px-3 py-2">1) Stop scrolling: the truth about {`{your niche}`}</li>
+              <li className="rounded-lg border border-slate-200 bg-white px-3 py-2">2) How to get better results in 30 minutes a day (without burning out)</li>
+              <li className="rounded-lg border border-slate-200 bg-white px-3 py-2">3) The simplest title formula for {`{your audience}`}</li>
+            </ul>
+          </div>
+
           <DelegatedButton
             onClick={generateTitles}
             disabled={isGenerating}
@@ -242,7 +259,11 @@ export function TitleGeneratorClient({ relatedAside, ctaLinks, showZhInlineLead 
           input={topic}
           onCopyItem={handleCopyItem}
           onCopyAll={handleCopyAll}
-          onCopyTrack={() => toolMeta && trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country })}
+          onCopyTrack={(index) => {
+            if (!toolMeta) return;
+            trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
+            logOutputCopy(toolMeta.slug, mapListCopyToResultType(toolMeta.slug, index));
+          }}
           onRegenerate={generateTitles}
           onSaveEditedItem={handleSaveEditedItem}
           onItemsChange={handleItemsChange}
@@ -255,6 +276,7 @@ export function TitleGeneratorClient({ relatedAside, ctaLinks, showZhInlineLead 
       }
       howItWorks={
         <HowItWorksCard
+          title={zhUi ? "怎么用" : "How it works"}
           steps={[
             { step: 1, text: tTitle("howItWorks1") },
             { step: 2, text: tTitle("howItWorks2") },
@@ -262,21 +284,48 @@ export function TitleGeneratorClient({ relatedAside, ctaLinks, showZhInlineLead 
           ]}
         />
       }
-      aside={
-        <>
-          <HistoryPanel toolSlug="title-generator" refreshTrigger={historyTrigger} />
-          <ExamplesCard
-            examples={TITLE_EXAMPLES}
-            onUseExample={(input) => setTopic(input)}
-          />
-          <ToolProTipsCard
-            tips={[tTitle("proTip1"), tTitle("proTip2"), tTitle("proTip3")]}
-          />
-          {ctaLinks && ctaLinks.length > 0 && <CtaLinksSection links={ctaLinks} />}
-          {showZhInlineLead && <ZhCtaCaptureBlock keyword="爆款标题" inline />}
-          {relatedAside}
-        </>
+      proTips={
+        <ToolProTipsCard
+          title={zhUi ? "进阶技巧" : "Pro tips"}
+          tips={[tTitle("proTip1"), tTitle("proTip2"), tTitle("proTip3")]}
+        />
       }
+      extraSections={[
+        {
+          title: zhUi ? "历史生成记录" : "Generation history",
+          content: <HistoryPanel toolSlug="title-generator" refreshTrigger={historyTrigger} />
+        },
+        {
+          title: zhUi ? "输入示例" : "Input examples",
+          content: (
+            <ExamplesCard examples={TITLE_EXAMPLES} onUseExample={(input) => setTopic(input)} />
+          )
+        },
+        ...(ctaLinks && ctaLinks.length > 0
+          ? [
+              {
+                title: zhUi ? "延伸阅读" : "Further reading",
+                content: <CtaLinksSection links={ctaLinks} />
+              }
+            ]
+          : []),
+        ...(showZhInlineLead
+          ? [
+              {
+                title: zhUi ? "获取更多灵感" : "Get more ideas",
+                content: <ZhCtaCaptureBlock keyword="爆款标题" inline />
+              }
+            ]
+          : []),
+        ...(relatedAside
+          ? [
+              {
+                title: zhUi ? "相关工具与资源" : "Related tools and resources",
+                content: relatedAside
+              }
+            ]
+          : [])
+      ]}
     />
     </>
   );

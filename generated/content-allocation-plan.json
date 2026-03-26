@@ -1,0 +1,19 @@
+{
+  "updatedAt": "2026-03-25T17:55:10.262Z",
+  "source": "growth-priority.json (V110)",
+  "priorityPlatforms": {},
+  "priorityTopics": {},
+  "priorityIntents": {},
+  "reducedClusters": [],
+  "pausedClusters": [],
+  "rationale": [
+    {
+      "action": "summary",
+      "reason": "priority* = multiplicative weights from topBlogs/expandTopicsFrom/topTools; reducedClusters lower matching triples; pausedClusters skip exact slugs",
+      "topPlatforms": [],
+      "topTopics": [],
+      "topIntents": []
+    }
+  ],
+  "weightsNote": "Multipliers stack on base 1.0; final weight = platform*topic*intent*reduction. Paused exact slugs skip generation."
+}

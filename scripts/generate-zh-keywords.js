@@ -12,8 +12,18 @@ require("dotenv").config();
 const path = require("path");
 const fs = require("fs");
 const { openaiChatCompletions, getBaseUrl, getModel } = require("./lib/openai-fetch");
+const {
+  validateZhKeywordContent,
+  computeSimilarityAgainstCorpus,
+  loadFingerprintStore,
+  saveFingerprintStore,
+  writeRejectionLog,
+  nowIso
+} = require("./lib/seo-quality-gate");
 
 const CACHE_PATH = path.join(process.cwd(), "data", "zh-keywords.json");
+const FINGERPRINT_STORE = path.join(process.cwd(), "generated", "quality-gate", "zh-keywords-fingerprints.json");
+const REJECTION_LOG = path.join(process.cwd(), "logs", "quality-gate-rejections.jsonl");
 
 const PLATFORMS = ["tiktok", "youtube", "instagram"];
 const PLATFORM_NAMES = { tiktok: "TikTok", youtube: "YouTube", instagram: "Instagram" };
@@ -189,6 +199,7 @@ async function main() {
 
   const keywords = generateKeywords(safeLimit);
   const cache = loadCache();
+  const corpus = loadFingerprintStore(FINGERPRINT_STORE);
 
   console.log("\n===== v59 Keyword Mining Engine =====\n");
   console.log(`OpenAI base URL: ${getBaseUrl()}`);
@@ -199,6 +210,7 @@ async function main() {
 
   let generated = 0;
   let skipped = 0;
+  let rejected = 0;
 
   for (const entry of keywords) {
     if (cache[entry.slug] && cache[entry.slug].published !== false) {
@@ -209,15 +221,58 @@ async function main() {
     try {
       const prompt = buildKeywordPrompt(entry);
       const content = await generateWithOpenAI(prompt, apiKey);
-      cache[entry.slug] = {
+      const next = {
         ...content,
+        keyword: entry.keyword,
+        platform: entry.platform,
+        goal: entry.goal,
         createdAt: Date.now(),
         lastModified: Date.now(),
         published: true
       };
-      saveCache(cache);
-      generated++;
-      console.log(`  ✓ ${entry.slug} (${entry.keyword})`);
+      const textForSim = [
+        next.title,
+        next.description,
+        next.directAnswer,
+        next.intro,
+        next.guide,
+        next.stepByStep,
+        next.faq,
+        next.strategy,
+        next.tips,
+        Array.isArray(next.resultPreview) ? next.resultPreview.join("\n") : ""
+      ]
+        .filter(Boolean)
+        .join("\n");
+      const sim = computeSimilarityAgainstCorpus(textForSim, corpus, { similarityMax: 0.94 });
+      const gate = validateZhKeywordContent({
+        slug: entry.slug,
+        keyword: entry.keyword,
+        content: next,
+        similarity: sim.bestSimilarity
+      });
+      if (!gate.ok) {
+        rejected++;
+        cache[entry.slug] = { ...next, published: false };
+        saveCache(cache);
+        writeRejectionLog(
+          {
+            at: nowIso(),
+            ...gate.meta,
+            reasons: gate.reasons,
+            bestSimilarity: sim.bestSimilarity,
+            bestMatchId: sim.bestMatchId
+          },
+          REJECTION_LOG
+        );
+        console.log(`  ○ ${entry.slug} rejected by quality gate`);
+      } else {
+        cache[entry.slug] = next;
+        saveCache(cache);
+        corpus.push({ id: entry.slug, slug: entry.slug, hashes: sim.hashes });
+        generated++;
+        console.log(`  ✓ ${entry.slug} (${entry.keyword})`);
+      }
     } catch (err) {
       console.error(`  ✗ ${entry.slug}:`, err.message);
     }
@@ -226,10 +281,12 @@ async function main() {
   }
 
   const totalWithContent = Object.keys(cache).filter((k) => cache[k].published !== false).length;
+  saveFingerprintStore(FINGERPRINT_STORE, corpus);
 
   console.log("\n===== Output =====");
   console.log(`Total keywords generated: ${keywords.length}`);
   console.log(`New pages this run: ${generated}`);
+  console.log(`Rejected by quality gate: ${rejected}`);
   console.log(`Skipped (existing): ${skipped}`);
   console.log(`Total keyword pages with content: ${totalWithContent}`);
   console.log(`Example URLs:`);

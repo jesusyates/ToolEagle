@@ -6,7 +6,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", "/zh/", "/en/", "/ai-feed", "/questions/"],
+        /** Whole public site; only sensitive paths blocked (SEO + AI discovery). */
+        allow: "/",
         disallow: ["/api/", "/dashboard/", "/auth/", "/admin/"]
       },
       // v62.1: Baidu crawler - explicit allow
@@ -30,6 +31,7 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: [
       `${BASE_URL}/sitemap.xml`,
+      `${BASE_URL}/sitemap-blog.xml`,
       `${BASE_URL}/sitemap-zh.xml`,
       `${BASE_URL}/baidu-sitemap.xml`,
       `${BASE_URL}/sitemap-ai.xml`,

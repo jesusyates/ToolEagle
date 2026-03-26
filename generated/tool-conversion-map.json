@@ -1,0 +1,14 @@
+{
+  "updatedAt": "2026-03-25T16:55:17.856Z",
+  "eventCount": 0,
+  "blogs": {},
+  "classification": {
+    "high_conversion_pages": [],
+    "low_conversion_pages": []
+  },
+  "decisions": {
+    "expandSimilarTopics": [],
+    "prioritizeCtrOnBlogs": [],
+    "noteInternalLinking": "high_conversion_pages merged into search link priority; low_conversion_pages penalized unless overridden by search winners."
+  }
+}

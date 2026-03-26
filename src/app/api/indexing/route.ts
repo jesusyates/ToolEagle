@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { google } from "googleapis";
+import { submitUrlToGoogleIndexing } from "@/lib/google-indexing-submit";
 import { getAllSeoParams } from "@/config/seo/index";
 import { tools } from "@/config/tools";
 import { getAllAnswerSlugs } from "@/config/answers";
@@ -116,32 +117,10 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const auth = new google.auth.GoogleAuth({
-      credentials: { client_email: clientEmail, private_key: privateKey },
-      scopes: ["https://www.googleapis.com/auth/indexing"]
-    } as any);
-
-    const client = await auth.getClient();
-    const token = await client.getAccessToken();
-    const accessToken = token.token;
-    if (!accessToken) {
-      return NextResponse.json({ error: "Failed to get access token" }, { status: 500 });
+    const result = await submitUrlToGoogleIndexing(url);
+    if (!result.ok) {
+      return NextResponse.json({ error: result.error }, { status: 500 });
     }
-
-    const res = await fetch("https://indexing.googleapis.com/v3/urlNotifications:publish", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`
-      },
-      body: JSON.stringify({ url, type: "URL_UPDATED" })
-    });
-
-    if (!res.ok) {
-      const errText = await res.text();
-      throw new Error(errText || `Indexing API returned ${res.status}`);
-    }
-
     return NextResponse.json({ ok: true, message: "URL submitted to Indexing API" });
   } catch (err: any) {
     console.error("Indexing API error:", err);

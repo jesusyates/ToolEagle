@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useReducer, useRef, useState, type ReactNode } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Copy, RefreshCw, BookmarkPlus, Target, Lock, Share2 } from "lucide-react";
 import { safeCopyToClipboard } from "@/lib/clipboard";
@@ -14,8 +14,7 @@ import {
 import type { LockedPackagePreview } from "@/lib/ai/packageTierSplit";
 import { savePackageAsTemplate } from "@/lib/templates/localTemplates";
 import { DelegatedButton } from "@/components/DelegatedButton";
-import { UpgradeLink } from "@/components/monetization/UpgradeLink";
-import { ZhPricingLink } from "@/components/monetization/ZhPricingLink";
+import Link from "next/link";
 import { FeedbackLauncher } from "@/components/feedback/FeedbackLauncher";
 import { SupportModal } from "@/components/monetization/SupportModal";
 import { SupportPrompt } from "@/components/monetization/SupportPrompt";
@@ -31,13 +30,13 @@ import { PACKAGE_SECTION_LABELS_ZH } from "@/lib/zh-site/packageLabels";
 import { DOUYIN_RESULT_LABELS, douyinFieldRoleTag } from "@/lib/zh-site/douyin-result-labels";
 import { ZhDouyinWorkflowNextStep } from "@/components/zh/ZhDouyinWorkflowNextStep";
 import type { ContentSafetyClientMeta } from "@/lib/ai/generatePostPackage";
-import { getCnProMonthlyCny } from "@/lib/payment/config";
 import { BASE_URL } from "@/config/site";
 import { ZH } from "@/lib/zh-site/paths";
 import {
   V1062AggregatedTrafficBlocks,
   V1062PerPackageShareBlock
 } from "@/components/zh/V1062ExternalTrafficResultBlocks";
+import { logOutputCopy, mapPackageFieldKeyToResultType } from "@/lib/tool-output-quality";
 
 type Props = {
   title: string;
@@ -114,6 +113,8 @@ export function PostPackageResults({
         ...(douyinConversionMode ? DOUYIN_RESULT_LABELS : {})
       }
     : PACKAGE_SECTION_LABELS;
+  const isFree = tierApplied === "free";
+  const showRechargeEntry = isFree && usageRemaining === 0;
 
   /** V103.1 — Rule-based value tag per result · V104.2 — Douyin publish-ready tags */
   const VALUE_TAGS_ZH = ["🔥 适合带货", "📈 提升完播率", "💬 强互动结构", "🎯 转化型开头"] as const;
@@ -134,68 +135,6 @@ export function PostPackageResults({
     }
     const arr = zh ? VALUE_TAGS_ZH : VALUE_TAGS_EN;
     return arr[idx % arr.length];
-  }
-
-  function markDouyinUpgrade(source: string) {
-    if (!douyinConversionMode) return;
-    try {
-      sessionStorage.setItem("te_douyin_upgrade_intent", "1");
-    } catch {
-      /* ignore */
-    }
-    trackEvent("douyin_upgrade_click", {
-      tool_slug: toolSlug,
-      conversion_source: source
-    });
-
-    trackConversion("douyin_upgrade_click", {
-      tool_slug: toolSlug,
-      market: "cn",
-      locale: "zh",
-      conversion_source: source,
-      plan_amount: getCnProMonthlyCny(),
-      plan_currency: "CNY"
-    });
-  }
-
-  function markCnUpgrade(source: string) {
-    try {
-      sessionStorage.setItem("te_cn_upgrade_intent", "1");
-    } catch {
-      /* ignore */
-    }
-    trackConversion("cn_upgrade_click", {
-      tool_slug: toolSlug,
-      market: "cn",
-      locale: "zh",
-      conversion_source: source,
-      plan_amount: getCnProMonthlyCny(),
-      plan_currency: "CNY"
-    });
-  }
-
-  function ProLink(props: { className?: string; conversionSource: string; children: ReactNode }) {
-    if (upgradeMode === "china") {
-      return (
-        <ZhPricingLink
-          hash="#cn-credits-checkout"
-          className={props.className}
-          conversionSource={props.conversionSource}
-          afterClick={
-            douyinConversionMode
-              ? () => markDouyinUpgrade(props.conversionSource)
-              : () => markCnUpgrade(props.conversionSource)
-          }
-        >
-          {props.children}
-        </ZhPricingLink>
-      );
-    }
-    return (
-      <UpgradeLink className={props.className} conversionSource={props.conversionSource}>
-        {props.children}
-      </UpgradeLink>
-    );
   }
 
   const showContent = !isLoading && packages.length > 0;
@@ -257,12 +196,10 @@ export function PostPackageResults({
     bumpSeen();
   }
 
-  const isFree = tierApplied === "free";
   const showLocked = isFree && lockedPreview.length > 0;
   const cnHardPaywallUi = zh && isFree && upgradeMode === "china";
-  const nearLimit =
-    isFree && usageRemaining !== null && usageRemaining <= 1 && usageRemaining >= 0;
-  const secondUseHighlight = isFree && lifetimeGenerationCount === 2;
+  const nearLimit = showRechargeEntry;
+  const secondUseHighlight = false;
 
   useEffect(() => {
     douyinLockedTracked.current = false;
@@ -300,11 +237,15 @@ export function PostPackageResults({
 
   async function copyAll(pkg: CreatorPostPackage) {
     await safeCopyToClipboard(formatPackageAsPlainText(pkg, labels));
+    logOutputCopy(toolSlug, "full");
   }
 
   async function copyField(key: keyof CreatorPostPackage, pkg: CreatorPostPackage) {
     const v = (pkg[key] ?? "").toString();
-    if (v.trim()) await safeCopyToClipboard(v);
+    if (v.trim()) {
+      await safeCopyToClipboard(v);
+      logOutputCopy(toolSlug, mapPackageFieldKeyToResultType(String(key)));
+    }
   }
 
   async function copyShareablePageLink() {
@@ -385,28 +326,27 @@ export function PostPackageResults({
           {zh ? (
             douyinConversionMode ? (
               <>
-                <span className="font-semibold">今日免费次数不多。</span>
-                需要继续生成可查看算力包；也可明天再用免费额度。{" "}
-                <ProLink className="text-red-800 font-semibold underline" conversionSource="near_limit_banner">
-                  去充值 →
-                </ProLink>
+                <span className="font-semibold">今日免费次数已用完。</span>
+                继续生成请前往{" "}
+                <Link href="/zh/pricing#cn-credits-checkout" className="text-red-800 font-semibold underline">
+                  充值页面 →
+                </Link>
               </>
             ) : (
               <>
-                <span className="font-bold">今日剩余次数不多了。</span>
-                充值算力包涨粉更快：按次使用 + <strong>爆款结构</strong>、直接可用文案、提高完播率。{" "}
-                <ProLink className="text-rose-800 font-bold underline" conversionSource="near_limit_banner">
-                  解锁全部爆款文案 →
-                </ProLink>
+                <span className="font-bold">今日免费次数已用完。</span>
+                继续生成请前往{" "}
+                <Link href="/zh/pricing#cn-credits-checkout" className="text-rose-800 font-bold underline">
+                  充值页面 →
+                </Link>
               </>
             )
           ) : (
             <>
-              <span className="font-bold">Almost at your daily limit.</span> Top up credits for more runs +{" "}
-              <strong>full</strong> packages (all strategy fields + every variant).{" "}
-              <ProLink className="text-rose-800 font-bold underline" conversionSource="near_limit_banner">
-                Unlock Pro →
-              </ProLink>
+              <span className="font-bold">You have used all free runs for today.</span> Continue generation at{" "}
+              <Link href="/pricing" className="text-rose-800 font-bold underline">
+                pricing →
+              </Link>
             </>
           )}
         </div>
@@ -416,19 +356,11 @@ export function PostPackageResults({
         <div className="px-4 py-3 bg-violet-50 border-b border-violet-100 text-sm text-violet-950">
           {zh ? (
             <>
-              <span className="font-bold">第二次生成，节奏对了。</span> Pro 用户每次可拿{" "}
-              <strong>10 套完整文案包</strong>（带货/情绪/干货/娱乐多风格），含「为什么能爆」与发布建议。{" "}
-              <ProLink className="font-bold text-violet-900 underline" conversionSource="second_use_banner">
-                看 Pro 多给什么 →
-              </ProLink>
+              <span className="font-bold">第二次生成，节奏对了。</span>
             </>
           ) : (
             <>
-              <span className="font-bold">Second run — nice.</span> Pro users get{" "}
-              <strong>5 full packages</strong> per generation with “why it works” + posting playbooks.{" "}
-              <ProLink className="font-bold text-violet-900 underline" conversionSource="second_use_banner">
-                See what Pro unlocks →
-              </ProLink>
+              <span className="font-bold">Second run — nice.</span>
             </>
           )}
         </div>
@@ -444,37 +376,25 @@ export function PostPackageResults({
                   <strong>1 套</strong>
                   部分结果（钩子/口播/正文已<strong>强截断</strong>）；另有{" "}
                   <strong>{lockedPreview.length} 套</strong> Pro 变体在下方，含<strong>更强钩子、完整五段口播、为什么能爆与转化拆解</strong>
-                  （预览区可见真实口播截断，非空占位）。{" "}
-                  <ProLink className="text-sky-800 font-bold hover:underline" conversionSource="result_banner">
-                    解锁全部 — ¥Pro →
-                  </ProLink>
+                  （预览区可见真实口播截断，非空占位）。
                 </>
               ) : (
               <>
                 <span className="font-semibold">免费档：</span>每条仅展示{" "}
                 <strong>{packages.length} 套部分结果</strong>（开头/口播/正文/话题等已截断），
-                <strong>「为什么能爆」「转化拆解」「涨粉案例向策略」</strong>已锁定。{" "}
-                <ProLink className="text-sky-800 font-bold hover:underline" conversionSource="result_banner">
-                  解锁全部内容 →
-                </ProLink>
+                <strong>「为什么能爆」「转化拆解」「涨粉案例向策略」</strong>已锁定。
               </>
               )
             ) : (
               <>
                 <span className="font-semibold">免费预览：</span>下方展示 {packages.length} 套可见区块 +{" "}
-                <strong>{lockedPreview.length} 个 Pro 专属变体</strong>已模糊处理。{" "}
-                <ProLink className="text-sky-800 font-bold hover:underline" conversionSource="result_banner">
-                  去掉模糊 — 去升级 →
-                </ProLink>
+                <strong>{lockedPreview.length} 个 Pro 专属变体</strong>已模糊处理。
               </>
             )
           ) : (
             <>
               <span className="font-semibold">Free preview:</span> 3 full blocks below +{" "}
-              <strong>{lockedPreview.length} full-package variants (locked)</strong> blurred.{" "}
-              <ProLink className="text-sky-800 font-bold hover:underline" conversionSource="result_banner">
-                Remove blur — upgrade →
-              </ProLink>
+              <strong>{lockedPreview.length} full-package variants (locked)</strong> blurred.
             </>
           )}
         </div>
@@ -697,12 +617,7 @@ export function PostPackageResults({
                         >
                           <p className="text-[11px] font-semibold text-slate-800">{row.t}</p>
                           <p className="text-[10px] text-slate-500 mt-0.5 line-clamp-2">{row.d}</p>
-                          <ProLink
-                            className="mt-1.5 inline-block text-[10px] font-bold text-amber-900 underline"
-                            conversionSource="cn_locked_section"
-                          >
-                            解锁 →
-                          </ProLink>
+                          
                         </div>
                       ))}
                     </div>
@@ -724,7 +639,7 @@ export function PostPackageResults({
                     ? douyinConversionMode
                       ? "建议：先贴描述区与话题，再按口播结构拍摄；评论引导可发后再补置顶。"
                       : "下一步：把区块粘进草稿 → 按口播要点开拍 → 再贴正文与话题标签。"
-                    : "Next steps: copy blocks into your draft → film to the talking points → paste caption + hashtags."}
+                    : "Next steps: copy Hook + Script beats + Caption + CTA + Hashtags → paste into Describe your post → tap Post → check Profile."}
                 </p>
               </div>
             </article>
@@ -767,12 +682,7 @@ export function PostPackageResults({
                           : "Upgrade to unlock full hook, script, caption, CTA, hashtags + strategy."
                         : "Upgrade to unlock full hook, script, caption, CTA, hashtags + strategy."}
                     </p>
-                    <ProLink
-                      className="mt-3 inline-flex rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-bold text-white hover:bg-slate-800"
-                      conversionSource={`locked_variant_${i + 1}`}
-                    >
-                      {zh ? "购买算力包解锁 →" : "Get credits to unlock →"}
-                    </ProLink>
+                    
                   </div>
                   <p className="p-4 text-sm text-slate-400 blur-sm select-none pointer-events-none">{lp.hookTeaser}</p>
                 </div>
@@ -787,12 +697,7 @@ export function PostPackageResults({
                     {lp.structureHint ? (
                       <p className="text-[10px] text-slate-600 mt-1 leading-snug">{lp.structureHint}</p>
                     ) : null}
-                    <ProLink
-                      className="mt-2 inline-flex text-xs font-bold text-red-800 hover:underline"
-                      conversionSource={`locked_teaser_${i + 1}`}
-                    >
-                      解锁完整包与 {lockedPreview.length + packages.length} 套级变体 →
-                    </ProLink>
+                    
                   </div>
                 ) : null}
               </div>
@@ -800,7 +705,7 @@ export function PostPackageResults({
           </div>
         )}
 
-        {showContent && isFree && (
+        {false && showContent && isFree && (
           <div className="rounded-xl border border-sky-200 bg-sky-50/50 p-3">
             <p className="text-xs font-semibold text-sky-950">
               {zh
@@ -809,12 +714,7 @@ export function PostPackageResults({
                   : "想让每个变体都有「可执行的完整打法」？充值后可按次生成完整结构化文案包。"
                 : "Want the full playbook on every variant? Buy credits for more runs and full structured packages."}
             </p>
-            <ProLink
-              className="mt-2 inline-flex text-sm font-bold text-sky-800 hover:underline"
-              conversionSource="post_generation_strip"
-            >
-              {zh ? (upgradeMode === "china" ? "解锁全部内容 — 看 Pro 多给什么 →" : "对比免费与 Pro →") : "Compare Free vs Pro →"}
-            </ProLink>
+            
           </div>
         )}
 

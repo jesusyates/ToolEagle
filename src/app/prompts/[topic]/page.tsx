@@ -147,6 +147,7 @@ export default async function PromptsTopicPage({ params, searchParams }: Props) 
                     name={t.name}
                     description={t.description}
                     category={t.category}
+                    slug={t.slug}
                   />
                 ))}
             </div>

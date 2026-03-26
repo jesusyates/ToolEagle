@@ -21,7 +21,6 @@ import {
   TYPE_LABELS
 } from "@/config/programmatic-blog";
 import { SITE_URL } from "@/config/site";
-
 type Params = Promise<{ slug: string }>;
 
 export async function generateStaticParams() {

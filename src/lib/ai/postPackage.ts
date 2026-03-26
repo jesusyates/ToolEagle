@@ -145,7 +145,11 @@ export function formatPackageAsPlainText(
 
 /** Parse OpenAI JSON { packages: [...] } */
 export function parsePackagesJson(raw: string): CreatorPostPackage[] {
-  const text = raw.trim();
+  const text = raw
+    .trim()
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/```\s*$/i, "")
+    .trim();
   if (!text) return [];
   let data: unknown;
   try {
@@ -163,9 +167,21 @@ export function parsePackagesJson(raw: string): CreatorPostPackage[] {
       return [];
     }
   }
-  if (!data || typeof data !== "object") return [];
-  const pkgs = (data as { packages?: unknown }).packages;
+  if (!data) return [];
+
+  let pkgs: unknown = null;
+  if (Array.isArray(data)) {
+    pkgs = data;
+  } else if (typeof data === "object") {
+    const obj = data as Record<string, unknown>;
+    pkgs =
+      obj.packages ??
+      obj.results ??
+      obj.items ??
+      (obj.data && typeof obj.data === "object" ? (obj.data as Record<string, unknown>).packages : null);
+  }
   if (!Array.isArray(pkgs)) return [];
+
   const out: CreatorPostPackage[] = [];
   for (const item of pkgs) {
     if (!item || typeof item !== "object") continue;

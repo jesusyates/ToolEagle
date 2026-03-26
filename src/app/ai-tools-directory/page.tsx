@@ -73,6 +73,7 @@ export default function AiToolsDirectoryPage() {
                       name={tool.name}
                       description={tool.description}
                       category={tool.category}
+                      slug={tool.slug}
                     />
                   ))}
                 </div>

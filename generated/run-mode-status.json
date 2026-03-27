@@ -1,0 +1,40 @@
+{
+  "updatedAt": "2026-03-26T17:33:49.479Z",
+  "seoGrowthActive": true,
+  "indexingActive": true,
+  "optimizationWatcherActive": true,
+  "optimizationWriteLocked": true,
+  "enDailyGrowthRunning": true,
+  "optimizationWatcherRunning": false,
+  "taskOverlapDetected": false,
+  "lockStateSummary": {
+    "enDailyGrowth": {
+      "exists": true,
+      "running": true,
+      "pid": 21272,
+      "startedAt": "2026-03-26T17:08:07.323Z"
+    },
+    "optimizationWatcher": {
+      "exists": false,
+      "running": false,
+      "pid": null,
+      "startedAt": null
+    }
+  },
+  "latestWatcherState": {
+    "checkedAt": "2026-03-26T15:46:30.712Z",
+    "inputMode": "stub",
+    "ready": false,
+    "schedulerNextAction": "PAUSE_NO_DATA",
+    "pauseType": "NO_DATA",
+    "bootstrapEligible": false,
+    "launchRecommended": false,
+    "blockers": [
+      "search_performance_is_stub_or_empty",
+      "candidate_list_empty",
+      "recommendation_list_empty",
+      "no_high_potential_candidates"
+    ]
+  },
+  "summary": "EN SEO growth and indexing are active. Optimization remains passive in background watcher mode with write lock enforced until first real batch readiness. Automation is guarded by scheduler non-reentry and script lock files."
+}

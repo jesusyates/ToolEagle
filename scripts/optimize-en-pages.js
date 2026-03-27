@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 /**
  * V112 + V113 — Apply safe EN blog MDX updates; V113 appends generated/page-optimization-registry.json on --write
+ * Governed by docs/system-blueprint.md.
+ * Do not implement logic that conflicts with blueprint rules.
  *
  * Usage:
  *   node scripts/optimize-en-pages.js --dry-run
@@ -15,12 +17,18 @@ const matter = require("gray-matter");
 const { BLOG_DIR, safeReadJson } = require("./lib/page-optimization-shared");
 const { buildRolloutStatusFile, defaultPolicyV114, safeReadJson: safeReadPolicyJson } = require("./lib/page-optimization-policy");
 const { sanitizeAndValidateMdxForWrite } = require("./lib/mdx-safety");
+const {
+  ensureSchedulerStatus,
+  assertWriteAllowedOrExit,
+  registerCohortFromWriteBatch
+} = require("./lib/optimization-experiment-scheduler");
 
 const REC_PATH = path.join(process.cwd(), "generated", "page-optimization-recommendations.json");
 const POLICY_PATH = path.join(process.cwd(), "generated", "page-optimization-policy.json");
 const LESSONS_PATH = path.join(process.cwd(), "generated", "page-optimization-lessons.json");
 const ROLLOUT_STATUS_PATH = path.join(process.cwd(), "generated", "page-optimization-rollout-status.json");
 const HISTORY = path.join(process.cwd(), "generated", "page-optimization-history.jsonl");
+const SCHEDULER_STATUS_PATH = path.join(process.cwd(), "generated", "optimization-scheduler-status.json");
 const { appendEntries } = require("./lib/page-optimization-registry");
 
 function parseArgs(argv) {
@@ -48,8 +56,32 @@ function appendHistory(entry) {
   fs.appendFileSync(HISTORY, JSON.stringify(entry) + "\n", "utf8");
 }
 
+function readSchedulerStatus() {
+  try {
+    if (!fs.existsSync(SCHEDULER_STATUS_PATH)) return null;
+    return JSON.parse(fs.readFileSync(SCHEDULER_STATUS_PATH, "utf8"));
+  } catch {
+    return null;
+  }
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
+  const doWrite = args.write;
+
+  // V119 hard lock: only allow writes in explicitly approved scheduler states.
+  if (doWrite) {
+    ensureSchedulerStatus();
+    const schedulerStatus = readSchedulerStatus();
+    const nextAction = schedulerStatus?.nextAction;
+    const allowed = nextAction === "ALLOW_NEXT_BATCH" || nextAction === "ALLOW_FIRST_REAL_BATCH";
+    if (!allowed) {
+      console.error("Optimization write blocked by scheduler state");
+      console.error(`[V119] nextAction=${nextAction || "UNKNOWN"} reason=${schedulerStatus?.reason || "scheduler_blocked"}`);
+      process.exit(1);
+    }
+  }
+
   const doc = safeReadJson(REC_PATH);
   if (!doc || !Array.isArray(doc.items)) {
     console.error("Missing generated/page-optimization-recommendations.json — run build-page-optimization-recommendations.js");
@@ -77,11 +109,15 @@ function main() {
     process.exit(1);
   }
 
-  const doWrite = args.write;
   if (!doWrite && !args.dryRun) {
     console.log("No --write or --dry-run: defaulting to --dry-run (no files changed).");
   }
   const dry = !doWrite;
+  if (doWrite) {
+    assertWriteAllowedOrExit();
+  } else {
+    ensureSchedulerStatus();
+  }
 
   let items = doc.items.filter((it) => it.status !== "missing_file" && it.recommendations);
   if (args.only) {
@@ -240,6 +276,10 @@ function main() {
   if (!dry && registryBatch.length) {
     appendEntries(registryBatch);
     console.log(`[V113] registry +${registryBatch.length} → generated/page-optimization-registry.json`);
+    const cohort = registerCohortFromWriteBatch(registryBatch, registryBatch.length);
+    if (cohort) {
+      console.log(`[V117] cohort created: ${cohort.cohortId} (${cohort.slugs.length} slug(s))`);
+    }
   }
 
   console.log(`Done. ${dry ? "Dry-run" : "Wrote"} ${applied} file(s). History: ${HISTORY}`);

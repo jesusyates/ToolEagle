@@ -1,0 +1,167 @@
+{
+  "updatedAt": "2026-03-26T17:33:47.091Z",
+  "caps": {
+    "answersMax": 5,
+    "guidesMax": 2
+  },
+  "answersCreated": 0,
+  "guidesCreated": 0,
+  "primaryPagesCreated": 0,
+  "supportingPagesCreated": 0,
+  "skippedDueToConflict": 5,
+  "downgradedGenerations": 3,
+  "cannibalizationPreventedCount": 5,
+  "preventedConflicts": [
+    {
+      "type": "guide",
+      "url": "/how-to/write-viral-captions",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-captions-ideas",
+      "reason": "plan_guard_downgrade_guide_to_answer"
+    },
+    {
+      "type": "guide",
+      "url": "/how-to/get-youtube-subscribers",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/youtube-titles-ideas",
+      "reason": "plan_guard_downgrade_guide_to_answer"
+    },
+    {
+      "type": "guide",
+      "url": "/how-to/go-viral-on-instagram",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/instagram-captions-ideas",
+      "reason": "plan_guard_downgrade_guide_to_answer"
+    },
+    {
+      "type": "guide",
+      "url": "/en/how-to/instagram-growth",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/instagram-hashtags-ideas",
+      "reason": "duplicate_url"
+    },
+    {
+      "type": "guide",
+      "url": "/how-to/get-instagram-followers",
+      "primaryType": "guide",
+      "primaryUrl": "/how-to/get-instagram-followers",
+      "reason": "duplicate_url"
+    }
+  ],
+  "intentSeparation": {
+    "blog": "broader_ideas_examples_lists",
+    "answer": "short_direct_question_answer",
+    "guide": "step_by_step_workflow"
+  },
+  "queued": {
+    "answers": [],
+    "guides": []
+  },
+  "skippedReasons": [
+    {
+      "type": "guide",
+      "url": "/how-to/write-viral-captions",
+      "reason": "downgraded_to_answer:plan_guard_downgrade_guide_to_answer"
+    },
+    {
+      "type": "guide",
+      "url": "/how-to/get-youtube-subscribers",
+      "reason": "downgraded_to_answer:plan_guard_downgrade_guide_to_answer"
+    },
+    {
+      "type": "guide",
+      "url": "/how-to/go-viral-on-instagram",
+      "reason": "downgraded_to_answer:plan_guard_downgrade_guide_to_answer"
+    },
+    {
+      "type": "guide",
+      "url": "/en/how-to/instagram-growth",
+      "reason": "duplicate_url"
+    },
+    {
+      "type": "guide",
+      "url": "/how-to/get-instagram-followers",
+      "reason": "duplicate_url"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-to-write-tiktok-captions",
+      "reason": "cooldown_not_elapsed"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-to-write-viral-hooks",
+      "reason": "cooldown_not_elapsed"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-to-go-viral-tiktok",
+      "reason": "cooldown_not_elapsed"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/youtube-title-formulas",
+      "reason": "cooldown_not_elapsed"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-to-write-youtube-hooks",
+      "reason": "cooldown_not_elapsed"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-to-go-viral-youtube",
+      "reason": "cooldown_not_elapsed"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-to-write-instagram-captions",
+      "reason": "cooldown_not_elapsed"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-many-hashtags-instagram",
+      "reason": "cooldown_not_elapsed"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-to-go-viral-instagram",
+      "reason": "cooldown_not_elapsed"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-to-write-tiktok-captions",
+      "reason": "cooldown_not_elapsed"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/youtube-title-formulas",
+      "reason": "cooldown_not_elapsed"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-to-write-instagram-captions",
+      "reason": "cooldown_not_elapsed"
+    },
+    {
+      "type": "guide",
+      "url": "/how-to/create-viral-hooks",
+      "reason": "cooldown_not_elapsed"
+    },
+    {
+      "type": "guide",
+      "url": "/how-to/grow-on-tiktok",
+      "reason": "cooldown_not_elapsed"
+    },
+    {
+      "type": "guide",
+      "url": "/how-to/create-viral-hooks",
+      "reason": "cooldown_not_elapsed"
+    },
+    {
+      "type": "guide",
+      "url": "/en/how-to/youtube-growth",
+      "reason": "cooldown_not_elapsed"
+    }
+  ]
+}

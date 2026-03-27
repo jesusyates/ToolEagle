@@ -1,0 +1,161 @@
+{
+  "version": "V125",
+  "status": "LOCKED_FOUNDATION",
+  "scope": "en_main_site_growth_with_global_extensibility",
+  "A_mission_core_goal": {
+    "traffic": {
+      "goal": "grow broad and high-intent SEO entry coverage",
+      "requirements": [
+        "maintain indexing and sitemap discoverability",
+        "maintain internal linking quality"
+      ]
+    },
+    "scale": {
+      "goal": "support 100k-1M pages over time",
+      "requirements": [
+        "structured expansion",
+        "anti-drift controls",
+        "observable automation"
+      ]
+    },
+    "monetization": {
+      "goal": "convert traffic into tool usage and paid paths",
+      "requirements": [
+        "content to tool routing",
+        "upgrade surface continuity"
+      ]
+    }
+  },
+  "B_page_type_system": {
+    "blog": {
+      "definition": "broad discovery for ideas/examples/lists",
+      "allowedUseCases": [
+        "ideas",
+        "examples",
+        "listicle",
+        "trend framing"
+      ],
+      "forbiddenOverlaps": [
+        "cannot replace workflow guide intent when guide is primary",
+        "cannot behave like short direct Q/A"
+      ]
+    },
+    "answer": {
+      "definition": "short explicit question-intent page",
+      "allowedUseCases": [
+        "how many",
+        "what is",
+        "when",
+        "should i"
+      ],
+      "forbiddenOverlaps": [
+        "never primary ownership",
+        "cannot become long workflow tutorial",
+        "cannot become broad listicle"
+      ]
+    },
+    "guide": {
+      "definition": "step-by-step workflow page",
+      "allowedUseCases": [
+        "how-to",
+        "workflow",
+        "execution sequence"
+      ],
+      "forbiddenOverlaps": [
+        "cannot become generic listicle",
+        "cannot duplicate blog broad-intent structure for same core query"
+      ]
+    },
+    "tool": {
+      "definition": "product action page for generation and conversion",
+      "allowedUseCases": [
+        "core conversion destination",
+        "functional output and upgrade path"
+      ],
+      "forbiddenOverlaps": [
+        "cannot be content-only without usable action path",
+        "cannot be isolated from content traffic graph"
+      ]
+    }
+  },
+  "C_topic_ownership_rules": {
+    "oneTopicOnePrimary": true,
+    "answerCanBePrimary": false,
+    "requiredFieldsPerTopic": [
+      "primaryType",
+      "primaryUrl",
+      "supportingPages"
+    ],
+    "antiCannibalizationLogic": [
+      "block generation if same-topic page competes with primary intent",
+      "block same-type non-primary URLs under same topic ownership",
+      "skip or downgrade conflicting generation"
+    ]
+  },
+  "D_traffic_flow_model": {
+    "flow": [
+      "seo_query",
+      "entry_page",
+      "tool_page",
+      "upgrade_or_revenue"
+    ],
+    "internalLinkingRules": [
+      "all entry pages should link to relevant tools",
+      "cross-type linking should reinforce ownership hierarchy",
+      "no isolated content silos"
+    ],
+    "discoverabilityRequirements": [
+      "indexing queue submission",
+      "sitemap inclusion",
+      "shared discoverability network"
+    ]
+  },
+  "E_content_generation_rules": {
+    "canGenerate": [
+      "en_blog_primary_volume",
+      "en_answer_secondary_controlled",
+      "en_guide_secondary_controlled",
+      "topic_ownership_plans"
+    ],
+    "mustAvoid": [
+      "near-duplicate pages across types for same query shape",
+      "type-intent mismatch",
+      "unbounded expansion without ownership checks"
+    ],
+    "qualityRequirements": [
+      "preserve existing blog quality gates",
+      "enforce type-pattern checks for answer/guide secondary layer",
+      "skip when intent or quality safety is uncertain"
+    ]
+  },
+  "F_scaling_rules": {
+    "expandTopics": [
+      "prioritize tool-aligned high-value clusters",
+      "use allocation and growth signals",
+      "preserve one-topic-one-primary ownership"
+    ],
+    "expandPlatforms": [
+      "keep explicit intent separation",
+      "reuse indexing/linking/status systems"
+    ],
+    "mustNotDo": [
+      "do not reduce blog primary engine for secondary page inflation",
+      "do not mix incompatible intents to chase volume",
+      "do not bypass anti-cannibalization guards"
+    ]
+  },
+  "G_system_priority_locked": [
+    "SEO traffic",
+    "content production",
+    "creator ecosystem",
+    "tools marketplace",
+    "monetization"
+  ],
+  "usage": {
+    "humanReadablePath": "docs/system-blueprint.md",
+    "machineReadablePath": "generated/system-blueprint.json",
+    "futureScriptsShouldReference": true,
+    "driftPolicy": "logic conflicting with blueprint is considered drift and should be corrected"
+  },
+  "updatedAt": "2026-03-26T00:00:00.000Z"
+}

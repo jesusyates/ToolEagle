@@ -1,0 +1,17 @@
+{
+  "updatedAt": "2026-03-26T15:46:30.486Z",
+  "ready": false,
+  "blockers": [
+    "search_performance_is_stub_or_empty",
+    "candidate_list_empty",
+    "recommendation_list_empty",
+    "no_high_potential_candidates"
+  ],
+  "candidateCount": 0,
+  "recommendationCount": 0,
+  "highPotentialCount": 0,
+  "schedulerState": "PAUSE_NO_DATA",
+  "inputMode": "stub",
+  "canBootstrapFirstBatch": false,
+  "summary": "First real optimization batch is blocked until all readiness conditions pass."
+}

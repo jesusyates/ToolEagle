@@ -1,3 +1,7 @@
+/**
+ * Governed by docs/system-blueprint.md.
+ * Do not implement logic that conflicts with blueprint rules.
+ */
 const fs = require("fs");
 const path = require("path");
 

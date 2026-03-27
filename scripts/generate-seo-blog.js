@@ -1,5 +1,7 @@
 /**
  * SEO Blog Generator - Target 500 posts
+ * Governed by docs/system-blueprint.md.
+ * Do not implement logic that conflicts with blueprint rules.
  * Topics: TikTok captions ideas, TikTok hook ideas, YouTube shorts titles, Instagram caption ideas
  *
  * Usage: node scripts/generate-seo-blog.js [--dry-run] [--limit N]
@@ -25,6 +27,9 @@ const {
 
 const { enqueueIndexingUrl } = require("./lib/indexing-queue");
 const { sanitizeAndValidateMdxForWrite } = require("./lib/mdx-safety");
+const { topicKeyFromParts } = require("./lib/topic-normalizer");
+const { validateBlogLike } = require("./lib/content-role-validator");
+const { loadRegistry, saveRegistry, decideGeneration, upsertTopicPage } = require("./lib/topic-registry");
 
 const {
   buildEnBlogLinkIndex,
@@ -566,6 +571,7 @@ async function main() {
   let generated = 0;
   let skipped = 0;
   let rejected = 0;
+  let skippedDueToConflict = 0;
   let attempts = 0; // counts non-existing slugs we actually tried
   const rejectionReasonDist = new Map();
   const retryDistribution = {
@@ -575,6 +581,7 @@ async function main() {
     failed: 0
   };
   const failureByTopic = new Map();
+  const topicRegistry = loadRegistry();
 
   for (const row of generationOrder) {
     const { platform, contentType, topic } = row;
@@ -583,6 +590,22 @@ async function main() {
         const slug = generateSlug(platform, contentType, topic);
         if (existing.has(slug)) {
           skipped++;
+          continue;
+        }
+        const topicKey = topicKeyFromParts({ platform, topic, slug });
+        const intent = /how-to|workflow/i.test(topic) ? "how-to/workflow" : "ideas/examples/list";
+        const preDecision = decideGeneration({
+          registry: topicRegistry,
+          topicKey,
+          platform,
+          type: "blog",
+          url: `/blog/${slug}`,
+          intent
+        });
+        if (preDecision.decision === "skip") {
+          skipped++;
+          skippedDueToConflict += 1;
+          rejectionReasonDist.set(`pre_generation_skip_${preDecision.reason}`, (rejectionReasonDist.get(`pre_generation_skip_${preDecision.reason}`) ?? 0) + 1);
           continue;
         }
         attempts++;
@@ -626,6 +649,18 @@ async function main() {
             });
 
             if (gate.ok) {
+              const roleOk = validateBlogLike(data.body, data.title);
+              if (!roleOk.ok) {
+                gate = {
+                  ...gate,
+                  ok: false,
+                  reasons: [...(Array.isArray(gate.reasons) ? gate.reasons : []), roleOk.reason]
+                };
+                lastGate = { gate, sim };
+                data = null;
+                sim = null;
+                continue;
+              }
               succeededAttemptIdx = attemptIdx;
               lastGate = null;
               lastError = null;
@@ -734,6 +769,15 @@ async function main() {
           });
           if (res.ok) {
             fs.writeFileSync(filePath, res.sanitizedMdx, "utf8");
+            upsertTopicPage({
+              registry: topicRegistry,
+              topicKey,
+              platform,
+              type: "blog",
+              url: `/blog/${slug}`,
+              primaryType: "blog",
+              primaryUrl: `/blog/${slug}`
+            });
             try {
               const base = (process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://www.tooleagle.com").replace(
                 /\/$/,
@@ -776,6 +820,7 @@ async function main() {
 
   if (!dryRun) {
     saveFingerprintStore(FINGERPRINT_STORE, corpus);
+    saveRegistry(topicRegistry);
   }
 
   const totalAttempts = generated + rejected;
@@ -804,6 +849,7 @@ async function main() {
       retryDistribution,
       avgRetriesPerSuccess,
       failureByTopic: Object.fromEntries([...failureByTopic.entries()].sort((a, b) => String(a[0]).localeCompare(String(b[0])))),
+      skippedDueToConflict,
       topRejectionReasons
     };
     fs.mkdirSync(path.dirname(OBSERVATION_LOG), { recursive: true });

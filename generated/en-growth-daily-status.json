@@ -1,0 +1,31 @@
+{
+  "date": "2026-03-26",
+  "targetDailyLimit": 30,
+  "caps": {
+    "blogPrimary": 30,
+    "answersSecondary": 5,
+    "guidesSecondary": 2
+  },
+  "actualBatchesRun": 11,
+  "attempted": 55,
+  "created": 55,
+  "blogCreated": 55,
+  "answersCreated": 0,
+  "guidesCreated": 0,
+  "totalCreated": 55,
+  "primaryPagesCreated": 0,
+  "supportingPagesCreated": 0,
+  "skippedDueToConflict": 5,
+  "downgradedGenerations": 3,
+  "cannibalizationPreventedCount": 5,
+  "rejected": 0,
+  "rejectionRate": 0,
+  "indexingSubmitted": 4,
+  "indexingSubmittedByType": {
+    "blog": 4,
+    "answers": 0,
+    "guides": 0
+  },
+  "fallbackTriggered": false,
+  "summary": "V122 daily autopilot run at 2026-03-26T17:08:07.324Z. Blog=55, answers=0, guides=0, rejected=0, rejectionRate=0.0%. Primary=0, supporting=0, downgraded=3, conflictsPrevented=5. IndexingSubmitted=4 (blog=4, answers=0, guides=0)."
+}

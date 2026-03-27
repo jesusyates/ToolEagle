@@ -1,0 +1,10 @@
+{
+  "updatedAt": "2026-03-26T15:46:30.697Z",
+  "currentActiveCohortId": null,
+  "cohortAgeDays": null,
+  "pauseType": "NO_DATA",
+  "bootstrapEligible": false,
+  "dataReady": false,
+  "nextAction": "PAUSE_NO_DATA",
+  "reason": "No data-ready signal yet. (search_performance_is_stub_or_empty)"
+}

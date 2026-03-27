@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 /**
  * V111 — Build generated/content-allocation-plan.json from V110 growth-priority.json
+ * Governed by docs/system-blueprint.md.
+ * Do not implement logic that conflicts with blueprint rules.
  *
  * Usage: node scripts/build-content-allocation-plan.js
  */

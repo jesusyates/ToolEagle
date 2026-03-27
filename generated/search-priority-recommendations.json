@@ -1,0 +1,13 @@
+{
+  "updatedAt": "2026-03-26T15:46:29.367Z",
+  "linkPrioritySlugs": [],
+  "weakLinkSlugs": [],
+  "decisions": {
+    "expandTopics": [],
+    "ctrTitleMetaImprove": [],
+    "internalLinkBoostRationale": "linkPrioritySlugs = blog URLs in winners, rising_pages, or high_potential (by impressions). weakLinkSlugs = weak_pages for deprioritized internal links.",
+    "slowDownClusters": [],
+    "internalLinkBoostCount": 0,
+    "weakDeprioritizeCount": 0
+  }
+}

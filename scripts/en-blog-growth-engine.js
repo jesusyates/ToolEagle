@@ -1,5 +1,7 @@
 /**
  * V103: Automated Growth Engine + Smart Scheduler + Early Risk Control
+ * Governed by docs/system-blueprint.md.
+ * Do not implement logic that conflicts with blueprint rules.
  *
  * Reads logs/seo-observation.jsonl and decides an EN daily publishing capacity.
  * Then executes real publish batches sequentially using scripts/generate-seo-blog.js.
@@ -56,8 +58,8 @@ function computeDailyLimit({ lastRealBatches }) {
     dailyLimit = 0;
     baseRule = "pause_generation_gt20pct";
   } else if (latestRejectionRate > 0.10) {
-    dailyLimit = 10;
-    baseRule = "fallback_10_gt10pct";
+    dailyLimit = 15;
+    baseRule = "fallback_15_gt10pct";
   } else if (latestRejectionRate > 0.05) {
     dailyLimit = 15;
     baseRule = "fallback_15_gt5pct";
@@ -65,9 +67,12 @@ function computeDailyLimit({ lastRealBatches }) {
     dailyLimit = 30;
     baseRule = "increase_30_last10_zero_and_avgRetries_lt0_4";
   } else if (last5AllZero) {
-    dailyLimit = 25;
-    baseRule = "increase_25_last5_zero";
+    dailyLimit = 30;
+    baseRule = "increase_30_last5_zero";
   }
+
+  // Hard cap (V122): never jump above 30/day in this version.
+  dailyLimit = Math.min(30, dailyLimit);
 
   return {
     dailyLimit,
@@ -96,6 +101,8 @@ function applyEarlyRiskControl({ dailyLimit, lastRealBatches }) {
     earlyWarning = { type: "reduce_30pct_avgRetries_gt0_8", rollingAvgRetries };
   }
 
+  // Hard cap safety (V122).
+  adjusted = Math.min(30, adjusted);
   return { adjustedDailyLimit: adjusted, earlyWarning, rollingAvgRetries };
 }
 

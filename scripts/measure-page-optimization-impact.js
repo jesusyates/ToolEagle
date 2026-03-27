@@ -14,6 +14,7 @@ require("dotenv").config();
 
 const { google } = require("googleapis");
 const { loadRegistry, REGISTRY_PATH } = require("./lib/page-optimization-registry");
+const { refreshCohortEvaluationFromImpact } = require("./lib/optimization-experiment-scheduler");
 
 const OUT_IMPACT = path.join(process.cwd(), "generated", "page-optimization-impact.json");
 const OUT_LESSONS = path.join(process.cwd(), "generated", "page-optimization-lessons.json");
@@ -257,6 +258,7 @@ async function main() {
       "utf8"
     );
     console.warn("[measure-page-optimization-impact] Missing GSC credentials — wrote stubs.");
+    refreshCohortEvaluationFromImpact();
     return;
   }
 
@@ -324,6 +326,12 @@ async function main() {
   console.log(
     `[measure-page-optimization-impact] records=${records.length} → ${OUT_IMPACT} + ${OUT_LESSONS}`
   );
+  const schedulerStatus = refreshCohortEvaluationFromImpact();
+  if (schedulerStatus?.nextAction) {
+    console.log(
+      `[V117] scheduler nextAction=${schedulerStatus.nextAction} activeCohort=${schedulerStatus.currentActiveCohortId || "none"}`
+    );
+  }
 }
 
 main().catch((e) => {

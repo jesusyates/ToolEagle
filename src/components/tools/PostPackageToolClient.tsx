@@ -36,8 +36,22 @@ import { ZhDouyinCreditsBar } from "@/components/zh/ZhDouyinCreditsBar";
 import { getEnToolJourney } from "@/config/en-tool-journey";
 import { ToolNextSteps } from "@/components/tools/ToolNextSteps";
 import { recordGenerationComplete } from "@/lib/tool-output-quality";
+import { parseToolPrefillParams } from "@/lib/tools/tool-prefill";
+import { trackGenerationStart, trackToolEntry } from "@/lib/seo/asset-seo-conversion-tracking";
+import { computeMonetizationPotential } from "@/lib/seo/asset-seo-monetization-score";
+import { deriveMonetizationTrigger, type MonetizationTrigger } from "@/lib/seo/asset-seo-monetization-trigger";
+import { trackUpgradeClicked, trackUpgradeConverted, trackUpgradeShown } from "@/lib/seo/asset-seo-monetization-tracking";
+import { pickVariantDeterministic, variantsForTrigger, type MonetizationVariant } from "@/lib/seo/asset-seo-monetization-variants";
+import {
+  selectBestTriggerTiming,
+  selectWinningVariant,
+  type MonetizationIntelligence
+} from "@/lib/seo/asset-seo-monetization-decision";
 
 const LIFETIME_GEN_KEY = "te_v96_lifetime_pkg_gens";
+const MONETIZATION_VARIANT_STATS_KEY = "te_monetization_variant_stats";
+const MONETIZATION_TIMING_STATS_KEY = "te_monetization_timing_stats";
+const MONETIZATION_SERVER_INTEL = "/generated/asset-seo-monetization-intelligence.json";
 
 export type PostPackageToolClientProps = {
   toolSlug: string;
@@ -96,13 +110,57 @@ export function PostPackageToolClient({
   introAudience: introAudienceProp,
   outputPreview
 }: PostPackageToolClientProps) {
+  function bumpVariantStat(variantId: string, field: "shown" | "clicked" | "converted") {
+    try {
+      const raw = localStorage.getItem(MONETIZATION_VARIANT_STATS_KEY);
+      const obj = raw ? (JSON.parse(raw) as Record<string, { shown: number; clicked: number; converted: number }>) : {};
+      obj[variantId] = obj[variantId] ?? { shown: 0, clicked: 0, converted: 0 };
+      obj[variantId][field] += 1;
+      localStorage.setItem(MONETIZATION_VARIANT_STATS_KEY, JSON.stringify(obj));
+    } catch {}
+  }
+
+  function computeWinnerVariant(triggerType: "soft" | "hard"): string | null {
+    try {
+      const raw = localStorage.getItem(MONETIZATION_VARIANT_STATS_KEY);
+      const obj = raw ? (JSON.parse(raw) as Record<string, { shown: number; clicked: number; converted: number }>) : {};
+      const ids = variantsForTrigger(triggerType).map((v) => v.id);
+      const scored = ids.map((id) => {
+        const s = obj[id] ?? { shown: 0, clicked: 0, converted: 0 };
+        const cr = s.shown > 0 ? s.converted / s.shown : 0;
+        const ctr = s.shown > 0 ? s.clicked / s.shown : 0;
+        return { id, score: cr * 0.7 + ctr * 0.3 };
+      });
+      const winner = scored.sort((a, b) => b.score - a.score)[0]?.id ?? null;
+      if (winner) localStorage.setItem(`te_monetization_winner_variant_${triggerType}`, winner);
+      return winner;
+    } catch {
+      return null;
+    }
+  }
+
+  function bumpTimingStat(generationCountBeforeConversion: number) {
+    try {
+      const timing = Math.max(1, Math.min(3, Math.round(generationCountBeforeConversion)));
+      const raw = localStorage.getItem(MONETIZATION_TIMING_STATS_KEY);
+      const obj = raw ? (JSON.parse(raw) as Record<string, number>) : {};
+      obj[String(timing)] = (obj[String(timing)] ?? 0) + 1;
+      localStorage.setItem(MONETIZATION_TIMING_STATS_KEY, JSON.stringify(obj));
+      const best = Number(Object.entries(obj).sort((a, b) => (b[1] as number) - (a[1] as number))[0]?.[0] ?? 2);
+      localStorage.setItem("te_monetization_best_timing", String(best));
+      trackEvent("trigger_timing_optimized", { tool_slug: toolSlug, page_type: String(best) } as any);
+    } catch {}
+  }
+
   const intlLocale = useLocale();
   const locale = siteMode === "china" ? "zh" : intlLocale;
   const country = useCountry();
   const pathname = usePathname() || "";
   const searchParams = useSearchParams();
+  const prefill = parseToolPrefillParams(searchParams);
   const q = searchParams.get(seedFromQueryParam) ?? "";
-  const [idea, setIdea] = useState(q);
+  const initialIdea = prefill.topic ?? q;
+  const [idea, setIdea] = useState(initialIdea);
   const [packages, setPackages] = useState<CreatorPostPackage[]>([]);
   const [lockedPreview, setLockedPreview] = useState<LockedPackagePreview[]>([]);
   const [tierApplied, setTierApplied] = useState<"free" | "pro">("free");
@@ -123,6 +181,9 @@ export function PostPackageToolClient({
   /** V106.1 — merged publish pack (default on for CN) */
   const [publishFullPack, setPublishFullPack] = useState(siteMode === "china");
   const [publishFullPackEcho, setPublishFullPackEcho] = useState(false);
+  const [monetizationTrigger, setMonetizationTrigger] = useState<MonetizationTrigger | null>(null);
+  const [monetizationVariant, setMonetizationVariant] = useState<MonetizationVariant | null>(null);
+  const [serverIntelligence, setServerIntelligence] = useState<MonetizationIntelligence | null>(null);
 
   const toolMeta = tools.find((t) => t.slug === toolSlug);
 
@@ -153,9 +214,29 @@ export function PostPackageToolClient({
   }, []);
 
   useEffect(() => {
+    fetch(MONETIZATION_SERVER_INTEL, { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d && typeof d === "object") {
+          setServerIntelligence(d as MonetizationIntelligence);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
     if (!toolMeta) return;
     trackEvent("tool_page_view", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
   }, [toolMeta, country]);
+
+  useEffect(() => {
+    if (!toolMeta) return;
+    if (prefill.source !== "ai_page") return;
+    trackToolEntry({ tool_slug: toolMeta.slug, topic: prefill.topic ?? undefined, intent: prefill.intent ?? undefined, workflow: prefill.workflow ?? undefined, source: prefill.source ?? undefined });
+    if (prefill.autostart && (prefill.topic ?? "").trim().length > 0) {
+      void runGenerate();
+    }
+  }, [toolMeta, prefill.source, prefill.autostart]);
 
   async function runGenerate() {
     const hadPrior = packages.length > 0;
@@ -177,11 +258,28 @@ export function PostPackageToolClient({
 
     setIsGenerating(true);
     try {
+      if (toolMeta && prefill.source === "ai_page") {
+        trackGenerationStart({
+          tool_slug: toolMeta.slug,
+          topic: prefill.topic ?? trimmed,
+          intent: prefill.intent ?? undefined,
+          workflow: prefill.workflow ?? undefined,
+          source: prefill.source ?? undefined
+        });
+      }
       const res = await generatePostPackages(trimmed, toolKind, {
         locale,
         market: siteMode === "china" ? "cn" : undefined,
         clientRoute: pathname || undefined,
-        publishFullPack: siteMode === "china" ? publishFullPack : false
+        publishFullPack: siteMode === "china" ? publishFullPack : false,
+        attribution: prefill.source
+          ? {
+              entry_source: prefill.source,
+              entry_intent: prefill.intent,
+              topic: prefill.topic ?? trimmed,
+              workflow: prefill.workflow
+            }
+          : undefined
       });
       setPackages(res.packages);
       setLockedPreview(res.lockedPreview ?? []);
@@ -189,6 +287,7 @@ export function PostPackageToolClient({
       setResultQuality(res.resultQuality);
       setContentSafety(res.contentSafety ?? null);
       setPublishFullPackEcho(res.publishFullPack === true);
+      const nextGenerationCount = lifetimeGenCount + (res.packages.length > 0 ? 1 : 0);
       if (toolMeta) {
         trackEvent("tool_generate_ai", {
           tool_slug: toolMeta.slug,
@@ -264,6 +363,112 @@ export function PostPackageToolClient({
         }
 
         recordGenerationComplete(toolSlug, { wasRegenerate: hadPrior });
+        if (res.tierApplied === "pro") {
+          trackEvent("conversion_completed", {
+            tool_slug: toolMeta.slug,
+            topic_slug: prefill.topic ?? trimmed,
+            prompt_id: prefill.workflow ?? ""
+          } as any);
+          trackUpgradeConverted({
+            tool_slug: toolMeta.slug,
+            topic: prefill.topic ?? trimmed,
+            workflow: prefill.workflow ?? "",
+            variant_id: monetizationVariant?.id
+          });
+          if (monetizationVariant?.id) {
+            bumpVariantStat(monetizationVariant.id, "converted");
+            computeWinnerVariant(monetizationVariant.trigger_type);
+          }
+          bumpTimingStat(nextGenerationCount);
+        }
+      }
+      // V151 monetization trigger: post-value, frequency-capped, non-blocking first experience.
+      const mp = computeMonetizationPotential({
+        conversion_score: Number((res.generationMeta as any)?.retrieval_used ? 0.5 : 0.32),
+        generation_start_rate: res.packages.length > 0 ? 0.7 : 0.1,
+        intent: prefill.intent ?? "wants_examples",
+        retrieval_share: Number((res.generationMeta as any)?.retrieval_used ? 0.6 : 0.35)
+      });
+      const trigger = deriveMonetizationTrigger({
+        monetization_tier: mp.monetization_tier,
+        generation_count: nextGenerationCount,
+        value_delivered: res.packages.length > 0,
+        best_trigger_timing:
+          selectBestTriggerTiming({
+            intelligence: serverIntelligence,
+            topic: prefill.topic ?? trimmed,
+            workflow_id: prefill.workflow ?? toolKind,
+            min_samples: 10
+          }) ??
+          (Number(localStorage.getItem("te_monetization_best_timing") || "2") as 1 | 2 | 3)
+      });
+      const lastShownTs = Number(localStorage.getItem("te_monetization_trigger_last_shown_ts") || "0");
+      const canShow = Date.now() - lastShownTs > 1000 * 60 * 60 * 12; // 12h cap
+      if (trigger.trigger_type !== "none" && canShow) {
+        const triggerType = trigger.trigger_type === "hard" ? "hard" : "soft";
+        const strategy = selectWinningVariant({
+          intelligence: serverIntelligence,
+          topic: prefill.topic ?? trimmed,
+          workflow_id: prefill.workflow ?? toolKind,
+          min_samples: 10
+        });
+        const sessionKey = `te_monetization_variant_${triggerType}`;
+        const persistedVariantId = localStorage.getItem(sessionKey) || "";
+        const winnerVariantId = localStorage.getItem(`te_monetization_winner_variant_${triggerType}`) || "";
+        const pool = variantsForTrigger(triggerType);
+        const picked =
+          pool.find((v) => v.id === strategy.variant_id) ??
+          pool.find((v) => v.id === winnerVariantId) ??
+          pool.find((v) => v.id === persistedVariantId) ??
+          pickVariantDeterministic(`${toolSlug}-${Date.now().toString(36)}-${prefill.topic ?? ""}`, triggerType);
+        localStorage.setItem(sessionKey, picked.id);
+        setMonetizationTrigger(trigger);
+        setMonetizationVariant(picked);
+        localStorage.setItem("te_monetization_trigger_last_shown_ts", String(Date.now()));
+        trackEvent("monetization_trigger_fired", {
+          tool_slug: toolMeta?.slug ?? toolSlug,
+          topic_slug: prefill.topic ?? trimmed,
+          prompt_id: prefill.workflow ?? "",
+          page_type: trigger.trigger_type
+        } as any);
+        trackEvent("monetization_variant_assigned", {
+          tool_slug: toolMeta?.slug ?? toolSlug,
+          variant_id: picked.id,
+          page_type: trigger.trigger_type
+        } as any);
+        if (strategy.source !== "fallback") {
+          trackEvent("monetization_global_winner_applied", {
+            tool_slug: toolMeta?.slug ?? toolSlug,
+            variant_id: strategy.variant_id,
+            page_type: strategy.source
+          } as any);
+          trackEvent("monetization_server_timing_applied", {
+            tool_slug: toolMeta?.slug ?? toolSlug,
+            page_type: String(strategy.best_trigger_timing)
+          } as any);
+          if (strategy.source === "topic") {
+            trackEvent("monetization_topic_strategy_applied", {
+              tool_slug: toolMeta?.slug ?? toolSlug,
+              topic_slug: prefill.topic ?? trimmed
+            } as any);
+          } else if (strategy.source === "workflow") {
+            trackEvent("monetization_workflow_strategy_applied", {
+              tool_slug: toolMeta?.slug ?? toolSlug,
+              prompt_id: prefill.workflow ?? toolKind
+            } as any);
+          }
+        }
+        bumpVariantStat(picked.id, "shown");
+        trackUpgradeShown({
+          tool_slug: toolMeta?.slug ?? toolSlug,
+          topic: prefill.topic ?? trimmed,
+          workflow: prefill.workflow ?? "",
+          trigger_type: trigger.trigger_type,
+          variant_id: picked.id
+        });
+      } else {
+        setMonetizationTrigger(null);
+        setMonetizationVariant(null);
       }
     } catch (err) {
       if (err instanceof LimitReachedError || err instanceof CreditsDepletedError) {
@@ -543,6 +748,47 @@ export function PostPackageToolClient({
           </DelegatedButton>
         </div>
       ) : null}
+      {monetizationTrigger && (
+        <div className="mt-3 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
+          <p className="font-semibold">{monetizationVariant?.text ?? monetizationTrigger.trigger_message}</p>
+          <div className="mt-2">
+            <a
+              href={siteMode === "china" ? "/zh/pricing" : "/pricing"}
+              onClick={() => {
+                if (toolMeta) {
+                  trackUpgradeClicked({
+                    tool_slug: toolMeta.slug,
+                    topic: prefill.topic ?? idea,
+                    workflow: prefill.workflow ?? "",
+                    trigger_type: monetizationTrigger.trigger_type,
+                    variant_id: monetizationVariant?.id
+                  });
+                  if (monetizationVariant?.id) {
+                    bumpVariantStat(monetizationVariant.id, "clicked");
+                    const winner = computeWinnerVariant(monetizationVariant.trigger_type);
+                    if (winner) {
+                      trackEvent("monetization_variant_winner_selected", {
+                        tool_slug: toolMeta.slug,
+                        variant_id: winner,
+                        page_type: monetizationVariant.trigger_type
+                      } as any);
+                    }
+                  }
+                }
+                trackEvent("upgrade_clicked", {
+                  tool_slug: toolMeta?.slug ?? toolSlug,
+                  topic_slug: prefill.topic ?? idea,
+                  prompt_id: prefill.workflow ?? "",
+                  variant_id: monetizationVariant?.id ?? ""
+                } as any);
+              }}
+              className="inline-flex items-center rounded-lg bg-amber-600 px-3 py-1.5 font-semibold text-white hover:bg-amber-500"
+            >
+              Upgrade for full power
+            </a>
+          </div>
+        </div>
+      )}
     </>
   );
 }

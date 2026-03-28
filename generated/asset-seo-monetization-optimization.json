@@ -1,0 +1,60 @@
+{
+  "version": "v152.0",
+  "updatedAt": "2026-03-27T15:49:41.464Z",
+  "variants": [
+    {
+      "variant_id": "v1",
+      "ctr": 0.25,
+      "conversion_rate": 0.0833,
+      "revenue": 120
+    },
+    {
+      "variant_id": "v2",
+      "ctr": 0.2,
+      "conversion_rate": 0.0643,
+      "revenue": 95
+    },
+    {
+      "variant_id": "v3",
+      "ctr": 0.275,
+      "conversion_rate": 0.1375,
+      "revenue": 180
+    }
+  ],
+  "winning_variant": "v3",
+  "best_trigger_timing": 2,
+  "top_monetizing_topics": [
+    {
+      "topic": "ai hooks",
+      "revenue": 180,
+      "conversion_rate": 0.1375
+    },
+    {
+      "topic": "comedy hooks",
+      "revenue": 120,
+      "conversion_rate": 0.0833
+    },
+    {
+      "topic": "fitness hooks",
+      "revenue": 95,
+      "conversion_rate": 0.0643
+    }
+  ],
+  "underperforming_topics": [
+    {
+      "topic": "fitness hooks",
+      "revenue": 95,
+      "conversion_rate": 0.0643
+    },
+    {
+      "topic": "comedy hooks",
+      "revenue": 120,
+      "conversion_rate": 0.0833
+    },
+    {
+      "topic": "ai hooks",
+      "revenue": 180,
+      "conversion_rate": 0.1375
+    }
+  ]
+}

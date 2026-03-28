@@ -71,6 +71,12 @@ export async function generatePostPackages(
     market?: "global" | "cn";
     clientRoute?: string;
     publishFullPack?: boolean;
+    attribution?: {
+      entry_source?: string | null;
+      entry_intent?: string | null;
+      topic?: string | null;
+      workflow?: string | null;
+    };
   }
 ): Promise<GeneratePackageResult> {
   const locale = options?.locale ?? "en";
@@ -83,6 +89,12 @@ export async function generatePostPackages(
   }
   if (typeof options?.publishFullPack === "boolean") {
     body.publishFullPack = options.publishFullPack;
+  }
+  if (options?.attribution && typeof options.attribution === "object") {
+    body.entrySource = options.attribution.entry_source ?? null;
+    body.entryIntent = options.attribution.entry_intent ?? null;
+    body.entryTopic = options.attribution.topic ?? null;
+    body.entryWorkflow = options.attribution.workflow ?? null;
   }
   body.toolSlug = toolKind;
   const res = await fetch("/api/generate-package", {

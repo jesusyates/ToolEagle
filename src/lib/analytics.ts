@@ -75,7 +75,20 @@ type ToolEvent =
   | "login_click"
   /** V108 — SEO blog → tool funnel */
   | "blog_tool_click"
-  | "tool_entry_from_blog";
+  | "tool_entry_from_blog"
+  | "upgrade_shown"
+  | "upgrade_clicked"
+  | "upgrade_converted"
+  | "monetization_trigger_fired"
+  | "conversion_completed"
+  | "monetization_variant_assigned"
+  | "monetization_variant_winner_selected"
+  | "trigger_timing_optimized"
+  | "monetization_global_winner_applied"
+  | "monetization_topic_strategy_applied"
+  | "monetization_workflow_strategy_applied"
+  | "monetization_server_timing_applied"
+  | "monetization_intelligence_computed";
 
 export type ToolAnalyticsPayload = {
   tool_slug?: string;

@@ -1,0 +1,287 @@
+{
+  "version": "v145.0",
+  "workflows": {
+    "tiktok_post_v1": {
+      "workflowId": "tiktok_post_v1",
+      "version": "1.0.0",
+      "seo_feedback_loop_enabled": true,
+      "seo_feedback_artifact": "generated/asset-seo-feedback-summary.json",
+      "seo_asset_export_enabled": true,
+      "seo_materialization_enabled": true,
+      "seo_publish_manifest_artifact": "generated/asset-seo-publish-manifest.json",
+      "seo_publish_integration_mode": "artifact_handoff_compatible",
+      "seo_activation_enabled": true,
+      "seo_activation_manifest_artifact": "generated/asset-seo-activation-manifest.json",
+      "seo_autopilot_enabled": true,
+      "seo_autopilot_summary_artifact": "generated/asset-seo-autopilot-summary.json",
+      "seo_volume_policy_enabled": true,
+      "seo_volume_policy_artifact": "generated/asset-seo-volume-policy.json",
+      "ai_citation_optimized": true,
+      "citation_summary_artifact": "generated/asset-seo-citation-summary.json",
+      "ai_traffic_capture_enabled": true,
+      "ai_capture_summary_artifact": "generated/asset-seo-ai-capture-summary.json",
+      "ai_conversion_path_enabled": true,
+      "conversion_summary_artifact": "generated/asset-seo-conversion-summary.json",
+      "ai_real_conversion_enabled": true,
+      "conversion_metrics_artifact": "generated/asset-seo-conversion-metrics.json",
+      "conversion_feedback_loop_enabled": true,
+      "conversion_feedback_artifact": "generated/asset-seo-conversion-feedback.json",
+      "data_flywheel_enabled": true,
+      "topic_expansion_artifact": "generated/asset-seo-topic-expansion.json",
+      "data_flywheel_metrics_enabled": true,
+      "data_flywheel_metrics_artifact": "generated/asset-seo-data-flywheel-metrics.json",
+      "monetization_enabled": true,
+      "monetization_metrics_artifact": "generated/asset-seo-monetization-metrics.json",
+      "monetization_optimization_enabled": true,
+      "monetization_optimization_artifact": "generated/asset-seo-monetization-optimization.json",
+      "monetization_intelligence_enabled": true,
+      "monetization_intelligence_artifact": "generated/asset-seo-monetization-intelligence.json",
+      "seo_supported_page_types": [
+        "examples",
+        "ideas",
+        "caption-examples"
+      ],
+      "seo_export_locale_scope": [
+        "en"
+      ],
+      "quality_ranked_assets": true,
+      "promotion_engine_enabled": true,
+      "retrieval_ranking_version": "v135.0",
+      "retrieval_enabled": true,
+      "retrieval_default_limit": 8,
+      "retrieval_min_results_for_rewrite": 2,
+      "retrieval_min_similarity_for_rewrite": 0.35,
+      "rewrite_capability": "rewrite_workflow",
+      "full_generation_fallback": true,
+      "assetization_supported": true,
+      "asset_types_emitted": [
+        "tiktok_post"
+      ],
+      "asset_search_endpoint": "/api/agent/v1/assets/search",
+      "execute_smart_endpoint": "/api/agent/v1/workflow/execute-smart",
+      "quote_smart_endpoint": "/api/agent/v1/workflow/quote-smart",
+      "rewrite_supported": true,
+      "estimated_step_count": 3,
+      "billing_mode": "workflow_package",
+      "workflow_credit_cost": 3,
+      "limit_cost_units": 3,
+      "input_schema": {
+        "required": [
+          "topic",
+          "platform",
+          "options",
+          "context"
+        ],
+        "optional": [
+          "tone",
+          "locale",
+          "requestId"
+        ],
+        "nested": {
+          "options": {
+            "required": [
+              "qualityTier",
+              "maxVariants"
+            ]
+          },
+          "context": {
+            "required": [
+              "callerType",
+              "callerId"
+            ]
+          }
+        }
+      },
+      "summary": "Generate a full TikTok post workflow package via chained agent capabilities.",
+      "steps": [
+        {
+          "stepId": "caption_step",
+          "capability": "generate_caption",
+          "requestTemplate": {
+            "input": {
+              "topic": "{{input.topic}}",
+              "platform": "tiktok",
+              "tone": "{{input.tone}}",
+              "locale": "{{input.locale}}"
+            },
+            "options": {
+              "qualityTier": "{{input.options.qualityTier}}",
+              "maxVariants": 1
+            }
+          }
+        },
+        {
+          "stepId": "hashtags_step",
+          "capability": "generate_hashtags",
+          "requestTemplate": {
+            "input": {
+              "topic": "{{input.topic}}",
+              "platform": "tiktok",
+              "tone": "{{input.tone}}",
+              "locale": "{{input.locale}}"
+            },
+            "options": {
+              "qualityTier": "{{input.options.qualityTier}}",
+              "maxVariants": 1
+            }
+          }
+        },
+        {
+          "stepId": "tiktok_post_step",
+          "capability": "generate_tiktok_post",
+          "requestTemplate": {
+            "input": {
+              "topic": "{{steps.caption_step.output.caption}} {{steps.hashtags_step.output.hashtags}}",
+              "platform": "tiktok",
+              "tone": "{{input.tone}}",
+              "locale": "{{input.locale}}"
+            },
+            "options": {
+              "qualityTier": "{{input.options.qualityTier}}",
+              "maxVariants": 1
+            }
+          }
+        }
+      ],
+      "finalOutputTemplate": "{{steps.tiktok_post_step.output}}",
+      "quote_endpoint": "/api/agent/v1/workflow/quote",
+      "idempotency_supported": true
+    },
+    "instagram_post_v1": {
+      "workflowId": "instagram_post_v1",
+      "version": "1.0.0",
+      "seo_feedback_loop_enabled": true,
+      "seo_feedback_artifact": "generated/asset-seo-feedback-summary.json",
+      "seo_asset_export_enabled": true,
+      "seo_materialization_enabled": true,
+      "seo_publish_manifest_artifact": "generated/asset-seo-publish-manifest.json",
+      "seo_publish_integration_mode": "artifact_handoff_compatible",
+      "seo_activation_enabled": true,
+      "seo_activation_manifest_artifact": "generated/asset-seo-activation-manifest.json",
+      "seo_autopilot_enabled": true,
+      "seo_autopilot_summary_artifact": "generated/asset-seo-autopilot-summary.json",
+      "seo_volume_policy_enabled": true,
+      "seo_volume_policy_artifact": "generated/asset-seo-volume-policy.json",
+      "ai_citation_optimized": true,
+      "citation_summary_artifact": "generated/asset-seo-citation-summary.json",
+      "ai_traffic_capture_enabled": true,
+      "ai_capture_summary_artifact": "generated/asset-seo-ai-capture-summary.json",
+      "ai_conversion_path_enabled": true,
+      "conversion_summary_artifact": "generated/asset-seo-conversion-summary.json",
+      "ai_real_conversion_enabled": true,
+      "conversion_metrics_artifact": "generated/asset-seo-conversion-metrics.json",
+      "conversion_feedback_loop_enabled": true,
+      "conversion_feedback_artifact": "generated/asset-seo-conversion-feedback.json",
+      "data_flywheel_enabled": true,
+      "topic_expansion_artifact": "generated/asset-seo-topic-expansion.json",
+      "data_flywheel_metrics_enabled": true,
+      "data_flywheel_metrics_artifact": "generated/asset-seo-data-flywheel-metrics.json",
+      "monetization_enabled": true,
+      "monetization_metrics_artifact": "generated/asset-seo-monetization-metrics.json",
+      "monetization_optimization_enabled": true,
+      "monetization_optimization_artifact": "generated/asset-seo-monetization-optimization.json",
+      "monetization_intelligence_enabled": true,
+      "monetization_intelligence_artifact": "generated/asset-seo-monetization-intelligence.json",
+      "seo_supported_page_types": [
+        "examples",
+        "ideas",
+        "caption-examples"
+      ],
+      "seo_export_locale_scope": [
+        "en"
+      ],
+      "quality_ranked_assets": true,
+      "promotion_engine_enabled": true,
+      "retrieval_ranking_version": "v135.0",
+      "retrieval_enabled": true,
+      "retrieval_default_limit": 8,
+      "retrieval_min_results_for_rewrite": 2,
+      "retrieval_min_similarity_for_rewrite": 0.35,
+      "rewrite_capability": "rewrite_workflow",
+      "full_generation_fallback": true,
+      "assetization_supported": true,
+      "asset_types_emitted": [
+        "instagram_post"
+      ],
+      "asset_search_endpoint": "/api/agent/v1/assets/search",
+      "execute_smart_endpoint": "/api/agent/v1/workflow/execute-smart",
+      "quote_smart_endpoint": "/api/agent/v1/workflow/quote-smart",
+      "rewrite_supported": true,
+      "estimated_step_count": 2,
+      "billing_mode": "workflow_package",
+      "workflow_credit_cost": 2,
+      "limit_cost_units": 2,
+      "input_schema": {
+        "required": [
+          "topic",
+          "platform",
+          "options",
+          "context"
+        ],
+        "optional": [
+          "tone",
+          "locale",
+          "requestId"
+        ],
+        "nested": {
+          "options": {
+            "required": [
+              "qualityTier",
+              "maxVariants"
+            ]
+          },
+          "context": {
+            "required": [
+              "callerType",
+              "callerId"
+            ]
+          }
+        }
+      },
+      "summary": "Generate an Instagram post via caption + hashtag steps.",
+      "steps": [
+        {
+          "stepId": "caption_step",
+          "capability": "generate_caption",
+          "requestTemplate": {
+            "input": {
+              "topic": "{{input.topic}}",
+              "platform": "instagram",
+              "tone": "{{input.tone}}",
+              "locale": "{{input.locale}}"
+            },
+            "options": {
+              "qualityTier": "{{input.options.qualityTier}}",
+              "maxVariants": 1
+            }
+          }
+        },
+        {
+          "stepId": "hashtags_step",
+          "capability": "generate_hashtags",
+          "requestTemplate": {
+            "input": {
+              "topic": "{{input.topic}}",
+              "platform": "instagram",
+              "tone": "{{input.tone}}",
+              "locale": "{{input.locale}}"
+            },
+            "options": {
+              "qualityTier": "{{input.options.qualityTier}}",
+              "maxVariants": 1
+            }
+          }
+        }
+      ],
+      "finalOutputTemplate": {
+        "caption": "{{steps.caption_step.output.caption}}",
+        "cta": "{{steps.caption_step.output.cta}}",
+        "hashtags": "{{steps.hashtags_step.output.hashtags}}",
+        "usageTips": "{{steps.hashtags_step.output.usageTips}}",
+        "setType": "{{steps.hashtags_step.output.setType}}"
+      },
+      "quote_endpoint": "/api/agent/v1/workflow/quote",
+      "idempotency_supported": true
+    }
+  }
+}

@@ -1,15 +1,10 @@
 {
-  "checkedAt": "2026-03-26T17:08:07.388Z",
+  "checkedAt": "2026-03-28T03:48:52.842Z",
   "overallStatus": "ok",
   "violations": [],
-  "warnings": [
-    {
-      "flag": "page_type_distribution_drift",
-      "detail": "no_created_pages_in_status_window"
-    }
-  ],
+  "warnings": [],
   "metrics": {
-    "blogRatio": 0,
+    "blogRatio": 1,
     "answerRatio": 0,
     "guideRatio": 0
   },

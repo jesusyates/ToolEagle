@@ -1,24 +1,8 @@
 {
-  "updatedAt": "2026-03-26T15:46:29.366Z",
+  "updatedAt": "2026-03-28T03:49:27.840Z",
+  "error": "fetch failed",
+  "code": "GSC_TOKEN_ERROR",
   "siteUrl": "https://www.tooleagle.com/",
-  "baseOrigin": "https://www.tooleagle.com",
-  "periods": {
-    "last14": {
-      "start": "2026-03-12",
-      "end": "2026-03-26"
-    },
-    "prev14": {
-      "start": "2026-02-26",
-      "end": "2026-03-11"
-    }
-  },
-  "pageCount": 0,
   "pages": [],
-  "buckets": {
-    "winners": [],
-    "rising_pages": [],
-    "high_potential": [],
-    "weak_pages": [],
-    "neutral": 0
-  }
+  "buckets": {}
 }

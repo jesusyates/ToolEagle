@@ -14,6 +14,7 @@ require("dotenv").config();
 const path = require("path");
 const fs = require("fs");
 const { Client } = require("pg");
+const { isSeoDryRun, ensureSandboxDir } = require("./lib/seo-sandbox-context");
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://www.tooleagle.com";
 const ZH_KEYWORDS_PATH = path.join(process.cwd(), "data", "zh-keywords.json");
@@ -88,6 +89,10 @@ function loadEnPages(limit) {
 }
 
 async function main() {
+  const dry = isSeoDryRun();
+  if (dry) {
+    console.log("[auto-distribute] V157 dry-run: skipping DB upsert; writing distribution JSON to sandbox only.");
+  }
   const dbUrl = process.env.SUPABASE_DB_URL;
   if (!dbUrl) {
     console.log("SUPABASE_DB_URL not set. Skipping DB insert. Writing to generated/distribution-queue.json instead.");
@@ -118,7 +123,7 @@ async function main() {
     });
   }
 
-  if (dbUrl) {
+  if (dbUrl && !dry) {
     const client = new Client({ connectionString: dbUrl });
     try {
       await client.connect();
@@ -148,7 +153,7 @@ async function main() {
     }
   }
 
-  const outDir = path.join(process.cwd(), "generated");
+  const outDir = dry ? ensureSandboxDir(process.cwd()) : path.join(process.cwd(), "generated");
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
   fs.writeFileSync(
     path.join(outDir, "distribution-queue.json"),

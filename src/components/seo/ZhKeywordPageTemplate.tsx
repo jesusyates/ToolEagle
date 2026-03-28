@@ -49,6 +49,7 @@ import { getRelatedQuestionLinks, getAnswerIndexLinks } from "@/lib/related-ques
 import { getDataSignals, inferDataSignalTopic } from "@/lib/data-signals";
 import { BASE_URL } from "@/config/site";
 import { PeopleReadingMoneyBlock } from "@/components/traffic/PeopleReadingMoneyBlock";
+import { AiCitationSeoBlock } from "@/components/seo/AiCitationSeoBlock";
 
 function renderMarkdownBlock(text: string) {
   const blocks = text.split(/\n(?=## |### )/).filter(Boolean);
@@ -212,6 +213,8 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
             <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-slate-900">
               {content.h1 || entry.keyword}
             </h1>
+
+            <AiCitationSeoBlock zhRow={{ ...content, keyword: entry.keyword }} topicKey={entry.keyword} />
 
             <DirectAnswerBlock answer={content.directAnswer || ""} lang="zh" />
             <DataSignalBlock

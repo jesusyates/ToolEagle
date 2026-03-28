@@ -63,8 +63,13 @@ async function fetchWithTimeout(url, options, timeoutMs = FETCH_TIMEOUT_MS) {
   }
 }
 
-async function openaiChatCompletions(body, apiKey) {
-  const baseUrl = getBaseUrl();
+/**
+ * @param {object} body
+ * @param {string} apiKey
+ * @param {{ baseUrl?: string }} [opts] - V153: override base URL for GLM / fallback without mutating env
+ */
+async function openaiChatCompletions(body, apiKey, opts = {}) {
+  const baseUrl = (opts.baseUrl || getBaseUrl()).replace(/\/$/, "");
   const url = `${baseUrl}/chat/completions`;
   let lastError;
 

@@ -8,6 +8,8 @@ export type MonetizationEventRow = {
   variant_id?: string | null;
   topic?: string | null;
   workflow_id?: string | null;
+  /** V158 — optional coarse page bucket for revenue segmentation */
+  page_type?: string | null;
   generation_count_before_conversion?: number | null;
   revenue?: number | null;
 };
@@ -108,16 +110,36 @@ export function computeWorkflowMonetizationPerformance(rows: MonetizationEventRo
     .sort((a, b) => b.revenue - a.revenue || b.conversion_rate - a.conversion_rate);
 }
 
+export function computePageTypeMonetizationPerformance(rows: MonetizationEventRow[]) {
+  const m: Record<string, { shown: number; clicked: number; converted: number; revenue: number }> = {};
+  for (const r of rows) {
+    const k = String(r.page_type || "unknown");
+    m[k] = m[k] ?? { shown: 0, clicked: 0, converted: 0, revenue: 0 };
+    if (r.event_name === "upgrade_shown") m[k].shown += 1;
+    if (r.event_name === "upgrade_clicked") m[k].clicked += 1;
+    if (r.event_name === "upgrade_converted") {
+      m[k].converted += 1;
+      m[k].revenue += Number(r.revenue ?? 0);
+    }
+    if (r.event_name === "conversion_completed") m[k].revenue += Number(r.revenue ?? 0);
+  }
+  return Object.entries(m)
+    .map(([page_type, x]) => ({ page_type, ...toPerf(x) }))
+    .sort((a, b) => b.revenue - a.revenue || b.conversion_rate - a.conversion_rate);
+}
+
 export function aggregateMonetizationEvents(rows: MonetizationEventRow[]) {
   const variants = computeVariantPerformance(rows);
   const timings = computeTimingPerformance(rows);
   const topics = computeTopicMonetizationPerformance(rows);
   const workflows = computeWorkflowMonetizationPerformance(rows);
+  const page_types = computePageTypeMonetizationPerformance(rows);
   return {
     variants,
     timings,
     topics,
     workflows,
+    page_types,
     global_winner_variant: variants[0]?.variant_id ?? "v1",
     global_best_timing: (timings[0]?.timing ?? 2) as 1 | 2 | 3
   };

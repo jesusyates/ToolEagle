@@ -13,6 +13,7 @@ import type { InternalLinkItem } from "@/lib/programmatic-seo";
 import { PseoTrackedMoneyLinks } from "@/components/seo/PseoTrackedMoneyLinks";
 import { PseoJsonLd } from "@/components/seo/PseoJsonLd";
 import { SeoMidUpgradeCta } from "@/components/monetization/SeoMidUpgradeCta";
+import { AiCitationSeoBlock } from "@/components/seo/AiCitationSeoBlock";
 import { UpgradeLink } from "@/components/monetization/UpgradeLink";
 import { zhToolHrefFromSlug } from "@/lib/zh-site/zh-tool-href";
 import { zhSeoTitle } from "@/config/zh-brand";
@@ -96,6 +97,8 @@ export function ProgrammaticPageTemplate({
         ) : null}
 
         <h1 className="text-4xl font-bold tracking-tight text-slate-900">{title}</h1>
+
+        <AiCitationSeoBlock topicKey={displayKeyword} />
 
         <PseoTrackedMoneyLinks sourcePage={sourcePagePath} locale={locale} variant="above-fold" />
 

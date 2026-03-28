@@ -1,0 +1,15 @@
+{
+  "version": "v156.0",
+  "updatedAt": "2026-03-28T09:13:57.653Z",
+  "batch_multiplier": 1,
+  "retrieval_ease_multiplier": 1,
+  "deprioritized_topic_prefixes": [
+    "v63-tiktok",
+    "v63-youtube",
+    "v63-instagram",
+    "tiktok-baokuan",
+    "youtube-baokuan"
+  ],
+  "v63_expansion_limit": 500,
+  "recommended_action": "none"
+}

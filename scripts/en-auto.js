@@ -12,9 +12,12 @@ require("dotenv").config();
 
 const path = require("path");
 const fs = require("fs");
+const { isSeoDryRun, pathInSandbox } = require("./lib/seo-sandbox-context");
 
 const ZH_KEYWORDS_PATH = path.join(process.cwd(), "data", "zh-keywords.json");
-const OUTPUT_PATH = path.join(process.cwd(), "data", "en-how-to-new.json");
+const OUTPUT_PATH = isSeoDryRun()
+  ? pathInSandbox(process.cwd(), "data", "en-how-to-new.json")
+  : path.join(process.cwd(), "data", "en-how-to-new.json");
 const LIMIT = 50;
 
 const ZH_TO_EN_GOALS = {

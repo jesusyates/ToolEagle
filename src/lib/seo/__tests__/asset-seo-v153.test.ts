@@ -40,6 +40,7 @@ describe("V153 monetization aggregation", () => {
     expect([1, 2, 3]).toContain(agg.global_best_timing);
     expect(agg.topics.length).toBeGreaterThan(0);
     expect(agg.workflows.length).toBeGreaterThan(0);
+    expect(Array.isArray(agg.page_types)).toBe(true);
   });
 });
 

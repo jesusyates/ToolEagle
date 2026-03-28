@@ -13,6 +13,11 @@ export function deriveMonetizationTrigger(context: {
     best_trigger_timing?: 1 | 2 | 3;
     preferred_trigger_type?: "soft" | "hard";
   };
+  /** V163 — bounded timing nudge; does not bypass value_delivered / low tier */
+  escalation?: {
+    timing_offset?: -1 | 0 | 1;
+    preferred_trigger_type?: "soft" | "hard";
+  };
 }): MonetizationTrigger {
   // Safety: no trigger before value is delivered.
   if (!context.value_delivered) {
@@ -21,8 +26,11 @@ export function deriveMonetizationTrigger(context: {
   if (context.monetization_tier === "low") {
     return { trigger_type: "none", trigger_message: "", trigger_position: "post_generate" };
   }
-  const bestTiming = context.strategy?.best_trigger_timing ?? context.best_trigger_timing ?? 2;
-  const preferredType = context.strategy?.preferred_trigger_type;
+  const rawTiming = context.strategy?.best_trigger_timing ?? context.best_trigger_timing ?? 2;
+  const offset = context.escalation?.timing_offset ?? 0;
+  const bestTiming = Math.max(1, Math.min(3, rawTiming + offset)) as 1 | 2 | 3;
+  const preferredType =
+    context.strategy?.preferred_trigger_type ?? context.escalation?.preferred_trigger_type;
   if (
     (preferredType === "hard" || context.monetization_tier === "high") &&
     context.generation_count >= bestTiming

@@ -1,0 +1,34 @@
+{
+  "version": "v162.0",
+  "updatedAt": "2026-03-28T11:32:11.883Z",
+  "segment_distribution": {
+    "seo_discovery": 10
+  },
+  "top_segments_by_value": [
+    {
+      "segment_key": "seo_discovery",
+      "value_score": 9.7,
+      "count": 10
+    }
+  ],
+  "low_value_segments": [
+    "seo_discovery"
+  ],
+  "recommended_biases": {
+    "page_bias": {
+      "seo_first": 10
+    },
+    "cta_style": {
+      "minimal": 10
+    }
+  },
+  "segment_bias_counts": {
+    "prioritized": 0,
+    "deprioritized": 10,
+    "neutral": 0
+  },
+  "notes": [
+    "V162 segment strategy biases queue/CTA/conversion; does not replace V161 or risk controls",
+    "rows: 10"
+  ]
+}

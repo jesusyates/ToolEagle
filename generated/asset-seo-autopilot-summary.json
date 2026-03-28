@@ -1,0 +1,70 @@
+{
+  "version": "v160.1.0",
+  "updatedAt": "2026-03-28T11:25:22.743Z",
+  "citation_ready_rate": 1,
+  "top_ai_citable_topics": [],
+  "emerging_ai_citable_topics": [
+    "tiktok 算法优化 教程",
+    "youtube小白如何变现",
+    "tiktok-zhangfen-mijue",
+    "tiktok-zhangfen-gonglue",
+    "tiktok-zhangfen-rumen",
+    "tiktok-zhangfen-jiaocheng",
+    "tiktok-bofangliang-mijue",
+    "tiktok-bofangliang-gonglue",
+    "tiktok-bofangliang-rumen",
+    "tiktok-bofangliang-jiaocheng",
+    "tiktok-hudong-mijue",
+    "tiktok-hudong-gonglue"
+  ],
+  "overall_ai_citation_score": 97,
+  "ai_citation_dominance_bonus_count": 15,
+  "weak_ai_citation_penalty_count": 0,
+  "queue_item_count": 465,
+  "established_topic_count": 0,
+  "emerging_topic_count": 465,
+  "notes": [
+    "Merged V160.1 citation dominance slice; full metrics in asset-seo-ai-citation-dominance.json"
+  ],
+  "top_allocated_topics": [
+    "tiktok-zhangfen-mijue",
+    "tiktok-zhangfen-gonglue",
+    "tiktok-zhangfen-rumen",
+    "tiktok-zhangfen-jiaocheng",
+    "tiktok-bofangliang-mijue",
+    "tiktok-bofangliang-gonglue",
+    "tiktok-bofangliang-rumen",
+    "tiktok-bofangliang-jiaocheng",
+    "tiktok-hudong-mijue",
+    "tiktok-hudong-gonglue",
+    "tiktok-hudong-rumen",
+    "tiktok-hudong-jiaocheng"
+  ],
+  "top_allocated_workflows": [
+    "youtube",
+    "tiktok",
+    "instagram",
+    "en_topic_registry"
+  ],
+  "top_allocated_page_types": [
+    "zh_search",
+    "en_topic_registry"
+  ],
+  "suppressed_segment_count": 36,
+  "exploration_quota_count": 8,
+  "top_segments_by_value": [
+    "balanced_default",
+    "seo_discovery",
+    "emerging_topic_exploration"
+  ],
+  "segment_distribution": {
+    "seo_discovery": 114,
+    "emerging_topic_exploration": 9,
+    "balanced_default": 342
+  },
+  "segment_bias_counts": {
+    "prioritized": 0,
+    "deprioritized": 114,
+    "neutral": 351
+  }
+}

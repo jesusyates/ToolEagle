@@ -526,13 +526,15 @@ function loadExistingMdxSlugs() {
 
 async function main() {
   const args = process.argv.slice(2);
-  const dryRun = args.includes("--dry-run");
+  const { isSeoDryRun, pathInSandbox } = require("./lib/seo-sandbox-context");
+  const dryRun = args.includes("--dry-run") || isSeoDryRun();
   const limitIdx = args.indexOf("--limit");
   const limit = limitIdx >= 0 ? parseInt(args[limitIdx + 1], 10) : 50;
   const attemptLimitIdx = args.indexOf("--attempt-limit");
   const attemptLimit =
     attemptLimitIdx >= 0 ? parseInt(args[attemptLimitIdx + 1], 10) : undefined;
   const dateISO = new Date().toISOString().slice(0, 10);
+  const observationLog = dryRun ? pathInSandbox(process.cwd(), "seo-observation.jsonl") : OBSERVATION_LOG;
 
   if (!fs.existsSync(BLOG_DIR)) {
     fs.mkdirSync(BLOG_DIR, { recursive: true });
@@ -544,6 +546,17 @@ async function main() {
     console.error("OPENAI_API_KEY required for publish-ready SEO generation (V96 quality gate).");
     process.exit(1);
   }
+
+  const { pickSeoChatConfig } = require("./lib/seo-model-router-v153");
+  const { logV153SeoGeneration } = require("./lib/seo-telemetry-v153");
+  const v153BlogCfg = pickSeoChatConfig({ bulk: true });
+  logV153SeoGeneration({
+    retrieval_used: false,
+    generation_mode: "ai",
+    model_cost_tier: v153BlogCfg.model_cost_tier || "medium",
+    slug: "en:seo-blog-batch",
+    keyword: `batch_limit=${limit}`
+  });
 
   const corpus = loadFingerprintStore(FINGERPRINT_STORE);
   const linkIndex = buildEnBlogLinkIndex(corpus);
@@ -852,15 +865,15 @@ async function main() {
       skippedDueToConflict,
       topRejectionReasons
     };
-    fs.mkdirSync(path.dirname(OBSERVATION_LOG), { recursive: true });
-    fs.appendFileSync(OBSERVATION_LOG, JSON.stringify(snapshot) + "\n", "utf8");
+    fs.mkdirSync(path.dirname(observationLog), { recursive: true });
+    fs.appendFileSync(observationLog, JSON.stringify(snapshot) + "\n", "utf8");
   } catch (e) {
     console.warn("[seo-observation] skipped:", e?.message || String(e));
   }
 
   // Auto-scaling recommendation (does NOT trigger generation volume changes here).
   try {
-    const observations = readRealPublishObservations(OBSERVATION_LOG);
+    const observations = readRealPublishObservations(observationLog);
     const rec = computeScalingRecommendationFromObservations(observations);
     console.log(
       `[auto-scaling][EN blog] recommendedDailyLimit=${rec.recommendedDailyLimit}/day (rule=${rec.rule}, stability=${rec.stability})`

@@ -15,7 +15,17 @@ require("dotenv").config();
 
 const path = require("path");
 const fs = require("fs");
+const { isSeoDryRun, ensureSandboxDir } = require("./lib/seo-sandbox-context");
 const { openaiChatCompletions, getBaseUrl, getModel } = require("./lib/openai-fetch");
+const { searchRetrievalForKeyword, retrievalSufficient, formatHitsForPrompt } = require("./lib/seo-retrieval-v153");
+const { pickSeoChatConfig } = require("./lib/seo-model-router-v153");
+const {
+  logV153SeoGeneration,
+  logRetrievalPathUsed,
+  logAiFallbackUsed,
+  logCostOptimizationApplied
+} = require("./lib/seo-telemetry-v153");
+const { writeCostEfficiencyArtifact } = require("./lib/seo-cost-artifact-v153");
 const { generateV63Keywords, scoreKeyword } = require("./lib/keyword-expansion-v63");
 const {
   validateZhKeywordContent,
@@ -26,12 +36,34 @@ const {
   nowIso
 } = require("./lib/seo-quality-gate");
 
-const CACHE_PATH = path.join(process.cwd(), "data", "zh-keywords.json");
-const LOG_PATH = path.join(process.cwd(), "logs", "auto-gen.log");
-const FINGERPRINT_STORE = path.join(process.cwd(), "generated", "quality-gate", "zh-keywords-fingerprints.json");
-const REJECTION_LOG = path.join(process.cwd(), "logs", "quality-gate-rejections.jsonl");
 const NEW_KEYWORDS_LIMIT = 200;
 const RETRY_COUNT = 3;
+
+function topicClusterKeyForRisk(entry) {
+  if (entry.platform && entry.goal && GOAL_SLUGS[entry.goal]) {
+    return `${entry.platform}-${GOAL_SLUGS[entry.goal]}`;
+  }
+  const parts = String(entry.slug || "")
+    .toLowerCase()
+    .split("-")
+    .filter(Boolean);
+  if (parts.length < 2) return parts[0] || "";
+  return `${parts[0]}-${parts[1]}`;
+}
+
+function parseCliArgs() {
+  const argv = process.argv.slice(2);
+  let batchSize = NEW_KEYWORDS_LIMIT;
+  let noGit = false;
+  for (const a of argv) {
+    if (a.startsWith("--batch-size=")) {
+      const n = parseInt(a.split("=")[1], 10);
+      if (Number.isFinite(n)) batchSize = Math.min(200, Math.max(1, n));
+    }
+    if (a === "--no-git") noGit = true;
+  }
+  return { batchSize, noGit };
+}
 
 const PLATFORMS = ["tiktok", "youtube", "instagram"];
 const PLATFORM_NAMES = { tiktok: "TikTok", youtube: "YouTube", instagram: "Instagram" };
@@ -76,34 +108,86 @@ const PATTERNS = [
   { id: "jinjie", template: "{platform} {goal} 进阶", slug: "jinjie" }
 ];
 
+/** V157 — live cache read; sandbox write when SEO_DRY_RUN. */
+function zhAutogenPaths() {
+  const cwd = process.cwd();
+  const dry = isSeoDryRun();
+  const liveCache = path.join(cwd, "data", "zh-keywords.json");
+  if (!dry) {
+    return {
+      cacheRead: liveCache,
+      cacheWrite: liveCache,
+      fingerprint: path.join(cwd, "generated", "quality-gate", "zh-keywords-fingerprints.json"),
+      rejectionLog: path.join(cwd, "logs", "quality-gate-rejections.jsonl"),
+      logPath: path.join(cwd, "logs", "auto-gen.log")
+    };
+  }
+  const sb = ensureSandboxDir(cwd);
+  return {
+    cacheRead: liveCache,
+    cacheWrite: path.join(sb, "data", "zh-keywords.json"),
+    fingerprint: path.join(sb, "quality-gate", "zh-keywords-fingerprints.json"),
+    rejectionLog: path.join(sb, "quality-gate-rejections.jsonl"),
+    logPath: path.join(sb, "auto-gen.log")
+  };
+}
+
+/** V156/V157 — search risk context (sandbox first when dry-run). */
+function loadSearchRiskContext() {
+  const cwd = process.cwd();
+  const paths = isSeoDryRun()
+    ? [
+        path.join(cwd, "generated", "sandbox", "seo-risk-context.json"),
+        path.join(cwd, "generated", "seo-risk-context.json")
+      ]
+    : [path.join(cwd, "generated", "seo-risk-context.json")];
+  for (const p of paths) {
+    try {
+      const j = JSON.parse(fs.readFileSync(p, "utf8"));
+      const lim = Number(j.v63_expansion_limit);
+      return {
+        deprioritized_topic_prefixes: Array.isArray(j.deprioritized_topic_prefixes)
+          ? j.deprioritized_topic_prefixes.map((s) => String(s).toLowerCase())
+          : [],
+        v63_expansion_limit: Number.isFinite(lim) ? Math.max(80, Math.min(500, Math.floor(lim))) : 500
+      };
+    } catch {
+      continue;
+    }
+  }
+  return { deprioritized_topic_prefixes: [], v63_expansion_limit: 500 };
+}
+
 function fillPattern(tpl, platform, goal) {
   return tpl.replace("{platform}", platform).replace("{goal}", goal);
 }
 
 function ensureLogDir() {
-  const dir = path.dirname(LOG_PATH);
+  const dir = path.dirname(zhAutogenPaths().logPath);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 }
 
 function log(msg, alsoConsole = true) {
   ensureLogDir();
   const line = `[${new Date().toISOString()}] ${msg}\n`;
-  fs.appendFileSync(LOG_PATH, line, "utf8");
+  fs.appendFileSync(zhAutogenPaths().logPath, line, "utf8");
   if (alsoConsole) console.log(msg);
 }
 
 function loadCache() {
+  const { cacheRead } = zhAutogenPaths();
   try {
-    return JSON.parse(fs.readFileSync(CACHE_PATH, "utf8"));
+    return JSON.parse(fs.readFileSync(cacheRead, "utf8"));
   } catch {
     return {};
   }
 }
 
 function saveCache(cache) {
-  const dir = path.dirname(CACHE_PATH);
+  const { cacheWrite } = zhAutogenPaths();
+  const dir = path.dirname(cacheWrite);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(CACHE_PATH, JSON.stringify(cache, null, 2), "utf8");
+  fs.writeFileSync(cacheWrite, JSON.stringify(cache, null, 2), "utf8");
 }
 
 function generateAllPossibleKeywords() {
@@ -131,10 +215,137 @@ function getNewKeywordsToGenerate(cache, limit) {
   return newOnes;
 }
 
-function mergeAndScoreCandidates(legacy, v63, limit) {
+/** V160 — prefer expansion aligned with last dominance artifact (optional file). */
+function loadAiCitationDominance() {
+  const cwd = process.cwd();
+  const paths = isSeoDryRun()
+    ? [
+        path.join(cwd, "generated", "sandbox", "asset-seo-ai-citation-dominance.json"),
+        path.join(cwd, "generated", "asset-seo-ai-citation-dominance.json")
+      ]
+    : [path.join(cwd, "generated", "asset-seo-ai-citation-dominance.json")];
+  for (const p of paths) {
+    try {
+      const j = JSON.parse(fs.readFileSync(p, "utf8"));
+      if (j && (Array.isArray(j.top_ai_citable_topics) || j.version)) return j;
+    } catch (_) {
+      /* optional */
+    }
+  }
+  return null;
+}
+
+/** V161 — optional traffic allocation artifact (topic tiers + suppression). */
+function loadTrafficAllocation() {
+  const cwd = process.cwd();
+  const paths = isSeoDryRun()
+    ? [
+        path.join(cwd, "generated", "sandbox", "asset-seo-traffic-allocation.json"),
+        path.join(cwd, "generated", "asset-seo-traffic-allocation.json")
+      ]
+    : [path.join(cwd, "generated", "asset-seo-traffic-allocation.json")];
+  for (const p of paths) {
+    try {
+      const j = JSON.parse(fs.readFileSync(p, "utf8"));
+      if (j && (Array.isArray(j.top_allocated_topics) || j.version)) return j;
+    } catch (_) {
+      /* optional */
+    }
+  }
+  return null;
+}
+
+/** Bounded ±4 on expansion sort key; does not override risk deprioritization. */
+function aiCitationExpansionBias(entry, dominance) {
+  if (!dominance) return 0;
+  const kw = String(entry.keyword || "").toLowerCase();
+  let delta = 0;
+  const tops = Array.isArray(dominance.top_ai_citable_topics) ? dominance.top_ai_citable_topics : [];
+  for (const t of tops) {
+    const tk = String((t && t.topic_key) || t || "")
+      .toLowerCase()
+      .trim();
+    if (tk.length < 2) continue;
+    if (kw.includes(tk) || tk.includes(kw.slice(0, Math.min(12, kw.length)))) {
+      delta += 2;
+      break;
+    }
+  }
+  const weaks = Array.isArray(dominance.weak_topics) ? dominance.weak_topics : [];
+  for (const t of weaks) {
+    const tk = String((t && t.topic_key) || t || "")
+      .toLowerCase()
+      .trim();
+    if (tk.length < 2) continue;
+    if (kw.includes(tk) || tk.includes(kw.slice(0, Math.min(10, kw.length)))) {
+      delta -= 3;
+      break;
+    }
+  }
+  return Math.max(-4, Math.min(4, delta));
+}
+
+/** Bounded ±3 on expansion sort key from V161 allocation summary. */
+function trafficAllocationExpansionBias(entry, alloc) {
+  if (!alloc) return 0;
+  const kw = String(entry.keyword || "").toLowerCase();
+  let delta = 0;
+  const tops = Array.isArray(alloc.top_allocated_topics) ? alloc.top_allocated_topics : [];
+  for (const t of tops) {
+    const tk = String((t && typeof t === "object" && t.topic_key) || t || "")
+      .toLowerCase()
+      .trim();
+    if (tk.length < 2) continue;
+    if (kw.includes(tk) || tk.includes(kw.slice(0, Math.min(14, kw.length)))) {
+      delta += 2;
+      break;
+    }
+  }
+  const suppressed = Array.isArray(alloc.suppressed_segments) ? alloc.suppressed_segments : [];
+  for (const s of suppressed) {
+    if ((s.kind || "") !== "topic") continue;
+    const seg = String(s.segment || "").toLowerCase();
+    if (seg.length < 2) continue;
+    if (kw.includes(seg) || seg.includes(kw.slice(0, 12))) {
+      delta -= 3;
+      break;
+    }
+  }
+  const explore = Array.isArray(alloc.exploration_quota_assignments) ? alloc.exploration_quota_assignments : [];
+  for (const e of explore) {
+    const ek = String(e || "").toLowerCase().trim();
+    if (ek.length < 2) continue;
+    if (kw.includes(ek) || ek.includes(kw.slice(0, 12))) {
+      delta += 1;
+      break;
+    }
+  }
+  return Math.max(-3, Math.min(3, delta));
+}
+
+function mergeAndScoreCandidates(legacy, v63, limit, riskCtx, dominance, trafficAlloc) {
+  const deps = new Set(riskCtx?.deprioritized_topic_prefixes || []);
+  const bump = (e) => {
+    const k = topicClusterKeyForRisk(e);
+    return deps.has(k) ? -8 : 0;
+  };
   const merged = [
-    ...legacy.map((e) => ({ ...e, _score: scoreKeyword(e.keyword) })),
-    ...v63.map((e) => ({ ...e, _score: scoreKeyword(e.keyword) }))
+    ...legacy.map((e) => ({
+      ...e,
+      _score:
+        scoreKeyword(e.keyword) +
+        bump(e) +
+        aiCitationExpansionBias(e, dominance) +
+        trafficAllocationExpansionBias(e, trafficAlloc)
+    })),
+    ...v63.map((e) => ({
+      ...e,
+      _score:
+        scoreKeyword(e.keyword) +
+        bump(e) +
+        aiCitationExpansionBias(e, dominance) +
+        trafficAllocationExpansionBias(e, trafficAlloc)
+    }))
   ];
   merged.sort((a, b) => (b._score || 0) - (a._score || 0));
   return merged.slice(0, limit).map(({ _score, ...e }) => e);
@@ -199,18 +410,35 @@ function buildKeywordPrompt(entry) {
 }`;
 }
 
-async function generateWithRetry(prompt, apiKey) {
+function buildRetrievalRewritePrompt(entry, contextBlocks) {
+  const { keyword, platform, goal } = entry;
+  return `你是中文 SEO 编辑。基于以下检索到的内部高质量素材，改写成完整页面 JSON，不得编造事实；可重组语句与结构。
+搜索关键词：${keyword}
+平台：${platform}，目标：${goal}
+
+【素材】
+${contextBlocks}
+
+输出单个 JSON（与全量生成字段一致）：titlePattern, title, description, h1, directAnswer, resultPreview（2条）, intro, guide, stepByStep, faq, strategy, tips。
+Markdown 用 ## / ###。总字数 1200-2000 字。只输出 JSON。`;
+}
+
+/** @param {{ model: string, apiKey: string, baseUrl?: string }} chatCfg */
+async function generateWithRetry(prompt, chatCfg, genOpts = {}) {
+  const max_tokens = genOpts.max_tokens ?? 4000;
+  const temperature = genOpts.temperature ?? 0.7;
   let lastErr;
   for (let attempt = 1; attempt <= RETRY_COUNT; attempt++) {
     try {
       const content = await openaiChatCompletions(
         {
-          model: getModel(),
+          model: chatCfg.model,
           messages: [{ role: "user", content: prompt }],
-          temperature: 0.7,
-          max_tokens: 4000
+          temperature,
+          max_tokens
         },
-        apiKey
+        chatCfg.apiKey,
+        chatCfg.baseUrl ? { baseUrl: chatCfg.baseUrl } : {}
       );
       const jsonMatch = content.match(/```(?:json)?\s*([\s\S]*?)```/) ?? [null, content];
       const jsonStr = (jsonMatch[1] || content).trim();
@@ -227,41 +455,81 @@ async function generateWithRetry(prompt, apiKey) {
 }
 
 async function main() {
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) {
-    log("ERROR: OPENAI_API_KEY required");
+  const cli = parseCliArgs();
+  const primaryCfg = pickSeoChatConfig({ bulk: true });
+  if (!primaryCfg.apiKey) {
+    log("ERROR: API key required (OPENAI_API_KEY or GLM_API_KEY when SEO_USE_GLM_FOR_CN=1)");
     process.exit(1);
   }
 
-  log("===== v63.1 Auto Content Factory =====");
-  log(`OpenAI base: ${getBaseUrl()}`);
+  log("===== v63.1 Auto Content Factory (V153 retrieval + cost) =====");
+  log(`Primary API base: ${primaryCfg.baseUrl || getBaseUrl()} batch=${cli.batchSize} noGit=${cli.noGit}`);
 
   const cache = loadCache();
-  const corpus = loadFingerprintStore(FINGERPRINT_STORE);
+  const pathsForRun = zhAutogenPaths();
+  const corpus = loadFingerprintStore(pathsForRun.fingerprint);
   const existingSlugs = new Set(Object.keys(cache));
   const existingKeywords = Object.values(cache)
     .filter((c) => c && c.published !== false)
     .map((c) => c.h1 || c.title || c.keyword || "")
     .filter(Boolean);
+  const riskCtx = loadSearchRiskContext();
   const legacy = getNewKeywordsToGenerate(cache);
-  const v63 = generateV63Keywords(existingSlugs, existingKeywords, 500);
-  const toGenerate = mergeAndScoreCandidates(legacy, v63, NEW_KEYWORDS_LIMIT);
+  const v63 = generateV63Keywords(existingSlugs, existingKeywords, riskCtx.v63_expansion_limit);
+  const dominance = loadAiCitationDominance();
+  const trafficAlloc = loadTrafficAllocation();
+  const toGenerate = mergeAndScoreCandidates(legacy, v63, cli.batchSize, riskCtx, dominance, trafficAlloc);
 
   if (toGenerate.length === 0) {
     log("No new keywords to generate. All patterns exhausted.");
     return;
   }
 
-  log(`New keywords to generate: ${toGenerate.length} (limit ${NEW_KEYWORDS_LIMIT})`);
+  log(`New keywords to generate: ${toGenerate.length} (limit ${cli.batchSize})`);
 
   let success = 0;
   let failed = 0;
   let rejected = 0;
+  const runStats = { retrieval: 0, ai: 0, highCost: 0, topicModes: {} };
 
   for (const entry of toGenerate) {
     try {
-      const prompt = buildKeywordPrompt(entry);
-      const content = await generateWithRetry(prompt, apiKey);
+      const { hits } = searchRetrievalForKeyword({
+        keyword: entry.keyword,
+        platform: entry.platform,
+        goal: entry.goal
+      });
+      const useRetrieval = retrievalSufficient(hits);
+      let chatCfg = { ...pickSeoChatConfig({ bulk: true }) };
+      let generation_mode = useRetrieval ? "retrieval" : "ai";
+      let prompt = useRetrieval
+        ? buildRetrievalRewritePrompt(entry, formatHitsForPrompt(hits))
+        : buildKeywordPrompt(entry);
+      const max_tokens = useRetrieval ? 2800 : 4000;
+      const temperature = useRetrieval ? 0.55 : 0.7;
+
+      if (useRetrieval) {
+        logRetrievalPathUsed({ slug: entry.slug, hits: hits.length, top: hits[0]?.score });
+        logCostOptimizationApplied({ slug: entry.slug, method: "retrieval_rewrite" });
+      }
+
+      let content;
+      try {
+        content = await generateWithRetry(prompt, chatCfg, { max_tokens, temperature });
+      } catch (e1) {
+        if (process.env.SEO_ALLOW_OPENAI_FALLBACK === "1") {
+          const fb = pickSeoChatConfig({ bulk: false, forceOpenAiFallback: true });
+          if (fb.apiKey) {
+            logAiFallbackUsed({ slug: entry.slug, reason: String(e1.message || e1) });
+            chatCfg = { ...fb };
+            content = await generateWithRetry(prompt, chatCfg, { max_tokens, temperature });
+          } else {
+            throw e1;
+          }
+        } else {
+          throw e1;
+        }
+      }
       const next = {
         ...content,
         keyword: entry.keyword,
@@ -308,7 +576,7 @@ async function main() {
             bestSimilarity: sim.bestSimilarity,
             bestMatchId: sim.bestMatchId
           },
-          REJECTION_LOG
+          pathsForRun.rejectionLog
         );
         log(`  ○ ${entry.slug} rejected by quality gate (${entry.keyword})`, false);
       } else {
@@ -317,6 +585,21 @@ async function main() {
         corpus.push({ id: entry.slug, slug: entry.slug, hashes: sim.hashes });
         success++;
         log(`  ✓ ${entry.slug} (${entry.keyword})`);
+        const tier = chatCfg.model_cost_tier || "medium";
+        if (generation_mode === "retrieval") runStats.retrieval++;
+        else runStats.ai++;
+        if (tier === "high") runStats.highCost++;
+        const tk = entry.keyword || entry.slug;
+        if (!runStats.topicModes[tk]) runStats.topicModes[tk] = { retrieval: 0, ai: 0 };
+        if (generation_mode === "retrieval") runStats.topicModes[tk].retrieval++;
+        else runStats.topicModes[tk].ai++;
+        logV153SeoGeneration({
+          retrieval_used: useRetrieval,
+          generation_mode,
+          model_cost_tier: tier,
+          slug: entry.slug,
+          keyword: entry.keyword
+        });
       }
     } catch (err) {
       failed++;
@@ -327,10 +610,21 @@ async function main() {
     await new Promise((r) => setTimeout(r, 500));
   }
 
-  saveFingerprintStore(FINGERPRINT_STORE, corpus);
+  saveFingerprintStore(pathsForRun.fingerprint, corpus);
   log(`===== Done: ${success} generated, ${rejected} rejected, ${failed} failed =====`);
 
-  if (success > 0) {
+  try {
+    writeCostEfficiencyArtifact({
+      runStats,
+      zhKeywordsSnapshot: Object.keys(loadCache()).length
+    });
+    const { execSync } = require("child_process");
+    execSync("npx tsx scripts/build-asset-seo-publish-queue.ts", { cwd: process.cwd(), stdio: "inherit" });
+  } catch (e) {
+    log(`V153 artifact refresh: ${e.message} (non-fatal)`, false);
+  }
+
+  if (success > 0 && !cli.noGit && !isSeoDryRun()) {
     const baseUrl = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || "https://www.tooleagle.com";
     const pingUrl = `https://www.google.com/ping?sitemap=${encodeURIComponent(`${baseUrl}/sitemap-zh.xml`)}`;
     try {
@@ -341,8 +635,8 @@ async function main() {
     }
 
     // v61: Auto git add/commit/push after zh:auto
-    const { execSync } = require("child_process");
     try {
+      const { execSync } = require("child_process");
       execSync(`git add data/zh-keywords.json`, { stdio: "inherit" });
       execSync(`git commit -m "auto: update zh keywords"`, { stdio: "inherit" });
       execSync(`git push`, { stdio: "inherit" });

@@ -42,16 +42,30 @@ import { computeMonetizationPotential } from "@/lib/seo/asset-seo-monetization-s
 import { deriveMonetizationTrigger, type MonetizationTrigger } from "@/lib/seo/asset-seo-monetization-trigger";
 import { trackUpgradeClicked, trackUpgradeConverted, trackUpgradeShown } from "@/lib/seo/asset-seo-monetization-tracking";
 import { pickVariantDeterministic, variantsForTrigger, type MonetizationVariant } from "@/lib/seo/asset-seo-monetization-variants";
+import { selectWinningVariant, type MonetizationIntelligence } from "@/lib/seo/asset-seo-monetization-decision";
+import type { AssetSeoRevenueSummaryArtifact } from "@/lib/seo/asset-seo-revenue-summary";
+import { selectCtaVariantWithRevenueContext } from "@/lib/seo/asset-seo-cta-optimizer";
 import {
-  selectBestTriggerTiming,
-  selectWinningVariant,
-  type MonetizationIntelligence
-} from "@/lib/seo/asset-seo-monetization-decision";
+  computeConversionPathAmplification,
+  logConversionPathRevenueAmplification
+} from "@/lib/seo/asset-seo-conversion-path";
+import { logAssetSeoConversionFeedback } from "@/lib/seo/asset-seo-telemetry";
+import {
+  applyRuntimeMonetizationTriggerBias,
+  buildRuntimeSegmentStrategy
+} from "@/lib/seo/asset-seo-segment-strategy-runtime";
+import {
+  escalationPreferredTriggerType,
+  escalationTimingOffset
+} from "@/lib/seo/asset-seo-intent-escalation";
+import { buildRuntimeIntentEscalationPlan } from "@/lib/seo/asset-seo-intent-escalation-runtime";
+import { logAssetSeoIntentEscalation } from "@/lib/seo/asset-seo-telemetry";
 
 const LIFETIME_GEN_KEY = "te_v96_lifetime_pkg_gens";
 const MONETIZATION_VARIANT_STATS_KEY = "te_monetization_variant_stats";
 const MONETIZATION_TIMING_STATS_KEY = "te_monetization_timing_stats";
 const MONETIZATION_SERVER_INTEL = "/generated/asset-seo-monetization-intelligence.json";
+const REVENUE_SUMMARY_URL = "/generated/asset-seo-revenue-summary.json";
 
 export type PostPackageToolClientProps = {
   toolSlug: string;
@@ -184,6 +198,7 @@ export function PostPackageToolClient({
   const [monetizationTrigger, setMonetizationTrigger] = useState<MonetizationTrigger | null>(null);
   const [monetizationVariant, setMonetizationVariant] = useState<MonetizationVariant | null>(null);
   const [serverIntelligence, setServerIntelligence] = useState<MonetizationIntelligence | null>(null);
+  const [revenueSummary, setRevenueSummary] = useState<AssetSeoRevenueSummaryArtifact | null>(null);
 
   const toolMeta = tools.find((t) => t.slug === toolSlug);
 
@@ -219,6 +234,17 @@ export function PostPackageToolClient({
       .then((d) => {
         if (d && typeof d === "object") {
           setServerIntelligence(d as MonetizationIntelligence);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    fetch(REVENUE_SUMMARY_URL, { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d && typeof d === "object" && typeof (d as AssetSeoRevenueSummaryArtifact).version === "string") {
+          setRevenueSummary(d as AssetSeoRevenueSummaryArtifact);
         }
       })
       .catch(() => {});
@@ -389,52 +415,188 @@ export function PostPackageToolClient({
         intent: prefill.intent ?? "wants_examples",
         retrieval_share: Number((res.generationMeta as any)?.retrieval_used ? 0.6 : 0.35)
       });
+      const retrievalUsed = Boolean((res.generationMeta as { retrieval_used?: boolean })?.retrieval_used);
+      const lifetimeAfterSuccess = lifetimeGenCount + (res.packages.length > 0 ? 1 : 0);
+      const lane = locale.startsWith("zh") ? "zh" : "en";
+      const monetizationStrategy = selectWinningVariant({
+        intelligence: serverIntelligence,
+        topic: prefill.topic ?? trimmed,
+        workflow_id: prefill.workflow ?? toolKind,
+        min_samples: 10
+      });
+      const bestTiming =
+        monetizationStrategy.best_trigger_timing ??
+        (Number(localStorage.getItem("te_monetization_best_timing") || "2") as 1 | 2 | 3);
+      const intentPlan = buildRuntimeIntentEscalationPlan({
+        lane,
+        topic: prefill.topic ?? trimmed,
+        workflow_id: prefill.workflow ?? toolKind,
+        entry_source: prefill.source,
+        intent: prefill.intent,
+        monetization_tier: mp.monetization_tier,
+        generation_index: nextGenerationCount,
+        lifetime_generation_count: lifetimeAfterSuccess,
+        value_delivered: res.packages.length > 0,
+        retrieval_used: retrievalUsed,
+        revenue_summary: revenueSummary
+      });
+      logAssetSeoIntentEscalation({
+        event: "intent_state_detected",
+        current_intent_state: intentPlan.current_intent_state,
+        next_intent_state: intentPlan.next_intent_state,
+        recommended_nudge: intentPlan.recommended_nudge,
+        escalation_strength: intentPlan.escalation_strength,
+        topic_key: prefill.topic ?? trimmed,
+        workflow_id: prefill.workflow ?? toolKind,
+        reason: "tool_runtime_v163"
+      });
+      if (intentPlan.current_intent_state !== intentPlan.next_intent_state && intentPlan.escalation_strength > 0) {
+        logAssetSeoIntentEscalation({
+          event: "intent_escalation_applied",
+          current_intent_state: intentPlan.current_intent_state,
+          next_intent_state: intentPlan.next_intent_state,
+          recommended_nudge: intentPlan.recommended_nudge,
+          escalation_strength: intentPlan.escalation_strength,
+          topic_key: prefill.topic ?? trimmed,
+          reason: "tool_runtime_v163"
+        });
+      }
+      if (
+        intentPlan.next_intent_state === "high_intent_tool_entry" ||
+        intentPlan.next_intent_state === "repeat_user_monetization"
+      ) {
+        logAssetSeoIntentEscalation({
+          event: "high_intent_escalated",
+          next_intent_state: intentPlan.next_intent_state,
+          topic_key: prefill.topic ?? trimmed,
+          reason: "tool_runtime_v163"
+        });
+      }
+      if (
+        intentPlan.current_intent_state === "generation_ready" ||
+        intentPlan.current_intent_state === "repeat_user_monetization"
+      ) {
+        logAssetSeoIntentEscalation({
+          event: "monetization_ready_detected",
+          current_intent_state: intentPlan.current_intent_state,
+          topic_key: prefill.topic ?? trimmed,
+          reason: "tool_runtime_v163"
+        });
+      }
       const trigger = deriveMonetizationTrigger({
         monetization_tier: mp.monetization_tier,
         generation_count: nextGenerationCount,
         value_delivered: res.packages.length > 0,
-        best_trigger_timing:
-          selectBestTriggerTiming({
-            intelligence: serverIntelligence,
-            topic: prefill.topic ?? trimmed,
-            workflow_id: prefill.workflow ?? toolKind,
-            min_samples: 10
-          }) ??
-          (Number(localStorage.getItem("te_monetization_best_timing") || "2") as 1 | 2 | 3)
+        best_trigger_timing: bestTiming,
+        strategy: {
+          best_trigger_timing: monetizationStrategy.best_trigger_timing
+        },
+        escalation: {
+          timing_offset: escalationTimingOffset(intentPlan, nextGenerationCount, nextGenerationCount <= 1),
+          preferred_trigger_type: escalationPreferredTriggerType(intentPlan)
+        }
       });
       const lastShownTs = Number(localStorage.getItem("te_monetization_trigger_last_shown_ts") || "0");
       const canShow = Date.now() - lastShownTs > 1000 * 60 * 60 * 12; // 12h cap
       if (trigger.trigger_type !== "none" && canShow) {
-        const triggerType = trigger.trigger_type === "hard" ? "hard" : "soft";
-        const strategy = selectWinningVariant({
-          intelligence: serverIntelligence,
+        const runtimeSeg = buildRuntimeSegmentStrategy({
+          lane,
           topic: prefill.topic ?? trimmed,
           workflow_id: prefill.workflow ?? toolKind,
-          min_samples: 10
+          page_type: "tool",
+          entry_source: prefill.source,
+          intent: prefill.intent,
+          monetization_tier: mp.monetization_tier,
+          generation_index: nextGenerationCount,
+          lifetime_generation_count: lifetimeAfterSuccess,
+          retrieval_used: retrievalUsed,
+          revenue_summary: revenueSummary
         });
-        const sessionKey = `te_monetization_variant_${triggerType}`;
-        const persistedVariantId = localStorage.getItem(sessionKey) || "";
+        let triggerType: "soft" | "hard" = trigger.trigger_type === "hard" ? "hard" : "soft";
+        triggerType = applyRuntimeMonetizationTriggerBias(triggerType, runtimeSeg, {
+          monetization_tier: mp.monetization_tier,
+          generation_index: nextGenerationCount
+        });
+        const strategy = monetizationStrategy;
+        const sessionKeyBase = `te_monetization_variant_${triggerType}`;
+        const persistedVariantId = localStorage.getItem(sessionKeyBase) || "";
         const winnerVariantId = localStorage.getItem(`te_monetization_winner_variant_${triggerType}`) || "";
-        const pool = variantsForTrigger(triggerType);
+        const rev = selectCtaVariantWithRevenueContext({
+          topicKey: prefill.topic ?? trimmed,
+          workflowId: prefill.workflow ?? toolKind,
+          baseTriggerType: triggerType,
+          revenueSummary,
+          seed: `${toolSlug}-${Date.now().toString(36)}-${prefill.topic ?? ""}`,
+          segmentStrategy: {
+            segment_key: runtimeSeg.segment_key,
+            recommended_cta_style: runtimeSeg.recommended_cta_style,
+            monetization_role: runtimeSeg.monetization_role
+          },
+          intentEscalation: {
+            recommended_nudge: intentPlan.recommended_nudge,
+            escalation_strength: intentPlan.escalation_strength
+          },
+          generationIndex: nextGenerationCount
+        });
+        const pool = variantsForTrigger(rev.trigger_type);
         const picked =
           pool.find((v) => v.id === strategy.variant_id) ??
+          pool.find((v) => v.id === rev.variant.id) ??
           pool.find((v) => v.id === winnerVariantId) ??
           pool.find((v) => v.id === persistedVariantId) ??
-          pickVariantDeterministic(`${toolSlug}-${Date.now().toString(36)}-${prefill.topic ?? ""}`, triggerType);
+          rev.variant ??
+          pickVariantDeterministic(`${toolSlug}-${Date.now().toString(36)}-${prefill.topic ?? ""}`, rev.trigger_type);
+        const sessionKey = `te_monetization_variant_${rev.trigger_type}`;
         localStorage.setItem(sessionKey, picked.id);
-        setMonetizationTrigger(trigger);
+        const mergedTrigger: MonetizationTrigger = {
+          ...trigger,
+          trigger_type: rev.trigger_type
+        };
+        setMonetizationTrigger(mergedTrigger);
         setMonetizationVariant(picked);
+
+        const amp = computeConversionPathAmplification({
+          workflow_id: prefill.workflow ?? toolKind,
+          normalized_topic: prefill.topic ?? trimmed,
+          page_type: "tool",
+          revenueSummary,
+          riskContext: null,
+          segmentStrategy: {
+            segment_key: runtimeSeg.segment_key,
+            recommended_allocation_weight: runtimeSeg.recommended_allocation_weight,
+            recommended_page_bias: runtimeSeg.recommended_page_bias
+          },
+          intentEscalation: {
+            recommended_nudge: intentPlan.recommended_nudge,
+            escalation_strength: intentPlan.escalation_strength
+          }
+        });
+        logConversionPathRevenueAmplification({
+          workflow_id: prefill.workflow ?? toolKind,
+          normalized_topic: prefill.topic ?? trimmed,
+          page_type: "tool",
+          amp,
+          revenue_tier: rev.revenue_tier
+        });
+        logAssetSeoConversionFeedback({
+          event: "cta_variant_selected",
+          normalized_topic: prefill.topic ?? trimmed,
+          workflow_id: prefill.workflow ?? toolKind,
+          page_type: mergedTrigger.trigger_position,
+          cta_variant: picked.id,
+          conversion_tier: rev.revenue_tier === "high" ? "high" : rev.revenue_tier === "low" ? "low" : "medium"
+        });
         localStorage.setItem("te_monetization_trigger_last_shown_ts", String(Date.now()));
         trackEvent("monetization_trigger_fired", {
           tool_slug: toolMeta?.slug ?? toolSlug,
           topic_slug: prefill.topic ?? trimmed,
           prompt_id: prefill.workflow ?? "",
-          page_type: trigger.trigger_type
+          page_type: mergedTrigger.trigger_type
         } as any);
         trackEvent("monetization_variant_assigned", {
           tool_slug: toolMeta?.slug ?? toolSlug,
           variant_id: picked.id,
-          page_type: trigger.trigger_type
+          page_type: mergedTrigger.trigger_type
         } as any);
         if (strategy.source !== "fallback") {
           trackEvent("monetization_global_winner_applied", {
@@ -463,7 +625,7 @@ export function PostPackageToolClient({
           tool_slug: toolMeta?.slug ?? toolSlug,
           topic: prefill.topic ?? trimmed,
           workflow: prefill.workflow ?? "",
-          trigger_type: trigger.trigger_type,
+          trigger_type: mergedTrigger.trigger_type,
           variant_id: picked.id
         });
       } else {

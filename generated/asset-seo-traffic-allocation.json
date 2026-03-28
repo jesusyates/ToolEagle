@@ -1,0 +1,106 @@
+{
+  "version": "v161.0",
+  "updatedAt": "2026-03-28T11:32:11.869Z",
+  "total_daily_capacity": 100,
+  "top_allocated_topics": [
+    {
+      "topic_key": "tiktok 涨粉 0",
+      "units": 10,
+      "score": 38,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "tiktok 涨粉 1",
+      "units": 10,
+      "score": 38,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "tiktok 涨粉 2",
+      "units": 9,
+      "score": 38,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "tiktok 涨粉 3",
+      "units": 9,
+      "score": 38,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "tiktok 涨粉 4",
+      "units": 9,
+      "score": 38,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "tiktok 涨粉 5",
+      "units": 9,
+      "score": 38,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "tiktok 涨粉 6",
+      "units": 9,
+      "score": 38,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "tiktok 涨粉 7",
+      "units": 9,
+      "score": 38,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "tiktok 涨粉 8",
+      "units": 9,
+      "score": 38,
+      "tier": "high"
+    },
+    {
+      "topic_key": "tiktok 涨粉 9",
+      "units": 9,
+      "score": 38,
+      "tier": "high"
+    }
+  ],
+  "top_allocated_workflows": [
+    {
+      "workflow_id": "tiktok",
+      "units": 8,
+      "score": 52,
+      "tier": "mid"
+    }
+  ],
+  "top_allocated_page_types": [
+    {
+      "page_type": "zh_search",
+      "units": 13,
+      "score": 63,
+      "tier": "high"
+    }
+  ],
+  "suppressed_segments": [],
+  "allocation_reasoning": [
+    "topic_score = clamp(0,100, base38 + revenue(0-22) + conversion(0-18) + citation(-14..+18) + risk(-22..0) + quality(0-12))",
+    "main_units ≈ 92 with per-topic cap 12 and floor 0.35",
+    "exploration_quota_assignments = top emerging-scored non-suppressed topics (bounded count)",
+    "recommended_*_batch_scale derived from average active topic score, clamped [0.88, 1.08]"
+  ],
+  "notes": [
+    "V161 allocation guides queue bonus and batch scaling; safety/risk engines remain authoritative",
+    "suppressed_segments: 0"
+  ],
+  "recommended_zh_batch_scale": 0.88,
+  "recommended_en_batch_scale": 0.892,
+  "exploration_quota_assignments": [
+    "tiktok 涨粉 0",
+    "tiktok 涨粉 1",
+    "tiktok 涨粉 2",
+    "tiktok 涨粉 3",
+    "tiktok 涨粉 4",
+    "tiktok 涨粉 5",
+    "tiktok 涨粉 6",
+    "tiktok 涨粉 7"
+  ]
+}

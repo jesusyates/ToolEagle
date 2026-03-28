@@ -3,7 +3,8 @@ $ErrorActionPreference = "Stop"
 $taskName = "ToolEagle-OptimizationBootstrapWatcher"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $scriptPath = Join-Path $repoRoot "scripts\run-optimization-bootstrap-check.ps1"
-$startTime = "09:15"
+# 略早于 14:00 主栈，只做只读检查
+$startTime = "13:45"
 
 $action = New-ScheduledTaskAction `
   -Execute "powershell.exe" `

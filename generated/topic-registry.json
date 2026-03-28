@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-28T04:13:57.416Z",
+  "updatedAt": "2026-03-28T09:24:03.359Z",
   "topics": [
     {
       "topicKey": "youtube-titles",
@@ -966,6 +966,468 @@
         }
       ],
       "lastUpdated": "2026-03-28T04:13:57.065Z"
+    },
+    {
+      "topicKey": "tiktok-transformation-hashtags",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-hashtags-transformation",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/tiktok-hashtags-transformation",
+          "createdAt": "2026-03-28T08:52:03.245Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T08:52:03.245Z"
+    },
+    {
+      "topicKey": "instagram-comparison-captions",
+      "platform": "instagram",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/instagram-captions-comparison",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/instagram-captions-comparison",
+          "createdAt": "2026-03-28T08:52:45.765Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T08:52:45.765Z"
+    },
+    {
+      "topicKey": "tiktok-question-hashtags",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-hashtags-question",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/tiktok-hashtags-question",
+          "createdAt": "2026-03-28T08:54:30.329Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T08:54:30.329Z"
+    },
+    {
+      "topicKey": "tiktok-gaming-titles",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-titles-gaming-ideas",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/tiktok-titles-gaming-ideas",
+          "createdAt": "2026-03-28T08:55:12.997Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T08:55:12.997Z"
+    },
+    {
+      "topicKey": "youtube-education-captions",
+      "platform": "youtube",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/youtube-captions-education-ideas",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/youtube-captions-education-ideas",
+          "createdAt": "2026-03-28T08:55:52.699Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T08:55:52.699Z"
+    },
+    {
+      "topicKey": "instagram-comedy-hashtags-titles",
+      "platform": "instagram",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/instagram-titles-comedy-hashtags",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/instagram-titles-comedy-hashtags",
+          "createdAt": "2026-03-28T08:56:32.535Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T08:56:32.535Z"
+    },
+    {
+      "topicKey": "tiktok-attitude-hashtags",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-hashtags-attitude",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/tiktok-hashtags-attitude",
+          "createdAt": "2026-03-28T08:57:13.308Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T08:57:13.308Z"
+    },
+    {
+      "topicKey": "youtube-hooks",
+      "platform": "youtube",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/youtube-hooks-list",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/youtube-hooks-list",
+          "createdAt": "2026-03-28T08:58:24.138Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T08:58:24.138Z"
+    },
+    {
+      "topicKey": "tiktok-stitch-captions",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-captions-stitch-ideas",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/tiktok-captions-stitch-ideas",
+          "createdAt": "2026-03-28T08:59:04.697Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T08:59:04.697Z"
+    },
+    {
+      "topicKey": "youtube-fitness-hashtags-titles",
+      "platform": "youtube",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/youtube-titles-fitness-hashtags",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/youtube-titles-fitness-hashtags",
+          "createdAt": "2026-03-28T09:00:18.311Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:00:18.312Z"
+    },
+    {
+      "topicKey": "instagram-story-hashtags",
+      "platform": "instagram",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/instagram-hashtags-story",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/instagram-hashtags-story",
+          "createdAt": "2026-03-28T09:01:02.901Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:01:02.901Z"
+    },
+    {
+      "topicKey": "youtube-cooking-captions",
+      "platform": "youtube",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/youtube-captions-cooking",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/youtube-captions-cooking",
+          "createdAt": "2026-03-28T09:02:23.925Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:02:23.925Z"
+    },
+    {
+      "topicKey": "tiktok-wedding-titles",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-titles-wedding",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/tiktok-titles-wedding",
+          "createdAt": "2026-03-28T09:03:37.905Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:03:37.905Z"
+    },
+    {
+      "topicKey": "tiktok-bio-titles",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-titles-bio-ideas",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/tiktok-titles-bio-ideas",
+          "createdAt": "2026-03-28T09:04:58.646Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:04:58.646Z"
+    },
+    {
+      "topicKey": "youtube-get-ready-me-hooks",
+      "platform": "youtube",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/youtube-hooks-get-ready-with-me",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/youtube-hooks-get-ready-with-me",
+          "createdAt": "2026-03-28T09:05:41.390Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:05:41.390Z"
+    },
+    {
+      "topicKey": "instagram-titles-views-hooks",
+      "platform": "instagram",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/instagram-hooks-title-for-views",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/instagram-hooks-title-for-views",
+          "createdAt": "2026-03-28T09:06:25.864Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:06:25.864Z"
+    },
+    {
+      "topicKey": "tiktok-sarcastic-hashtags",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-hashtags-sarcastic",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/tiktok-hashtags-sarcastic",
+          "createdAt": "2026-03-28T09:08:04.117Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:08:04.117Z"
+    },
+    {
+      "topicKey": "youtube-baddie-captions",
+      "platform": "youtube",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/youtube-captions-baddie",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/youtube-captions-baddie",
+          "createdAt": "2026-03-28T09:09:15.689Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:09:15.689Z"
+    },
+    {
+      "topicKey": "tiktok-nature-hashtags",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-hashtags-nature",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/tiktok-hashtags-nature",
+          "createdAt": "2026-03-28T09:10:26.424Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:10:26.424Z"
+    },
+    {
+      "topicKey": "youtube-beginners-hashtags",
+      "platform": "youtube",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/youtube-hashtags-ideas-for-beginners",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/youtube-hashtags-ideas-for-beginners",
+          "createdAt": "2026-03-28T09:11:12.946Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:11:12.946Z"
+    },
+    {
+      "topicKey": "instagram-captions-titles",
+      "platform": "instagram",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/instagram-titles-caption-ideas",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/instagram-titles-caption-ideas",
+          "createdAt": "2026-03-28T09:11:55.255Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:11:55.255Z"
+    },
+    {
+      "topicKey": "tiktok-viral-hooks",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-hooks-viral-ideas",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/tiktok-hooks-viral-ideas",
+          "createdAt": "2026-03-28T09:13:40.593Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:13:40.593Z"
+    },
+    {
+      "topicKey": "youtube-beginners-titles",
+      "platform": "youtube",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/youtube-titles-ideas-for-beginners",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/youtube-titles-ideas-for-beginners",
+          "createdAt": "2026-03-28T09:14:22.786Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:14:22.786Z"
+    },
+    {
+      "topicKey": "tiktok-dance-hashtags-hooks",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-hooks-dance-hashtags",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/tiktok-hooks-dance-hashtags",
+          "createdAt": "2026-03-28T09:15:06.812Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:15:06.812Z"
+    },
+    {
+      "topicKey": "youtube-aesthetic-hashtags",
+      "platform": "youtube",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/youtube-hashtags-aesthetic",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/youtube-hashtags-aesthetic",
+          "createdAt": "2026-03-28T09:16:25.343Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:16:25.343Z"
+    },
+    {
+      "topicKey": "instagram-food-titles",
+      "platform": "instagram",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/instagram-titles-food-ideas",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/instagram-titles-food-ideas",
+          "createdAt": "2026-03-28T09:17:35.974Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:17:35.975Z"
+    },
+    {
+      "topicKey": "tiktok-duet-hooks",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-hooks-duet-ideas",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/tiktok-hooks-duet-ideas",
+          "createdAt": "2026-03-28T09:18:42.731Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:18:42.731Z"
+    },
+    {
+      "topicKey": "youtube-comedy-hashtags-hooks",
+      "platform": "youtube",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/youtube-hooks-comedy-hashtags",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/youtube-hooks-comedy-hashtags",
+          "createdAt": "2026-03-28T09:19:26.106Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:19:26.106Z"
+    },
+    {
+      "topicKey": "tiktok-aesthetic-reel-hooks",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-hooks-aesthetic-reel",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/tiktok-hooks-aesthetic-reel",
+          "createdAt": "2026-03-28T09:20:08.770Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:20:08.770Z"
+    },
+    {
+      "topicKey": "youtube-creative-usernames-captions",
+      "platform": "youtube",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/youtube-captions-creative-usernames",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/youtube-captions-creative-usernames",
+          "createdAt": "2026-03-28T09:21:27.673Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:21:27.673Z"
+    },
+    {
+      "topicKey": "instagram-script-structure-captions",
+      "platform": "instagram",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/instagram-captions-script-structure",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/instagram-captions-script-structure",
+          "createdAt": "2026-03-28T09:22:11.237Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:22:11.237Z"
+    },
+    {
+      "topicKey": "tiktok-business-hooks",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-hooks-business",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/tiktok-hooks-business",
+          "createdAt": "2026-03-28T09:23:19.716Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:23:19.716Z"
+    },
+    {
+      "topicKey": "youtube-get-ready-me-titles",
+      "platform": "youtube",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/youtube-titles-get-ready-with-me",
+      "pages": [
+        {
+          "type": "blog",
+          "url": "/blog/youtube-titles-get-ready-with-me",
+          "createdAt": "2026-03-28T09:24:02.957Z"
+        }
+      ],
+      "lastUpdated": "2026-03-28T09:24:02.957Z"
     }
   ]
 }

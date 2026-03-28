@@ -3,7 +3,8 @@ $ErrorActionPreference = "Stop"
 $taskName = "ToolEagle-ENDailyGrowth"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $wrapperPath = Join-Path $repoRoot "scripts\\run-en-seo-daily.ps1"
-$startTime = "09:30"
+# 默认已并入 ToolEagle-AfternoonSEOStack（14:00）。若仍单独安装本任务，请改时间避免与编排器同时跑。
+$startTime = "15:30"
 
 $action = New-ScheduledTaskAction `
   -Execute "powershell.exe" `

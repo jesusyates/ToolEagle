@@ -136,7 +136,19 @@ function runGit(message) {
     "data/zh-seo.json",
     "data/zh-keywords.json",
     "data/core-pages-en.json",
-    ".deploy-state.json"
+    ".deploy-state.json",
+    "generated/seo-pipeline-state.json",
+    "generated/asset-seo-publish-queue.json",
+    "generated/asset-seo-cost-efficiency.json",
+    "generated/agent_high_quality_assets.json",
+    "generated/workflow-assets-retrieval.json",
+    "generated/seo-daily-report.json",
+    "generated/seo-reliability-summary.json",
+    "generated/seo-production-history.jsonl",
+    "generated/seo-watchdog-state.json",
+    "generated/seo-risk-summary.json",
+    "generated/seo-risk-context.json",
+    "generated/asset-seo-revenue-summary.json"
   ].filter((p) => {
     const full = path.join(CWD, p);
     return fs.existsSync(full);

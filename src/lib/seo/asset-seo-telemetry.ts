@@ -333,6 +333,10 @@ export function logAssetSeoConversionPath(input: {
   workflow_id: string;
   normalized_topic: string;
   bonus_points?: number;
+  /** V158 — bounded amplification metadata */
+  exposure_multiplier?: number;
+  cta_frequency_cap?: number;
+  revenue_tier?: string;
 }): void {
   try {
     console.info(
@@ -390,6 +394,185 @@ export function logAssetSeoDataFlywheel(input: {
   try {
     console.info(
       "[asset_seo_data_flywheel]",
+      JSON.stringify({
+        ts: new Date().toISOString(),
+        ...input
+      })
+    );
+  } catch {
+    // no-op
+  }
+}
+
+/** V153 — generation path + cost tier (metadata only). */
+export function logV153SeoGeneration(input: {
+  retrieval_used: boolean;
+  generation_mode: "retrieval" | "ai";
+  model_cost_tier: "low" | "medium" | "high";
+  slug?: string;
+  keyword?: string;
+}): void {
+  try {
+    console.info(
+      "[v153_seo_gen]",
+      JSON.stringify({
+        ts: new Date().toISOString(),
+        ...input
+      })
+    );
+  } catch {
+    // no-op
+  }
+}
+
+export function logV153RetrievalPathUsed(input: Record<string, unknown>): void {
+  try {
+    console.info("[v153_retrieval_path]", JSON.stringify({ ts: new Date().toISOString(), event: "retrieval_path_used", ...input }));
+  } catch {
+    // no-op
+  }
+}
+
+export function logV153AiFallbackUsed(input: Record<string, unknown>): void {
+  try {
+    console.info("[v153_ai_fallback]", JSON.stringify({ ts: new Date().toISOString(), event: "ai_fallback_used", ...input }));
+  } catch {
+    // no-op
+  }
+}
+
+export function logV153CostOptimizationApplied(input: Record<string, unknown>): void {
+  try {
+    console.info("[v153_cost_optimization]", JSON.stringify({ ts: new Date().toISOString(), event: "cost_optimization_applied", ...input }));
+  } catch {
+    // no-op
+  }
+}
+
+/** V160 — AI citation dominance loop (metadata only; no external citation APIs). */
+export function logAssetSeoAiCitationDominance(input: {
+  event: "ai_citation_dominance_computed" | "ai_citable_topic_boosted" | "weak_ai_topic_suppressed";
+  overall_ai_citation_score?: number;
+  row_count?: number;
+  top_topics_sample?: string[];
+  weak_topics_sample?: string[];
+  topic_key?: string;
+  bonus_delta?: number;
+  penalty_delta?: number;
+  reason?: string;
+}): void {
+  try {
+    console.info(
+      "[asset_seo_ai_citation_dominance]",
+      JSON.stringify({
+        ts: new Date().toISOString(),
+        ...input
+      })
+    );
+  } catch {
+    // no-op
+  }
+}
+
+/** V163 — intent escalation (metadata only). */
+export function logAssetSeoIntentEscalation(input: {
+  event:
+    | "intent_state_detected"
+    | "intent_escalation_applied"
+    | "high_intent_escalated"
+    | "monetization_ready_detected";
+  current_intent_state?: string;
+  next_intent_state?: string;
+  recommended_nudge?: string;
+  escalation_strength?: number;
+  topic_key?: string;
+  workflow_id?: string;
+  row_count?: number;
+  reason?: string;
+}): void {
+  try {
+    console.info(
+      "[asset_seo_intent_escalation]",
+      JSON.stringify({
+        ts: new Date().toISOString(),
+        ...input
+      })
+    );
+  } catch {
+    // no-op
+  }
+}
+
+/** V162 — segment strategy (metadata only). */
+export function logAssetSeoSegmentStrategy(input: {
+  event:
+    | "segment_strategy_computed"
+    | "high_value_segment_prioritized"
+    | "low_value_segment_deprioritized";
+  segment_key?: string;
+  topic_key?: string;
+  queue_bonus_delta?: number;
+  recommended_allocation_weight?: number;
+  row_count?: number;
+  reason?: string;
+}): void {
+  try {
+    console.info(
+      "[asset_seo_segment_strategy]",
+      JSON.stringify({
+        ts: new Date().toISOString(),
+        ...input
+      })
+    );
+  } catch {
+    // no-op
+  }
+}
+
+/** V161 — bounded traffic allocation (metadata only). */
+export function logAssetSeoTrafficAllocation(input: {
+  event:
+    | "traffic_allocation_computed"
+    | "high_value_segment_allocated"
+    | "low_value_segment_suppressed"
+    | "exploration_quota_assigned";
+  topic_key?: string;
+  workflow_id?: string;
+  page_type?: string;
+  total_daily_capacity?: number;
+  suppressed_count?: number;
+  exploration_quota_count?: number;
+  allocation_bonus?: number;
+  recommended_zh_batch_scale?: number;
+  recommended_en_batch_scale?: number;
+  reason?: string;
+}): void {
+  try {
+    console.info(
+      "[asset_seo_traffic_allocation]",
+      JSON.stringify({
+        ts: new Date().toISOString(),
+        ...input
+      })
+    );
+  } catch {
+    // no-op
+  }
+}
+
+/** V158 — revenue scaling signals (metadata only). */
+export function logAssetSeoRevenueScaling(input: {
+  event: "revenue_signal_detected" | "high_value_topic_boosted" | "low_value_topic_suppressed";
+  topic_key?: string;
+  workflow_id?: string;
+  revenue_score?: number;
+  bonus_delta?: number;
+  penalty_delta?: number;
+  reason?: string;
+}): void {
+  try {
+    console.info(
+      "[asset_seo_revenue_scaling]",
       JSON.stringify({
         ts: new Date().toISOString(),
         ...input

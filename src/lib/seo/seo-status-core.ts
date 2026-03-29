@@ -14,6 +14,10 @@ import {
   utilizationSliceFromPayload,
   writeSeoRetrievalUtilizationSummary
 } from "@/lib/seo/retrieval-utilization-summary";
+import {
+  type SeoRetrievalActivationJson,
+  writeRetrievalActivationArtifact
+} from "@/lib/seo/retrieval-activation-artifact";
 
 function readJson<T>(p: string, fb: T): T {
   try {
@@ -49,11 +53,13 @@ export type SeoStatusResult = {
   exitCode: number;
   flywheel: SeoFlywheelRampJson;
   retrievalUtilization: SeoRetrievalUtilizationJson;
+  retrievalActivation: SeoRetrievalActivationJson;
 };
 
 export function buildFlywheelRampForWorkspace(cwd: string, now: Date): {
   flywheel: SeoFlywheelRampJson;
   retrievalUtilization: SeoRetrievalUtilizationJson;
+  retrievalActivation: SeoRetrievalActivationJson;
 } {
   const gen = path.join(cwd, "generated");
   const hqCount = countHqAssets(cwd);
@@ -105,7 +111,8 @@ export function buildFlywheelRampForWorkspace(cwd: string, now: Date): {
   );
 
   writeJson(path.join(gen, "seo-flywheel-ramp.json"), artifact);
-  return { flywheel: artifact, retrievalUtilization: utilizationPayload };
+  const retrievalActivation = writeRetrievalActivationArtifact(cwd, now);
+  return { flywheel: artifact, retrievalUtilization: utilizationPayload, retrievalActivation };
 }
 
 export function runSeoStatus(cwd: string, now = new Date()): SeoStatusResult {
@@ -120,7 +127,8 @@ export function runSeoStatus(cwd: string, now = new Date()): SeoStatusResult {
     null
   );
 
-  const { flywheel, retrievalUtilization: utilizationPayload } = buildFlywheelRampForWorkspace(cwd, now);
+  const { flywheel, retrievalUtilization: utilizationPayload, retrievalActivation } =
+    buildFlywheelRampForWorkspace(cwd, now);
 
   const tNow = now.getTime();
   let hoursSince: number | null = null;
@@ -139,7 +147,7 @@ export function runSeoStatus(cwd: string, now = new Date()): SeoStatusResult {
   const state = stalled ? "STALLED" : "ACTIVE";
 
   const lines: string[] = [];
-  lines.push("=== ToolEagle SEO status (V166) ===");
+  lines.push("=== ToolEagle SEO status (V166.1) ===");
   lines.push(`System: ${state}`);
   lines.push(`Last run: ${heartbeat?.last_run_at ?? "(no heartbeat)"}`);
   lines.push(
@@ -176,11 +184,25 @@ export function runSeoStatus(cwd: string, now = new Date()): SeoStatusResult {
     `Retrieval utilization — window hits: ${flywheel.retrieval_hits_window}, window fallbacks: ${flywheel.retrieval_fallbacks_window}, window_share: ${windowShareStr}, prod_share: ${utilizationPayload.production_retrieval_share}, top_fallback: ${flywheel.fallback_top_reason ?? "n/a"}, sample_topic: ${flywheel.top_retrieval_topic_sample ?? "n/a"}`
   );
   lines.push(`Retrieval utilization artifact: generated/seo-retrieval-utilization.json`);
+  const actReady = retrievalActivation.retrieval_activation_ready ? "yes" : "no";
+  const actBlocker = retrievalActivation.top_blockers[0] ?? "none";
+  const cov = retrievalActivation.workflow_bucket_coverage;
+  const covStr = `tiktok=${cov.tiktok ?? 0} youtube=${cov.youtube ?? 0} instagram=${cov.instagram ?? 0}`;
+  lines.push(
+    `Retrieval activation — ready: ${actReady}, top_blocker: ${actBlocker}, workflow_coverage: ${covStr}`
+  );
+  lines.push(`Retrieval activation artifact: generated/seo-retrieval-activation.json`);
   lines.push(
     `Flywheel — HQ assets: ${flywheel.current_high_quality_asset_count}, retrieval_share: ${flywheel.retrieval_share}, ai_share: ${flywheel.ai_share}, state: ${flywheel.flywheel_state}, pool_ready: ${flywheel.asset_pool_ready}, ramping: ${flywheel.retrieval_ramping}, active: ${flywheel.flywheel_active}, dataset_ready: ${flywheel.retrieval_dataset_ready}`
   );
   lines.push(`Flywheel artifact: generated/seo-flywheel-ramp.json (updated ${flywheel.updatedAt})`);
   lines.push("=====================================");
 
-  return { lines, exitCode: stalled ? 1 : 0, flywheel, retrievalUtilization: utilizationPayload };
+  return {
+    lines,
+    exitCode: stalled ? 1 : 0,
+    flywheel,
+    retrievalUtilization: utilizationPayload,
+    retrievalActivation
+  };
 }

@@ -1,0 +1,22 @@
+{
+  "version": "166.1",
+  "updatedAt": "2026-03-29T02:30:11.016Z",
+  "dataset_ready": true,
+  "workflow_bucket_coverage": {
+    "tiktok": 2,
+    "youtube": 2,
+    "instagram": 1
+  },
+  "topic_matchability_summary": "Sampled 24 zh-keywords h1/title rows: avg top_score=0.34, sufficient=24 (V166.1 matching + activation pass).",
+  "retrieval_activation_ready": true,
+  "top_blockers": [
+    "none"
+  ],
+  "notes": [
+    "V166.1 adds CJK/substring/goal overlap and bounded activation threshold pass when dataset + workflow bucket + similarity signals hold.",
+    "Workflow row count: 5; locale buckets: 1; page_type buckets: 1."
+  ],
+  "sample_keywords_checked": 24,
+  "sample_avg_top_score": 0.34,
+  "sample_sufficient_count": 24
+}

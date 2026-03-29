@@ -1,14 +1,21 @@
 {
-  "updatedAt": "2026-03-29T01:28:34.794Z",
+  "updatedAt": "2026-03-29T02:30:11.016Z",
   "current_high_quality_asset_count": 5,
-  "current_retrieval_dataset_count": 0,
+  "current_retrieval_dataset_count": 5,
   "retrieval_share": 0,
   "ai_share": 1,
   "days_since_activation": 0,
   "retrieval_ready": true,
+  "retrieval_dataset_ready": true,
+  "retrieval_dataset_threshold": 3,
+  "retrieval_dataset_last_built_at": "2026-03-29T02:30:11.016Z",
+  "retrieval_hits_window": 0,
+  "retrieval_fallbacks_window": 0,
+  "fallback_top_reason": null,
+  "top_retrieval_topic_sample": null,
   "asset_pool_ready": false,
   "retrieval_ramping": false,
   "flywheel_active": false,
   "flywheel_state": "warming",
-  "notes": "HQ assets: 5; retrieval dataset rows: 0; gen R:0 AI:5 Asset pool below 50 HQ entries. Retrieval share not rising vs last snapshot (or zero)."
+  "notes": "HQ assets: 5; retrieval dataset rows: 5 (threshold 3); gen R:0 AI:5 Utilization window: no retrieval events logged yet (V166 jsonl). Retrieval dataset ready for retrieval-first gating. Asset pool below 50 HQ entries. Retrieval share not rising vs last snapshot (or zero)."
 }

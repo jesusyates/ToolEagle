@@ -523,6 +523,17 @@ async function main() {
           top_score: evalr.topScore,
           primary_lane: evalr.primaryLane
         });
+        if (evalr.activationPassUsed) {
+          appendRetrievalTelemetryEvent(cwdZh, {
+            event: "retrieval_activation_pass_recorded",
+            keyword: entry.keyword,
+            platform: entry.platform,
+            goal: entry.goal,
+            top_score: evalr.topScore,
+            primary_lane: evalr.primaryLane,
+            note: "v166.1_activation_threshold_pass"
+          });
+        }
       } else {
         appendRetrievalTelemetryEvent(cwdZh, {
           event: "retrieval_fallback_reason_recorded",

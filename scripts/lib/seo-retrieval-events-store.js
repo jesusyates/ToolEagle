@@ -28,7 +28,7 @@ function trimJsonlIfHuge(cwd) {
 /**
  * @param {string} cwd
  * @param {{
- *   event: 'retrieval_hit_recorded' | 'retrieval_fallback_reason_recorded' | 'retrieval_bias_applied';
+ *   event: 'retrieval_hit_recorded' | 'retrieval_fallback_reason_recorded' | 'retrieval_bias_applied' | 'retrieval_activation_pass_recorded';
  *   keyword?: string;
  *   platform?: string;
  *   goal?: string;
@@ -59,6 +59,11 @@ function appendRetrievalTelemetryEvent(cwd, payload) {
       );
     } else if (event === "retrieval_bias_applied") {
       console.info("[retrieval_telemetry]", JSON.stringify({ event: "retrieval_bias_applied", ...rest }));
+    } else if (event === "retrieval_activation_pass_recorded") {
+      console.info(
+        "[retrieval_telemetry]",
+        JSON.stringify({ event: "retrieval_activation_pass_recorded", ...rest })
+      );
     }
   } catch {
     // no-op

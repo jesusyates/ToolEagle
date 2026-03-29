@@ -68,6 +68,9 @@ describe("seo-status-core", () => {
     expect(joined).toContain("Retrieval dataset — built: yes");
     expect(joined).toContain("Retrieval utilization —");
     expect(joined).toMatch(/eligible:\s*(yes|no)/);
+    expect(joined).toContain("Retrieval activation — ready:");
+    expect(joined).toContain("workflow_coverage:");
+    expect(fs.existsSync(path.join(gen, "seo-retrieval-activation.json"))).toBe(true);
     expect(joined).toContain("Flywheel — HQ assets:");
     expect(joined).toMatch(/state:\s*\w+/);
     expect(flywheel.current_high_quality_asset_count).toBe(1);

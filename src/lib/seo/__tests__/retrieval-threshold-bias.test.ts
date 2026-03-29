@@ -4,7 +4,6 @@
 
 import path from "path";
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 const bias = require(path.join(process.cwd(), "scripts/lib/retrieval-threshold-bias.cjs")) as {
   applyBoundedBiasToThresholds: (
     t1: number,

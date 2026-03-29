@@ -19,7 +19,6 @@ import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
 import { CtaLinksSection } from "@/components/tools/CtaLinksSection";
 import { LimitReachedModal } from "@/components/LimitReachedModal";
 import { LoginPromptModal } from "@/components/LoginPromptModal";
-import { ExitIntentCta } from "@/components/tools/ExitIntentCta";
 import { ZhCtaCaptureBlock } from "@/components/zh/ZhCtaCaptureBlock";
 import { useAuth } from "@/hooks/useAuth";
 import { useCountry } from "@/hooks/useCountry";
@@ -196,7 +195,6 @@ export function TitleGeneratorClient({ relatedAside, ctaLinks, showZhInlineLead 
     <>
       <LimitReachedModal open={limitModalOpen} onClose={() => setLimitModalOpen(false)} />
       <LoginPromptModal open={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
-      {titles.length > 0 && <ExitIntentCta toolSlug="title-generator" toolName={tTitle("title")} />}
       <ToolPageShell
       eyebrow={tTool("eyebrow")}
       title={tTitle("title")}

@@ -11,13 +11,14 @@ import { RelatedContentCard } from "@/components/related/RelatedContentCard";
 import { getRelatedContent } from "@/lib/related-content";
 import { Zap } from "lucide-react";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 const HOOK_TOOLS = ["hook-generator", "youtube-hook-generator"];
 
 type Props = { params: Promise<{ topic: string }> };
 
 export async function generateStaticParams() {
-  return getAllTopicSlugs().map((topic) => ({ topic }));
+  return limitBuildStaticParams(getAllTopicSlugs().map((topic) => ({ topic })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

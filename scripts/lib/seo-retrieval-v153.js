@@ -1,13 +1,25 @@
 /**
  * V153 retrieval-first: load agent_high_quality_assets + workflow fallback, score by keyword overlap.
+ * V166 — evaluateRetrievalForKeyword: explicit fallback reasons + bounded strong-workflow bias.
  */
 
 const fs = require("fs");
 const path = require("path");
+const { isStrongWorkflow, applyBoundedBiasToThresholds } = require("./retrieval-threshold-bias.cjs");
 
 const CWD = process.cwd();
 const HQ_PATH = path.join(CWD, "generated", "agent_high_quality_assets.json");
 const WF_PATH = path.join(CWD, "generated", "workflow-assets-retrieval.json");
+
+/** V166 taxonomy for utilization summaries */
+const FALLBACK_REASONS = [
+  "dataset_not_ready",
+  "workflow_bucket_empty",
+  "no_qualified_hits",
+  "score_below_threshold",
+  "ai_forced_fallback"
+];
+
 function riskContextJsonPath() {
   const sandbox = path.join(CWD, "generated", "sandbox", "seo-risk-context.json");
   if (process.env.SEO_DRY_RUN === "1" || process.env.SEO_SANDBOX === "1") {
@@ -58,20 +70,34 @@ function loadHighQualityAssets() {
   return normalizeAssetList(raw).map((a, i) => ({
     id: a.id || a.asset_id || `hq-${i}`,
     topic: a.topic || a.normalized_topic || "",
-    workflow_id: a.workflow_id || "",
-    body: [a.snippet, a.body, a.summary, a.text, a.content].filter(Boolean).join("\n"),
+    workflow_id: a.workflow_id || a.workflow || "",
+    body: [a.content_summary, a.snippet, a.body, a.summary, a.text, a.content].filter(Boolean).join("\n"),
     tier: a.quality_tier || "high"
   }));
 }
 
+function workflowDatasetCount() {
+  const raw = loadJson(WF_PATH, null);
+  if (raw && typeof raw === "object" && typeof raw.item_count === "number") {
+    return Math.max(0, Number(raw.item_count));
+  }
+  return normalizeAssetList(raw || { items: [] }).length;
+}
+
+function retrievalDatasetMinRows() {
+  const n = parseInt(process.env.RETRIEVAL_DATASET_MIN_ROWS || "3", 10);
+  return Number.isFinite(n) && n >= 1 ? n : 3;
+}
+
 function loadWorkflowAssets() {
   const raw = loadJson(WF_PATH, { items: [] });
-  return normalizeAssetList(raw).map((a, i) => ({
+  const items = normalizeAssetList(raw);
+  return items.map((a, i) => ({
     id: a.id || `wf-${i}`,
     topic: a.topic || a.normalized_topic || "",
-    workflow_id: a.workflow_id || "",
-    body: [a.snippet, a.body, a.summary, a.text].filter(Boolean).join("\n"),
-    tier: "workflow"
+    workflow_id: a.workflow_id || a.workflow || "",
+    body: [a.content_summary, a.snippet, a.body, a.summary, a.text].filter(Boolean).join("\n"),
+    tier: Number(a.quality_score) >= 0.85 ? "high" : "workflow"
   }));
 }
 
@@ -120,16 +146,114 @@ function getRetrievalEaseMultiplier() {
   }
 }
 
-/** Sufficient for retrieval-rewrite path (target 60–80% over time via growing HQ corpus). */
+function passesScoreThresholds(hits, t1, t2a, t2b) {
+  if (!hits || hits.length === 0) return false;
+  const h0 = hits[0].score;
+  const h1 = hits[1]?.score;
+  if (hits.length >= 2 && h0 >= t2a && h1 >= t2b) return true;
+  if (hits.length >= 1 && h0 >= t1) return true;
+  return false;
+}
+
+/**
+ * V166 — Full eligibility with fallback reason + optional bounded bias for strong workflows.
+ * @param {{ keyword: string; platform?: string; goal?: string }} ctx
+ */
+function evaluateRetrievalForKeyword(ctx) {
+  const keyword = ctx.keyword || "";
+  const platform = ctx.platform || "";
+  const goal = ctx.goal || "";
+
+  if (process.env.SEO_FORCE_AI_GENERATION === "1") {
+    return {
+      hits: [],
+      sufficient: false,
+      fallbackReason: "ai_forced_fallback",
+      primaryLane: null,
+      topScore: null,
+      thresholds: null,
+      bias: { biasApplied: false, biasFactor: 1 }
+    };
+  }
+
+  const minRows = retrievalDatasetMinRows();
+  const dsCount = workflowDatasetCount();
+  if (dsCount < minRows) {
+    return {
+      hits: [],
+      sufficient: false,
+      fallbackReason: "dataset_not_ready",
+      primaryLane: null,
+      topScore: null,
+      thresholds: null,
+      bias: { biasApplied: false, biasFactor: 1 }
+    };
+  }
+
+  const { hits, primaryLane } = searchRetrievalForKeyword({ keyword, platform, goal });
+  const wfItems = loadWorkflowAssets();
+
+  if (hits.length === 0) {
+    const reason =
+      wfItems.length === 0 && dsCount >= minRows ? "workflow_bucket_empty" : "no_qualified_hits";
+    return {
+      hits,
+      sufficient: false,
+      fallbackReason: reason,
+      primaryLane,
+      topScore: null,
+      thresholds: null,
+      bias: { biasApplied: false, biasFactor: 1 }
+    };
+  }
+
+  const ease = getRetrievalEaseMultiplier();
+  let t2a = 0.12 / ease;
+  let t2b = 0.08 / ease;
+  let t1 = 0.35 / ease;
+
+  const datasetReady = dsCount >= minRows;
+  const strongWorkflow = isStrongWorkflow(platform, WF_PATH);
+  const adj = applyBoundedBiasToThresholds(t1, t2a, t2b, { datasetReady, strongWorkflow });
+  t1 = adj.t1;
+  t2a = adj.t2a;
+  t2b = adj.t2b;
+
+  const sufficient = passesScoreThresholds(hits, t1, t2a, t2b);
+  const topScore = hits[0]?.score ?? null;
+
+  if (!sufficient) {
+    return {
+      hits,
+      sufficient: false,
+      fallbackReason: "score_below_threshold",
+      primaryLane,
+      topScore,
+      thresholds: { t1, t2a, t2b },
+      bias: { biasApplied: adj.biasApplied, biasFactor: adj.biasFactor }
+    };
+  }
+
+  return {
+    hits,
+    sufficient: true,
+    fallbackReason: null,
+    primaryLane,
+    topScore,
+    thresholds: { t1, t2a, t2b },
+    bias: { biasApplied: adj.biasApplied, biasFactor: adj.biasFactor }
+  };
+}
+
+/** Legacy: score-only check without V166 bias (platform unknown). Prefer evaluateRetrievalForKeyword. */
 function retrievalSufficient(hits) {
+  if (workflowDatasetCount() < retrievalDatasetMinRows()) return false;
   if (!hits || hits.length === 0) return false;
   const ease = getRetrievalEaseMultiplier();
   const t2a = 0.12 / ease;
   const t2b = 0.08 / ease;
   const t1 = 0.35 / ease;
-  if (hits.length >= 2 && hits[0].score >= t2a && hits[1].score >= t2b) return true;
-  if (hits.length >= 1 && hits[0].score >= t1) return true;
-  return false;
+  return passesScoreThresholds(hits, t1, t2a, t2b);
 }
 
 function formatHitsForPrompt(hits, maxChars = 6000) {
@@ -144,10 +268,14 @@ function formatHitsForPrompt(hits, maxChars = 6000) {
 
 module.exports = {
   searchRetrievalForKeyword,
+  evaluateRetrievalForKeyword,
   retrievalSufficient,
   formatHitsForPrompt,
   loadHighQualityAssets,
   loadWorkflowAssets,
+  workflowDatasetCount,
+  retrievalDatasetMinRows,
+  FALLBACK_REASONS,
   HQ_PATH,
   WF_PATH
 };

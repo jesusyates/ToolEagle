@@ -4,11 +4,12 @@ import { GuidePageTemplate } from "@/components/seo/GuidePageTemplate";
 import { VIRAL_EXAMPLE_TOPICS, formatTopicLabel } from "@/config/traffic-topics";
 import { getExamplesForTopic } from "@/lib/guide-data";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 type Props = { params: Promise<{ topic: string }> };
 
 export async function generateStaticParams() {
-  return VIRAL_EXAMPLE_TOPICS.map((topic) => ({ topic }));
+  return limitBuildStaticParams(VIRAL_EXAMPLE_TOPICS.map((topic) => ({ topic })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

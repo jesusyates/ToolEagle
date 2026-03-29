@@ -18,7 +18,6 @@ import { ExamplesCard } from "@/components/tools/ExamplesCard";
 import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
 import { LimitReachedModal } from "@/components/LimitReachedModal";
 import { LoginPromptModal } from "@/components/LoginPromptModal";
-import { ExitIntentCta } from "@/components/tools/ExitIntentCta";
 import { useAuth } from "@/hooks/useAuth";
 import { useCountry } from "@/hooks/useCountry";
 import { resolveToolPageCopy } from "@/config/tool-page-copy-resolve";
@@ -192,7 +191,6 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
     <>
       <LimitReachedModal open={limitModalOpen} onClose={() => setLimitModalOpen(false)} />
       <LoginPromptModal open={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
-      {results.length > 0 && <ExitIntentCta toolSlug="hashtag-generator" toolName="Hashtag Generator" />}
       <ToolPageShell
       eyebrow="Tool"
       title="Hashtag Generator"

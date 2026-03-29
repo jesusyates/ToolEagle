@@ -1,0 +1,14 @@
+{
+  "updatedAt": "2026-03-29T01:28:34.794Z",
+  "current_high_quality_asset_count": 5,
+  "current_retrieval_dataset_count": 0,
+  "retrieval_share": 0,
+  "ai_share": 1,
+  "days_since_activation": 0,
+  "retrieval_ready": true,
+  "asset_pool_ready": false,
+  "retrieval_ramping": false,
+  "flywheel_active": false,
+  "flywheel_state": "warming",
+  "notes": "HQ assets: 5; retrieval dataset rows: 0; gen R:0 AI:5 Asset pool below 50 HQ entries. Retrieval share not rising vs last snapshot (or zero)."
+}

@@ -4,11 +4,12 @@ import { GuidePageTemplate } from "@/components/seo/GuidePageTemplate";
 import { AI_PROMPT_TOPICS, formatTopicLabel } from "@/config/traffic-topics";
 import { getExamplesForTopic } from "@/lib/guide-data";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 type Props = { params: Promise<{ topic: string }> };
 
 export async function generateStaticParams() {
-  return AI_PROMPT_TOPICS.map((topic) => ({ topic }));
+  return limitBuildStaticParams(AI_PROMPT_TOPICS.map((topic) => ({ topic })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

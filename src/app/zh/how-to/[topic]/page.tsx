@@ -3,21 +3,15 @@ import { notFound } from "next/navigation";
 import { ZhGuidePageTemplate } from "@/components/seo/ZhGuidePageTemplate";
 import { ZhHubPageTemplate } from "@/components/seo/ZhHubPageTemplate";
 import { parseZhSlug, isBaseTopicValid, ZH_PLATFORMS } from "@/config/traffic-topics";
-import { getZhContent, getAllZhGuideParams, shouldNoindexZhPage } from "@/lib/generate-zh-content";
-import { getAllHubParams } from "@/lib/zh-hub-data";
+import { getZhContent, shouldNoindexZhPage } from "@/lib/generate-zh-content";
+import { getZhGuideStaticParamsForBuild } from "@/lib/zh-guide-static-params";
 import { getExamplesForTopic } from "@/lib/guide-data";
 import { BASE_URL } from "@/config/site";
 import { getZhPageMetadata, getZhGuideKeyword } from "@/lib/zh-metadata";
-
 type Props = { params: Promise<{ topic: string }> };
 
 export async function generateStaticParams() {
-  const childParams = getAllZhGuideParams().filter((p) => p.pageType === "how-to");
-  const withContent = childParams.filter((p) => getZhContent("how-to", p.topic));
-  const hubParams = getAllHubParams()
-    .filter((h) => h.pageType === "how-to")
-    .map((h) => ({ topic: h.platform }));
-  return [...withContent.map((p) => ({ topic: p.topic })), ...hubParams];
+  return getZhGuideStaticParamsForBuild("how-to");
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

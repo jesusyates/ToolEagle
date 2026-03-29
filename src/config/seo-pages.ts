@@ -2,6 +2,8 @@
  * Programmatic SEO pages dataset.
  * Used by /[category]/[topic] for SSG.
  */
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
+
 export type SeoPageEntry = {
   category: "tiktok" | "youtube" | "instagram";
   topic: string;
@@ -377,6 +379,11 @@ export function getSeoPageEntry(category: string, topic: string): SeoPageEntry |
 
 export function getSeoPageParams(): { category: string; topic: string }[] {
   return seoPageEntries.map((e) => ({ category: e.category, topic: e.topic }));
+}
+
+/** Vercel: capped for `generateStaticParams` only; sitemap uses full `getSeoPageParams`. */
+export function getSeoPageStaticParamsForBuild(): { category: string; topic: string }[] {
+  return limitBuildStaticParams(getSeoPageParams());
 }
 
 export function formatTopicLabel(topic: string): string {

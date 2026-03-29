@@ -25,6 +25,40 @@ import {
   seoSandboxDir,
   type SeoProductionRunMode
 } from "../src/lib/seo/seo-sandbox";
+import { buildAndWriteRetrievalDataset } from "../src/lib/seo/retrieval-dataset-build";
+
+// V163.1 — heartbeat / alerts / metrics (CommonJS lib)
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const activation = require("./lib/seo-system-activation.js") as {
+  writeRunHeartbeat: (
+    cwd: string,
+    p: {
+      success: boolean;
+      zh_generated?: number;
+      en_generated?: number;
+      stop_reason: string;
+      run_mode?: string;
+    }
+  ) => void;
+  detectRunGapAndAlert: (cwd: string) => { gap: boolean; hours: number | null };
+  recordLlmMissingAlert: (cwd: string) => void;
+  updateRealMetrics: (
+    cwd: string,
+    slice: {
+      daily_zh: number;
+      daily_en: number;
+      retrieval_share: number;
+      avg_cost_per_page: number;
+      run_success: boolean;
+      stop_reason?: string;
+    }
+  ) => void;
+  evaluateAndWriteCriticalState: (cwd: string) => { critical: boolean; reasons: string[] };
+  hasAnyLlmApiKey: () => boolean;
+  mergeSeoAlerts: (cwd: string, alerts: Array<Record<string, unknown>>) => void;
+  clearMissedRunAlertOnSuccess: (cwd: string) => void;
+  recordDegradedStreakFromReport: (cwd: string) => void;
+};
 
 const CWD = process.cwd();
 const REPORT_PATH = path.join(CWD, "generated", "seo-daily-report.json");
@@ -272,6 +306,57 @@ function runDailyCycle(): number {
   let lastDetail: ReturnType<typeof runBackgroundSeoTick>["detail"] | null = null;
 
   try {
+  // V163.1 — live: gap alert; block entire run if no LLM keys (no "success without AI").
+  if (mode === "live") {
+    activation.detectRunGapAndAlert(CWD);
+    if (!activation.hasAnyLlmApiKey()) {
+      activation.recordLlmMissingAlert(CWD);
+      const nowIso = new Date().toISOString();
+      const day = nowIso.slice(0, 10);
+      activation.writeRunHeartbeat(CWD, {
+        success: false,
+        zh_generated: 0,
+        en_generated: 0,
+        stop_reason: "llm_missing_keys",
+        run_mode: "live"
+      });
+      const failReport: DailyReport = {
+        date: day,
+        en_status: "failed",
+        zh_status: "failed",
+        en_generated_count: 0,
+        zh_generated_count: 0,
+        retrieval_share: 0,
+        ai_share: 0,
+        avg_cost_per_page: 0,
+        failures_count: 1,
+        retries_count: 0,
+        stop_reason: "llm_missing_keys",
+        safety_status: "degraded",
+        notes: ["llm_missing_blocked_run", "no_llm_api_key_env"],
+        updatedAt: nowIso,
+        orchestrator_cycle_started_at: cycleStartedAt,
+        orchestrator_completed_at: nowIso,
+        orchestrator_exit_code: 1,
+        run_mode: mode
+      };
+      writeDailyReport(failReport, mode);
+      appendProductionHistory(CWD, { ...failReport });
+      activation.updateRealMetrics(CWD, {
+        daily_zh: 0,
+        daily_en: 0,
+        retrieval_share: 0,
+        avg_cost_per_page: 0,
+        run_success: false,
+        stop_reason: "llm_missing_keys"
+      });
+      activation.recordDegradedStreakFromReport(CWD);
+      activation.evaluateAndWriteCriticalState(CWD);
+      logEvent("daily_run_blocked_llm", {});
+      return 1;
+    }
+  }
+
   const health = runHealthCheck(mode);
   if (!health.ok) {
     notes.push(...health.notes);
@@ -299,6 +384,13 @@ function runDailyCycle(): number {
   }
 
   savePipelineState(state, statePath);
+
+  try {
+    const ds = buildAndWriteRetrievalDataset(CWD);
+    logEvent("retrieval_dataset_synced", { item_count: ds.itemCount, builtAt: ds.builtAt });
+  } catch (err) {
+    logEvent("retrieval_dataset_sync_failed", { message: String(err) });
+  }
 
   const searchRisk = computeAndWriteSearchRisk(CWD, { useSandbox: mode !== "live" });
   logEvent("search_risk_computed", {
@@ -473,6 +565,29 @@ function runDailyCycle(): number {
 
   writeDailyReport(report, mode);
   appendProductionHistory(CWD, { ...report });
+
+  const actMode = mode === "dry_run" ? "dry_run" : "live";
+  activation.writeRunHeartbeat(CWD, {
+    success: lastCode === 0,
+    zh_generated: zhDelta,
+    en_generated: enDelta,
+    stop_reason: stopReason,
+    run_mode: actMode
+  });
+  if (mode === "live" && lastCode === 0) {
+    activation.clearMissedRunAlertOnSuccess(CWD);
+  }
+  activation.updateRealMetrics(CWD, {
+    daily_zh: zhDelta,
+    daily_en: enDelta,
+    retrieval_share: Number(costData.retrieval_share ?? 0),
+    avg_cost_per_page: Number(costData.avg_cost_per_page ?? 0),
+    run_success: lastCode === 0,
+    stop_reason: stopReason
+  });
+  activation.recordDegradedStreakFromReport(CWD);
+  activation.evaluateAndWriteCriticalState(CWD);
+
   return lastCode;
   } finally {
     const fin = loadPipelineState(statePath);

@@ -11,6 +11,7 @@ import { tools } from "@/config/tools";
 import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { Video, MessageSquareText, Zap, User } from "lucide-react";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 const CAPTION_SLUGS = ["tiktok-caption-generator", "instagram-caption-generator"];
 const HOOK_SLUGS = ["hook-generator", "youtube-hook-generator"];
@@ -24,7 +25,7 @@ export const dynamic = "force-dynamic";
 export async function generateStaticParams() {
   const categories = getAllTrendingSlugs().map((slug) => ({ slug }));
   const periods = TRENDING_PERIODS.map((slug) => ({ slug }));
-  return [...categories, ...periods];
+  return limitBuildStaticParams([...categories, ...periods]);
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

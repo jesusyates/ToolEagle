@@ -11,13 +11,14 @@ import { PageShareButtons } from "@/components/share/PageShareButtons";
 import { AnswerSaveButton } from "@/components/save/AnswerSaveButton";
 import { Video } from "lucide-react";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  return getAllAnswerSlugs().map((slug) => ({ slug }));
+  return limitBuildStaticParams(getAllAnswerSlugs().map((slug) => ({ slug })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

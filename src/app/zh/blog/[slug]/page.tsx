@@ -7,12 +7,13 @@ import {
   getRelatedBlogSlugs
 } from "@/lib/zh-blog-data";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
   const slugs = getAllBlogSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return limitBuildStaticParams(slugs.map((slug) => ({ slug })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

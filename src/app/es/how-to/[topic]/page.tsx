@@ -3,11 +3,12 @@ import { notFound } from "next/navigation";
 import { EnHowToPageTemplate } from "@/components/seo/EnHowToPageTemplate";
 import { getEnHowToContent, getAllEnHowToSlugs } from "@/lib/en-how-to-content";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 type Props = { params: Promise<{ topic: string }> };
 
 export async function generateStaticParams() {
-  return getAllEnHowToSlugs().map((topic) => ({ topic }));
+  return limitBuildStaticParams(getAllEnHowToSlugs().map((topic) => ({ topic })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

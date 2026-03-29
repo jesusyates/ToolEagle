@@ -17,7 +17,8 @@ const path = require("path");
 const fs = require("fs");
 const { isSeoDryRun, ensureSandboxDir } = require("./lib/seo-sandbox-context");
 const { openaiChatCompletions, getBaseUrl, getModel } = require("./lib/openai-fetch");
-const { searchRetrievalForKeyword, retrievalSufficient, formatHitsForPrompt } = require("./lib/seo-retrieval-v153");
+const { evaluateRetrievalForKeyword, formatHitsForPrompt } = require("./lib/seo-retrieval-v153");
+const { appendRetrievalTelemetryEvent } = require("./lib/seo-retrieval-events-store");
 const { pickSeoChatConfig } = require("./lib/seo-model-router-v153");
 const {
   logV153SeoGeneration,
@@ -26,6 +27,7 @@ const {
   logCostOptimizationApplied
 } = require("./lib/seo-telemetry-v153");
 const { writeCostEfficiencyArtifact } = require("./lib/seo-cost-artifact-v153");
+const { appendHighQualityAsset, mergeRetrievalStats } = require("./lib/seo-hq-assets-store");
 const { generateV63Keywords, scoreKeyword } = require("./lib/keyword-expansion-v63");
 const {
   validateZhKeywordContent,
@@ -494,12 +496,43 @@ async function main() {
 
   for (const entry of toGenerate) {
     try {
-      const { hits } = searchRetrievalForKeyword({
+      const evalr = evaluateRetrievalForKeyword({
         keyword: entry.keyword,
         platform: entry.platform,
         goal: entry.goal
       });
-      const useRetrieval = retrievalSufficient(hits);
+      const hits = evalr.hits;
+      const useRetrieval = evalr.sufficient;
+      const cwdZh = process.cwd();
+      if (evalr.bias && evalr.bias.biasApplied) {
+        appendRetrievalTelemetryEvent(cwdZh, {
+          event: "retrieval_bias_applied",
+          keyword: entry.keyword,
+          platform: entry.platform,
+          goal: entry.goal,
+          bias_applied: true,
+          bias_factor: evalr.bias.biasFactor
+        });
+      }
+      if (useRetrieval) {
+        appendRetrievalTelemetryEvent(cwdZh, {
+          event: "retrieval_hit_recorded",
+          keyword: entry.keyword,
+          platform: entry.platform,
+          goal: entry.goal,
+          top_score: evalr.topScore,
+          primary_lane: evalr.primaryLane
+        });
+      } else {
+        appendRetrievalTelemetryEvent(cwdZh, {
+          event: "retrieval_fallback_reason_recorded",
+          keyword: entry.keyword,
+          platform: entry.platform,
+          goal: entry.goal,
+          reason: evalr.fallbackReason || "unknown",
+          top_score: evalr.topScore
+        });
+      }
       let chatCfg = { ...pickSeoChatConfig({ bulk: true }) };
       let generation_mode = useRetrieval ? "retrieval" : "ai";
       let prompt = useRetrieval
@@ -600,6 +633,29 @@ async function main() {
           slug: entry.slug,
           keyword: entry.keyword
         });
+        try {
+          const structure = [next.title, next.directAnswer, next.intro, next.guide]
+            .filter(Boolean)
+            .join("\n")
+            .slice(0, 2000);
+          const qs = Math.min(
+            0.99,
+            0.52 +
+              (1 - Math.min(sim.bestSimilarity, 0.99)) * 0.38 +
+              (generation_mode === "retrieval" ? 0.12 : 0)
+          );
+          appendHighQualityAsset(process.cwd(), {
+            topic: entry.keyword,
+            workflow: String(entry.platform || "zh-seo"),
+            page_type: "zh_keyword",
+            content_summary: String(next.directAnswer || next.intro || next.title || "").slice(0, 1200),
+            quality_score: qs,
+            title: next.title || entry.keyword,
+            structure
+          });
+        } catch (e) {
+          log(`  HQ asset append: ${e.message}`, false);
+        }
       }
     } catch (err) {
       failed++;
@@ -618,7 +674,19 @@ async function main() {
       runStats,
       zhKeywordsSnapshot: Object.keys(loadCache()).length
     });
+    mergeRetrievalStats(process.cwd(), {
+      retrieval_delta: runStats.retrieval,
+      ai_delta: runStats.ai
+    });
     const { execSync } = require("child_process");
+    try {
+      execSync("npx tsx scripts/write-retrieval-utilization-summary.ts", {
+        cwd: process.cwd(),
+        stdio: "ignore"
+      });
+    } catch {
+      // non-fatal
+    }
     execSync("npx tsx scripts/build-asset-seo-publish-queue.ts", { cwd: process.cwd(), stdio: "inherit" });
   } catch (e) {
     log(`V153 artifact refresh: ${e.message} (non-fatal)`, false);

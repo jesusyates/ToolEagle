@@ -1,3 +1,97 @@
 {
-  "items": []
+  "version": "165",
+  "builtAt": "2026-03-29T01:36:34.136Z",
+  "source": "agent_high_quality_assets.json",
+  "source_asset_count": 5,
+  "item_count": 5,
+  "items": [
+    {
+      "id": "hq-22ac906b7c6835b1",
+      "topic": "Instagram变现3天实现方法",
+      "normalized_topic": "instagram变现3天实现方法",
+      "workflow": "instagram",
+      "page_type": "zh_keyword",
+      "locale": "zh",
+      "content_summary": "Instagram三天变现核心在于利用现有资源快速产生价值交换。无需等待粉丝过万，可通过“联盟营销推广数字产品”、“快闪优惠与社群变现”及“内容重售与模板服务”三大方法，在创建账号后72小时内实现收入。",
+      "quality_score": 0.9,
+      "created_at": "2026-03-29T01:06:54.660Z"
+    },
+    {
+      "id": "hq-4ee7a7e8e98ed902",
+      "topic": "YouTube引流7天实现方法",
+      "normalized_topic": "youtube引流7天实现方法",
+      "workflow": "youtube",
+      "page_type": "zh_keyword",
+      "locale": "zh",
+      "content_summary": "YouTube引流7天实现的核心在于“精准定位+内容钩子+跨平台联动”。通过7天高强度、有策略的发布与互动，快速测试内容方向，利用短视频平台为长视频引流，建立初步的观众池和引流循环。",
+      "quality_score": 0.9,
+      "created_at": "2026-03-29T01:05:58.189Z"
+    },
+    {
+      "id": "hq-056de9af353651a1",
+      "topic": "YouTube变现3天实现方法",
+      "normalized_topic": "youtube变现3天实现方法",
+      "workflow": "youtube",
+      "page_type": "zh_keyword",
+      "locale": "zh",
+      "content_summary": "YouTube变现3天实现的核心是：利用平台现有功能（如Shorts、会员、超级感谢）直接向观众寻求支持，并快速加入YPP。关键在于创造高互动、低门槛的“行动召唤”内容，而非等待粉丝积累。",
+      "quality_score": 0.9,
+      "created_at": "2026-03-29T01:04:59.164Z"
+    },
+    {
+      "id": "hq-8740e308fcb818cf",
+      "topic": "TikTok私域引流快速实现方法",
+      "normalized_topic": "tiktok私域引流快速实现方法",
+      "workflow": "tiktok",
+      "page_type": "zh_keyword",
+      "locale": "zh",
+      "content_summary": "TikTok私域引流核心在于快速将公域粉丝引导至可反复触达的私人平台（如微信、邮箱、独立社群）。最快方法是：在优质内容中自然植入“钩子”，通过评论区引导、主页直链、直播口播等方式，提供独家价值，吸引用户主动进入你的私域流量池。",
+      "quality_score": 0.9,
+      "created_at": "2026-03-29T01:03:58.714Z"
+    },
+    {
+      "id": "hq-e851ce46858e80e0",
+      "topic": "TikTok变现3天实现方法",
+      "normalized_topic": "tiktok变现3天实现方法",
+      "workflow": "tiktok",
+      "page_type": "zh_keyword",
+      "locale": "zh",
+      "content_summary": "3天变现的核心是“快速验证-立刻转化”模型。关键在于：第1天精准定位并发布引流内容；第2天通过直播或链接引导至变现落地页；第3天分析数据并优化转化话术。必须跳过长期养号的误区，直接进入销售环节。",
+      "quality_score": 0.9,
+      "created_at": "2026-03-29T01:02:58.716Z"
+    }
+  ],
+  "buckets": {
+    "by_workflow": {
+      "instagram": [
+        "hq-22ac906b7c6835b1"
+      ],
+      "youtube": [
+        "hq-4ee7a7e8e98ed902",
+        "hq-056de9af353651a1"
+      ],
+      "tiktok": [
+        "hq-8740e308fcb818cf",
+        "hq-e851ce46858e80e0"
+      ]
+    },
+    "by_page_type": {
+      "zh_keyword": [
+        "hq-22ac906b7c6835b1",
+        "hq-4ee7a7e8e98ed902",
+        "hq-056de9af353651a1",
+        "hq-8740e308fcb818cf",
+        "hq-e851ce46858e80e0"
+      ]
+    },
+    "by_locale": {
+      "zh": [
+        "hq-22ac906b7c6835b1",
+        "hq-4ee7a7e8e98ed902",
+        "hq-056de9af353651a1",
+        "hq-8740e308fcb818cf",
+        "hq-e851ce46858e80e0"
+      ]
+    }
+  }
 }

@@ -12,6 +12,7 @@
  */
 
 import { getAllTopicSlugs, getTopic } from "./topics";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 export type SeoExpansionPageType =
   | "best-captions"
@@ -173,4 +174,11 @@ export function getSeoExpansionSlugsForPageType(
   pageType: SeoExpansionPageType
 ): { topic: string }[] {
   return getAllTopicSlugs().map((topic) => ({ topic }));
+}
+
+/** Vercel: capped static params for expansion routes only. */
+export function getSeoExpansionStaticParamsForPageType(
+  pageType: SeoExpansionPageType
+): { topic: string }[] {
+  return limitBuildStaticParams(getSeoExpansionSlugsForPageType(pageType));
 }

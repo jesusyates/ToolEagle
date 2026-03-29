@@ -17,6 +17,7 @@ import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { TopicViewTracker } from "@/components/analytics/TopicViewTracker";
 import { Video } from "lucide-react";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -25,7 +26,7 @@ type Props = {
 export async function generateStaticParams() {
   const base = getAllTopicSlugs().map((slug) => ({ slug }));
   const clusters = getAllTopicClusterSlugs().map((slug) => ({ slug }));
-  return [...base, ...clusters];
+  return limitBuildStaticParams([...base, ...clusters]);
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

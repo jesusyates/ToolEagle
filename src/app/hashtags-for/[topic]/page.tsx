@@ -11,13 +11,14 @@ import { RelatedContentCard } from "@/components/related/RelatedContentCard";
 import { getRelatedContent } from "@/lib/related-content";
 import { Hash } from "lucide-react";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 const HASHTAG_TOOLS = ["hashtag-generator", "tiktok-hashtag-generator", "instagram-hashtag-generator"];
 
 type Props = { params: Promise<{ topic: string }> };
 
 export async function generateStaticParams() {
-  return getAllTopicSlugs().map((topic) => ({ topic }));
+  return limitBuildStaticParams(getAllTopicSlugs().map((topic) => ({ topic })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -21,7 +21,6 @@ import { AnswerLinksCard } from "@/components/tools/AnswerLinksCard";
 import { DelegatedButton } from "@/components/DelegatedButton";
 import { LimitReachedModal } from "@/components/LimitReachedModal";
 import { LoginPromptModal } from "@/components/LoginPromptModal";
-import { ExitIntentCta } from "@/components/tools/ExitIntentCta";
 import { useAuth } from "@/hooks/useAuth";
 import { useCountry } from "@/hooks/useCountry";
 import { getEnToolJourney } from "@/config/en-tool-journey";
@@ -213,9 +212,6 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
     <>
       <LimitReachedModal open={limitModalOpen} onClose={() => setLimitModalOpen(false)} />
       <LoginPromptModal open={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
-      {items.length > 0 && (
-        <ExitIntentCta toolSlug={slug} toolName={toolMeta.name} />
-      )}
       <ToolPageShell
       title={toolMeta.name}
       description={descriptionHero}

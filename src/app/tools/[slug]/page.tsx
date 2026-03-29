@@ -14,6 +14,7 @@ import { toolToBlogTags } from "@/lib/seo";
 import { getToolMetaDescriptionEn } from "@/lib/tool-display";
 import type { Metadata } from "next";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 const STATIC_TOOL_SLUGS = [
   "tiktok-caption-generator",
@@ -23,7 +24,7 @@ const STATIC_TOOL_SLUGS = [
 ];
 
 export async function generateStaticParams() {
-  return Object.keys(generators).map((slug) => ({ slug }));
+  return limitBuildStaticParams(Object.keys(generators).map((slug) => ({ slug })));
 }
 
 export async function generateMetadata({

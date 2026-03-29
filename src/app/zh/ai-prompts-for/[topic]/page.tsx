@@ -3,21 +3,15 @@ import { notFound } from "next/navigation";
 import { ZhGuidePageTemplate } from "@/components/seo/ZhGuidePageTemplate";
 import { ZhHubPageTemplate } from "@/components/seo/ZhHubPageTemplate";
 import { parseZhSlug, isBaseTopicValid, ZH_PLATFORMS } from "@/config/traffic-topics";
-import { getZhContent, getAllZhGuideParams, shouldNoindexZhPage } from "@/lib/generate-zh-content";
-import { getAllHubParams } from "@/lib/zh-hub-data";
+import { getZhContent, shouldNoindexZhPage } from "@/lib/generate-zh-content";
+import { getZhGuideStaticParamsForBuild } from "@/lib/zh-guide-static-params";
 import { getZhPageMetadata, getZhGuideKeyword } from "@/lib/zh-metadata";
 import { getExamplesForTopic } from "@/lib/guide-data";
 import { BASE_URL } from "@/config/site";
-
 type Props = { params: Promise<{ topic: string }> };
 
 export async function generateStaticParams() {
-  const childParams = getAllZhGuideParams().filter((p) => p.pageType === "ai-prompts");
-  const withContent = childParams.filter((p) => getZhContent("ai-prompts", p.topic));
-  const hubParams = getAllHubParams()
-    .filter((h) => h.pageType === "ai-prompts")
-    .map((h) => ({ topic: h.platform }));
-  return [...withContent.map((p) => ({ topic: p.topic })), ...hubParams];
+  return getZhGuideStaticParamsForBuild("ai-prompts");
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

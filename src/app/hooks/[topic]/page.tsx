@@ -16,6 +16,7 @@ import { RelatedLinks } from "@/components/seo/RelatedLinks";
 import { CaptionHookExampleCard } from "@/components/save/CaptionHookExampleCard";
 import { Zap } from "lucide-react";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 const HOOK_TOOL_SLUGS = ["hook-generator", "youtube-hook-generator"];
 
@@ -24,7 +25,7 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  return CAPTION_HOOK_TOPICS.map((topic) => ({ topic }));
+  return limitBuildStaticParams(CAPTION_HOOK_TOPICS.map((topic) => ({ topic })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

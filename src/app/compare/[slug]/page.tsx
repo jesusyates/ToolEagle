@@ -8,6 +8,7 @@ import { getComparePair, getAllComparePairSlugs } from "@/lib/generate-compariso
 import { ToolComparisonPage } from "@/components/compare/ToolComparisonPage";
 import { Check, X } from "lucide-react";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -16,7 +17,7 @@ type Props = {
 export async function generateStaticParams() {
   const legacy = getAllCompareSlugs().map((slug) => ({ slug }));
   const pairs = getAllComparePairSlugs().map((slug) => ({ slug }));
-  return [...legacy, ...pairs];
+  return limitBuildStaticParams([...legacy, ...pairs]);
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

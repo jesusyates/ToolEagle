@@ -24,7 +24,6 @@ import { HistoryPanel } from "@/components/tools/HistoryPanel";
 import { HowItWorksCard } from "@/components/tools/HowItWorksCard";
 import { ToolProTipsCard } from "@/components/tools/ToolProTipsCard";
 import { LimitReachedModal } from "@/components/LimitReachedModal";
-import { ExitIntentCta } from "@/components/tools/ExitIntentCta";
 import { useCountry } from "@/hooks/useCountry";
 import { formatPackageAsPlainText, PACKAGE_SECTION_LABELS } from "@/lib/ai/postPackage";
 import { PACKAGE_SECTION_LABELS_ZH } from "@/lib/zh-site/packageLabels";
@@ -703,9 +702,6 @@ export function PostPackageToolClient({
           loginNextPath={pathname || "/zh"}
         />
       ) : null}
-      {packages.length > 0 && (
-        <ExitIntentCta toolSlug={toolSlug} toolName={title} siteMode={siteMode} />
-      )}
       <div className={showDouyinMobileSticky ? "pb-[5.5rem] md:pb-0" : undefined}>
       <ToolPageShell
         eyebrow={eyebrow}

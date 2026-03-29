@@ -449,6 +449,40 @@ export function logV153CostOptimizationApplied(input: Record<string, unknown>): 
   }
 }
 
+/** V166 — mirrors JSONL in `generated/seo-retrieval-events.jsonl` (metadata only). */
+export function logRetrievalHitRecorded(input: Record<string, unknown>): void {
+  try {
+    console.info(
+      "[retrieval_telemetry]",
+      JSON.stringify({ ts: new Date().toISOString(), event: "retrieval_hit_recorded", ...input })
+    );
+  } catch {
+    // no-op
+  }
+}
+
+export function logRetrievalFallbackReasonRecorded(input: Record<string, unknown>): void {
+  try {
+    console.info(
+      "[retrieval_telemetry]",
+      JSON.stringify({ ts: new Date().toISOString(), event: "retrieval_fallback_reason_recorded", ...input })
+    );
+  } catch {
+    // no-op
+  }
+}
+
+export function logRetrievalBiasApplied(input: Record<string, unknown>): void {
+  try {
+    console.info(
+      "[retrieval_telemetry]",
+      JSON.stringify({ ts: new Date().toISOString(), event: "retrieval_bias_applied", ...input })
+    );
+  } catch {
+    // no-op
+  }
+}
+
 /** V160 — AI citation dominance loop (metadata only; no external citation APIs). */
 export function logAssetSeoAiCitationDominance(input: {
   event: "ai_citation_dominance_computed" | "ai_citable_topic_boosted" | "weak_ai_topic_suppressed";

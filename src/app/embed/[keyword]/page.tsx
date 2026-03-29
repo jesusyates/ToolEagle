@@ -2,14 +2,13 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EmbedWidgetClient } from "./EmbedWidgetClient";
 import { getKeywordBySlug } from "@/lib/keyword-patterns";
-import { getKeywordContent, getAllKeywordSlugsWithContent } from "@/lib/zh-keyword-content";
+import { getKeywordContent, getZhKeywordEmbedStaticParams } from "@/lib/zh-keyword-content";
 import { BASE_URL } from "@/config/site";
 
 type Props = { params: Promise<{ keyword: string }> };
 
 export async function generateStaticParams() {
-  const slugs = getAllKeywordSlugsWithContent();
-  return slugs.map((slug) => ({ keyword: slug }));
+  return getZhKeywordEmbedStaticParams();
 }
 
 export const metadata: Metadata = {

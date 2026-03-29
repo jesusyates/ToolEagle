@@ -9,13 +9,14 @@ import { SeoToolCTA } from "@/components/seo/SeoToolCTA";
 import { tools } from "@/config/tools";
 import { Video } from "lucide-react";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  return getAllBestContentSlugs().map((slug) => ({ slug }));
+  return limitBuildStaticParams(getAllBestContentSlugs().map((slug) => ({ slug })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

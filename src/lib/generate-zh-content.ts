@@ -170,14 +170,16 @@ function loadCache(): ZhCache {
   }
 }
 
-function saveCache(cache: ZhCache): void {
-  const dir = path.dirname(CACHE_PATH);
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(CACHE_PATH, JSON.stringify(cache, null, 2), "utf8");
+/** One disk read; use with `getZhContentFromCache` in hot loops (e.g. `generateStaticParams`). */
+export function loadZhContentCache(): ZhCache {
+  return loadCache();
 }
 
-export function getZhContent(pageType: GuidePageType, topic: string): ZhPageContent | null {
-  const cache = loadCache();
+export function getZhContentFromCache(
+  cache: ZhCache,
+  pageType: GuidePageType,
+  topic: string
+): ZhPageContent | null {
   const key = `${pageType}:${topic}`;
   const pageCache = cache[pageType] ?? cache[key];
   let content: ZhPageContent | undefined;
@@ -192,6 +194,16 @@ export function getZhContent(pageType: GuidePageType, topic: string): ZhPageCont
   if (!content) return null;
   if (content.published === false) return null;
   return content;
+}
+
+function saveCache(cache: ZhCache): void {
+  const dir = path.dirname(CACHE_PATH);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(CACHE_PATH, JSON.stringify(cache, null, 2), "utf8");
+}
+
+export function getZhContent(pageType: GuidePageType, topic: string): ZhPageContent | null {
+  return getZhContentFromCache(loadCache(), pageType, topic);
 }
 
 export function setZhContent(pageType: GuidePageType, topic: string, content: ZhPageContent): void {

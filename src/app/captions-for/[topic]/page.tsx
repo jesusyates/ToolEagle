@@ -12,13 +12,14 @@ import { RelatedAITools } from "@/components/tools/RelatedAITools";
 import { getRelatedContent } from "@/lib/related-content";
 import { MessageSquareText } from "lucide-react";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 const CAPTION_TOOLS = ["tiktok-caption-generator", "instagram-caption-generator"];
 
 type Props = { params: Promise<{ topic: string }> };
 
 export async function generateStaticParams() {
-  return getAllTopicSlugs().map((topic) => ({ topic }));
+  return limitBuildStaticParams(getAllTopicSlugs().map((topic) => ({ topic })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

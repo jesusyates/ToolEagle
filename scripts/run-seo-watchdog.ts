@@ -24,6 +24,11 @@ import { dailyReportMtimeMs, loadRecentDailyReports, readDailyReportFile } from 
 import { buildReliabilitySummaryPayload, writeReliabilitySummary } from "./lib/seo-reliability-summary";
 import { isPrimaryScriptEntry } from "../src/lib/seo/seo-sandbox";
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const seoActivation = require("./lib/seo-system-activation.js") as {
+  evaluateAndWriteCriticalState: (cwd: string) => { critical: boolean; reasons: string[] };
+};
+
 const CWD = process.cwd();
 const EVENT_LOG = path.join(CWD, "logs", "seo-orchestrator-events.jsonl");
 const RELIABILITY_LOG = path.join(CWD, "logs", "seo-reliability-watchdog.jsonl");
@@ -194,6 +199,8 @@ function runWatchdogOnce(): number {
       stale: metrics.stale_report_count
     });
   }
+
+  seoActivation.evaluateAndWriteCriticalState(CWD);
 
   return passed ? 0 : 1;
 }

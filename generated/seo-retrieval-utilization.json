@@ -1,0 +1,18 @@
+{
+  "version": "166",
+  "updatedAt": "2026-03-29T01:43:18.484Z",
+  "retrieval_share": 0,
+  "ai_share": 0,
+  "retrieval_hits": 0,
+  "retrieval_fallbacks": 0,
+  "top_retrieval_topics": [],
+  "weak_retrieval_topics": [],
+  "workflow_retrieval_performance": [],
+  "fallback_reason_breakdown": {},
+  "production_retrieval_share": 0,
+  "production_ai_share": 1,
+  "production_retrieval_count": 0,
+  "production_ai_count": 5,
+  "bias_events_in_window": 0,
+  "notes": "Window utilization: retrieval_share = retrieval_hits / (retrieval_hits + retrieval_fallbacks) over last 0 parsed event rows. Production (seo-retrieval-stats): retrieval_share = retrieval_count / (retrieval_count + ai_generation_count). No retrieval decision events in window yet — run zh:auto to populate seo-retrieval-events.jsonl."
+}

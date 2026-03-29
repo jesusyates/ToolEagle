@@ -2,14 +2,14 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
-import { getSeoExpansionConfig, getSeoExpansionSlugsForPageType } from "@/config/seo-expansion";
+import { getSeoExpansionConfig, getSeoExpansionStaticParamsForPageType } from "@/config/seo-expansion";
 import { SeoExpansionTemplate } from "@/components/seo/SeoExpansionTemplate";
 import { BASE_URL } from "@/config/site";
 
 type Props = { params: Promise<{ topic: string }> };
 
 export async function generateStaticParams() {
-  return getSeoExpansionSlugsForPageType("caption-ideas");
+  return getSeoExpansionStaticParamsForPageType("caption-ideas");
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

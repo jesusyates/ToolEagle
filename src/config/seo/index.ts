@@ -15,6 +15,7 @@ import { platforms } from "./platforms";
 import { contentTypes } from "./content-types";
 import { topics } from "./topics";
 import { getIntent } from "./intents";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 export function getAllSeoParams(): { platform: string; type: string; topic: string }[] {
   const params: { platform: string; type: string; topic: string }[] = [];
@@ -34,4 +35,19 @@ export function getIndexableSeoParams(): { platform: string; type: string; topic
     const intent = getIntent(topic);
     return !intent || intent === "guide";
   });
+}
+
+/** Vercel: capped static params; sitemap/runtime still use full `getIndexableSeoParams`. */
+export function getIndexableSeoStaticParamRoutes(): {
+  category: string;
+  type: string;
+  topic: string;
+}[] {
+  return limitBuildStaticParams(
+    getIndexableSeoParams().map(({ platform, type, topic }) => ({
+      category: platform,
+      type,
+      topic
+    }))
+  );
 }

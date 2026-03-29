@@ -5,7 +5,8 @@ import { getKeywordBySlug } from "@/lib/keyword-patterns";
 import {
   getKeywordContent,
   shouldNoindexKeywordPage,
-  getAllKeywordSlugsWithContent
+  getAllKeywordSlugsWithContent,
+  getZhKeywordSearchStaticParams
 } from "@/lib/zh-keyword-content";
 import { BASE_URL } from "@/config/site";
 import { getZhPageMetadata } from "@/lib/zh-metadata";
@@ -13,8 +14,7 @@ import { getZhPageMetadata } from "@/lib/zh-metadata";
 type Props = { params: Promise<{ "keyword-slug": string }> };
 
 export async function generateStaticParams() {
-  const slugs = getAllKeywordSlugsWithContent();
-  return slugs.map((slug) => ({ "keyword-slug": slug }));
+  return getZhKeywordSearchStaticParams();
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

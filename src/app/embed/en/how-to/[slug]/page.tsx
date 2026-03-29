@@ -2,11 +2,12 @@ import { notFound } from "next/navigation";
 import { EmbedWidgetClient } from "@/app/embed/[keyword]/EmbedWidgetClient";
 import { getEnHowToContent, getAllEnHowToSlugs, resolveEnHowToSlug } from "@/lib/en-how-to-content";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return getAllEnHowToSlugs().map((slug) => ({ slug }));
+  return limitBuildStaticParams(getAllEnHowToSlugs().map((slug) => ({ slug })));
 }
 
 export const metadata = {

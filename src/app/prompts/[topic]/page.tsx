@@ -12,6 +12,7 @@ import { getPromptsByTopic, getAllPromptTopics } from "@/lib/generated-content";
 import { tools } from "@/config/tools";
 import { ToolCard } from "@/components/tools/ToolCard";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 const PAGE_SIZE = 50;
 
@@ -19,7 +20,7 @@ type Props = { params: Promise<{ topic: string }>; searchParams: Promise<{ page?
 
 export async function generateStaticParams() {
   const topics = await getAllPromptTopics();
-  return topics.map((topic) => ({ topic }));
+  return limitBuildStaticParams(topics.map((topic) => ({ topic })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

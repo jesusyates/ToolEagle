@@ -7,7 +7,7 @@ import { ToolCard } from "@/components/tools/ToolCard";
 import { tools } from "@/config/tools";
 import {
   getSeoPageEntry,
-  getSeoPageParams,
+  getSeoPageStaticParamsForBuild,
   formatTopicLabel,
   getExamplesForTopic,
   getCategoryLabel,
@@ -29,7 +29,10 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const seoParams = getSeoPageParams().map(({ category, topic }) => ({ slug: category, topic }));
+  const seoParams = getSeoPageStaticParamsForBuild().map(({ category, topic }) => ({
+    slug: category,
+    topic
+  }));
   // v47: idea detail pages are dynamic - skip for static params
   return seoParams;
 }

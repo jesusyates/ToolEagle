@@ -5,11 +5,12 @@ import { SiteFooter } from "../../_components/SiteFooter";
 import { getAITool, getAllAIToolSlugs } from "@/config/ai-tools-marketplace";
 import { AIToolPage } from "@/components/tools/AIToolPage";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return getAllAIToolSlugs().map((slug) => ({ slug }));
+  return limitBuildStaticParams(getAllAIToolSlugs().map((slug) => ({ slug })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

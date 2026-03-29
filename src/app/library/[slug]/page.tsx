@@ -12,6 +12,7 @@ import { RelatedLinks } from "@/components/seo/RelatedLinks";
 import { LibraryExampleCard } from "@/components/save/LibraryExampleCard";
 import { MessageSquareText, Zap } from "lucide-react";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 const MIN_EXAMPLES = 100;
 
@@ -20,7 +21,7 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  return getAllLibrarySlugs().map((slug) => ({ slug }));
+  return limitBuildStaticParams(getAllLibrarySlugs().map((slug) => ({ slug })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

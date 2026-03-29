@@ -10,7 +10,7 @@ import {
   PLATFORM_LABELS,
   CONTENT_TYPE_LABELS,
   formatTopicLabel,
-  getIndexableSeoParams,
+  getIndexableSeoStaticParamRoutes,
   TOOL_MAP,
   getIntent
 } from "@/config/seo/index";
@@ -35,11 +35,7 @@ type Props = {
 export const revalidate = 86400; // ISR: 24h
 
 export async function generateStaticParams() {
-  return getIndexableSeoParams().map(({ platform, type, topic }) => ({
-    category: platform,
-    type,
-    topic
-  }));
+  return getIndexableSeoStaticParamRoutes();
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

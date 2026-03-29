@@ -16,13 +16,14 @@ import { getRelatedContent } from "@/lib/related-content";
 import { tools } from "@/config/tools";
 import { MessageSquareText } from "lucide-react";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 const CAPTION_TOOLS = ["tiktok-caption-generator", "instagram-caption-generator"];
 
 type Props = { params: Promise<{ topic: string; style: string }> };
 
 export async function generateStaticParams() {
-  return getAllCaptionStyleParams();
+  return limitBuildStaticParams(getAllCaptionStyleParams());
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

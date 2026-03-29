@@ -21,6 +21,7 @@ import {
   TYPE_LABELS
 } from "@/config/programmatic-blog";
 import { SITE_URL } from "@/config/site";
+import { limitBuildStaticBlogMdx, limitBuildStaticBlogProgrammatic } from "@/lib/build-static-params-limit";
 type Params = Promise<{ slug: string }>;
 
 export async function generateStaticParams() {
@@ -28,7 +29,10 @@ export async function generateStaticParams() {
   const programmaticParams = getAllProgrammaticBlogParams().map(({ topic, platform, type }) => ({
     slug: getProgrammaticBlogSlug(topic, platform, type)
   }));
-  return [...mdxPosts.map((post) => ({ slug: post.frontmatter.slug })), ...programmaticParams];
+  return [
+    ...limitBuildStaticBlogMdx(mdxPosts.map((post) => ({ slug: post.frontmatter.slug }))),
+    ...limitBuildStaticBlogProgrammatic(programmaticParams)
+  ];
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {

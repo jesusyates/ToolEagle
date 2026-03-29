@@ -12,11 +12,12 @@ import { RelatedContentCard } from "@/components/related/RelatedContentCard";
 import { getRelatedContent } from "@/lib/related-content";
 import { Lightbulb } from "lucide-react";
 import { BASE_URL } from "@/config/site";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return getAllTopicSlugs().map((slug) => ({ slug }));
+  return limitBuildStaticParams(getAllTopicSlugs().map((slug) => ({ slug })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

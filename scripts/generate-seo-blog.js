@@ -549,6 +549,7 @@ async function main() {
 
   const { pickSeoChatConfig } = require("./lib/seo-model-router-v153");
   const { logV153SeoGeneration } = require("./lib/seo-telemetry-v153");
+  const { appendHighQualityAsset, mergeRetrievalStats } = require("./lib/seo-hq-assets-store");
   const v153BlogCfg = pickSeoChatConfig({ bulk: true });
   logV153SeoGeneration({
     retrieval_used: false,
@@ -791,6 +792,22 @@ async function main() {
               primaryType: "blog",
               primaryUrl: `/blog/${slug}`
             });
+            try {
+              const structure = String(data.body || "").slice(0, 2000);
+              const qs = Math.min(0.99, 0.58 + (1 - Math.min(sim.bestSimilarity, 0.99)) * 0.36);
+              appendHighQualityAsset(process.cwd(), {
+                topic: String(topic),
+                workflow: String(platform),
+                page_type: "en_blog_mdx",
+                content_summary: String(data.description || "").slice(0, 1200),
+                quality_score: qs,
+                title: data.title,
+                structure
+              });
+              mergeRetrievalStats(process.cwd(), { ai_delta: 1 });
+            } catch (e) {
+              console.warn("[hq-assets]", e?.message || e);
+            }
             try {
               const base = (process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://www.tooleagle.com").replace(
                 /\/$/,

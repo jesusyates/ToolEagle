@@ -3,6 +3,7 @@
  */
 import * as fs from "fs";
 import * as path from "path";
+import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 export type ZhKeywordContent = {
   title: string;
@@ -70,6 +71,18 @@ export function getAllKeywordSlugsWithContent(): string[] {
   return Object.entries(cache)
     .filter(([, c]) => c.published !== false)
     .map(([slug]) => slug);
+}
+
+/** Vercel-capped params for `/zh/search/[keyword-slug]`. */
+export function getZhKeywordSearchStaticParams(): { "keyword-slug": string }[] {
+  return limitBuildStaticParams(
+    getAllKeywordSlugsWithContent().map((slug) => ({ "keyword-slug": slug }))
+  );
+}
+
+/** Vercel-capped params for `/embed/[keyword]`. */
+export function getZhKeywordEmbedStaticParams(): { keyword: string }[] {
+  return limitBuildStaticParams(getAllKeywordSlugsWithContent().map((slug) => ({ keyword: slug })));
 }
 
 export function shouldNoindexKeywordPage(content: ZhKeywordContent | null): boolean {

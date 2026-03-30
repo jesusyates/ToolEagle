@@ -18,6 +18,11 @@ import {
   type SeoRetrievalActivationJson,
   writeRetrievalActivationArtifact
 } from "@/lib/seo/retrieval-activation-artifact";
+import {
+  buildRetrievalOptimizationPlan,
+  writeRetrievalOptimizationPlan
+} from "@/lib/seo/retrieval-optimizer";
+import { writeSystemMapJson } from "@/lib/seo/system-map";
 
 function readJson<T>(p: string, fb: T): T {
   try {
@@ -54,12 +59,15 @@ export type SeoStatusResult = {
   flywheel: SeoFlywheelRampJson;
   retrievalUtilization: SeoRetrievalUtilizationJson;
   retrievalActivation: SeoRetrievalActivationJson;
+  /** V168 — from retrieval-optimization-plan */
+  recommendations: string[];
 };
 
 export function buildFlywheelRampForWorkspace(cwd: string, now: Date): {
   flywheel: SeoFlywheelRampJson;
   retrievalUtilization: SeoRetrievalUtilizationJson;
   retrievalActivation: SeoRetrievalActivationJson;
+  recommendations: string[];
 } {
   const gen = path.join(cwd, "generated");
   const hqCount = countHqAssets(cwd);
@@ -112,7 +120,15 @@ export function buildFlywheelRampForWorkspace(cwd: string, now: Date): {
 
   writeJson(path.join(gen, "seo-flywheel-ramp.json"), artifact);
   const retrievalActivation = writeRetrievalActivationArtifact(cwd, now);
-  return { flywheel: artifact, retrievalUtilization: utilizationPayload, retrievalActivation };
+  const optPlan = buildRetrievalOptimizationPlan(cwd, now, { apply: false });
+  writeRetrievalOptimizationPlan(cwd, optPlan);
+  writeSystemMapJson(cwd, now);
+  return {
+    flywheel: artifact,
+    retrievalUtilization: utilizationPayload,
+    retrievalActivation,
+    recommendations: optPlan.recommendations
+  };
 }
 
 export function runSeoStatus(cwd: string, now = new Date()): SeoStatusResult {
@@ -127,7 +143,7 @@ export function runSeoStatus(cwd: string, now = new Date()): SeoStatusResult {
     null
   );
 
-  const { flywheel, retrievalUtilization: utilizationPayload, retrievalActivation } =
+  const { flywheel, retrievalUtilization: utilizationPayload, retrievalActivation, recommendations } =
     buildFlywheelRampForWorkspace(cwd, now);
 
   const tNow = now.getTime();
@@ -147,7 +163,7 @@ export function runSeoStatus(cwd: string, now = new Date()): SeoStatusResult {
   const state = stalled ? "STALLED" : "ACTIVE";
 
   const lines: string[] = [];
-  lines.push("=== ToolEagle SEO status (V166.1) ===");
+  lines.push("=== ToolEagle SEO status (V167) ===");
   lines.push(`System: ${state}`);
   lines.push(`Last run: ${heartbeat?.last_run_at ?? "(no heartbeat)"}`);
   lines.push(
@@ -196,6 +212,10 @@ export function runSeoStatus(cwd: string, now = new Date()): SeoStatusResult {
     `Flywheel — HQ assets: ${flywheel.current_high_quality_asset_count}, retrieval_share: ${flywheel.retrieval_share}, ai_share: ${flywheel.ai_share}, state: ${flywheel.flywheel_state}, pool_ready: ${flywheel.asset_pool_ready}, ramping: ${flywheel.retrieval_ramping}, active: ${flywheel.flywheel_active}, dataset_ready: ${flywheel.retrieval_dataset_ready}`
   );
   lines.push(`Flywheel artifact: generated/seo-flywheel-ramp.json (updated ${flywheel.updatedAt})`);
+  lines.push(
+    `Recommendations (V168): ${recommendations.length ? recommendations.join(" | ") : "none"}`
+  );
+  lines.push(`Artifacts: generated/retrieval-optimization-plan.json, generated/system-map.json`);
   lines.push("=====================================");
 
   return {
@@ -203,6 +223,7 @@ export function runSeoStatus(cwd: string, now = new Date()): SeoStatusResult {
     exitCode: stalled ? 1 : 0,
     flywheel,
     retrievalUtilization: utilizationPayload,
-    retrievalActivation
+    retrievalActivation,
+    recommendations
   };
 }

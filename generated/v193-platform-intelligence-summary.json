@@ -1,0 +1,32 @@
+{
+  "version": "193.0",
+  "builtAt": "2026-03-30T09:23:39.780Z",
+  "notes": "V193 observations are additive boosts on top of existing V191 patterns.",
+  "platforms": {
+    "tiktok": {
+      "hook_focus": {
+        "count": 15,
+        "top_structures": [
+          "I tested {tool/approach} on {niche} for 7 days. Day 1 vs Day 7: {before} → {after}. Here’s the exact script I used.",
+          "For TikTok Shop: The product solves {problem}—here’s the exact demo moment (skip to 0:12).",
+          "Most creators say {common_advice}. Here’s what actually works for {niche}: {specific_action} (and the proof is in the results)."
+        ]
+      },
+      "hashtag": {
+        "count": 2,
+        "top_structures": [
+          "Hashtag set: one branded tag + three niche tags + two intent tags (e.g. #hook #tutorial). Avoid generic spam tags.",
+          "Hashtag set: #{niche} + #{sub_niche} + #howto + #tips + #creatortok + #fyp (only if hook matches)."
+        ]
+      },
+      "title": {
+        "count": 3,
+        "top_structures": [
+          "I tried {approach} for {niche} — here’s what changed (in {time_box}).",
+          "Stop doing {common_action} if you want {goal} — do this instead.",
+          "{3_mistakes} Mistakes Killing Your {niche} (and the fix)."
+        ]
+      }
+    }
+  }
+}

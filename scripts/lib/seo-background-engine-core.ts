@@ -3,9 +3,18 @@
  * Used by run-background-seo-engine.ts and run-daily-orchestrator.ts.
  */
 
+import { createRequire } from "module";
 import { spawnSync } from "child_process";
 import fs from "fs";
 import path from "path";
+
+const require = createRequire(import.meta.url);
+const { resolveRepoRoot } = require("./repo-root.js") as {
+  resolveRepoRoot: (startDir?: string) => string;
+};
+
+/** Repo root from script location — not shell cwd. */
+export const DEFAULT_REPO_ROOT = resolveRepoRoot();
 
 export type SeoPipelineStatus = "idle" | "running" | "completed" | "partial";
 
@@ -32,7 +41,7 @@ export type SeoPipelineState = {
   orchestrator_cycle_started_at: string | null;
 };
 
-export const DEFAULT_STATE_PATH = path.join(process.cwd(), "generated", "seo-pipeline-state.json");
+export const DEFAULT_STATE_PATH = path.join(DEFAULT_REPO_ROOT, "generated", "seo-pipeline-state.json");
 
 export function defaultPipelineState(): SeoPipelineState {
   return {
@@ -125,7 +134,7 @@ export type BackgroundTickResult = {
  * Single V153 tick: optional ZH batch → distribute → optional EN blog + en:auto.
  */
 export function runBackgroundSeoTick(opts: BackgroundTickOptions): BackgroundTickResult {
-  const cwd = opts.cwd ?? process.cwd();
+  const cwd = opts.cwd ?? DEFAULT_REPO_ROOT;
   const statePath = opts.statePath ?? DEFAULT_STATE_PATH;
   const childEnv: NodeJS.ProcessEnv | undefined = opts.dryRun
     ? { ...process.env, SEO_DRY_RUN: "1" }

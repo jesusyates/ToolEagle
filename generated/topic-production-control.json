@@ -1,0 +1,80 @@
+{
+  "version": "173",
+  "builtAt": "2026-03-30T11:03:05.977Z",
+  "min_pregen_score_from_signals": 0.08,
+  "generation_strict_from_signals": true,
+  "topics": [
+    {
+      "topic": "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: Un",
+      "route_type": "post_package",
+      "status": "active",
+      "reason": "",
+      "fail_rate": 1,
+      "last_decision_at": "2026-03-30T11:03:05.977Z",
+      "topic_fp": "cd76c1c286074b58"
+    },
+    {
+      "topic": "hello",
+      "route_type": "post_package",
+      "status": "active",
+      "reason": "",
+      "fail_rate": 0.5,
+      "last_decision_at": "2026-03-30T11:03:05.977Z",
+      "topic_fp": "2cf24dba5fb0a30e"
+    },
+    {
+      "topic": "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: Ge",
+      "route_type": "post_package",
+      "status": "active",
+      "reason": "",
+      "fail_rate": 0.167,
+      "last_decision_at": "2026-03-30T11:03:05.977Z",
+      "topic_fp": "b5c6773fcea06940"
+    },
+    {
+      "topic": "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: he",
+      "route_type": "post_package",
+      "status": "active",
+      "reason": "",
+      "fail_rate": 0,
+      "last_decision_at": "2026-03-30T11:03:05.977Z",
+      "topic_fp": "63c817ac8f9eee56"
+    },
+    {
+      "topic": "Creator intent: Promote a product. Content scenario: Small business. Hook/video ",
+      "route_type": "post_package",
+      "status": "active",
+      "reason": "",
+      "fail_rate": 0,
+      "last_decision_at": "2026-03-30T11:03:05.977Z",
+      "topic_fp": "106200c031bcf985"
+    },
+    {
+      "topic": "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: or",
+      "route_type": "post_package",
+      "status": "active",
+      "reason": "",
+      "fail_rate": 0,
+      "last_decision_at": "2026-03-30T11:03:05.977Z",
+      "topic_fp": "5f27da9916327a04"
+    },
+    {
+      "topic": "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: [V",
+      "route_type": "post_package",
+      "status": "active",
+      "reason": "",
+      "fail_rate": 0,
+      "last_decision_at": "2026-03-30T11:03:05.977Z",
+      "topic_fp": "36154537ce4d46d8"
+    },
+    {
+      "topic": "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: Us",
+      "route_type": "post_package",
+      "status": "active",
+      "reason": "",
+      "fail_rate": 0,
+      "last_decision_at": "2026-03-30T11:03:05.977Z",
+      "topic_fp": "b86c128e15578ef2"
+    }
+  ]
+}

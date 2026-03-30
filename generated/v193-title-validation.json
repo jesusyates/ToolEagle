@@ -1,0 +1,50 @@
+{
+  "version": "193.3",
+  "generated_at": "2026-03-30T13:52:54.331Z",
+  "baseline_output": "[V186 Creator Knowledge Engine — use structure and constraints; do not copy verbatim.]\n[V191 Target surface: tiktok — patterns and fragments weighted for this platform + monetization profile.]\nIntent: Get more views (intent_views)\nScenario: Tutorial (sc_tutorial)\nRecipe: Titles must match thumbnail and first 3 seconds; no misleading health claims.\nHigh-weight patterns:\n1. [title] [tiktok · title] Specific outcome + time or number + light curiosity; match spoken hook so feed feels coherent.\n2. [ctr] Concrete outcome + specificity + light curiosity; avoid clickbait without payoff.\nKnowledge fragments (weighted selection):\n1. (tip) Title formulas: 'I tried X so you don't have to', '3 X mistakes', 'Stop doing X if you want Y'.\n2. (general_platform_safe) Avoid guaranteed income claims; use 'may', 'often', 'can help'. Disclose paid partnerships when applicable.\n3. (commerce_disclosure) TikTok Shop: lead with the problem the product solves in one line, show the product in frame early.\n4. (tip) Strong hooks contrast 'common advice' vs 'what actually works' with a specific example niche.",
+  "v193_output": "[V186 Creator Knowledge Engine — use structure and constraints; do not copy verbatim.]\n[V191 Target surface: tiktok — patterns and fragments weighted for this platform + monetization profile.]\n[V193 Platform Observations — additive TikTok boost. Apply when relevant to your generation task.]\nTop TikTok observation patterns:\n- I tried {approach} for {niche} — here’s what changed (in {time_box}).\n- Stop doing {common_action} if you want {goal} — do this instead.\n[V193.2 Platform Difference Reinforcement — prioritize TikTok cover text / opener-style titles (additive only).]\nTikTok title/cover-text rules:\n- Treat these like on-screen cover text or spoken opener lines: short, punchy, high-contrast; not SEO/YouTube phrasing.\n- Avoid long “How to …” search titles unless the first 3 words still interrupt the scroll.\n- Prefer mistakes, before/after, quick interrupts, specific payoff promises, and direct address.\n\nReference TikTok title styles (adapt to the topic):\n- I tried one approach for cozy desk setup for students — here’s what changed (in 7 days).\n- Stop doing this if you want better results — do this instead.\n- 3 Mistakes Killing Your cozy desk setup for students (and the fix).\n\nOutput 10 distinct title lines (aim for ~3–8 words each). No explanations.\n[V193.3 TikTok Chain Consistency — keep Hook/Caption/Hashtag/Title aligned for one post package.]\nChain style: proof_first · CTA intensity: medium\nShared voice rules:\n- Use conversational spoken lines (short clauses, no formal essay tone).\n- Keep wording native to TikTok feed language, avoid generic SEO phrasing.\n- Carry the same opener intent across hook/caption/title (do not switch premise mid-chain).\nShared pacing rules:\n- Front-load value in first line, then support with one tight payoff line.\n- Prefer 1-idea-per-line cadence; avoid long compound sentences.\n- Hashtag sets should mirror the same content angle as hook/title.\nShared CTA rules:\n- CTA = action-oriented but still value-first; ask for one clear next step.\nShared monetization rules:\n- Monetization fit: trust-building first (value/proof), then soft conversion.\n- Do not use hard-sell language before delivering payoff.\nIntent: Get more views (intent_views)\nScenario: Tutorial (sc_tutorial)\nRecipe: Titles must match thumbnail and first 3 seconds; no misleading health claims.\nHigh-weight patterns:\n1. [title] [tiktok · title] Specific outcome + time or number + light curiosity; match spoken hook so feed feels coherent.\n2. [title] [tiktok · title] I tried {approach} for {niche} — here’s what changed (in {time_box}).\nKnowledge fragments (weighted selection):\n1. (tip) Title formulas: 'I tried X so you don't have to', '3 X mistakes', 'Stop doing X if you want Y'.\n2. (general_platform_safe) Avoid guaranteed income claims; use 'may', 'often', 'can help'. Disclose paid partnerships when applicable.\n3. (commerce_disclosure) TikTok Shop: lead with the problem the product solves in one line, show the product in frame early.\n4. (tip) Strong hooks contrast 'common advice' vs 'what actually works' with a specific example niche.",
+  "differences": [
+    "knowledgeBlock longer by 1976 chars",
+    "V193 observation summary present only in v193 run",
+    "V193.3 chain consistency block present only in v193 run",
+    "v193ObservationApplied baseline=false v193=true"
+  ],
+  "conclusion": "V193 TikTok observations + chain consistency add tool-specific reinforcement vs baseline.",
+  "pass": true,
+  "v193_meta": {
+    "observation_applied": true,
+    "observation_count_used": 4,
+    "top_pattern_types_applied": [
+      "title",
+      "observation_summary"
+    ],
+    "additive_only": true,
+    "tool_slug": "title-generator",
+    "generation_surfaces": [
+      "hybrid_pattern_pool",
+      "title_scaffolds",
+      "platform_intelligence_summary"
+    ]
+  },
+  "chain_rules": {
+    "chain_style": "proof_first",
+    "cta_intensity": "medium",
+    "voice_rules": [
+      "Use conversational spoken lines (short clauses, no formal essay tone).",
+      "Keep wording native to TikTok feed language, avoid generic SEO phrasing.",
+      "Carry the same opener intent across hook/caption/title (do not switch premise mid-chain)."
+    ],
+    "pacing_rules": [
+      "Front-load value in first line, then support with one tight payoff line.",
+      "Prefer 1-idea-per-line cadence; avoid long compound sentences.",
+      "Hashtag sets should mirror the same content angle as hook/title."
+    ],
+    "cta_rules": [
+      "CTA = action-oriented but still value-first; ask for one clear next step."
+    ],
+    "monetization_rules": [
+      "Monetization fit: trust-building first (value/proof), then soft conversion.",
+      "Do not use hard-sell language before delivering payoff."
+    ]
+  }
+}

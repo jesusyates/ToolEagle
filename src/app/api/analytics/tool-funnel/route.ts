@@ -7,12 +7,27 @@ export const runtime = "nodejs";
 
 const LOG_PATH = path.join(process.cwd(), "generated", "tool-click-events.jsonl");
 
+const ALLOWED = new Set([
+  "tool_click",
+  "tool_entry",
+  "tool_copy",
+  "publish_redirect_click",
+  "generation_complete"
+]);
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const type = typeof body?.type === "string" ? body.type : "";
-    if (type !== "tool_click" && type !== "tool_entry") {
+    if (!ALLOWED.has(type)) {
       return NextResponse.json({ ok: false, error: "invalid type" }, { status: 400 });
+    }
+
+    if (
+      (type === "tool_copy" || type === "publish_redirect_click" || type === "generation_complete") &&
+      (typeof body?.toolSlug !== "string" || !String(body.toolSlug).trim())
+    ) {
+      return NextResponse.json({ ok: false, error: "toolSlug required" }, { status: 400 });
     }
 
     const line =

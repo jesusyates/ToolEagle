@@ -1,0 +1,20 @@
+{
+  "version": "174",
+  "builtAt": "2026-03-30T11:03:06.691Z",
+  "sources": [
+    "generated/conversion-entry-audit.json",
+    "generated/tool-conversion-map.json"
+  ],
+  "prioritize_paths": [],
+  "deprioritize_paths": [],
+  "weak_cta_pages": [
+    {
+      "file": "src/app/ai-tools/category/[slug]/page.tsx",
+      "suggestion": "add StandardToolSurfaceCtas or SeoToolCTA"
+    }
+  ],
+  "copy_publish_funnel": [
+    "Ensure CopyPublishModal on EN tools (v171.1)",
+    "Route upgrade CTAs to /pricing with telemetry"
+  ]
+}

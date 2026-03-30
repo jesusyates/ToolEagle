@@ -1,0 +1,1245 @@
+{
+  "version": "178.1",
+  "builtAt": "2026-03-29T11:34:10.912Z",
+  "dry_run": true,
+  "tools": {
+    "tiktok-caption-generator": {
+      "extraRelatedSlugs": [],
+      "workflowExtra": [],
+      "showConversionPath": true
+    },
+    "instagram-username-generator": {
+      "extraRelatedSlugs": [],
+      "workflowExtra": [],
+      "showConversionPath": true
+    },
+    "script-outline-generator": {
+      "extraRelatedSlugs": [],
+      "workflowExtra": [],
+      "showConversionPath": true
+    },
+    "hashtag-generator": {
+      "extraRelatedSlugs": [],
+      "workflowExtra": [],
+      "showConversionPath": true
+    },
+    "hook-generator": {
+      "extraRelatedSlugs": [],
+      "workflowExtra": [],
+      "showConversionPath": true
+    },
+    "title-generator": {
+      "extraRelatedSlugs": [],
+      "workflowExtra": [],
+      "showConversionPath": true
+    },
+    "youtube-title-generator": {
+      "extraRelatedSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowExtra": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "showConversionPath": false
+    },
+    "youtube-description-generator": {
+      "extraRelatedSlugs": [
+        "youtube-title-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowExtra": [
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        },
+        {
+          "href": "/tools/youtube-script-generator",
+          "label": "Youtube Script Generator"
+        }
+      ],
+      "showConversionPath": false
+    },
+    "youtube-video-idea-generator": {
+      "extraRelatedSlugs": [
+        "youtube-title-generator",
+        "youtube-description-generator",
+        "youtube-script-generator"
+      ],
+      "workflowExtra": [
+        {
+          "href": "/tools/youtube-script-generator",
+          "label": "Youtube Script Generator"
+        }
+      ],
+      "showConversionPath": false
+    },
+    "youtube-script-generator": {
+      "extraRelatedSlugs": [
+        "youtube-title-generator",
+        "youtube-description-generator",
+        "youtube-video-idea-generator"
+      ],
+      "workflowExtra": [],
+      "showConversionPath": false
+    }
+  },
+  "answers": {
+    "how-to-write-tiktok-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-caption-length": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-hook-ideas": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-hashtag-strategy": {
+      "toolSlug": "hashtag-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "how-many-hashtags-on-tiktok": {
+      "toolSlug": "hashtag-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "do-tiktok-captions-matter": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-viral-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-caption-emojis": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-cta-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-funny-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-pov-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-trending-sounds-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-engagement-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-duet-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-storytime-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-tutorial-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "how-to-write-youtube-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-title-tips": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "youtube-shorts-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-description-seo": {
+      "toolSlug": "youtube-description-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-title-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        },
+        {
+          "href": "/tools/youtube-script-generator",
+          "label": "Youtube Script Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "youtube-viral-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-thumbnail-title-match": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "youtube-intro-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-ctr-titles": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "how-to-write-viral-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-video-ideas": {
+      "toolSlug": "youtube-video-idea-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-title-generator",
+        "youtube-description-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-script-generator",
+          "label": "Youtube Script Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "youtube-script-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-retention-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-outro-cta": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-shorts-vs-long-form-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-keywords-in-title": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "youtube-thumbnail-text": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "youtube-first-48-hours": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "instagram-hashtag-strategy": {
+      "toolSlug": "hashtag-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-link-in-bio-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-end-screen-cta": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-series-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-community-post-ideas": {
+      "toolSlug": "youtube-video-idea-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-title-generator",
+        "youtube-description-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-script-generator",
+          "label": "Youtube Script Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "best-caption-length": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "how-many-hashtags-tiktok": {
+      "toolSlug": "hashtag-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "how-many-hashtags-instagram": {
+      "toolSlug": "hashtag-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "how-many-hashtags-reels": {
+      "toolSlug": "hashtag-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "hashtag-limit-tiktok": {
+      "toolSlug": "hashtag-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "hashtag-limit-instagram": {
+      "toolSlug": "hashtag-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "best-hashtag-count": {
+      "toolSlug": "hashtag-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "hashtag-vs-no-hashtag": {
+      "toolSlug": "hashtag-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "niche-hashtags-vs-trending": {
+      "toolSlug": "hashtag-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "best-time-to-post-tiktok": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "best-time-to-post-youtube": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "best-time-to-post-shorts": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "posting-schedule-tips": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "timezone-posting-strategy": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "how-to-go-viral-tiktok": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "how-to-go-viral-youtube": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "what-makes-content-viral": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "viral-formula-short-form": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "viral-hook-formula": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "trending-sound-strategy": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "fyp-strategy": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "caption-length-tiktok": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "caption-character-limit": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "hook-strategies-tiktok": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "hook-strategies-youtube": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "hook-strategies-reels": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "question-hook-vs-statement": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "pattern-interrupt-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "curiosity-gap-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "first-3-seconds-hook": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "scroll-stopper-formula": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-algorithm-tips": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-algorithm-tips": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "algorithm-engagement-signals": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "algorithm-watch-time": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "algorithm-comment-signals": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-aesthetic-captions": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-short-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-long-captions": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-storytime-captions": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-trending-captions": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-emoji-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-quote-captions": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-opening-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-question-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "instagram-story-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-curiosity-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-controversial-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "instagram-pattern-interrupt-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-first-line-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-scroll-stopper-hooks": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-shorts-captions": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "instagram-duet-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-stitch-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-long-form-captions": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-engagement-strategy": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-growth-strategy": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "instagram-algorithm-strategy": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-ctr-strategy": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-retention-strategy": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "instagram-saves-strategy": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-shares-strategy": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-comments-strategy": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "instagram-followers-strategy": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "fitness-captions-tiktok": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "food-captions-youtube": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "beauty-captions-tiktok": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "fashion-captions-youtube": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "mom-captions-tiktok": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "dating-captions-youtube": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "education-captions-tiktok": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-first-post-tips": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-first-video": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "caption-emojis-yes-no": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "hashtags-in-caption-or-comment": {
+      "toolSlug": "hashtag-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "follow-cta-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "comment-cta-ideas": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "share-cta-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tiktok-description-tips": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-description-length": {
+      "toolSlug": "youtube-description-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-title-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        },
+        {
+          "href": "/tools/youtube-script-generator",
+          "label": "Youtube Script Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "thumbnail-ctr-tips": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "title-thumbnail-match": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "tiktok-cover-photo": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "series-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "ugc-caption-tips": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "giveaway-caption-tips": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "behind-scenes-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "grwm-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "unboxing-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "tutorial-caption-format": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "workout-caption-ideas": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "motivation-caption-ideas": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "friday-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "holiday-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "caption-hashtag-placement": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "caption-call-out": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "caption-accessibility": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "caption-searchability": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "multi-platform-caption": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "caption-templates": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "caption-a-b-testing": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "youtube-title-formulas": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "youtube-title-keywords": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "youtube-title-length": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "youtube-title-capitalization": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "youtube-title-numbers": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "youtube-title-questions": {
+      "toolSlug": "youtube-title-generator",
+      "extraRelatedToolSlugs": [
+        "youtube-description-generator",
+        "youtube-video-idea-generator",
+        "youtube-script-generator"
+      ],
+      "workflowToTool": [
+        {
+          "href": "/tools/youtube-description-generator",
+          "label": "Youtube Description Generator"
+        },
+        {
+          "href": "/tools/youtube-video-idea-generator",
+          "label": "Youtube Video Idea Generator"
+        }
+      ],
+      "emphasizePrimaryCta": false
+    },
+    "shorts-hook-formula": {
+      "toolSlug": "hook-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    },
+    "cross-posting-captions": {
+      "toolSlug": "tiktok-caption-generator",
+      "extraRelatedToolSlugs": [],
+      "workflowToTool": [],
+      "emphasizePrimaryCta": true
+    }
+  }
+}

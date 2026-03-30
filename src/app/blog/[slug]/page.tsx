@@ -6,10 +6,9 @@ import { getAllPostsFromMdx, getPostBySlug } from "@/lib/blog";
 import { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents } from "@/components/mdx";
-import { TryToolCard } from "@/components/blog/TryToolCard";
-import { TryToolsCard } from "@/components/blog/TryToolsCard";
 import { BlogToolCTA } from "@/components/blog/BlogToolCTA";
-import { BlogAnswerLinks } from "@/components/blog/BlogAnswerLinks";
+import { StandardBlogMidWorkflowCta } from "@/components/cta/StandardBlogMidWorkflowCta";
+import { StandardBlogEndToolsCta } from "@/components/cta/StandardBlogEndToolsCta";
 import { TableOfContents } from "@/components/blog/TableOfContents";
 import { ProgrammaticBlogPost } from "@/components/blog/ProgrammaticBlogPost";
 import {
@@ -160,46 +159,9 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
           <hr className="my-6 border-slate-200" />
 
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-4">
-            <p className="text-sm font-semibold text-slate-900">Try our tools</p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/creator"
-                className="inline-flex items-center justify-center rounded-xl bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-700"
-              >
-                Creator Mode →
-              </Link>
-              <Link
-                href="/tools"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-              >
-                AI Tools →
-              </Link>
-              <Link
-                href="/trending"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-              >
-                Trending content →
-              </Link>
-              <Link
-                href="/examples"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-              >
-                Creator Examples →
-              </Link>
-            </div>
-          </div>
+          <StandardBlogMidWorkflowCta />
 
-          <div className="mt-6">
-            {frontmatter.recommendedTools?.length ? (
-              <TryToolsCard toolSlugs={frontmatter.recommendedTools} />
-            ) : (
-              <TryToolCard tags={frontmatter.tags} />
-            )}
-          </div>
-
-          <hr className="my-8 border-slate-200" />
-          <BlogAnswerLinks />
+          <StandardBlogEndToolsCta frontmatter={frontmatter} />
         </article>
 
         <script

@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "platform": "youtube",
+  "patterns": [
+    {
+      "id": "yt_hook_search_intent",
+      "platform": "youtube",
+      "pattern_type": "hook",
+      "tool_type": "hook_focus",
+      "structure": "State the exact search query viewers typed → why this video answers it in first 15s → chapter promise.",
+      "intent_fit": ["intent_views", "intent_story"],
+      "scenario_fit": ["sc_tutorial", "sc_small_business"],
+      "monetization_fit": ["affiliate", "ad_driven_growth", "lead_generation"],
+      "quality_score": 0.9,
+      "revenue_score": 0.72
+    },
+    {
+      "id": "yt_desc_pack_chapters",
+      "platform": "youtube",
+      "pattern_type": "caption_pack",
+      "tool_type": "tiktok_caption",
+      "structure": "Above-the-fold: 1-line value + timestamps mindset; pin comment for resource link; avoid TikTok-style line breaks only.",
+      "intent_fit": ["intent_views", "intent_story"],
+      "scenario_fit": ["sc_tutorial", "sc_personal_brand"],
+      "monetization_fit": ["affiliate", "personal_brand", "lead_generation"],
+      "quality_score": 0.88,
+      "revenue_score": 0.76
+    },
+    {
+      "id": "yt_shorts_hook_loop",
+      "platform": "youtube",
+      "pattern_type": "caption_pack",
+      "tool_type": "tiktok_caption",
+      "structure": "Vertical Shorts: loop-friendly opening line → single takeaway → subscribe nudge in last beat (not mid-hook).",
+      "intent_fit": ["intent_views", "intent_viral"],
+      "scenario_fit": ["sc_fitness", "sc_beauty"],
+      "monetization_fit": ["ad_driven_growth", "affiliate"],
+      "quality_score": 0.87,
+      "revenue_score": 0.7
+    },
+    {
+      "id": "yt_tags_search_clusters",
+      "platform": "youtube",
+      "pattern_type": "hashtag_set",
+      "tool_type": "hashtag",
+      "structure": "Primary keyword + 3 long-tail variants + brand tag; align with title and first 125 chars of description.",
+      "intent_fit": ["intent_views", "intent_viral"],
+      "scenario_fit": ["sc_tutorial"],
+      "monetization_fit": ["affiliate", "lead_generation"],
+      "quality_score": 0.86,
+      "revenue_score": 0.68
+    },
+    {
+      "id": "yt_title_thumbnail_match",
+      "platform": "youtube",
+      "pattern_type": "title",
+      "tool_type": "title",
+      "structure": "Title promises one clear outcome; avoid clickbait that thumbnail contradicts; front-load keyword.",
+      "intent_fit": ["intent_views", "intent_viral"],
+      "scenario_fit": ["sc_tutorial", "sc_small_business"],
+      "monetization_fit": ["ad_driven_growth", "product_selling"],
+      "quality_score": 0.91,
+      "revenue_score": 0.73
+    }
+  ]
+}

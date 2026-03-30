@@ -1,5 +1,5 @@
 import type { PostPackageToolKind } from "@/lib/ai/postPackage";
-import { buildBaseUserInstruction, buildV106UserSuffix, buildPublishPackSuffix } from "./shared/json-rules";
+import { buildBaseUserInstruction, buildV106UserSuffix, buildPublishPackSuffix, buildV172UserSuffix } from "./shared/json-rules";
 import { sharedStrategistSystem } from "./shared/strategist-system";
 import { sharedContentSafetyPrompt } from "./shared/content-safety-prompt";
 import { localeSystemPrefix } from "./locale/output-language";
@@ -21,6 +21,8 @@ export function composePostPackagePrompts(args: {
   locale: string;
   /** V106.1 — merged topic+hook+full script+caption+comment CTA in one pack */
   publishFullPack?: boolean;
+  /** V172 — retrieval / studio reference block (prepended to user prompt) */
+  retrievalReferenceBlock?: string;
 }): { systemPrompt: string; userPrompt: string } {
   const depth: "compact" | "full" = args.tier === "pro" ? "full" : "compact";
   /** V103.1 — Free: 2–3 preview; Pro: 8–12 full packages, multiple styles */
@@ -32,11 +34,15 @@ export function composePostPackagePrompts(args: {
   if (args.publishFullPack === true) {
     userBody += buildPublishPackSuffix(args.locale);
   }
+  userBody += buildV172UserSuffix(args.locale, count);
   if (args.tier === "pro" && args.market === "cn") {
     userBody +=
       "\n\nAcross packages, keep 带货/情绪/干货/娱乐 angles diverse — already encoded in variation_pack.";
   }
-  const userPrompt = `${platform}\n\n${userBody}`;
+  const ref = args.retrievalReferenceBlock?.trim();
+  const userPrompt = ref
+    ? `${platform}\n\n${ref}\n\n---\n\n${userBody}`
+    : `${platform}\n\n${userBody}`;
 
   const chunks: string[] = [
     sharedStrategistSystem(),

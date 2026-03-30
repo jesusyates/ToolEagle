@@ -2,13 +2,14 @@
  * V154 — Daily production orchestrator: health, retries, safe mode, stall recovery, daily report.
  * Delegates execution to V153 core (runBackgroundSeoTick).
  *
- * MAIN automation entry (cron): npx tsx scripts/run-daily-orchestrator.ts
- * Optional loop: --watch (uses SEO_ORCH_INTERVAL_MS, default 24h)
+ * V170: Production cron uses `npm run daily-engine` — this script is a **sub-step** (lanes, safe mode, history).
+ * Run directly: `npm run seo:orchestrator` · Optional loop: `npm run seo:orchestrator:watch` (SEO_ORCH_INTERVAL_MS, default 24h)
  */
 
 import { spawnSync } from "child_process";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import {
   DEFAULT_STATE_PATH,
   loadPipelineState,
@@ -60,7 +61,12 @@ const activation = require("./lib/seo-system-activation.js") as {
   recordDegradedStreakFromReport: (cwd: string) => void;
 };
 
-const CWD = process.cwd();
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { resolveRepoRoot } = require("./lib/repo-root.js") as {
+  resolveRepoRoot: (startDir?: string) => string;
+};
+
+const CWD = resolveRepoRoot(path.dirname(fileURLToPath(import.meta.url)));
 const REPORT_PATH = path.join(CWD, "generated", "seo-daily-report.json");
 const SANDBOX_REPORT_PATH = path.join(CWD, "generated", "sandbox", "seo-daily-report.json");
 const EVENT_LOG = path.join(CWD, "logs", "seo-orchestrator-events.jsonl");

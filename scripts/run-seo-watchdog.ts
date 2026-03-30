@@ -5,7 +5,7 @@
  * Loop: npx tsx scripts/run-seo-watchdog.ts --watch
  *
  * Env:
- *   SEO_WATCHDOG_RECOVERY=1 — allow spawning orchestrator when stale/missed
+ *   SEO_WATCHDOG_RECOVERY=1 — allow spawning daily-engine when stale/missed
  *   SEO_WATCHDOG_MAX_RECOVERY_PER_DAY=2 (default)
  *   SEO_WATCHDOG_STALE_MS — daily report max age (default 40h)
  *   SEO_WATCHDOG_LOOKBACK_DAYS=7
@@ -14,6 +14,7 @@
 import { spawnSync } from "child_process";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import { loadPipelineState, type SeoPipelineState } from "./lib/seo-background-engine-core";
 import {
   buildReliabilityMetrics,
@@ -29,11 +30,17 @@ const seoActivation = require("./lib/seo-system-activation.js") as {
   evaluateAndWriteCriticalState: (cwd: string) => { critical: boolean; reasons: string[] };
 };
 
-const CWD = process.cwd();
-const EVENT_LOG = path.join(CWD, "logs", "seo-orchestrator-events.jsonl");
-const RELIABILITY_LOG = path.join(CWD, "logs", "seo-reliability-watchdog.jsonl");
-const WATCHDOG_STATE_LIVE = path.join(CWD, "generated", "seo-watchdog-state.json");
-const WATCHDOG_STATE_SANDBOX = path.join(CWD, "generated", "sandbox", "seo-watchdog-state.json");
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { resolveRepoRoot } = require("./lib/repo-root.js") as {
+  resolveRepoRoot: (startDir?: string) => string;
+};
+
+/** Canonical repo root — same basis as daily-engine / history writers (not shell cwd). */
+const REPO_ROOT = resolveRepoRoot(path.dirname(fileURLToPath(import.meta.url)));
+const EVENT_LOG = path.join(REPO_ROOT, "logs", "seo-orchestrator-events.jsonl");
+const RELIABILITY_LOG = path.join(REPO_ROOT, "logs", "seo-reliability-watchdog.jsonl");
+const WATCHDOG_STATE_LIVE = path.join(REPO_ROOT, "generated", "seo-watchdog-state.json");
+const WATCHDOG_STATE_SANDBOX = path.join(REPO_ROOT, "generated", "sandbox", "seo-watchdog-state.json");
 
 function watchdogStatePath(): string {
   return process.env.SEO_WATCHDOG_DRY === "1" ? WATCHDOG_STATE_SANDBOX : WATCHDOG_STATE_LIVE;
@@ -106,9 +113,9 @@ function runWatchdogOnce(): number {
   const incompleteMs =
     parseInt(process.env.SEO_WATCHDOG_INCOMPLETE_MS || String(4 * 60 * 60 * 1000), 10) || 4 * 60 * 60 * 1000;
 
-  const snapshots = loadRecentDailyReports(CWD, 200);
-  const latest = readDailyReportFile(CWD);
-  const mtime = dailyReportMtimeMs(CWD);
+  const snapshots = loadRecentDailyReports(REPO_ROOT, 200);
+  const latest = readDailyReportFile(REPO_ROOT);
+  const mtime = dailyReportMtimeMs(REPO_ROOT);
   const pipeline = loadPipelineState();
   const wd = loadWd();
 
@@ -167,13 +174,13 @@ function runWatchdogOnce(): number {
     wd.recovery_triggers_count += 1;
     logLine(EVENT_LOG, "recovery_retriggered", { attempt: wd.recovery_triggers_count, max: maxRec });
     logLine(RELIABILITY_LOG, "recovery_retriggered", { attempt: wd.recovery_triggers_count });
-    const npx = process.platform === "win32" ? "npx.cmd" : "npx";
-    const r = spawnSync(npx, ["tsx", "scripts/run-daily-orchestrator.ts"], {
-      cwd: CWD,
+    const engineScript = path.join(REPO_ROOT, "scripts", "daily-engine.js");
+    const r = spawnSync(process.execPath, [engineScript], {
+      cwd: REPO_ROOT,
       stdio: "inherit"
     });
     if (r.status !== 0) {
-      logLine(EVENT_LOG, "recovery_orchestrator_failed", { code: r.status });
+      logLine(EVENT_LOG, "recovery_daily_engine_failed", { code: r.status });
     }
   } else if (decision.shouldTrigger && process.env.SEO_WATCHDOG_DRY === "1") {
     logLine(RELIABILITY_LOG, "recovery_skipped_dry_run", { reason: "SEO_WATCHDOG_DRY" });
@@ -187,7 +194,7 @@ function runWatchdogOnce(): number {
   if (!recoveryEnabled && missedOrStale) summaryNotes.push("recovery_disabled_set_SEO_WATCHDOG_RECOVERY=1");
 
   const payload = buildReliabilitySummaryPayload(metrics, lookback, summaryNotes);
-  writeReliabilitySummary(CWD, payload, { useSandbox: process.env.SEO_WATCHDOG_DRY === "1" });
+  writeReliabilitySummary(REPO_ROOT, payload, { useSandbox: process.env.SEO_WATCHDOG_DRY === "1" });
 
   const passed = !missedOrStale && !metrics.long_running && metrics.reliability_score >= 50;
   if (passed) {
@@ -200,7 +207,7 @@ function runWatchdogOnce(): number {
     });
   }
 
-  seoActivation.evaluateAndWriteCriticalState(CWD);
+  seoActivation.evaluateAndWriteCriticalState(REPO_ROOT);
 
   return passed ? 0 : 1;
 }

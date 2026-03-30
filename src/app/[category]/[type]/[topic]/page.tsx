@@ -27,6 +27,7 @@ import { BestGuidesSection } from "@/components/seo/BestGuidesSection";
 import { PopularGuidesSection } from "@/components/seo/PopularGuidesSection";
 import { HubLinksSection } from "@/components/seo/HubLinksSection";
 import { BASE_URL } from "@/config/site";
+import { loadContentQualityStatus, shouldNoindexPath } from "@/lib/seo/load-content-quality-status";
 
 type Props = {
   params: Promise<{ category: string; type: string; topic: string }>;
@@ -56,18 +57,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = `200+ ${topicLabel} ${platformLabel} ${typeLabel.toLowerCase()} for your videos. Copy and use instantly or generate more with AI.`;
 
   const intent = getIntent(topic);
-  const noindex =
+  const intentNoindex =
     intent === "questions" ||
     intent === "templates" ||
     intent === "ideas" ||
     intent === "examples";
+
+  const cq = loadContentQualityStatus();
+  const path = `/${category}/${type}/${topic}`;
+  const qualityNoindex = shouldNoindexPath(path, cq);
 
   const ogImageUrl = `${BASE_URL}/og/${category}-${type}-${topic}.png`;
 
   return {
     title,
     description,
-    robots: noindex ? { index: false, follow: true } : undefined,
+    robots: intentNoindex || qualityNoindex ? { index: false, follow: true } : undefined,
     alternates: {
       canonical: `${BASE_URL}/${category}/${type}/${topic}`
     },

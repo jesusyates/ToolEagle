@@ -1,0 +1,22 @@
+{
+  "version": "1",
+  "updated_at": "2026-03-30T14:42:19.966Z",
+  "status": "skipped",
+  "applied_fix": null,
+  "target_step": null,
+  "changed_files": [
+    "src/config/v195-chain-top1-fix.json"
+  ],
+  "change_type": "none",
+  "expected_effect": "No product behavior change; v195-chain-top1-fix.json reset to mode=none.",
+  "skip_reason": "No UI fix: data insufficient or top_1_fix is measurement-only. Collect events and run npm run v195 before applying.",
+  "top_1_fix_snapshot": {
+    "dimension": "measurement",
+    "action": "Collect more tiktok-chain-events.jsonl data and re-aggregate so biggest_drop_step is non-null.",
+    "rationale": "Rules require a identified transition; current data does not support a single target."
+  },
+  "rules_snapshot": {
+    "optimize_target_step": "insufficient_data_or_ambiguous_drop",
+    "confidence": 0
+  }
+}

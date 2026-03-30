@@ -130,6 +130,19 @@ function main() {
   }
 
   console.log("\n============================\n");
+
+  const failOn = process.argv.includes("--fail-on-violations");
+  if (failOn) {
+    const zhFail =
+      (g.exists ? g.failingPublished || 0 : 0) + (k.exists ? k.failingPublished || 0 : 0);
+    const enFail = b.exists ? b.failing || 0 : 0;
+    if (zhFail > 0 || enFail > 0) {
+      console.error(
+        `[seo-quality-scan] --fail-on-violations: zh_failing_published=${zhFail} en_blog_failing=${enFail}`
+      );
+      process.exit(1);
+    }
+  }
 }
 
 main();

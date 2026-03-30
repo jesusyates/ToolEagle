@@ -1,0 +1,28 @@
+{
+  "version": "180.1",
+  "builtAt": "2026-03-30T11:03:10.342Z",
+  "top_paid_tools_exact": [],
+  "top_paid_pages_exact": [],
+  "top_paid_paths_exact": [],
+  "inferred_only_paths": [],
+  "unattributed_orders": [
+    {
+      "order_id": "te_ef54e32345594a14beee24ae38da9c1d",
+      "status": "pending",
+      "market": "global",
+      "reason": "no_source_path_and_no_return_url"
+    },
+    {
+      "order_id": "te_b8ed3cc28a904f3f8fea2b3c41a3274d",
+      "status": "pending",
+      "market": "global",
+      "reason": "no_source_path_and_no_return_url"
+    },
+    {
+      "order_id": "te_5cdb304797384e87b971d1f9d5d91c4a",
+      "status": "pending",
+      "market": "global",
+      "reason": "no_source_path_and_no_return_url"
+    }
+  ]
+}

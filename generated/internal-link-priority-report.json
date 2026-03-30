@@ -1,0 +1,6261 @@
+{
+  "version": "171.1",
+  "generatedAt": "2026-03-30T15:11:30.325Z",
+  "note": "Higher score = preferred internal link target for conversion-first navigation (platform → workflow → monetization path). V181 boost/penalty merged here for tool→tool ranking. EN programmatic blogs use scripts/lib/en-internal-linking.js (same v181 JSON + v176) for Related pages / backlinks / Related tools — see generated/v181-final-link-control.json.",
+  "byToolSlug": {
+    "creator-analysis": [
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 1.2,
+        "reasons": [
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 1.2,
+        "reasons": [
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 0.5,
+        "reasons": [
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/instagram-username-generator",
+        "targetSlug": "instagram-username-generator",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/youtube-video-idea-generator",
+        "targetSlug": "youtube-video-idea-generator",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 0,
+        "reasons": []
+      }
+    ],
+    "tiktok-caption-generator": [
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 7.2,
+        "reasons": [
+          "same_platform_cluster",
+          "workflow_next_step",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 7.2,
+        "reasons": [
+          "same_platform_cluster",
+          "workflow_next_step",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-story-generator",
+        "targetSlug": "tiktok-story-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-trend-caption-generator",
+        "targetSlug": "tiktok-trend-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 3.7,
+        "reasons": [
+          "workflow_next_step",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 3.2,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "ai-caption-generator": [
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 6.2,
+        "reasons": [
+          "same_workflow_category",
+          "workflow_next_step",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 4.2,
+        "reasons": [
+          "workflow_next_step",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 4.2,
+        "reasons": [
+          "workflow_next_step",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 3.2,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/social-media-post-generator",
+        "targetSlug": "social-media-post-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/reel-caption-generator",
+        "targetSlug": "reel-caption-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-story-generator",
+        "targetSlug": "tiktok-story-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-trend-caption-generator",
+        "targetSlug": "tiktok-trend-caption-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-reels-caption-generator",
+        "targetSlug": "instagram-reels-caption-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-comment-reply-generator",
+        "targetSlug": "instagram-comment-reply-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-story-caption-generator",
+        "targetSlug": "instagram-story-caption-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-community-post-generator",
+        "targetSlug": "youtube-community-post-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-carousel-caption-generator",
+        "targetSlug": "instagram-carousel-caption-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "hashtag-generator": [
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 7.2,
+        "reasons": [
+          "same_platform_cluster",
+          "workflow_next_step",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 7.2,
+        "reasons": [
+          "same_platform_cluster",
+          "workflow_next_step",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-story-generator",
+        "targetSlug": "tiktok-story-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-trend-caption-generator",
+        "targetSlug": "tiktok-trend-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-video-idea-generator",
+        "targetSlug": "tiktok-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-transition-generator",
+        "targetSlug": "tiktok-transition-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "hook-generator": [
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 7.2,
+        "reasons": [
+          "same_platform_cluster",
+          "workflow_next_step",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 7.2,
+        "reasons": [
+          "same_platform_cluster",
+          "workflow_next_step",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 4.2,
+        "reasons": [
+          "workflow_next_step",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-story-generator",
+        "targetSlug": "tiktok-story-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-trend-caption-generator",
+        "targetSlug": "tiktok-trend-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-video-idea-generator",
+        "targetSlug": "tiktok-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "title-generator": [
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 3.2,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-story-generator",
+        "targetSlug": "tiktok-story-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-trend-caption-generator",
+        "targetSlug": "tiktok-trend-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-video-idea-generator",
+        "targetSlug": "tiktok-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "tiktok-bio-generator": [
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-story-generator",
+        "targetSlug": "tiktok-story-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-trend-caption-generator",
+        "targetSlug": "tiktok-trend-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-video-idea-generator",
+        "targetSlug": "tiktok-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-transition-generator",
+        "targetSlug": "tiktok-transition-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "youtube-title-generator": [
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 5.5,
+        "reasons": [
+          "same_platform_cluster",
+          "workflow_next_step"
+        ]
+      },
+      {
+        "href": "/tools/youtube-tag-generator",
+        "targetSlug": "youtube-tag-generator",
+        "score": 5.5,
+        "reasons": [
+          "same_platform_cluster",
+          "workflow_next_step"
+        ]
+      },
+      {
+        "href": "/tools/shorts-title-generator",
+        "targetSlug": "shorts-title-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-shorts-title-generator",
+        "targetSlug": "youtube-shorts-title-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-thumbnail-text-generator",
+        "targetSlug": "youtube-thumbnail-text-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-playlist-title-generator",
+        "targetSlug": "youtube-playlist-title-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-video-idea-generator",
+        "targetSlug": "youtube-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-script-generator",
+        "targetSlug": "youtube-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-hook-generator",
+        "targetSlug": "youtube-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-community-post-generator",
+        "targetSlug": "youtube-community-post-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-end-screen-generator",
+        "targetSlug": "youtube-end-screen-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 2.5,
+        "reasons": [
+          "same_workflow_category",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/viral-hook-generator",
+        "targetSlug": "viral-hook-generator",
+        "score": 2.5,
+        "reasons": [
+          "workflow_next_step"
+        ]
+      },
+      {
+        "href": "/tools/clickbait-title-generator",
+        "targetSlug": "clickbait-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "instagram-caption-generator": [
+      {
+        "href": "/tools/reel-caption-generator",
+        "targetSlug": "reel-caption-generator",
+        "score": 7.5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "workflow_next_step"
+        ]
+      },
+      {
+        "href": "/tools/instagram-hashtag-generator",
+        "targetSlug": "instagram-hashtag-generator",
+        "score": 5.5,
+        "reasons": [
+          "same_platform_cluster",
+          "workflow_next_step"
+        ]
+      },
+      {
+        "href": "/tools/instagram-reels-caption-generator",
+        "targetSlug": "instagram-reels-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-comment-reply-generator",
+        "targetSlug": "instagram-comment-reply-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-story-caption-generator",
+        "targetSlug": "instagram-story-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-carousel-caption-generator",
+        "targetSlug": "instagram-carousel-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-dm-generator",
+        "targetSlug": "instagram-dm-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 4.2,
+        "reasons": [
+          "workflow_next_step",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-username-generator",
+        "targetSlug": "instagram-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-bio-generator",
+        "targetSlug": "instagram-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-poll-idea-generator",
+        "targetSlug": "instagram-poll-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-hook-generator",
+        "targetSlug": "reel-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "youtube-description-generator": [
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 4.2,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/youtube-video-idea-generator",
+        "targetSlug": "youtube-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-script-generator",
+        "targetSlug": "youtube-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-tag-generator",
+        "targetSlug": "youtube-tag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/shorts-title-generator",
+        "targetSlug": "shorts-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-shorts-title-generator",
+        "targetSlug": "youtube-shorts-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-thumbnail-text-generator",
+        "targetSlug": "youtube-thumbnail-text-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-hook-generator",
+        "targetSlug": "youtube-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-community-post-generator",
+        "targetSlug": "youtube-community-post-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-end-screen-generator",
+        "targetSlug": "youtube-end-screen-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-playlist-title-generator",
+        "targetSlug": "youtube-playlist-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      }
+    ],
+    "tiktok-username-generator": [
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-story-generator",
+        "targetSlug": "tiktok-story-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-trend-caption-generator",
+        "targetSlug": "tiktok-trend-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-video-idea-generator",
+        "targetSlug": "tiktok-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-transition-generator",
+        "targetSlug": "tiktok-transition-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "instagram-username-generator": [
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 4.2,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/instagram-hashtag-generator",
+        "targetSlug": "instagram-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-caption-generator",
+        "targetSlug": "reel-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-reels-caption-generator",
+        "targetSlug": "instagram-reels-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-bio-generator",
+        "targetSlug": "instagram-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-comment-reply-generator",
+        "targetSlug": "instagram-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-story-caption-generator",
+        "targetSlug": "instagram-story-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-carousel-caption-generator",
+        "targetSlug": "instagram-carousel-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-dm-generator",
+        "targetSlug": "instagram-dm-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-poll-idea-generator",
+        "targetSlug": "instagram-poll-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-hook-generator",
+        "targetSlug": "reel-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      }
+    ],
+    "tiktok-idea-generator": [
+      {
+        "href": "/tools/tiktok-video-idea-generator",
+        "targetSlug": "tiktok-video-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-transition-generator",
+        "targetSlug": "tiktok-transition-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-duet-idea-generator",
+        "targetSlug": "tiktok-duet-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-challenge-idea-generator",
+        "targetSlug": "tiktok-challenge-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "youtube-video-idea-generator": [
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 4.2,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-script-generator",
+        "targetSlug": "youtube-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-tag-generator",
+        "targetSlug": "youtube-tag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/shorts-title-generator",
+        "targetSlug": "shorts-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-shorts-title-generator",
+        "targetSlug": "youtube-shorts-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-thumbnail-text-generator",
+        "targetSlug": "youtube-thumbnail-text-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-hook-generator",
+        "targetSlug": "youtube-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-community-post-generator",
+        "targetSlug": "youtube-community-post-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-end-screen-generator",
+        "targetSlug": "youtube-end-screen-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-playlist-title-generator",
+        "targetSlug": "youtube-playlist-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-video-idea-generator",
+        "targetSlug": "tiktok-video-idea-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-transition-generator",
+        "targetSlug": "tiktok-transition-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "tiktok-script-generator": [
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-story-generator",
+        "targetSlug": "tiktok-story-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-trend-caption-generator",
+        "targetSlug": "tiktok-trend-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-video-idea-generator",
+        "targetSlug": "tiktok-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-transition-generator",
+        "targetSlug": "tiktok-transition-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "youtube-script-generator": [
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 4.2,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-video-idea-generator",
+        "targetSlug": "youtube-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-tag-generator",
+        "targetSlug": "youtube-tag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/shorts-title-generator",
+        "targetSlug": "shorts-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-shorts-title-generator",
+        "targetSlug": "youtube-shorts-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-thumbnail-text-generator",
+        "targetSlug": "youtube-thumbnail-text-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-hook-generator",
+        "targetSlug": "youtube-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-community-post-generator",
+        "targetSlug": "youtube-community-post-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-end-screen-generator",
+        "targetSlug": "youtube-end-screen-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-playlist-title-generator",
+        "targetSlug": "youtube-playlist-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/short-form-script-generator",
+        "targetSlug": "short-form-script-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/script-outline-generator",
+        "targetSlug": "script-outline-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "viral-hook-generator": [
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/story-hook-generator",
+        "targetSlug": "story-hook-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-hook-generator",
+        "targetSlug": "youtube-hook-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/reel-hook-generator",
+        "targetSlug": "reel-hook-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 1.2,
+        "reasons": [
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 1.2,
+        "reasons": [
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 0.5,
+        "reasons": [
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/creator-analysis",
+        "targetSlug": "creator-analysis",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 0,
+        "reasons": []
+      }
+    ],
+    "story-hook-generator": [
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/viral-hook-generator",
+        "targetSlug": "viral-hook-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-hook-generator",
+        "targetSlug": "youtube-hook-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/reel-hook-generator",
+        "targetSlug": "reel-hook-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 1.2,
+        "reasons": [
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 1.2,
+        "reasons": [
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 0.5,
+        "reasons": [
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/creator-analysis",
+        "targetSlug": "creator-analysis",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 0,
+        "reasons": []
+      }
+    ],
+    "clickbait-title-generator": [
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 3.2,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 2.5,
+        "reasons": [
+          "same_workflow_category",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-video-title-generator",
+        "targetSlug": "ai-video-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/shorts-title-generator",
+        "targetSlug": "shorts-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-shorts-title-generator",
+        "targetSlug": "youtube-shorts-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-thumbnail-text-generator",
+        "targetSlug": "youtube-thumbnail-text-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-playlist-title-generator",
+        "targetSlug": "youtube-playlist-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 1.2,
+        "reasons": [
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/creator-analysis",
+        "targetSlug": "creator-analysis",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 0,
+        "reasons": []
+      }
+    ],
+    "ai-video-title-generator": [
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 3.2,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 2.5,
+        "reasons": [
+          "same_workflow_category",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/clickbait-title-generator",
+        "targetSlug": "clickbait-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/shorts-title-generator",
+        "targetSlug": "shorts-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-shorts-title-generator",
+        "targetSlug": "youtube-shorts-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-thumbnail-text-generator",
+        "targetSlug": "youtube-thumbnail-text-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-playlist-title-generator",
+        "targetSlug": "youtube-playlist-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 1.2,
+        "reasons": [
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/creator-analysis",
+        "targetSlug": "creator-analysis",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 0,
+        "reasons": []
+      }
+    ],
+    "social-media-post-generator": [
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 3.2,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/reel-caption-generator",
+        "targetSlug": "reel-caption-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-story-generator",
+        "targetSlug": "tiktok-story-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-trend-caption-generator",
+        "targetSlug": "tiktok-trend-caption-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-reels-caption-generator",
+        "targetSlug": "instagram-reels-caption-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-comment-reply-generator",
+        "targetSlug": "instagram-comment-reply-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-story-caption-generator",
+        "targetSlug": "instagram-story-caption-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-community-post-generator",
+        "targetSlug": "youtube-community-post-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-carousel-caption-generator",
+        "targetSlug": "instagram-carousel-caption-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-end-screen-generator",
+        "targetSlug": "youtube-end-screen-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-dm-generator",
+        "targetSlug": "instagram-dm-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "instagram-hashtag-generator": [
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 4.2,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-username-generator",
+        "targetSlug": "instagram-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-caption-generator",
+        "targetSlug": "reel-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-reels-caption-generator",
+        "targetSlug": "instagram-reels-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-bio-generator",
+        "targetSlug": "instagram-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-comment-reply-generator",
+        "targetSlug": "instagram-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-story-caption-generator",
+        "targetSlug": "instagram-story-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-carousel-caption-generator",
+        "targetSlug": "instagram-carousel-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-dm-generator",
+        "targetSlug": "instagram-dm-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-poll-idea-generator",
+        "targetSlug": "instagram-poll-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-hook-generator",
+        "targetSlug": "reel-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-tag-generator",
+        "targetSlug": "youtube-tag-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "youtube-tag-generator": [
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 4.2,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-video-idea-generator",
+        "targetSlug": "youtube-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-script-generator",
+        "targetSlug": "youtube-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/shorts-title-generator",
+        "targetSlug": "shorts-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-shorts-title-generator",
+        "targetSlug": "youtube-shorts-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-thumbnail-text-generator",
+        "targetSlug": "youtube-thumbnail-text-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-hook-generator",
+        "targetSlug": "youtube-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-community-post-generator",
+        "targetSlug": "youtube-community-post-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-end-screen-generator",
+        "targetSlug": "youtube-end-screen-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-playlist-title-generator",
+        "targetSlug": "youtube-playlist-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-hashtag-generator",
+        "targetSlug": "instagram-hashtag-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "tiktok-hashtag-generator": [
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 6.7,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-story-generator",
+        "targetSlug": "tiktok-story-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-trend-caption-generator",
+        "targetSlug": "tiktok-trend-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-video-idea-generator",
+        "targetSlug": "tiktok-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-transition-generator",
+        "targetSlug": "tiktok-transition-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "reel-caption-generator": [
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 6.2,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/instagram-reels-caption-generator",
+        "targetSlug": "instagram-reels-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-comment-reply-generator",
+        "targetSlug": "instagram-comment-reply-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-story-caption-generator",
+        "targetSlug": "instagram-story-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-carousel-caption-generator",
+        "targetSlug": "instagram-carousel-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-dm-generator",
+        "targetSlug": "instagram-dm-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-username-generator",
+        "targetSlug": "instagram-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-hashtag-generator",
+        "targetSlug": "instagram-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-bio-generator",
+        "targetSlug": "instagram-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-poll-idea-generator",
+        "targetSlug": "instagram-poll-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-hook-generator",
+        "targetSlug": "reel-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/social-media-post-generator",
+        "targetSlug": "social-media-post-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "shorts-title-generator": [
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 6.2,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/youtube-shorts-title-generator",
+        "targetSlug": "youtube-shorts-title-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-thumbnail-text-generator",
+        "targetSlug": "youtube-thumbnail-text-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-playlist-title-generator",
+        "targetSlug": "youtube-playlist-title-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-video-idea-generator",
+        "targetSlug": "youtube-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-script-generator",
+        "targetSlug": "youtube-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-tag-generator",
+        "targetSlug": "youtube-tag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-hook-generator",
+        "targetSlug": "youtube-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-community-post-generator",
+        "targetSlug": "youtube-community-post-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-end-screen-generator",
+        "targetSlug": "youtube-end-screen-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 2.5,
+        "reasons": [
+          "same_workflow_category",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/clickbait-title-generator",
+        "targetSlug": "clickbait-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/ai-video-title-generator",
+        "targetSlug": "ai-video-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "tiktok-hook-generator": [
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 6.7,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-story-generator",
+        "targetSlug": "tiktok-story-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-trend-caption-generator",
+        "targetSlug": "tiktok-trend-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-video-idea-generator",
+        "targetSlug": "tiktok-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-transition-generator",
+        "targetSlug": "tiktok-transition-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "tiktok-comment-reply-generator": [
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 6.7,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-story-generator",
+        "targetSlug": "tiktok-story-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-trend-caption-generator",
+        "targetSlug": "tiktok-trend-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 3.2,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "tiktok-story-generator": [
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 6.7,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-trend-caption-generator",
+        "targetSlug": "tiktok-trend-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 3.2,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "tiktok-trend-caption-generator": [
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 6.7,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-story-generator",
+        "targetSlug": "tiktok-story-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 3.2,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "tiktok-video-idea-generator": [
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-transition-generator",
+        "targetSlug": "tiktok-transition-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-duet-idea-generator",
+        "targetSlug": "tiktok-duet-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-challenge-idea-generator",
+        "targetSlug": "tiktok-challenge-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "youtube-shorts-title-generator": [
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 6.2,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/shorts-title-generator",
+        "targetSlug": "shorts-title-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-thumbnail-text-generator",
+        "targetSlug": "youtube-thumbnail-text-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-playlist-title-generator",
+        "targetSlug": "youtube-playlist-title-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-video-idea-generator",
+        "targetSlug": "youtube-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-script-generator",
+        "targetSlug": "youtube-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-tag-generator",
+        "targetSlug": "youtube-tag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-hook-generator",
+        "targetSlug": "youtube-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-community-post-generator",
+        "targetSlug": "youtube-community-post-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-end-screen-generator",
+        "targetSlug": "youtube-end-screen-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 2.5,
+        "reasons": [
+          "same_workflow_category",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/clickbait-title-generator",
+        "targetSlug": "clickbait-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/ai-video-title-generator",
+        "targetSlug": "ai-video-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "youtube-thumbnail-text-generator": [
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 6.2,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/shorts-title-generator",
+        "targetSlug": "shorts-title-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-shorts-title-generator",
+        "targetSlug": "youtube-shorts-title-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-playlist-title-generator",
+        "targetSlug": "youtube-playlist-title-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-video-idea-generator",
+        "targetSlug": "youtube-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-script-generator",
+        "targetSlug": "youtube-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-tag-generator",
+        "targetSlug": "youtube-tag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-hook-generator",
+        "targetSlug": "youtube-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-community-post-generator",
+        "targetSlug": "youtube-community-post-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-end-screen-generator",
+        "targetSlug": "youtube-end-screen-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 2.5,
+        "reasons": [
+          "same_workflow_category",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/clickbait-title-generator",
+        "targetSlug": "clickbait-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/ai-video-title-generator",
+        "targetSlug": "ai-video-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "youtube-hook-generator": [
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 4.2,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-video-idea-generator",
+        "targetSlug": "youtube-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-script-generator",
+        "targetSlug": "youtube-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-tag-generator",
+        "targetSlug": "youtube-tag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/shorts-title-generator",
+        "targetSlug": "shorts-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-shorts-title-generator",
+        "targetSlug": "youtube-shorts-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-thumbnail-text-generator",
+        "targetSlug": "youtube-thumbnail-text-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-community-post-generator",
+        "targetSlug": "youtube-community-post-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-end-screen-generator",
+        "targetSlug": "youtube-end-screen-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-playlist-title-generator",
+        "targetSlug": "youtube-playlist-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/viral-hook-generator",
+        "targetSlug": "viral-hook-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/story-hook-generator",
+        "targetSlug": "story-hook-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "instagram-reels-caption-generator": [
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 6.2,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/reel-caption-generator",
+        "targetSlug": "reel-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-comment-reply-generator",
+        "targetSlug": "instagram-comment-reply-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-story-caption-generator",
+        "targetSlug": "instagram-story-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-carousel-caption-generator",
+        "targetSlug": "instagram-carousel-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-dm-generator",
+        "targetSlug": "instagram-dm-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-username-generator",
+        "targetSlug": "instagram-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-hashtag-generator",
+        "targetSlug": "instagram-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-bio-generator",
+        "targetSlug": "instagram-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-poll-idea-generator",
+        "targetSlug": "instagram-poll-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-hook-generator",
+        "targetSlug": "reel-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/social-media-post-generator",
+        "targetSlug": "social-media-post-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "instagram-bio-generator": [
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 4.2,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/instagram-username-generator",
+        "targetSlug": "instagram-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-hashtag-generator",
+        "targetSlug": "instagram-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-caption-generator",
+        "targetSlug": "reel-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-reels-caption-generator",
+        "targetSlug": "instagram-reels-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-comment-reply-generator",
+        "targetSlug": "instagram-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-story-caption-generator",
+        "targetSlug": "instagram-story-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-carousel-caption-generator",
+        "targetSlug": "instagram-carousel-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-dm-generator",
+        "targetSlug": "instagram-dm-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-poll-idea-generator",
+        "targetSlug": "instagram-poll-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-hook-generator",
+        "targetSlug": "reel-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      }
+    ],
+    "instagram-comment-reply-generator": [
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 6.2,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/reel-caption-generator",
+        "targetSlug": "reel-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-reels-caption-generator",
+        "targetSlug": "instagram-reels-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-story-caption-generator",
+        "targetSlug": "instagram-story-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-carousel-caption-generator",
+        "targetSlug": "instagram-carousel-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-dm-generator",
+        "targetSlug": "instagram-dm-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-username-generator",
+        "targetSlug": "instagram-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-hashtag-generator",
+        "targetSlug": "instagram-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-bio-generator",
+        "targetSlug": "instagram-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-poll-idea-generator",
+        "targetSlug": "instagram-poll-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-hook-generator",
+        "targetSlug": "reel-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/social-media-post-generator",
+        "targetSlug": "social-media-post-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "instagram-story-caption-generator": [
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 6.2,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/reel-caption-generator",
+        "targetSlug": "reel-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-reels-caption-generator",
+        "targetSlug": "instagram-reels-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-comment-reply-generator",
+        "targetSlug": "instagram-comment-reply-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-carousel-caption-generator",
+        "targetSlug": "instagram-carousel-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-dm-generator",
+        "targetSlug": "instagram-dm-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-username-generator",
+        "targetSlug": "instagram-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-hashtag-generator",
+        "targetSlug": "instagram-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-bio-generator",
+        "targetSlug": "instagram-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-poll-idea-generator",
+        "targetSlug": "instagram-poll-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-hook-generator",
+        "targetSlug": "reel-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/social-media-post-generator",
+        "targetSlug": "social-media-post-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "tiktok-transition-generator": [
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-video-idea-generator",
+        "targetSlug": "tiktok-video-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-duet-idea-generator",
+        "targetSlug": "tiktok-duet-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-challenge-idea-generator",
+        "targetSlug": "tiktok-challenge-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "youtube-community-post-generator": [
+      {
+        "href": "/tools/youtube-end-screen-generator",
+        "targetSlug": "youtube-end-screen-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 4.2,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 3.2,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-video-idea-generator",
+        "targetSlug": "youtube-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-script-generator",
+        "targetSlug": "youtube-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-tag-generator",
+        "targetSlug": "youtube-tag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/shorts-title-generator",
+        "targetSlug": "shorts-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-shorts-title-generator",
+        "targetSlug": "youtube-shorts-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-thumbnail-text-generator",
+        "targetSlug": "youtube-thumbnail-text-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-hook-generator",
+        "targetSlug": "youtube-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-playlist-title-generator",
+        "targetSlug": "youtube-playlist-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "instagram-carousel-caption-generator": [
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 6.2,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/reel-caption-generator",
+        "targetSlug": "reel-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-reels-caption-generator",
+        "targetSlug": "instagram-reels-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-comment-reply-generator",
+        "targetSlug": "instagram-comment-reply-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-story-caption-generator",
+        "targetSlug": "instagram-story-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-dm-generator",
+        "targetSlug": "instagram-dm-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-username-generator",
+        "targetSlug": "instagram-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-hashtag-generator",
+        "targetSlug": "instagram-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-bio-generator",
+        "targetSlug": "instagram-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-poll-idea-generator",
+        "targetSlug": "instagram-poll-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-hook-generator",
+        "targetSlug": "reel-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/social-media-post-generator",
+        "targetSlug": "social-media-post-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "tiktok-duet-idea-generator": [
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-video-idea-generator",
+        "targetSlug": "tiktok-video-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-transition-generator",
+        "targetSlug": "tiktok-transition-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-challenge-idea-generator",
+        "targetSlug": "tiktok-challenge-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "youtube-end-screen-generator": [
+      {
+        "href": "/tools/youtube-community-post-generator",
+        "targetSlug": "youtube-community-post-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 4.2,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 3.2,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-video-idea-generator",
+        "targetSlug": "youtube-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-script-generator",
+        "targetSlug": "youtube-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-tag-generator",
+        "targetSlug": "youtube-tag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/shorts-title-generator",
+        "targetSlug": "shorts-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-shorts-title-generator",
+        "targetSlug": "youtube-shorts-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-thumbnail-text-generator",
+        "targetSlug": "youtube-thumbnail-text-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-hook-generator",
+        "targetSlug": "youtube-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-playlist-title-generator",
+        "targetSlug": "youtube-playlist-title-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "instagram-dm-generator": [
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 6.2,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/reel-caption-generator",
+        "targetSlug": "reel-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-reels-caption-generator",
+        "targetSlug": "instagram-reels-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-comment-reply-generator",
+        "targetSlug": "instagram-comment-reply-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-story-caption-generator",
+        "targetSlug": "instagram-story-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-carousel-caption-generator",
+        "targetSlug": "instagram-carousel-caption-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-username-generator",
+        "targetSlug": "instagram-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-hashtag-generator",
+        "targetSlug": "instagram-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-bio-generator",
+        "targetSlug": "instagram-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-poll-idea-generator",
+        "targetSlug": "instagram-poll-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-hook-generator",
+        "targetSlug": "reel-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/social-media-post-generator",
+        "targetSlug": "social-media-post-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "tiktok-challenge-idea-generator": [
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-video-idea-generator",
+        "targetSlug": "tiktok-video-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-transition-generator",
+        "targetSlug": "tiktok-transition-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-duet-idea-generator",
+        "targetSlug": "tiktok-duet-idea-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 4.7,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 3.5,
+        "reasons": [
+          "same_platform_cluster",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hashtag-generator",
+        "targetSlug": "tiktok-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-hook-generator",
+        "targetSlug": "tiktok-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      }
+    ],
+    "youtube-playlist-title-generator": [
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 6.2,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/shorts-title-generator",
+        "targetSlug": "shorts-title-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-shorts-title-generator",
+        "targetSlug": "youtube-shorts-title-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-thumbnail-text-generator",
+        "targetSlug": "youtube-thumbnail-text-generator",
+        "score": 5,
+        "reasons": [
+          "same_platform_cluster",
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-video-idea-generator",
+        "targetSlug": "youtube-video-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-script-generator",
+        "targetSlug": "youtube-script-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-tag-generator",
+        "targetSlug": "youtube-tag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-hook-generator",
+        "targetSlug": "youtube-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-community-post-generator",
+        "targetSlug": "youtube-community-post-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/youtube-end-screen-generator",
+        "targetSlug": "youtube-end-screen-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 2.5,
+        "reasons": [
+          "same_workflow_category",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/clickbait-title-generator",
+        "targetSlug": "clickbait-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/ai-video-title-generator",
+        "targetSlug": "ai-video-title-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "instagram-poll-idea-generator": [
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 4.2,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/instagram-username-generator",
+        "targetSlug": "instagram-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-hashtag-generator",
+        "targetSlug": "instagram-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-caption-generator",
+        "targetSlug": "reel-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-reels-caption-generator",
+        "targetSlug": "instagram-reels-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-bio-generator",
+        "targetSlug": "instagram-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-comment-reply-generator",
+        "targetSlug": "instagram-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-story-caption-generator",
+        "targetSlug": "instagram-story-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-carousel-caption-generator",
+        "targetSlug": "instagram-carousel-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-dm-generator",
+        "targetSlug": "instagram-dm-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-hook-generator",
+        "targetSlug": "reel-hook-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-video-idea-generator",
+        "targetSlug": "youtube-video-idea-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-video-idea-generator",
+        "targetSlug": "tiktok-video-idea-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "short-form-script-generator": [
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-script-generator",
+        "targetSlug": "youtube-script-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/script-outline-generator",
+        "targetSlug": "script-outline-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 1.2,
+        "reasons": [
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 1.2,
+        "reasons": [
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 0.5,
+        "reasons": [
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/creator-analysis",
+        "targetSlug": "creator-analysis",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 0,
+        "reasons": []
+      }
+    ],
+    "viral-caption-generator": [
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 3.2,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/social-media-post-generator",
+        "targetSlug": "social-media-post-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/reel-caption-generator",
+        "targetSlug": "reel-caption-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-comment-reply-generator",
+        "targetSlug": "tiktok-comment-reply-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-story-generator",
+        "targetSlug": "tiktok-story-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-trend-caption-generator",
+        "targetSlug": "tiktok-trend-caption-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-reels-caption-generator",
+        "targetSlug": "instagram-reels-caption-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-comment-reply-generator",
+        "targetSlug": "instagram-comment-reply-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-story-caption-generator",
+        "targetSlug": "instagram-story-caption-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-community-post-generator",
+        "targetSlug": "youtube-community-post-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-carousel-caption-generator",
+        "targetSlug": "instagram-carousel-caption-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-end-screen-generator",
+        "targetSlug": "youtube-end-screen-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "reel-hook-generator": [
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 4.2,
+        "reasons": [
+          "same_platform_cluster",
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 3.7,
+        "reasons": [
+          "same_workflow_category",
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/instagram-username-generator",
+        "targetSlug": "instagram-username-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-hashtag-generator",
+        "targetSlug": "instagram-hashtag-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/reel-caption-generator",
+        "targetSlug": "reel-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-reels-caption-generator",
+        "targetSlug": "instagram-reels-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-bio-generator",
+        "targetSlug": "instagram-bio-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-comment-reply-generator",
+        "targetSlug": "instagram-comment-reply-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-story-caption-generator",
+        "targetSlug": "instagram-story-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-carousel-caption-generator",
+        "targetSlug": "instagram-carousel-caption-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-dm-generator",
+        "targetSlug": "instagram-dm-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/instagram-poll-idea-generator",
+        "targetSlug": "instagram-poll-idea-generator",
+        "score": 3,
+        "reasons": [
+          "same_platform_cluster"
+        ]
+      },
+      {
+        "href": "/tools/viral-hook-generator",
+        "targetSlug": "viral-hook-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/story-hook-generator",
+        "targetSlug": "story-hook-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      }
+    ],
+    "content-idea-bank": [
+      {
+        "href": "/tools/tiktok-idea-generator",
+        "targetSlug": "tiktok-idea-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-video-idea-generator",
+        "targetSlug": "youtube-video-idea-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-video-idea-generator",
+        "targetSlug": "tiktok-video-idea-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-transition-generator",
+        "targetSlug": "tiktok-transition-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-duet-idea-generator",
+        "targetSlug": "tiktok-duet-idea-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-challenge-idea-generator",
+        "targetSlug": "tiktok-challenge-idea-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/instagram-poll-idea-generator",
+        "targetSlug": "instagram-poll-idea-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 1.2,
+        "reasons": [
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 1.2,
+        "reasons": [
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 0.5,
+        "reasons": [
+          "popular_surface"
+        ]
+      }
+    ],
+    "script-outline-generator": [
+      {
+        "href": "/tools/tiktok-script-generator",
+        "targetSlug": "tiktok-script-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/youtube-script-generator",
+        "targetSlug": "youtube-script-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/short-form-script-generator",
+        "targetSlug": "short-form-script-generator",
+        "score": 2,
+        "reasons": [
+          "same_workflow_category"
+        ]
+      },
+      {
+        "href": "/tools/tiktok-caption-generator",
+        "targetSlug": "tiktok-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/ai-caption-generator",
+        "targetSlug": "ai-caption-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hashtag-generator",
+        "targetSlug": "hashtag-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/hook-generator",
+        "targetSlug": "hook-generator",
+        "score": 1.7,
+        "reasons": [
+          "high_intent_tool",
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/youtube-title-generator",
+        "targetSlug": "youtube-title-generator",
+        "score": 1.2,
+        "reasons": [
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/instagram-caption-generator",
+        "targetSlug": "instagram-caption-generator",
+        "score": 1.2,
+        "reasons": [
+          "high_intent_tool"
+        ]
+      },
+      {
+        "href": "/tools/title-generator",
+        "targetSlug": "title-generator",
+        "score": 0.5,
+        "reasons": [
+          "popular_surface"
+        ]
+      },
+      {
+        "href": "/tools/creator-analysis",
+        "targetSlug": "creator-analysis",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/tiktok-bio-generator",
+        "targetSlug": "tiktok-bio-generator",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/youtube-description-generator",
+        "targetSlug": "youtube-description-generator",
+        "score": 0,
+        "reasons": []
+      },
+      {
+        "href": "/tools/tiktok-username-generator",
+        "targetSlug": "tiktok-username-generator",
+        "score": 0,
+        "reasons": []
+      }
+    ]
+  }
+}

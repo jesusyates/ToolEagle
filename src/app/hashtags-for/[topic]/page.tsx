@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { getCachedHashtagForExamples } from "@/lib/seo/cached-public-examples";
+import { robotsForHashtagsForTopic } from "@/lib/seo/topic-for-page-meta";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { getTopic, getAllTopicSlugs } from "@/config/topics";
@@ -12,8 +13,6 @@ import { getRelatedContent } from "@/lib/related-content";
 import { Hash } from "lucide-react";
 import { BASE_URL } from "@/config/site";
 import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
-
-const HASHTAG_TOOLS = ["hashtag-generator", "tiktok-hashtag-generator", "instagram-hashtag-generator"];
 
 type Props = { params: Promise<{ topic: string }> };
 
@@ -28,9 +27,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const label = topic.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
   const title = `${label} Hashtags | ToolEagle`;
   const description = `Best ${label.toLowerCase()} hashtags for TikTok, Instagram and Reels. Copy or generate with AI.`;
+  const robots = await robotsForHashtagsForTopic(topic);
   return {
     title,
     description,
+    robots,
     alternates: { canonical: `${BASE_URL}/hashtags-for/${topic}` },
     openGraph: { title, description, url: `${BASE_URL}/hashtags-for/${topic}` }
   };
@@ -42,29 +43,8 @@ export default async function HashtagsForPage({ params }: Props) {
   if (!t) notFound();
 
   const label = topic.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-  const term = topic.replace(/-/g, " ");
-  const supabase = await createClient();
 
-  const { data: examples } = await supabase
-    .from("public_examples")
-    .select("slug, tool_name, result, creator_username")
-    .in("tool_slug", HASHTAG_TOOLS)
-    .ilike("result", `%${term}%`)
-    .not("slug", "is", null)
-    .order("created_at", { ascending: false })
-    .limit(12);
-
-  const fallback = (examples?.length ?? 0) === 0
-    ? await supabase
-        .from("public_examples")
-        .select("slug, tool_name, result, creator_username")
-        .in("tool_slug", HASHTAG_TOOLS)
-        .not("slug", "is", null)
-        .order("created_at", { ascending: false })
-        .limit(12)
-    : null;
-
-  const displayExamples = (examples?.length ? examples : fallback?.data) ?? [];
+  const displayExamples = await getCachedHashtagForExamples(topic);
   const related = await getRelatedContent({ topic, limit: 6 });
   const tool = tools.find((x) => x.slug === "hashtag-generator");
 

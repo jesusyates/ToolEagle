@@ -5,6 +5,7 @@
 
 import { getAllAnswerSlugs } from "./answers";
 import { getAnswerPage } from "./answers";
+import { loadContentQualityStatus, shouldHardExcludeFromInternalLinks } from "@/lib/seo/load-content-quality-status";
 
 export type AnswerLink = { slug: string; title: string };
 
@@ -37,10 +38,12 @@ export function getAnswersForPlatformType(
       return { slug, score, title: page.question };
     })
     .filter((x) => x.score > 0)
-    .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
-    .slice(0, limit);
+    .sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
 
-  return scored.map(({ slug, title }) => ({ slug, title: title ?? slug }));
+  const cq = loadContentQualityStatus();
+  const filtered = scored.filter((x) => !shouldHardExcludeFromInternalLinks(`/answers/${x.slug}`, cq));
+
+  return filtered.slice(0, limit).map(({ slug, title }) => ({ slug, title: title ?? slug }));
 }
 
 /** Generic "More answers" links for any page */
@@ -53,7 +56,10 @@ export function getFeaturedAnswerLinks(limit = 5): AnswerLink[] {
     "how-to-write-viral-hooks"
   ];
   const slugs = getAllAnswerSlugs();
-  const available = featured.filter((s) => slugs.includes(s));
+  const cq = loadContentQualityStatus();
+  const available = featured.filter(
+    (s) => slugs.includes(s) && !shouldHardExcludeFromInternalLinks(`/answers/${s}`, cq)
+  );
   return available.slice(0, limit).map((slug) => {
     const page = getAnswerPage(slug);
     return { slug, title: page?.question ?? slug };

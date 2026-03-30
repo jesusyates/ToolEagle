@@ -1,6 +1,16 @@
 /**
  * Governed by docs/system-blueprint.md.
  * Do not implement logic that conflicts with blueprint rules.
+ *
+ * EN blog internal link scoring — single convergence order (V181.1 + V182):
+ *   1) base relevance — Jaccard similarity on fingerprint hashes (related blog picks)
+ *   2) search + growth sets — priority / weak from search-priority-recommendations, tool-conversion-map, growth-priority
+ *   3) V176 — boost_slugs / reduce_slugs on blog slugs (+link_score_boost_bonus / reduce_penalty)
+ *   4) V181 — exact-revenue tool boost & friction penalty on primary tool inferred from each blog slug + preferredOutboundTargets for ops
+ *   5) V182 — entry boost on high exact-revenue blog slugs + related-tools placement order (peak/stable)
+ *   6) hard exclude — content-quality internalLinkExcludePaths (answers/tools/guides only where used)
+ *
+ * `build-internal-link-priority-report.ts` output is for tool→tool UI ranking; EN blog MDX write path uses **this module** + v176 + v181 + v182 JSON.
  */
 const fs = require("fs");
 const path = require("path");
@@ -50,21 +60,189 @@ function loadSearchLinkPriority() {
     /* ignore */
   }
   for (const x of priority) weak.delete(x);
-  return { prioritySet: priority, weakSet: weak };
+  return {
+    prioritySet: priority,
+    weakSet: weak,
+    v176: loadV176LinkWeights(),
+    v181: loadV181LinkWeights(),
+    v182: loadV182EntryBoost()
+  };
 }
 
-function linkScoreAdjust(slug, prioritySet, weakSet) {
-  if (prioritySet && prioritySet.has(slug)) return 0.12;
-  if (weakSet && weakSet.has(slug)) return -0.08;
-  return 0;
+/** V176 — bias related-page picks toward execution-layer winners. */
+function loadV176LinkWeights() {
+  const p = path.join(process.cwd(), "generated", "v176-internal-link-weights.json");
+  if (!fs.existsSync(p)) return null;
+  try {
+    const j = JSON.parse(fs.readFileSync(p, "utf8"));
+    const boost = j.boost_slugs || [];
+    const reduce = j.reduce_slugs || [];
+    return {
+      boost: new Set(boost.map(String)),
+      reduce: new Set(reduce.map(String)),
+      boostBonus: Number.isFinite(Number(j.link_score_boost_bonus)) ? Number(j.link_score_boost_bonus) : 0.22,
+      reducePenalty: Number.isFinite(Number(j.link_score_reduce_penalty)) ? Number(j.link_score_reduce_penalty) : 0.12
+    };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * V181 — revenue link weights (tool slug keys). Used for blog scoring via blogSlugToPrimaryToolSlug.
+ * Source: generated/v181-revenue-link-priority.json (run-v181-revenue-growth-control.js).
+ */
+function loadV181LinkWeights() {
+  const p = path.join(process.cwd(), "generated", "v181-revenue-link-priority.json");
+  if (!fs.existsSync(p)) return null;
+  try {
+    const j = JSON.parse(fs.readFileSync(p, "utf8"));
+    const boost = j.linkScoreBoostByToolSlug && typeof j.linkScoreBoostByToolSlug === "object" ? j.linkScoreBoostByToolSlug : {};
+    const penalty = j.linkScorePenaltyByToolSlug && typeof j.linkScorePenaltyByToolSlug === "object" ? j.linkScorePenaltyByToolSlug : {};
+    const preferredOutboundTargets =
+      j.preferredOutboundTargets && typeof j.preferredOutboundTargets === "object" ? j.preferredOutboundTargets : {};
+    return { boostByTool: boost, penaltyByTool: penalty, preferredOutboundTargets };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * V182 — revenue entry boost (exact paths only). Source: generated/v182-revenue-entry-boost.json.
+ */
+function loadV182EntryBoost() {
+  const p = path.join(process.cwd(), "generated", "v182-revenue-entry-boost.json");
+  if (!fs.existsSync(p)) return null;
+  try {
+    const j = JSON.parse(fs.readFileSync(p, "utf8"));
+    const blogSlugBoost =
+      j.blog_slug_entry_boost && typeof j.blog_slug_entry_boost === "object" ? j.blog_slug_entry_boost : {};
+    const toolBoost =
+      j.tool_entry_boost && typeof j.tool_entry_boost === "object" ? j.tool_entry_boost : {};
+    const placementBoostOrder = Array.isArray(j.related_tools_placement_boost)
+      ? j.related_tools_placement_boost.map(String)
+      : [];
+    return { blogSlugBoost, toolBoost, placementBoostOrder };
+  } catch {
+    return null;
+  }
+}
+
+/** Map programmatic blog slug → primary monetization tool for that page (same as Related tools default). */
+function blogSlugToPrimaryToolSlug(blogSlug) {
+  const meta = parseEnBlogSlugMeta(blogSlug);
+  if (!meta) return null;
+  return getEnToolSlugForMeta({ platform: meta.platform, contentType: meta.contentType });
+}
+
+function toolHrefToSlug(href) {
+  const m = String(href || "").match(/\/tools\/([a-z0-9-]+)/);
+  return m ? m[1] : null;
+}
+
+/**
+ * Re-order related tool links: V181 revenue boost + V182 peak/stable placement (exact revenue only).
+ */
+function sortToolLinksByV181Revenue(links, v181, v182) {
+  if (!Array.isArray(links) || links.length === 0) return links || [];
+  const nb = Object.keys(v181?.boostByTool || {}).length;
+  const np = Object.keys(v181?.penaltyByTool || {}).length;
+  const has182 = v182 && (Object.keys(v182.toolBoost || {}).length > 0 || (v182.placementBoostOrder || []).length > 0);
+  if ((!v181 || (nb === 0 && np === 0)) && !has182) return links;
+  const placementIdx = (tool) => {
+    const arr = v182?.placementBoostOrder || [];
+    const i = arr.indexOf(tool);
+    return i >= 0 ? 30 - i * 0.15 : 0;
+  };
+  const rank = (href) => {
+    const tool = toolHrefToSlug(href);
+    if (!tool) return 0;
+    let s = 0;
+    if (v181) {
+      const b = Number(v181.boostByTool[tool]);
+      const p = Number(v181.penaltyByTool[tool]);
+      if (Number.isFinite(b) && b > 1) s += (b - 1) * 10;
+      if (Number.isFinite(p) && p < 1) s += (p - 1) * 8;
+    }
+    if (v182?.toolBoost?.[tool]) {
+      const tier = v182.toolBoost[tool].tier;
+      if (tier === "peak") s += 14;
+      else if (tier === "stable") s += 5;
+    }
+    s += placementIdx(tool);
+    return s;
+  };
+  return [...links].sort((a, b) => rank(b.href) - rank(a.href));
+}
+
+/** V171.2 — hard-excluded answer (and other) paths from content-quality-status.json */
+function loadInternalLinkHardExcludes() {
+  const set = new Set();
+  try {
+    const cq = path.join(process.cwd(), "generated", "content-quality-status.json");
+    if (!fs.existsSync(cq)) return set;
+    const doc = JSON.parse(fs.readFileSync(cq, "utf8"));
+    const paths = doc.internalLinkExcludePaths || doc.noindexPaths || [];
+    for (const p of paths) {
+      if (p) set.add(String(p));
+    }
+  } catch {
+    /* optional */
+  }
+  return set;
+}
+
+function filterHardExcludedHrefs(links, excludeSet) {
+  if (!excludeSet || excludeSet.size === 0) return links || [];
+  return (links || []).filter((l) => l && l.href && !excludeSet.has(l.href));
+}
+
+function linkScoreAdjust(slug, prioritySet, weakSet, v176, v181, v182) {
+  let adj = 0;
+  if (prioritySet && prioritySet.has(slug)) adj += 0.12;
+  if (weakSet && weakSet.has(slug)) adj -= 0.08;
+  if (v176?.boost?.has(slug)) adj += v176.boostBonus;
+  if (v176?.reduce?.has(slug)) adj -= v176.reducePenalty;
+  if (v181) {
+    const tool = blogSlugToPrimaryToolSlug(slug);
+    if (tool) {
+      const b = Number(v181.boostByTool[tool]);
+      const p = Number(v181.penaltyByTool[tool]);
+      if (Number.isFinite(b) && b > 1) adj += Math.min(0.42, (b - 1) * 0.32);
+      if (Number.isFinite(p) && p < 1) adj -= Math.min(0.38, (1 - p) * 0.42);
+    }
+  }
+  if (v182?.blogSlugBoost) {
+    const m = Number(v182.blogSlugBoost[slug]);
+    if (Number.isFinite(m) && m > 1) adj += Math.min(0.28, (m - 1) * 0.35);
+  }
+  return adj;
 }
 
 /** Prefer search-strong pages when choosing who receives backlinks to the new post. */
-function sortBlogSlugsForBacklinks(slugs, prioritySet, weakSet) {
+function sortBlogSlugsForBacklinks(slugs, prioritySet, weakSet, v176, v181, v182) {
   const pri = prioritySet || new Set();
   const weak = weakSet || new Set();
   return [...(slugs || [])].sort((a, b) => {
-    const rank = (s) => (pri.has(s) ? 2 : weak.has(s) ? 0 : 1);
+    const rank = (s) => {
+      let r = pri.has(s) ? 2 : weak.has(s) ? 0 : 1;
+      if (v176?.boost?.has(s)) r += 1.5;
+      if (v176?.reduce?.has(s)) r -= 1;
+      if (v181) {
+        const tool = blogSlugToPrimaryToolSlug(s);
+        if (tool) {
+          const b = Number(v181.boostByTool[tool]);
+          const p = Number(v181.penaltyByTool[tool]);
+          if (Number.isFinite(b) && b > 1) r += Math.min(1.4, (b - 1) * 2.2);
+          if (Number.isFinite(p) && p < 1) r -= Math.min(1.2, (1 - p) * 2.5);
+        }
+      }
+      if (v182?.blogSlugBoost) {
+        const m = Number(v182.blogSlugBoost[s]);
+        if (Number.isFinite(m) && m > 1) r += Math.min(1.1, (m - 1) * 0.9);
+      }
+      return r;
+    };
     return rank(b) - rank(a);
   });
 }
@@ -169,6 +347,10 @@ function selectEnBlogRelatedPageSlugs({
       ? linkPriority.weakSet
       : new Set(Array.isArray(linkPriority?.weakSlugs) ? linkPriority.weakSlugs : []);
 
+  const v176 = linkPriority?.v176 || null;
+  const v181 = linkPriority?.v181 || null;
+  const v182 = linkPriority?.v182 || null;
+
   const group = intentGroupForContentType(contentType);
   const k1 = `${platform}|${topic}|${group}`;
   const k2 = `${platform}|${topic}`;
@@ -197,7 +379,7 @@ function selectEnBlogRelatedPageSlugs({
         const fp = index.fpBySlug.get(slug);
         if (!fp?.hashes) return null;
         const base = jaccardScore(newHashes, fp.hashes);
-        return { slug, score: base + linkScoreAdjust(slug, prioritySet, weakSet) };
+        return { slug, score: base + linkScoreAdjust(slug, prioritySet, weakSet, v176, v181, v182) };
       })
       .filter(Boolean)
       .sort((a, b) => b.score - a.score);
@@ -277,6 +459,47 @@ function upsertEnBlogRelatedPagesSectionIntoBody(body, relatedLinks, { minLinks 
     return `${before}\n\n${section}${after}`.replace(/\n{3,}/g, "\n\n");
   }
 
+  return `${b.trimEnd()}\n\n${section}`;
+}
+
+/**
+ * V177 — merge new related-page bullets into existing section (dedupe by slug), cap maxLinks.
+ */
+function mergeEnBlogRelatedPagesSectionIntoBody(body, relatedLinks, { maxLinks = 12 } = {}) {
+  const b = String(body || "");
+  const heading = "## Related pages";
+  const summaryMarker = "\n## Summary";
+  const links = Array.isArray(relatedLinks) ? relatedLinks : [];
+
+  const existingRange = findEnBlogSectionRange(b, heading);
+  const bySlug = new Map();
+  const re = /^- \[([^\]]*)\]\(\/blog\/([a-z0-9-]+)\)/gm;
+  if (existingRange.start >= 0 && existingRange.end > existingRange.start) {
+    const sectionText = b.slice(existingRange.start, existingRange.end);
+    let m;
+    while ((m = re.exec(sectionText))) {
+      bySlug.set(m[2], { slug: m[2], title: String(m[1] || "").trim() });
+    }
+  }
+  for (const l of links) {
+    if (!l?.slug) continue;
+    if (!bySlug.has(l.slug)) {
+      bySlug.set(l.slug, { slug: l.slug, title: l.title || l.slug });
+    }
+  }
+  const merged = [...bySlug.values()].slice(0, maxLinks);
+  const bullets = merged.map((l) => `- [${l.title || l.slug}](/blog/${l.slug})`).join("\n");
+  const section = `${heading}\n\n${bullets}\n`;
+
+  if (existingRange.start >= 0 && existingRange.end > existingRange.start) {
+    return `${b.slice(0, existingRange.start)}${section}${b.slice(existingRange.end)}`.replace(/\n{3,}/g, "\n\n");
+  }
+  const idx = b.indexOf(summaryMarker);
+  if (idx >= 0) {
+    const before = b.slice(0, idx).trimEnd();
+    const after = b.slice(idx);
+    return `${before}\n\n${section}${after}`.replace(/\n{3,}/g, "\n\n");
+  }
   return `${b.trimEnd()}\n\n${section}`;
 }
 
@@ -401,7 +624,7 @@ function labelForToolSlug(slug) {
   return m[slug] || slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-function computeEnRelatedToolLinksForBlogPage({ platform, contentType }) {
+function computeEnRelatedToolLinksForBlogPage({ platform, contentType }, v181, v182) {
   const primary = getEnToolSlugForMeta({ platform, contentType });
   const captionSlug = getEnToolSlugForMeta({ platform, contentType: "captions" });
   const hookSlug = getEnToolSlugForMeta({ platform, contentType: "hooks" });
@@ -417,15 +640,18 @@ function computeEnRelatedToolLinksForBlogPage({ platform, contentType }) {
     return [primary, captionSlug, hookSlug, titleSlug, hashtagSlug];
   })();
 
+  const placementBoost = (v182?.placementBoostOrder || []).filter(Boolean);
+  const mergedOrder = [...new Set([primary, ...placementBoost, ...order])];
+
   const seen = new Set();
   const out = [];
-  for (const slug of order) {
+  for (const slug of mergedOrder) {
     if (!slug || seen.has(slug)) continue;
     seen.add(slug);
     out.push({ href: `/tools/${slug}`, label: labelForToolSlug(slug) });
     if (out.length >= 3) break; // 1–3 tools per page
   }
-  return out;
+  return sortToolLinksByV181Revenue(out, v181, v182);
 }
 
 function computeEnRelatedHubLinksForBlogPage(platform) {
@@ -438,6 +664,7 @@ function computeEnRelatedHubLinksForBlogPage(platform) {
 }
 
 function computeEnRelatedAnswerLinksForBlogPage({ platform, contentType }) {
+  const exclude = loadInternalLinkHardExcludes();
   const intentGroup = intentGroupForContentType(contentType);
 
   const captionsHooks = () => {
@@ -446,7 +673,7 @@ function computeEnRelatedAnswerLinksForBlogPage({ platform, contentType }) {
     if (platform === "youtube") base.push({ href: "/answers/how-to-write-youtube-hooks", label: "How to write YouTube hooks" });
     if (platform === "instagram") base.push({ href: "/answers/how-to-write-instagram-captions", label: "How to write Instagram captions" });
     base.push({ href: "/answers/how-to-write-viral-hooks", label: "Viral hooks (cross-platform)" });
-    return base.slice(0, 3);
+    return filterHardExcludedHrefs(base.slice(0, 3), exclude).slice(0, 3);
   };
 
   if (intentGroup === "hashtags") {
@@ -455,7 +682,7 @@ function computeEnRelatedAnswerLinksForBlogPage({ platform, contentType }) {
     if (platform === "instagram") base.push({ href: "/answers/instagram-hashtag-strategy", label: "Instagram hashtag strategy" });
     if (platform === "youtube") base.push({ href: "/answers/tiktok-hashtag-strategy", label: "Hashtag strategy (adjacent)" });
     base.push({ href: "/answers/how-to-write-viral-hooks", label: "Viral hooks (adjacent guide)" });
-    return base.slice(0, 3);
+    return filterHardExcludedHrefs(base.slice(0, 3), exclude).slice(0, 3);
   }
 
   return captionsHooks();
@@ -576,10 +803,19 @@ module.exports = {
   addEnBlogFpToLinkIndex,
   selectEnBlogRelatedPageSlugs,
   loadSearchLinkPriority,
+  loadV176LinkWeights,
+  loadV181LinkWeights,
+  loadV182EntryBoost,
+  blogSlugToPrimaryToolSlug,
+  sortToolLinksByV181Revenue,
+  loadInternalLinkHardExcludes,
+  filterHardExcludedHrefs,
   sortBlogSlugsForBacklinks,
   extractEnBlogTitleFromMdx,
   injectEnBlogRelatedPagesSectionIntoBody,
   upsertEnBlogRelatedPagesSectionIntoBody,
+  mergeEnBlogRelatedPagesSectionIntoBody,
+  findEnBlogSectionRange,
   upsertEnBlogRelatedPagesLink,
   computeEnRelatedToolLinksForBlogPage,
   computeEnRelatedAnswerLinksForBlogPage,

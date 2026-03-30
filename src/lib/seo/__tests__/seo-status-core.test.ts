@@ -68,6 +68,8 @@ describe("seo-status-core", () => {
     expect(joined).toContain("Retrieval dataset — built: yes");
     expect(joined).toContain("Retrieval utilization —");
     expect(joined).toMatch(/eligible:\s*(yes|no)/);
+    expect(joined).toContain("Recommendations (V168):");
+    expect(joined).toContain("generated/system-map.json");
     expect(joined).toContain("Retrieval activation — ready:");
     expect(joined).toContain("workflow_coverage:");
     expect(fs.existsSync(path.join(gen, "seo-retrieval-activation.json"))).toBe(true);

@@ -12,6 +12,7 @@ import { RelatedContentCard } from "@/components/related/RelatedContentCard";
 import { getRelatedContent } from "@/lib/related-content";
 import { Lightbulb } from "lucide-react";
 import { BASE_URL } from "@/config/site";
+import { loadContentQualityStatus, shouldNoindexPath } from "@/lib/seo/load-content-quality-status";
 import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -27,11 +28,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const label = slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
   const title = `${label} Content Ideas | ToolEagle`;
   const description = `100+ ${label.toLowerCase()} content ideas for TikTok, YouTube and Instagram. Captions, hooks, hashtags and more.`;
+  const cq = loadContentQualityStatus();
+  const path = `/ideas/${slug}`;
+  const noindex = shouldNoindexPath(path, cq);
   return {
     title,
     description,
     alternates: { canonical: `${BASE_URL}/ideas/${slug}` },
-    openGraph: { title, description, url: `${BASE_URL}/ideas/${slug}` }
+    openGraph: { title, description, url: `${BASE_URL}/ideas/${slug}` },
+    ...(noindex ? { robots: { index: false, follow: true } as const } : {})
   };
 }
 

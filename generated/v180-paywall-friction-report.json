@@ -1,0 +1,8 @@
+{
+  "version": "180.1",
+  "builtAt": "2026-03-30T11:03:10.342Z",
+  "criteria": "upgrade_click>=2 and zero exact-attributed paid orders and zero exact create_order for that tool slug",
+  "paths": [],
+  "non_exact_mixing": "disallowed_for_top_paths",
+  "note": "Top paid paths and this friction list use exact client/order_payload attribution only; inferred and fallback are reported separately."
+}

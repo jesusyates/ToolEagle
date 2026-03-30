@@ -28,7 +28,10 @@
     "makeShorter": "更简短",
     "makeFunnier": "更有趣",
     "makeViral": "更吸睛",
-    "addEmojis": "添加表情"
+    "addEmojis": "添加表情",
+    "resultAttribution": "由 ToolEagle 生成 · 免费创作者工具",
+    "loginPromptSave": "登录后可收藏或保存到项目。",
+    "generating": "生成中…"
   },
   "loginPage": {
     "title": "登入",
@@ -230,7 +233,8 @@
       "Bios": "主页简介与一句话人设定位。",
       "Usernames": "账号昵称与 @ 用户名灵感。",
       "Hashtags": "话题标签组合与可发现性优化。",
-      "Descriptions": "长描述、SEO 说明区与频道级文案。"
+      "Descriptions": "长描述、SEO 说明区与频道级文案。",
+      "Strategy": "账号解读、定位与下一步内容方向——在生成前先看清自己。"
     },
     "platformLabels": {
       "tiktok": "TikTok",
@@ -524,6 +528,7 @@
     "upgrade": "Pro · 更快增长",
     "dashboard": "仪表盘",
     "creator": "创作者模式",
+    "creatorHub": "创作者中心",
     "slogan": "面向创作者的免费工具"
   }
 }

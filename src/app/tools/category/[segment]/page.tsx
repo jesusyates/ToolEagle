@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { SiteHeader } from "@/app/_components/SiteHeader";
 import { SiteFooter } from "@/app/_components/SiteFooter";
-import { ToolCard } from "@/components/tools/ToolCard";
+import { EnglishToolEntryCard } from "@/components/tools/EnglishToolEntryCard";
 import {
   popularToolSlugs,
   toolCategories,
@@ -76,26 +76,16 @@ export default async function ToolCategoryPage({ params }: Props) {
             {tools.length} {tools.length === 1 ? "tool" : "tools"} in this category
           </p>
 
-          <ul className="mt-8 space-y-4">
+          <div className="mt-8 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {tools.map((tool) => (
-              <li key={tool.slug}>
-                <ToolCard
-                  href={`/tools/${tool.slug}`}
-                  icon={tool.icon}
-                  name={tool.name}
-                  description={tool.description}
-                  category={tool.category}
-                  slug={tool.slug}
-                  badge={
-                    popularToolSlugs.includes(tool.slug)
-                      ? "Popular"
-                      : undefined
-                  }
-                  locale="en"
-                />
-              </li>
+              <EnglishToolEntryCard
+                key={tool.slug}
+                tool={tool}
+                href={`/tools/${tool.slug}`}
+                badge={popularToolSlugs.includes(tool.slug) ? "Popular" : undefined}
+              />
             ))}
-          </ul>
+          </div>
         </section>
       </div>
       <SiteFooter />

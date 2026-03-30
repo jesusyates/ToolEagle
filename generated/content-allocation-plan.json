@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-28T09:19:26.253Z",
+  "updatedAt": "2026-03-30T11:03:10.998Z",
   "source": "growth-priority.json (V110)",
   "priorityPlatforms": {},
   "priorityTopics": {},
@@ -15,5 +15,5 @@
       "topIntents": []
     }
   ],
-  "weightsNote": "Multipliers stack on base 1.0; final weight = platform*topic*intent*reduction. Paused exact slugs skip generation."
+  "weightsNote": "Multipliers stack on base 1.0; final weight = platform*topic*intent*reduction * V173 * V174 * V181 (intent+topic revenue) * stale. Paused exact slugs skip generation."
 }

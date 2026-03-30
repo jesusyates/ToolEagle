@@ -1,11 +1,27 @@
 {
-  "updated_at": "2026-03-28T09:05:31.478Z",
-  "retrieval_share": 0,
-  "ai_share": 1,
-  "avg_cost_per_page": 2,
+  "updated_at": "2026-03-30T15:11:00.195Z",
+  "retrieval_share": 1,
+  "ai_share": 0,
+  "avg_cost_per_page": 1,
   "high_cost_usage_rate": 0,
-  "top_low_cost_topics": [],
+  "top_low_cost_topics": [
+    "YouTube新手如何变现",
+    "Instagram新手如何变现",
+    "TikTok引流3天实现方法",
+    "YouTube私域引流3天实现方法",
+    "Instagram引流3天实现方法",
+    "TikTok博主如何私域引流",
+    "TikTok商家如何引流",
+    "YouTube博主如何引流",
+    "YouTube商家如何私域引流",
+    "Instagram个人如何私域引流",
+    "Instagram商家如何引流",
+    "TikTok引流模板大全",
+    "TikTok私域引流技巧大全",
+    "YouTube变现指南大全",
+    "YouTube引流模板大全"
+  ],
   "topics_with_high_ai_usage": [],
-  "run_total_pages": 6,
-  "zh_keywords_sample_size": 380
+  "run_total_pages": 182,
+  "zh_keywords_sample_size": 760
 }

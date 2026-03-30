@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { getCachedCaptionForExamples } from "@/lib/seo/cached-public-examples";
+import { robotsForCaptionsForTopic } from "@/lib/seo/topic-for-page-meta";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { getTopic, getAllTopicSlugs } from "@/config/topics";
@@ -13,8 +14,6 @@ import { getRelatedContent } from "@/lib/related-content";
 import { MessageSquareText } from "lucide-react";
 import { BASE_URL } from "@/config/site";
 import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
-
-const CAPTION_TOOLS = ["tiktok-caption-generator", "instagram-caption-generator"];
 
 type Props = { params: Promise<{ topic: string }> };
 
@@ -29,9 +28,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const label = topic.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
   const title = `${label} Captions | ToolEagle`;
   const description = `Best ${label.toLowerCase()} captions for TikTok and Instagram. Copy examples or generate your own with AI.`;
+  const robots = await robotsForCaptionsForTopic(topic);
   return {
     title,
     description,
+    robots,
     alternates: { canonical: `${BASE_URL}/captions-for/${topic}` },
     openGraph: { title, description, url: `${BASE_URL}/captions-for/${topic}` }
   };
@@ -43,29 +44,8 @@ export default async function CaptionsForPage({ params }: Props) {
   if (!t) notFound();
 
   const label = topic.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-  const term = topic.replace(/-/g, " ");
-  const supabase = await createClient();
 
-  const { data: examples } = await supabase
-    .from("public_examples")
-    .select("slug, tool_name, result, creator_username")
-    .in("tool_slug", CAPTION_TOOLS)
-    .ilike("result", `%${term}%`)
-    .not("slug", "is", null)
-    .order("created_at", { ascending: false })
-    .limit(12);
-
-  const fallback = (examples?.length ?? 0) === 0
-    ? await supabase
-        .from("public_examples")
-        .select("slug, tool_name, result, creator_username")
-        .in("tool_slug", CAPTION_TOOLS)
-        .not("slug", "is", null)
-        .order("created_at", { ascending: false })
-        .limit(12)
-    : null;
-
-  const displayExamples = (examples?.length ? examples : fallback?.data) ?? [];
+  const displayExamples = await getCachedCaptionForExamples(topic);
   const related = await getRelatedContent({ topic, limit: 6 });
   const tool = tools.find((x) => x.slug === "tiktok-caption-generator");
 

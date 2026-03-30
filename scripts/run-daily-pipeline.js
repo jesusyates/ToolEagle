@@ -3,7 +3,7 @@
  * Run: node scripts/run-daily-pipeline.js
  * Schedule: daily (e.g. 0 2 * * * for 2am)
  *
- * Default: V154 orchestrator (health, retries, daily report) → V153 tick (ZH+EN batches).
+ * Default: V170 daily-engine (production entry) → V153 tick only when --bg-only.
  * `--zh-only` — ZH lane only (cheaper). `--bg-only` — thin V153 engine only (no orchestrator).
  * `--sync` — legacy full zh:auto + distribute + optional --en en:auto.
  */
@@ -46,12 +46,27 @@ async function main() {
     if (argv.includes("--dry-run") || argv.includes("--sandbox")) scope += " --dry-run";
     run("V153 background SEO (thin tick)", `npx tsx scripts/run-background-seo-engine.ts ${scope}`);
   } else {
-    let cmd = "npx tsx scripts/run-daily-orchestrator.ts";
-    if (argv.includes("--zh-only")) cmd += " --zh-only";
-    if (argv.includes("--en-only")) cmd += " --en-only";
-    if (argv.includes("--dry-run") || argv.includes("--sandbox")) cmd += " --dry-run";
-    if (argv.includes("--check-only") || argv.includes("--check")) cmd += " --check-only";
-    run("V154 daily orchestrator", cmd);
+    const useOrchestrator =
+      argv.includes("--zh-only") ||
+      argv.includes("--en-only") ||
+      argv.includes("--check-only") ||
+      argv.includes("--check");
+    if (useOrchestrator) {
+      let cmd = "npx tsx scripts/run-daily-orchestrator.ts";
+      if (argv.includes("--zh-only")) cmd += " --zh-only";
+      if (argv.includes("--en-only")) cmd += " --en-only";
+      if (argv.includes("--dry-run") || argv.includes("--sandbox")) cmd += " --dry-run";
+      if (argv.includes("--check-only") || argv.includes("--check")) cmd += " --check-only";
+      run("V154 daily orchestrator (sub-step / lane flags)", cmd);
+    } else {
+      const parts = ["node scripts/daily-engine.js"];
+      if (argv.includes("--dry-run") || argv.includes("--sandbox")) parts.push("--dry-run");
+      if (argv.includes("--skip-quality")) parts.push("--skip-quality");
+      if (argv.includes("--no-stop-on-error")) parts.push("--no-stop-on-error");
+      const mr = argv.find((x) => String(x).startsWith("--max-retry="));
+      if (mr) parts.push(mr);
+      run("V170 daily-engine", parts.join(" "));
+    }
   }
 
   const skipLedger =

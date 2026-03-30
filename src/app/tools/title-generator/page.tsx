@@ -2,7 +2,7 @@ import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { TitleGeneratorClient } from "./pageClient";
 import { ToolStructuredData } from "@/components/seo/ToolStructuredData";
-import { RelatedToolsCard } from "@/components/tools/RelatedToolsCard";
+import { ToolPageStandardAsideLead } from "@/components/tools/ToolPageStandardAsideLead";
 import { RelatedArticlesCard } from "@/components/tools/RelatedArticlesCard";
 import { LearnAiLinkCard } from "@/components/tools/LearnAiLinkCard";
 import { ToolContentLinksCard } from "@/components/tools/ToolContentLinksCard";
@@ -42,7 +42,7 @@ export default function TitleGeneratorPage() {
         <TitleGeneratorClient
           relatedAside={
             <>
-              <RelatedToolsCard currentSlug={slug} category="Titles" />
+              <ToolPageStandardAsideLead toolSlug={slug} />
               <RelatedArticlesCard tags={toolToBlogTags[slug] ?? []} />
               <LearnAiLinkCard />
               <ToolContentLinksCard toolSlug={slug} />

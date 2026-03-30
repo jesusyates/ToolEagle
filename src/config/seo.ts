@@ -6,6 +6,11 @@ export const toolSeo: Record<
   string,
   { title: string; description: string }
 > = {
+  "creator-analysis": {
+    title: "Creator Account Analysis – Content Mix & Next Steps",
+    description:
+      "Analyze your past posts (manual input): creator type, growth vs conversion lean, strengths, gaps, and next content ideas."
+  },
   "tiktok-caption-generator": {
     title: "TikTok Caption Generator – Create Viral Captions Instantly",
     description: "Generate engaging TikTok captions in seconds. Free caption generator for creators. Add hooks, emojis and hashtags."

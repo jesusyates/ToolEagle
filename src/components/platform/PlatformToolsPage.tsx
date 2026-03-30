@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Video, Youtube, Instagram } from "lucide-react";
 import { tools } from "@/config/tools";
-import { ToolCard } from "@/components/tools/ToolCard";
+import { EnglishToolEntryCard } from "@/components/tools/EnglishToolEntryCard";
 import { contentTypes, CONTENT_TYPE_LABELS } from "@/config/seo/content-types";
 import { formatTopicLabel } from "@/config/seo/topics";
 import type { BlogPost } from "@/lib/blog";
@@ -94,17 +94,9 @@ export function PlatformToolsPage({
         <p className="mt-2 text-sm text-slate-600">
           Generate publish-ready packages (not toy one-liners). Copy, paste, ship.
         </p>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {allTools.map((tool) => (
-            <ToolCard
-              key={tool.slug}
-              href={`/tools/${tool.slug}`}
-              icon={tool.icon}
-              name={tool.name}
-              description={tool.description}
-              category={tool.category}
-              slug={tool.slug}
-            />
+            <EnglishToolEntryCard key={tool.slug} tool={tool} href={`/tools/${tool.slug}`} />
           ))}
         </div>
       </section>

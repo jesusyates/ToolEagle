@@ -27,6 +27,28 @@ import { getAllGuideParams } from "@/config/traffic-topics";
 import { SITE_URL } from "@/config/site";
 import { getAllEnHowToSlugs } from "@/lib/en-how-to-content";
 import { createAdminClient } from "@/lib/supabase/admin";
+import {
+  loadContentQualityStatus,
+  shouldExcludePathFromSitemap
+} from "@/lib/seo/load-content-quality-status";
+
+function urlToPath(fullUrl: string): string {
+  const base = BASE_URL.replace(/\/$/, "");
+  if (fullUrl.startsWith(base)) {
+    const p = fullUrl.slice(base.length);
+    return p.startsWith("/") ? p : `/${p}`;
+  }
+  try {
+    return new URL(fullUrl).pathname;
+  } catch {
+    return "";
+  }
+}
+
+function filterEntriesByContentQuality(entries: SitemapEntry[], cq: ReturnType<typeof loadContentQualityStatus>) {
+  if (!cq) return entries;
+  return entries.filter((e) => !shouldExcludePathFromSitemap(urlToPath(e.url), cq));
+}
 
 export const BASE_URL = SITE_URL;
 
@@ -63,6 +85,7 @@ export function catalogToolPageUrls(): SitemapEntry[] {
 }
 
 export function staticAndToolUrls(): SitemapEntry[] {
+  const cq = loadContentQualityStatus();
   const toolSlugs = tools
     .filter(
       (t) =>
@@ -71,7 +94,7 @@ export function staticAndToolUrls(): SitemapEntry[] {
     )
     .map((t) => t.slug);
 
-  return [
+  const entries: SitemapEntry[] = [
     { url: BASE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
     { url: `${BASE_URL}/creator`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.95 },
     { url: `${BASE_URL}/tools`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
@@ -254,11 +277,13 @@ export function staticAndToolUrls(): SitemapEntry[] {
       priority: 0.8
     }))
   ];
+  return filterEntriesByContentQuality(entries, cq);
 }
 
 export function topicUrls(): SitemapEntry[] {
+  const cq = loadContentQualityStatus();
   const now = new Date();
-  return [
+  const entries: SitemapEntry[] = [
     ...getAllTopicSlugs().map((slug) => ({
       url: `${BASE_URL}/topics/${slug}`,
       lastModified: now,
@@ -294,6 +319,26 @@ export function topicUrls(): SitemapEntry[] {
       priority: 0.8
     }))
   ];
+  return filterEntriesByContentQuality(entries, cq);
+}
+
+/** When there are zero public_examples, drop topic-level “for” pages (they render empty). */
+export async function stripRuntimeExampleDeadUrls(entries: SitemapEntry[]): Promise<SitemapEntry[]> {
+  let any = true;
+  try {
+    const admin = createAdminClient();
+    const { count } = await admin.from("public_examples").select("id", { count: "exact", head: true });
+    any = (count ?? 0) > 0;
+  } catch {
+    any = true;
+  }
+  if (any) return entries;
+  return entries.filter((e) => {
+    const p = urlToPath(e.url);
+    return (
+      !p.startsWith("/captions-for/") && !p.startsWith("/hooks-for/") && !p.startsWith("/hashtags-for/")
+    );
+  });
 }
 
 export async function exampleUrls(): Promise<SitemapEntry[]> {
@@ -373,13 +418,19 @@ export async function promptsUrls(): Promise<SitemapEntry[]> {
 
 export function ideasUrls(): SitemapEntry[] {
   const now = new Date();
-  return [
-    ...getSeoPageParams().map(({ category, topic }) => ({
-      url: `${BASE_URL}/ideas/${category}/${topic}`,
-      lastModified: now,
-      changeFrequency: "weekly" as const,
-      priority: 0.75
-    })),
+  const cq = loadContentQualityStatus();
+  const entries: SitemapEntry[] = [
+    ...getSeoPageParams()
+      .filter(({ category, topic }) => {
+        const p = `/ideas/${category}/${topic}`;
+        return !shouldExcludePathFromSitemap(p, cq);
+      })
+      .map(({ category, topic }) => ({
+        url: `${BASE_URL}/ideas/${category}/${topic}`,
+        lastModified: now,
+        changeFrequency: "weekly" as const,
+        priority: 0.75
+      })),
     ...getAllTopicSlugs().flatMap((slug) => [
       { url: `${BASE_URL}/ideas/${slug}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.75 },
       { url: `${BASE_URL}/captions-for/${slug}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.75 },
@@ -398,7 +449,8 @@ export function ideasUrls(): SitemapEntry[] {
       changeFrequency: "weekly" as const,
       priority: 0.72
     }))
-  ].slice(0, MAX_URLS_PER_SITEMAP);
+  ];
+  return filterEntriesByContentQuality(entries, cq).slice(0, MAX_URLS_PER_SITEMAP);
 }
 
 export async function generatedIdeaDetailUrls(): Promise<SitemapEntry[]> {
@@ -434,14 +486,17 @@ export function libraryUrls(): SitemapEntry[] {
 
 export function answerUrls(): SitemapEntry[] {
   const now = new Date();
+  const cq = loadContentQualityStatus();
   return [
     { url: `${BASE_URL}/answers`, lastModified: now, changeFrequency: "daily" as const, priority: 0.88 },
-    ...getAllAnswerSlugs().map((slug) => ({
-      url: `${BASE_URL}/answers/${slug}`,
-      lastModified: now,
-      changeFrequency: "daily" as const,
-      priority: 0.8
-    })),
+    ...getAllAnswerSlugs()
+      .filter((slug) => !shouldExcludePathFromSitemap(`/answers/${slug}`, cq))
+      .map((slug) => ({
+        url: `${BASE_URL}/answers/${slug}`,
+        lastModified: now,
+        changeFrequency: "daily" as const,
+        priority: 0.8
+      })),
     ...getAllLearnAiSlugs().map((slug) => ({
       url: `${BASE_URL}/learn-ai/${slug}`,
       lastModified: now,

@@ -1,0 +1,2569 @@
+{
+  "version": "176",
+  "builtAt": "2026-03-30T11:03:07.596Z",
+  "criteria": "Top ~10% of scored blog pages by page-value score, preferring rows with GSC impressions/clicks; falls back to score-only when GSC empty.",
+  "gate": {
+    "has_gsc_page_rows": false,
+    "has_gsc_aggregate": false,
+    "stale_data": true,
+    "growth_metrics_version": "175"
+  },
+  "winners": [
+    {
+      "path": "/blog/youtube-video-ideas-that-work",
+      "slug": "youtube-video-ideas-that-work",
+      "score": 0.701,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "youtube-title-generator",
+              "href": "/tools/youtube-title-generator",
+              "label": "YouTube Title Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "youtube-description-generator",
+              "href": "/tools/youtube-description-generator",
+              "label": "YouTube Description Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "youtube-video-idea-generator",
+              "href": "/tools/youtube-video-idea-generator",
+              "label": "YouTube Video Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "youtube-script-generator",
+              "href": "/tools/youtube-script-generator",
+              "label": "YouTube Script Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-caption-ideas",
+              "slug": "tiktok-caption-ideas",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-content-ideas-that-work",
+              "slug": "tiktok-content-ideas-that-work",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-username-ideas",
+              "slug": "tiktok-username-ideas",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-caption-ideas",
+          "tiktok-content-ideas-that-work",
+          "tiktok-username-ideas"
+        ]
+      }
+    },
+    {
+      "path": "/blog/tiktok-captions-travel",
+      "slug": "tiktok-captions-travel",
+      "score": 0.7,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-titles-travel",
+              "slug": "tiktok-titles-travel",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-hashtags-travel",
+              "slug": "youtube-hashtags-travel",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-captions-travel-hashtags",
+              "slug": "tiktok-captions-travel-hashtags",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-titles-travel",
+          "youtube-hashtags-travel",
+          "tiktok-captions-travel-hashtags"
+        ]
+      }
+    },
+    {
+      "path": "/blog/youtube-captions-trending-ideas",
+      "slug": "youtube-captions-trending-ideas",
+      "score": 0.7,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "youtube-title-generator",
+              "href": "/tools/youtube-title-generator",
+              "label": "YouTube Title Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "youtube-description-generator",
+              "href": "/tools/youtube-description-generator",
+              "label": "YouTube Description Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "youtube-video-idea-generator",
+              "href": "/tools/youtube-video-idea-generator",
+              "label": "YouTube Video Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "youtube-script-generator",
+              "href": "/tools/youtube-script-generator",
+              "label": "YouTube Script Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-caption-ideas",
+              "slug": "tiktok-caption-ideas",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-titles-trending",
+              "slug": "youtube-titles-trending",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-captions-trending-ideas",
+              "slug": "tiktok-captions-trending-ideas",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-captions-trending",
+              "slug": "tiktok-captions-trending",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-username-ideas",
+              "slug": "tiktok-username-ideas",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-caption-ideas",
+          "youtube-titles-trending",
+          "tiktok-captions-trending-ideas",
+          "tiktok-captions-trending"
+        ]
+      }
+    },
+    {
+      "path": "/blog/best-tiktok-bio-ideas",
+      "slug": "best-tiktok-bio-ideas",
+      "score": 0.699,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "creator-analysis",
+              "href": "/tools/creator-analysis",
+              "label": "Creator Account Analysis",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "ai-caption-generator",
+              "href": "/tools/ai-caption-generator",
+              "label": "AI Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "hashtag-generator",
+              "href": "/tools/hashtag-generator",
+              "label": "Hashtag Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-caption-ideas",
+              "slug": "tiktok-caption-ideas",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-titles-bio-ideas",
+              "slug": "youtube-titles-bio-ideas",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-titles-bio-ideas",
+              "slug": "tiktok-titles-bio-ideas",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-username-ideas",
+              "slug": "tiktok-username-ideas",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-caption-ideas",
+          "youtube-titles-bio-ideas",
+          "tiktok-titles-bio-ideas",
+          "tiktok-username-ideas"
+        ]
+      }
+    },
+    {
+      "path": "/blog/tiktok-captions-motivation",
+      "slug": "tiktok-captions-motivation",
+      "score": 0.699,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/motivational-tiktok-captions",
+              "slug": "motivational-tiktok-captions",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "motivational-tiktok-captions"
+        ]
+      }
+    },
+    {
+      "path": "/blog/tiktok-captions-food",
+      "slug": "tiktok-captions-food",
+      "score": 0.698,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/youtube-hooks-food-ideas",
+              "slug": "youtube-hooks-food-ideas",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-hashtags-food-ideas",
+              "slug": "tiktok-hashtags-food-ideas",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/instagram-titles-food-ideas",
+              "slug": "instagram-titles-food-ideas",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-captions-food-hashtags",
+              "slug": "tiktok-captions-food-hashtags",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "youtube-hooks-food-ideas",
+          "tiktok-hashtags-food-ideas",
+          "instagram-titles-food-ideas",
+          "tiktok-captions-food-hashtags"
+        ]
+      }
+    },
+    {
+      "path": "/blog/seo-how-search-engines-find-creator-content",
+      "slug": "seo-how-search-engines-find-creator-content",
+      "score": 0.697,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "creator-analysis",
+              "href": "/tools/creator-analysis",
+              "label": "Creator Account Analysis",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "ai-caption-generator",
+              "href": "/tools/ai-caption-generator",
+              "label": "AI Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "hashtag-generator",
+              "href": "/tools/hashtag-generator",
+              "label": "Hashtag Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": []
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": []
+      }
+    },
+    {
+      "path": "/blog/tiktok-captions-inspirational",
+      "slug": "tiktok-captions-inspirational",
+      "score": 0.697,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/youtube-hashtags-inspirational",
+              "slug": "youtube-hashtags-inspirational",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "youtube-hashtags-inspirational"
+        ]
+      }
+    },
+    {
+      "path": "/blog/tiktok-captions-life-hack",
+      "slug": "tiktok-captions-life-hack",
+      "score": 0.697,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/youtube-captions-life-hack",
+              "slug": "youtube-captions-life-hack",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "youtube-captions-life-hack"
+        ]
+      }
+    },
+    {
+      "path": "/blog/tiktok-captions-romantic",
+      "slug": "tiktok-captions-romantic",
+      "score": 0.697,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/instagram-captions-romantic",
+              "slug": "instagram-captions-romantic",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "instagram-captions-romantic"
+        ]
+      }
+    },
+    {
+      "path": "/blog/instagram-captions-for-reels",
+      "slug": "instagram-captions-for-reels",
+      "score": 0.696,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "instagram-caption-generator",
+              "href": "/tools/instagram-caption-generator",
+              "label": "Instagram Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-username-generator",
+              "href": "/tools/instagram-username-generator",
+              "label": "Instagram Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-hashtag-generator",
+              "href": "/tools/instagram-hashtag-generator",
+              "label": "Instagram Hashtag Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-reels-caption-generator",
+              "href": "/tools/instagram-reels-caption-generator",
+              "label": "Instagram Reels Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/best-hashtags-for-reels",
+              "slug": "best-hashtags-for-reels",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "best-hashtags-for-reels"
+        ]
+      }
+    },
+    {
+      "path": "/blog/instagram-hashtags-funny-usernames",
+      "slug": "instagram-hashtags-funny-usernames",
+      "score": 0.696,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "instagram-caption-generator",
+              "href": "/tools/instagram-caption-generator",
+              "label": "Instagram Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-username-generator",
+              "href": "/tools/instagram-username-generator",
+              "label": "Instagram Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-hashtag-generator",
+              "href": "/tools/instagram-hashtag-generator",
+              "label": "Instagram Hashtag Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-reels-caption-generator",
+              "href": "/tools/instagram-reels-caption-generator",
+              "label": "Instagram Reels Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-captions-funny",
+              "slug": "tiktok-captions-funny",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-hooks-funny",
+              "slug": "youtube-hooks-funny",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-hashtags-funny",
+              "slug": "tiktok-hashtags-funny",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-captions-funny",
+          "youtube-hooks-funny",
+          "tiktok-hashtags-funny"
+        ]
+      }
+    },
+    {
+      "path": "/blog/tiktok-captions-attitude",
+      "slug": "tiktok-captions-attitude",
+      "score": 0.696,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-hashtags-attitude",
+              "slug": "tiktok-hashtags-attitude",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-hashtags-attitude"
+        ]
+      }
+    },
+    {
+      "path": "/blog/tiktok-captions-cute",
+      "slug": "tiktok-captions-cute",
+      "score": 0.696,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-hooks-cute",
+              "slug": "tiktok-hooks-cute",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-hashtags-cute",
+              "slug": "youtube-hashtags-cute",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-captions-cute",
+              "slug": "youtube-captions-cute",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-hooks-cute",
+          "youtube-hashtags-cute",
+          "youtube-captions-cute"
+        ]
+      }
+    },
+    {
+      "path": "/blog/instagram-captions-grwm",
+      "slug": "instagram-captions-grwm",
+      "score": 0.695,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "instagram-caption-generator",
+              "href": "/tools/instagram-caption-generator",
+              "label": "Instagram Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-username-generator",
+              "href": "/tools/instagram-username-generator",
+              "label": "Instagram Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-hashtag-generator",
+              "href": "/tools/instagram-hashtag-generator",
+              "label": "Instagram Hashtag Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-reels-caption-generator",
+              "href": "/tools/instagram-reels-caption-generator",
+              "label": "Instagram Reels Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/youtube-hashtags-grwm",
+              "slug": "youtube-hashtags-grwm",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-titles-grwm",
+              "slug": "youtube-titles-grwm",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-captions-grwm",
+              "slug": "tiktok-captions-grwm",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "youtube-hashtags-grwm",
+          "youtube-titles-grwm",
+          "tiktok-captions-grwm"
+        ]
+      }
+    },
+    {
+      "path": "/blog/instagram-captions-script-structure",
+      "slug": "instagram-captions-script-structure",
+      "score": 0.695,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "instagram-caption-generator",
+              "href": "/tools/instagram-caption-generator",
+              "label": "Instagram Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-username-generator",
+              "href": "/tools/instagram-username-generator",
+              "label": "Instagram Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-hashtag-generator",
+              "href": "/tools/instagram-hashtag-generator",
+              "label": "Instagram Hashtag Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-reels-caption-generator",
+              "href": "/tools/instagram-reels-caption-generator",
+              "label": "Instagram Reels Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/youtube-hashtags-script",
+              "slug": "youtube-hashtags-script",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/instagram-hooks-script-structure",
+              "slug": "instagram-hooks-script-structure",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-hashtags-script-structure",
+              "slug": "tiktok-hashtags-script-structure",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-script-structure",
+              "slug": "youtube-script-structure",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "youtube-hashtags-script",
+          "instagram-hooks-script-structure",
+          "tiktok-hashtags-script-structure",
+          "youtube-script-structure"
+        ]
+      }
+    },
+    {
+      "path": "/blog/instagram-hooks-tips",
+      "slug": "instagram-hooks-tips",
+      "score": 0.695,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "instagram-caption-generator",
+              "href": "/tools/instagram-caption-generator",
+              "label": "Instagram Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-username-generator",
+              "href": "/tools/instagram-username-generator",
+              "label": "Instagram Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-hashtag-generator",
+              "href": "/tools/instagram-hashtag-generator",
+              "label": "Instagram Hashtag Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-reels-caption-generator",
+              "href": "/tools/instagram-reels-caption-generator",
+              "label": "Instagram Reels Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-hooks-tips",
+              "slug": "tiktok-hooks-tips",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-captions-tips",
+              "slug": "tiktok-captions-tips",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-hashtags-tips",
+              "slug": "youtube-hashtags-tips",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-hooks-tips",
+          "tiktok-captions-tips",
+          "youtube-hashtags-tips"
+        ]
+      }
+    },
+    {
+      "path": "/blog/instagram-hooks-trending-sound",
+      "slug": "instagram-hooks-trending-sound",
+      "score": 0.695,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "instagram-caption-generator",
+              "href": "/tools/instagram-caption-generator",
+              "label": "Instagram Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-username-generator",
+              "href": "/tools/instagram-username-generator",
+              "label": "Instagram Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-hashtag-generator",
+              "href": "/tools/instagram-hashtag-generator",
+              "label": "Instagram Hashtag Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-reels-caption-generator",
+              "href": "/tools/instagram-reels-caption-generator",
+              "label": "Instagram Reels Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-titles-trending-sounds-ideas",
+              "slug": "tiktok-titles-trending-sounds-ideas",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-titles-trending",
+              "slug": "youtube-titles-trending",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-titles-trending-sound",
+              "slug": "youtube-titles-trending-sound",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-captions-trending-sound",
+              "slug": "tiktok-captions-trending-sound",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-captions-trending",
+              "slug": "tiktok-captions-trending",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-titles-trending-sounds-ideas",
+          "youtube-titles-trending",
+          "youtube-titles-trending-sound",
+          "tiktok-captions-trending-sound"
+        ]
+      }
+    },
+    {
+      "path": "/blog/instagram-hooks-viral-hashtags",
+      "slug": "instagram-hooks-viral-hashtags",
+      "score": 0.695,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "instagram-caption-generator",
+              "href": "/tools/instagram-caption-generator",
+              "label": "Instagram Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-username-generator",
+              "href": "/tools/instagram-username-generator",
+              "label": "Instagram Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-hashtag-generator",
+              "href": "/tools/instagram-hashtag-generator",
+              "label": "Instagram Hashtag Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-reels-caption-generator",
+              "href": "/tools/instagram-reels-caption-generator",
+              "label": "Instagram Reels Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-captions-viral",
+              "slug": "tiktok-captions-viral",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-captions-viral"
+        ]
+      }
+    },
+    {
+      "path": "/blog/tiktok-captions-friends",
+      "slug": "tiktok-captions-friends",
+      "score": 0.695,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": []
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": []
+      }
+    },
+    {
+      "path": "/blog/tiktok-captions-gaming",
+      "slug": "tiktok-captions-gaming",
+      "score": 0.695,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-titles-gaming-ideas",
+              "slug": "tiktok-titles-gaming-ideas",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-captions-gaming-video",
+              "slug": "tiktok-captions-gaming-video",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/instagram-hashtags-gaming-ideas",
+              "slug": "instagram-hashtags-gaming-ideas",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-titles-gaming-ideas",
+          "tiktok-captions-gaming-video",
+          "instagram-hashtags-gaming-ideas"
+        ]
+      }
+    },
+    {
+      "path": "/blog/tiktok-content-ideas-beginners",
+      "slug": "tiktok-content-ideas-beginners",
+      "score": 0.695,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-caption-ideas",
+              "slug": "tiktok-caption-ideas",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-captions-beginners",
+              "slug": "tiktok-captions-beginners",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-username-ideas",
+              "slug": "tiktok-username-ideas",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-caption-ideas",
+          "tiktok-captions-beginners",
+          "tiktok-username-ideas"
+        ]
+      }
+    },
+    {
+      "path": "/blog/youtube-captions-stitch",
+      "slug": "youtube-captions-stitch",
+      "score": 0.695,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "youtube-title-generator",
+              "href": "/tools/youtube-title-generator",
+              "label": "YouTube Title Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "youtube-description-generator",
+              "href": "/tools/youtube-description-generator",
+              "label": "YouTube Description Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "youtube-video-idea-generator",
+              "href": "/tools/youtube-video-idea-generator",
+              "label": "YouTube Video Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "youtube-script-generator",
+              "href": "/tools/youtube-script-generator",
+              "label": "YouTube Script Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-captions-stitch",
+              "slug": "tiktok-captions-stitch",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-captions-stitch-ideas",
+              "slug": "tiktok-captions-stitch-ideas",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-captions-stitch",
+          "tiktok-captions-stitch-ideas"
+        ]
+      }
+    },
+    {
+      "path": "/blog/youtube-hashtags-grwm",
+      "slug": "youtube-hashtags-grwm",
+      "score": 0.695,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "youtube-title-generator",
+              "href": "/tools/youtube-title-generator",
+              "label": "YouTube Title Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "youtube-description-generator",
+              "href": "/tools/youtube-description-generator",
+              "label": "YouTube Description Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "youtube-video-idea-generator",
+              "href": "/tools/youtube-video-idea-generator",
+              "label": "YouTube Video Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "youtube-script-generator",
+              "href": "/tools/youtube-script-generator",
+              "label": "YouTube Script Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/instagram-captions-grwm",
+              "slug": "instagram-captions-grwm",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-titles-grwm",
+              "slug": "youtube-titles-grwm",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-captions-grwm",
+              "slug": "tiktok-captions-grwm",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "instagram-captions-grwm",
+          "youtube-titles-grwm",
+          "tiktok-captions-grwm"
+        ]
+      }
+    },
+    {
+      "path": "/blog/instagram-hashtags-duet-ideas",
+      "slug": "instagram-hashtags-duet-ideas",
+      "score": 0.694,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "instagram-caption-generator",
+              "href": "/tools/instagram-caption-generator",
+              "label": "Instagram Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-username-generator",
+              "href": "/tools/instagram-username-generator",
+              "label": "Instagram Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-hashtag-generator",
+              "href": "/tools/instagram-hashtag-generator",
+              "label": "Instagram Hashtag Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-reels-caption-generator",
+              "href": "/tools/instagram-reels-caption-generator",
+              "label": "Instagram Reels Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/instagram-captions-duet",
+              "slug": "instagram-captions-duet",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-caption-ideas",
+              "slug": "tiktok-caption-ideas",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-captions-duet",
+              "slug": "tiktok-captions-duet",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-hooks-duet-ideas",
+              "slug": "tiktok-hooks-duet-ideas",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-username-ideas",
+              "slug": "tiktok-username-ideas",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "instagram-captions-duet",
+          "tiktok-caption-ideas",
+          "tiktok-captions-duet",
+          "tiktok-hooks-duet-ideas"
+        ]
+      }
+    },
+    {
+      "path": "/blog/instagram-hashtags-prank",
+      "slug": "instagram-hashtags-prank",
+      "score": 0.694,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "instagram-caption-generator",
+              "href": "/tools/instagram-caption-generator",
+              "label": "Instagram Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-username-generator",
+              "href": "/tools/instagram-username-generator",
+              "label": "Instagram Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-hashtag-generator",
+              "href": "/tools/instagram-hashtag-generator",
+              "label": "Instagram Hashtag Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-reels-caption-generator",
+              "href": "/tools/instagram-reels-caption-generator",
+              "label": "Instagram Reels Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-captions-prank",
+              "slug": "tiktok-captions-prank",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-captions-prank"
+        ]
+      }
+    },
+    {
+      "path": "/blog/instagram-hooks-ootd",
+      "slug": "instagram-hooks-ootd",
+      "score": 0.694,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "instagram-caption-generator",
+              "href": "/tools/instagram-caption-generator",
+              "label": "Instagram Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-username-generator",
+              "href": "/tools/instagram-username-generator",
+              "label": "Instagram Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-hashtag-generator",
+              "href": "/tools/instagram-hashtag-generator",
+              "label": "Instagram Hashtag Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-reels-caption-generator",
+              "href": "/tools/instagram-reels-caption-generator",
+              "label": "Instagram Reels Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/instagram-captions-ootd",
+              "slug": "instagram-captions-ootd",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-captions-ootd",
+              "slug": "tiktok-captions-ootd",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "instagram-captions-ootd",
+          "tiktok-captions-ootd"
+        ]
+      }
+    },
+    {
+      "path": "/blog/instagram-titles-comedy-ideas",
+      "slug": "instagram-titles-comedy-ideas",
+      "score": 0.694,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "instagram-caption-generator",
+              "href": "/tools/instagram-caption-generator",
+              "label": "Instagram Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-username-generator",
+              "href": "/tools/instagram-username-generator",
+              "label": "Instagram Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-hashtag-generator",
+              "href": "/tools/instagram-hashtag-generator",
+              "label": "Instagram Hashtag Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "instagram-reels-caption-generator",
+              "href": "/tools/instagram-reels-caption-generator",
+              "label": "Instagram Reels Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-captions-comedy",
+              "slug": "tiktok-captions-comedy",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-caption-ideas",
+              "slug": "tiktok-caption-ideas",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-username-ideas",
+              "slug": "tiktok-username-ideas",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-captions-comedy",
+          "tiktok-caption-ideas",
+          "tiktok-username-ideas"
+        ]
+      }
+    },
+    {
+      "path": "/blog/seo-sitemaps-robots-and-indexing",
+      "slug": "seo-sitemaps-robots-and-indexing",
+      "score": 0.694,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "creator-analysis",
+              "href": "/tools/creator-analysis",
+              "label": "Creator Account Analysis",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "ai-caption-generator",
+              "href": "/tools/ai-caption-generator",
+              "label": "AI Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "hashtag-generator",
+              "href": "/tools/hashtag-generator",
+              "label": "Hashtag Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": []
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": []
+      }
+    },
+    {
+      "path": "/blog/tiktok-captions-collab",
+      "slug": "tiktok-captions-collab",
+      "score": 0.694,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": []
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": []
+      }
+    },
+    {
+      "path": "/blog/tiktok-captions-funny",
+      "slug": "tiktok-captions-funny",
+      "score": 0.694,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/instagram-hashtags-funny-usernames",
+              "slug": "instagram-hashtags-funny-usernames",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-hooks-funny",
+              "slug": "youtube-hooks-funny",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/funny-tiktok-captions",
+              "slug": "funny-tiktok-captions",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-hashtags-funny",
+              "slug": "tiktok-hashtags-funny",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "instagram-hashtags-funny-usernames",
+          "youtube-hooks-funny",
+          "funny-tiktok-captions",
+          "tiktok-hashtags-funny"
+        ]
+      }
+    },
+    {
+      "path": "/blog/tiktok-captions-sarcastic",
+      "slug": "tiktok-captions-sarcastic",
+      "score": 0.694,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-hashtags-sarcastic",
+              "slug": "tiktok-hashtags-sarcastic",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-hashtags-sarcastic"
+        ]
+      }
+    },
+    {
+      "path": "/blog/tiktok-hashtags-hook-examples",
+      "slug": "tiktok-hashtags-hook-examples",
+      "score": 0.694,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/youtube-hook-examples",
+              "slug": "youtube-hook-examples",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-title-examples",
+              "slug": "youtube-title-examples",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "youtube-hook-examples",
+          "youtube-title-examples"
+        ]
+      }
+    },
+    {
+      "path": "/blog/tiktok-hashtags-long",
+      "slug": "tiktok-hashtags-long",
+      "score": 0.694,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-captions-long",
+              "slug": "tiktok-captions-long",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-captions-long"
+        ]
+      }
+    },
+    {
+      "path": "/blog/tiktok-hashtags-selfie",
+      "slug": "tiktok-hashtags-selfie",
+      "score": 0.694,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/tiktok-captions-selfie",
+              "slug": "tiktok-captions-selfie",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/instagram-captions-for-selfies",
+              "slug": "instagram-captions-for-selfies",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-hooks-caption-for-selfies",
+              "slug": "youtube-hooks-caption-for-selfies",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-titles-caption-for-selfies",
+              "slug": "youtube-titles-caption-for-selfies",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "tiktok-captions-selfie",
+          "instagram-captions-for-selfies",
+          "youtube-hooks-caption-for-selfies",
+          "youtube-titles-caption-for-selfies"
+        ]
+      }
+    },
+    {
+      "path": "/blog/tiktok-hooks-caption-for-business",
+      "slug": "tiktok-hooks-caption-for-business",
+      "score": 0.694,
+      "impressions": 0,
+      "clicks": 0,
+      "ctr": 0,
+      "actions": {
+        "internal_links": {
+          "tools": [
+            {
+              "slug": "tiktok-caption-generator",
+              "href": "/tools/tiktok-caption-generator",
+              "label": "TikTok Caption Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-bio-generator",
+              "href": "/tools/tiktok-bio-generator",
+              "label": "TikTok Bio Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-username-generator",
+              "href": "/tools/tiktok-username-generator",
+              "label": "TikTok Username Generator",
+              "reason": "winner_amplification_same_platform"
+            },
+            {
+              "slug": "tiktok-idea-generator",
+              "href": "/tools/tiktok-idea-generator",
+              "label": "TikTok Idea Generator",
+              "reason": "winner_amplification_same_platform"
+            }
+          ],
+          "answers": [
+            {
+              "href": "/answers",
+              "label": "Browse creator answers"
+            },
+            {
+              "href": "/tools",
+              "label": "Tool directory (high-intent)"
+            }
+          ],
+          "related_blogs": [
+            {
+              "href": "/blog/youtube-titles-caption-for-business",
+              "slug": "youtube-titles-caption-for-business",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/instagram-captions-for-business",
+              "slug": "instagram-captions-for-business",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/instagram-captions-business",
+              "slug": "instagram-captions-business",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/tiktok-hooks-business",
+              "slug": "tiktok-hooks-business",
+              "reason": "same_topic_cluster"
+            },
+            {
+              "href": "/blog/youtube-titles-business",
+              "slug": "youtube-titles-business",
+              "reason": "same_topic_cluster"
+            }
+          ]
+        },
+        "cta_priority": [
+          "upgrade_pricing",
+          "primary_tool_try",
+          "related_tool_grid"
+        ],
+        "related_pages_expand": [
+          "youtube-titles-caption-for-business",
+          "instagram-captions-for-business",
+          "instagram-captions-business",
+          "tiktok-hooks-business"
+        ]
+      }
+    }
+  ]
+}

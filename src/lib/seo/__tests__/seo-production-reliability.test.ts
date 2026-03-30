@@ -41,6 +41,18 @@ describe("V155 seo-production-reliability", () => {
     expect(r.stale).toBe(true);
   });
 
+  test("detectStaleReport treats daily-engine generatedAt like updatedAt", () => {
+    const nowMs = 1_700_000_000_000;
+    const r = detectStaleReport(
+      { generatedAt: new Date(nowMs - 60_000).toISOString() },
+      null,
+      nowMs,
+      3600_000
+    );
+    expect(r.stale).toBe(false);
+    expect(r.source).toBe("updatedAt");
+  });
+
   test("computeProductionReliability applies penalties and clamps 0–100", () => {
     const hi = computeProductionReliability({
       missed_run_count: 4,

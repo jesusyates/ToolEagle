@@ -1,0 +1,36 @@
+{
+  "version": "183.1",
+  "builtAt": "2026-03-30T11:03:10.572Z",
+  "stale_data": true,
+  "stale_reasons": [
+    "analytics_missing"
+  ],
+  "stale_sources": {
+    "data_freshness.json": {
+      "updatedAt": "2026-03-30T11:03:06.691Z",
+      "staleness_applied": true,
+      "reason": [
+        "analytics_missing"
+      ]
+    },
+    "search_performance.json": {
+      "updatedAt": "2026-03-30T11:03:02.448Z",
+      "age_hours": 0.0022569444444444442,
+      "error": "fetch failed",
+      "data_empty": true,
+      "is_stale": true
+    },
+    "tool_conversion_map.json": {
+      "updatedAt": "2026-03-30T11:03:02.890Z",
+      "age_hours": 0.0021341666666666666,
+      "is_stale": false
+    },
+    "v180_payment_db_snapshot.json": {
+      "builtAt": "2026-03-30T11:03:10.117Z",
+      "age_hours": 0.00012666666666666666,
+      "payment_events_error": "Could not find the table 'public.payment_events' in the schema cache",
+      "is_stale": false
+    }
+  },
+  "freshness_threshold_hours": 48
+}

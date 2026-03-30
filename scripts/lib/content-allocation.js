@@ -21,6 +21,11 @@ const TOOL_SIGNAL = {
 
 const GROWTH_PATH = path.join(process.cwd(), "generated", "growth-priority.json");
 const PLAN_PATH = path.join(process.cwd(), "generated", "content-allocation-plan.json");
+const V173_RAMP_PATH = path.join(process.cwd(), "generated", "v173-ramp-allocation.json");
+const V174_SCALE_PATH = path.join(process.cwd(), "generated", "v174-scale-plan.json");
+const DATA_FRESHNESS_PATH = path.join(process.cwd(), "generated", "data-freshness.json");
+const V181_CONTROL_PATH = path.join(process.cwd(), "generated", "v181-revenue-growth-control.json");
+const V182_AMPLIFY_PLAN_PATH = path.join(process.cwd(), "generated", "v182-revenue-amplification-plan.json");
 
 function parseProgrammaticSlug(slug) {
   const parts = String(slug || "").split("-");
@@ -193,7 +198,7 @@ function buildAllocationPlanFromGrowth(growth) {
     pausedClusters,
     rationale: rationale.slice(0, 200),
     weightsNote:
-      "Multipliers stack on base 1.0; final weight = platform*topic*intent*reduction. Paused exact slugs skip generation."
+      "Multipliers stack on base 1.0; final weight = platform*topic*intent*reduction * V173 * V174 * V181 (intent+topic revenue) * stale. Paused exact slugs skip generation."
   };
 }
 
@@ -227,6 +232,55 @@ function isPaused(slug, plan) {
   return paused.some((p) => p.exactSlug === slug);
 }
 
+function loadV173RampTopicTails() {
+  const ramp = safeReadJson(V173_RAMP_PATH);
+  const tm = ramp?.topicTailMultipliers;
+  return tm && typeof tm === "object" ? tm : null;
+}
+
+/** V174 — HIGH_PERFORMING / STABLE / RISKY frequency multipliers from build-v174-controlled-scale.ts */
+function loadV174ScaleMultipliers() {
+  const doc = safeReadJson(V174_SCALE_PATH);
+  const tm = doc?.topicFrequencyMultipliers;
+  return tm && typeof tm === "object" ? tm : null;
+}
+
+/** V175 — when GSC/conversion/analytics are stale, dampen blind scale-up. */
+function loadStaleDataMultiplier() {
+  const d = safeReadJson(DATA_FRESHNESS_PATH);
+  if (d?.stale_data === true) return 0.35;
+  return 1;
+}
+
+/** V181 — exact revenue multipliers (intent + topic) from run-v181-revenue-growth-control.js */
+function loadV181IntentRevenueMultipliers() {
+  const doc = safeReadJson(V181_CONTROL_PATH);
+  const m = doc?.intent_revenue_multipliers;
+  return m && typeof m === "object" ? m : null;
+}
+
+function loadV181TopicRevenueMultipliers() {
+  const doc = safeReadJson(V181_CONTROL_PATH);
+  const m = doc?.topic_revenue_multipliers;
+  return m && typeof m === "object" ? m : null;
+}
+
+/** V182 — exact-revenue amplify tier (intent + topic) from run-v182-revenue-amplification.js; inferred-only excluded from peak. */
+function loadV182IntentAmplifyMultipliers() {
+  const doc = safeReadJson(V182_AMPLIFY_PLAN_PATH);
+  const m = doc?.intent_amplify_multipliers;
+  return m && typeof m === "object" ? m : null;
+}
+
+function loadV182TopicAmplifyMultipliers() {
+  const doc = safeReadJson(V182_AMPLIFY_PLAN_PATH);
+  const m = doc?.topic_amplify_multipliers;
+  return m && typeof m === "object" ? m : null;
+}
+
+/**
+ * V173 — Prefer high-success topic tails; down-rank blocked/demoted tails from ramp artifact.
+ */
 function computeTripleWeight(platform, contentType, topic, plan) {
   const pp = plan.priorityPlatforms || {};
   const pt = plan.priorityTopics || {};
@@ -249,6 +303,37 @@ function computeTripleWeight(platform, contentType, topic, plan) {
       w *= rc.multiplier ?? 0.6;
     }
   }
+  const tails = loadV173RampTopicTails();
+  if (tails && tails[topic] != null) {
+    const m = Number(tails[topic]);
+    if (Number.isFinite(m)) w *= m;
+  }
+  const v174 = loadV174ScaleMultipliers();
+  if (v174 && v174[topic] != null) {
+    const m = Number(v174[topic]);
+    if (Number.isFinite(m)) w *= m;
+  }
+  const v181i = loadV181IntentRevenueMultipliers();
+  if (v181i && v181i[contentType] != null) {
+    const m = Number(v181i[contentType]);
+    if (Number.isFinite(m)) w *= m;
+  }
+  const v181t = loadV181TopicRevenueMultipliers();
+  if (v181t && v181t[topic] != null) {
+    const m = Number(v181t[topic]);
+    if (Number.isFinite(m)) w *= m;
+  }
+  const v182i = loadV182IntentAmplifyMultipliers();
+  if (v182i && v182i[contentType] != null) {
+    const m = Number(v182i[contentType]);
+    if (Number.isFinite(m) && m > 1) w *= m;
+  }
+  const v182t = loadV182TopicAmplifyMultipliers();
+  if (v182t && v182t[topic] != null) {
+    const m = Number(v182t[topic]);
+    if (Number.isFinite(m) && m > 1) w *= m;
+  }
+  w *= loadStaleDataMultiplier();
   return Math.max(0.05, w);
 }
 

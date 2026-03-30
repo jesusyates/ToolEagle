@@ -1,0 +1,15 @@
+{
+  "version": "173",
+  "builtAt": "2026-03-30T11:03:05.977Z",
+  "generated_count": 52,
+  "blocked_before_generation": 1,
+  "rejected_after_generation": 11,
+  "estimated_saved_calls": 1,
+  "estimated_wasted_calls": 4,
+  "strict_mode_efficiency": 0.826,
+  "notes": {
+    "saved_calls": "pregen/dedup/blog V172 skips avoid model invocation.",
+    "wasted_calls": "Model ran but post_package returned strict 503 or router_error.",
+    "blog_reject": "Counted in rejected_after_generation (quality gate after LLM)."
+  }
+}

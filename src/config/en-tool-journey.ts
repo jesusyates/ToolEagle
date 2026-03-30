@@ -10,7 +10,10 @@ export type EnToolJourneySlug =
   | "tiktok-caption-generator"
   | "hook-generator"
   | "tiktok-script-generator"
-  | "tiktok-idea-generator";
+  | "tiktok-idea-generator"
+  | "hashtag-generator"
+  | "youtube-title-generator"
+  | "instagram-caption-generator";
 
 export type EnToolJourney = {
   /** Product role for docs / UI hints */
@@ -41,8 +44,7 @@ export const EN_TOOL_JOURNEY: Record<EnToolJourneySlug, EnToolJourney> = {
       "Short-form creators who want the posting path spelled out: generate, paste into Describe your post, post, check Profile.",
     generateCta: "Start generating now",
     nextSteps: [
-      { href: "/ai-caption-generator", label: "Upgrade to full cross-platform package" },
-      { href: "/tools/hook-generator", label: "Polish the hook" }
+      { href: "/tools/hashtag-generator", label: "Step 3: build hashtag sets" }
     ]
   },
   "hook-generator": {
@@ -51,8 +53,7 @@ export const EN_TOOL_JOURNEY: Record<EnToolJourneySlug, EnToolJourney> = {
     introAudience: "Anyone who needs a stronger first 1–3 seconds before filming or writing the rest.",
     generateCta: "Generate hooks",
     nextSteps: [
-      { href: "/tools/tiktok-caption-generator", label: "Build full caption package" },
-      { href: "/tools/tiktok-script-generator", label: "Add script beats" }
+      { href: "/tools/tiktok-caption-generator", label: "Step 2: build caption package" }
     ]
   },
   "tiktok-script-generator": {
@@ -73,6 +74,39 @@ export const EN_TOOL_JOURNEY: Record<EnToolJourneySlug, EnToolJourney> = {
     nextSteps: [
       { href: "/tools/hook-generator", label: "Turn an idea into a hook" },
       { href: "/tools/tiktok-caption-generator", label: "Expand into a full package" }
+    ]
+  },
+  "hashtag-generator": {
+    role: "quick_single",
+    introProblem: "Finish the posting stack: pair tags with a caption package that matches your hook.",
+    introAudience: "Creators who already picked a topic and need distribution-ready text.",
+    generateCta: "Generate hashtags",
+    nextSteps: [
+      { href: "/tools/title-generator", label: "Step 4: finalize title" }
+    ]
+  },
+  "youtube-title-generator": {
+    role: "attention",
+    introProblem: "Titles are the thumbnail for search and browse—tighten them before you script.",
+    introAudience: "YouTube and Shorts creators packaging discovery + retention.",
+    generateCta: "Generate titles",
+    nextSteps: [
+      { href: "/youtube-tools", label: "Start here: YouTube workflow hub" },
+      { href: "/tools/viral-hook-generator", label: "Next: intro hook for the open" },
+      { href: "/tools/youtube-description-generator", label: "Then: description + keywords" },
+      { href: "/pricing", label: "Upgrade when you scale uploads" }
+    ]
+  },
+  "instagram-caption-generator": {
+    role: "quick_single",
+    introProblem: "Reels and carousels need captions that match intent—then tags and next post.",
+    introAudience: "Instagram-first creators building a consistent feed.",
+    generateCta: "Generate captions",
+    nextSteps: [
+      { href: "/instagram-tools", label: "Start here: Instagram workflow hub" },
+      { href: "/tools/reel-caption-generator", label: "Next: reel-specific captions" },
+      { href: "/tools/instagram-hashtag-generator", label: "Then: hashtag set for reach" },
+      { href: "/pricing", label: "Upgrade for more daily runs" }
     ]
   }
 };

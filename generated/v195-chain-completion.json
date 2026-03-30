@@ -1,0 +1,130 @@
+{
+  "version": "1.1",
+  "updated_at": "2026-03-30T14:42:19.958Z",
+  "source_file": "C:\\Users\\44570\\Desktop\\tooleagle\\generated\\tiktok-chain-events.jsonl",
+  "chain_definition": {
+    "completion_requires_ordered": [
+      "hook_generated",
+      "caption_generated",
+      "hashtag_generated",
+      "title_generated",
+      "upload_redirect"
+    ],
+    "notes": "completion = strict chronological order of first occurrence of each milestone; copy_event tracked separately and not required for completion"
+  },
+  "total_sessions": 0,
+  "started_sessions": 0,
+  "completed_sessions": 0,
+  "completion_rate": 0,
+  "copy_events_total": 0,
+  "sessions_reaching_hook": 0,
+  "sessions_reaching_caption": 0,
+  "sessions_reaching_hashtag": 0,
+  "sessions_reaching_title": 0,
+  "sessions_reaching_upload": 0,
+  "step_to_step_conversion": [
+    {
+      "from": "session_start",
+      "to": "hook_generated",
+      "numerator": 0,
+      "denominator": 0,
+      "rate": 0,
+      "rate_pct": 0
+    },
+    {
+      "from": "hook_generated",
+      "to": "caption_generated",
+      "numerator": 0,
+      "denominator": 0,
+      "rate": 0,
+      "rate_pct": 0
+    },
+    {
+      "from": "caption_generated",
+      "to": "hashtag_generated",
+      "numerator": 0,
+      "denominator": 0,
+      "rate": 0,
+      "rate_pct": 0
+    },
+    {
+      "from": "hashtag_generated",
+      "to": "title_generated",
+      "numerator": 0,
+      "denominator": 0,
+      "rate": 0,
+      "rate_pct": 0
+    },
+    {
+      "from": "title_generated",
+      "to": "upload_redirect",
+      "numerator": 0,
+      "denominator": 0,
+      "rate": 0,
+      "rate_pct": 0
+    }
+  ],
+  "biggest_drop_step": {
+    "transition": null,
+    "from_step": null,
+    "to_step": null,
+    "lost_sessions": 0,
+    "from_count": 0,
+    "to_count": 0,
+    "relative_drop_rate": 0,
+    "note": "no started sessions in source file"
+  },
+  "common_partial_paths": [],
+  "reached_milestone_counts": {
+    "hook_generated": 0,
+    "caption_generated": 0,
+    "hashtag_generated": 0,
+    "title_generated": 0,
+    "upload_redirect": 0
+  },
+  "drop_off_by_step": [
+    {
+      "step": "session_start",
+      "next_milestone": "hook_generated",
+      "reached_with_session_start": 0,
+      "reached_next_milestone": 0,
+      "lost_to_next": 0,
+      "note": "Among sessions that emitted session_start, how many reached hook_generated (first chain step)"
+    },
+    {
+      "step": "hook",
+      "milestone": "hook_generated",
+      "next_milestone": "caption_generated",
+      "reached_count": 0,
+      "lost_to_next": 0
+    },
+    {
+      "step": "caption",
+      "milestone": "caption_generated",
+      "next_milestone": "hashtag_generated",
+      "reached_count": 0,
+      "lost_to_next": 0
+    },
+    {
+      "step": "hashtag",
+      "milestone": "hashtag_generated",
+      "next_milestone": "title_generated",
+      "reached_count": 0,
+      "lost_to_next": 0
+    },
+    {
+      "step": "title",
+      "milestone": "title_generated",
+      "next_milestone": "upload_redirect",
+      "reached_count": 0,
+      "lost_to_next": 0
+    },
+    {
+      "step": "upload_redirect",
+      "milestone": "upload_redirect",
+      "next_milestone": null,
+      "reached_count": 0,
+      "lost_to_next": 0
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "version": "173",
+  "updatedAt": "2026-03-30T08:12:27.071Z",
+  "strict_fail_streak": {
+    "/tools/hook-generator|b5c6773fcea06940": 0,
+    "/tools/hook-generator|cd76c1c286074b58": 2,
+    "/unknown-tool|2cf24dba5fb0a30e": 0
+  }
+}

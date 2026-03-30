@@ -1,0 +1,49 @@
+{
+  "version": "193.3",
+  "generated_at": "2026-03-30T13:52:54.331Z",
+  "baseline_output": "[V186 Creator Knowledge Engine — use structure and constraints; do not copy verbatim.]\n[V191 Target surface: tiktok — patterns and fragments weighted for this platform + monetization profile.]\nIntent: Get more views (intent_views)\nScenario: Tutorial (sc_tutorial)\nRecipe: Emphasize TikTok-native pacing and on-screen text compatibility.\nHigh-weight patterns:\n1. [caption_pack] [tiktok · caption_pack] Problem in hook → demo / before-after → one objection handled → shop or keyword CTA.\n2. [caption_pack] [tiktok · caption_pack] Stakes in line 1 → 2–3 proof beats → twist → comment CTA (save/share) before hard sell.\nKnowledge fragments (weighted selection):\n1. (commerce_disclosure) TikTok Shop: lead with the problem the product solves in one line, show the product in frame early.\n2. (tip) Story format: start mid-action, name the emotion, end with one takeaway viewers can use today.\n3. (general_platform_safe) Avoid guaranteed income claims; use 'may', 'often', 'can help'. Disclose paid partnerships when applicable.\n4. (tip) Strong hooks contrast 'common advice' vs 'what actually works' with a specific example niche.",
+  "v193_output": "[V186 Creator Knowledge Engine — use structure and constraints; do not copy verbatim.]\n[V191 Target surface: tiktok — patterns and fragments weighted for this platform + monetization profile.]\n[V193.3 Platform Difference Reinforcement — prioritize TikTok caption cadence + hook/title alignment (additive only).]\nTikTok caption cadence rules:\n- Keep captions short and spoken: 1–2 punchy lines + optional CTA line.\n- Line 1 should continue the same angle as hook/title (same promise, no pivot).\n- Use compact payoff phrasing (what changed, what to do next, or why this works).\n- Chain style: proof_first · CTA intensity: medium.\nHook-aligned opener seed: I tested {tool/approach} on cozy desk setup for students for 7 days. Day 1 vs Day 7: {before} → {after}. Here’s the exact script I used.\nTitle-aligned phrasing seed: I tried one approach for cozy desk setup for students — here’s what changed (in 7 days).\nCTA seed: Comment “{keyword}” and I’ll send the template for cozy desk setup for students (tomorrow).\nOutput short TikTok-ready captions (not blog copy, not SEO sentence blocks).\n[V193.3 TikTok Chain Consistency — keep Hook/Caption/Hashtag/Title aligned for one post package.]\nChain style: proof_first · CTA intensity: medium\nShared voice rules:\n- Use conversational spoken lines (short clauses, no formal essay tone).\n- Keep wording native to TikTok feed language, avoid generic SEO phrasing.\n- Carry the same opener intent across hook/caption/title (do not switch premise mid-chain).\nShared pacing rules:\n- Front-load value in first line, then support with one tight payoff line.\n- Prefer 1-idea-per-line cadence; avoid long compound sentences.\n- Hashtag sets should mirror the same content angle as hook/title.\nShared CTA rules:\n- CTA = action-oriented but still value-first; ask for one clear next step.\nShared monetization rules:\n- Monetization fit: trust-building first (value/proof), then soft conversion.\n- Do not use hard-sell language before delivering payoff.\nIntent: Get more views (intent_views)\nScenario: Tutorial (sc_tutorial)\nRecipe: Emphasize TikTok-native pacing and on-screen text compatibility.\nHigh-weight patterns:\n1. [caption_pack] [tiktok · caption_pack] Problem in hook → demo / before-after → one objection handled → shop or keyword CTA.\n2. [caption_pack] [tiktok · caption_pack] Stakes in line 1 → 2–3 proof beats → twist → comment CTA (save/share) before hard sell.\nKnowledge fragments (weighted selection):\n1. (commerce_disclosure) TikTok Shop: lead with the problem the product solves in one line, show the product in frame early.\n2. (tip) Story format: start mid-action, name the emotion, end with one takeaway viewers can use today.\n3. (general_platform_safe) Avoid guaranteed income claims; use 'may', 'often', 'can help'. Disclose paid partnerships when applicable.\n4. (tip) Strong hooks contrast 'common advice' vs 'what actually works' with a specific example niche.",
+  "differences": [
+    "knowledgeBlock longer by 1787 chars",
+    "V193.3 chain consistency block present only in v193 run",
+    "v193ObservationApplied baseline=false v193=true"
+  ],
+  "conclusion": "V193 TikTok observations + chain consistency add tool-specific reinforcement vs baseline.",
+  "pass": true,
+  "v193_meta": {
+    "observation_applied": true,
+    "observation_count_used": 3,
+    "top_pattern_types_applied": [
+      "caption",
+      "hook",
+      "title",
+      "cta"
+    ],
+    "additive_only": true,
+    "tool_slug": "tiktok-caption-generator",
+    "generation_surfaces": [
+      "caption_scaffolds"
+    ]
+  },
+  "chain_rules": {
+    "chain_style": "proof_first",
+    "cta_intensity": "medium",
+    "voice_rules": [
+      "Use conversational spoken lines (short clauses, no formal essay tone).",
+      "Keep wording native to TikTok feed language, avoid generic SEO phrasing.",
+      "Carry the same opener intent across hook/caption/title (do not switch premise mid-chain)."
+    ],
+    "pacing_rules": [
+      "Front-load value in first line, then support with one tight payoff line.",
+      "Prefer 1-idea-per-line cadence; avoid long compound sentences.",
+      "Hashtag sets should mirror the same content angle as hook/title."
+    ],
+    "cta_rules": [
+      "CTA = action-oriented but still value-first; ask for one clear next step."
+    ],
+    "monetization_rules": [
+      "Monetization fit: trust-building first (value/proof), then soft conversion.",
+      "Do not use hard-sell language before delivering payoff."
+    ]
+  }
+}

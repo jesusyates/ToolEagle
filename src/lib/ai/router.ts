@@ -49,6 +49,11 @@ export type GenerationRouterMeta = {
   model_tier?: ModelTier;
   estimated_cost_usd?: number;
   max_tokens_applied?: number;
+  /** V172 — retrieval block was injected into the user prompt */
+  retrieval_used?: boolean;
+  /** Populated by generate-package route when V172 runs */
+  v172_retrieval_snippets?: number;
+  v172_pregen_score?: number;
 };
 
 type Attempt = { providerId: string; model: string };
@@ -80,6 +85,8 @@ function buildAttemptChain(market: RoutedMarket): Attempt[] {
 export type RouterGeneratePostPackageInput = PostPackageRouterContext & {
   userInput: string;
   riskScore?: number;
+  /** V172 — conditioning text from workflow-assets-retrieval / high-quality-signals */
+  retrievalReferenceBlock?: string;
 };
 
 /**
@@ -124,7 +131,8 @@ export async function routerGeneratePostPackage(
     tier: input.userPlan,
     market: input.market,
     locale: input.locale,
-    publishFullPack: input.publishFullPack
+    publishFullPack: input.publishFullPack,
+    retrievalReferenceBlock: input.retrievalReferenceBlock
   });
 
   const temperature = 0.75;
@@ -165,6 +173,7 @@ export async function routerGeneratePostPackage(
         ? "model_after_provider_fallback"
         : "model_primary";
 
+      const refBlock = input.retrievalReferenceBlock?.trim() ?? "";
       return {
         rawText: normalized,
         meta: {
@@ -175,7 +184,8 @@ export async function routerGeneratePostPackage(
           outcome,
           model_tier: finalTier,
           estimated_cost_usd: Number(estimatedCost.toFixed(6)),
-          max_tokens_applied: maxTokens
+          max_tokens_applied: maxTokens,
+          retrieval_used: refBlock.length > 0
         }
       };
     } catch (e) {

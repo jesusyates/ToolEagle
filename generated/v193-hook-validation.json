@@ -1,0 +1,52 @@
+{
+  "version": "193.3",
+  "generated_at": "2026-03-30T13:52:54.331Z",
+  "baseline_output": "[V186 Creator Knowledge Engine — use structure and constraints; do not copy verbatim.]\n[V191 Target surface: tiktok — patterns and fragments weighted for this platform + monetization profile.]\nIntent: Get more views (intent_views)\nScenario: Tutorial (sc_tutorial)\nRecipe: Hooks must match educational payoff in the script beats.\nHigh-weight patterns:\n1. [hook] [tiktok · hook] 0–1s pattern interrupt → 1–3s curiosity gap → promise of payoff in-video (no external click needed).\n2. [growth] Pattern interrupt + specific curiosity gap + proof you will deliver in the video.\nKnowledge fragments (weighted selection):\n1. (tip) Strong hooks contrast 'common advice' vs 'what actually works' with a specific example niche.\n2. (general_platform_safe) Avoid guaranteed income claims; use 'may', 'often', 'can help'. Disclose paid partnerships when applicable.\n3. (commerce_disclosure) TikTok Shop: lead with the problem the product solves in one line, show the product in frame early.\n4. (tip) Story format: start mid-action, name the emotion, end with one takeaway viewers can use today.",
+  "v193_output": "[V186 Creator Knowledge Engine — use structure and constraints; do not copy verbatim.]\n[V191 Target surface: tiktok — patterns and fragments weighted for this platform + monetization profile.]\n[V193 Platform Observations — additive TikTok boost. Apply when relevant to your generation task.]\nTop TikTok observation patterns:\n- I tested {tool/approach} on {niche} for 7 days. Day 1 vs Day 7: {before} → {after}. Here’s the exact script I used.\n- For TikTok Shop: The product solves {problem}—here’s the exact demo moment (skip to 0:12).\n[V193.1 Platform Difference Reinforcement — prioritize TikTok hook/structure/CTA scaffolds (additive only).]\nPrimary hook scaffold (first spoken line): I tested your approach on cozy desk setup for students for 7 days. Day 1 vs Day 7: what you had before → what changes after. Here’s the exact script I used.\nAlternate hook angle (keep A/B different): Most creators say common advice. Here’s what actually works for cozy desk setup for students: a specific action (and the proof is in the results).\nStructure scaffold (beats / pacing for first 3–15s): Setup (1 line): Here’s the context for cozy desk setup for students. Shift (1 line): the reason your results plateau. Proof (2 lines): what changed + mini screenshot/metric. Next step (1 line): one action viewers can do today.\nCTA scaffold (after proof): Comment “your keyword” and I’ll send the template for cozy desk setup for students (tomorrow).\n\nTikTok voice (must follow for hooks):\n- First line must earn the next 3 seconds: curiosity, contrast, or a pattern interrupt — not generic motivation or filler.\n- Prefer spoken rhythm: short clauses; one idea per beat; sound like a real creator talking to camera.\n- Avoid vague AI-ish phrasing: do not lean on “In today’s video”, “Let me share”, “Here’s the thing” unless they truly interrupt the scroll.\n- Make a clear payoff promise: what the viewer gets by the end (or reveal the tension you will resolve).\n- Direct address + specificity: name the mistake, niche, or outcome — not generic “tips” or “strategies”.\n\nRewrite using these scaffolds only; do NOT output meta-labels like “Hook scaffold”. Output creator-ready lines. Keep line 1 punchy for TikTok; place CTA after proof per scaffold (not sales-heavy in line 1).\n[V193.3 TikTok Chain Consistency — keep Hook/Caption/Hashtag/Title aligned for one post package.]\nChain style: proof_first · CTA intensity: medium\nShared voice rules:\n- Use conversational spoken lines (short clauses, no formal essay tone).\n- Keep wording native to TikTok feed language, avoid generic SEO phrasing.\n- Carry the same opener intent across hook/caption/title (do not switch premise mid-chain).\nShared pacing rules:\n- Front-load value in first line, then support with one tight payoff line.\n- Prefer 1-idea-per-line cadence; avoid long compound sentences.\n- Hashtag sets should mirror the same content angle as hook/title.\nShared CTA rules:\n- CTA = action-oriented but still value-first; ask for one clear next step.\nShared monetization rules:\n- Monetization fit: trust-building first (value/proof), then soft conversion.\n- Do not use hard-sell language before delivering payoff.\nIntent: Get more views (intent_views)\nScenario: Tutorial (sc_tutorial)\nRecipe: Hooks must match educational payoff in the script beats.\nHigh-weight patterns:\n1. [hook] [tiktok · hook] 0–1s pattern interrupt → 1–3s curiosity gap → promise of payoff in-video (no external click needed).\n2. [hook] [tiktok · hook] I tested {tool/approach} on {niche} for 7 days. Day 1 vs Day 7: {before} → {after}. Here’s the exact script I used.\nKnowledge fragments (weighted selection):\n1. (tip) Strong hooks contrast 'common advice' vs 'what actually works' with a specific example niche.\n2. (general_platform_safe) Avoid guaranteed income claims; use 'may', 'often', 'can help'. Disclose paid partnerships when applicable.\n3. (commerce_disclosure) TikTok Shop: lead with the problem the product solves in one line, show the product in frame early.\n4. (tip) Story format: start mid-action, name the emotion, end with one takeaway viewers can use today.",
+  "differences": [
+    "knowledgeBlock longer by 3010 chars",
+    "V193 observation summary present only in v193 run",
+    "V193.3 chain consistency block present only in v193 run",
+    "v193ObservationApplied baseline=false v193=true"
+  ],
+  "conclusion": "V193 TikTok observations + chain consistency add tool-specific reinforcement vs baseline.",
+  "pass": true,
+  "v193_meta": {
+    "observation_applied": true,
+    "observation_count_used": 5,
+    "top_pattern_types_applied": [
+      "hook",
+      "structure",
+      "cta",
+      "observation_summary"
+    ],
+    "additive_only": true,
+    "tool_slug": "hook-generator",
+    "generation_surfaces": [
+      "hybrid_pattern_pool",
+      "hook_structure_cta_scaffolds",
+      "platform_intelligence_summary"
+    ]
+  },
+  "chain_rules": {
+    "chain_style": "proof_first",
+    "cta_intensity": "medium",
+    "voice_rules": [
+      "Use conversational spoken lines (short clauses, no formal essay tone).",
+      "Keep wording native to TikTok feed language, avoid generic SEO phrasing.",
+      "Carry the same opener intent across hook/caption/title (do not switch premise mid-chain)."
+    ],
+    "pacing_rules": [
+      "Front-load value in first line, then support with one tight payoff line.",
+      "Prefer 1-idea-per-line cadence; avoid long compound sentences.",
+      "Hashtag sets should mirror the same content angle as hook/title."
+    ],
+    "cta_rules": [
+      "CTA = action-oriented but still value-first; ask for one clear next step."
+    ],
+    "monetization_rules": [
+      "Monetization fit: trust-building first (value/proof), then soft conversion.",
+      "Do not use hard-sell language before delivering payoff."
+    ]
+  }
+}

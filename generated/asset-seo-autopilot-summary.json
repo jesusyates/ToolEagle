@@ -1,44 +1,44 @@
 {
   "version": "v160.1.0",
-  "updatedAt": "2026-03-28T11:25:22.743Z",
+  "updatedAt": "2026-03-30T15:11:02.049Z",
   "citation_ready_rate": 1,
   "top_ai_citable_topics": [],
   "emerging_ai_citable_topics": [
     "tiktok 算法优化 教程",
+    "youtube涨粉2026实现方法",
     "youtube小白如何变现",
-    "tiktok-zhangfen-mijue",
-    "tiktok-zhangfen-gonglue",
-    "tiktok-zhangfen-rumen",
-    "tiktok-zhangfen-jiaocheng",
-    "tiktok-bofangliang-mijue",
-    "tiktok-bofangliang-gonglue",
-    "tiktok-bofangliang-rumen",
-    "tiktok-bofangliang-jiaocheng",
-    "tiktok-hudong-mijue",
-    "tiktok-hudong-gonglue"
+    "instagram引流模板大全",
+    "instagram提高完播率真的能赚钱吗",
+    "instagram私域引流详细步骤",
+    "youtube 品牌打造 新手",
+    "youtube 算法优化 教程",
+    "youtube 算法优化 新手",
+    "youtube 数据分析 方法",
+    "youtube 数据分析 教程",
+    "instagram引流最快的方法"
   ],
   "overall_ai_citation_score": 97,
   "ai_citation_dominance_bonus_count": 15,
   "weak_ai_citation_penalty_count": 0,
-  "queue_item_count": 465,
+  "queue_item_count": 814,
   "established_topic_count": 0,
-  "emerging_topic_count": 465,
+  "emerging_topic_count": 814,
   "notes": [
     "Merged V160.1 citation dominance slice; full metrics in asset-seo-ai-citation-dominance.json"
   ],
   "top_allocated_topics": [
-    "tiktok-zhangfen-mijue",
-    "tiktok-zhangfen-gonglue",
-    "tiktok-zhangfen-rumen",
-    "tiktok-zhangfen-jiaocheng",
-    "tiktok-bofangliang-mijue",
-    "tiktok-bofangliang-gonglue",
-    "tiktok-bofangliang-rumen",
-    "tiktok-bofangliang-jiaocheng",
-    "tiktok-hudong-mijue",
-    "tiktok-hudong-gonglue",
-    "tiktok-hudong-rumen",
-    "tiktok-hudong-jiaocheng"
+    "Instagram引流模板大全",
+    "Instagram提高完播率真的能赚钱吗",
+    "Instagram私域引流详细步骤",
+    "YouTube 品牌打造 新手",
+    "YouTube 算法优化 教程",
+    "YouTube 算法优化 新手",
+    "YouTube 数据分析 方法",
+    "YouTube 数据分析 教程",
+    "YouTube 数据分析 新手",
+    "Instagram引流最快的方法",
+    "Instagram私域引流最快的方法",
+    "Instagram博主如何变现"
   ],
   "top_allocated_workflows": [
     "youtube",
@@ -58,13 +58,36 @@
     "emerging_topic_exploration"
   ],
   "segment_distribution": {
-    "seo_discovery": 114,
-    "emerging_topic_exploration": 9,
-    "balanced_default": 342
+    "seo_discovery": 283,
+    "emerging_topic_exploration": 17,
+    "balanced_default": 514
   },
   "segment_bias_counts": {
     "prioritized": 0,
-    "deprioritized": 114,
-    "neutral": 351
-  }
+    "deprioritized": 283,
+    "neutral": 531
+  },
+  "intent_state_distribution": {
+    "ai_citation_discovery": 371,
+    "seo_discovery": 349,
+    "high_intent_tool_entry": 94
+  },
+  "intent_escalation_paths_sample": [
+    {
+      "from": "ai_citation_discovery",
+      "to": "ai_citation_discovery",
+      "count": 371
+    },
+    {
+      "from": "seo_discovery",
+      "to": "seo_discovery",
+      "count": 349
+    },
+    {
+      "from": "high_intent_tool_entry",
+      "to": "high_intent_tool_entry",
+      "count": 94
+    }
+  ],
+  "monetization_ready_segments": 0
 }

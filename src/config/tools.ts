@@ -1,5 +1,6 @@
 import {
   AtSign,
+  BarChart3,
   Hash,
   LayoutList,
   Lightbulb,
@@ -23,7 +24,8 @@ export type ToolCategory =
   | "Bios"
   | "Usernames"
   | "Hashtags"
-  | "Descriptions";
+  | "Descriptions"
+  | "Strategy";
 
 export type ToolConfig = {
   slug: string;
@@ -45,6 +47,14 @@ export type ToolConfig = {
 };
 
 export const tools: ToolConfig[] = [
+  {
+    slug: "creator-analysis",
+    name: "Creator Account Analysis",
+    description:
+      "Paste a few past posts and get a profile read: content mix, strengths, gaps, and what to post next.",
+    category: "Strategy",
+    icon: BarChart3
+  },
   // Original 4
   {
     slug: "tiktok-caption-generator",
@@ -508,6 +518,7 @@ export const toolCategories: ToolCategory[] = [
   "Bios",
   "Usernames",
   "Hashtags",
-  "Descriptions"
+  "Descriptions",
+  "Strategy"
 ];
 

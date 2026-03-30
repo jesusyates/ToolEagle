@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "description": "V189 — Creator stages (1–5). Evaluated top-down; first matching rule wins.",
+  "stages": [
+    {
+      "id": 5,
+      "key": "optimize_revenue",
+      "title": "Optimize for revenue",
+      "summary": "Double down on offers, proof, and conversion-oriented hooks.",
+      "match": {
+        "min_score": 72,
+        "min_workflow_completion": 0.55,
+        "any_of": ["sales_intent", "min_publish_clicks_1"]
+      }
+    },
+    {
+      "id": 4,
+      "key": "optimize_growth",
+      "title": "Optimize for growth",
+      "summary": "Iterate on packaging: titles, hooks, and first-frame curiosity.",
+      "match": {
+        "min_score": 52,
+        "min_tool_diversity": 3,
+        "min_workflow_completion": 0.45
+      }
+    },
+    {
+      "id": 3,
+      "key": "publish_consistently",
+      "title": "Publish consistently",
+      "summary": "Ship on a rhythm — copy → upload → one small improvement next time.",
+      "match": {
+        "any_of": ["min_publish_clicks_1", "min_repeat_days_3", "min_gen_10"]
+      }
+    },
+    {
+      "id": 2,
+      "key": "build_workflow_habit",
+      "title": "Build workflow habit",
+      "summary": "Use the full chain so each post builds on the last.",
+      "match": {
+        "min_score": 8,
+        "any_of": ["min_gen_3", "min_workflow_completion_0.25"]
+      }
+    },
+    {
+      "id": 1,
+      "key": "first_content",
+      "title": "First content",
+      "summary": "Get one complete output copied — then open upload once.",
+      "match": { "fallback": true }
+    }
+  ],
+  "signals": {
+    "sales_intent": "last_v186_intent_id matches intent_promote OR shop/promote/sell in id",
+    "min_publish_clicks_1": "publish_redirect_count >= 1",
+    "min_publish_clicks_2": "publish_redirect_count >= 2",
+    "min_repeat_days_3": "distinct_calendar_days >= 3",
+    "min_gen_10": "generation_count >= 10",
+    "min_gen_3": "generation_count >= 3",
+    "min_workflow_completion_0.25": "workflow_completion_percent >= 25"
+  }
+}

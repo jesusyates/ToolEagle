@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-28T09:24:03.280Z",
+  "updatedAt": "2026-03-30T09:48:07.261Z",
   "sourceSignals": {
     "contentAllocationPlan": true,
     "growthPriority": true
@@ -48,10 +48,10 @@
         "guideUrl": "/how-to/write-viral-captions"
       },
       "primaryTool": "tiktok-caption-generator",
-      "score": 1,
+      "score": 1.84,
       "rationale": [
         "reinforces strong tool tiktok-caption-generator",
-        "signal score platform=1.00 topic=1.00 intent=1.00",
+        "signal score platform=1.84 topic=1.00 intent=1.00",
         "baseline tool boost applied",
         "ownership assigned: blog is primary for this topic",
         "intent split preserved: blog broad, answer explicit question, guide workflow"
@@ -90,10 +90,10 @@
         "guideUrl": "/how-to/create-viral-hooks"
       },
       "primaryTool": "hook-generator",
-      "score": 1,
+      "score": 1.84,
       "rationale": [
         "reinforces strong tool hook-generator",
-        "signal score platform=1.00 topic=1.00 intent=1.00",
+        "signal score platform=1.84 topic=1.00 intent=1.00",
         "baseline tool boost applied",
         "ownership assigned: blog is primary for this topic",
         "intent split preserved: blog broad, answer explicit question, guide workflow"
@@ -132,10 +132,10 @@
         "guideUrl": "/how-to/grow-on-tiktok"
       },
       "primaryTool": "tiktok-caption-generator",
-      "score": 1,
+      "score": 1.84,
       "rationale": [
         "reinforces strong tool tiktok-caption-generator",
-        "signal score platform=1.00 topic=1.00 intent=1.00",
+        "signal score platform=1.84 topic=1.00 intent=1.00",
         "baseline tool boost applied",
         "ownership assigned: guide is primary for this topic",
         "intent split preserved: blog broad, answer explicit question, guide workflow"
@@ -174,10 +174,10 @@
         "guideUrl": "/how-to/get-youtube-subscribers"
       },
       "primaryTool": "youtube-title-generator",
-      "score": 1,
+      "score": 1.28,
       "rationale": [
         "reinforces strong tool youtube-title-generator",
-        "signal score platform=1.00 topic=1.00 intent=1.00",
+        "signal score platform=1.28 topic=1.00 intent=1.00",
         "baseline tool boost applied",
         "ownership assigned: blog is primary for this topic",
         "intent split preserved: blog broad, answer explicit question, guide workflow"
@@ -216,10 +216,10 @@
         "guideUrl": "/how-to/create-viral-hooks"
       },
       "primaryTool": "hook-generator",
-      "score": 1,
+      "score": 1.28,
       "rationale": [
         "reinforces strong tool hook-generator",
-        "signal score platform=1.00 topic=1.00 intent=1.00",
+        "signal score platform=1.28 topic=1.00 intent=1.00",
         "baseline tool boost applied",
         "ownership assigned: blog is primary for this topic",
         "intent split preserved: blog broad, answer explicit question, guide workflow"
@@ -258,10 +258,10 @@
         "guideUrl": "/en/how-to/youtube-growth"
       },
       "primaryTool": "youtube-title-generator",
-      "score": 1,
+      "score": 1.28,
       "rationale": [
         "reinforces strong tool youtube-title-generator",
-        "signal score platform=1.00 topic=1.00 intent=1.00",
+        "signal score platform=1.28 topic=1.00 intent=1.00",
         "baseline tool boost applied",
         "ownership assigned: guide is primary for this topic",
         "intent split preserved: blog broad, answer explicit question, guide workflow"

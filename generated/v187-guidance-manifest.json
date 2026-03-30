@@ -1,0 +1,13 @@
+{
+  "version": "187.1",
+  "builtAt": "2026-03-29T15:36:19.985Z",
+  "integrates": {
+    "v186_knowledge_engine": "intent/scenario chips feed last_v186_* in client memory",
+    "v180_revenue": "telemetry + orders attribution (server); guidance copy nudges upgrade when appropriate",
+    "v181_growth": {
+      "note": "Optional V181 snapshot for operator-facing hints; client guidance uses static rules + user memory.",
+      "has_file": true
+    }
+  },
+  "guidance_rules_version": "187.1"
+}

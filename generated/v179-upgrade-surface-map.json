@@ -1,0 +1,64 @@
+{
+  "version": "179",
+  "builtAt": "2026-03-30T11:03:07.891Z",
+  "policy": {
+    "forbid_random_pricing_links": true,
+    "runtime_source": "generated/v179-upgrade-runtime.json",
+    "gate_env": "V177_AUTO_EXECUTION=1"
+  },
+  "levels": {
+    "A": {
+      "label": "strong",
+      "description": "Core tools, high-conversion tools, copy→publish path primary upgrade control",
+      "zones": [
+        "tool_aside_publish_path_card",
+        "workflow_upgrade_subtle_when_primary_shown"
+      ]
+    },
+    "B": {
+      "label": "medium",
+      "description": "Answer primary CTA strip, blog mid-page structured workflow",
+      "zones": [
+        "answer_primary_tool_cta",
+        "blog_mid_workflow_section"
+      ]
+    },
+    "C": {
+      "label": "weak",
+      "description": "Footer-adjacent / supplemental links only",
+      "zones": [
+        "blog_footer_related",
+        "related_links_component"
+      ]
+    }
+  },
+  "by_page_type": {
+    "core_tool": {
+      "default_upgrade_level": "A",
+      "surfaces": [
+        "A"
+      ]
+    },
+    "tool": {
+      "default_upgrade_level": "A",
+      "surfaces": [
+        "A",
+        "C"
+      ]
+    },
+    "answer": {
+      "default_upgrade_level": "B",
+      "surfaces": [
+        "B",
+        "C"
+      ]
+    },
+    "blog": {
+      "default_upgrade_level": "B",
+      "surfaces": [
+        "B",
+        "C"
+      ]
+    }
+  }
+}

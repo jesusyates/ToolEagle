@@ -1,0 +1,17 @@
+{
+  "version": "184.1",
+  "builtAt": "2026-03-30T11:03:10.643Z",
+  "status": "manual_required",
+  "checklist": [
+    "Apply Supabase migration 0037_v184_payment_events_closure.sql (or full chain including 0036).",
+    "Set LEMON_SQUEEZY_SIGNING_SECRET and register webhook URL in Lemon dashboard.",
+    "For CN: ensure aggregator notify reaches /api/payment/callback with valid signature.",
+    "Create a credits order (global), complete payment, confirm orders.status=paid and payment_events rows exist."
+  ],
+  "last_snapshot_summary": {
+    "pending_orders": 3,
+    "paid_orders": 0,
+    "payment_events_rows": 0
+  },
+  "note": "Automated browser payment is environment-specific; mark status: passed manually after verification."
+}

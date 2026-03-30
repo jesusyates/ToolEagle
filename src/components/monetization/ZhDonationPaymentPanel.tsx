@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { DONATION_TIER_AMOUNTS_CNY } from "@/lib/payment/donation-config";
 import { ZH } from "@/lib/zh-site/paths";
 import { trackEvent } from "@/lib/analytics";
@@ -16,6 +17,7 @@ type Props = {
  * V101.1 — Donation via aggregator (same QR + callback pattern as Pro).
  */
 export function ZhDonationPaymentPanel({ onPaid }: Props) {
+  const pathname = usePathname() || ZH.support;
   const [phase, setPhase] = useState<Phase>("idle");
   const [modalOpen, setModalOpen] = useState(false);
   const [orderId, setOrderId] = useState<string | null>(null);
@@ -44,7 +46,24 @@ export function ZhDonationPaymentPanel({ onPaid }: Props) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ amount: tier, market: "cn" })
+        body: JSON.stringify({
+          amount: tier,
+          market: "cn",
+          source_path: pathname,
+          source_type: "donation_panel",
+          page_type: pathname.includes("support") ? "support" : "other",
+          tool_slug: null,
+          referrer_path:
+            typeof document !== "undefined" && document.referrer
+              ? (() => {
+                  try {
+                    return new URL(document.referrer).pathname;
+                  } catch {
+                    return null;
+                  }
+                })()
+              : null
+        })
       });
       const data = await res.json().catch(() => ({}));
 

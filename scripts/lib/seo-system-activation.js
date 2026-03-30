@@ -118,7 +118,9 @@ function readAlertsFile(cwd) {
 }
 
 function readDailyReportQuick(cwd) {
-  const p = path.join(genDir(cwd), DAILY_REPORT);
+  const enginePath = path.join(cwd, "logs", "daily-report.json");
+  const legacyPath = path.join(genDir(cwd), DAILY_REPORT);
+  const p = fs.existsSync(enginePath) ? enginePath : legacyPath;
   try {
     return JSON.parse(fs.readFileSync(p, "utf8"));
   } catch {

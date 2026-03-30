@@ -1,0 +1,239 @@
+{
+  "version": "181",
+  "builtAt": "2026-03-30T11:03:10.424Z",
+  "exact_revenue_pages": [],
+  "exact_revenue_tools": [],
+  "revenue_weighted_topics": [],
+  "promoted_by_revenue": [],
+  "demoted_by_revenue": [
+    "for-reels",
+    "bio-ideas",
+    "asmr",
+    "business",
+    "comparison",
+    "creative-usernames",
+    "duet",
+    "for-business",
+    "for-selfies",
+    "grwm",
+    "niche",
+    "ootd",
+    "romantic",
+    "script-structure",
+    "challenge",
+    "cottagecore",
+    "duet-ideas",
+    "fitness",
+    "funny-usernames",
+    "gaming-ideas",
+    "prank",
+    "story",
+    "storytime",
+    "sunset",
+    "challenge-ideas",
+    "comedy-reel",
+    "content-ideas",
+    "fitness-ideas",
+    "lets-play",
+    "mom-life",
+    "mystery",
+    "tips",
+    "title-for-views",
+    "trending-sound",
+    "tutorial",
+    "viral-hashtags",
+    "aesthetic",
+    "best-hashtags",
+    "caption-ideas",
+    "comedy-hashtags",
+    "comedy-ideas",
+    "food-ideas",
+    "love",
+    "minimalist",
+    "savage",
+    "small-business",
+    "transformation",
+    "advanced",
+    "adventure",
+    "aesthetic-reel",
+    "attitude",
+    "baddie",
+    "beauty-hashtags",
+    "before-after",
+    "beginners",
+    "behind-the-scenes",
+    "best",
+    "clean-girl",
+    "clickbait",
+    "coffee"
+  ],
+  "high_traffic_low_revenue_pages": [
+    {
+      "path": "/blog/youtube-video-ideas-that-work",
+      "score": 0.701
+    },
+    {
+      "path": "/blog/tiktok-captions-travel",
+      "score": 0.7
+    },
+    {
+      "path": "/blog/youtube-captions-trending-ideas",
+      "score": 0.7
+    },
+    {
+      "path": "/blog/best-tiktok-bio-ideas",
+      "score": 0.699
+    },
+    {
+      "path": "/blog/tiktok-captions-motivation",
+      "score": 0.699
+    },
+    {
+      "path": "/blog/tiktok-captions-food",
+      "score": 0.698
+    },
+    {
+      "path": "/blog/seo-how-search-engines-find-creator-content",
+      "score": 0.697
+    },
+    {
+      "path": "/blog/tiktok-captions-inspirational",
+      "score": 0.697
+    },
+    {
+      "path": "/blog/tiktok-captions-life-hack",
+      "score": 0.697
+    },
+    {
+      "path": "/blog/tiktok-captions-romantic",
+      "score": 0.697
+    },
+    {
+      "path": "/blog/instagram-captions-for-reels",
+      "score": 0.696
+    },
+    {
+      "path": "/blog/instagram-hashtags-funny-usernames",
+      "score": 0.696
+    },
+    {
+      "path": "/blog/tiktok-captions-attitude",
+      "score": 0.696
+    },
+    {
+      "path": "/blog/tiktok-captions-cute",
+      "score": 0.696
+    },
+    {
+      "path": "/blog/instagram-captions-grwm",
+      "score": 0.695
+    },
+    {
+      "path": "/blog/instagram-captions-script-structure",
+      "score": 0.695
+    },
+    {
+      "path": "/blog/instagram-hooks-tips",
+      "score": 0.695
+    },
+    {
+      "path": "/blog/instagram-hooks-trending-sound",
+      "score": 0.695
+    },
+    {
+      "path": "/blog/instagram-hooks-viral-hashtags",
+      "score": 0.695
+    },
+    {
+      "path": "/blog/tiktok-captions-friends",
+      "score": 0.695
+    },
+    {
+      "path": "/blog/tiktok-captions-gaming",
+      "score": 0.695
+    },
+    {
+      "path": "/blog/tiktok-content-ideas-beginners",
+      "score": 0.695
+    },
+    {
+      "path": "/blog/youtube-captions-stitch",
+      "score": 0.695
+    },
+    {
+      "path": "/blog/youtube-hashtags-grwm",
+      "score": 0.695
+    },
+    {
+      "path": "/blog/instagram-hashtags-duet-ideas",
+      "score": 0.694
+    },
+    {
+      "path": "/blog/instagram-hashtags-prank",
+      "score": 0.694
+    },
+    {
+      "path": "/blog/instagram-hooks-ootd",
+      "score": 0.694
+    },
+    {
+      "path": "/blog/instagram-titles-comedy-ideas",
+      "score": 0.694
+    },
+    {
+      "path": "/blog/seo-sitemaps-robots-and-indexing",
+      "score": 0.694
+    },
+    {
+      "path": "/blog/tiktok-captions-collab",
+      "score": 0.694
+    },
+    {
+      "path": "/blog/tiktok-captions-funny",
+      "score": 0.694
+    },
+    {
+      "path": "/blog/tiktok-captions-sarcastic",
+      "score": 0.694
+    },
+    {
+      "path": "/blog/tiktok-hashtags-hook-examples",
+      "score": 0.694
+    },
+    {
+      "path": "/blog/tiktok-hashtags-long",
+      "score": 0.694
+    },
+    {
+      "path": "/blog/tiktok-hashtags-selfie",
+      "score": 0.694
+    },
+    {
+      "path": "/blog/tiktok-hooks-caption-for-business",
+      "score": 0.694
+    },
+    {
+      "path": "/blog/tiktok-hooks-niche-hashtags",
+      "score": 0.694
+    },
+    {
+      "path": "/blog/viral-tiktok-hooks",
+      "score": 0.694
+    },
+    {
+      "path": "/blog/youtube-captions-comedy-reel",
+      "score": 0.694
+    },
+    {
+      "path": "/blog/youtube-hooks-comedy-hashtags",
+      "score": 0.694
+    }
+  ],
+  "high_revenue_paths_exact": [],
+  "revenue_signal_freshness": {
+    "stale_data": true,
+    "data_freshness_builtAt": null,
+    "v180_dashboard_version": "180.1"
+  },
+  "topic_production_note": 8
+}

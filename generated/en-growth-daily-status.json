@@ -1,31 +1,31 @@
 {
-  "date": "2026-03-26",
+  "date": "2026-03-30",
   "targetDailyLimit": 30,
   "caps": {
     "blogPrimary": 30,
     "answersSecondary": 5,
     "guidesSecondary": 2
   },
-  "actualBatchesRun": 11,
-  "attempted": 55,
-  "created": 55,
-  "blogCreated": 55,
+  "actualBatchesRun": 1,
+  "attempted": 10,
+  "created": 0,
+  "blogCreated": 0,
   "answersCreated": 0,
   "guidesCreated": 0,
-  "totalCreated": 55,
+  "totalCreated": 0,
   "primaryPagesCreated": 0,
   "supportingPagesCreated": 0,
   "skippedDueToConflict": 5,
   "downgradedGenerations": 3,
   "cannibalizationPreventedCount": 5,
-  "rejected": 0,
-  "rejectionRate": 0,
-  "indexingSubmitted": 4,
+  "rejected": 10,
+  "rejectionRate": 1,
+  "indexingSubmitted": 0,
   "indexingSubmittedByType": {
-    "blog": 4,
+    "blog": 0,
     "answers": 0,
     "guides": 0
   },
-  "fallbackTriggered": false,
-  "summary": "V122 daily autopilot run at 2026-03-26T17:08:07.324Z. Blog=55, answers=0, guides=0, rejected=0, rejectionRate=0.0%. Primary=0, supporting=0, downgraded=3, conflictsPrevented=5. IndexingSubmitted=4 (blog=4, answers=0, guides=0)."
+  "fallbackTriggered": true,
+  "summary": "V122 daily autopilot run at 2026-03-30T09:45:56.165Z. Blog=0, answers=0, guides=0, rejected=10, rejectionRate=100.0%. Primary=0, supporting=0, downgraded=3, conflictsPrevented=5. IndexingSubmitted=0 (blog=0, answers=0, guides=0)."
 }

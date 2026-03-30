@@ -1,0 +1,17 @@
+{
+  "version": "168",
+  "updatedAt": "2026-03-30T15:11:44.148Z",
+  "top_fallback_reason": null,
+  "dataset_row_count": 561,
+  "dataset_threshold": 3,
+  "dataset_not_ready": false,
+  "recommendations": [
+    "monitor"
+  ],
+  "env_suggestions": {},
+  "boost_topics": [],
+  "actions_taken": [],
+  "notes": [
+    "No dominant retrieval issue detected from window + dataset snapshot."
+  ]
+}

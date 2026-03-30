@@ -119,7 +119,11 @@ async function main() {
       continue;
     }
 
-    const toolLinks = computeEnRelatedToolLinksForBlogPage({ platform: meta.platform, contentType: meta.contentType });
+    const toolLinks = computeEnRelatedToolLinksForBlogPage(
+      { platform: meta.platform, contentType: meta.contentType },
+      searchLink.v181,
+      searchLink.v182
+    );
     const answerLinks = computeEnRelatedAnswerLinksForBlogPage({ platform: meta.platform, contentType: meta.contentType });
     const guideLinks = computeEnRelatedGuideLinksForBlogPage({ platform: meta.platform, contentType: meta.contentType });
     const hubLinks = computeEnRelatedHubLinksForBlogPage(meta.platform);

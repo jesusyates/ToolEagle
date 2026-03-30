@@ -1,6 +1,6 @@
 {
   "version": "v160.1.0",
-  "updatedAt": "2026-03-28T11:25:22.740Z",
+  "updatedAt": "2026-03-30T15:11:02.045Z",
   "overall_ai_citation_score": 97,
   "min_sample_thresholds": {
     "min_samples_topic": 3,
@@ -14,11 +14,19 @@
     "emerging_ai_citable_topics = topics with n < min_samples_topic, sorted by raw composite (promising, reduced queue bonus)"
   ],
   "established_topic_count": 0,
-  "emerging_topic_count": 465,
+  "emerging_topic_count": 814,
   "top_ai_citable_topics": [],
   "emerging_ai_citable_topics": [
     {
       "topic_key": "tiktok 算法优化 教程",
+      "composite": 100,
+      "adjusted_composite": 33,
+      "confidence_weight": 0.3333,
+      "mean_quality": 100,
+      "n": 1
+    },
+    {
+      "topic_key": "youtube涨粉2026实现方法",
       "composite": 100,
       "adjusted_composite": 33,
       "confidence_weight": 0.3333,
@@ -34,7 +42,7 @@
       "n": 1
     },
     {
-      "topic_key": "tiktok-zhangfen-mijue",
+      "topic_key": "instagram引流模板大全",
       "composite": 99,
       "adjusted_composite": 33,
       "confidence_weight": 0.3333,
@@ -42,7 +50,7 @@
       "n": 1
     },
     {
-      "topic_key": "tiktok-zhangfen-gonglue",
+      "topic_key": "instagram提高完播率真的能赚钱吗",
       "composite": 99,
       "adjusted_composite": 33,
       "confidence_weight": 0.3333,
@@ -50,7 +58,7 @@
       "n": 1
     },
     {
-      "topic_key": "tiktok-zhangfen-rumen",
+      "topic_key": "instagram私域引流详细步骤",
       "composite": 99,
       "adjusted_composite": 33,
       "confidence_weight": 0.3333,
@@ -58,7 +66,7 @@
       "n": 1
     },
     {
-      "topic_key": "tiktok-zhangfen-jiaocheng",
+      "topic_key": "youtube 品牌打造 新手",
       "composite": 99,
       "adjusted_composite": 33,
       "confidence_weight": 0.3333,
@@ -66,7 +74,7 @@
       "n": 1
     },
     {
-      "topic_key": "tiktok-bofangliang-mijue",
+      "topic_key": "youtube 算法优化 教程",
       "composite": 99,
       "adjusted_composite": 33,
       "confidence_weight": 0.3333,
@@ -74,7 +82,7 @@
       "n": 1
     },
     {
-      "topic_key": "tiktok-bofangliang-gonglue",
+      "topic_key": "youtube 算法优化 新手",
       "composite": 99,
       "adjusted_composite": 33,
       "confidence_weight": 0.3333,
@@ -82,7 +90,7 @@
       "n": 1
     },
     {
-      "topic_key": "tiktok-bofangliang-rumen",
+      "topic_key": "youtube 数据分析 方法",
       "composite": 99,
       "adjusted_composite": 33,
       "confidence_weight": 0.3333,
@@ -90,7 +98,7 @@
       "n": 1
     },
     {
-      "topic_key": "tiktok-bofangliang-jiaocheng",
+      "topic_key": "youtube 数据分析 教程",
       "composite": 99,
       "adjusted_composite": 33,
       "confidence_weight": 0.3333,
@@ -98,7 +106,7 @@
       "n": 1
     },
     {
-      "topic_key": "tiktok-hudong-mijue",
+      "topic_key": "instagram引流最快的方法",
       "composite": 99,
       "adjusted_composite": 33,
       "confidence_weight": 0.3333,
@@ -106,7 +114,7 @@
       "n": 1
     },
     {
-      "topic_key": "tiktok-hudong-gonglue",
+      "topic_key": "instagram私域引流最快的方法",
       "composite": 99,
       "adjusted_composite": 33,
       "confidence_weight": 0.3333,
@@ -114,7 +122,7 @@
       "n": 1
     },
     {
-      "topic_key": "tiktok-hudong-rumen",
+      "topic_key": "instagram博主如何变现",
       "composite": 99,
       "adjusted_composite": 33,
       "confidence_weight": 0.3333,
@@ -122,15 +130,7 @@
       "n": 1
     },
     {
-      "topic_key": "tiktok-hudong-jiaocheng",
-      "composite": 99,
-      "adjusted_composite": 33,
-      "confidence_weight": 0.3333,
-      "mean_quality": 100,
-      "n": 1
-    },
-    {
-      "topic_key": "tiktok-qihao-mijue",
+      "topic_key": "instagram博主如何私域引流",
       "composite": 99,
       "adjusted_composite": 33,
       "confidence_weight": 0.3333,
@@ -144,8 +144,8 @@
       "composite": 99,
       "adjusted_composite": 99,
       "confidence_weight": 1,
-      "mean_quality": 99.94,
-      "n": 363
+      "mean_quality": 99.74,
+      "n": 657
     },
     {
       "page_type": "en_topic_registry",
@@ -153,33 +153,33 @@
       "adjusted_composite": 90,
       "confidence_weight": 1,
       "mean_quality": 89,
-      "n": 102
+      "n": 157
     }
   ],
   "top_ai_citable_workflows": [
     {
-      "workflow_id": "tiktok",
+      "workflow_id": "instagram",
       "composite": 99,
       "adjusted_composite": 99,
       "confidence_weight": 1,
-      "mean_quality": 100,
-      "n": 140
+      "mean_quality": 99.73,
+      "n": 190
     },
     {
       "workflow_id": "youtube",
       "composite": 99,
       "adjusted_composite": 99,
       "confidence_weight": 1,
-      "mean_quality": 99.84,
-      "n": 132
+      "mean_quality": 99.79,
+      "n": 219
     },
     {
-      "workflow_id": "instagram",
+      "workflow_id": "tiktok",
       "composite": 99,
       "adjusted_composite": 99,
       "confidence_weight": 1,
-      "mean_quality": 100,
-      "n": 91
+      "mean_quality": 99.72,
+      "n": 248
     },
     {
       "workflow_id": "en_topic_registry",
@@ -187,12 +187,12 @@
       "adjusted_composite": 90,
       "confidence_weight": 1,
       "mean_quality": 89,
-      "n": 102
+      "n": 157
     }
   ],
   "weak_topics": [],
   "citation_ready_rate": 1,
-  "avg_structured_content_ratio": 0.9533,
+  "avg_structured_content_ratio": 0.9518,
   "notes": [
     "overall_ai_citation_score = mean per-row composite(likely*28 + quality*0.62 + structured*10)",
     "citation_ready_rate = share of queue rows with ai_answer_quality_score >= 52",
@@ -203,18 +203,8 @@
     "emerging_ai_citable_topics = topics with n < min_samples_topic, sorted by raw composite (promising, reduced queue bonus)"
   ],
   "topic_performance": {
-    "tiktok-zhangfen-mijue": {
-      "topic_key": "tiktok-zhangfen-mijue",
-      "n": 1,
-      "mean_ai_citation_likely": 0.9852,
-      "mean_ai_answer_quality_score": 100,
-      "mean_structured_content_ratio": 0.947,
-      "composite": 99,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 33
-    },
-    "tiktok-zhangfen-gonglue": {
-      "topic_key": "tiktok-zhangfen-gonglue",
+    "instagram引流模板大全": {
+      "topic_key": "instagram引流模板大全",
       "n": 1,
       "mean_ai_citation_likely": 0.9838,
       "mean_ai_answer_quality_score": 100,
@@ -223,18 +213,728 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 33
     },
-    "tiktok-zhangfen-rumen": {
-      "topic_key": "tiktok-zhangfen-rumen",
+    "instagram提高完播率真的能赚钱吗": {
+      "topic_key": "instagram提高完播率真的能赚钱吗",
       "n": 1,
-      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_citation_likely": 0.9838,
       "mean_ai_answer_quality_score": 100,
-      "mean_structured_content_ratio": 0.9524,
+      "mean_structured_content_ratio": 0.942,
       "composite": 99,
       "confidence_weight": 0.3333,
       "adjusted_composite": 33
     },
-    "tiktok-zhangfen-jiaocheng": {
-      "topic_key": "tiktok-zhangfen-jiaocheng",
+    "instagram私域引流详细步骤": {
+      "topic_key": "instagram私域引流详细步骤",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9844,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9444,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube 品牌打造 新手": {
+      "topic_key": "youtube 品牌打造 新手",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube 算法优化 教程": {
+      "topic_key": "youtube 算法优化 教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube 算法优化 新手": {
+      "topic_key": "youtube 算法优化 新手",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube 数据分析 方法": {
+      "topic_key": "youtube 数据分析 方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube 数据分析 教程": {
+      "topic_key": "youtube 数据分析 教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram-grwm-captions": {
+      "topic_key": "instagram-grwm-captions",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-grwm-hashtags": {
+      "topic_key": "youtube-grwm-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-grwm-titles": {
+      "topic_key": "youtube-grwm-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-cute-hooks": {
+      "topic_key": "tiktok-cute-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-script-structure-hashtags": {
+      "topic_key": "tiktok-script-structure-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-wedding-titles": {
+      "topic_key": "tiktok-wedding-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-script-structure-captions": {
+      "topic_key": "instagram-script-structure-captions",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-script-structure-hooks": {
+      "topic_key": "instagram-script-structure-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-dance-reel-captions": {
+      "topic_key": "youtube-dance-reel-captions",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-relatable-hooks": {
+      "topic_key": "tiktok-relatable-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-finance-hashtags": {
+      "topic_key": "tiktok-finance-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-relatable-hashtags": {
+      "topic_key": "youtube-relatable-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-cute-hashtags": {
+      "topic_key": "youtube-cute-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-cute-captions": {
+      "topic_key": "youtube-cute-captions",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-product-titles": {
+      "topic_key": "tiktok-product-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-finance-captions": {
+      "topic_key": "youtube-finance-captions",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-ootd-captions": {
+      "topic_key": "instagram-ootd-captions",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-wedding-hooks": {
+      "topic_key": "youtube-wedding-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-funny-usernames-hashtags": {
+      "topic_key": "instagram-funny-usernames-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-wedding-hooks": {
+      "topic_key": "tiktok-wedding-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-ootd-hooks": {
+      "topic_key": "instagram-ootd-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-product-hooks": {
+      "topic_key": "youtube-product-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-tutorial-reel-titles": {
+      "topic_key": "tiktok-tutorial-reel-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-minimalist-hashtags": {
+      "topic_key": "youtube-minimalist-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-mystery-hooks": {
+      "topic_key": "instagram-mystery-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-minimalist-titles": {
+      "topic_key": "instagram-minimalist-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-mystery-hooks": {
+      "topic_key": "tiktok-mystery-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-dance-hooks": {
+      "topic_key": "tiktok-dance-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-team-titles": {
+      "topic_key": "tiktok-team-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-sunset-hashtags": {
+      "topic_key": "instagram-sunset-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-asmr-captions": {
+      "topic_key": "instagram-asmr-captions",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-script-template-captions": {
+      "topic_key": "tiktok-script-template-captions",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-transformation-hashtags": {
+      "topic_key": "tiktok-transformation-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-dance-hashtags-hooks": {
+      "topic_key": "tiktok-dance-hashtags-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-duet-hooks": {
+      "topic_key": "tiktok-duet-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-minimalist-hashtags": {
+      "topic_key": "tiktok-minimalist-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-new-arrival-hooks": {
+      "topic_key": "youtube-new-arrival-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-diy-titles": {
+      "topic_key": "tiktok-diy-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-funny-hooks": {
+      "topic_key": "youtube-funny-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-asmr-titles": {
+      "topic_key": "tiktok-asmr-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-curiosity-hashtags": {
+      "topic_key": "youtube-curiosity-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-advanced-hashtags": {
+      "topic_key": "youtube-advanced-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-short-hashtags": {
+      "topic_key": "youtube-short-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-dance-titles": {
+      "topic_key": "tiktok-dance-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-transformation-titles": {
+      "topic_key": "instagram-transformation-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-promotion-hooks": {
+      "topic_key": "tiktok-promotion-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-inspirational-hashtags": {
+      "topic_key": "youtube-inspirational-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-mystery-titles": {
+      "topic_key": "youtube-mystery-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-duet-captions": {
+      "topic_key": "instagram-duet-captions",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-dance-titles": {
+      "topic_key": "youtube-dance-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-controversial-hashtags": {
+      "topic_key": "tiktok-controversial-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-tutorial-hooks": {
+      "topic_key": "instagram-tutorial-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-long-hashtags": {
+      "topic_key": "tiktok-long-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-walkthrough-hashtags": {
+      "topic_key": "youtube-walkthrough-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-duet-hashtags": {
+      "topic_key": "instagram-duet-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-recipe-hashtags": {
+      "topic_key": "tiktok-recipe-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-aesthetic-usernames-hashtags": {
+      "topic_key": "youtube-aesthetic-usernames-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-intro-hooks-titles": {
+      "topic_key": "tiktok-intro-hooks-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-script-hashtags": {
+      "topic_key": "youtube-script-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-sunset-hooks": {
+      "topic_key": "instagram-sunset-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-challenge-hashtags": {
+      "topic_key": "instagram-challenge-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-yoga-hooks": {
+      "topic_key": "tiktok-yoga-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-team-hashtags": {
+      "topic_key": "tiktok-team-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram引流最快的方法": {
+      "topic_key": "instagram引流最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram私域引流最快的方法": {
+      "topic_key": "instagram私域引流最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram博主如何变现": {
+      "topic_key": "instagram博主如何变现",
       "n": 1,
       "mean_ai_citation_likely": 0.9852,
       "mean_ai_answer_quality_score": 100,
@@ -243,8 +943,108 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 33
     },
-    "tiktok-bofangliang-mijue": {
-      "topic_key": "tiktok-bofangliang-mijue",
+    "instagram博主如何私域引流": {
+      "topic_key": "instagram博主如何私域引流",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube 数据分析 新手": {
+      "topic_key": "youtube 数据分析 新手",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 获得播放量 新手": {
+      "topic_key": "instagram 获得播放量 新手",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 做爆款视频 新手": {
+      "topic_key": "instagram 做爆款视频 新手",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 提高互动率 新手": {
+      "topic_key": "instagram 提高互动率 新手",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 做爆款 方法": {
+      "topic_key": "instagram 做爆款 方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 做爆款 新手": {
+      "topic_key": "instagram 做爆款 新手",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 做内容 方法": {
+      "topic_key": "instagram 做内容 方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 做内容 教程": {
+      "topic_key": "instagram 做内容 教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9844,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9444,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 做内容 新手": {
+      "topic_key": "instagram 做内容 新手",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 提高完播率 方法": {
+      "topic_key": "instagram 提高完播率 方法",
       "n": 1,
       "mean_ai_citation_likely": 0.9902,
       "mean_ai_answer_quality_score": 100,
@@ -253,8 +1053,48 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 33
     },
-    "tiktok-bofangliang-gonglue": {
-      "topic_key": "tiktok-bofangliang-gonglue",
+    "instagram 提高完播率 教程": {
+      "topic_key": "instagram 提高完播率 教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 直播带货 方法": {
+      "topic_key": "instagram 直播带货 方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 直播带货 教程": {
+      "topic_key": "instagram 直播带货 教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 直播带货 新手": {
+      "topic_key": "instagram 直播带货 新手",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 品牌打造 方法": {
+      "topic_key": "instagram 品牌打造 方法",
       "n": 1,
       "mean_ai_citation_likely": 0.9902,
       "mean_ai_answer_quality_score": 100,
@@ -263,8 +1103,88 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 33
     },
-    "tiktok-bofangliang-rumen": {
-      "topic_key": "tiktok-bofangliang-rumen",
+    "instagram 品牌打造 教程": {
+      "topic_key": "instagram 品牌打造 教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 品牌打造 新手": {
+      "topic_key": "instagram 品牌打造 新手",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 算法优化 方法": {
+      "topic_key": "instagram 算法优化 方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 算法优化 新手": {
+      "topic_key": "instagram 算法优化 新手",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 数据分析 教程": {
+      "topic_key": "instagram 数据分析 教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 数据分析 新手": {
+      "topic_key": "instagram 数据分析 新手",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram新手如何获得播放量": {
+      "topic_key": "instagram新手如何获得播放量",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9793,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9259,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram新手如何做爆款视频": {
+      "topic_key": "instagram新手如何做爆款视频",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram新手如何提高互动率": {
+      "topic_key": "instagram新手如何提高互动率",
       "n": 1,
       "mean_ai_citation_likely": 0.9902,
       "mean_ai_answer_quality_score": 100,
@@ -273,12 +1193,32 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 33
     },
-    "tiktok-bofangliang-jiaocheng": {
-      "topic_key": "tiktok-bofangliang-jiaocheng",
+    "instagram新手如何账号起号": {
+      "topic_key": "instagram新手如何账号起号",
       "n": 1,
-      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_citation_likely": 0.9844,
       "mean_ai_answer_quality_score": 100,
-      "mean_structured_content_ratio": 0.9649,
+      "mean_structured_content_ratio": 0.9444,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram新手如何算法优化": {
+      "topic_key": "instagram新手如何算法优化",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram新手如何数据分析": {
+      "topic_key": "instagram新手如何数据分析",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
       "composite": 99,
       "confidence_weight": 0.3333,
       "adjusted_composite": 33
@@ -290,6 +1230,156 @@
       "mean_ai_answer_quality_score": 100,
       "mean_structured_content_ratio": 0.9722,
       "composite": 100,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram私域引流方法大全": {
+      "topic_key": "instagram私域引流方法大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.8255,
+      "mean_ai_answer_quality_score": 79,
+      "mean_structured_content_ratio": 0.9167,
+      "composite": 81,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 27
+    },
+    "instagram变现技巧大全": {
+      "topic_key": "instagram变现技巧大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram私域引流技巧大全": {
+      "topic_key": "instagram私域引流技巧大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube 算法优化 方法": {
+      "topic_key": "youtube 算法优化 方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 涨粉 新手": {
+      "topic_key": "instagram 涨粉 新手",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 账号起号 新手": {
+      "topic_key": "instagram 账号起号 新手",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9313,
+      "mean_ai_answer_quality_score": 94,
+      "mean_structured_content_ratio": 0.9091,
+      "composite": 93,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 31
+    },
+    "instagram 做爆款 教程": {
+      "topic_key": "instagram 做爆款 教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 提高完播率 新手": {
+      "topic_key": "instagram 提高完播率 新手",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 算法优化 教程": {
+      "topic_key": "instagram 算法优化 教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 数据分析 方法": {
+      "topic_key": "instagram 数据分析 方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram新手如何涨粉": {
+      "topic_key": "instagram新手如何涨粉",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9335,
+      "mean_ai_answer_quality_score": 94,
+      "mean_structured_content_ratio": 0.9167,
+      "composite": 94,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 31
+    },
+    "instagram新手如何品牌打造": {
+      "topic_key": "instagram新手如何品牌打造",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram引流3天实现方法": {
+      "topic_key": "instagram引流3天实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram个人如何私域引流": {
+      "topic_key": "instagram个人如何私域引流",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram商家如何引流": {
+      "topic_key": "instagram商家如何引流",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
       "confidence_weight": 0.3333,
       "adjusted_composite": 33
     },
@@ -363,26 +1453,6 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 30
     },
-    "tiktok-tutorial-reel-titles": {
-      "topic_key": "tiktok-tutorial-reel-titles",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
-    "youtube-minimalist-hashtags": {
-      "topic_key": "youtube-minimalist-hashtags",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
     "tiktok-self-love-hooks": {
       "topic_key": "tiktok-self-love-hooks",
       "n": 1,
@@ -395,16 +1465,6 @@
     },
     "youtube-business-titles": {
       "topic_key": "youtube-business-titles",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
-    "instagram-mystery-hooks": {
-      "topic_key": "instagram-mystery-hooks",
       "n": 1,
       "mean_ai_citation_likely": 0.913,
       "mean_ai_answer_quality_score": 89,
@@ -483,28 +1543,8 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 30
     },
-    "tiktok-cute-hooks": {
-      "topic_key": "tiktok-cute-hooks",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
     "youtube-small-business-hashtags-titles": {
       "topic_key": "youtube-small-business-hashtags-titles",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
-    "instagram-minimalist-titles": {
-      "topic_key": "instagram-minimalist-titles",
       "n": 1,
       "mean_ai_citation_likely": 0.913,
       "mean_ai_answer_quality_score": 89,
@@ -525,16 +1565,6 @@
     },
     "instagram-fitness-hooks": {
       "topic_key": "instagram-fitness-hooks",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
-    "tiktok-script-structure-hashtags": {
-      "topic_key": "tiktok-script-structure-hashtags",
       "n": 1,
       "mean_ai_citation_likely": 0.913,
       "mean_ai_answer_quality_score": 89,
@@ -583,16 +1613,6 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 30
     },
-    "tiktok-mystery-hooks": {
-      "topic_key": "tiktok-mystery-hooks",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
     "youtube-contest-hooks": {
       "topic_key": "youtube-contest-hooks",
       "n": 1,
@@ -613,28 +1633,8 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 30
     },
-    "tiktok-dance-hooks": {
-      "topic_key": "tiktok-dance-hooks",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
     "instagram-lets-play-hooks": {
       "topic_key": "instagram-lets-play-hooks",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
-    "tiktok-team-titles": {
-      "topic_key": "tiktok-team-titles",
       "n": 1,
       "mean_ai_citation_likely": 0.913,
       "mean_ai_answer_quality_score": 89,
@@ -753,16 +1753,6 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 30
     },
-    "instagram-sunset-hashtags": {
-      "topic_key": "instagram-sunset-hashtags",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
     "tiktok-niche-hashtags-hooks": {
       "topic_key": "tiktok-niche-hashtags-hooks",
       "n": 1,
@@ -823,16 +1813,6 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 30
     },
-    "instagram-asmr-captions": {
-      "topic_key": "instagram-asmr-captions",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
     "tiktok-beginners-captions": {
       "topic_key": "tiktok-beginners-captions",
       "n": 1,
@@ -855,16 +1835,6 @@
     },
     "instagram-sale-hooks": {
       "topic_key": "instagram-sale-hooks",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
-    "tiktok-script-template-captions": {
-      "topic_key": "tiktok-script-template-captions",
       "n": 1,
       "mean_ai_citation_likely": 0.913,
       "mean_ai_answer_quality_score": 89,
@@ -983,16 +1953,6 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 30
     },
-    "tiktok-transformation-hashtags": {
-      "topic_key": "tiktok-transformation-hashtags",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
     "instagram-comparison-captions": {
       "topic_key": "instagram-comparison-captions",
       "n": 1,
@@ -1103,16 +2063,6 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 30
     },
-    "tiktok-wedding-titles": {
-      "topic_key": "tiktok-wedding-titles",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
     "tiktok-bio-titles": {
       "topic_key": "tiktok-bio-titles",
       "n": 1,
@@ -1213,16 +2163,6 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 30
     },
-    "tiktok-dance-hashtags-hooks": {
-      "topic_key": "tiktok-dance-hashtags-hooks",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
     "youtube-aesthetic-hashtags": {
       "topic_key": "youtube-aesthetic-hashtags",
       "n": 1,
@@ -1235,16 +2175,6 @@
     },
     "instagram-food-titles": {
       "topic_key": "instagram-food-titles",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
-    "tiktok-duet-hooks": {
-      "topic_key": "tiktok-duet-hooks",
       "n": 1,
       "mean_ai_citation_likely": 0.913,
       "mean_ai_answer_quality_score": 89,
@@ -1283,16 +2213,6 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 30
     },
-    "instagram-script-structure-captions": {
-      "topic_key": "instagram-script-structure-captions",
-      "n": 1,
-      "mean_ai_citation_likely": 0.913,
-      "mean_ai_answer_quality_score": 89,
-      "mean_structured_content_ratio": 0.9722,
-      "composite": 90,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 30
-    },
     "tiktok-business-hooks": {
       "topic_key": "tiktok-business-hooks",
       "n": 1,
@@ -1312,6 +2232,886 @@
       "composite": 90,
       "confidence_weight": 0.3333,
       "adjusted_composite": 30
+    },
+    "tiktok-captions-hashtags": {
+      "topic_key": "tiktok-captions-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-content-hooks": {
+      "topic_key": "instagram-content-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-hashtags-titles": {
+      "topic_key": "instagram-hashtags-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "instagram-gaming-hashtags": {
+      "topic_key": "instagram-gaming-hashtags",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-captions-selfies-hooks": {
+      "topic_key": "youtube-captions-selfies-hooks",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-captions-business-titles": {
+      "topic_key": "youtube-captions-business-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-titles-formulas": {
+      "topic_key": "tiktok-titles-formulas",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-trending-sounds-titles": {
+      "topic_key": "tiktok-trending-sounds-titles",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "youtube-trending-captions": {
+      "topic_key": "youtube-trending-captions",
+      "n": 1,
+      "mean_ai_citation_likely": 0.913,
+      "mean_ai_answer_quality_score": 89,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 90,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 30
+    },
+    "tiktok-zhangfen-mijue": {
+      "topic_key": "tiktok-zhangfen-mijue",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok-zhangfen-gonglue": {
+      "topic_key": "tiktok-zhangfen-gonglue",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok-zhangfen-rumen": {
+      "topic_key": "tiktok-zhangfen-rumen",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok-zhangfen-jiaocheng": {
+      "topic_key": "tiktok-zhangfen-jiaocheng",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok-bofangliang-mijue": {
+      "topic_key": "tiktok-bofangliang-mijue",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok-bofangliang-gonglue": {
+      "topic_key": "tiktok-bofangliang-gonglue",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok-bofangliang-rumen": {
+      "topic_key": "tiktok-bofangliang-rumen",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok-bofangliang-jiaocheng": {
+      "topic_key": "tiktok-bofangliang-jiaocheng",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram个人如何变现": {
+      "topic_key": "instagram个人如何变现",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram引流7天实现方法": {
+      "topic_key": "instagram引流7天实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram 账号起号 教程": {
+      "topic_key": "instagram 账号起号 教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram新手如何变现": {
+      "topic_key": "instagram新手如何变现",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram引流技巧大全": {
+      "topic_key": "instagram引流技巧大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram做爆款真的能赚钱吗": {
+      "topic_key": "instagram做爆款真的能赚钱吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram新手如何提高完播率": {
+      "topic_key": "instagram新手如何提高完播率",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram涨粉2026实现方法": {
+      "topic_key": "instagram涨粉2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9844,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9444,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram涨粉最新实现方法": {
+      "topic_key": "instagram涨粉最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram获得播放量2026实现方法": {
+      "topic_key": "instagram获得播放量2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram做爆款视频2026实现方法": {
+      "topic_key": "instagram做爆款视频2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram提高互动率2026实现方法": {
+      "topic_key": "instagram提高互动率2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram做爆款快速实现方法": {
+      "topic_key": "instagram做爆款快速实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram做内容7天实现方法": {
+      "topic_key": "instagram做内容7天实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram提高完播率最新实现方法": {
+      "topic_key": "instagram提高完播率最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram直播带货最新实现方法": {
+      "topic_key": "instagram直播带货最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram算法优化最新实现方法": {
+      "topic_key": "instagram算法优化最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9808,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9314,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram涨粉教程大全": {
+      "topic_key": "instagram涨粉教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram获得播放量教程大全": {
+      "topic_key": "instagram获得播放量教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram做爆款视频教程大全": {
+      "topic_key": "instagram做爆款视频教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram提高互动率教程大全": {
+      "topic_key": "instagram提高互动率教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram账号起号教程大全": {
+      "topic_key": "instagram账号起号教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9844,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9444,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram做爆款方法大全": {
+      "topic_key": "instagram做爆款方法大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram提高完播率方法大全": {
+      "topic_key": "instagram提高完播率方法大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram直播带货教程大全": {
+      "topic_key": "instagram直播带货教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram品牌打造教程大全": {
+      "topic_key": "instagram品牌打造教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram数据分析教程大全": {
+      "topic_key": "instagram数据分析教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram涨粉详细教程": {
+      "topic_key": "instagram涨粉详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram获得播放量最快的方法": {
+      "topic_key": "instagram获得播放量最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram获得播放量详细教程": {
+      "topic_key": "instagram获得播放量详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram做爆款视频最快的方法": {
+      "topic_key": "instagram做爆款视频最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram做爆款视频详细教程": {
+      "topic_key": "instagram做爆款视频详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram提高互动率最快的方法": {
+      "topic_key": "instagram提高互动率最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram提高互动率详细教程": {
+      "topic_key": "instagram提高互动率详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram账号起号详细教程": {
+      "topic_key": "instagram账号起号详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram做内容最快的方法": {
+      "topic_key": "instagram做内容最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram直播带货详细教程": {
+      "topic_key": "instagram直播带货详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram品牌打造详细教程": {
+      "topic_key": "instagram品牌打造详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram算法优化详细教程": {
+      "topic_key": "instagram算法优化详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram数据分析详细教程": {
+      "topic_key": "instagram数据分析详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram涨粉适合新手吗": {
+      "topic_key": "instagram涨粉适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram获得播放量适合新手吗": {
+      "topic_key": "instagram获得播放量适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram做爆款视频适合新手吗": {
+      "topic_key": "instagram做爆款视频适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram提高互动率适合新手吗": {
+      "topic_key": "instagram提高互动率适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9779,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9211,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram账号起号适合新手吗": {
+      "topic_key": "instagram账号起号适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram直播带货适合新手吗": {
+      "topic_key": "instagram直播带货适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9825,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9375,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram品牌打造适合新手吗": {
+      "topic_key": "instagram品牌打造适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram算法优化适合新手吗": {
+      "topic_key": "instagram算法优化适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram数据分析适合新手吗": {
+      "topic_key": "instagram数据分析适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 涨粉 高效": {
+      "topic_key": "tiktok 涨粉 高效",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 快速 涨粉": {
+      "topic_key": "tiktok 快速 涨粉",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 涨粉 实战": {
+      "topic_key": "tiktok 涨粉 实战",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 涨粉 完整指南": {
+      "topic_key": "tiktok 涨粉 完整指南",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 涨粉 进阶": {
+      "topic_key": "tiktok 涨粉 进阶",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 快速 获得播放量": {
+      "topic_key": "tiktok 快速 获得播放量",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 获得播放量 实战": {
+      "topic_key": "tiktok 获得播放量 实战",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 获得播放量 完整指南": {
+      "topic_key": "tiktok 获得播放量 完整指南",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 获得播放量 进阶": {
+      "topic_key": "tiktok 获得播放量 进阶",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 提高互动率 高效": {
+      "topic_key": "tiktok 提高互动率 高效",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 快速 提高互动率": {
+      "topic_key": "tiktok 快速 提高互动率",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 提高互动率 进阶": {
+      "topic_key": "tiktok 提高互动率 进阶",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 账号起号 高效": {
+      "topic_key": "tiktok 账号起号 高效",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 快速 账号起号": {
+      "topic_key": "tiktok 快速 账号起号",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 账号起号 实战": {
+      "topic_key": "tiktok 账号起号 实战",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 账号起号 完整指南": {
+      "topic_key": "tiktok 账号起号 完整指南",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 账号起号 进阶": {
+      "topic_key": "tiktok 账号起号 进阶",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 做内容 实战": {
+      "topic_key": "tiktok 做内容 实战",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "instagram账号起号最新实现方法": {
+      "topic_key": "instagram账号起号最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9313,
+      "mean_ai_answer_quality_score": 94,
+      "mean_structured_content_ratio": 0.9091,
+      "composite": 93,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 31
+    },
+    "instagram品牌打造最新实现方法": {
+      "topic_key": "instagram品牌打造最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9313,
+      "mean_ai_answer_quality_score": 94,
+      "mean_structured_content_ratio": 0.9091,
+      "composite": 93,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 31
+    },
+    "instagram算法优化教程大全": {
+      "topic_key": "instagram算法优化教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9313,
+      "mean_ai_answer_quality_score": 94,
+      "mean_structured_content_ratio": 0.9091,
+      "composite": 93,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 31
+    },
+    "tiktok 获得播放量 高效": {
+      "topic_key": "tiktok 获得播放量 高效",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9313,
+      "mean_ai_answer_quality_score": 94,
+      "mean_structured_content_ratio": 0.9091,
+      "composite": 93,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 31
     },
     "tiktok-hudong-mijue": {
       "topic_key": "tiktok-hudong-mijue",
@@ -3713,6 +5513,426 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 31
     },
+    "tiktok私域引流快速实现方法": {
+      "topic_key": "tiktok私域引流快速实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube变现3天实现方法": {
+      "topic_key": "youtube变现3天实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube引流7天实现方法": {
+      "topic_key": "youtube引流7天实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok引流方法大全": {
+      "topic_key": "tiktok引流方法大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube引流方法大全": {
+      "topic_key": "youtube引流方法大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube小白如何引流": {
+      "topic_key": "youtube小白如何引流",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube个人如何变现": {
+      "topic_key": "youtube个人如何变现",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok私域引流3天实现方法": {
+      "topic_key": "tiktok私域引流3天实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube私域引流7天实现方法": {
+      "topic_key": "youtube私域引流7天实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube私域引流方法大全": {
+      "topic_key": "youtube私域引流方法大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok商家如何私域引流": {
+      "topic_key": "tiktok商家如何私域引流",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube博主如何变现": {
+      "topic_key": "youtube博主如何变现",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube博主如何私域引流": {
+      "topic_key": "youtube博主如何私域引流",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube商家如何引流": {
+      "topic_key": "youtube商家如何引流",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok引流详细步骤": {
+      "topic_key": "tiktok引流详细步骤",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube变现真的能赚钱吗": {
+      "topic_key": "youtube变现真的能赚钱吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube引流详细步骤": {
+      "topic_key": "youtube引流详细步骤",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube提高完播率真的能赚钱吗": {
+      "topic_key": "youtube提高完播率真的能赚钱吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9779,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9211,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok新手如何获得播放量": {
+      "topic_key": "tiktok新手如何获得播放量",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok新手如何账号起号": {
+      "topic_key": "tiktok新手如何账号起号",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok新手如何做内容": {
+      "topic_key": "tiktok新手如何做内容",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok新手如何数据分析": {
+      "topic_key": "tiktok新手如何数据分析",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube新手如何涨粉": {
+      "topic_key": "youtube新手如何涨粉",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9844,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9444,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube新手如何获得播放量": {
+      "topic_key": "youtube新手如何获得播放量",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube新手如何提高互动率": {
+      "topic_key": "youtube新手如何提高互动率",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube新手如何账号起号": {
+      "topic_key": "youtube新手如何账号起号",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube新手如何做内容": {
+      "topic_key": "youtube新手如何做内容",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube新手如何品牌打造": {
+      "topic_key": "youtube新手如何品牌打造",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube新手如何算法优化": {
+      "topic_key": "youtube新手如何算法优化",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube新手如何数据分析": {
+      "topic_key": "youtube新手如何数据分析",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok涨粉2026实现方法": {
+      "topic_key": "tiktok涨粉2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok获得播放量2026实现方法": {
+      "topic_key": "tiktok获得播放量2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok获得播放量最新实现方法": {
+      "topic_key": "tiktok获得播放量最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9793,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9259,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok提高互动率最新实现方法": {
+      "topic_key": "tiktok提高互动率最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok账号起号最新实现方法": {
+      "topic_key": "tiktok账号起号最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok做爆款快速实现方法": {
+      "topic_key": "tiktok做爆款快速实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok做内容最新实现方法": {
+      "topic_key": "tiktok做内容最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok提高完播率快速实现方法": {
+      "topic_key": "tiktok提高完播率快速实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok直播带货2026实现方法": {
+      "topic_key": "tiktok直播带货2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok品牌打造2026实现方法": {
+      "topic_key": "tiktok品牌打造2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok品牌打造最新实现方法": {
+      "topic_key": "tiktok品牌打造最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube涨粉2026实现方法": {
+      "topic_key": "youtube涨粉2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9922,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9722,
+      "composite": 100,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
     "youtube小白如何变现": {
       "topic_key": "youtube小白如何变现",
       "n": 1,
@@ -3722,6 +5942,1236 @@
       "composite": 100,
       "confidence_weight": 0.3333,
       "adjusted_composite": 33
+    },
+    "tiktok小白如何引流": {
+      "topic_key": "tiktok小白如何引流",
+      "n": 1,
+      "mean_ai_citation_likely": 0.934,
+      "mean_ai_answer_quality_score": 93,
+      "mean_structured_content_ratio": 0.9444,
+      "composite": 93,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 31
+    },
+    "tiktok个人如何私域引流": {
+      "topic_key": "tiktok个人如何私域引流",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9363,
+      "mean_ai_answer_quality_score": 93,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 93,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 31
+    },
+    "tiktok引流指南大全": {
+      "topic_key": "tiktok引流指南大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube变现技巧大全": {
+      "topic_key": "youtube变现技巧大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube引流指南大全": {
+      "topic_key": "youtube引流指南大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok做爆款真的能赚钱吗": {
+      "topic_key": "tiktok做爆款真的能赚钱吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok提高完播率真的能赚钱吗": {
+      "topic_key": "tiktok提高完播率真的能赚钱吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok新手如何涨粉": {
+      "topic_key": "tiktok新手如何涨粉",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok新手如何提高互动率": {
+      "topic_key": "tiktok新手如何提高互动率",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9433,
+      "mean_ai_answer_quality_score": 95,
+      "mean_structured_content_ratio": 0.9259,
+      "composite": 95,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 32
+    },
+    "tiktok新手如何直播带货": {
+      "topic_key": "tiktok新手如何直播带货",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube新手如何直播带货": {
+      "topic_key": "youtube新手如何直播带货",
+      "n": 1,
+      "mean_ai_citation_likely": 0.8255,
+      "mean_ai_answer_quality_score": 79,
+      "mean_structured_content_ratio": 0.9167,
+      "composite": 81,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 27
+    },
+    "tiktok提高互动率2026实现方法": {
+      "topic_key": "tiktok提高互动率2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok算法优化2026实现方法": {
+      "topic_key": "tiktok算法优化2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok算法优化最新实现方法": {
+      "topic_key": "tiktok算法优化最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok数据分析2026实现方法": {
+      "topic_key": "tiktok数据分析2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube私域引流3天实现方法": {
+      "topic_key": "youtube私域引流3天实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok私域引流技巧大全": {
+      "topic_key": "tiktok私域引流技巧大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube私域引流技巧大全": {
+      "topic_key": "youtube私域引流技巧大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9793,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9259,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok数据分析最新实现方法": {
+      "topic_key": "tiktok数据分析最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube获得播放量2026实现方法": {
+      "topic_key": "youtube获得播放量2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube获得播放量最新实现方法": {
+      "topic_key": "youtube获得播放量最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube提高互动率2026实现方法": {
+      "topic_key": "youtube提高互动率2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube提高互动率最新实现方法": {
+      "topic_key": "youtube提高互动率最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube账号起号2026实现方法": {
+      "topic_key": "youtube账号起号2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube账号起号最新实现方法": {
+      "topic_key": "youtube账号起号最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube做爆款快速实现方法": {
+      "topic_key": "youtube做爆款快速实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube提高完播率快速实现方法": {
+      "topic_key": "youtube提高完播率快速实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube直播带货2026实现方法": {
+      "topic_key": "youtube直播带货2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube直播带货最新实现方法": {
+      "topic_key": "youtube直播带货最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube品牌打造2026实现方法": {
+      "topic_key": "youtube品牌打造2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube算法优化2026实现方法": {
+      "topic_key": "youtube算法优化2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube个人如何私域引流": {
+      "topic_key": "youtube个人如何私域引流",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok私域引流方法大全": {
+      "topic_key": "tiktok私域引流方法大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube新手如何变现": {
+      "topic_key": "youtube新手如何变现",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok引流3天实现方法": {
+      "topic_key": "tiktok引流3天实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok博主如何私域引流": {
+      "topic_key": "tiktok博主如何私域引流",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok商家如何引流": {
+      "topic_key": "tiktok商家如何引流",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube博主如何引流": {
+      "topic_key": "youtube博主如何引流",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube商家如何私域引流": {
+      "topic_key": "youtube商家如何私域引流",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok引流模板大全": {
+      "topic_key": "tiktok引流模板大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube变现指南大全": {
+      "topic_key": "youtube变现指南大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube引流模板大全": {
+      "topic_key": "youtube引流模板大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok私域引流详细步骤": {
+      "topic_key": "tiktok私域引流详细步骤",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube做爆款真的能赚钱吗": {
+      "topic_key": "youtube做爆款真的能赚钱吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube私域引流详细步骤": {
+      "topic_key": "youtube私域引流详细步骤",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok新手如何提高完播率": {
+      "topic_key": "tiktok新手如何提高完播率",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube新手如何提高完播率": {
+      "topic_key": "youtube新手如何提高完播率",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok涨粉快速实现方法": {
+      "topic_key": "tiktok涨粉快速实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok获得播放量快速实现方法": {
+      "topic_key": "tiktok获得播放量快速实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok提高互动率快速实现方法": {
+      "topic_key": "tiktok提高互动率快速实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok账号起号快速实现方法": {
+      "topic_key": "tiktok账号起号快速实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok做爆款7天实现方法": {
+      "topic_key": "tiktok做爆款7天实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok做内容快速实现方法": {
+      "topic_key": "tiktok做内容快速实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok提高完播率最新实现方法": {
+      "topic_key": "tiktok提高完播率最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok直播带货快速实现方法": {
+      "topic_key": "tiktok直播带货快速实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok品牌打造快速实现方法": {
+      "topic_key": "tiktok品牌打造快速实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok算法优化快速实现方法": {
+      "topic_key": "tiktok算法优化快速实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube做内容7天实现方法": {
+      "topic_key": "youtube做内容7天实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9844,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9444,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube算法优化最新实现方法": {
+      "topic_key": "youtube算法优化最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube数据分析2026实现方法": {
+      "topic_key": "youtube数据分析2026实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube数据分析最新实现方法": {
+      "topic_key": "youtube数据分析最新实现方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok涨粉教程大全": {
+      "topic_key": "tiktok涨粉教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok获得播放量教程大全": {
+      "topic_key": "tiktok获得播放量教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok账号起号教程大全": {
+      "topic_key": "tiktok账号起号教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok做内容教程大全": {
+      "topic_key": "tiktok做内容教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok提高完播率方法大全": {
+      "topic_key": "tiktok提高完播率方法大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok品牌打造教程大全": {
+      "topic_key": "tiktok品牌打造教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok算法优化教程大全": {
+      "topic_key": "tiktok算法优化教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok数据分析教程大全": {
+      "topic_key": "tiktok数据分析教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube涨粉教程大全": {
+      "topic_key": "youtube涨粉教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube获得播放量教程大全": {
+      "topic_key": "youtube获得播放量教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube做爆款方法大全": {
+      "topic_key": "youtube做爆款方法大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube做内容教程大全": {
+      "topic_key": "youtube做内容教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube提高完播率方法大全": {
+      "topic_key": "youtube提高完播率方法大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube直播带货教程大全": {
+      "topic_key": "youtube直播带货教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube品牌打造教程大全": {
+      "topic_key": "youtube品牌打造教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube算法优化教程大全": {
+      "topic_key": "youtube算法优化教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube数据分析教程大全": {
+      "topic_key": "youtube数据分析教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok涨粉最快的方法": {
+      "topic_key": "tiktok涨粉最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok涨粉详细教程": {
+      "topic_key": "tiktok涨粉详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok获得播放量最快的方法": {
+      "topic_key": "tiktok获得播放量最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok获得播放量详细教程": {
+      "topic_key": "tiktok获得播放量详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok提高互动率最快的方法": {
+      "topic_key": "tiktok提高互动率最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok提高互动率详细教程": {
+      "topic_key": "tiktok提高互动率详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok账号起号最快的方法": {
+      "topic_key": "tiktok账号起号最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok账号起号详细教程": {
+      "topic_key": "tiktok账号起号详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9825,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9375,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok做爆款最快的方法": {
+      "topic_key": "tiktok做爆款最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok做内容详细教程": {
+      "topic_key": "tiktok做内容详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok直播带货最快的方法": {
+      "topic_key": "tiktok直播带货最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok直播带货详细教程": {
+      "topic_key": "tiktok直播带货详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok品牌打造最快的方法": {
+      "topic_key": "tiktok品牌打造最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok品牌打造详细教程": {
+      "topic_key": "tiktok品牌打造详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok算法优化最快的方法": {
+      "topic_key": "tiktok算法优化最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9793,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9259,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok算法优化详细教程": {
+      "topic_key": "tiktok算法优化详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok数据分析详细教程": {
+      "topic_key": "tiktok数据分析详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube涨粉最快的方法": {
+      "topic_key": "youtube涨粉最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9844,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9444,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube涨粉详细教程": {
+      "topic_key": "youtube涨粉详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube获得播放量详细教程": {
+      "topic_key": "youtube获得播放量详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube提高互动率详细教程": {
+      "topic_key": "youtube提高互动率详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube做爆款最快的方法": {
+      "topic_key": "youtube做爆款最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube做内容详细教程": {
+      "topic_key": "youtube做内容详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube提高完播率最快的方法": {
+      "topic_key": "youtube提高完播率最快的方法",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube直播带货详细教程": {
+      "topic_key": "youtube直播带货详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube品牌打造详细教程": {
+      "topic_key": "youtube品牌打造详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube算法优化详细教程": {
+      "topic_key": "youtube算法优化详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube数据分析详细教程": {
+      "topic_key": "youtube数据分析详细教程",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok涨粉适合新手吗": {
+      "topic_key": "tiktok涨粉适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok做内容适合新手吗": {
+      "topic_key": "tiktok做内容适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok品牌打造适合新手吗": {
+      "topic_key": "tiktok品牌打造适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9867,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9524,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok算法优化适合新手吗": {
+      "topic_key": "tiktok算法优化适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube获得播放量适合新手吗": {
+      "topic_key": "youtube获得播放量适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9883,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9583,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube提高互动率适合新手吗": {
+      "topic_key": "youtube提高互动率适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube账号起号适合新手吗": {
+      "topic_key": "youtube账号起号适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube直播带货适合新手吗": {
+      "topic_key": "youtube直播带货适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube品牌打造适合新手吗": {
+      "topic_key": "youtube品牌打造适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube算法优化适合新手吗": {
+      "topic_key": "youtube算法优化适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "youtube数据分析适合新手吗": {
+      "topic_key": "youtube数据分析适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok提高互动率教程大全": {
+      "topic_key": "tiktok提高互动率教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9313,
+      "mean_ai_answer_quality_score": 94,
+      "mean_structured_content_ratio": 0.9091,
+      "composite": 93,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 31
+    },
+    "tiktok直播带货教程大全": {
+      "topic_key": "tiktok直播带货教程大全",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9335,
+      "mean_ai_answer_quality_score": 94,
+      "mean_structured_content_ratio": 0.9167,
+      "composite": 94,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 31
+    },
+    "tiktok获得播放量适合新手吗": {
+      "topic_key": "tiktok获得播放量适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9313,
+      "mean_ai_answer_quality_score": 94,
+      "mean_structured_content_ratio": 0.9091,
+      "composite": 93,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 31
+    },
+    "tiktok提高互动率适合新手吗": {
+      "topic_key": "tiktok提高互动率适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.8255,
+      "mean_ai_answer_quality_score": 79,
+      "mean_structured_content_ratio": 0.9167,
+      "composite": 81,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 27
+    },
+    "tiktok账号起号适合新手吗": {
+      "topic_key": "tiktok账号起号适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9313,
+      "mean_ai_answer_quality_score": 94,
+      "mean_structured_content_ratio": 0.9091,
+      "composite": 93,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 31
+    },
+    "youtube涨粉适合新手吗": {
+      "topic_key": "youtube涨粉适合新手吗",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9433,
+      "mean_ai_answer_quality_score": 95,
+      "mean_structured_content_ratio": 0.9259,
+      "composite": 95,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 32
     },
     "tiktok私域引流真的能赚钱吗": {
       "topic_key": "tiktok私域引流真的能赚钱吗",
@@ -4423,16 +7873,6 @@
       "confidence_weight": 0.3333,
       "adjusted_composite": 33
     },
-    "tiktok-baokuan-jiaocheng": {
-      "topic_key": "tiktok-baokuan-jiaocheng",
-      "n": 1,
-      "mean_ai_citation_likely": 0.9838,
-      "mean_ai_answer_quality_score": 100,
-      "mean_structured_content_ratio": 0.942,
-      "composite": 99,
-      "confidence_weight": 0.3333,
-      "adjusted_composite": 33
-    },
     "youtube引流技巧大全": {
       "topic_key": "youtube引流技巧大全",
       "n": 1,
@@ -4442,6 +7882,56 @@
       "composite": 93,
       "confidence_weight": 0.3333,
       "adjusted_composite": 31
+    },
+    "tiktok 快速 做爆款": {
+      "topic_key": "tiktok 快速 做爆款",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 做爆款 实战": {
+      "topic_key": "tiktok 做爆款 实战",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 做爆款 完整指南": {
+      "topic_key": "tiktok 做爆款 完整指南",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9902,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.9649,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok 做爆款 进阶": {
+      "topic_key": "tiktok 做爆款 进阶",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9852,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.947,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
+    },
+    "tiktok-baokuan-jiaocheng": {
+      "topic_key": "tiktok-baokuan-jiaocheng",
+      "n": 1,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 100,
+      "mean_structured_content_ratio": 0.942,
+      "composite": 99,
+      "confidence_weight": 0.3333,
+      "adjusted_composite": 33
     },
     "tiktok-bianxian-ruhe": {
       "topic_key": "tiktok-bianxian-ruhe",
@@ -4857,17 +8347,17 @@
   "page_type_performance": {
     "zh_search": {
       "page_type": "zh_search",
-      "n": 363,
-      "mean_ai_citation_likely": 0.985,
-      "mean_ai_answer_quality_score": 99.94,
-      "mean_structured_content_ratio": 0.948,
+      "n": 657,
+      "mean_ai_citation_likely": 0.9833,
+      "mean_ai_answer_quality_score": 99.74,
+      "mean_structured_content_ratio": 0.9469,
       "composite": 99,
       "confidence_weight": 1,
       "adjusted_composite": 99
     },
     "en_topic_registry": {
       "page_type": "en_topic_registry",
-      "n": 102,
+      "n": 157,
       "mean_ai_citation_likely": 0.913,
       "mean_ai_answer_quality_score": 89,
       "mean_structured_content_ratio": 0.9722,
@@ -4877,19 +8367,29 @@
     }
   },
   "workflow_performance": {
-    "tiktok": {
-      "workflow_id": "tiktok",
-      "n": 140,
-      "mean_ai_citation_likely": 0.985,
-      "mean_ai_answer_quality_score": 100,
+    "instagram": {
+      "workflow_id": "instagram",
+      "n": 190,
+      "mean_ai_citation_likely": 0.9831,
+      "mean_ai_answer_quality_score": 99.73,
       "mean_structured_content_ratio": 0.9465,
+      "composite": 99,
+      "confidence_weight": 1,
+      "adjusted_composite": 99
+    },
+    "youtube": {
+      "workflow_id": "youtube",
+      "n": 219,
+      "mean_ai_citation_likely": 0.9838,
+      "mean_ai_answer_quality_score": 99.79,
+      "mean_structured_content_ratio": 0.9478,
       "composite": 99,
       "confidence_weight": 1,
       "adjusted_composite": 99
     },
     "en_topic_registry": {
       "workflow_id": "en_topic_registry",
-      "n": 102,
+      "n": 157,
       "mean_ai_citation_likely": 0.913,
       "mean_ai_answer_quality_score": 89,
       "mean_structured_content_ratio": 0.9722,
@@ -4897,22 +8397,12 @@
       "confidence_weight": 1,
       "adjusted_composite": 90
     },
-    "youtube": {
-      "workflow_id": "youtube",
-      "n": 132,
-      "mean_ai_citation_likely": 0.9844,
-      "mean_ai_answer_quality_score": 99.84,
-      "mean_structured_content_ratio": 0.9485,
-      "composite": 99,
-      "confidence_weight": 1,
-      "adjusted_composite": 99
-    },
-    "instagram": {
-      "workflow_id": "instagram",
-      "n": 91,
-      "mean_ai_citation_likely": 0.9858,
-      "mean_ai_answer_quality_score": 100,
-      "mean_structured_content_ratio": 0.9495,
+    "tiktok": {
+      "workflow_id": "tiktok",
+      "n": 248,
+      "mean_ai_citation_likely": 0.983,
+      "mean_ai_answer_quality_score": 99.72,
+      "mean_structured_content_ratio": 0.9464,
       "composite": 99,
       "confidence_weight": 1,
       "adjusted_composite": 99

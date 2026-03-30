@@ -1,0 +1,61 @@
+{
+  "version": "180.1",
+  "builtAt": "2026-03-30T11:03:10.342Z",
+  "tests": [
+    {
+      "target_type": "core_tool",
+      "target_id": "tiktok-caption-generator",
+      "axis": "upgrade_cta_copy",
+      "variant_a": {
+        "upgrade_label": "Upgrade for higher limits →"
+      },
+      "variant_b": {
+        "upgrade_label": "Unlock plans & remove limits →"
+      }
+    },
+    {
+      "target_type": "core_tool",
+      "target_id": "hashtag-generator",
+      "axis": "upgrade_cta_copy",
+      "variant_a": {
+        "upgrade_label": "Upgrade for higher limits →"
+      },
+      "variant_b": {
+        "upgrade_label": "Unlock plans & remove limits →"
+      }
+    },
+    {
+      "target_type": "core_tool",
+      "target_id": "hook-generator",
+      "axis": "upgrade_cta_copy",
+      "variant_a": {
+        "upgrade_label": "Upgrade for higher limits →"
+      },
+      "variant_b": {
+        "upgrade_label": "Unlock plans & remove limits →"
+      }
+    },
+    {
+      "target_type": "core_tool",
+      "target_id": "title-generator",
+      "axis": "upgrade_cta_copy",
+      "variant_a": {
+        "upgrade_label": "Upgrade for higher limits →"
+      },
+      "variant_b": {
+        "upgrade_label": "Unlock plans & remove limits →"
+      }
+    },
+    {
+      "target_type": "pricing_guidance",
+      "target_id": "global",
+      "axis": "pricing_copy",
+      "variant_a": {
+        "line": "Compare plans on the pricing page."
+      },
+      "variant_b": {
+        "line": "See transparent pricing — cancel anytime."
+      }
+    }
+  ]
+}

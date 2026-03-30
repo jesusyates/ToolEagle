@@ -1,5 +1,5 @@
 # V156 — 下午 SEO 全自动栈（与计划任务共用；也可手动运行）
-# 顺序：V154 日编排 → V122 EN 日增（索引/增长链）→ V155 看门狗
+# 顺序：V170 daily-engine（生产入口）→ V122 EN 日增（索引/增长链）→ V195（链分析 + 规则 + apply-top1）→ V155 看门狗
 # 日志：logs/afternoon-seo-automation.log
 
 $ErrorActionPreference = "Stop"
@@ -25,15 +25,20 @@ try {
   $prevEap = $ErrorActionPreference
   $ErrorActionPreference = "Continue"
 
-  Write-Log "step: seo:daily (orchestrator)"
-  & npx.cmd tsx scripts/run-daily-orchestrator.ts 2>&1 | Tee-Object -FilePath $logPath -Append
+  Write-Log "step: daily-engine (V170 production entry)"
+  & npm.cmd run daily-engine 2>&1 | Tee-Object -FilePath $logPath -Append
   $orch = $LASTEXITCODE
-  Write-Log "orchestrator exit=$orch"
+  Write-Log "daily-engine exit=$orch"
 
   Write-Log "step: run-en-seo-daily.js (growth + indexing)"
   & node scripts/run-en-seo-daily.js 2>&1 | Tee-Object -FilePath $logPath -Append
   $en = $LASTEXITCODE
   Write-Log "en-daily exit=$en"
+
+  Write-Log "step: v195 (completion + diagnosis + optimization rules + apply-top1)"
+  & npm.cmd run v195 2>&1 | Tee-Object -FilePath $logPath -Append
+  $v195 = $LASTEXITCODE
+  Write-Log "v195 exit=$v195"
 
   Write-Log "step: seo:watchdog"
   & npx.cmd tsx scripts/run-seo-watchdog.ts 2>&1 | Tee-Object -FilePath $logPath -Append

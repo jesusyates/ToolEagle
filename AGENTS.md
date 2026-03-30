@@ -1,19 +1,10 @@
 # ToolEagle — Instructions for AI assistants
-
-**All project rules (normative direction) live in one file:**
-
-→ **`docs/MEMORY.md`**
-
+**All project rules (normative direction) live in one file:** → **`docs/MEMORY.md`**
 **Operational runbooks** (“how to do X step by step”) live under **`memory/`** (see `memory/README.md`). They **do not** replace MEMORY; on conflict, **MEMORY wins**. When a task matches a runbook topic, **read what you need yourself**: open `memory/README.md` for the index, then Read only the relevant `memory/*.md` files (do not ask the user to paste them unless there is no repo access).
-
 **Project operating manual (stay aligned on execution):** For work that touches **daily SEO/orchestrator production, watchdog/sandbox, git upload/sync with production status, EN+ZH publishing rhythm, retrieval/flywheel, monetization SEO layer, risk/reliability, or content governance**, Read **`memory/tooleagle-project-operating-manual.md`** once per task thread (or when returning after a long gap)—**after** `docs/MEMORY.md` per the policy below. Skip for tiny isolated fixes unrelated to those areas.
-
 **Upload default (mandatory):** If the user asks to **upload**, **push**, or **sync the repo to remote** (including Chinese 「上传」), **Read `memory/tooleagle-project-operating-manual.md` before `git` operations** (section 8 is required reading; one Read per upload request). Then read `generated/seo-daily-report.json` when present and include EN/ZH production status in the summary (see that section).
-
 On the **first** substantial turn in a chat (or when the user says **「读记忆本」** / you need to re-sync after edits), **read `docs/MEMORY.md`**. Do **not** re-read on every user message unless a re-read is needed (see rule file below).
-
 There are **no** separate architecture / country-site / V98 rule docs — everything is merged there.
-
 **Information hierarchy** (when docs disagree): see **`docs/MEMORY.md` § 零点五·一** — MEMORY wins for direction; `PROJECT-STATUS-REPORT-FOR-CHATGPT.md` describes current state; code is ground truth for behavior; historical `docs/V*.md` is background only.
-
+**New tools / AI generation:** **Knowledge Engine** is mandatory — **intent → retrieval → recipe → generation**; local knowledge assets first; pure prompt-only defaults are **not** shippable. See **`docs/MEMORY.md` — 六点二·一**.
 **Memory alignment (token-efficient):** `.cursor/rules/00-memory-read-policy.mdc` instructs the assistant to **Read `docs/MEMORY.md` once per conversation** before the first substantive reply, and **again only when needed** (user asks, file changed, major decision, or stale context)—**not** before every user message. Edit only `docs/MEMORY.md` for rule content.

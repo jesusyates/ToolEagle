@@ -1,15 +1,12 @@
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
 import { SeoToolCTA } from "./SeoToolCTA";
+import { getCachedExpansionExamples } from "@/lib/seo/cached-public-examples";
 import { RelatedContentCard } from "@/components/related/RelatedContentCard";
 import { RelatedAITools } from "@/components/tools/RelatedAITools";
 import { getRelatedContent } from "@/lib/related-content";
 import { tools } from "@/config/tools";
 import type { SeoExpansionConfig } from "@/config/seo-expansion";
 import { MessageSquareText, Zap } from "lucide-react";
-
-const CAPTION_TOOLS = ["tiktok-caption-generator", "instagram-caption-generator"];
-const HOOK_TOOLS = ["hook-generator", "youtube-hook-generator"];
 
 type Props = {
   config: SeoExpansionConfig;
@@ -18,35 +15,7 @@ type Props = {
 };
 
 export async function SeoExpansionTemplate({ config, backHref, backLabel }: Props) {
-  const term = config.topic.replace(/-/g, " ");
-  const supabase = await createClient();
-
-  const toolSlugs =
-    config.pageType === "best-captions" || config.pageType === "caption-ideas"
-      ? CAPTION_TOOLS
-      : HOOK_TOOLS;
-
-  const { data: examples } = await supabase
-    .from("public_examples")
-    .select("slug, tool_name, result, creator_username")
-    .in("tool_slug", toolSlugs)
-    .ilike("result", `%${term}%`)
-    .not("slug", "is", null)
-    .order("created_at", { ascending: false })
-    .limit(12);
-
-  const fallback =
-    (examples?.length ?? 0) === 0
-      ? await supabase
-          .from("public_examples")
-          .select("slug, tool_name, result, creator_username")
-          .in("tool_slug", toolSlugs)
-          .not("slug", "is", null)
-          .order("created_at", { ascending: false })
-          .limit(12)
-      : null;
-
-  const displayExamples = (examples?.length ? examples : fallback?.data) ?? [];
+  const displayExamples = await getCachedExpansionExamples(config.topic, config.pageType);
   const related = await getRelatedContent({ topic: config.topic, limit: 6 });
   const tool = tools.find((x) => x.slug === config.toolSlug);
   const ToolIcon = tool?.icon ?? (config.pageType.includes("caption") ? MessageSquareText : Zap);

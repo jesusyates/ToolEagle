@@ -1,0 +1,67 @@
+{
+  "version": "187.1",
+  "journey_steps": [
+    {
+      "id": 1,
+      "key": "choose_direction",
+      "title": "Choose direction",
+      "title_zh": "选方向",
+      "description": "Pick intent and scenario so every generation matches your goal.",
+      "tool_hints": ["tiktok-caption-generator", "hook-generator", "hashtag-generator", "title-generator"]
+    },
+    {
+      "id": 2,
+      "key": "generate_hook",
+      "title": "Generate hook",
+      "title_zh": "生成钩子",
+      "description": "Lock a scroll-stopping opening before you expand the full script.",
+      "tool_hints": ["hook-generator"]
+    },
+    {
+      "id": 3,
+      "key": "generate_content",
+      "title": "Generate content",
+      "title_zh": "生成内容",
+      "description": "Build captions, titles, or hashtag sets aligned with your hook.",
+      "tool_hints": ["tiktok-caption-generator", "title-generator", "hashtag-generator"]
+    },
+    {
+      "id": 4,
+      "key": "optimize_structure",
+      "title": "Optimize structure",
+      "title_zh": "优化结构",
+      "description": "Tighten beats, CTA, and pacing using packages or a second pass.",
+      "tool_hints": ["tiktok-caption-generator", "hook-generator"]
+    },
+    {
+      "id": 5,
+      "key": "publish",
+      "title": "Publish",
+      "title_zh": "发布",
+      "description": "Post to your platform — publish tracking comes next.",
+      "tool_hints": [],
+      "future": true
+    },
+    {
+      "id": 6,
+      "key": "review",
+      "title": "Review & iterate",
+      "title_zh": "复盘",
+      "description": "Compare what you copied vs results; double down on what worked.",
+      "tool_hints": [],
+      "future": true
+    }
+  ],
+  "tool_default_step": {
+    "hook-generator": 2,
+    "tiktok-caption-generator": 3,
+    "hashtag-generator": 3,
+    "title-generator": 3
+  },
+  "workflow_links": {
+    "hook-generator": "/tools/hook-generator",
+    "tiktok-caption-generator": "/tools/tiktok-caption-generator",
+    "hashtag-generator": "/tools/hashtag-generator",
+    "title-generator": "/tools/title-generator"
+  }
+}

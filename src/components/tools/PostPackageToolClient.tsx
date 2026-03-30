@@ -1,7 +1,7 @@
 "use client";
 
-import { ReactNode, useEffect, useMemo, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useLocale } from "next-intl";
 import { trackEvent } from "@/lib/analytics";
 import { trackConversion } from "@/lib/analytics/conversionClient";
@@ -35,6 +35,7 @@ import { ZhDouyinCreditsBar } from "@/components/zh/ZhDouyinCreditsBar";
 import { getEnToolJourney } from "@/config/en-tool-journey";
 import { ToolNextSteps } from "@/components/tools/ToolNextSteps";
 import { recordGenerationComplete } from "@/lib/tool-output-quality";
+import { parseUsageStatusForToolUi } from "@/lib/usage-status-client";
 import { parseToolPrefillParams } from "@/lib/tools/tool-prefill";
 import { trackGenerationStart, trackToolEntry } from "@/lib/seo/asset-seo-conversion-tracking";
 import { computeMonetizationPotential } from "@/lib/seo/asset-seo-monetization-score";
@@ -59,6 +60,23 @@ import {
 } from "@/lib/seo/asset-seo-intent-escalation";
 import { buildRuntimeIntentEscalationPlan } from "@/lib/seo/asset-seo-intent-escalation-runtime";
 import { logAssetSeoIntentEscalation } from "@/lib/seo/asset-seo-telemetry";
+import { CreatorKnowledgeEnginePanel } from "@/components/tools/CreatorKnowledgeEnginePanel";
+import { CreatorAnalysisInsightCard } from "@/components/tools/CreatorAnalysisInsightCard";
+import { CreatorTakeoverGuidance } from "@/components/tools/CreatorTakeoverGuidance";
+import { CreatorScoreCard } from "@/components/tools/CreatorScoreCard";
+import { CreatorMonetizationCard } from "@/components/tools/CreatorMonetizationCard";
+import { WorkflowNextStepCard } from "@/components/tools/WorkflowNextStepCard";
+import { V186ContextStrip } from "@/components/tools/V186ContextStrip";
+import { TikTokChainProgressHint } from "@/components/tools/TikTokChainProgressHint";
+import { initTikTokChainSessionOnTool, isTikTokChainToolSlug } from "@/lib/tiktok-chain-tracking";
+import { loadCreatorMemory, recordV187V186Context } from "@/lib/creator-guidance/creator-memory-store";
+import { inferCreatorProfile } from "@/lib/creator-guidance/infer-creator-profile";
+import { getMonetizationModeForKnowledgeEngine, getMonetizationProfileForTool } from "@/lib/creator-guidance/infer-monetization-profile";
+import { inferPlatformFromToolSlug } from "@/lib/platform-intelligence/resolve-patterns";
+import { loadCreatorAnalysis } from "@/lib/creator-analysis/storage";
+import { buildCreatorAnalysisSummaryForPrompt } from "@/lib/creator-analysis/to-downstream";
+import assets from "@/config/creator-knowledge-engine/v186-assets.json";
+import monetizationCopyMap from "../../../generated/v190.1-monetization-copy-map.json";
 
 const LIFETIME_GEN_KEY = "te_v96_lifetime_pkg_gens";
 const MONETIZATION_VARIANT_STATS_KEY = "te_monetization_variant_stats";
@@ -96,6 +114,8 @@ export type PostPackageToolClientProps = {
   introAudience?: string;
   /** V99 — show a visible output preview before the first generation */
   outputPreview?: ReactNode;
+  /** V186 — Creator Knowledge Engine (intent + scenario + weighted retrieval upstream of generate-package) */
+  creatorKnowledgeEngine?: boolean;
 };
 
 export function PostPackageToolClient({
@@ -121,7 +141,8 @@ export function PostPackageToolClient({
   packageLabelsZh,
   introProblem: introProblemProp,
   introAudience: introAudienceProp,
-  outputPreview
+  outputPreview,
+  creatorKnowledgeEngine = false
 }: PostPackageToolClientProps) {
   function bumpVariantStat(variantId: string, field: "shown" | "clicked" | "converted") {
     try {
@@ -170,11 +191,34 @@ export function PostPackageToolClient({
   const country = useCountry();
   const pathname = usePathname() || "";
   const searchParams = useSearchParams();
+  const router = useRouter();
   const prefill = parseToolPrefillParams(searchParams);
   const q = searchParams.get(seedFromQueryParam) ?? "";
   const initialIdea = prefill.topic ?? q;
   const [idea, setIdea] = useState(initialIdea);
+  const keDefault = useMemo(() => {
+    const intents = assets.intent_chips[toolSlug as keyof typeof assets.intent_chips];
+    const sc = assets.scenario_chips[toolSlug as keyof typeof assets.scenario_chips];
+    return {
+      intentId: intents?.[0]?.id ?? "intent_views",
+      scenarioId: sc?.[0]?.id ?? "sc_tutorial"
+    };
+  }, [toolSlug]);
+  const [keIntent, setKeIntent] = useState(keDefault.intentId);
+  const [keScenario, setKeScenario] = useState(keDefault.scenarioId);
+  useEffect(() => {
+    const vi = searchParams.get("v186_intent");
+    const vs = searchParams.get("v186_scenario");
+    setKeIntent(vi || keDefault.intentId);
+    setKeScenario(vs || keDefault.scenarioId);
+  }, [searchParams, toolSlug, keDefault.intentId, keDefault.scenarioId]);
+
+  useEffect(() => {
+    if (isTikTokChainToolSlug(toolSlug)) initTikTokChainSessionOnTool(toolSlug);
+  }, [toolSlug]);
+
   const [packages, setPackages] = useState<CreatorPostPackage[]>([]);
+  const [contentId, setContentId] = useState<string | null>(null);
   const [lockedPreview, setLockedPreview] = useState<LockedPackagePreview[]>([]);
   const [tierApplied, setTierApplied] = useState<"free" | "pro">("free");
   const [resultQuality, setResultQuality] = useState<"compact_post_package" | "full_post_package">(
@@ -198,6 +242,51 @@ export function PostPackageToolClient({
   const [monetizationVariant, setMonetizationVariant] = useState<MonetizationVariant | null>(null);
   const [serverIntelligence, setServerIntelligence] = useState<MonetizationIntelligence | null>(null);
   const [revenueSummary, setRevenueSummary] = useState<AssetSeoRevenueSummaryArtifact | null>(null);
+  const [generateError, setGenerateError] = useState<string | null>(null);
+  const zhSite = siteMode === "china";
+
+  const [analysisTick, setAnalysisTick] = useState(0);
+  useEffect(() => {
+    const bump = () => setAnalysisTick((t) => t + 1);
+    window.addEventListener("te_v191_analysis_updated", bump);
+    window.addEventListener("storage", bump);
+    return () => {
+      window.removeEventListener("te_v191_analysis_updated", bump);
+      window.removeEventListener("storage", bump);
+    };
+  }, []);
+
+  const analysisStored = useMemo(() => loadCreatorAnalysis(), [analysisTick]);
+  const creatorAnalysisOutput = analysisStored?.output ?? null;
+  const primaryIssueTitle = (!zhSite ? creatorAnalysisOutput?.content_issues?.[0]?.title?.trim() : "") ?? "";
+  const hasCreatorAnalysis = Boolean(analysisStored);
+  const analysisAppliedHint =
+    !zhSite && hasCreatorAnalysis
+      ? `Applied from your analysis: ${primaryIssueTitle || "creator profile signals"}`
+      : null;
+
+  const monetizationUsageHint = useMemo(() => {
+    if (zhSite) return null;
+    try {
+      const p = getMonetizationProfileForTool(toolSlug);
+      return (monetizationCopyMap.result_usage_hints as any)[p.current_focus] ?? null;
+    } catch {
+      return null;
+    }
+  }, [zhSite, toolSlug, analysisTick]);
+
+  /** V193.1 — only after a successful generate when server applied TikTok observations */
+  const [v193ResultHint, setV193ResultHint] = useState<string | null>(null);
+  const [v193ChainBadge, setV193ChainBadge] = useState<boolean>(false);
+
+  const resultsAnchorRef = useRef<HTMLDivElement | null>(null);
+
+  const hookFixPrimaryLabelOverride =
+    toolKind === "hook_focus" && !zhSite
+      ? primaryIssueTitle
+        ? `Fix your ${primaryIssueTitle.length > 28 ? `${primaryIssueTitle.slice(0, 26)}...` : primaryIssueTitle}`
+        : "Generate hooks"
+      : undefined;
 
   const toolMeta = tools.find((t) => t.slug === toolSlug);
 
@@ -210,13 +299,11 @@ export function PostPackageToolClient({
   }, []);
 
   function applyUsageStatusPayload(d: Record<string, unknown>) {
-    const bm = d.billingModel;
-    setCnBilling(
-      bm === "credits" ? "credits" : bm === "legacy_pro" ? "legacy_pro" : bm === "free" ? "free" : null
-    );
+    const m = parseUsageStatusForToolUi(d);
+    setCnBilling(m.cnBilling);
     if (typeof d.creditsRemaining === "number") setCnCreditsRemaining(d.creditsRemaining);
-    setCnCreditsDaysLeft(typeof d.creditsDaysLeft === "number" ? d.creditsDaysLeft : null);
-    if (typeof d.remaining === "number") setUsageRemaining(d.remaining);
+    setCnCreditsDaysLeft(m.cnCreditsDaysLeft);
+    setUsageRemaining(m.usageRemaining);
     if (typeof d.authenticated === "boolean") setAuthenticated(d.authenticated);
   }
 
@@ -266,14 +353,20 @@ export function PostPackageToolClient({
   async function runGenerate() {
     const hadPrior = packages.length > 0;
     const trimmed = idea.trim();
-    if (!trimmed) {
+    const effectiveForApi =
+      trimmed.length > 0
+        ? trimmed
+        : siteMode === "china" && !creatorKnowledgeEngine
+          ? tryExample.trim().slice(0, MAX_INPUT_LENGTH)
+          : "";
+    if (!creatorKnowledgeEngine && !effectiveForApi) {
       setPackages([]);
       setLockedPreview([]);
       setContentSafety(null);
       setPublishFullPackEcho(false);
       return;
     }
-    if (trimmed.length > MAX_INPUT_LENGTH) {
+    if (effectiveForApi.length > MAX_INPUT_LENGTH) {
       setPackages([]);
       setLockedPreview([]);
       setContentSafety(null);
@@ -282,42 +375,90 @@ export function PostPackageToolClient({
     }
 
     setIsGenerating(true);
+    setContentId(null);
+    setGenerateError(null);
+    setV193ResultHint(null);
+    setV193ChainBadge(false);
     try {
       if (toolMeta && prefill.source === "ai_page") {
         trackGenerationStart({
           tool_slug: toolMeta.slug,
-          topic: prefill.topic ?? trimmed,
+          topic: prefill.topic ?? effectiveForApi,
           intent: prefill.intent ?? undefined,
           workflow: prefill.workflow ?? undefined,
           source: prefill.source ?? undefined
         });
       }
-      const res = await generatePostPackages(trimmed, toolKind, {
+      const urlSummary = searchParams.get("creatorAnalysisSummary")?.trim();
+      const analysisStored = loadCreatorAnalysis();
+      const creatorAnalysisSummary =
+        creatorKnowledgeEngine && !zhSite
+          ? urlSummary && urlSummary.length > 0
+            ? urlSummary.slice(0, 2400)
+            : analysisStored
+              ? buildCreatorAnalysisSummaryForPrompt(
+                  analysisStored.output,
+                  [analysisStored.input.niche, analysisStored.input.bio ?? "", analysisStored.input.positioning ?? ""].join("\n")
+                )
+              : undefined
+          : undefined;
+
+      const res = await generatePostPackages(effectiveForApi, toolKind, {
         locale,
         market: siteMode === "china" ? "cn" : undefined,
         clientRoute: pathname || undefined,
         publishFullPack: siteMode === "china" ? publishFullPack : false,
+        toolSlug,
+        v186:
+          creatorKnowledgeEngine && !zhSite
+            ? {
+                toolSlug,
+                intentId: keIntent,
+                scenarioId: keScenario,
+                platform: inferPlatformFromToolSlug(toolSlug),
+                monetizationMode: getMonetizationModeForKnowledgeEngine(),
+                primaryGoal: inferCreatorProfile(loadCreatorMemory()).primary_goal
+              }
+            : undefined,
+        creatorAnalysisSummary,
         attribution: prefill.source
           ? {
               entry_source: prefill.source,
               entry_intent: prefill.intent,
-              topic: prefill.topic ?? trimmed,
+              topic: prefill.topic ?? effectiveForApi,
               workflow: prefill.workflow
             }
           : undefined
       });
+      const shouldScrollToResults = res.packages.length > 0 && !hadPrior;
       setPackages(res.packages);
+      setContentId(res.content_id);
       setLockedPreview(res.lockedPreview ?? []);
       setTierApplied(res.tierApplied);
       setResultQuality(res.resultQuality);
       setContentSafety(res.contentSafety ?? null);
       setPublishFullPackEcho(res.publishFullPack === true);
+      setV193ResultHint(
+        !zhSite && res.v193ObservationApplied ? "Adjusted using recent TikTok content patterns." : null
+      );
+      setV193ChainBadge(
+        !zhSite &&
+          res.v193ObservationApplied === true &&
+          res.v193ChainConsistencyApplied === true &&
+          ["hook-generator", "tiktok-caption-generator", "hashtag-generator", "title-generator"].includes(toolSlug)
+      );
+
+      if (shouldScrollToResults) {
+        requestAnimationFrame(() => {
+          resultsAnchorRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
       const nextGenerationCount = lifetimeGenCount + (res.packages.length > 0 ? 1 : 0);
       if (toolMeta) {
         trackEvent("tool_generate_ai", {
           tool_slug: toolMeta.slug,
           tool_category: toolMeta.category,
-          input_length: trimmed.length,
+          input_length: effectiveForApi.length,
           country,
           v95_package: 1,
           content_safety_filtered: res.contentSafety?.filteredCount ?? 0,
@@ -365,7 +506,7 @@ export function PostPackageToolClient({
         addToHistory({
           toolSlug: toolMeta.slug,
           toolName: toolMeta.name,
-          input: trimmed,
+          input: effectiveForApi,
           items
         });
         setHistoryTrigger((t) => t + 1);
@@ -387,16 +528,23 @@ export function PostPackageToolClient({
           });
         }
 
-        recordGenerationComplete(toolSlug, { wasRegenerate: hadPrior });
+        recordGenerationComplete(toolSlug, {
+          wasRegenerate: hadPrior,
+          inputPreview: effectiveForApi,
+          contentId: res.content_id
+        });
+        if (creatorKnowledgeEngine) {
+          recordV187V186Context(keIntent, keScenario);
+        }
         if (res.tierApplied === "pro") {
           trackEvent("conversion_completed", {
             tool_slug: toolMeta.slug,
-            topic_slug: prefill.topic ?? trimmed,
+            topic_slug: prefill.topic ?? effectiveForApi,
             prompt_id: prefill.workflow ?? ""
           } as any);
           trackUpgradeConverted({
             tool_slug: toolMeta.slug,
-            topic: prefill.topic ?? trimmed,
+            topic: prefill.topic ?? effectiveForApi,
             workflow: prefill.workflow ?? "",
             variant_id: monetizationVariant?.id
           });
@@ -419,7 +567,7 @@ export function PostPackageToolClient({
       const lane = locale.startsWith("zh") ? "zh" : "en";
       const monetizationStrategy = selectWinningVariant({
         intelligence: serverIntelligence,
-        topic: prefill.topic ?? trimmed,
+        topic: prefill.topic ?? effectiveForApi,
         workflow_id: prefill.workflow ?? toolKind,
         min_samples: 10
       });
@@ -428,7 +576,7 @@ export function PostPackageToolClient({
         (Number(localStorage.getItem("te_monetization_best_timing") || "2") as 1 | 2 | 3);
       const intentPlan = buildRuntimeIntentEscalationPlan({
         lane,
-        topic: prefill.topic ?? trimmed,
+        topic: prefill.topic ?? effectiveForApi,
         workflow_id: prefill.workflow ?? toolKind,
         entry_source: prefill.source,
         intent: prefill.intent,
@@ -445,7 +593,7 @@ export function PostPackageToolClient({
         next_intent_state: intentPlan.next_intent_state,
         recommended_nudge: intentPlan.recommended_nudge,
         escalation_strength: intentPlan.escalation_strength,
-        topic_key: prefill.topic ?? trimmed,
+        topic_key: prefill.topic ?? effectiveForApi,
         workflow_id: prefill.workflow ?? toolKind,
         reason: "tool_runtime_v163"
       });
@@ -456,7 +604,7 @@ export function PostPackageToolClient({
           next_intent_state: intentPlan.next_intent_state,
           recommended_nudge: intentPlan.recommended_nudge,
           escalation_strength: intentPlan.escalation_strength,
-          topic_key: prefill.topic ?? trimmed,
+          topic_key: prefill.topic ?? effectiveForApi,
           reason: "tool_runtime_v163"
         });
       }
@@ -467,7 +615,7 @@ export function PostPackageToolClient({
         logAssetSeoIntentEscalation({
           event: "high_intent_escalated",
           next_intent_state: intentPlan.next_intent_state,
-          topic_key: prefill.topic ?? trimmed,
+          topic_key: prefill.topic ?? effectiveForApi,
           reason: "tool_runtime_v163"
         });
       }
@@ -478,7 +626,7 @@ export function PostPackageToolClient({
         logAssetSeoIntentEscalation({
           event: "monetization_ready_detected",
           current_intent_state: intentPlan.current_intent_state,
-          topic_key: prefill.topic ?? trimmed,
+          topic_key: prefill.topic ?? effectiveForApi,
           reason: "tool_runtime_v163"
         });
       }
@@ -500,7 +648,7 @@ export function PostPackageToolClient({
       if (trigger.trigger_type !== "none" && canShow) {
         const runtimeSeg = buildRuntimeSegmentStrategy({
           lane,
-          topic: prefill.topic ?? trimmed,
+          topic: prefill.topic ?? effectiveForApi,
           workflow_id: prefill.workflow ?? toolKind,
           page_type: "tool",
           entry_source: prefill.source,
@@ -521,7 +669,7 @@ export function PostPackageToolClient({
         const persistedVariantId = localStorage.getItem(sessionKeyBase) || "";
         const winnerVariantId = localStorage.getItem(`te_monetization_winner_variant_${triggerType}`) || "";
         const rev = selectCtaVariantWithRevenueContext({
-          topicKey: prefill.topic ?? trimmed,
+          topicKey: prefill.topic ?? effectiveForApi,
           workflowId: prefill.workflow ?? toolKind,
           baseTriggerType: triggerType,
           revenueSummary,
@@ -556,7 +704,7 @@ export function PostPackageToolClient({
 
         const amp = computeConversionPathAmplification({
           workflow_id: prefill.workflow ?? toolKind,
-          normalized_topic: prefill.topic ?? trimmed,
+          normalized_topic: prefill.topic ?? effectiveForApi,
           page_type: "tool",
           revenueSummary,
           riskContext: null,
@@ -572,14 +720,14 @@ export function PostPackageToolClient({
         });
         logConversionPathRevenueAmplification({
           workflow_id: prefill.workflow ?? toolKind,
-          normalized_topic: prefill.topic ?? trimmed,
+          normalized_topic: prefill.topic ?? effectiveForApi,
           page_type: "tool",
           amp,
           revenue_tier: rev.revenue_tier
         });
         logAssetSeoConversionFeedback({
           event: "cta_variant_selected",
-          normalized_topic: prefill.topic ?? trimmed,
+          normalized_topic: prefill.topic ?? effectiveForApi,
           workflow_id: prefill.workflow ?? toolKind,
           page_type: mergedTrigger.trigger_position,
           cta_variant: picked.id,
@@ -588,7 +736,7 @@ export function PostPackageToolClient({
         localStorage.setItem("te_monetization_trigger_last_shown_ts", String(Date.now()));
         trackEvent("monetization_trigger_fired", {
           tool_slug: toolMeta?.slug ?? toolSlug,
-          topic_slug: prefill.topic ?? trimmed,
+          topic_slug: prefill.topic ?? effectiveForApi,
           prompt_id: prefill.workflow ?? "",
           page_type: mergedTrigger.trigger_type
         } as any);
@@ -610,7 +758,7 @@ export function PostPackageToolClient({
           if (strategy.source === "topic") {
             trackEvent("monetization_topic_strategy_applied", {
               tool_slug: toolMeta?.slug ?? toolSlug,
-              topic_slug: prefill.topic ?? trimmed
+              topic_slug: prefill.topic ?? effectiveForApi
             } as any);
           } else if (strategy.source === "workflow") {
             trackEvent("monetization_workflow_strategy_applied", {
@@ -622,7 +770,7 @@ export function PostPackageToolClient({
         bumpVariantStat(picked.id, "shown");
         trackUpgradeShown({
           tool_slug: toolMeta?.slug ?? toolSlug,
-          topic: prefill.topic ?? trimmed,
+          topic: prefill.topic ?? effectiveForApi,
           workflow: prefill.workflow ?? "",
           trigger_type: mergedTrigger.trigger_type,
           variant_id: picked.id
@@ -634,13 +782,15 @@ export function PostPackageToolClient({
     } catch (err) {
       if (err instanceof LimitReachedError || err instanceof CreditsDepletedError) {
         setLimitModalOpen(true);
+      } else {
+        const msg = err instanceof Error ? err.message : String(err);
+        setGenerateError(msg || "Generation failed");
       }
     } finally {
       setIsGenerating(false);
     }
   }
 
-  const zhSite = siteMode === "china";
   const isDouyinTool = toolSlug.startsWith("douyin-");
   /** V106.2 — absolute URL for share blocks + ?q= theme */
   const toolShareUrl = useMemo(() => {
@@ -653,8 +803,13 @@ export function PostPackageToolClient({
   const enJourney = !zhSite ? getEnToolJourney(toolSlug) : null;
   const shellIntroProblem = introProblemProp ?? enJourney?.introProblem;
   const shellIntroAudience = introAudienceProp !== undefined ? introAudienceProp : enJourney?.introAudience;
-  const generateLabelEffective =
+  let generateLabelEffective =
     zhSite && publishFullPack ? "一键生成完整内容" : enJourney?.generateCta ?? generateButtonLabel;
+
+  // V191.1 — bind generation CTA to primary issues for hook-generator.
+  if (!zhSite && creatorKnowledgeEngine && toolKind === "hook_focus") {
+    generateLabelEffective = primaryIssueTitle ? `Fix your ${primaryIssueTitle}` : "Generate hooks";
+  }
 
   const showDouyinMobileSticky = zhSite && isDouyinTool && idea.trim().length > 0 && !isGenerating;
 
@@ -715,6 +870,7 @@ export function PostPackageToolClient({
         locale={locale}
         input={
           <ToolInputCard label={inputLabel}>
+            <TikTokChainProgressHint toolSlug={toolSlug} />
             {!isDouyinTool && zhSite && cnBilling === "credits" && cnCreditsRemaining !== null && cnCreditsRemaining > 0 ? (
               <div className="mb-3 rounded-xl border border-emerald-200 bg-emerald-50/80 px-3 py-2 text-sm text-emerald-950">
                 <span className="font-semibold">
@@ -758,6 +914,47 @@ export function PostPackageToolClient({
                 <span>一键完整内容包（选题 + 全文口播 + 描述区 + 评论引导）</span>
               </label>
             ) : null}
+            {creatorKnowledgeEngine && !zhSite ? <CreatorScoreCard toolSlug={toolSlug} locale={locale} /> : null}
+            {creatorKnowledgeEngine && !zhSite ? <CreatorMonetizationCard toolSlug={toolSlug} locale={locale} /> : null}
+            {creatorKnowledgeEngine && !zhSite && toolKind === "hook_focus" ? (
+              hasCreatorAnalysis && creatorAnalysisOutput ? (
+                <CreatorAnalysisInsightCard output={creatorAnalysisOutput} />
+              ) : (
+                <div className="rounded-2xl border border-amber-100 bg-amber-50/70 px-4 py-3">
+                  <p className="text-sm font-semibold text-slate-900">
+                    Run your first content analysis to unlock smarter generation
+                  </p>
+                  <DelegatedButton
+                    onClick={() => router.push("/creator-analysis")}
+                    className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800"
+                  >
+                    Run analysis <span className="text-slate-400">→</span>
+                  </DelegatedButton>
+                </div>
+              )
+            ) : null}
+            {creatorKnowledgeEngine && !zhSite ? (
+              <CreatorTakeoverGuidance
+                toolSlug={toolSlug}
+                intentId={keIntent}
+                scenarioId={keScenario}
+                topicHint={idea.trim()}
+                locale={locale}
+                onPrimaryGenerate={() => void runGenerate()}
+                isGenerating={isGenerating}
+                primaryLabelOverride={hookFixPrimaryLabelOverride}
+              />
+            ) : null}
+            {creatorKnowledgeEngine && !zhSite ? (
+              <CreatorKnowledgeEnginePanel
+                toolSlug={toolSlug}
+                intentId={keIntent}
+                scenarioId={keScenario}
+                onIntentChange={setKeIntent}
+                onScenarioChange={setKeScenario}
+                locale={locale}
+              />
+            ) : null}
             <DelegatedButton
               onClick={() => setIdea(tryExample)}
               className="text-xs font-medium text-sky-700 hover:underline mb-2 block"
@@ -778,6 +975,11 @@ export function PostPackageToolClient({
                   : `Please keep under ${MAX_INPUT_LENGTH} characters.`}
               </p>
             )}
+            {generateError ? (
+              <p className="text-sm text-rose-600 mt-2" role="alert">
+                {generateError}
+              </p>
+            ) : null}
 
             {outputPreview ? (
               <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-3">
@@ -809,29 +1011,52 @@ export function PostPackageToolClient({
         }
         result={
           <>
-            <PostPackageResults
-              title={resultTitle}
-              packages={packages}
-              lockedPreview={lockedPreview}
-              isLoading={isGenerating}
-              emptyMessage={emptyMessage}
-              toolSlug={toolSlug}
-              tierApplied={tierApplied}
-              resultQuality={resultQuality}
-              onRegenerate={runGenerate}
-              userInput={idea}
-              lifetimeGenerationCount={lifetimeGenCount}
-              usageRemaining={usageRemaining}
-              uiLocale={zhSite ? "zh" : "en"}
-              upgradeMode={zhSite ? "china" : "global"}
-              supportSourcePath={pathname || undefined}
-              contentSafety={contentSafety}
-              douyinConversionMode={zhSite && isDouyinTool}
-              packageLabelsZh={packageLabelsZh}
-              shareQueryParam={seedFromQueryParam}
-              publishReadyNotice={zhSite && publishFullPackEcho}
-              toolShareUrl={toolShareUrl}
-            />
+            {creatorKnowledgeEngine && !zhSite && packages.length > 0 ? (
+              <>
+                <CreatorScoreCard toolSlug={toolSlug} variant="compact" locale={locale} />
+                <CreatorMonetizationCard toolSlug={toolSlug} variant="compact" locale={locale} />
+                <WorkflowNextStepCard
+                  toolSlug={toolSlug}
+                  hasResults={packages.length > 0}
+                  intentId={keIntent}
+                  scenarioId={keScenario}
+                  topicHint={idea.trim()}
+                  locale={locale}
+                />
+                <V186ContextStrip toolSlug={toolSlug} intentId={keIntent} scenarioId={keScenario} locale={locale} />
+              </>
+            ) : null}
+            <div ref={resultsAnchorRef}>
+              <PostPackageResults
+                title={resultTitle}
+                packages={packages}
+                lockedPreview={lockedPreview}
+                isLoading={isGenerating}
+                emptyMessage={emptyMessage}
+                toolSlug={toolSlug}
+                contentId={contentId ?? undefined}
+                tierApplied={tierApplied}
+                resultQuality={resultQuality}
+                onRegenerate={runGenerate}
+                userInput={idea}
+                lifetimeGenerationCount={lifetimeGenCount}
+                usageRemaining={usageRemaining}
+                uiLocale={zhSite ? "zh" : "en"}
+                upgradeMode={zhSite ? "china" : "global"}
+                supportSourcePath={pathname || undefined}
+                contentSafety={contentSafety}
+                douyinConversionMode={zhSite && isDouyinTool}
+                packageLabelsZh={packageLabelsZh}
+                shareQueryParam={seedFromQueryParam}
+                publishReadyNotice={zhSite && publishFullPackEcho}
+                toolShareUrl={toolShareUrl}
+                v188ReadyToPost={Boolean(!zhSite && creatorKnowledgeEngine)}
+                analysisAppliedHint={analysisAppliedHint}
+                monetizationUsageHint={monetizationUsageHint}
+                v193PlatformHint={v193ResultHint}
+                v193ChainBadge={v193ChainBadge}
+              />
+            </div>
             {!zhSite ? (
               <ToolNextSteps
                 toolSlug={toolSlug}

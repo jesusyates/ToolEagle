@@ -26,5 +26,6 @@ export const toolToBlogTags: Record<string, string[]> = {
   "youtube-tag-generator": ["youtube", "tags"],
   "tiktok-hashtag-generator": ["tiktok", "hashtags"],
   "reel-caption-generator": ["instagram", "reels", "captions"],
-  "shorts-title-generator": ["youtube", "shorts", "titles"]
+  "shorts-title-generator": ["youtube", "shorts", "titles"],
+  "creator-analysis": ["strategy", "creators", "growth"]
 };

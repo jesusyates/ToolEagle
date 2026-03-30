@@ -64,6 +64,10 @@ function parseCliArgs() {
     }
     if (a === "--no-git") noGit = true;
   }
+  const scale = parseFloat(process.env.DAILY_ENGINE_BATCH_SCALE || "1");
+  if (Number.isFinite(scale) && scale > 0 && scale < 1) {
+    batchSize = Math.max(1, Math.floor(batchSize * scale));
+  }
   return { batchSize, noGit };
 }
 

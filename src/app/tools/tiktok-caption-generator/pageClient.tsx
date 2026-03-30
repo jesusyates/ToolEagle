@@ -38,6 +38,7 @@ export function TikTokCaptionGeneratorClient({ relatedAside }: Props) {
       examplesCategory="tiktok_caption"
       valueProofVariant="caption"
       relatedAside={relatedAside}
+      creatorKnowledgeEngine
       outputPreview={
         <div>
           <p className="font-semibold text-slate-900">Hook</p>

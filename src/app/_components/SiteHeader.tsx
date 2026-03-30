@@ -15,6 +15,7 @@ const EN_HOME = englishSwitchHref("/");
 const primaryNav = [
   { href: EN_HOME, key: "home" as const },
   { href: "/tools", key: "tools" as const },
+  { href: "/creator", key: "creatorHub" as const },
   { href: "/en/how-to", key: "guides" as const },
   { href: "/pricing", key: "pricing" as const }
 ];
@@ -23,6 +24,7 @@ function isPrimaryNavActive(pathname: string, key: (typeof primaryNav)[number]["
   const p = pathname || "/";
   if (key === "home") return p === "/" || p === "";
   if (key === "tools") return p === "/tools" || p.startsWith("/tools/");
+  if (key === "creatorHub") return p === "/creator" || p.startsWith("/creator/");
   if (key === "guides") return p.startsWith("/en/how-to");
   if (key === "pricing") return p === "/pricing" || p.startsWith("/pricing/");
   return false;

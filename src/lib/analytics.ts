@@ -18,6 +18,11 @@ type ToolEvent =
   /** AI path failed (non-limit); template/local fallback used */
   | "tool_generate_ai_fallback"
   | "tool_copy"
+  /** V171.1 — Post-copy publish funnel (EN tools) */
+  | "copy_click"
+  | "copy_modal_shown"
+  | "publish_redirect_click"
+  | "publish_redirect_cancel"
   | "conversion"
   | "prompt_improved"
   | "prompt_copied"

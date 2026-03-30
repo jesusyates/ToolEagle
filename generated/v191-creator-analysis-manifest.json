@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "description": "V191 Creator Analysis MVP — output schema and labels for heuristic engine.",
+  "creator_archetypes": [
+    { "id": "tutorial_educator", "label": "Tutorial / how-to educator" },
+    { "id": "storyteller", "label": "Story-first creator" },
+    { "id": "promo_commerce", "label": "Commerce / promo-forward" },
+    { "id": "mixed_generalist", "label": "Mixed formats (generalist)" },
+    { "id": "opinion_hot_take", "label": "Opinion / commentary" }
+  ],
+  "content_type_labels": {
+    "tutorial": "Tutorial / tips",
+    "storytelling": "Story / personal",
+    "selling": "Offer / product",
+    "opinion": "Opinion / hot take",
+    "listicle": "List / carousel-style",
+    "other": "Other / unclear"
+  },
+  "style_labels": {
+    "educational": "Educational / calm",
+    "conversational": "Conversational / friendly",
+    "hype": "High-energy / hype",
+    "selling": "Direct response / salesy"
+  },
+  "output_fields": [
+    "creator_profile",
+    "content_mix",
+    "dominant_style",
+    "account_focus_score",
+    "monetization_readiness",
+    "top_strengths",
+    "top_weaknesses",
+    "next_content_recommendations",
+    "next_best_strategy"
+  ],
+  "focus_score_interpretation": {
+    "0_35": "Primarily growth / reach (hooks, discovery, consistency)",
+    "36_65": "Balanced — grow audience while testing light CTAs",
+    "66_100": "Conversion-leaning — offers, proof, and CTAs matter most"
+  }
+}

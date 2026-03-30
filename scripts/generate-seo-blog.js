@@ -49,6 +49,8 @@ const {
 } = require("./lib/en-internal-linking");
 
 const { loadContentAllocationPlan, buildGenerationOrder } = require("./lib/content-allocation");
+const v172 = require("./lib/v172-blog-gate.cjs");
+const { appendBlogV173 } = require("./lib/v173-log-blog.cjs");
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 const FINGERPRINT_STORE = path.join(process.cwd(), "generated", "quality-gate", "en-blog-fingerprints.json");
@@ -314,14 +316,18 @@ async function generateListicleViaAI({
   toolSlug,
   apiKey,
   itemCount,
-  strictStructure
+  strictStructure,
+  retrievalRefBlock
 }) {
   const topicLabel = formatLabel(topic);
   const resourceLinks = internalResourceLinks(platform, contentType);
   const desiredCount = Number.isFinite(itemCount) ? itemCount : 50;
+  const v172Prefix = retrievalRefBlock?.trim()
+    ? `${String(retrievalRefBlock).trim()}\n\n---\n\n`
+    : "";
 
   // Enforce publish-ready narrative + real, usable list items.
-  const prompt = `You write for short-form creators. Generate an English blog page as JSON.
+  const prompt = `${v172Prefix}You write for short-form creators. Generate an English blog page as JSON.
 
 Topic: ${topicLabel}
 Platform: ${platformLabel}
@@ -331,6 +337,7 @@ Primary tool: /tools/${toolSlug}
 Hard requirements:
 - FORBID placeholders: "${EN_PLACEHOLDER_PHRASES.join('", "')}" (do not output them anywhere).
 - Must deliver EXACTLY ${desiredCount} usable items under "items" (each item MUST be a string with ${MIN_ITEM_WORDS}+ words; concrete + niche-aware).
+- V172 packageFraming: hook = one scroll-stopping line; captionOrTitle = 2+ sentences with a concrete niche detail; cta = explicit comment/save/follow ask (not generic); scriptBeats = 3-5 distinct beats; whyItWorks = 2-4 non-template bullets.
 - Must include a "packageFraming" object describing: hook, scriptBeats, captionOrTitle, cta, hashtags, whyItWorks.
 - Must include BOTH internal link blocks:
   1) relatedTools: include at least one "/tools/*" href (must be JSON strings)
@@ -622,10 +629,63 @@ async function main() {
           rejectionReasonDist.set(`pre_generation_skip_${preDecision.reason}`, (rejectionReasonDist.get(`pre_generation_skip_${preDecision.reason}`) ?? 0) + 1);
           continue;
         }
-        attempts++;
 
         const platformLabel = getPlatformLabel(platform);
         const typeLabel = getTypeLabel(contentType);
+        const topicLabelForV172 = formatLabel(topic);
+        const v172Seed = `${platform} ${contentType} ${topic} ${topicLabelForV172}`;
+        const v172Pregen = v172.evaluatePregenBlog(v172Seed, process.cwd());
+        if (!v172Pregen.allowed) {
+          appendBlogV173({
+            source: "blog_seo",
+            outcome: "blog_skip_v172_pregen",
+            topic_preview: `${platform}-${contentType}-${topic}`.slice(0, 120),
+            message: String(v172Pregen.reason || ""),
+            slug
+          });
+          skipped++;
+          rejectionReasonDist.set("v172_pregen_blocked", (rejectionReasonDist.get("v172_pregen_blocked") ?? 0) + 1);
+          writeRejectionLog(
+            {
+              at: nowIso(),
+              kind: "en_blog_mdx",
+              slug,
+              reason: "v172_pregen_blocked",
+              score: v172Pregen.score
+            },
+            REJECTION_LOG
+          );
+          continue;
+        }
+
+        const v172Dedup = v172.checkDedupBlog(`${platformLabel} ${typeLabel} ${topicLabelForV172}`, process.cwd());
+        if (v172Dedup.blocked) {
+          appendBlogV173({
+            source: "blog_seo",
+            outcome: "blog_skip_v172_dedup",
+            topic_preview: `${platformLabel} ${typeLabel} ${topicLabelForV172}`.slice(0, 120),
+            message: v172Dedup.similarSlug,
+            slug
+          });
+          skipped++;
+          rejectionReasonDist.set("v172_content_dedup", (rejectionReasonDist.get("v172_content_dedup") ?? 0) + 1);
+          writeRejectionLog(
+            {
+              at: nowIso(),
+              kind: "en_blog_mdx",
+              slug,
+              reason: "v172_content_dedup",
+              similarSlug: v172Dedup.similarSlug,
+              similarity: v172Dedup.similarity
+            },
+            REJECTION_LOG
+          );
+          continue;
+        }
+
+        const retrievalRef = v172.buildRetrievalRefBlog(v172Seed, process.cwd());
+        attempts++;
+
         const toolSlug = getToolSlug(platform, contentType);
         let data = null;
         let sim = null;
@@ -649,7 +709,8 @@ async function main() {
               toolSlug,
               apiKey,
               itemCount: desiredCount,
-              strictStructure
+              strictStructure,
+              retrievalRefBlock: retrievalRef.block
             });
 
             sim = computeSimilarityAgainstCorpus(data.body, corpus, { similarityMax: 0.92 });
@@ -695,6 +756,13 @@ async function main() {
         }
 
         if (!data || !sim || !gate || !gate.ok) {
+          appendBlogV173({
+            source: "blog_seo",
+            outcome: "blog_reject",
+            topic_preview: `${platform}-${contentType}-${topic}`.slice(0, 120),
+            slug,
+            message: lastGate?.gate?.reasons?.length ? String(lastGate.gate.reasons[0]) : String(lastError?.message || "quality_or_parse")
+          });
           rejected++;
           retryDistribution.failed += 1;
           failureByTopic.set(topic, (failureByTopic.get(topic) ?? 0) + 1);
@@ -754,7 +822,11 @@ async function main() {
         }));
 
         // V105: cross-layer linking (tools/answers/guides/hubs) + blog-to-blog "Related pages".
-        const relatedToolLinks = computeEnRelatedToolLinksForBlogPage({ platform, contentType });
+        const relatedToolLinks = computeEnRelatedToolLinksForBlogPage(
+          { platform, contentType },
+          searchLink.v181,
+          searchLink.v182
+        );
         data.body = upsertEnBlogRelatedToolsSectionIntoBody(data.body, relatedToolLinks, { maxLinks: 3 });
 
         const relatedAnswerLinks = computeEnRelatedAnswerLinksForBlogPage({ platform, contentType });
@@ -827,7 +899,10 @@ async function main() {
           const backlinkTargets = sortBlogSlugsForBacklinks(
             relatedPageSlugs,
             searchLink.prioritySet,
-            searchLink.weakSet
+            searchLink.weakSet,
+            searchLink.v176,
+            searchLink.v181,
+            searchLink.v182
           ).slice(0, 5);
           if (backlinkTargets.length >= 3) {
             backlinkTargets.forEach((targetSlug) => {
@@ -842,6 +917,13 @@ async function main() {
           }
         }
 
+    appendBlogV173({
+      source: "blog_seo",
+      outcome: "success",
+      topic_preview: `${platform}-${contentType}-${topic}`.slice(0, 120),
+      slug,
+      message: data?.title ? String(data.title).slice(0, 160) : slug
+    });
     generated++;
     if (dryRun) console.log(`[dry-run] Would create: ${slug}.mdx`);
     if (limit && generated >= limit) break;

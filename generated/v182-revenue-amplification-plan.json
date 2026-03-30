@@ -1,0 +1,24 @@
+{
+  "version": "182",
+  "builtAt": "2026-03-30T11:03:10.501Z",
+  "note": "Amplify tiers apply only to exact V180.1 revenue signals; inferred-only excluded from peak.",
+  "top_exact_revenue_pages": [],
+  "top_exact_revenue_tools": [],
+  "top_exact_revenue_paths": [],
+  "amplify_pages": [],
+  "amplify_tools": [],
+  "amplify_topics": [],
+  "intent_amplify_multipliers": {},
+  "topic_amplify_multipliers": {},
+  "blocked_from_amplify": {
+    "inferred_only_paths": [],
+    "stale_data": true,
+    "weak_confidence_reasons": [
+      "data_freshness_stale"
+    ]
+  },
+  "v181_cross_ref": {
+    "final_link_control": "generated/v181-final-link-control.json",
+    "growth_control": "generated/v181-revenue-growth-control.json"
+  }
+}

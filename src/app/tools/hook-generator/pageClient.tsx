@@ -37,6 +37,7 @@ export function HookGeneratorClient({ relatedAside, ctaLinks }: Props) {
         { step: 3, text: tHook("howItWorks3") }
       ]}
       proTips={[tHook("proTip1"), tHook("proTip2"), tHook("proTip3")]}
+      creatorKnowledgeEngine
       examplesCategory="hook"
       valueProofVariant="hook"
       relatedAside={relatedAside}

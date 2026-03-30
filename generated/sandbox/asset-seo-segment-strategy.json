@@ -1,0 +1,48 @@
+{
+  "version": "v162.0",
+  "updatedAt": "2026-03-29T01:06:56.173Z",
+  "segment_distribution": {
+    "seo_discovery": 114,
+    "emerging_topic_exploration": 9,
+    "balanced_default": 342
+  },
+  "top_segments_by_value": [
+    {
+      "segment_key": "balanced_default",
+      "value_score": 342,
+      "count": 342
+    },
+    {
+      "segment_key": "seo_discovery",
+      "value_score": 110.58,
+      "count": 114
+    },
+    {
+      "segment_key": "emerging_topic_exploration",
+      "value_score": 9.18,
+      "count": 9
+    }
+  ],
+  "low_value_segments": [
+    "seo_discovery"
+  ],
+  "recommended_biases": {
+    "page_bias": {
+      "seo_first": 114,
+      "balanced": 351
+    },
+    "cta_style": {
+      "minimal": 123,
+      "standard": 342
+    }
+  },
+  "segment_bias_counts": {
+    "prioritized": 0,
+    "deprioritized": 114,
+    "neutral": 351
+  },
+  "notes": [
+    "V162 segment strategy biases queue/CTA/conversion; does not replace V161 or risk controls",
+    "rows: 465"
+  ]
+}

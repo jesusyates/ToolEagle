@@ -1,0 +1,35 @@
+{
+  "version": "179",
+  "builtAt": "2026-03-30T11:03:07.891Z",
+  "high_upgrade_click_pages": [
+    {
+      "path": "/tools/tiktok-caption-generator",
+      "pricing_adjacent_events": 1
+    },
+    {
+      "path": "/tools/tiktok-transition-generator",
+      "pricing_adjacent_events": 1
+    }
+  ],
+  "high_copy_publish_upgrade_path": [
+    {
+      "tool_slug": "tiktok-caption-generator",
+      "copies": 14
+    },
+    {
+      "tool_slug": "instagram-username-generator",
+      "copies": 3
+    },
+    {
+      "tool_slug": "hook-generator",
+      "copies": 3
+    }
+  ],
+  "low_revenue_high_traffic_pages": [],
+  "inputs": {
+    "v176_revenue_signals": true,
+    "tool_conversion_map": true,
+    "v174_conversion_path": true,
+    "page_value_score": true
+  }
+}

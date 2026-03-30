@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "platform": "instagram",
+  "patterns": [
+    {
+      "id": "ig_reels_hook_visual_first",
+      "platform": "instagram",
+      "pattern_type": "hook",
+      "tool_type": "hook_focus",
+      "structure": "Assume silent scroll: on-screen text line 1 matches visual beat; audio reinforces in 2s; no TikTok in-joke reliance.",
+      "intent_fit": ["intent_views", "intent_viral"],
+      "scenario_fit": ["sc_beauty", "sc_fitness", "sc_personal_brand"],
+      "monetization_fit": ["personal_brand", "affiliate", "product_selling"],
+      "quality_score": 0.9,
+      "revenue_score": 0.75
+    },
+    {
+      "id": "ig_caption_first_line_fold",
+      "platform": "instagram",
+      "pattern_type": "caption_pack",
+      "tool_type": "tiktok_caption",
+      "structure": "First line is the hook before “more”; emoji sparingly; CTA in last line or first comment strategy.",
+      "intent_fit": ["intent_promote", "intent_story", "intent_views"],
+      "scenario_fit": ["sc_small_business", "sc_affiliate"],
+      "monetization_fit": ["lead_generation", "product_selling", "affiliate"],
+      "quality_score": 0.89,
+      "revenue_score": 0.82
+    },
+    {
+      "id": "ig_carousel_edu_stack",
+      "platform": "instagram",
+      "pattern_type": "caption_pack",
+      "tool_type": "tiktok_caption",
+      "structure": "Carousel: slide 1 = promise; slides 2–4 = steps; final slide = CTA + save reminder; caption mirrors slide order.",
+      "intent_fit": ["intent_views", "intent_story"],
+      "scenario_fit": ["sc_tutorial", "sc_small_business"],
+      "monetization_fit": ["lead_generation", "personal_brand"],
+      "quality_score": 0.88,
+      "revenue_score": 0.74
+    },
+    {
+      "id": "ig_hashtag_niche_layers",
+      "platform": "instagram",
+      "pattern_type": "hashtag_set",
+      "tool_type": "hashtag",
+      "structure": "3 hyper-niche + 2 mid + 1 branded; avoid banned or irrelevant volume tags that hurt Explore.",
+      "intent_fit": ["intent_views", "intent_viral"],
+      "scenario_fit": ["sc_beauty", "sc_fitness"],
+      "monetization_fit": ["affiliate", "personal_brand"],
+      "quality_score": 0.87,
+      "revenue_score": 0.65
+    },
+    {
+      "id": "ig_title_cover_line",
+      "platform": "instagram",
+      "pattern_type": "title",
+      "tool_type": "title",
+      "structure": "Cover text style: 3–5 words max; complements thumbnail/cover; Reels title field matches first spoken line.",
+      "intent_fit": ["intent_views", "intent_viral"],
+      "scenario_fit": ["sc_personal_brand", "sc_beauty"],
+      "monetization_fit": ["personal_brand", "ad_driven_growth"],
+      "quality_score": 0.88,
+      "revenue_score": 0.69
+    }
+  ]
+}

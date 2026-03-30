@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
-import { ideasUrls, generatedIdeaDetailUrls, sitemapToXml } from "@/lib/sitemap-data";
+import {
+  ideasUrls,
+  generatedIdeaDetailUrls,
+  sitemapToXml,
+  stripRuntimeExampleDeadUrls
+} from "@/lib/sitemap-data";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 3600;
@@ -10,7 +15,7 @@ export async function GET() {
       Promise.resolve(ideasUrls()),
       generatedIdeaDetailUrls()
     ]);
-    const urls = [...staticUrls, ...generatedUrls];
+    const urls = await stripRuntimeExampleDeadUrls([...staticUrls, ...generatedUrls]);
     const xml = sitemapToXml(urls);
     return new NextResponse(xml, {
       headers: {

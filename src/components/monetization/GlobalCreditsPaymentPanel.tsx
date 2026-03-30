@@ -69,7 +69,21 @@ export function GlobalCreditsPaymentPanel({
       body: JSON.stringify({
         market: "global",
         package_id: selectedPack.package_id,
-        order_type: "credits"
+        order_type: "credits",
+        source_path: typeof window !== "undefined" ? window.location.pathname : "/pricing",
+        source_type: "pricing_panel",
+        page_type: "pricing",
+        tool_slug: null,
+        referrer_path:
+          typeof window !== "undefined" && document.referrer
+            ? (() => {
+                try {
+                  return new URL(document.referrer).pathname;
+                } catch {
+                  return null;
+                }
+              })()
+            : null
       })
     });
     const data = await res.json().catch(() => ({}));

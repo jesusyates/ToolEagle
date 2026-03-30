@@ -1,0 +1,271 @@
+{
+  "version": "179",
+  "builtAt": "2026-03-30T11:03:07.891Z",
+  "scope_note": "core_tool, winner_blog, low_revenue_high_traffic",
+  "tests": [
+    {
+      "target_type": "core_tool",
+      "target_id": "tiktok-caption-generator",
+      "axis": "cta_copy",
+      "variant_a": {
+        "upgrade_button_label": "Upgrade for higher limits →"
+      },
+      "variant_b": {
+        "upgrade_button_label": "See plans & raise limits →"
+      }
+    },
+    {
+      "target_type": "core_tool",
+      "target_id": "hashtag-generator",
+      "axis": "cta_copy",
+      "variant_a": {
+        "upgrade_button_label": "Upgrade for higher limits →"
+      },
+      "variant_b": {
+        "upgrade_button_label": "See plans & raise limits →"
+      }
+    },
+    {
+      "target_type": "core_tool",
+      "target_id": "hook-generator",
+      "axis": "cta_copy",
+      "variant_a": {
+        "upgrade_button_label": "Upgrade for higher limits →"
+      },
+      "variant_b": {
+        "upgrade_button_label": "See plans & raise limits →"
+      }
+    },
+    {
+      "target_type": "core_tool",
+      "target_id": "title-generator",
+      "axis": "cta_copy",
+      "variant_a": {
+        "upgrade_button_label": "Upgrade for higher limits →"
+      },
+      "variant_b": {
+        "upgrade_button_label": "See plans & raise limits →"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "youtube-video-ideas-that-work",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "tiktok-captions-travel",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "youtube-captions-trending-ideas",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "best-tiktok-bio-ideas",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "tiktok-captions-motivation",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "tiktok-captions-food",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "seo-how-search-engines-find-creator-content",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "tiktok-captions-inspirational",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "tiktok-captions-life-hack",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "tiktok-captions-romantic",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "instagram-captions-for-reels",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "instagram-hashtags-funny-usernames",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "tiktok-captions-attitude",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "tiktok-captions-cute",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "instagram-captions-grwm",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "instagram-captions-script-structure",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "instagram-hooks-tips",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "instagram-hooks-trending-sound",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "instagram-hooks-viral-hashtags",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    },
+    {
+      "target_type": "winner_blog",
+      "target_id": "tiktok-captions-friends",
+      "axis": "cta_placement",
+      "variant_a": {
+        "mid_section": "before_summary"
+      },
+      "variant_b": {
+        "mid_section": "before_summary"
+      }
+    }
+  ]
+}

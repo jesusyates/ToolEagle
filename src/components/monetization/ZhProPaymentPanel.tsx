@@ -55,7 +55,25 @@ export function ZhProPaymentPanel({ paymentEnabled = true }: { paymentEnabled?: 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ package_id: selected, market: "cn", order_type: "credits" })
+        body: JSON.stringify({
+          package_id: selected,
+          market: "cn",
+          order_type: "credits",
+          source_path: pathname,
+          source_type: "zh_pricing_panel",
+          page_type: pathname.includes("/pricing") ? "pricing" : "other",
+          tool_slug: pathname.match(/^\/zh\/tools\/([^/]+)/)?.[1] ?? null,
+          referrer_path:
+            typeof document !== "undefined" && document.referrer
+              ? (() => {
+                  try {
+                    return new URL(document.referrer).pathname;
+                  } catch {
+                    return null;
+                  }
+                })()
+              : null
+        })
       });
       const data = await res.json().catch(() => ({}));
 

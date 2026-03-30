@@ -20,6 +20,7 @@ import { getIdeaById, getIdeasByTopic } from "@/lib/generated-content";
 import type { GeneratedContentRow } from "@/lib/generated-content";
 import { IdeaViewTracker } from "./IdeaViewTracker";
 import { BASE_URL } from "@/config/site";
+import { loadContentQualityStatus, shouldNoindexPath } from "@/lib/seo/load-content-quality-status";
 
 const IDEAS_PREFIX = "/ideas";
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -46,11 +47,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const title = `${topicLabel} ${categoryLabel} – 100+ Ideas for Your Videos`;
     const description = `Free AI generator for ${topicLabel.toLowerCase()} ${categoryLabel}. Get 100+ ideas, examples, and templates. Create scroll-stopping content in seconds.`;
     const url = `${BASE_URL}${IDEAS_PREFIX}/${category}/${topic}`;
+    const cq = loadContentQualityStatus();
+    const noindex = shouldNoindexPath(`${IDEAS_PREFIX}/${category}/${topic}`, cq);
     return {
       title,
       description,
       alternates: { canonical: url },
-      openGraph: { title, description, url }
+      openGraph: { title, description, url },
+      ...(noindex ? { robots: { index: false, follow: true } } : {})
     };
   }
   // v47: idea detail (topic = UUID)

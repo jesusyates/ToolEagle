@@ -20,6 +20,94 @@ const OUT_PERF = path.join(process.cwd(), "generated", "search-performance.json"
 const OUT_REC = path.join(process.cwd(), "generated", "search-priority-recommendations.json");
 const OUT_ERR = path.join(process.cwd(), "generated", "search-performance-error.json");
 
+/** V175 — stable schema version for downstream (growth-metrics, data-freshness). */
+const SCHEMA_VERSION = 175;
+
+function emptyTotals() {
+  return {
+    last14: { clicks: 0, impressions: 0, ctr: 0, position: null },
+    prev14: { clicks: 0, impressions: 0, ctr: 0, position: null },
+    combined28: { clicks: 0, impressions: 0, ctr: 0, position: null }
+  };
+}
+
+function sumMapMetrics(map) {
+  let clicks = 0;
+  let impressions = 0;
+  let posW = 0;
+  let posSum = 0;
+  for (const row of map.values()) {
+    clicks += row.clicks ?? 0;
+    impressions += row.impressions ?? 0;
+    const im = row.impressions ?? 0;
+    const pos = row.position ?? 0;
+    if (im > 0 && Number.isFinite(pos)) {
+      posW += im;
+      posSum += pos * im;
+    }
+  }
+  const ctr = impressions > 0 ? clicks / impressions : 0;
+  const position = posW > 0 ? posSum / posW : null;
+  return { clicks, impressions, ctr, position };
+}
+
+function mergeTotals(a, b) {
+  const clicks = (a.clicks || 0) + (b.clicks || 0);
+  const impressions = (a.impressions || 0) + (b.impressions || 0);
+  const ctr = impressions > 0 ? clicks / impressions : 0;
+  const posA = a.position;
+  const posB = b.position;
+  const impA = a.impressions || 0;
+  const impB = b.impressions || 0;
+  let position = null;
+  if (impA + impB > 0 && posA != null && posB != null) {
+    position = (posA * impA + posB * impB) / (impA + impB);
+  } else if (posA != null) position = posA;
+  else if (posB != null) position = posB;
+  return { clicks, impressions, ctr, position };
+}
+
+/**
+ * Site-wide totals for a date range (no dimensions) — falls back to null rows on failure.
+ */
+async function fetchAggregateTotals(accessToken, siteUrl, startDate, endDate) {
+  const dispatcher = getProxyDispatcher();
+  const endpoint = `https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(
+    siteUrl
+  )}/searchAnalytics/query`;
+  try {
+    const resp = await fetch(endpoint, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${accessToken}`, "content-type": "application/json" },
+      body: JSON.stringify({
+        startDate,
+        endDate,
+        dataState: "all"
+      }),
+      dispatcher
+    });
+    if (!resp.ok) {
+      const t = await resp.text();
+      return { ok: false, error: `aggregate query failed: ${resp.status} ${t.slice(0, 200)}` };
+    }
+    const json = await resp.json();
+    const rows = json.rows || [];
+    if (rows.length === 0) return { ok: true, row: null };
+    const row = rows[0];
+    return {
+      ok: true,
+      row: {
+        clicks: row.clicks ?? 0,
+        impressions: row.impressions ?? 0,
+        ctr: row.ctr ?? 0,
+        position: row.position ?? null
+      }
+    };
+  } catch (e) {
+    return { ok: false, error: e?.message || "aggregate fetch failed" };
+  }
+}
+
 function loadEnvLocal() {
   try {
     const dotenv = require("dotenv");
@@ -286,6 +374,88 @@ async function fetchPageRows(accessToken, siteUrl, startDate, endDate, diagnosti
   return map;
 }
 
+/** Search query rows (last N days) — explicit coverage for queries + metrics. */
+async function fetchQueryRows(accessToken, siteUrl, startDate, endDate, diagnostics) {
+  const list = [];
+  let startRow = 0;
+  const rowLimit = 2500;
+  const maxStartRow = 10000;
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const isRetryable = (e) => {
+    const code = String(e?.code || e?.cause?.code || "");
+    const msg = String(e?.message || e?.cause?.message || "");
+    return (
+      code === "ECONNRESET" ||
+      code === "ETIMEDOUT" ||
+      code === "ECONNREFUSED" ||
+      msg.includes("ECONNRESET") ||
+      msg.includes("ETIMEDOUT")
+    );
+  };
+  while (true) {
+    if (startRow > maxStartRow) break;
+    let res;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        const dispatcher = getProxyDispatcher();
+        const endpoint = `https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(
+          siteUrl
+        )}/searchAnalytics/query`;
+        const dimensions = ["query"];
+        const resp = await fetch(endpoint, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${accessToken}`, "content-type": "application/json" },
+          body: JSON.stringify({
+            startDate,
+            endDate,
+            dimensions,
+            rowLimit,
+            startRow,
+            dataState: "all"
+          }),
+          dispatcher
+        });
+        if (!resp.ok) {
+          const t = await resp.text();
+          throw new Error(`GSC query failed: status=${resp.status} body=${t.slice(0, 200)}`);
+        }
+        const json = await resp.json();
+        res = { data: json };
+        if (startRow === 0 && diagnostics && diagnostics.enabled) {
+          const firstRowCount = Array.isArray(json.rows) ? json.rows.length : 0;
+          console.log(
+            `[pull-search-performance][diag] dimensions=query firstRowCount=${firstRowCount}`
+          );
+        }
+        break;
+      } catch (e) {
+        if (attempt < 2 && isRetryable(e)) {
+          await sleep(700 * Math.pow(2, attempt));
+          continue;
+        }
+        throw e;
+      }
+    }
+    const rows = res.data.rows || [];
+    if (rows.length === 0) break;
+    for (const row of rows) {
+      const q = row.keys?.[0];
+      if (!q) continue;
+      list.push({
+        query: q,
+        clicks: row.clicks ?? 0,
+        impressions: row.impressions ?? 0,
+        ctr: row.ctr ?? 0,
+        position: row.position ?? 0
+      });
+    }
+    if (rows.length < rowLimit) break;
+    startRow += rowLimit;
+  }
+  list.sort((a, b) => b.impressions - a.impressions);
+  return list;
+}
+
 function mergeMetrics(a, b) {
   return {
     clicks: (a?.clicks || 0) + (b?.clicks || 0),
@@ -333,12 +503,23 @@ async function main() {
   const propertyMode = detectGscPropertyMode(siteUrl);
   if (propertyMode === "invalid") {
     const bad = {
+      version: SCHEMA_VERSION,
       updatedAt: new Date().toISOString(),
       error:
         "Invalid GSC_SITE_URL. Use either sc-domain:example.com or literal URL-prefix like https://www.example.com/. Do NOT use sc-url-prefix:...",
       code: "GSC_SITE_URL_INVALID",
       siteUrl,
+      baseOrigin: getBaseOrigin(),
+      periods: { last14: { start: null, end: null }, prev14: { start: null, end: null } },
+      gsc: {
+        status: "invalid_site",
+        data_empty: true,
+        reason: "GSC_SITE_URL_INVALID"
+      },
+      totals: emptyTotals(),
+      queries: [],
       pages: [],
+      pageCount: 0,
       buckets: {}
     };
     ensureDir(OUT_PERF);
@@ -371,10 +552,22 @@ async function main() {
 
   if (!clientEmail || !privateKey) {
     const stub = {
+      version: SCHEMA_VERSION,
       updatedAt: new Date().toISOString(),
       error: "GSC credentials not configured",
+      code: "GSC_CREDENTIALS_MISSING",
       siteUrl,
+      baseOrigin: getBaseOrigin(),
+      periods: { last14: { start: null, end: null }, prev14: { start: null, end: null } },
+      gsc: {
+        status: "no_credentials",
+        data_empty: true,
+        reason: "GSC_CLIENT_EMAIL / GSC_PRIVATE_KEY not set"
+      },
+      totals: emptyTotals(),
+      queries: [],
       pages: [],
+      pageCount: 0,
       buckets: {}
     };
     fs.writeFileSync(OUT_PERF, JSON.stringify(stub, null, 2), "utf8");
@@ -405,11 +598,22 @@ async function main() {
   const tokenRes = await getGscAccessToken();
   if (!tokenRes.ok) {
     const stub = {
+      version: SCHEMA_VERSION,
       updatedAt: new Date().toISOString(),
       error: tokenRes.error,
       code: "GSC_TOKEN_ERROR",
       siteUrl,
+      baseOrigin: getBaseOrigin(),
+      periods: { last14: { start: null, end: null }, prev14: { start: null, end: null } },
+      gsc: {
+        status: "token_error",
+        data_empty: true,
+        reason: String(tokenRes.error || "token")
+      },
+      totals: emptyTotals(),
+      queries: [],
       pages: [],
+      pageCount: 0,
       buckets: {}
     };
     fs.writeFileSync(OUT_PERF, JSON.stringify(stub, null, 2), "utf8");
@@ -453,6 +657,29 @@ async function main() {
   console.log(`[pull-search-performance][diag] mode=${propertyMode} siteUrl=${siteUrl} dimensions=page`);
   const mapLast = await fetchPageRows(accessToken, siteUrl, lastStart, lastEnd, diagnostics);
   const mapPrev = await fetchPageRows(accessToken, siteUrl, prevStart, prevEnd, diagnostics);
+
+  let queryRows = [];
+  let queryFetchError = null;
+  try {
+    queryRows = await fetchQueryRows(accessToken, siteUrl, lastStart, lastEnd, diagnostics);
+  } catch (e) {
+    queryFetchError = e?.message || String(e);
+    console.warn("[pull-search-performance] query dimension fetch failed (queries array empty):", queryFetchError);
+  }
+
+  const sumLast = sumMapMetrics(mapLast);
+  const sumPrev = sumMapMetrics(mapPrev);
+  const aggLast = await fetchAggregateTotals(accessToken, siteUrl, lastStart, lastEnd);
+  const aggPrev = await fetchAggregateTotals(accessToken, siteUrl, prevStart, prevEnd);
+  if (!aggLast.ok) {
+    console.warn("[pull-search-performance] aggregate last14 fallback to page-map sum:", aggLast.error);
+  }
+  if (!aggPrev.ok) {
+    console.warn("[pull-search-performance] aggregate prev14 fallback to page-map sum:", aggPrev.error);
+  }
+  const last14Totals = aggLast.ok && aggLast.row ? aggLast.row : sumLast;
+  const prev14Totals = aggPrev.ok && aggPrev.row ? aggPrev.row : sumPrev;
+  const combined28 = mergeTotals(last14Totals, prev14Totals);
 
   const allUrls = new Set([...mapLast.keys(), ...mapPrev.keys()]);
   const pages = [];
@@ -597,7 +824,13 @@ async function main() {
   };
 
   const isScDomain = String(rawSiteUrl || "").startsWith("sc-domain:");
+  const dataEmpty = pages.length === 0 && queryRows.length === 0;
+  let gscStatus = "ok";
+  if (dataEmpty) gscStatus = "empty";
+  else if (queryFetchError) gscStatus = "partial";
+
   const outPerf = {
+    version: SCHEMA_VERSION,
     updatedAt: new Date().toISOString(),
     siteUrl,
     baseOrigin: getBaseOrigin(),
@@ -605,6 +838,23 @@ async function main() {
       last14: { start: lastStart, end: lastEnd },
       prev14: { start: prevStart, end: prevEnd }
     },
+    gsc: {
+      status: gscStatus,
+      data_empty: dataEmpty,
+      reason: dataEmpty
+        ? "No page or query rows in the selected windows (or classification dropped all URLs)."
+        : queryFetchError
+          ? `Query dimension failed: ${queryFetchError}`
+          : null,
+      query_fetch_error: queryFetchError
+    },
+    totals: {
+      last14: last14Totals,
+      prev14: prev14Totals,
+      combined28
+    },
+    queries: queryRows,
+    queryCount: queryRows.length,
     pageCount: pages.length,
     pages,
     buckets
@@ -695,6 +945,7 @@ async function main() {
 }
 
 main().catch((e) => {
+  const errMsg = String(e?.message || e);
   try {
     ensureDir(OUT_ERR);
     fs.writeFileSync(
@@ -702,10 +953,10 @@ main().catch((e) => {
       JSON.stringify(
         {
           updatedAt: new Date().toISOString(),
-          error: String(e?.message || e),
+          error: errMsg,
           code: e?.code || null,
           siteUrl: process.env.GSC_SITE_URL || null,
-          note: "search:performance failed before writing fresh output; check network/proxy/credentials."
+          note: "search:performance failed; see search-performance.json for aligned stub."
         },
         null,
         2
@@ -714,6 +965,33 @@ main().catch((e) => {
     );
   } catch {
     // ignore secondary failure on error logging
+  }
+  try {
+    ensureDir(OUT_PERF);
+    const rawSite =
+      process.env.GSC_SITE_URL ?? `${getBaseOrigin()}/`;
+    const stub = {
+      version: SCHEMA_VERSION,
+      updatedAt: new Date().toISOString(),
+      error: errMsg,
+      code: "GSC_RUN_EXCEPTION",
+      siteUrl: String(rawSite),
+      baseOrigin: getBaseOrigin(),
+      periods: { last14: { start: null, end: null }, prev14: { start: null, end: null } },
+      gsc: {
+        status: "error",
+        data_empty: true,
+        reason: errMsg
+      },
+      totals: emptyTotals(),
+      queries: [],
+      pageCount: 0,
+      pages: [],
+      buckets: {}
+    };
+    fs.writeFileSync(OUT_PERF, JSON.stringify(stub, null, 2), "utf8");
+  } catch {
+    // ignore
   }
   console.error("[pull-search-performance]", e);
   process.exit(1);

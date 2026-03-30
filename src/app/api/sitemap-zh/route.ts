@@ -5,6 +5,10 @@ import { getAllKeywordSlugsWithContent } from "@/lib/zh-keyword-content";
 import { getKeywordLastModifiedMap } from "@/lib/zh-keyword-data";
 import { sitemapToXml } from "@/lib/sitemap-data";
 import { BASE_URL } from "@/config/site";
+import {
+  isZhPathExcludedFromSitemap,
+  loadZhContentCleanup
+} from "@/lib/zh/zh-content-cleanup-runtime";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 3600;
@@ -100,7 +104,7 @@ export async function GET() {
       priority: 0.75
     }));
 
-    const urls = [
+    const rawUrls = [
       ...hubUrls,
       ...platformHubUrls,
       ...douyinClusterUrls,
@@ -109,6 +113,15 @@ export async function GET() {
       ...keywordUrls,
       ...blogUrls
     ];
+    const zhCleanup = loadZhContentCleanup();
+    const urls = rawUrls.filter((e) => {
+      try {
+        const pathname = new URL(e.url).pathname;
+        return !isZhPathExcludedFromSitemap(pathname, zhCleanup);
+      } catch {
+        return true;
+      }
+    });
     const xml = sitemapToXml(urls);
 
     return new NextResponse(xml, {

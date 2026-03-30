@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "description": "V191 — Structured result shape produced by runCreatorAnalysis (heuristic engine, no LLM).",
+  "analysis": {
+    "content_mix": {
+      "tutorial": "number (percent)",
+      "storytelling": "number (percent)",
+      "selling": "number (percent)",
+      "opinion": "number (percent)",
+      "listicle": "number (percent)",
+      "other": "number (percent)"
+    },
+    "hook_distribution": {
+      "question": "number (percent)",
+      "fear": "number (percent)",
+      "curiosity": "number (percent)",
+      "list": "number (percent)",
+      "story": "number (percent)",
+      "command": "number (percent)",
+      "none": "number (percent)"
+    },
+    "dominant_style": "string (format + editorial tone)",
+    "cta_usage": {
+      "posts_with_cta": "number",
+      "posts_without_cta": "number",
+      "coverage": "number (0-1)",
+      "dominant_cta_kind": "soft_engagement | link_or_shop | hard_sell | none | mixed"
+    },
+    "topic_consistency_score": "number (0-100)"
+  },
+  "profile": {
+    "creator_profile": "string (archetype + platform + stage)",
+    "creator_stage": "beginner | growing | monetizing",
+    "primary_focus": "growth | conversion",
+    "account_focus_score": "number (0-100)",
+    "monetization_readiness": "low | medium | high"
+  },
+  "issues": {
+    "content_issues": [
+      {
+        "id": "string",
+        "title": "string",
+        "detail": "string"
+      }
+    ],
+    "top_weaknesses": "string[] (titles only, mirrors issues for prompts)"
+  },
+  "recommendations": {
+    "next_content_types": "string[]",
+    "next_best_action": "string",
+    "short_strategy": "string",
+    "next_content_recommendations": "string[] (same as next_content_types)",
+    "next_best_strategy": "string (legacy alias of short_strategy)"
+  },
+  "signals": {
+    "_signals": {
+      "cta_coverage": "number",
+      "niche_entropy": "number",
+      "avg_hook_len": "number",
+      "selling_mix": "number",
+      "tutorial_mix": "number",
+      "story_mix": "number"
+    }
+  }
+}

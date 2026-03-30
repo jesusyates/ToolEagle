@@ -1,0 +1,261 @@
+{
+  "version": "186.1",
+  "builtAt": "2026-03-29T15:09:36.443Z",
+  "source": "src/config/creator-knowledge-engine/v186-assets.json",
+  "counts": {
+    "knowledge_patterns": 5,
+    "knowledge_scenarios": 6,
+    "knowledge_fragments": 6,
+    "generation_recipes": 4
+  },
+  "knowledge_patterns": [
+    {
+      "id": "pat_promote_product",
+      "platform": "tiktok",
+      "tool_type": "tiktok_caption",
+      "scenario": "commerce",
+      "audience": "seller",
+      "pattern_text": "Hook with a clear product promise → demo or proof → CTA to shop or comment keyword.",
+      "quality_score": 0.92,
+      "revenue_score": 0.95,
+      "intent_tags": [
+        "promote_product",
+        "sell"
+      ]
+    },
+    {
+      "id": "pat_story_arc",
+      "platform": "tiktok",
+      "tool_type": "tiktok_caption",
+      "scenario": "story",
+      "audience": "general",
+      "pattern_text": "Personal stake in line 1 → tension → turn → lesson → soft CTA.",
+      "quality_score": 0.9,
+      "revenue_score": 0.72,
+      "intent_tags": [
+        "tell_story",
+        "story"
+      ]
+    },
+    {
+      "id": "pat_views_retention",
+      "platform": "tiktok",
+      "tool_type": "hook_focus",
+      "scenario": "growth",
+      "audience": "creator",
+      "pattern_text": "Pattern interrupt + specific curiosity gap + proof you will deliver in the video.",
+      "quality_score": 0.91,
+      "revenue_score": 0.78,
+      "intent_tags": [
+        "more_views",
+        "views"
+      ]
+    },
+    {
+      "id": "pat_hashtag_cluster",
+      "platform": "tiktok",
+      "tool_type": "hashtag",
+      "scenario": "discovery",
+      "audience": "creator",
+      "pattern_text": "Mix 2 broad + 3 niche + 1 intent tags; avoid banned or empty vanity tags.",
+      "quality_score": 0.88,
+      "revenue_score": 0.65,
+      "intent_tags": [
+        "discover",
+        "fyp"
+      ]
+    },
+    {
+      "id": "pat_title_curiosity",
+      "platform": "tiktok",
+      "tool_type": "title",
+      "scenario": "ctr",
+      "audience": "general",
+      "pattern_text": "Concrete outcome + specificity + light curiosity; avoid clickbait without payoff.",
+      "quality_score": 0.9,
+      "revenue_score": 0.7,
+      "intent_tags": [
+        "viral",
+        "views"
+      ]
+    }
+  ],
+  "knowledge_scenarios": [
+    {
+      "id": "sc_small_business",
+      "platform": "tiktok",
+      "tool_type": "shared",
+      "label": "Small business",
+      "slug": "small_business",
+      "quality_score": 0.88
+    },
+    {
+      "id": "sc_tutorial",
+      "platform": "tiktok",
+      "tool_type": "shared",
+      "label": "Tutorial",
+      "slug": "tutorial",
+      "quality_score": 0.9
+    },
+    {
+      "id": "sc_beauty",
+      "platform": "tiktok",
+      "tool_type": "shared",
+      "label": "Beauty",
+      "slug": "beauty",
+      "quality_score": 0.87
+    },
+    {
+      "id": "sc_fitness",
+      "platform": "tiktok",
+      "tool_type": "shared",
+      "label": "Fitness",
+      "slug": "fitness",
+      "quality_score": 0.86
+    },
+    {
+      "id": "sc_affiliate",
+      "platform": "tiktok",
+      "tool_type": "shared",
+      "label": "Affiliate",
+      "slug": "affiliate",
+      "quality_score": 0.85,
+      "revenue_score": 0.9
+    },
+    {
+      "id": "sc_personal_brand",
+      "platform": "tiktok",
+      "tool_type": "shared",
+      "label": "Personal brand",
+      "slug": "personal_brand",
+      "quality_score": 0.89
+    }
+  ],
+  "knowledge_fragments": [
+    {
+      "id": "frag_compliance_1",
+      "platform": "tiktok",
+      "tool_type": "shared",
+      "text": "Avoid guaranteed income claims; use 'may', 'often', 'can help'. Disclose paid partnerships when applicable.",
+      "tags": [
+        "compliance",
+        "safe"
+      ],
+      "quality_score": 0.95,
+      "revenue_score": 0.5,
+      "compliance_note": "general_platform_safe"
+    },
+    {
+      "id": "frag_hook_shop",
+      "platform": "tiktok",
+      "tool_type": "tiktok_caption",
+      "text": "TikTok Shop: lead with the problem the product solves in one line, show the product in frame early.",
+      "tags": [
+        "shop",
+        "commerce"
+      ],
+      "quality_score": 0.9,
+      "revenue_score": 0.92,
+      "compliance_note": "commerce_disclosure"
+    },
+    {
+      "id": "frag_story_emotion",
+      "platform": "tiktok",
+      "tool_type": "tiktok_caption",
+      "text": "Story format: start mid-action, name the emotion, end with one takeaway viewers can use today.",
+      "tags": [
+        "story",
+        "emotion"
+      ],
+      "quality_score": 0.91,
+      "revenue_score": 0.7
+    },
+    {
+      "id": "frag_hook_pattern",
+      "platform": "tiktok",
+      "tool_type": "hook_focus",
+      "text": "Strong hooks contrast 'common advice' vs 'what actually works' with a specific example niche.",
+      "tags": [
+        "hook",
+        "contrast"
+      ],
+      "quality_score": 0.9,
+      "revenue_score": 0.75
+    },
+    {
+      "id": "frag_hashtag_mix",
+      "platform": "tiktok",
+      "tool_type": "hashtag",
+      "text": "Use one branded tag + two topic tags + two discovery tags (#fyp #foryou only if content fits).",
+      "tags": [
+        "hashtag",
+        "mix"
+      ],
+      "quality_score": 0.87,
+      "revenue_score": 0.6
+    },
+    {
+      "id": "frag_title_formats",
+      "platform": "tiktok",
+      "tool_type": "title",
+      "text": "Title formulas: 'I tried X so you don't have to', '3 X mistakes', 'Stop doing X if you want Y'.",
+      "tags": [
+        "title",
+        "ctr"
+      ],
+      "quality_score": 0.89,
+      "revenue_score": 0.68
+    }
+  ],
+  "generation_recipes": [
+    {
+      "id": "rec_tiktok_default",
+      "tool_slug": "tiktok-caption-generator",
+      "intent_id": "intent_promote",
+      "scenario_id": "sc_small_business",
+      "user_input_template": "Creator intent: {intent_label}. Content scenario: {scenario_label}. Topic or product focus: {user_text}",
+      "fragment_ids": [
+        "frag_compliance_1",
+        "frag_hook_shop",
+        "frag_story_emotion"
+      ],
+      "recipe_prompt_addendum": "Emphasize TikTok-native pacing and on-screen text compatibility."
+    },
+    {
+      "id": "rec_hook_default",
+      "tool_slug": "hook-generator",
+      "intent_id": "intent_views",
+      "scenario_id": "sc_tutorial",
+      "user_input_template": "Creator intent: {intent_label}. Content scenario: {scenario_label}. Hook/video topic: {user_text}",
+      "fragment_ids": [
+        "frag_compliance_1",
+        "frag_hook_pattern"
+      ],
+      "recipe_prompt_addendum": "Hooks must match educational payoff in the script beats."
+    },
+    {
+      "id": "rec_hashtag_default",
+      "tool_slug": "hashtag-generator",
+      "intent_id": "intent_promote",
+      "scenario_id": "sc_fitness",
+      "user_input_template": "Creator intent: {intent_label}. Content scenario: {scenario_label}. Niche or topic for hashtag sets: {user_text}",
+      "fragment_ids": [
+        "frag_compliance_1",
+        "frag_hashtag_mix"
+      ],
+      "recipe_prompt_addendum": "Prefer searchable fitness tags; include one brand-safe community tag."
+    },
+    {
+      "id": "rec_title_default",
+      "tool_slug": "title-generator",
+      "intent_id": "intent_viral",
+      "scenario_id": "sc_beauty",
+      "user_input_template": "Creator intent: {intent_label}. Content scenario: {scenario_label}. Title/topic focus: {user_text}",
+      "fragment_ids": [
+        "frag_compliance_1",
+        "frag_title_formats"
+      ],
+      "recipe_prompt_addendum": "Titles must match thumbnail and first 3 seconds; no misleading health claims."
+    }
+  ]
+}

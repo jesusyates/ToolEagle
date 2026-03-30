@@ -3,8 +3,8 @@ import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { GenericToolClient } from "@/components/tools/GenericToolClient";
 import { ToolStructuredData } from "@/components/seo/ToolStructuredData";
-import { RelatedToolsCard } from "@/components/tools/RelatedToolsCard";
 import { RelatedArticlesCard } from "@/components/tools/RelatedArticlesCard";
+import { ToolPageStandardAsideLead } from "@/components/tools/ToolPageStandardAsideLead";
 import { LearnAiLinkCard } from "@/components/tools/LearnAiLinkCard";
 import { ToolContentLinksCard } from "@/components/tools/ToolContentLinksCard";
 import { tools } from "@/config/tools";
@@ -15,6 +15,8 @@ import { getToolMetaDescriptionEn } from "@/lib/tool-display";
 import type { Metadata } from "next";
 import { BASE_URL } from "@/config/site";
 import { limitBuildStaticParams } from "@/lib/build-static-params-limit";
+import { getV178ToolSurface, loadV178FullSurfaceManifest } from "@/lib/seo/v178-full-surface-manifest";
+import { ToolAutoConversionPathCard } from "@/components/cta/AutoConversionPathCard";
 
 const STATIC_TOOL_SLUGS = [
   "tiktok-caption-generator",
@@ -81,7 +83,7 @@ export default function DynamicToolPage({ params }: { params: { slug: string } }
           slug={slug}
             relatedAside={
             <>
-              <RelatedToolsCard currentSlug={slug} category={tool.category} />
+              <ToolPageStandardAsideLead toolSlug={slug} />
               <RelatedArticlesCard tags={toolToBlogTags[slug] ?? []} />
               <LearnAiLinkCard />
               <ToolContentLinksCard toolSlug={slug} />

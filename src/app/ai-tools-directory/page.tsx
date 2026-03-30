@@ -4,7 +4,7 @@ import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { toolsForEnglishSite } from "@/config/tools";
 import { AI_DIRECTORY_CATEGORIES, TOOL_CATEGORY_TO_DIRECTORY, DESIGN_TOOL_SLUGS } from "@/config/ai-tools-directory";
-import { ToolCard } from "@/components/tools/ToolCard";
+import { EnglishToolEntryCard } from "@/components/tools/EnglishToolEntryCard";
 import { BASE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -64,17 +64,9 @@ export default function AiToolsDirectoryPage() {
               <div key={cat.id}>
                 <h2 className="text-xl font-semibold text-slate-900">{cat.name}</h2>
                 <p className="mt-1 text-sm text-slate-600">{cat.description}</p>
-                <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="mt-6 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {cat.tools.slice(0, 9).map((tool) => (
-                    <ToolCard
-                      key={tool.slug}
-                      href={`/tools/${tool.slug}`}
-                      icon={tool.icon}
-                      name={tool.name}
-                      description={tool.description}
-                      category={tool.category}
-                      slug={tool.slug}
-                    />
+                    <EnglishToolEntryCard key={tool.slug} tool={tool} href={`/tools/${tool.slug}`} />
                   ))}
                 </div>
                 {cat.tools.length === 0 && (

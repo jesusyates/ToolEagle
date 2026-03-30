@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-03-30T11:45:00.000Z",
+  "missing_days_investigated": [
+    "2026-03-23",
+    "2026-03-24",
+    "2026-03-25",
+    "2026-03-26",
+    "2026-03-27"
+  ],
+  "scan_scope_note": "Recursive search under %USERPROFILE%\\Desktop only (not full $HOME) for duplicate truth files.",
+  "history_files_found": [
+    {
+      "path": "C:\\Users\\44570\\Desktop\\tooleagle\\generated\\seo-production-history.jsonl",
+      "bytes": 2758,
+      "role": "live_watchdog_truth"
+    },
+    {
+      "path": "C:\\Users\\44570\\Desktop\\tooleagle\\generated\\sandbox\\seo-production-history.jsonl",
+      "bytes": 601,
+      "role": "sandbox_dry_run"
+    }
+  ],
+  "history_ranges": [
+    {
+      "path": "C:\\Users\\44570\\Desktop\\tooleagle\\generated\\seo-production-history.jsonl",
+      "first_date": "2026-03-28",
+      "last_date": "2026-03-30",
+      "line_count": 11,
+      "covers_missing_days": false
+    }
+  ],
+  "daily_engine_log_files_found": [
+    {
+      "path": "C:\\Users\\44570\\Desktop\\tooleagle\\logs\\daily-engine-log.jsonl",
+      "role": "live",
+      "bytes": 21157
+    }
+  ],
+  "daily_engine_start_utc_days_in_live_log": [
+    "2026-03-29",
+    "2026-03-30"
+  ],
+  "start_logs_found_for_missing_days": [],
+  "current_repo_history_path": "C:\\Users\\44570\\Desktop\\tooleagle\\generated\\seo-production-history.jsonl",
+  "history_write_points": [
+    {
+      "file": "scripts/daily-engine.js",
+      "function": "appendProductionHistoryLine",
+      "notes": "Appends after buildDailyReport writes logs/daily-report.json; live vs sandbox dir when SEO_DRY_RUN"
+    },
+    {
+      "file": "scripts/lib/seo-production-reliability.ts",
+      "function": "appendProductionHistory",
+      "notes": "Used by run-daily-orchestrator.ts"
+    }
+  ],
+  "uses_process_cwd_before_fix": true,
+  "uses_process_cwd_after_fix": false,
+  "fixes_applied": [
+    "scripts/lib/repo-root.js — resolveRepoRoot(), TOOLEAGLE_REPO_ROOT override",
+    "daily-engine.js — REPO_ROOT for paths, dotenv from repo root, dry-run logs under logs/sandbox, history under generated/sandbox",
+    "run-seo-watchdog.ts / run-daily-orchestrator.ts — REPO_ROOT",
+    "scripts/lib/seo-background-engine-core.ts — DEFAULT_STATE_PATH from DEFAULT_REPO_ROOT",
+    "scripts/lib/seo-production-reliability.ts — default cwd = resolveRepoRoot()"
+  ],
+  "most_likely_root_cause": "no_runs_in_this_repo",
+  "root_cause_rationale": "Live history had no rows for 2026-03-23–27; daily-engine-log daily_engine_start only on 2026-03-29–30. Desktop scan showed a single live history file in this clone — not cwd/history split. Remaining risk (unverified without full-disk clone search): runs_in_other_directory."
+}

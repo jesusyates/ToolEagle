@@ -168,12 +168,14 @@ export async function insertPaymentEvent(params: {
   eventType: string;
   provider: string;
   payload: Record<string, unknown>;
-}): Promise<void> {
+}): Promise<{ ok: true } | { ok: false; error: string }> {
   const supabase = admin();
-  await supabase.from("payment_events").insert({
+  const { error } = await supabase.from("payment_events").insert({
     order_id: params.orderId,
     event_type: params.eventType,
     provider: params.provider,
     payload_json: params.payload
   });
+  if (error) return { ok: false, error: error.message };
+  return { ok: true };
 }

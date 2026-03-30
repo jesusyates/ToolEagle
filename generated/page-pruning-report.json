@@ -1,0 +1,292 @@
+{
+  "version": "174",
+  "builtAt": "2026-03-30T11:03:06.691Z",
+  "note": "Does not delete files — aligns with content-quality gate triad (noindex + sitemap + internal links).",
+  "candidates": [
+    {
+      "path": "/answers/do-tiktok-captions-matter",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/instagram-brand-voice-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/instagram-caption-for-growth",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/instagram-monday-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/instagram-quote-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/instagram-reels-vs-feed-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/instagram-save-worthy-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/instagram-storytelling-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/tiktok-duet-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/tiktok-link-in-bio-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/tiktok-pov-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/tiktok-series-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/tiktok-tutorial-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/tiktok-username-ideas",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/youtube-community-post-ideas",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/youtube-end-screen-cta",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/youtube-first-48-hours",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/youtube-keywords-in-title",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/youtube-outro-cta",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/youtube-shorts-vs-long-form-hooks",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/youtube-thumbnail-text",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/answers/youtube-video-ideas",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/instagram/best-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/instagram/caption-ideas",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/instagram/captions-for-reels",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/instagram/captions-for-selfies",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/instagram/funny-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/instagram/hashtag-ideas",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/instagram/hashtags",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/instagram/hashtags-for-reels",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/instagram/motivational-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/instagram/reel-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/instagram/reel-hashtag-strategy",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/instagram/short-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/instagram/trending-hashtags",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/instagram/username-ideas",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/tiktok/best-bios",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/tiktok/best-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/tiktok/bio-examples",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/tiktok/captions-for-views",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/tiktok/funny-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/tiktok/hashtag-ideas",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/tiktok/hashtags",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/tiktok/motivational-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/tiktok/pov-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/tiktok/script-templates",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/tiktok/short-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/tiktok/trending-captions",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/tiktok/trending-hashtags",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/tiktok/username-ideas",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/tiktok/usernames",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/youtube/script-for-beginners",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/youtube/script-structure",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/youtube/seo-tags",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/youtube/shorts-titles",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/youtube/tags",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    },
+    {
+      "path": "/ideas/youtube/video-ideas",
+      "reason": "already_in_content_quality_exclusion_or_noindex",
+      "action": "keep_internal_link_exclude"
+    }
+  ]
+}

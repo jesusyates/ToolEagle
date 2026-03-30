@@ -1,0 +1,206 @@
+{
+  "version": "186.1",
+  "builtAt": "2026-03-29T15:09:36.443Z",
+  "tools": {
+    "tiktok-caption-generator": {
+      "intents": [
+        {
+          "id": "intent_promote",
+          "label": "Promote a product"
+        },
+        {
+          "id": "intent_story",
+          "label": "Tell a story"
+        },
+        {
+          "id": "intent_views",
+          "label": "Get more views"
+        },
+        {
+          "id": "intent_viral",
+          "label": "Go viral"
+        },
+        {
+          "id": "intent_shop",
+          "label": "Sell on TikTok Shop"
+        }
+      ],
+      "scenarios": [
+        {
+          "id": "sc_small_business",
+          "label": "Small business"
+        },
+        {
+          "id": "sc_tutorial",
+          "label": "Tutorial"
+        },
+        {
+          "id": "sc_beauty",
+          "label": "Beauty"
+        },
+        {
+          "id": "sc_fitness",
+          "label": "Fitness"
+        },
+        {
+          "id": "sc_affiliate",
+          "label": "Affiliate"
+        },
+        {
+          "id": "sc_personal_brand",
+          "label": "Personal brand"
+        }
+      ]
+    },
+    "hook-generator": {
+      "intents": [
+        {
+          "id": "intent_promote",
+          "label": "Promote a product"
+        },
+        {
+          "id": "intent_story",
+          "label": "Tell a story"
+        },
+        {
+          "id": "intent_views",
+          "label": "Get more views"
+        },
+        {
+          "id": "intent_viral",
+          "label": "Go viral"
+        },
+        {
+          "id": "intent_shop",
+          "label": "Sell on TikTok Shop"
+        }
+      ],
+      "scenarios": [
+        {
+          "id": "sc_small_business",
+          "label": "Small business"
+        },
+        {
+          "id": "sc_tutorial",
+          "label": "Tutorial"
+        },
+        {
+          "id": "sc_beauty",
+          "label": "Beauty"
+        },
+        {
+          "id": "sc_fitness",
+          "label": "Fitness"
+        },
+        {
+          "id": "sc_affiliate",
+          "label": "Affiliate"
+        },
+        {
+          "id": "sc_personal_brand",
+          "label": "Personal brand"
+        }
+      ]
+    },
+    "hashtag-generator": {
+      "intents": [
+        {
+          "id": "intent_promote",
+          "label": "Promote a product"
+        },
+        {
+          "id": "intent_story",
+          "label": "Tell a story"
+        },
+        {
+          "id": "intent_views",
+          "label": "Get more views"
+        },
+        {
+          "id": "intent_viral",
+          "label": "Go viral"
+        },
+        {
+          "id": "intent_shop",
+          "label": "Sell on TikTok Shop"
+        }
+      ],
+      "scenarios": [
+        {
+          "id": "sc_small_business",
+          "label": "Small business"
+        },
+        {
+          "id": "sc_tutorial",
+          "label": "Tutorial"
+        },
+        {
+          "id": "sc_beauty",
+          "label": "Beauty"
+        },
+        {
+          "id": "sc_fitness",
+          "label": "Fitness"
+        },
+        {
+          "id": "sc_affiliate",
+          "label": "Affiliate"
+        },
+        {
+          "id": "sc_personal_brand",
+          "label": "Personal brand"
+        }
+      ]
+    },
+    "title-generator": {
+      "intents": [
+        {
+          "id": "intent_promote",
+          "label": "Promote a product"
+        },
+        {
+          "id": "intent_story",
+          "label": "Tell a story"
+        },
+        {
+          "id": "intent_views",
+          "label": "Get more views"
+        },
+        {
+          "id": "intent_viral",
+          "label": "Go viral"
+        },
+        {
+          "id": "intent_shop",
+          "label": "Sell on TikTok Shop"
+        }
+      ],
+      "scenarios": [
+        {
+          "id": "sc_small_business",
+          "label": "Small business"
+        },
+        {
+          "id": "sc_tutorial",
+          "label": "Tutorial"
+        },
+        {
+          "id": "sc_beauty",
+          "label": "Beauty"
+        },
+        {
+          "id": "sc_fitness",
+          "label": "Fitness"
+        },
+        {
+          "id": "sc_affiliate",
+          "label": "Affiliate"
+        },
+        {
+          "id": "sc_personal_brand",
+          "label": "Personal brand"
+        }
+      ]
+    }
+  }
+}

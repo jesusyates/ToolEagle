@@ -391,6 +391,14 @@ function evaluateRetrievalForKeyword(ctx) {
   t2a = adj.t2a;
   t2b = adj.t2b;
 
+  /** V168 — bounded threshold ease from optimizer (0.9–1.0 = up to 10% easier). */
+  const stm = parseFloat(process.env.RETRIEVAL_SCORE_THRESHOLD_MULT || "1");
+  if (Number.isFinite(stm) && stm < 1 && stm >= 0.9) {
+    t1 *= stm;
+    t2a *= stm;
+    t2b *= stm;
+  }
+
   let sufficient = passesScoreThresholds(hits, t1, t2a, t2b);
   const topScore = hits[0]?.score ?? null;
   let activationPassUsed = false;

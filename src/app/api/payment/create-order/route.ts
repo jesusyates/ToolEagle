@@ -4,7 +4,14 @@ import { createClient } from "@/lib/supabase/server";
 import { getPaymentProvider, isAggregatorConfigured } from "@/lib/payment/router";
 import type { OrderPlan, PaymentMarket } from "@/lib/payment/types";
 import { insertOrder, updateOrderProviderPayload } from "@/lib/payment/orders-repository";
+import type { AnonymousOrUser } from "@/lib/payment/order-attribution";
+import {
+  buildV180AttributionForCreateOrder,
+  mergeProviderPayload,
+  v180AttributionToProviderPayloadPatch
+} from "@/lib/payment/order-attribution";
 import { aggregatorCreatePayment } from "@/lib/payment/providers/aggregator";
+import { appendLemonCheckoutMerchantOrderId } from "@/lib/payment/providers/lemon";
 import { getCreditPackage } from "@/lib/billing/package-config";
 import {
   applySupporterIdCookie,
@@ -81,6 +88,26 @@ export async function POST(request: NextRequest) {
     }
     const publicOrderId = `te_${randomUUID().replace(/-/g, "")}`;
 
+    const planStr =
+      orderType === "donation" ? "donation" : String(packageId || (pack?.display_name ?? "credits"));
+    const anonymousOrUser: AnonymousOrUser = userId
+      ? "user"
+      : anonymousUserId
+        ? "anonymous"
+        : "unknown";
+
+    const refererHeader = request.headers.get("referer") || request.headers.get("referrer");
+    const v180 = buildV180AttributionForCreateOrder({
+      body: body as Record<string, unknown>,
+      refererHeader,
+      orderPublicId: publicOrderId,
+      market,
+      plan: planStr,
+      anonymousOrUser,
+      returnUrl
+    });
+    const attributionPatch = v180AttributionToProviderPayloadPatch(v180);
+
     const ins = await insertOrder({
       order_id: publicOrderId,
       user_id: userId,
@@ -94,7 +121,7 @@ export async function POST(request: NextRequest) {
       order_type: orderType,
       status: "pending",
       provider,
-      provider_payload: {}
+      provider_payload: { ...attributionPatch }
     });
 
     if (!ins.ok) {
@@ -102,7 +129,10 @@ export async function POST(request: NextRequest) {
     }
 
     if (provider !== "aggregator") {
-      const paymentUrl = (process.env.NEXT_PUBLIC_PAYMENT_LINK || "").trim() || returnUrl || "";
+      let paymentUrl = (process.env.NEXT_PUBLIC_PAYMENT_LINK || "").trim() || returnUrl || "";
+      if (paymentUrl) {
+        paymentUrl = appendLemonCheckoutMerchantOrderId(paymentUrl, publicOrderId);
+      }
       if (!paymentUrl) {
         return NextResponse.json(
           {
@@ -113,7 +143,13 @@ export async function POST(request: NextRequest) {
           { status: 503 }
         );
       }
-      await updateOrderProviderPayload(ins.id, { payment_url: paymentUrl, return_url: returnUrl });
+      await updateOrderProviderPayload(
+        ins.id,
+        mergeProviderPayload(attributionPatch, {
+          payment_url: paymentUrl,
+          return_url: returnUrl
+        })
+      );
       const response = NextResponse.json({
         ok: true,
         orderId: publicOrderId,
@@ -151,13 +187,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "aggregator_create_failed", detail: msg }, { status: 502 });
     }
 
-    const payload = {
+    const payload = mergeProviderPayload(attributionPatch, {
       ...(typeof pay.rawResponse === "object" && pay.rawResponse !== null
         ? (pay.rawResponse as Record<string, unknown>)
         : {}),
       _resolved_qr: pay.paymentQrUrl,
       _resolved_pay_url: pay.paymentUrl
-    };
+    });
     await updateOrderProviderPayload(ins.id, payload, pay.providerOrderRef);
 
     const response = NextResponse.json({

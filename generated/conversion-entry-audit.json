@@ -1,0 +1,464 @@
+{
+  "version": "171",
+  "generatedAt": "2026-03-30T15:11:46.011Z",
+  "summary": {
+    "filesScanned": 224,
+    "totalSeoToolCTA": 48,
+    "totalPricingHref": 2
+  },
+  "note": "Heuristic static scan (regex). Use for tightening redundant CTAs — not a runtime DOM audit.",
+  "pages": [
+    {
+      "file": "src/app/admin/indexing/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": [
+        "/dashboard"
+      ]
+    },
+    {
+      "file": "src/app/admin/seo/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": [
+        "/dashboard"
+      ]
+    },
+    {
+      "file": "src/app/ai-tools/category/[slug]/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 2,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/answers/[slug]/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/best/[slug]/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/best-instagram-caption-ideas/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/best-tiktok-caption-ideas/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/best-youtube-shorts-hooks/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/captions/[topic]/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/captions/[topic]/[style]/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/captions-for/[topic]/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/community/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": [
+        "/dashboard/create"
+      ]
+    },
+    {
+      "file": "src/app/creators/page.tsx",
+      "pageTypeGuess": "workflow_landing",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": [
+        "/dashboard/settings"
+      ]
+    },
+    {
+      "file": "src/app/dashboard/distribution/generate/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": [
+        "/dashboard/distribution"
+      ]
+    },
+    {
+      "file": "src/app/dashboard/distribution/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": [
+        "/dashboard",
+        "/dashboard/distribution/generate"
+      ]
+    },
+    {
+      "file": "src/app/dashboard/favorites/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": [
+        "/dashboard"
+      ]
+    },
+    {
+      "file": "src/app/dashboard/history/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": [
+        "/dashboard"
+      ]
+    },
+    {
+      "file": "src/app/dashboard/settings/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": [
+        "/dashboard"
+      ]
+    },
+    {
+      "file": "src/app/examples/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": [
+        "/dashboard/settings"
+      ]
+    },
+    {
+      "file": "src/app/hashtags-for/[topic]/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/hooks/[topic]/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/hooks-for/[topic]/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/ideas/[slug]/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/library/[slug]/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/onboarding/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": [
+        "/dashboard"
+      ]
+    },
+    {
+      "file": "src/app/pricing/page.tsx",
+      "pageTypeGuess": "pricing",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 2,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/privacy/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 1,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/tiktok-growth-kit/page.tsx",
+      "pageTypeGuess": "workflow_landing",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 1,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/topics/[slug]/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/trending/[slug]/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/zh/douyin/hub/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 1,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/zh/pricing/page.tsx",
+      "pageTypeGuess": "pricing",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 1,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/[category]/[type]/[topic]/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 3,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": []
+    }
+  ]
+}

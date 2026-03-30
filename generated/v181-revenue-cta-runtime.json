@@ -1,0 +1,87 @@
+{
+  "version": "181",
+  "builtAt": "2026-03-30T11:03:10.424Z",
+  "note": "Merged v180 paywall runtime + v179 boost hints + V181 revenue tiers. UI loads via v181-revenue-cta-runtime.ts",
+  "tools": {
+    "tiktok-caption-generator": {
+      "trust_block": "compact",
+      "workflow_upgrade_hidden": false,
+      "paywall_ab": "b",
+      "v181_tier": "default",
+      "cta_density": "medium",
+      "prefer_short_tool_path": false,
+      "upgrade_boost_hint": "max",
+      "revenue_exact_paid_conversions": 0
+    },
+    "hashtag-generator": {
+      "trust_block": "compact",
+      "workflow_upgrade_hidden": false,
+      "paywall_ab": "b",
+      "v181_tier": "default",
+      "cta_density": "medium",
+      "prefer_short_tool_path": false,
+      "upgrade_boost_hint": "max",
+      "revenue_exact_paid_conversions": 0
+    },
+    "hook-generator": {
+      "trust_block": "compact",
+      "workflow_upgrade_hidden": false,
+      "paywall_ab": "b",
+      "v181_tier": "default",
+      "cta_density": "medium",
+      "prefer_short_tool_path": false,
+      "upgrade_boost_hint": "max",
+      "revenue_exact_paid_conversions": 0
+    },
+    "title-generator": {
+      "trust_block": "compact",
+      "workflow_upgrade_hidden": false,
+      "paywall_ab": "b",
+      "v181_tier": "default",
+      "cta_density": "medium",
+      "prefer_short_tool_path": false,
+      "upgrade_boost_hint": "max",
+      "revenue_exact_paid_conversions": 0
+    },
+    "instagram-username-generator": {
+      "v181_tier": "default",
+      "trust_block": "compact",
+      "workflow_upgrade_hidden": false,
+      "paywall_ab": "a",
+      "cta_density": "medium",
+      "prefer_short_tool_path": false,
+      "upgrade_boost_hint": "max",
+      "revenue_exact_paid_conversions": 0
+    },
+    "script-outline-generator": {
+      "v181_tier": "default",
+      "trust_block": "compact",
+      "workflow_upgrade_hidden": false,
+      "paywall_ab": "a",
+      "cta_density": "medium",
+      "prefer_short_tool_path": false,
+      "upgrade_boost_hint": "max",
+      "revenue_exact_paid_conversions": 0
+    },
+    "instagram-caption-generator": {
+      "v181_tier": "default",
+      "trust_block": "compact",
+      "workflow_upgrade_hidden": false,
+      "paywall_ab": "a",
+      "cta_density": "medium",
+      "prefer_short_tool_path": false,
+      "upgrade_boost_hint": "standard",
+      "revenue_exact_paid_conversions": 0
+    },
+    "youtube-title-generator": {
+      "v181_tier": "default",
+      "trust_block": "compact",
+      "workflow_upgrade_hidden": false,
+      "paywall_ab": "a",
+      "cta_density": "medium",
+      "prefer_short_tool_path": false,
+      "upgrade_boost_hint": "standard",
+      "revenue_exact_paid_conversions": 0
+    }
+  }
+}

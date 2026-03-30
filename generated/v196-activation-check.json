@@ -1,0 +1,24 @@
+{
+  "version": "1",
+  "updated_at": "2026-03-30T16:06:05.339Z",
+  "migration_sql_reference": "supabase/migrations/0038_v196_content_memory.sql",
+  "migration_applied": true,
+  "content_items_ok": true,
+  "content_events_ok": true,
+  "content_items_row_count": 1,
+  "content_events_row_count": 3,
+  "sample_dump_ok": true,
+  "has_service_role_env": true,
+  "verified_flow": {
+    "path": "hook-generator → generate → copy → upload_redirect",
+    "same_content_id_tracked": true,
+    "example_content_id": "18c7bdec-f988-4904-8059-cfe7a2a22693",
+    "event_types_present": [
+      "copy",
+      "generate",
+      "upload_redirect"
+    ]
+  },
+  "activation_status": "ok",
+  "notes": []
+}

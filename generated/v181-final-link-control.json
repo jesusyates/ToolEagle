@@ -1,0 +1,414 @@
+{
+  "version": "181.1",
+  "builtAt": "2026-03-30T11:03:10.424Z",
+  "final_weight_order": [
+    "base_relevance_jaccard_similarity",
+    "search_growth_priority_and_weak_sets",
+    "v176_growth_execution_blog_slug_boost_reduce",
+    "v181_revenue_tool_boost_penalty_preferred_outbound",
+    "hard_content_quality_excludes"
+  ],
+  "final_boost_targets": [
+    {
+      "layer": "v176",
+      "slug": "youtube-video-ideas-that-work",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-travel",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "youtube-captions-trending-ideas",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "best-tiktok-bio-ideas",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-motivation",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-food",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "seo-how-search-engines-find-creator-content",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-inspirational",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-life-hack",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-romantic",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-captions-for-reels",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-hashtags-funny-usernames",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-attitude",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-cute",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-captions-grwm",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-captions-script-structure",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-hooks-tips",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-hooks-trending-sound",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-hooks-viral-hashtags",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-friends",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-gaming",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-content-ideas-beginners",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "youtube-captions-stitch",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "youtube-hashtags-grwm",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-hashtags-duet-ideas",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-hashtags-prank",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-hooks-ootd",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-titles-comedy-ideas",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "seo-sitemaps-robots-and-indexing",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-collab",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-funny",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-sarcastic",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-hashtags-hook-examples",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-hashtags-long",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-hashtags-selfie",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-hooks-caption-for-business",
+      "kind": "blog_slug"
+    }
+  ],
+  "final_reduce_targets": [
+    {
+      "layer": "v176",
+      "slug": "instagram-captions-ootd",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-reel-hashtag-strategy",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-beauty-hashtags",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-duet",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-grwm",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-hooks-mystery",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "youtube-captions-story",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "youtube-hooks-review",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-hooks-sale",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-titles-food-ideas",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-comparison",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-hair",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-minimalist",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-nature",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-short",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-sunset",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-trending-ideas",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-hooks-brand-hashtags",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-hooks-business",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-hooks-duet-ideas",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "youtube-captions-baddie",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "youtube-titles-business",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-ootd",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-script-template",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-wedding",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-yoga",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-hashtags-finance",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-hooks-promotion",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-titles-bio-ideas",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "youtube-captions-cute",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "youtube-hashtags-tips",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-hashtag-ideas-2025",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-business",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-diy",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-edgy",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-finance",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-food-hashtags",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-sale",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-story",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-trending-sound",
+      "kind": "blog_slug"
+    }
+  ],
+  "revenue_weight_applied": {
+    "source": "generated/v181-revenue-link-priority.json",
+    "linkScoreBoostByToolSlug": {},
+    "linkScorePenaltyByToolSlug": {},
+    "preferredOutboundTargets": {}
+  },
+  "growth_weight_applied": {
+    "source": "generated/v176-internal-link-weights.json",
+    "boost_slugs_count": 36,
+    "reduce_slugs_count": 74,
+    "link_score_boost_bonus": 0.22,
+    "link_score_reduce_penalty": 0.12
+  },
+  "en_blog_write_path": "scripts/lib/en-internal-linking.js — selectEnBlogRelatedPageSlugs, sortBlogSlugsForBacklinks, computeEnRelatedToolLinksForBlogPage; loadSearchLinkPriority() attaches v176 + v181",
+  "consumers": [
+    "scripts/generate-seo-blog.js",
+    "scripts/backfill-en-blog-linking.js"
+  ],
+  "note": "V181 revenue weights apply in the EN blog MDX write path, not only in internal-link-priority-report.json."
+}

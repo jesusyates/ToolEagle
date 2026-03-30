@@ -39,6 +39,27 @@ import {
 } from "@/lib/risk/anti-abuse";
 import { checkGlobalCostGuard, incrementGlobalCreditsUsed } from "@/lib/risk/cost-guard";
 import { getCnCreditsBalance } from "@/lib/credits/credits-repository";
+import {
+  buildRetrievalReferenceBlock,
+  checkContentDedup,
+  evaluatePregenGate,
+  isV172StrictMode
+} from "@/lib/seo/v172-generation-gate";
+import { v173AppendGenerationEvent } from "@/lib/seo/v173-generation-events";
+import {
+  v173ConsumeRelaxedOnceIfEligible,
+  v173DegradationKey,
+  v173RecordRelaxedSalvageFailed,
+  v173RecordStrictFailure,
+  v173RecordSuccess,
+  v173TopicFingerprint
+} from "@/lib/seo/v173-degradation-runtime";
+import {
+  mergeV186WithV172Retrieval,
+  resolveV186
+} from "@/lib/creator-knowledge-engine/resolve-v186";
+import type { PlatformId } from "@/lib/platform-intelligence/resolve-patterns";
+import v193PlatformPatterns from "../../../../generated/v193-platform-patterns.json";
 
 function sanitizeClientRoute(s: unknown): string | undefined {
   if (typeof s !== "string") return undefined;
@@ -63,8 +84,47 @@ const TOOL_KINDS: PostPackageToolKind[] = [
   "douyin_structure"
 ];
 
-function fallbackPackages(userInput: string, tier: "free" | "pro"): CreatorPostPackage[] {
+function fallbackPackages(
+  userInput: string,
+  tier: "free" | "pro",
+  opts?: {
+    toolKind?: PostPackageToolKind;
+    platform?: PlatformId | null;
+    v193Enabled?: boolean;
+    /** for verification: when true, we allow v193 to improve heuristic output */
+    debugDisableV172Strict?: boolean;
+  }
+): CreatorPostPackage[] {
   const short = userInput.trim().slice(0, 120) || "your topic";
+  const enableV193Fallback =
+    Boolean(opts?.debugDisableV172Strict) &&
+    Boolean(opts?.v193Enabled) &&
+    opts?.platform === "tiktok" &&
+    opts?.toolKind === "hook_focus";
+
+  const v193Patterns = Array.isArray((v193PlatformPatterns as any)?.patterns)
+    ? (v193PlatformPatterns as any).patterns
+    : [];
+  const normalizePt = (s: unknown) => String(s ?? "").toLowerCase().trim();
+
+  const replacePlaceholders = (template: string): string => {
+    const niche = short;
+    return String(template)
+      .replace(/\{problem\}/gi, niche)
+      .replace(/\{common_advice\}/gi, "one common mistake")
+      .replace(/\{niche\}/gi, niche)
+      .replace(/\{specific_action\}/gi, `quick fix for ${niche}`)
+      .replace(/\{goal\}/gi, "higher watch time")
+      .replace(/\{mistake_or_problem\}/gi, "the thing that ruins your results")
+      .replace(/\{micro_fix\}/gi, "a 10-second adjustment")
+      .replace(/\{next_topic\}/gi, niche)
+      .replace(/\{sub_niche\}/gi, "a sub-niche")
+      .replace(/\{keyword\}/gi, niche)
+      .replace(/\{before\}/gi, "what you had before")
+      .replace(/\{after\}/gi, "what changes after")
+      .replace(/\{tool\/approach\}/gi, "your approach");
+  };
+
   const action = [
     `stop doing this with ${short}`,
     `test this simple ${short} format`,
@@ -77,7 +137,7 @@ function fallbackPackages(userInput: string, tier: "free" | "pro"): CreatorPostP
     "clearer message in less time",
     "faster publish workflow"
   ];
-  const hooks = [
+  let hooks = [
     `Most creators miss this in ${short} — quick fix:`,
     `Before you post about ${short}, do this first:`,
     `The ${short} format that keeps people watching:`,
@@ -89,12 +149,32 @@ function fallbackPackages(userInput: string, tier: "free" | "pro"): CreatorPostP
     `The ${short} structure I wish I used earlier`,
     `Use this ${short} pattern for your next post`
   ];
-  const ctas = [
+  let ctas = [
     "Save this and test one variation today.",
     "Comment your niche and I will tailor one version.",
     "Follow for more creator workflows like this.",
     "Share this with a creator who posts weekly."
   ];
+
+  if (enableV193Fallback) {
+    const topHooks = v193Patterns
+      .filter((p: any) => p.platform === "tiktok" && p.tool_type === "hook_focus" && normalizePt(p.pattern_type) === "hook")
+      .sort((a: any, b: any) => (b.quality_score ?? 0.5) * 0.7 + (b.revenue_score ?? 0.5) * 0.3 - ((a.quality_score ?? 0.5) * 0.7 + (a.revenue_score ?? 0.5) * 0.3))
+      .slice(0, 5)
+      .map((p: any) => replacePlaceholders(String(p.structure ?? "")).replace(/\s+/g, " ").trim())
+      .filter(Boolean);
+
+    const topCtas = v193Patterns
+      .filter((p: any) => p.platform === "tiktok" && p.tool_type === "hook_focus" && normalizePt(p.pattern_type) === "cta")
+      .sort((a: any, b: any) => (b.quality_score ?? 0.5) * 0.7 + (b.revenue_score ?? 0.5) * 0.3 - ((a.quality_score ?? 0.5) * 0.7 + (a.revenue_score ?? 0.5) * 0.3))
+      .slice(0, 4)
+      .map((p: any) => replacePlaceholders(String(p.structure ?? "")).replace(/\s+/g, " ").trim())
+      .filter(Boolean);
+
+    if (topHooks.length >= 1) hooks = topHooks;
+    if (topCtas.length >= 1) ctas = topCtas;
+  }
+
   const tagSets = [
     "#creators #contentstrategy #shortformvideo #tiktoktips",
     "#creatorgrowth #socialmediaideas #videomarketing #reelsstrategy",
@@ -192,10 +272,11 @@ function estimatePackageQuality(packages: CreatorPostPackage[]): {
 function padToMin(
   packages: CreatorPostPackage[],
   userInput: string,
-  tier: "free" | "pro"
+  tier: "free" | "pro",
+  opts?: Parameters<typeof fallbackPackages>[2]
 ): CreatorPostPackage[] {
   const min = tier === "pro" ? 10 : 5;
-  const fb = fallbackPackages(userInput, tier);
+  const fb = fallbackPackages(userInput, tier, opts);
   const base = packages.slice(0, min);
   const out = [...base];
   let i = 0;
@@ -217,7 +298,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const reqBody = await request.json();
-    const userInput = typeof reqBody.userInput === "string" ? reqBody.userInput : "";
+    let userInput = typeof reqBody.userInput === "string" ? reqBody.userInput : "";
     const locale = typeof reqBody.locale === "string" ? reqBody.locale : "en";
     const toolKind = (typeof reqBody.toolKind === "string" ? reqBody.toolKind : "tiktok_caption") as PostPackageToolKind;
     const clientRoute = sanitizeClientRoute(reqBody.clientRoute);
@@ -225,6 +306,48 @@ export async function POST(request: NextRequest) {
       market: typeof reqBody.market === "string" ? reqBody.market : undefined,
       locale
     }) as RoutedMarket;
+    const debugDisableV172Strict =
+      typeof reqBody.debugDisableV172Strict === "boolean" ? reqBody.debugDisableV172Strict : false;
+
+    const creatorAnalysisSummary =
+      typeof reqBody.creatorAnalysisSummary === "string"
+        ? String(reqBody.creatorAnalysisSummary).trim().slice(0, 2400)
+        : "";
+
+    let requestPlatform: PlatformId | null = null;
+    let debugDisableV193 = false;
+
+    let v186Resolved: ReturnType<typeof resolveV186> = null;
+    const v186Raw = reqBody.v186;
+    if (v186Raw && typeof v186Raw === "object" && typeof v186Raw.toolSlug === "string") {
+      const platRaw = typeof v186Raw.platform === "string" ? v186Raw.platform.toLowerCase() : "";
+      const platform: PlatformId | null =
+        platRaw === "tiktok" || platRaw === "youtube" || platRaw === "instagram" ? (platRaw as PlatformId) : null;
+      requestPlatform = platform;
+      debugDisableV193 = typeof v186Raw.debugDisableV193 === "boolean" ? v186Raw.debugDisableV193 : false;
+      const pg = v186Raw.primaryGoal;
+      const primaryGoal =
+        pg === "views" || pg === "followers" || pg === "sales" ? pg : undefined;
+      const monetizationMode =
+        typeof v186Raw.monetizationMode === "string" ? v186Raw.monetizationMode.trim().slice(0, 64) : undefined;
+      const userProfile =
+        monetizationMode !== undefined || primaryGoal !== undefined
+          ? { monetizationMode, primaryGoal }
+          : undefined;
+      v186Resolved = resolveV186({
+        toolSlug: String(v186Raw.toolSlug).trim().slice(0, 120),
+        intentId: typeof v186Raw.intentId === "string" ? v186Raw.intentId : null,
+        scenarioId: typeof v186Raw.scenarioId === "string" ? v186Raw.scenarioId : null,
+        userText: userInput,
+        platform,
+        userProfile,
+        creatorAnalysisSummary: creatorAnalysisSummary || null,
+        debugDisableV193
+      });
+      if (v186Resolved) {
+        userInput = v186Resolved.effectiveUserInput;
+      }
+    }
 
     if (!userInput.trim()) {
       return NextResponse.json({ error: "Missing userInput" }, { status: 400 });
@@ -422,25 +545,130 @@ export async function POST(request: NextRequest) {
     }
 
     const tier = gate.plan === "pro" ? "pro" : "free";
+    const requiredCount = tier === "pro" ? 10 : 5;
+    const strict = isV172StrictMode(process.cwd());
+    const v173Key = v173DegradationKey(clientRoute, userInput);
+    const relaxedOnce = strict ? v173ConsumeRelaxedOnceIfEligible(v173Key, process.cwd()) : false;
+    const strictEffective = debugDisableV172Strict ? false : strict && !relaxedOnce;
+    const baseRetrieval = buildRetrievalReferenceBlock(userInput, locale);
+    const mergedRetrievalBlock =
+      v186Resolved != null
+        ? mergeV186WithV172Retrieval(v186Resolved.knowledgeBlock, baseRetrieval.block)
+        : baseRetrieval.block;
+    const retrievalCtx = {
+      block: mergedRetrievalBlock,
+      snippetCount: baseRetrieval.snippetCount + (v186Resolved ? v186Resolved.fragmentIds.length : 0),
+      usedSignalsFile: baseRetrieval.usedSignalsFile
+    };
+
+    const pregen = evaluatePregenGate(userInput, { toolSlug, v186Boost: Boolean(v186Resolved) }, process.cwd());
+    if (!pregen.allowed) {
+      v173AppendGenerationEvent(
+        {
+          source: "generate_package",
+          outcome: "pregen_block",
+          http_status: 422,
+          route: clientRoute,
+          topic_fp: v173TopicFingerprint(userInput),
+          topic_preview: userInput.slice(0, 80),
+          error_code: pregen.reason,
+          tier,
+          strict_effective: strictEffective
+        },
+        process.cwd()
+      );
+      logAiTelemetry({
+        task_type: "post_package",
+        market,
+        locale,
+        provider: "none",
+        model: "none",
+        user_plan: tier,
+        latency_ms: Date.now() - started,
+        fallback_used: false,
+        success: false,
+        error_code: "v172_pregen_blocked",
+        route: clientRoute,
+        risk_score: risk.riskScore,
+        risk_level: risk.riskLevel
+      });
+      return NextResponse.json(
+        { error: "pregen_blocked", reason: pregen.reason, score: pregen.score },
+        { status: 422 }
+      );
+    }
+
+    const dedup = checkContentDedup(userInput, process.cwd(), "topic");
+    if (dedup.blocked) {
+      v173AppendGenerationEvent(
+        {
+          source: "generate_package",
+          outcome: "dedup_block",
+          http_status: 409,
+          route: clientRoute,
+          topic_fp: v173TopicFingerprint(userInput),
+          topic_preview: userInput.slice(0, 80),
+          message: dedup.similarSlug,
+          tier,
+          strict_effective: strictEffective
+        },
+        process.cwd()
+      );
+      logAiTelemetry({
+        task_type: "post_package",
+        market,
+        locale,
+        provider: "none",
+        model: "none",
+        user_plan: tier,
+        latency_ms: Date.now() - started,
+        fallback_used: false,
+        success: false,
+        error_code: "v172_content_dedup",
+        route: clientRoute,
+        risk_score: risk.riskScore,
+        risk_level: risk.riskLevel
+      });
+      return NextResponse.json(
+        {
+          error: "content_dedup",
+          similarSlug: dedup.similarSlug,
+          similarity: dedup.similarity
+        },
+        { status: 409 }
+      );
+    }
 
     let packages: CreatorPostPackage[] = [];
     let modelParseOk = false;
+    let qualityFinal = estimatePackageQuality([]);
+    let genBad = true;
+    let v173SuccessEventPending = true;
 
-    const runModelAttempt = async (extraHint?: string) =>
+    const callModel = (input: string) =>
       routerGeneratePostPackage({
-        userInput,
+        userInput: input,
         toolType: toolKind,
         userPlan: tier,
         market,
         locale,
         taskType: "post_package",
         publishFullPack,
-        riskScore: risk.riskScore
+        riskScore: risk.riskScore,
+        retrievalReferenceBlock: retrievalCtx.block
       });
 
+    const mergeRouterMeta = (meta: GenerationRouterMeta): GenerationRouterMeta => ({
+      ...meta,
+      route: clientRoute,
+      v172_pregen_score: pregen.score,
+      v172_retrieval_snippets: retrievalCtx.snippetCount,
+      retrieval_used: retrievalCtx.snippetCount > 0
+    });
+
     try {
-      const result = await runModelAttempt();
-      routerMeta = { ...result.meta, route: clientRoute };
+      const result = await callModel(userInput);
+      routerMeta = mergeRouterMeta(result.meta);
       packages = typeof result.rawText === "string" ? parsePackagesJson(result.rawText) : [];
       modelParseOk = packages.length > 0;
 
@@ -450,59 +678,279 @@ export async function POST(request: NextRequest) {
           const retryInput =
             `${userInput}\n\n` +
             "Quality constraints: provide materially different variants. Avoid repeated hooks/captions, avoid boilerplate phrases, and use concrete scenario-specific wording.";
-          const retry = await routerGeneratePostPackage({
-            userInput: retryInput,
-            toolType: toolKind,
-            userPlan: tier,
-            market,
-            locale,
-            taskType: "post_package",
-            publishFullPack,
-            riskScore: risk.riskScore
-          });
+          const retry = await callModel(retryInput);
           const retryPackages = typeof retry.rawText === "string" ? parsePackagesJson(retry.rawText) : [];
           const retryQuality = estimatePackageQuality(retryPackages);
           if (retryPackages.length > 0 && retryQuality.score >= quality.score) {
             packages = retryPackages;
-            routerMeta = {
+            routerMeta = mergeRouterMeta({
               ...retry.meta,
-              route: clientRoute,
               fallback_used: true
-            };
+            });
           }
         }
       }
+
+      if (modelParseOk && packages.length < requiredCount) {
+        const countRetry = await callModel(
+          `${userInput}\n\nReturn JSON with exactly ${requiredCount} objects in the top-level "packages" array. Each object must include every required string field.`
+        );
+        const cr = typeof countRetry.rawText === "string" ? parsePackagesJson(countRetry.rawText) : [];
+        if (cr.length >= requiredCount) {
+          packages = cr;
+          routerMeta = mergeRouterMeta({ ...countRetry.meta, fallback_used: true });
+        } else if (cr.length > packages.length) {
+          packages = cr;
+          routerMeta = mergeRouterMeta({ ...countRetry.meta, fallback_used: true });
+        }
+      }
+
+      modelParseOk = packages.length > 0;
+      qualityFinal = estimatePackageQuality(packages);
+      genBad = !modelParseOk || packages.length < requiredCount || !qualityFinal.ok;
+
+      if (strictEffective && genBad) {
+        /** V172 strict gate: salvage UX with heuristic packages instead of hard 503 (tools must always return usable output). */
+        v173RecordStrictFailure(v173Key, process.cwd());
+        v173AppendGenerationEvent(
+          {
+            source: "generate_package",
+            outcome: "strict_gate_salvage",
+            http_status: 200,
+            route: clientRoute,
+            topic_fp: v173TopicFingerprint(userInput),
+            topic_preview: userInput.slice(0, 80),
+            package_count: packages.length,
+            retrieval_used: retrievalCtx.snippetCount > 0,
+            tier,
+            strict_effective: true,
+            relaxed_once: false,
+            error_code: "v172_strict_salvaged_heuristic",
+            message: qualityFinal.reason
+          },
+          process.cwd()
+        );
+        packages = fallbackPackages(userInput, tier, {
+          toolKind,
+          platform: requestPlatform,
+          v193Enabled: !debugDisableV193,
+          debugDisableV172Strict
+        });
+        packages = padToMin(packages, userInput, tier, {
+          toolKind,
+          platform: requestPlatform,
+          v193Enabled: !debugDisableV193,
+          debugDisableV172Strict
+        });
+        qualityFinal = estimatePackageQuality(packages);
+        routerMeta = {
+          ...routerMeta,
+          provider_used: "local_heuristic",
+          model_used: "none",
+          fallback_used: true,
+          outcome: "heuristic_after_empty_parse",
+          latency_ms: Date.now() - started
+        };
+        modelParseOk = packages.length > 0;
+        genBad = false;
+      }
     } catch (err) {
-      routerMeta = {
-        provider_used: "none",
-        model_used: "none",
-        fallback_used: true,
-        latency_ms: Date.now() - started,
-        route: clientRoute,
-        outcome: "heuristic_after_router_failure",
-        error_class: classifyProviderError(err)
-      };
-      packages = [];
-      modelParseOk = false;
+      if (strictEffective) {
+        /** Router threw (e.g. all providers down): still return heuristic packages so the tool is never blank. */
+        v173AppendGenerationEvent(
+          {
+            source: "generate_package",
+            outcome: "router_error_salvage",
+            http_status: 200,
+            route: clientRoute,
+            topic_fp: v173TopicFingerprint(userInput),
+            topic_preview: userInput.slice(0, 80),
+            tier,
+            strict_effective: true,
+            error_code: "v172_router_salvaged_heuristic",
+            message: err instanceof Error ? err.message : String(err)
+          },
+          process.cwd()
+        );
+        logAiTelemetry({
+          task_type: "post_package",
+          market,
+          locale,
+          provider: "none",
+          model: "none",
+          user_plan: tier,
+          latency_ms: Date.now() - started,
+          fallback_used: true,
+          success: true,
+          error_code: "v172_router_salvaged_heuristic",
+          route: clientRoute,
+          risk_score: risk.riskScore,
+          risk_level: risk.riskLevel
+        });
+        routerMeta = {
+          provider_used: "local_heuristic",
+          model_used: "none",
+          fallback_used: true,
+          latency_ms: Date.now() - started,
+          route: clientRoute,
+          outcome: "heuristic_after_router_failure",
+          error_class: classifyProviderError(err),
+          v172_pregen_score: pregen.score,
+          v172_retrieval_snippets: retrievalCtx.snippetCount,
+          retrieval_used: retrievalCtx.snippetCount > 0
+        };
+        packages = fallbackPackages(userInput, tier, {
+          toolKind,
+          platform: requestPlatform,
+          v193Enabled: !debugDisableV193,
+          debugDisableV172Strict
+        });
+        packages = padToMin(packages, userInput, tier, {
+          toolKind,
+          platform: requestPlatform,
+          v193Enabled: !debugDisableV193,
+          debugDisableV172Strict
+        });
+        modelParseOk = packages.length > 0;
+        qualityFinal = estimatePackageQuality(packages);
+        genBad = false;
+      } else {
+        routerMeta = {
+          provider_used: "none",
+          model_used: "none",
+          fallback_used: true,
+          latency_ms: Date.now() - started,
+          route: clientRoute,
+          outcome: "heuristic_after_router_failure",
+          error_class: classifyProviderError(err)
+        };
+        packages = [];
+        modelParseOk = false;
+        genBad = true;
+      }
     }
 
-    if (packages.length === 0) {
-      packages = fallbackPackages(userInput, tier);
-      const wasRouterFailure = routerMeta.provider_used === "none";
-      routerMeta = {
-        ...routerMeta,
-        provider_used: wasRouterFailure ? "local_heuristic" : routerMeta.provider_used,
-        fallback_used: true,
-        outcome: wasRouterFailure ? "heuristic_after_router_failure" : "heuristic_after_empty_parse"
-      };
-    }
+    if (!strictEffective) {
+      if (packages.length === 0) {
+        packages = fallbackPackages(userInput, tier, {
+          toolKind,
+          platform: requestPlatform,
+          v193Enabled: !debugDisableV193,
+          debugDisableV172Strict
+        });
+        const wasRouterFailure = routerMeta.provider_used === "none";
+        routerMeta = {
+          ...routerMeta,
+          provider_used: wasRouterFailure ? "local_heuristic" : routerMeta.provider_used,
+          fallback_used: true,
+          outcome: wasRouterFailure ? "heuristic_after_router_failure" : "heuristic_after_empty_parse"
+        };
+      }
+      packages = padToMin(packages, userInput, tier, {
+        toolKind,
+        platform: requestPlatform,
+        v193Enabled: !debugDisableV193,
+        debugDisableV172Strict
+      });
+      qualityFinal = estimatePackageQuality(packages);
+      genBad = packages.length < requiredCount || !qualityFinal.ok;
 
-    packages = padToMin(packages, userInput, tier);
+      if (relaxedOnce) {
+        if (!genBad) {
+          v173RecordSuccess(v173Key, process.cwd());
+          v173SuccessEventPending = false;
+          v173AppendGenerationEvent(
+            {
+              source: "generate_package",
+              outcome: "success",
+              http_status: 200,
+              route: clientRoute,
+              topic_fp: v173TopicFingerprint(userInput),
+              topic_preview: userInput.slice(0, 80),
+              package_count: packages.length,
+              retrieval_used: retrievalCtx.snippetCount > 0,
+              tier,
+              strict_effective: false,
+              relaxed_once: true,
+              via_relaxed_salvage: true,
+              heuristic_fill: true
+            },
+            process.cwd()
+          );
+        } else {
+          v173RecordRelaxedSalvageFailed(v173Key, process.cwd());
+          v173AppendGenerationEvent(
+            {
+              source: "generate_package",
+              outcome: "relaxed_once_still_failed",
+              http_status: 503,
+              route: clientRoute,
+              topic_fp: v173TopicFingerprint(userInput),
+              topic_preview: userInput.slice(0, 80),
+              package_count: packages.length,
+              tier,
+              relaxed_once: true,
+              error_code: "v173_relaxed_salvage_failed",
+              message: qualityFinal.reason
+            },
+            process.cwd()
+          );
+          logAiTelemetry({
+            task_type: "post_package",
+            market,
+            locale,
+            provider: routerMeta.provider_used,
+            model: routerMeta.model_used,
+            user_plan: tier,
+            latency_ms: Date.now() - started,
+            fallback_used: true,
+            success: false,
+            error_code: "v173_relaxed_salvage_failed",
+            route: clientRoute,
+            risk_score: risk.riskScore,
+            risk_level: risk.riskLevel
+          });
+          return NextResponse.json(
+            {
+              error: "generation_unsatisfactory",
+              code: "v173_relaxed_exhausted",
+              requiredCount,
+              gotCount: packages.length
+            },
+            { status: 503 }
+          );
+        }
+      }
+    }
 
     const safety = applyContentSafetyToPackages(packages, market === "cn" ? "cn" : "global");
     packages = safety.packages;
 
     routerMeta = { ...routerMeta, route: clientRoute };
+
+    if (v173SuccessEventPending) {
+      v173RecordSuccess(v173Key, process.cwd());
+      const heuristicFill =
+        routerMeta.fallback_used === true || routerMeta.provider_used === "local_heuristic";
+      v173AppendGenerationEvent(
+        {
+          source: "generate_package",
+          outcome: "success",
+          http_status: 200,
+          route: clientRoute,
+          topic_fp: v173TopicFingerprint(userInput),
+          topic_preview: userInput.slice(0, 80),
+          package_count: packages.length,
+          retrieval_used: retrievalCtx.snippetCount > 0,
+          tier,
+          strict_effective: strictEffective,
+          relaxed_once: relaxedOnce,
+          via_relaxed_salvage: false,
+          heuristic_fill: heuristicFill
+        },
+        process.cwd()
+      );
+    }
 
     const extraVisible = gate.supporterPerks.freeVisibleExtraSlots;
     const douyinTool = market === "cn" && isDouyinToolRoute(clientRoute);
@@ -563,6 +1011,39 @@ export async function POST(request: NextRequest) {
             }
           };
 
+    const responseBody = {
+      ...payload,
+      ...(v186Resolved
+        ? {
+            v186: {
+              recipe_id: v186Resolved.recipeId,
+              intent_label: v186Resolved.intentLabel,
+              scenario_label: v186Resolved.scenarioLabel,
+              fragment_ids: v186Resolved.fragmentIds,
+              pattern_ids: v186Resolved.patternIds
+            }
+          }
+        : {}),
+      ...(v186Resolved?.v193GenerationMeta
+        ? {
+            v193: {
+              platform: "tiktok" as const,
+              observation_applied: v186Resolved.v193GenerationMeta.observation_applied,
+              observation_count_used: v186Resolved.v193GenerationMeta.observation_count_used,
+              top_pattern_types_applied: v186Resolved.v193GenerationMeta.top_pattern_types_applied,
+              additive_only: true as const,
+              tool_slug: v186Resolved.v193GenerationMeta.tool_slug,
+              generation_surfaces: v186Resolved.v193GenerationMeta.generation_surfaces,
+              chain_consistency_applied:
+                Boolean(v186Resolved.v193ChainRules) &&
+                ["hook-generator", "tiktok-caption-generator", "hashtag-generator", "title-generator"].includes(
+                  toolSlug
+                )
+            }
+          }
+        : {})
+    };
+
     if (gate.creditsMode && creditCost > 0) {
       const dummy = {} as NextResponse;
       const fin = await finalizeGenerationUsage(gate, dummy, {
@@ -618,10 +1099,10 @@ export async function POST(request: NextRequest) {
         estimated_cost_usd: routerMeta.estimated_cost_usd,
         max_tokens_applied: routerMeta.max_tokens_applied
       });
-      return NextResponse.json(payload);
+      return NextResponse.json(responseBody);
     }
 
-    const json = NextResponse.json(payload);
+    const json = NextResponse.json(responseBody);
     await finalizeGenerationUsage(gate, json);
     await incrementDailyUsage(identity, 1);
     logAiTelemetry({

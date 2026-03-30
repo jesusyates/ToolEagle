@@ -30,6 +30,7 @@ export const TOOL_CATEGORY_CARD_VISUAL: Record<ToolCategory, { card: string; ico
   Bios: { card: "border border-slate-200 bg-white hover:border-cyan-200", iconWrap: "bg-cyan-600" },
   Usernames: { card: "border border-slate-200 bg-white hover:border-fuchsia-200", iconWrap: "bg-fuchsia-600" },
   Hashtags: { card: "border border-slate-200 bg-white hover:border-rose-200", iconWrap: "bg-rose-600" },
-  Descriptions: { card: "border border-slate-200 bg-white hover:border-teal-200", iconWrap: "bg-teal-600" }
+  Descriptions: { card: "border border-slate-200 bg-white hover:border-teal-200", iconWrap: "bg-teal-600" },
+  Strategy: { card: "border border-slate-200 bg-white hover:border-slate-300", iconWrap: "bg-slate-700" }
 };
 

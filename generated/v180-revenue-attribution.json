@@ -1,0 +1,82 @@
+{
+  "version": "180.1",
+  "builtAt": "2026-03-30T11:03:10.342Z",
+  "records": [
+    {
+      "event_type": "payment_create_order",
+      "order_id": "te_ef54e32345594a14beee24ae38da9c1d",
+      "source_path": "/pricing",
+      "page_type": "pricing",
+      "tool_slug": null,
+      "referrer_path": null,
+      "source_type": "unknown",
+      "market": "global",
+      "plan": "global_standard",
+      "anonymous_or_user": "user",
+      "attribution_confidence": "fallback",
+      "attribution_source": "return_url",
+      "attribution_key": {
+        "order_id": "te_ef54e32345594a14beee24ae38da9c1d",
+        "source_path": "/pricing",
+        "tool_slug": null,
+        "page_type": "pricing"
+      },
+      "attributed_stage": "create_order",
+      "created_at": "2026-03-24T11:20:28.144968+00:00"
+    },
+    {
+      "event_type": "payment_create_order",
+      "order_id": "te_b8ed3cc28a904f3f8fea2b3c41a3274d",
+      "source_path": "/pricing",
+      "page_type": "pricing",
+      "tool_slug": null,
+      "referrer_path": null,
+      "source_type": "unknown",
+      "market": "global",
+      "plan": "global_standard",
+      "anonymous_or_user": "user",
+      "attribution_confidence": "fallback",
+      "attribution_source": "return_url",
+      "attribution_key": {
+        "order_id": "te_b8ed3cc28a904f3f8fea2b3c41a3274d",
+        "source_path": "/pricing",
+        "tool_slug": null,
+        "page_type": "pricing"
+      },
+      "attributed_stage": "create_order",
+      "created_at": "2026-03-24T11:17:15.94897+00:00"
+    },
+    {
+      "event_type": "payment_create_order",
+      "order_id": "te_5cdb304797384e87b971d1f9d5d91c4a",
+      "source_path": "/pricing",
+      "page_type": "pricing",
+      "tool_slug": null,
+      "referrer_path": null,
+      "source_type": "unknown",
+      "market": "global",
+      "plan": "global_standard",
+      "anonymous_or_user": "user",
+      "attribution_confidence": "fallback",
+      "attribution_source": "return_url",
+      "attribution_key": {
+        "order_id": "te_5cdb304797384e87b971d1f9d5d91c4a",
+        "source_path": "/pricing",
+        "tool_slug": null,
+        "page_type": "pricing"
+      },
+      "attributed_stage": "create_order",
+      "created_at": "2026-03-24T11:16:36.090716+00:00"
+    }
+  ],
+  "record_count": 3,
+  "truncated": false,
+  "rollup": {
+    "by_event_type": {
+      "payment_create_order": 3
+    },
+    "by_attribution_confidence": {
+      "fallback": 3
+    }
+  }
+}

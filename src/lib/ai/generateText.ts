@@ -5,6 +5,7 @@
  */
 
 import { FREE_DAILY_LIMIT } from "@/lib/usage";
+import { readV195ChainSessionId } from "@/lib/tiktok-chain-tracking";
 
 export class LimitReachedError extends Error {
   constructor(
@@ -21,8 +22,8 @@ export type GenerateOptions = { locale?: string };
 
 export async function generateAIText(
   prompt: string,
-  options?: GenerateOptions
-): Promise<string[]> {
+  options?: GenerateOptions & { toolSlug?: string }
+): Promise<{ results: string[]; content_id: string }> {
   const locale = options?.locale ?? "en";
   const res = await fetch("/api/generate", {
     method: "POST",
@@ -48,5 +49,48 @@ export async function generateAIText(
     throw new Error("Invalid AI response");
   }
 
-  return data.results.slice(0, 5);
+  const results = data.results.slice(0, 5);
+
+  const content_id =
+    typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : `c-${Date.now()}-${Math.random()}`;
+
+  // V196 — non-blocking content_items write (best-effort).
+  try {
+    const toolSlug = options?.toolSlug ?? "";
+    const tool_type =
+      toolSlug === "hook-generator"
+        ? "hook"
+        : toolSlug === "tiktok-caption-generator"
+          ? "caption"
+          : toolSlug === "hashtag-generator"
+            ? "hashtag"
+            : toolSlug === "title-generator"
+              ? "title"
+              : null;
+
+    if (tool_type) {
+      const anonKey = "te_v187_anon_id";
+      const anonymous_id =
+        (typeof window !== "undefined" && localStorage.getItem(anonKey)) || `anon-${Date.now()}`;
+      const chain_session_id = readV195ChainSessionId();
+
+      void fetch("/api/content-memory/content-items", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content_id,
+          anonymous_id,
+          tool_type,
+          platform: "tiktok",
+          input_text: prompt,
+          generated_output: results,
+          chain_session_id
+        })
+      }).catch(() => {});
+    }
+  } catch {
+    // ignore
+  }
+
+  return { results, content_id };
 }

@@ -19,7 +19,9 @@ export function useDelegatedClick(handler: (e: React.MouseEvent<Element>) => voi
       const fn = handler as (e: unknown) => void | Promise<void>;
       const result = fn(e as unknown as React.MouseEvent);
       if (result instanceof Promise) {
-        result.catch(() => {});
+        result.catch((e) => {
+          console.error("[useDelegatedClick] async handler rejected:", e);
+        });
       }
     },
     [handler]

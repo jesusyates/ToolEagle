@@ -123,7 +123,7 @@ function utcDateString(d: Date): string {
 }
 
 export function detectStaleReport(
-  latestReport: { updatedAt?: string } | null,
+  latestReport: { updatedAt?: string; generatedAt?: string } | null,
   reportFileMtimeMs: number | null,
   nowMs: number,
   maxAgeMs: number
@@ -131,9 +131,15 @@ export function detectStaleReport(
   if (!latestReport && reportFileMtimeMs == null) {
     return { stale: true, age_ms: Number.POSITIVE_INFINITY, source: "missing" };
   }
-  const t =
+  const ts =
     latestReport?.updatedAt != null
-      ? new Date(latestReport.updatedAt).getTime()
+      ? latestReport.updatedAt
+      : latestReport?.generatedAt != null
+        ? latestReport.generatedAt
+        : null;
+  const t =
+    ts != null
+      ? new Date(ts).getTime()
       : reportFileMtimeMs ?? 0;
   if (!Number.isFinite(t) || t <= 0) {
     const age = reportFileMtimeMs != null ? nowMs - reportFileMtimeMs : Number.POSITIVE_INFINITY;

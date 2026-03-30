@@ -6,6 +6,8 @@ import { FREE_DAILY_LIMIT } from "@/lib/usage";
 import type { CreatorPostPackage, PostPackageToolKind } from "@/lib/ai/postPackage";
 import type { LockedPackagePreview } from "@/lib/ai/packageTierSplit";
 import { LimitReachedError } from "@/lib/ai/generateText";
+import type { PlatformId } from "@/lib/platform-intelligence/resolve-patterns";
+import { readV195ChainSessionId } from "@/lib/tiktok-chain-tracking";
 
 export { LimitReachedError };
 
@@ -45,6 +47,8 @@ export class CreditsDepletedError extends Error {
 }
 
 export type GeneratePackageResult = {
+  /** V196 — stable identifier for this generated content chain (used by content_events). */
+  content_id: string;
   packages: CreatorPostPackage[];
   /** V96: Free tier — blurred Pro slots */
   lockedPreview?: LockedPackagePreview[];
@@ -61,6 +65,10 @@ export type GeneratePackageResult = {
   /** V107 — after deduct */
   creditsRemaining?: number;
   creditsUsed?: number;
+  /** V193.1 — server confirms TikTok observation conditioning */
+  v193ObservationApplied?: boolean;
+  /** V193.4 — same-chain consistency applied for TikTok chain tools */
+  v193ChainConsistencyApplied?: boolean;
 };
 
 export async function generatePostPackages(
@@ -71,6 +79,19 @@ export async function generatePostPackages(
     market?: "global" | "cn";
     clientRoute?: string;
     publishFullPack?: boolean;
+    /** Actual tool page slug (e.g. tiktok-caption-generator) for attribution / V186 */
+    toolSlug?: string;
+    /** V186 Creator Knowledge Engine · V191 platform + monetization hints */
+    v186?: {
+      toolSlug: string;
+      intentId: string;
+      scenarioId: string;
+      platform?: PlatformId;
+      monetizationMode?: string;
+      primaryGoal?: "views" | "followers" | "sales";
+    };
+    /** V191 — pre-built text block from Creator Analysis (optional) */
+    creatorAnalysisSummary?: string;
     attribution?: {
       entry_source?: string | null;
       entry_intent?: string | null;
@@ -96,7 +117,13 @@ export async function generatePostPackages(
     body.entryTopic = options.attribution.topic ?? null;
     body.entryWorkflow = options.attribution.workflow ?? null;
   }
-  body.toolSlug = toolKind;
+  body.toolSlug = options?.toolSlug ?? toolKind;
+  if (options?.v186) {
+    body.v186 = options.v186;
+  }
+  if (typeof options?.creatorAnalysisSummary === "string" && options.creatorAnalysisSummary.trim().length > 0) {
+    body.creatorAnalysisSummary = options.creatorAnalysisSummary.trim().slice(0, 2400);
+  }
   const res = await fetch("/api/generate-package", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -155,7 +182,52 @@ export async function generatePostPackages(
       ? (cs as ContentSafetyClientMeta)
       : undefined;
 
+  const v193 = data.v193 as { observation_applied?: boolean; chain_consistency_applied?: boolean } | undefined;
+
+  const content_id =
+    typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : `c-${Date.now()}-${Math.random()}`;
+
+  // V196 — non-blocking content_items write (must not impact UX).
+  try {
+    const toolSlug = String(options?.toolSlug ?? toolKind);
+    const tool_type =
+      toolSlug === "hook-generator"
+        ? "hook"
+        : toolSlug === "tiktok-caption-generator"
+          ? "caption"
+          : toolSlug === "hashtag-generator"
+            ? "hashtag"
+            : toolSlug === "title-generator"
+              ? "title"
+              : null;
+
+    if (tool_type) {
+      const anonKey = "te_v187_anon_id";
+      const anonymous_id =
+        (typeof window !== "undefined" && localStorage.getItem(anonKey)) || `anon-${Date.now()}`;
+      const chain_session_id = readV195ChainSessionId();
+
+      // Fire-and-forget insert; wrap in try/catch so generation remains uninterrupted.
+      void fetch("/api/content-memory/content-items", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content_id,
+          anonymous_id,
+          tool_type,
+          platform: "tiktok",
+          input_text: userInput,
+          generated_output: data.packages,
+          chain_session_id
+        })
+      }).catch(() => {});
+    }
+  } catch {
+    // ignore
+  }
+
   return {
+    content_id,
     packages: data.packages as CreatorPostPackage[],
     lockedPreview: Array.isArray(data.lockedPreview)
       ? (data.lockedPreview as LockedPackagePreview[])
@@ -168,6 +240,8 @@ export async function generatePostPackages(
     contentSafety,
     publishFullPack: data.publishFullPack === true,
     creditsRemaining: typeof data.creditsRemaining === "number" ? data.creditsRemaining : undefined,
-    creditsUsed: typeof data.creditsUsed === "number" ? data.creditsUsed : undefined
+    creditsUsed: typeof data.creditsUsed === "number" ? data.creditsUsed : undefined,
+    v193ObservationApplied: v193?.observation_applied === true,
+    v193ChainConsistencyApplied: v193?.chain_consistency_applied === true
   };
 }

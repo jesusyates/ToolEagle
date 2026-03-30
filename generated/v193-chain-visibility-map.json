@@ -1,0 +1,14 @@
+{
+  "version": "193.4",
+  "generated_at": "2026-03-30T14:05:00.000Z",
+  "tools_supported": [
+    "hook-generator",
+    "tiktok-caption-generator",
+    "hashtag-generator",
+    "title-generator"
+  ],
+  "visibility_condition": "show badge only when tool_slug is in tools_supported AND v193ObservationApplied=true AND chain_consistency_applied=true (or equivalent v193ChainRules present in plain-generate flow)",
+  "badge_copy": "Optimized as one TikTok content chain",
+  "hint_copy": "Adjusted using recent TikTok content patterns.",
+  "chain_visibility_enabled": true
+}

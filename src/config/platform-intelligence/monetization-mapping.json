@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "description": "V191 — Boost platform patterns when monetization mode / goal aligns. Keys match V190 MonetizationModeId.",
+  "mode_boost": {
+    "affiliate": { "fit_overlap_weight": 0.14, "prefer_pattern_types": ["discovery", "listicle", "tutorial"] },
+    "product_selling": { "fit_overlap_weight": 0.18, "prefer_pattern_types": ["commerce", "demo_proof", "cta"] },
+    "personal_brand": { "fit_overlap_weight": 0.12, "prefer_pattern_types": ["story", "day_in_life", "authority"] },
+    "lead_generation": { "fit_overlap_weight": 0.16, "prefer_pattern_types": ["cta", "tutorial", "objection"] },
+    "ad_driven_growth": { "fit_overlap_weight": 0.15, "prefer_pattern_types": ["retention", "ctr", "hook"] }
+  },
+  "primary_goal_bias": {
+    "sales": { "revenue_score_multiplier": 1.12, "quality_score_multiplier": 1.0 },
+    "followers": { "revenue_score_multiplier": 1.0, "quality_score_multiplier": 1.06 },
+    "views": { "revenue_score_multiplier": 0.98, "quality_score_multiplier": 1.08 }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "version": "184.1",
+  "builtAt": "2026-03-30T11:03:10.643Z",
+  "callback_received_count": 0,
+  "callback_success_count": 0,
+  "callback_failed_count": 0,
+  "last_callback_at": null,
+  "callback_url": "https://www.tooleagle.com/api/payment/callback",
+  "lemon_webhook_url": "https://www.tooleagle.com/api/payment/lemon-webhook",
+  "aggregator_notify_url_hint": null,
+  "provider_status": {
+    "payment_events_error": "Could not find the table 'public.payment_events' in the schema cache",
+    "snapshot_ok": true,
+    "orders_row_count": 3,
+    "payment_events_row_count": 0
+  },
+  "deployment_checks": {
+    "cloudflare_or_vercel": "If callbacks never hit the server, verify DNS / WAF rules allow POST to /api/payment/callback and /api/payment/lemon-webhook.",
+    "lemon": "Lemon: set webhook URL to lemon_webhook_url; set LEMON_SQUEEZY_SIGNING_SECRET; checkout links must include checkout[custom][merchant_order_id] (create-order appends automatically).",
+    "cn_aggregator": "CN: set AGGREGATOR_NOTIFY_URL in production to callback_url (server-to-server)."
+  }
+}

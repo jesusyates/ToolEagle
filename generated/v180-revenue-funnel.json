@@ -1,0 +1,67 @@
+{
+  "version": "180.1",
+  "builtAt": "2026-03-30T11:03:10.342Z",
+  "stages": [
+    "visit",
+    "tool_click",
+    "generation_complete",
+    "copy",
+    "publish_redirect_click",
+    "upgrade_click",
+    "create_order",
+    "payment_success",
+    "membership_active"
+  ],
+  "overall": {
+    "visit": null,
+    "tool_click": 51,
+    "generation_complete": 19,
+    "copy": 20,
+    "publish_redirect_click": 0,
+    "upgrade_click": 2,
+    "create_order": 3,
+    "payment_success": 0,
+    "membership_active": 0
+  },
+  "attribution_split": {
+    "exact_paid_conversions": 0,
+    "inferred_or_fallback_paid_conversions": 0
+  },
+  "by_page_type": {
+    "tool": {
+      "upgrade_click": 2,
+      "create_order_exact": 0
+    },
+    "pricing": {
+      "create_order_exact": 0
+    }
+  },
+  "by_tool": {
+    "tiktok-caption-generator": {
+      "upgrade_click": 0,
+      "payment_success_exact": 0,
+      "payment_success_inferred": 0,
+      "create_order_exact": 0
+    },
+    "hashtag-generator": {
+      "upgrade_click": 0,
+      "payment_success_exact": 0,
+      "payment_success_inferred": 0,
+      "create_order_exact": 0
+    },
+    "hook-generator": {
+      "upgrade_click": 0,
+      "payment_success_exact": 0,
+      "payment_success_inferred": 0,
+      "create_order_exact": 0
+    },
+    "title-generator": {
+      "upgrade_click": 0,
+      "payment_success_exact": 0,
+      "payment_success_inferred": 0,
+      "create_order_exact": 0
+    }
+  },
+  "by_path_exact": {},
+  "by_path_inferred": {}
+}

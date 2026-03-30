@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "platform": "tiktok",
+  "patterns": [
+    {
+      "id": "tt_hook_fyp_retention",
+      "platform": "tiktok",
+      "pattern_type": "hook",
+      "tool_type": "hook_focus",
+      "structure": "0–1s pattern interrupt → 1–3s curiosity gap → promise of payoff in-video (no external click needed).",
+      "intent_fit": ["intent_views", "intent_viral"],
+      "scenario_fit": ["sc_tutorial", "sc_fitness", "sc_beauty"],
+      "monetization_fit": ["affiliate", "ad_driven_growth", "personal_brand"],
+      "quality_score": 0.92,
+      "revenue_score": 0.78
+    },
+    {
+      "id": "tt_caption_story_soft_cta",
+      "platform": "tiktok",
+      "pattern_type": "caption_pack",
+      "tool_type": "tiktok_caption",
+      "structure": "Stakes in line 1 → 2–3 proof beats → twist → comment CTA (save/share) before hard sell.",
+      "intent_fit": ["intent_story"],
+      "scenario_fit": ["sc_personal_brand", "sc_small_business"],
+      "monetization_fit": ["personal_brand", "lead_generation"],
+      "quality_score": 0.9,
+      "revenue_score": 0.74
+    },
+    {
+      "id": "tt_caption_commerce_demo",
+      "platform": "tiktok",
+      "pattern_type": "caption_pack",
+      "tool_type": "tiktok_caption",
+      "structure": "Problem in hook → demo / before-after → one objection handled → shop or keyword CTA.",
+      "intent_fit": ["intent_promote", "intent_shop"],
+      "scenario_fit": ["sc_affiliate", "sc_small_business"],
+      "monetization_fit": ["product_selling", "affiliate"],
+      "quality_score": 0.91,
+      "revenue_score": 0.93
+    },
+    {
+      "id": "tt_hashtag_discovery_mix",
+      "platform": "tiktok",
+      "pattern_type": "hashtag_set",
+      "tool_type": "hashtag",
+      "structure": "2 broad FYP-adjacent + 3 niche + 1 intent/offer tag; rotate to avoid spam clusters.",
+      "intent_fit": ["intent_views", "intent_viral"],
+      "scenario_fit": ["sc_tutorial", "sc_fitness"],
+      "monetization_fit": ["affiliate", "ad_driven_growth"],
+      "quality_score": 0.88,
+      "revenue_score": 0.66
+    },
+    {
+      "id": "tt_title_curiosity_native",
+      "platform": "tiktok",
+      "pattern_type": "title",
+      "tool_type": "title",
+      "structure": "Specific outcome + time or number + light curiosity; match spoken hook so feed feels coherent.",
+      "intent_fit": ["intent_viral", "intent_views"],
+      "scenario_fit": ["sc_tutorial", "sc_beauty"],
+      "monetization_fit": ["ad_driven_growth", "personal_brand"],
+      "quality_score": 0.89,
+      "revenue_score": 0.71
+    }
+  ]
+}

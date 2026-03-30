@@ -1,0 +1,5271 @@
+{
+  "version": "172",
+  "builtAt": "2026-03-30T11:03:05.293Z",
+  "title_similarity_threshold_blog": 0.55,
+  "title_similarity_threshold_topic": 0.82,
+  "blog_title_count": 352,
+  "titles": [
+    {
+      "slug": "best-hashtags-for-reels",
+      "title": "Best Hashtags for Reels in 2026",
+      "normalized": "best hashtags for reels in 2026"
+    },
+    {
+      "slug": "best-tiktok-bio-ideas",
+      "title": "Best TikTok Bio Ideas for 2025",
+      "normalized": "best tiktok bio ideas for 2025"
+    },
+    {
+      "slug": "best-tiktok-bios-2025",
+      "title": "Best TikTok Bio Ideas for 2025",
+      "normalized": "best tiktok bio ideas for 2025"
+    },
+    {
+      "slug": "best-tiktok-captions-for-views",
+      "title": "Best TikTok Captions for Views in 2025",
+      "normalized": "best tiktok captions for views in 2025"
+    },
+    {
+      "slug": "best-youtube-titles-for-views",
+      "title": "Best YouTube Titles for Views in 2025",
+      "normalized": "best youtube titles for views in 2025"
+    },
+    {
+      "slug": "funny-tiktok-captions",
+      "title": "50 Funny TikTok Captions That Actually Work",
+      "normalized": "50 funny tiktok captions that actually work"
+    },
+    {
+      "slug": "how-to-go-viral-on-tiktok",
+      "title": "How to Go Viral on TikTok in 2026",
+      "normalized": "how to go viral on tiktok in 2026"
+    },
+    {
+      "slug": "how-to-write-tiktok-hooks",
+      "title": "How to Write TikTok Hooks That Get Views",
+      "normalized": "how to write tiktok hooks that get views"
+    },
+    {
+      "slug": "how-to-write-viral-hooks",
+      "title": "How to Write Viral Hooks That Stop the Scroll",
+      "normalized": "how to write viral hooks that stop the scroll"
+    },
+    {
+      "slug": "instagram-captions-asmr",
+      "title": "50 ASMR Instagram Captions to Trigger Engagement",
+      "normalized": "50 asmr instagram captions to trigger engagement"
+    },
+    {
+      "slug": "instagram-captions-business",
+      "title": "50 Business Instagram Captions for Short-Form Creators",
+      "normalized": "50 business instagram captions for short form creators"
+    },
+    {
+      "slug": "instagram-captions-comparison",
+      "title": "50 Instagram Caption Formulas That Actually Convert",
+      "normalized": "50 instagram caption formulas that actually convert"
+    },
+    {
+      "slug": "instagram-captions-creative-usernames",
+      "title": "50 Creative Instagram Username Ideas for Your Niche",
+      "normalized": "50 creative instagram username ideas for your niche"
+    },
+    {
+      "slug": "instagram-captions-duet",
+      "title": "50 Instagram Duet Captions That Actually Get Engagement",
+      "normalized": "50 instagram duet captions that actually get engagement"
+    },
+    {
+      "slug": "instagram-captions-for-business",
+      "title": "Instagram Captions for Business That Convert",
+      "normalized": "instagram captions for business that convert"
+    },
+    {
+      "slug": "instagram-captions-for-reels",
+      "title": "Instagram Captions for Reels That Boost Engagement",
+      "normalized": "instagram captions for reels that boost engagement"
+    },
+    {
+      "slug": "instagram-captions-for-selfies",
+      "title": "Instagram Captions for Selfies and Photos",
+      "normalized": "instagram captions for selfies and photos"
+    },
+    {
+      "slug": "instagram-captions-grwm",
+      "title": "50 GRWM Instagram Captions to Stop the Scroll and Build Connection",
+      "normalized": "50 grwm instagram captions to stop the scroll and build connection"
+    },
+    {
+      "slug": "instagram-captions-niche",
+      "title": "50 Niche Instagram Captions for Authentic Engagement",
+      "normalized": "50 niche instagram captions for authentic engagement"
+    },
+    {
+      "slug": "instagram-captions-ootd",
+      "title": "20 Scroll-Stopping OOTD Caption Formulas for Instagram",
+      "normalized": "20 scroll stopping ootd caption formulas for instagram"
+    },
+    {
+      "slug": "instagram-captions-romantic",
+      "title": "50 Romantic Instagram Captions for Couples & Date Nights",
+      "normalized": "50 romantic instagram captions for couples date nights"
+    },
+    {
+      "slug": "instagram-captions-script-structure",
+      "title": "Instagram Caption Script Structure for Short-Form Creators",
+      "normalized": "instagram caption script structure for short form creators"
+    },
+    {
+      "slug": "instagram-hashtag-ideas-2025",
+      "title": "Instagram Hashtag Ideas for 2025",
+      "normalized": "instagram hashtag ideas for 2025"
+    },
+    {
+      "slug": "instagram-hashtags-challenge",
+      "title": "50 Challenge Hashtag Sets for Instagram Reels That Actually Get Views",
+      "normalized": "50 challenge hashtag sets for instagram reels that actually get views"
+    },
+    {
+      "slug": "instagram-hashtags-cottagecore",
+      "title": "Cottagecore Instagram Hashtag Guide",
+      "normalized": "cottagecore instagram hashtag guide"
+    },
+    {
+      "slug": "instagram-hashtags-duet-ideas",
+      "title": "50 Niche-Specific Instagram Duet Hashtag Sets to Boost Discoverability",
+      "normalized": "50 niche specific instagram duet hashtag sets to boost discoverability"
+    },
+    {
+      "slug": "instagram-hashtags-fitness",
+      "title": "Fitness Hashtag Strategy for Instagram Creators",
+      "normalized": "fitness hashtag strategy for instagram creators"
+    },
+    {
+      "slug": "instagram-hashtags-funny-usernames",
+      "title": "50 Funny Instagram Hashtags for Username Ideas That Actually Get Seen",
+      "normalized": "50 funny instagram hashtags for username ideas that actually get seen"
+    },
+    {
+      "slug": "instagram-hashtags-gaming-ideas",
+      "title": "30 Gaming Hashtag Sets for Instagram Creators",
+      "normalized": "30 gaming hashtag sets for instagram creators"
+    },
+    {
+      "slug": "instagram-hashtags-prank",
+      "title": "50 Instagram Hashtag Sets for Prank Content Creators",
+      "normalized": "50 instagram hashtag sets for prank content creators"
+    },
+    {
+      "slug": "instagram-hashtags-story",
+      "title": "50 Storytelling Hashtag Sets for Instagram Creators",
+      "normalized": "50 storytelling hashtag sets for instagram creators"
+    },
+    {
+      "slug": "instagram-hashtags-storytime",
+      "title": "30 Storytime Hashtag Sets for Instagram Creators",
+      "normalized": "30 storytime hashtag sets for instagram creators"
+    },
+    {
+      "slug": "instagram-hashtags-sunset",
+      "title": "30 Niche Sunset Hashtag Sets for Instagram Creators",
+      "normalized": "30 niche sunset hashtag sets for instagram creators"
+    },
+    {
+      "slug": "instagram-hooks-challenge-ideas",
+      "title": "50 Instagram Hook Ideas to Stop Scrollers & Boost Engagement",
+      "normalized": "50 instagram hook ideas to stop scrollers boost engagement"
+    },
+    {
+      "slug": "instagram-hooks-comedy-reel",
+      "title": "50 Instagram Comedy Reel Hooks That Actually Stop Scrollers",
+      "normalized": "50 instagram comedy reel hooks that actually stop scrollers"
+    },
+    {
+      "slug": "instagram-hooks-content-ideas",
+      "title": "50 Instagram Hooks That Actually Stop Scrollers",
+      "normalized": "50 instagram hooks that actually stop scrollers"
+    },
+    {
+      "slug": "instagram-hooks-fitness-ideas",
+      "title": "50 Fitness Hooks for Instagram Reels That Actually Stop Scrolling",
+      "normalized": "50 fitness hooks for instagram reels that actually stop scrolling"
+    },
+    {
+      "slug": "instagram-hooks-lets-play",
+      "title": "50 Instagram Hooks for Let's Play Content Creators",
+      "normalized": "50 instagram hooks for let s play content creators"
+    },
+    {
+      "slug": "instagram-hooks-mom-life",
+      "title": "30 Mom Life Instagram Hooks That Actually Stop the Scroll",
+      "normalized": "30 mom life instagram hooks that actually stop the scroll"
+    },
+    {
+      "slug": "instagram-hooks-mystery",
+      "title": "50 Mystery Hooks for Instagram Reels & Stories",
+      "normalized": "50 mystery hooks for instagram reels stories"
+    },
+    {
+      "slug": "instagram-hooks-ootd",
+      "title": "50 Scroll-Stopping Instagram Hooks for OOTD Content",
+      "normalized": "50 scroll stopping instagram hooks for ootd content"
+    },
+    {
+      "slug": "instagram-hooks-sale",
+      "title": "30 Instagram Hooks to Boost Your Next Sale",
+      "normalized": "30 instagram hooks to boost your next sale"
+    },
+    {
+      "slug": "instagram-hooks-script-structure",
+      "title": "50 Instagram Hooks for Short-Form Scripts",
+      "normalized": "50 instagram hooks for short form scripts"
+    },
+    {
+      "slug": "instagram-hooks-sunset",
+      "title": "30 Sunset Hooks to Stop the Instagram Scroll",
+      "normalized": "30 sunset hooks to stop the instagram scroll"
+    },
+    {
+      "slug": "instagram-hooks-tips",
+      "title": "50 Instagram Hooks That Actually Stop the Scroll",
+      "normalized": "50 instagram hooks that actually stop the scroll"
+    },
+    {
+      "slug": "instagram-hooks-title-for-views",
+      "title": "50 Instagram Hooks That Actually Stop the Scroll",
+      "normalized": "50 instagram hooks that actually stop the scroll"
+    },
+    {
+      "slug": "instagram-hooks-trending-sound",
+      "title": "50 Instagram Hooks for Trending Sounds (2024)",
+      "normalized": "50 instagram hooks for trending sounds 2024"
+    },
+    {
+      "slug": "instagram-hooks-tutorial",
+      "title": "50 Instagram Hooks That Actually Stop Scrolling",
+      "normalized": "50 instagram hooks that actually stop scrolling"
+    },
+    {
+      "slug": "instagram-hooks-viral-hashtags",
+      "title": "50 Viral Instagram Hooks Using Trending Hashtags",
+      "normalized": "50 viral instagram hooks using trending hashtags"
+    },
+    {
+      "slug": "instagram-reel-captions-2025",
+      "title": "Best Instagram Reel Captions for 2025",
+      "normalized": "best instagram reel captions for 2025"
+    },
+    {
+      "slug": "instagram-reel-hashtag-strategy",
+      "title": "Instagram Reel Hashtag Strategy for 2025",
+      "normalized": "instagram reel hashtag strategy for 2025"
+    },
+    {
+      "slug": "instagram-titles-aesthetic",
+      "title": "50 Aesthetic Instagram Title Ideas for Short-Form Creators",
+      "normalized": "50 aesthetic instagram title ideas for short form creators"
+    },
+    {
+      "slug": "instagram-titles-best-hashtags",
+      "title": "50 High-Performing Instagram Title Formulas for Short-Form Creators",
+      "normalized": "50 high performing instagram title formulas for short form creators"
+    },
+    {
+      "slug": "instagram-titles-caption-ideas",
+      "title": "50 Instagram Caption Ideas for Short-Form Creators",
+      "normalized": "50 instagram caption ideas for short form creators"
+    },
+    {
+      "slug": "instagram-titles-comedy-hashtags",
+      "title": "50 Comedy Hashtags for Instagram Reels & Posts",
+      "normalized": "50 comedy hashtags for instagram reels posts"
+    },
+    {
+      "slug": "instagram-titles-comedy-ideas",
+      "title": "50 Instagram Comedy Title Formulas That Actually Get Shares",
+      "normalized": "50 instagram comedy title formulas that actually get shares"
+    },
+    {
+      "slug": "instagram-titles-food-ideas",
+      "title": "30 Instagram Food Title Ideas to Stop the Scroll",
+      "normalized": "30 instagram food title ideas to stop the scroll"
+    },
+    {
+      "slug": "instagram-titles-love",
+      "title": "30 Love-Themed Instagram Title Ideas for Short-Form Creators",
+      "normalized": "30 love themed instagram title ideas for short form creators"
+    },
+    {
+      "slug": "instagram-titles-minimalist",
+      "title": "50 Minimalist Instagram Title Formulas for Short-Form Creators",
+      "normalized": "50 minimalist instagram title formulas for short form creators"
+    },
+    {
+      "slug": "instagram-titles-savage",
+      "title": "50 Savage Instagram Titles That Stop Scrollers",
+      "normalized": "50 savage instagram titles that stop scrollers"
+    },
+    {
+      "slug": "instagram-titles-small-business",
+      "title": "50 Instagram Title Ideas for Small Business Owners",
+      "normalized": "50 instagram title ideas for small business owners"
+    },
+    {
+      "slug": "instagram-titles-transformation",
+      "title": "50 Instagram Title Formulas for Transformation Content",
+      "normalized": "50 instagram title formulas for transformation content"
+    },
+    {
+      "slug": "motivational-tiktok-captions",
+      "title": "Motivational TikTok Captions for Inspirational Content",
+      "normalized": "motivational tiktok captions for inspirational content"
+    },
+    {
+      "slug": "seo-google-vs-baidu-for-creators",
+      "title": "Google vs Baidu for Creator Sites: What Actually Differs",
+      "normalized": "google vs baidu for creator sites what actually differs"
+    },
+    {
+      "slug": "seo-how-search-engines-find-creator-content",
+      "title": "How Search Engines Find Creator Content (Crawl, Index, Rank)",
+      "normalized": "how search engines find creator content crawl index rank"
+    },
+    {
+      "slug": "seo-publish-volume-without-spam-signals",
+      "title": "Publishing Often for SEO—Without Triggering Spam or Thin-Content Filters",
+      "normalized": "publishing often for seo without triggering spam or thin content filters"
+    },
+    {
+      "slug": "seo-sitemaps-robots-and-indexing",
+      "title": "Sitemaps, robots.txt, and Getting Pages Indexed",
+      "normalized": "sitemaps robots txt and getting pages indexed"
+    },
+    {
+      "slug": "short-tiktok-captions",
+      "title": "Short TikTok Captions Under 10 Words",
+      "normalized": "short tiktok captions under 10 words"
+    },
+    {
+      "slug": "shorts-title-formulas",
+      "title": "YouTube Shorts Title Formulas That Get Views",
+      "normalized": "youtube shorts title formulas that get views"
+    },
+    {
+      "slug": "tiktok-caption-ideas",
+      "title": "50 TikTok Caption Ideas That Actually Work",
+      "normalized": "50 tiktok caption ideas that actually work"
+    },
+    {
+      "slug": "tiktok-captions-advanced",
+      "title": "30 Advanced TikTok Captions for Short-Form Creators",
+      "normalized": "30 advanced tiktok captions for short form creators"
+    },
+    {
+      "slug": "tiktok-captions-adventure",
+      "title": "50 Adventure TikTok Captions to Boost Your Views",
+      "normalized": "50 adventure tiktok captions to boost your views"
+    },
+    {
+      "slug": "tiktok-captions-aesthetic-reel",
+      "title": "30 Aesthetic TikTok Captions for Your Next Reel",
+      "normalized": "30 aesthetic tiktok captions for your next reel"
+    },
+    {
+      "slug": "tiktok-captions-aesthetic",
+      "title": "50 Aesthetic TikTok Captions Ideas (2026)",
+      "normalized": "50 aesthetic tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-asmr",
+      "title": "50 ASMR TikTok Captions to Trigger Your Audience's Tingles",
+      "normalized": "50 asmr tiktok captions to trigger your audience s tingles"
+    },
+    {
+      "slug": "tiktok-captions-attitude",
+      "title": "50 Attitude TikTok Captions Ideas (2026)",
+      "normalized": "50 attitude tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-baddie",
+      "title": "50 Baddie TikTok Captions to Command Attention",
+      "normalized": "50 baddie tiktok captions to command attention"
+    },
+    {
+      "slug": "tiktok-captions-beauty-hashtags",
+      "title": "30 TikTok Beauty Captions & Hashtag Strategy for Short-Form Creators",
+      "normalized": "30 tiktok beauty captions hashtag strategy for short form creators"
+    },
+    {
+      "slug": "tiktok-captions-before-after",
+      "title": "Before & After TikTok Captions: 50 Formulas That Hook Viewers",
+      "normalized": "before after tiktok captions 50 formulas that hook viewers"
+    },
+    {
+      "slug": "tiktok-captions-beginners",
+      "title": "50 TikTok Captions for Beginners to Boost Engagement",
+      "normalized": "50 tiktok captions for beginners to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-behind-the-scenes",
+      "title": "Behind The Scenes TikTok Captions: 50 Ready-to-Use Ideas",
+      "normalized": "behind the scenes tiktok captions 50 ready to use ideas"
+    },
+    {
+      "slug": "tiktok-captions-best",
+      "title": "50 Best TikTok Captions to Boost Views & Engagement",
+      "normalized": "50 best tiktok captions to boost views engagement"
+    },
+    {
+      "slug": "tiktok-captions-brand",
+      "title": "30 TikTok Captions for Brand Building",
+      "normalized": "30 tiktok captions for brand building"
+    },
+    {
+      "slug": "tiktok-captions-business",
+      "title": "30 TikTok Captions for Business Creators to Boost Engagement",
+      "normalized": "30 tiktok captions for business creators to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-challenge",
+      "title": "30 TikTok Caption Challenges to Boost Your Engagement",
+      "normalized": "30 tiktok caption challenges to boost your engagement"
+    },
+    {
+      "slug": "tiktok-captions-clean-girl",
+      "title": "Clean Girl TikTok Captions: 50 Ready-to-Use Lines",
+      "normalized": "clean girl tiktok captions 50 ready to use lines"
+    },
+    {
+      "slug": "tiktok-captions-clickbait",
+      "title": "50 Clickbait TikTok Captions That Actually Work",
+      "normalized": "50 clickbait tiktok captions that actually work"
+    },
+    {
+      "slug": "tiktok-captions-coffee",
+      "title": "30 TikTok Captions for Coffee Creators",
+      "normalized": "30 tiktok captions for coffee creators"
+    },
+    {
+      "slug": "tiktok-captions-collab",
+      "title": "50 TikTok Captions for Collabs That Actually Get Clicks",
+      "normalized": "50 tiktok captions for collabs that actually get clicks"
+    },
+    {
+      "slug": "tiktok-captions-comedy-reel",
+      "title": "50 TikTok Captions for Comedy Reels That Actually Get Shared",
+      "normalized": "50 tiktok captions for comedy reels that actually get shared"
+    },
+    {
+      "slug": "tiktok-captions-comedy",
+      "title": "50 TikTok Captions for Comedy Creators to Boost Engagement",
+      "normalized": "50 tiktok captions for comedy creators to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-comparison",
+      "title": "TikTok Caption Comparison: 30 Formulas That Actually Work",
+      "normalized": "tiktok caption comparison 30 formulas that actually work"
+    },
+    {
+      "slug": "tiktok-captions-confidence",
+      "title": "50 Confidence TikTok Captions Ideas (2026)",
+      "normalized": "50 confidence tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-contest",
+      "title": "50 TikTok Contest Captions to Boost Your Entry's Visibility",
+      "normalized": "50 tiktok contest captions to boost your entry s visibility"
+    },
+    {
+      "slug": "tiktok-captions-controversial",
+      "title": "50 Controversial TikTok Captions to Spark Debate & Drive Views",
+      "normalized": "50 controversial tiktok captions to spark debate drive views"
+    },
+    {
+      "slug": "tiktok-captions-cooking",
+      "title": "30 TikTok Cooking Captions to Boost Your Views",
+      "normalized": "30 tiktok cooking captions to boost your views"
+    },
+    {
+      "slug": "tiktok-captions-cottagecore",
+      "title": "50 Cottagecore TikTok Captions for Cozy, Viral Content",
+      "normalized": "50 cottagecore tiktok captions for cozy viral content"
+    },
+    {
+      "slug": "tiktok-captions-cover",
+      "title": "TikTok Caption Formulas That Actually Get Clicks",
+      "normalized": "tiktok caption formulas that actually get clicks"
+    },
+    {
+      "slug": "tiktok-captions-curiosity",
+      "title": "50 Curiosity-Driven TikTok Captions to Stop the Scroll",
+      "normalized": "50 curiosity driven tiktok captions to stop the scroll"
+    },
+    {
+      "slug": "tiktok-captions-cute",
+      "title": "50 Cute TikTok Captions Ideas (2026)",
+      "normalized": "50 cute tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-dad",
+      "title": "50 Dad-Focused TikTok Captions That Actually Get Engagement",
+      "normalized": "50 dad focused tiktok captions that actually get engagement"
+    },
+    {
+      "slug": "tiktok-captions-dance-reel",
+      "title": "50 TikTok Dance Reel Captions to Boost Engagement",
+      "normalized": "50 tiktok dance reel captions to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-dance",
+      "title": "50 TikTok Captions for Dance Creators to Boost Engagement",
+      "normalized": "50 tiktok captions for dance creators to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-day-in-my-life",
+      "title": "50 TikTok Day In My Life Captions for Authentic Engagement",
+      "normalized": "50 tiktok day in my life captions for authentic engagement"
+    },
+    {
+      "slug": "tiktok-captions-diy",
+      "title": "30 TikTok Captions for DIY Creators to Boost Engagement",
+      "normalized": "30 tiktok captions for diy creators to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-duet",
+      "title": "30 TikTok Duet Captions to Boost Engagement",
+      "normalized": "30 tiktok duet captions to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-edgy",
+      "title": "Edgy TikTok Captions: 30 Lines to Make Your Content Unforgettable",
+      "normalized": "edgy tiktok captions 30 lines to make your content unforgettable"
+    },
+    {
+      "slug": "tiktok-captions-education",
+      "title": "50 TikTok Captions for Education Creators to Boost Engagement",
+      "normalized": "50 tiktok captions for education creators to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-engagement",
+      "title": "50 TikTok Captions That Actually Boost Engagement",
+      "normalized": "50 tiktok captions that actually boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-entrepreneur",
+      "title": "50 TikTok Captions for Entrepreneurs That Actually Get Engagement",
+      "normalized": "50 tiktok captions for entrepreneurs that actually get engagement"
+    },
+    {
+      "slug": "tiktok-captions-event",
+      "title": "30 TikTok Captions for Event Creators to Boost Engagement",
+      "normalized": "30 tiktok captions for event creators to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-family",
+      "title": "50 TikTok Captions for Family Content That Actually Get Engagement",
+      "normalized": "50 tiktok captions for family content that actually get engagement"
+    },
+    {
+      "slug": "tiktok-captions-fashion-hashtags",
+      "title": "50 Fashion Hashtags for TikTok Captions That Actually Get Seen",
+      "normalized": "50 fashion hashtags for tiktok captions that actually get seen"
+    },
+    {
+      "slug": "tiktok-captions-finance",
+      "title": "30 TikTok Captions for Finance Creators to Boost Engagement",
+      "normalized": "30 tiktok captions for finance creators to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-first-line",
+      "title": "30 TikTok First Lines to Stop the Scroll",
+      "normalized": "30 tiktok first lines to stop the scroll"
+    },
+    {
+      "slug": "tiktok-captions-fitness-hashtags",
+      "title": "50 TikTok Fitness Hashtags & Captions That Actually Get Views",
+      "normalized": "50 tiktok fitness hashtags captions that actually get views"
+    },
+    {
+      "slug": "tiktok-captions-fitness",
+      "title": "50 Fitness TikTok Captions Ideas (2026)",
+      "normalized": "50 fitness tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-food-hashtags",
+      "title": "30 TikTok Food Hashtags to Boost Your Content's Reach",
+      "normalized": "30 tiktok food hashtags to boost your content s reach"
+    },
+    {
+      "slug": "tiktok-captions-food",
+      "title": "50 Food TikTok Captions Ideas (2026)",
+      "normalized": "50 food tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-friends",
+      "title": "50 Friends TikTok Captions Ideas (2026)",
+      "normalized": "50 friends tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-funny",
+      "title": "50 Funny TikTok Captions Ideas (2026)",
+      "normalized": "50 funny tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-gaming-video",
+      "title": "50 Gaming TikTok Captions That Actually Get Views",
+      "normalized": "50 gaming tiktok captions that actually get views"
+    },
+    {
+      "slug": "tiktok-captions-gaming",
+      "title": "50 Gaming TikTok Captions Ideas (2026)",
+      "normalized": "50 gaming tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-get-ready-with-me",
+      "title": "30 TikTok GRWM Captions for Short-Form Creators",
+      "normalized": "30 tiktok grwm captions for short form creators"
+    },
+    {
+      "slug": "tiktok-captions-giveaway",
+      "title": "50 TikTok Giveaway Captions to Boost Engagement",
+      "normalized": "50 tiktok giveaway captions to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-grwm",
+      "title": "30 GRWM TikTok Captions to Boost Engagement",
+      "normalized": "30 grwm tiktok captions to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-gym",
+      "title": "50 Gym TikTok Captions Ideas (2026)",
+      "normalized": "50 gym tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-hacks",
+      "title": "50 TikTok Caption Hacks to Stop the Scroll and Boost Engagement",
+      "normalized": "50 tiktok caption hacks to stop the scroll and boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-hair",
+      "title": "30 TikTok Captions for Hair Content That Actually Get Saves",
+      "normalized": "30 tiktok captions for hair content that actually get saves"
+    },
+    {
+      "slug": "tiktok-captions-how-to",
+      "title": "How To Write TikTok Captions That Actually Get Views",
+      "normalized": "how to write tiktok captions that actually get views"
+    },
+    {
+      "slug": "tiktok-captions-ideas-for-beginners",
+      "title": "50 TikTok Caption Ideas for Beginner Creators",
+      "normalized": "50 tiktok caption ideas for beginner creators"
+    },
+    {
+      "slug": "tiktok-captions-inspirational",
+      "title": "50 Inspirational TikTok Captions Ideas (2026)",
+      "normalized": "50 inspirational tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-launch",
+      "title": "50 TikTok Launch Captions to Spark Your Next Viral Moment",
+      "normalized": "50 tiktok launch captions to spark your next viral moment"
+    },
+    {
+      "slug": "tiktok-captions-lets-play",
+      "title": "50 TikTok Captions for Let's Play Creators to Boost Engagement",
+      "normalized": "50 tiktok captions for let s play creators to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-life-hack",
+      "title": "50 TikTok Life Hack Captions to Boost Engagement",
+      "normalized": "50 tiktok life hack captions to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-lifestyle",
+      "title": "50 TikTok Captions for Lifestyle Creators to Boost Engagement",
+      "normalized": "50 tiktok captions for lifestyle creators to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-list",
+      "title": "50 TikTok Captions That Actually Get Comments & Shares",
+      "normalized": "50 tiktok captions that actually get comments shares"
+    },
+    {
+      "slug": "tiktok-captions-long",
+      "title": "30 Long TikTok Captions for Short-Form Creators",
+      "normalized": "30 long tiktok captions for short form creators"
+    },
+    {
+      "slug": "tiktok-captions-love",
+      "title": "50 Love TikTok Captions Ideas (2026)",
+      "normalized": "50 love tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-makeup",
+      "title": "50 TikTok Captions for Makeup Creators to Boost Engagement",
+      "normalized": "50 tiktok captions for makeup creators to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-minimalist",
+      "title": "30 Minimalist TikTok Captions for Clean Aesthetic Content",
+      "normalized": "30 minimalist tiktok captions for clean aesthetic content"
+    },
+    {
+      "slug": "tiktok-captions-mom-life",
+      "title": "50 TikTok Captions for Mom Life Creators",
+      "normalized": "50 tiktok captions for mom life creators"
+    },
+    {
+      "slug": "tiktok-captions-motivation",
+      "title": "50 Motivation TikTok Captions Ideas (2026)",
+      "normalized": "50 motivation tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-music",
+      "title": "50 Music-Focused TikTok Captions to Boost Engagement",
+      "normalized": "50 music focused tiktok captions to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-mystery",
+      "title": "50 Mystery TikTok Captions to Hook Your Audience",
+      "normalized": "50 mystery tiktok captions to hook your audience"
+    },
+    {
+      "slug": "tiktok-captions-nature",
+      "title": "30 Nature TikTok Captions to Boost Your Views",
+      "normalized": "30 nature tiktok captions to boost your views"
+    },
+    {
+      "slug": "tiktok-captions-new-arrival",
+      "title": "50 TikTok Captions for New Arrival Drops",
+      "normalized": "50 tiktok captions for new arrival drops"
+    },
+    {
+      "slug": "tiktok-captions-niche-hashtags",
+      "title": "Niche Hashtags for TikTok: 50 Caption Ideas to Boost Your Reach",
+      "normalized": "niche hashtags for tiktok 50 caption ideas to boost your reach"
+    },
+    {
+      "slug": "tiktok-captions-niche",
+      "title": "50 Niche TikTok Captions to Boost Your Engagement",
+      "normalized": "50 niche tiktok captions to boost your engagement"
+    },
+    {
+      "slug": "tiktok-captions-ootd",
+      "title": "30 TikTok OOTD Captions for Short-Form Creators",
+      "normalized": "30 tiktok ootd captions for short form creators"
+    },
+    {
+      "slug": "tiktok-captions-opening",
+      "title": "50 TikTok Opening Captions to Stop the Scroll",
+      "normalized": "50 tiktok opening captions to stop the scroll"
+    },
+    {
+      "slug": "tiktok-captions-pet",
+      "title": "50 TikTok Captions for Pet Creators That Actually Get Engagement",
+      "normalized": "50 tiktok captions for pet creators that actually get engagement"
+    },
+    {
+      "slug": "tiktok-captions-pov",
+      "title": "50 POV TikTok Captions That Actually Pull Viewers In",
+      "normalized": "50 pov tiktok captions that actually pull viewers in"
+    },
+    {
+      "slug": "tiktok-captions-prank",
+      "title": "50 TikTok Captions for Prank Videos That Actually Get Views",
+      "normalized": "50 tiktok captions for prank videos that actually get views"
+    },
+    {
+      "slug": "tiktok-captions-product",
+      "title": "30 TikTok Captions for Product Creators",
+      "normalized": "30 tiktok captions for product creators"
+    },
+    {
+      "slug": "tiktok-captions-productivity",
+      "title": "50 TikTok Captions for Productivity Creators to Boost Engagement",
+      "normalized": "50 tiktok captions for productivity creators to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-promotion",
+      "title": "50 TikTok Caption Formulas to Boost Your Promotion Videos",
+      "normalized": "50 tiktok caption formulas to boost your promotion videos"
+    },
+    {
+      "slug": "tiktok-captions-question",
+      "title": "50 TikTok Caption Questions That Stop Scrollers",
+      "normalized": "50 tiktok caption questions that stop scrollers"
+    },
+    {
+      "slug": "tiktok-captions-reaction",
+      "title": "50 Reaction Captions for TikTok That Actually Get Comments",
+      "normalized": "50 reaction captions for tiktok that actually get comments"
+    },
+    {
+      "slug": "tiktok-captions-recipe",
+      "title": "30 TikTok Captions for Recipe Creators to Boost Engagement",
+      "normalized": "30 tiktok captions for recipe creators to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-relatable",
+      "title": "50 Relatable TikTok Captions That Actually Get Comments",
+      "normalized": "50 relatable tiktok captions that actually get comments"
+    },
+    {
+      "slug": "tiktok-captions-restaurant",
+      "title": "30 TikTok Captions for Restaurant Content That Actually Get Saves",
+      "normalized": "30 tiktok captions for restaurant content that actually get saves"
+    },
+    {
+      "slug": "tiktok-captions-review",
+      "title": "50 TikTok Captions That Actually Get Views (Tested for Short-Form Creators)",
+      "normalized": "50 tiktok captions that actually get views tested for short form creators"
+    },
+    {
+      "slug": "tiktok-captions-romantic",
+      "title": "50 Romantic TikTok Captions Ideas (2026)",
+      "normalized": "50 romantic tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-running",
+      "title": "30 TikTok Running Captions to Boost Your Content",
+      "normalized": "30 tiktok running captions to boost your content"
+    },
+    {
+      "slug": "tiktok-captions-sad",
+      "title": "50 Sad TikTok Captions Ideas (2026)",
+      "normalized": "50 sad tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-sale",
+      "title": "30 TikTok Captions to Boost Your Sales",
+      "normalized": "30 tiktok captions to boost your sales"
+    },
+    {
+      "slug": "tiktok-captions-sarcastic",
+      "title": "50 Sarcastic TikTok Captions Ideas (2026)",
+      "normalized": "50 sarcastic tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-sassy",
+      "title": "50 Sassy TikTok Captions Ideas (2026)",
+      "normalized": "50 sassy tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-savage",
+      "title": "50 Savage TikTok Captions Ideas (2026)",
+      "normalized": "50 savage tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-script-template",
+      "title": "30 TikTok Caption Script Templates for Short-Form Creators",
+      "normalized": "30 tiktok caption script templates for short form creators"
+    },
+    {
+      "slug": "tiktok-captions-secret",
+      "title": "50 Secret-Focused TikTok Captions That Actually Get Views",
+      "normalized": "50 secret focused tiktok captions that actually get views"
+    },
+    {
+      "slug": "tiktok-captions-self-love",
+      "title": "50 Self-Love TikTok Captions to Boost Your Content",
+      "normalized": "50 self love tiktok captions to boost your content"
+    },
+    {
+      "slug": "tiktok-captions-selfie",
+      "title": "50 Selfie TikTok Captions Ideas (2026)",
+      "normalized": "50 selfie tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-short",
+      "title": "30 TikTok Caption Formulas for Short-Form Creators",
+      "normalized": "30 tiktok caption formulas for short form creators"
+    },
+    {
+      "slug": "tiktok-captions-skincare",
+      "title": "50 TikTok Captions for Skincare Creators to Boost Engagement",
+      "normalized": "50 tiktok captions for skincare creators to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-small-business",
+      "title": "50 TikTok Captions for Small Business Owners",
+      "normalized": "50 tiktok captions for small business owners"
+    },
+    {
+      "slug": "tiktok-captions-stitch-ideas",
+      "title": "50 TikTok Stitch Ideas to Boost Your Views",
+      "normalized": "50 tiktok stitch ideas to boost your views"
+    },
+    {
+      "slug": "tiktok-captions-stitch",
+      "title": "50 TikTok Captions for Stitch Content That Actually Get Engagement",
+      "normalized": "50 tiktok captions for stitch content that actually get engagement"
+    },
+    {
+      "slug": "tiktok-captions-story",
+      "title": "30 TikTok Story Captions to Hook Your Audience",
+      "normalized": "30 tiktok story captions to hook your audience"
+    },
+    {
+      "slug": "tiktok-captions-storytime",
+      "title": "50 TikTok Storytime Captions to Stop the Scroll",
+      "normalized": "50 tiktok storytime captions to stop the scroll"
+    },
+    {
+      "slug": "tiktok-captions-study",
+      "title": "50 Study-Focused TikTok Captions to Boost Engagement",
+      "normalized": "50 study focused tiktok captions to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-sunset",
+      "title": "30 Sunset TikTok Captions to Boost Your Views",
+      "normalized": "30 sunset tiktok captions to boost your views"
+    },
+    {
+      "slug": "tiktok-captions-team",
+      "title": "30 Team-Focused TikTok Captions for Short-Form Creators",
+      "normalized": "30 team focused tiktok captions for short form creators"
+    },
+    {
+      "slug": "tiktok-captions-tech",
+      "title": "50 Tech TikTok Captions That Actually Get Engagement",
+      "normalized": "50 tech tiktok captions that actually get engagement"
+    },
+    {
+      "slug": "tiktok-captions-testimonial",
+      "title": "50 TikTok Testimonial Captions That Actually Get Clicks",
+      "normalized": "50 tiktok testimonial captions that actually get clicks"
+    },
+    {
+      "slug": "tiktok-captions-that-girl",
+      "title": "50 That Girl TikTok Captions to Build Your Aesthetic",
+      "normalized": "50 that girl tiktok captions to build your aesthetic"
+    },
+    {
+      "slug": "tiktok-captions-tips",
+      "title": "50 TikTok Caption Formulas That Actually Get Comments & Shares",
+      "normalized": "50 tiktok caption formulas that actually get comments shares"
+    },
+    {
+      "slug": "tiktok-captions-top-10",
+      "title": "Top 10 TikTok Caption Formulas That Actually Get Views",
+      "normalized": "top 10 tiktok caption formulas that actually get views"
+    },
+    {
+      "slug": "tiktok-captions-transformation",
+      "title": "50 TikTok Captions for Transformation Content That Actually Work",
+      "normalized": "50 tiktok captions for transformation content that actually work"
+    },
+    {
+      "slug": "tiktok-captions-travel-hashtags",
+      "title": "50 Travel Hashtags for TikTok Captions to Boost Your Views",
+      "normalized": "50 travel hashtags for tiktok captions to boost your views"
+    },
+    {
+      "slug": "tiktok-captions-travel",
+      "title": "50 Travel TikTok Captions Ideas (2026)",
+      "normalized": "50 travel tiktok captions ideas 2026"
+    },
+    {
+      "slug": "tiktok-captions-trending-ideas",
+      "title": "30 Trending TikTok Caption Ideas for Short-Form Creators",
+      "normalized": "30 trending tiktok caption ideas for short form creators"
+    },
+    {
+      "slug": "tiktok-captions-trending-reel",
+      "title": "50 Trending TikTok Reel Captions to Boost Views",
+      "normalized": "50 trending tiktok reel captions to boost views"
+    },
+    {
+      "slug": "tiktok-captions-trending-sound",
+      "title": "30 TikTok Captions for Trending Sounds",
+      "normalized": "30 tiktok captions for trending sounds"
+    },
+    {
+      "slug": "tiktok-captions-trending",
+      "title": "30 Trending TikTok Captions to Boost Your Views",
+      "normalized": "30 trending tiktok captions to boost your views"
+    },
+    {
+      "slug": "tiktok-captions-tutorial-reel",
+      "title": "TikTok Tutorial Reel Captions: 50 Ready-to-Use Lines",
+      "normalized": "tiktok tutorial reel captions 50 ready to use lines"
+    },
+    {
+      "slug": "tiktok-captions-tutorial",
+      "title": "50 TikTok Caption Formulas That Actually Get Engagement",
+      "normalized": "50 tiktok caption formulas that actually get engagement"
+    },
+    {
+      "slug": "tiktok-captions-unboxing",
+      "title": "50 TikTok Unboxing Captions to Boost Your Views",
+      "normalized": "50 tiktok unboxing captions to boost your views"
+    },
+    {
+      "slug": "tiktok-captions-vacation",
+      "title": "50 Vacation TikTok Captions to Boost Your Views",
+      "normalized": "50 vacation tiktok captions to boost your views"
+    },
+    {
+      "slug": "tiktok-captions-views",
+      "title": "30 TikTok Captions to Boost Views (Short-Form Creator Toolkit)",
+      "normalized": "30 tiktok captions to boost views short form creator toolkit"
+    },
+    {
+      "slug": "tiktok-captions-viral",
+      "title": "50 Viral TikTok Captions to Boost Your Views",
+      "normalized": "50 viral tiktok captions to boost your views"
+    },
+    {
+      "slug": "tiktok-captions-vlog",
+      "title": "50 TikTok Captions for Vloggers to Boost Engagement",
+      "normalized": "50 tiktok captions for vloggers to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-vs",
+      "title": "50 TikTok Captions for 'Vs' Videos to Spark Debate & Views",
+      "normalized": "50 tiktok captions for vs videos to spark debate views"
+    },
+    {
+      "slug": "tiktok-captions-walkthrough",
+      "title": "30 TikTok Caption Walkthroughs for Short-Form Creators",
+      "normalized": "30 tiktok caption walkthroughs for short form creators"
+    },
+    {
+      "slug": "tiktok-captions-wedding",
+      "title": "30 TikTok Captions for Wedding Creators to Boost Engagement",
+      "normalized": "30 tiktok captions for wedding creators to boost engagement"
+    },
+    {
+      "slug": "tiktok-captions-work-from-home",
+      "title": "50 Work From Home TikTok Captions That Actually Get Engagement",
+      "normalized": "50 work from home tiktok captions that actually get engagement"
+    },
+    {
+      "slug": "tiktok-captions-y2k",
+      "title": "50 Y2K TikTok Captions That Actually Get Views",
+      "normalized": "50 y2k tiktok captions that actually get views"
+    },
+    {
+      "slug": "tiktok-captions-yoga",
+      "title": "30 TikTok Yoga Captions for Short-Form Creators",
+      "normalized": "30 tiktok yoga captions for short form creators"
+    },
+    {
+      "slug": "tiktok-content-ideas-beginners",
+      "title": "TikTok Content Ideas for Beginners",
+      "normalized": "tiktok content ideas for beginners"
+    },
+    {
+      "slug": "tiktok-content-ideas-that-work",
+      "title": "TikTok Content Ideas That Actually Get Views",
+      "normalized": "tiktok content ideas that actually get views"
+    },
+    {
+      "slug": "tiktok-hashtags-attitude",
+      "title": "50 Attitude Hashtag Sets for TikTok Creators",
+      "normalized": "50 attitude hashtag sets for tiktok creators"
+    },
+    {
+      "slug": "tiktok-hashtags-before-after",
+      "title": "50 Before & After TikTok Hashtag Sets for Maximum Reach",
+      "normalized": "50 before after tiktok hashtag sets for maximum reach"
+    },
+    {
+      "slug": "tiktok-hashtags-caption-ideas",
+      "title": "30 TikTok Hashtag Caption Ideas for Short-Form Creators",
+      "normalized": "30 tiktok hashtag caption ideas for short form creators"
+    },
+    {
+      "slug": "tiktok-hashtags-controversial",
+      "title": "50 Controversial TikTok Hashtags to Spark Debate & Views",
+      "normalized": "50 controversial tiktok hashtags to spark debate views"
+    },
+    {
+      "slug": "tiktok-hashtags-finance",
+      "title": "30 Finance Hashtag Sets for TikTok Creators",
+      "normalized": "30 finance hashtag sets for tiktok creators"
+    },
+    {
+      "slug": "tiktok-hashtags-first-line",
+      "title": "30 First-Line Hashtag Sets for TikTok Creators",
+      "normalized": "30 first line hashtag sets for tiktok creators"
+    },
+    {
+      "slug": "tiktok-hashtags-food-ideas",
+      "title": "50 TikTok Food Hashtag Strategies for Viral Recipe Videos",
+      "normalized": "50 tiktok food hashtag strategies for viral recipe videos"
+    },
+    {
+      "slug": "tiktok-hashtags-funny",
+      "title": "50 Funny TikTok Hashtags to Boost Your Comedy Content",
+      "normalized": "50 funny tiktok hashtags to boost your comedy content"
+    },
+    {
+      "slug": "tiktok-hashtags-hook-examples",
+      "title": "50 TikTok Hashtag Hooks to Stop Scrollers & Boost Reach",
+      "normalized": "50 tiktok hashtag hooks to stop scrollers boost reach"
+    },
+    {
+      "slug": "tiktok-hashtags-long",
+      "title": "50 Long-Form TikTok Hashtag Sets for Maximum Reach",
+      "normalized": "50 long form tiktok hashtag sets for maximum reach"
+    },
+    {
+      "slug": "tiktok-hashtags-minimalist",
+      "title": "30 Minimalist TikTok Hashtag Sets for Clean Aesthetic Content",
+      "normalized": "30 minimalist tiktok hashtag sets for clean aesthetic content"
+    },
+    {
+      "slug": "tiktok-hashtags-nature",
+      "title": "30 Nature Hashtag Sets for TikTok Creators",
+      "normalized": "30 nature hashtag sets for tiktok creators"
+    },
+    {
+      "slug": "tiktok-hashtags-question",
+      "title": "30 TikTok Hashtag Sets to Boost Your Question-Based Content",
+      "normalized": "30 tiktok hashtag sets to boost your question based content"
+    },
+    {
+      "slug": "tiktok-hashtags-recipe",
+      "title": "30 Niche-Aware TikTok Hashtag Sets for Recipe Creators",
+      "normalized": "30 niche aware tiktok hashtag sets for recipe creators"
+    },
+    {
+      "slug": "tiktok-hashtags-sarcastic",
+      "title": "Sarcastic Hashtag Arsenal for TikTok Creators",
+      "normalized": "sarcastic hashtag arsenal for tiktok creators"
+    },
+    {
+      "slug": "tiktok-hashtags-script-structure",
+      "title": "TikTok Hashtag Script Structure for Short-Form Creators",
+      "normalized": "tiktok hashtag script structure for short form creators"
+    },
+    {
+      "slug": "tiktok-hashtags-selfie",
+      "title": "50 TikTok Hashtag Sets for Selfie Creators to Boost Visibility",
+      "normalized": "50 tiktok hashtag sets for selfie creators to boost visibility"
+    },
+    {
+      "slug": "tiktok-hashtags-team",
+      "title": "Strategic Hashtag Collections for Team-Based TikTok Content",
+      "normalized": "strategic hashtag collections for team based tiktok content"
+    },
+    {
+      "slug": "tiktok-hashtags-transformation",
+      "title": "50 TikTok Hashtag Sets for Transformation Content",
+      "normalized": "50 tiktok hashtag sets for transformation content"
+    },
+    {
+      "slug": "tiktok-hashtags-trending-reel",
+      "title": "50 Trending TikTok Hashtag Sets for Viral Reels",
+      "normalized": "50 trending tiktok hashtag sets for viral reels"
+    },
+    {
+      "slug": "tiktok-hooks-aesthetic-reel",
+      "title": "50 Aesthetic TikTok Hooks for Visual Creators",
+      "normalized": "50 aesthetic tiktok hooks for visual creators"
+    },
+    {
+      "slug": "tiktok-hooks-brand-hashtags",
+      "title": "30 TikTok Hooks for Brand Hashtag Campaigns",
+      "normalized": "30 tiktok hooks for brand hashtag campaigns"
+    },
+    {
+      "slug": "tiktok-hooks-business",
+      "title": "30 TikTok Business Hooks for Short-Form Creators",
+      "normalized": "30 tiktok business hooks for short form creators"
+    },
+    {
+      "slug": "tiktok-hooks-caption-for-business",
+      "title": "50 Scroll-Stopping TikTok Hooks for Business Creators",
+      "normalized": "50 scroll stopping tiktok hooks for business creators"
+    },
+    {
+      "slug": "tiktok-hooks-comedy-reel",
+      "title": "50 TikTok Comedy Reel Hooks to Stop the Scroll",
+      "normalized": "50 tiktok comedy reel hooks to stop the scroll"
+    },
+    {
+      "slug": "tiktok-hooks-cute",
+      "title": "50 Cute TikTok Hooks to Charm Your Audience",
+      "normalized": "50 cute tiktok hooks to charm your audience"
+    },
+    {
+      "slug": "tiktok-hooks-dance-hashtags",
+      "title": "50 TikTok Dance Hashtag Hooks to Boost Your Views",
+      "normalized": "50 tiktok dance hashtag hooks to boost your views"
+    },
+    {
+      "slug": "tiktok-hooks-dance-ideas",
+      "title": "50 TikTok Dance Hooks to Stop the Scroll",
+      "normalized": "50 tiktok dance hooks to stop the scroll"
+    },
+    {
+      "slug": "tiktok-hooks-day-in-my-life",
+      "title": "30 TikTok Hooks for 'Day In My Life' Creators",
+      "normalized": "30 tiktok hooks for day in my life creators"
+    },
+    {
+      "slug": "tiktok-hooks-duet-ideas",
+      "title": "30 TikTok Duet Hooks to Boost Your Engagement",
+      "normalized": "30 tiktok duet hooks to boost your engagement"
+    },
+    {
+      "slug": "tiktok-hooks-lets-play",
+      "title": "50 TikTok Hooks for Let's Play Creators",
+      "normalized": "50 tiktok hooks for let s play creators"
+    },
+    {
+      "slug": "tiktok-hooks-mystery",
+      "title": "30 Mystery Hooks for TikTok Creators",
+      "normalized": "30 mystery hooks for tiktok creators"
+    },
+    {
+      "slug": "tiktok-hooks-niche-hashtags",
+      "title": "50 Niche TikTok Hooks for Micro-Audience Growth",
+      "normalized": "50 niche tiktok hooks for micro audience growth"
+    },
+    {
+      "slug": "tiktok-hooks-pov",
+      "title": "30 TikTok POV Hooks to Stop the Scroll",
+      "normalized": "30 tiktok pov hooks to stop the scroll"
+    },
+    {
+      "slug": "tiktok-hooks-promotion",
+      "title": "30 TikTok Hooks to Boost Your Promotion Videos",
+      "normalized": "30 tiktok hooks to boost your promotion videos"
+    },
+    {
+      "slug": "tiktok-hooks-reel-captions",
+      "title": "50 TikTok Reel Caption Hooks That Actually Stop Scrolling",
+      "normalized": "50 tiktok reel caption hooks that actually stop scrolling"
+    },
+    {
+      "slug": "tiktok-hooks-relatable",
+      "title": "50 Relatable TikTok Hooks That Actually Stop Scrolling",
+      "normalized": "50 relatable tiktok hooks that actually stop scrolling"
+    },
+    {
+      "slug": "tiktok-hooks-self-love",
+      "title": "50 Self-Love TikTok Hooks to Stop Scrolling",
+      "normalized": "50 self love tiktok hooks to stop scrolling"
+    },
+    {
+      "slug": "tiktok-hooks-tips",
+      "title": "50 TikTok Hooks That Actually Stop Scrolling",
+      "normalized": "50 tiktok hooks that actually stop scrolling"
+    },
+    {
+      "slug": "tiktok-hooks-viral-ideas",
+      "title": "20 Viral TikTok Hooks to Stop the Scroll",
+      "normalized": "20 viral tiktok hooks to stop the scroll"
+    },
+    {
+      "slug": "tiktok-hooks-wedding",
+      "title": "50 TikTok Wedding Hooks to Stop the Scroll & Boost Engagement",
+      "normalized": "50 tiktok wedding hooks to stop the scroll boost engagement"
+    },
+    {
+      "slug": "tiktok-hooks-yoga",
+      "title": "50 Scroll-Stopping Yoga Hooks for TikTok Growth",
+      "normalized": "50 scroll stopping yoga hooks for tiktok growth"
+    },
+    {
+      "slug": "tiktok-titles-asmr",
+      "title": "50 TikTok ASMR Title Formulas That Trigger Clicks",
+      "normalized": "50 tiktok asmr title formulas that trigger clicks"
+    },
+    {
+      "slug": "tiktok-titles-beauty-hashtags",
+      "title": "50 TikTok Beauty Hashtag Titles to Boost Your Content's Reach",
+      "normalized": "50 tiktok beauty hashtag titles to boost your content s reach"
+    },
+    {
+      "slug": "tiktok-titles-beauty-ideas",
+      "title": "30 TikTok Beauty Title Ideas to Stop the Scroll",
+      "normalized": "30 tiktok beauty title ideas to stop the scroll"
+    },
+    {
+      "slug": "tiktok-titles-bio-ideas",
+      "title": "30 TikTok Bio Ideas to Boost Your Profile",
+      "normalized": "30 tiktok bio ideas to boost your profile"
+    },
+    {
+      "slug": "tiktok-titles-clean-girl",
+      "title": "50 Clean Girl TikTok Title Formulas That Actually Get Views",
+      "normalized": "50 clean girl tiktok title formulas that actually get views"
+    },
+    {
+      "slug": "tiktok-titles-dance-ideas",
+      "title": "50 TikTok Dance Title Ideas to Boost Your Views",
+      "normalized": "50 tiktok dance title ideas to boost your views"
+    },
+    {
+      "slug": "tiktok-titles-diy",
+      "title": "30 TikTok DIY Title Formulas That Actually Get Views",
+      "normalized": "30 tiktok diy title formulas that actually get views"
+    },
+    {
+      "slug": "tiktok-titles-engagement",
+      "title": "50 TikTok Title Formulas to Boost Engagement in 2024",
+      "normalized": "50 tiktok title formulas to boost engagement in 2024"
+    },
+    {
+      "slug": "tiktok-titles-fitness",
+      "title": "50 TikTok Fitness Title Formulas That Actually Get Views",
+      "normalized": "50 tiktok fitness title formulas that actually get views"
+    },
+    {
+      "slug": "tiktok-titles-gaming-ideas",
+      "title": "50 Viral TikTok Gaming Title Formulas That Actually Get Views",
+      "normalized": "50 viral tiktok gaming title formulas that actually get views"
+    },
+    {
+      "slug": "tiktok-titles-intro-hooks",
+      "title": "20 TikTok Title Hooks That Stop the Scroll",
+      "normalized": "20 tiktok title hooks that stop the scroll"
+    },
+    {
+      "slug": "tiktok-titles-product",
+      "title": "50 TikTok Title Formulas for Product Videos That Stop the Scroll",
+      "normalized": "50 tiktok title formulas for product videos that stop the scroll"
+    },
+    {
+      "slug": "tiktok-titles-productivity",
+      "title": "50 TikTok Title Formulas to Boost Your Productivity Content",
+      "normalized": "50 tiktok title formulas to boost your productivity content"
+    },
+    {
+      "slug": "tiktok-titles-skincare",
+      "title": "30 TikTok Skincare Title Ideas to Stop the Scroll",
+      "normalized": "30 tiktok skincare title ideas to stop the scroll"
+    },
+    {
+      "slug": "tiktok-titles-study",
+      "title": "30 TikTok Title Formulas for Study Content That Gets Saves",
+      "normalized": "30 tiktok title formulas for study content that gets saves"
+    },
+    {
+      "slug": "tiktok-titles-team",
+      "title": "30 TikTok Title Formulas for Team Content That Actually Gets Shared",
+      "normalized": "30 tiktok title formulas for team content that actually gets shared"
+    },
+    {
+      "slug": "tiktok-titles-title-formulas",
+      "title": "30 TikTok Title Formulas to Stop Scrolling and Boost Views",
+      "normalized": "30 tiktok title formulas to stop scrolling and boost views"
+    },
+    {
+      "slug": "tiktok-titles-travel",
+      "title": "50 TikTok Travel Title Formulas That Actually Get Views",
+      "normalized": "50 tiktok travel title formulas that actually get views"
+    },
+    {
+      "slug": "tiktok-titles-trending-sounds-ideas",
+      "title": "50 Trending Sound Title Ideas for TikTok Short-Form Creators",
+      "normalized": "50 trending sound title ideas for tiktok short form creators"
+    },
+    {
+      "slug": "tiktok-titles-tutorial-reel",
+      "title": "50 TikTok Tutorial Reel Titles That Actually Get Views",
+      "normalized": "50 tiktok tutorial reel titles that actually get views"
+    },
+    {
+      "slug": "tiktok-titles-wedding",
+      "title": "30 Viral Wedding TikTok Title Ideas for Creators",
+      "normalized": "30 viral wedding tiktok title ideas for creators"
+    },
+    {
+      "slug": "tiktok-username-ideas",
+      "title": "TikTok Username Ideas That Stand Out",
+      "normalized": "tiktok username ideas that stand out"
+    },
+    {
+      "slug": "trending-tiktok-captions",
+      "title": "Trending TikTok Captions for 2025",
+      "normalized": "trending tiktok captions for 2025"
+    },
+    {
+      "slug": "viral-tiktok-hooks",
+      "title": "Viral TikTok Hooks That Stop the Scroll",
+      "normalized": "viral tiktok hooks that stop the scroll"
+    },
+    {
+      "slug": "youtube-captions-aesthetic-reel",
+      "title": "30 Aesthetic Reel Captions for YouTube Shorts (AI-Generated)",
+      "normalized": "30 aesthetic reel captions for youtube shorts ai generated"
+    },
+    {
+      "slug": "youtube-captions-baddie",
+      "title": "30 Baddie YouTube Captions to Boost Your Shorts",
+      "normalized": "30 baddie youtube captions to boost your shorts"
+    },
+    {
+      "slug": "youtube-captions-comedy-reel",
+      "title": "50 YouTube Comedy Reel Captions to Boost Engagement",
+      "normalized": "50 youtube comedy reel captions to boost engagement"
+    },
+    {
+      "slug": "youtube-captions-contest",
+      "title": "50 YouTube Contest Captions to Boost Engagement & Entries",
+      "normalized": "50 youtube contest captions to boost engagement entries"
+    },
+    {
+      "slug": "youtube-captions-cooking",
+      "title": "30 YouTube Cooking Captions to Boost Your Shorts",
+      "normalized": "30 youtube cooking captions to boost your shorts"
+    },
+    {
+      "slug": "youtube-captions-creative-usernames",
+      "title": "30 Creative YouTube Username Ideas for Short-Form Creators",
+      "normalized": "30 creative youtube username ideas for short form creators"
+    },
+    {
+      "slug": "youtube-captions-cute",
+      "title": "30 Cute YouTube Captions for Short-Form Creators",
+      "normalized": "30 cute youtube captions for short form creators"
+    },
+    {
+      "slug": "youtube-captions-dance-reel",
+      "title": "50 YouTube Dance Reel Captions to Boost Engagement",
+      "normalized": "50 youtube dance reel captions to boost engagement"
+    },
+    {
+      "slug": "youtube-captions-education-ideas",
+      "title": "50 YouTube Caption Ideas for Education Creators",
+      "normalized": "50 youtube caption ideas for education creators"
+    },
+    {
+      "slug": "youtube-captions-finance",
+      "title": "30 Finance Captions for YouTube Shorts to Stop the Scroll",
+      "normalized": "30 finance captions for youtube shorts to stop the scroll"
+    },
+    {
+      "slug": "youtube-captions-get-ready-with-me",
+      "title": "50 Get Ready With Me YouTube Captions to Boost Watch Time",
+      "normalized": "50 get ready with me youtube captions to boost watch time"
+    },
+    {
+      "slug": "youtube-captions-life-hack",
+      "title": "50 Life Hacks for YouTube Shorts Creators",
+      "normalized": "50 life hacks for youtube shorts creators"
+    },
+    {
+      "slug": "youtube-captions-review",
+      "title": "YouTube Caption Review: Using a TikTok Caption Generator for Short-Form Video",
+      "normalized": "youtube caption review using a tiktok caption generator for short form video"
+    },
+    {
+      "slug": "youtube-captions-skincare",
+      "title": "30 YouTube Captions for Skincare Creators",
+      "normalized": "30 youtube captions for skincare creators"
+    },
+    {
+      "slug": "youtube-captions-stitch",
+      "title": "YouTube Caption Hacks for Stitch Videos Using AI Tools",
+      "normalized": "youtube caption hacks for stitch videos using ai tools"
+    },
+    {
+      "slug": "youtube-captions-story",
+      "title": "30 YouTube Caption Ideas for Story-Driven Shorts",
+      "normalized": "30 youtube caption ideas for story driven shorts"
+    },
+    {
+      "slug": "youtube-captions-top-10",
+      "title": "Top 10 YouTube Caption Formulas for Short-Form Creators",
+      "normalized": "top 10 youtube caption formulas for short form creators"
+    },
+    {
+      "slug": "youtube-captions-transformation",
+      "title": "50 YouTube Caption Formulas for Transformative Content",
+      "normalized": "50 youtube caption formulas for transformative content"
+    },
+    {
+      "slug": "youtube-captions-trending-ideas",
+      "title": "50 Trending YouTube Shorts Caption Ideas to Stop the Scroll",
+      "normalized": "50 trending youtube shorts caption ideas to stop the scroll"
+    },
+    {
+      "slug": "youtube-hashtags-advanced",
+      "title": "30 Advanced YouTube Hashtag Strategies for Short-Form Creators",
+      "normalized": "30 advanced youtube hashtag strategies for short form creators"
+    },
+    {
+      "slug": "youtube-hashtags-aesthetic-usernames",
+      "title": "Aesthetic YouTube Username Hashtags for Short-Form Creators",
+      "normalized": "aesthetic youtube username hashtags for short form creators"
+    },
+    {
+      "slug": "youtube-hashtags-aesthetic",
+      "title": "30 Aesthetic YouTube Hashtag Sets for Short-Form Creators",
+      "normalized": "30 aesthetic youtube hashtag sets for short form creators"
+    },
+    {
+      "slug": "youtube-hashtags-comedy-hashtags",
+      "title": "50 Comedy Hashtags for YouTube Shorts to Boost Your Views",
+      "normalized": "50 comedy hashtags for youtube shorts to boost your views"
+    },
+    {
+      "slug": "youtube-hashtags-cover",
+      "title": "YouTube Hashtag Strategy: 30 Proven Sets for Short-Form Creators",
+      "normalized": "youtube hashtag strategy 30 proven sets for short form creators"
+    },
+    {
+      "slug": "youtube-hashtags-curiosity",
+      "title": "30 Curiosity-Driven Hashtags for YouTube Shorts Creators",
+      "normalized": "30 curiosity driven hashtags for youtube shorts creators"
+    },
+    {
+      "slug": "youtube-hashtags-cute",
+      "title": "50 Cute YouTube Hashtag Sets for Maximum Reach",
+      "normalized": "50 cute youtube hashtag sets for maximum reach"
+    },
+    {
+      "slug": "youtube-hashtags-grwm",
+      "title": "50 Niche-Aware GRWM Hashtags for YouTube Shorts to Boost Discoverability",
+      "normalized": "50 niche aware grwm hashtags for youtube shorts to boost discoverability"
+    },
+    {
+      "slug": "youtube-hashtags-ideas-for-beginners",
+      "title": "50 YouTube Hashtag Ideas for Beginner Creators",
+      "normalized": "50 youtube hashtag ideas for beginner creators"
+    },
+    {
+      "slug": "youtube-hashtags-inspirational",
+      "title": "20 Inspirational YouTube Hashtag Sets for Short-Form Creators",
+      "normalized": "20 inspirational youtube hashtag sets for short form creators"
+    },
+    {
+      "slug": "youtube-hashtags-minimalist",
+      "title": "20 Minimalist YouTube Hashtag Packages for Short-Form Creators",
+      "normalized": "20 minimalist youtube hashtag packages for short form creators"
+    },
+    {
+      "slug": "youtube-hashtags-relatable",
+      "title": "50 Relatable YouTube Hashtags to Boost Your Short-Form Reach",
+      "normalized": "50 relatable youtube hashtags to boost your short form reach"
+    },
+    {
+      "slug": "youtube-hashtags-sad",
+      "title": "20 Sad YouTube Hashtag Sets for Short-Form Creators",
+      "normalized": "20 sad youtube hashtag sets for short form creators"
+    },
+    {
+      "slug": "youtube-hashtags-script",
+      "title": "YouTube Shorts Script Hashtags: 50 Niche-Aware Tags for Viral Views",
+      "normalized": "youtube shorts script hashtags 50 niche aware tags for viral views"
+    },
+    {
+      "slug": "youtube-hashtags-short",
+      "title": "50 YouTube Hashtag Strategies for Short-Form Creators",
+      "normalized": "50 youtube hashtag strategies for short form creators"
+    },
+    {
+      "slug": "youtube-hashtags-tips",
+      "title": "30 YouTube Hashtag Tips for Short-Form Creators",
+      "normalized": "30 youtube hashtag tips for short form creators"
+    },
+    {
+      "slug": "youtube-hashtags-travel",
+      "title": "50 Travel YouTube Hashtags to Boost Your Video Reach",
+      "normalized": "50 travel youtube hashtags to boost your video reach"
+    },
+    {
+      "slug": "youtube-hashtags-walkthrough",
+      "title": "YouTube Shorts Walkthrough Hashtag Strategy: 30 Niche-Aware Tags for Step-by-Step Creators",
+      "normalized": "youtube shorts walkthrough hashtag strategy 30 niche aware tags for step by step creators"
+    },
+    {
+      "slug": "youtube-hook-examples",
+      "title": "YouTube Hook Examples for the First 30 Seconds",
+      "normalized": "youtube hook examples for the first 30 seconds"
+    },
+    {
+      "slug": "youtube-hooks-brand-hashtags",
+      "title": "30 YouTube Hooks Using Brand Hashtags",
+      "normalized": "30 youtube hooks using brand hashtags"
+    },
+    {
+      "slug": "youtube-hooks-caption-for-selfies",
+      "title": "30 YouTube Hooks for Selfie Captions",
+      "normalized": "30 youtube hooks for selfie captions"
+    },
+    {
+      "slug": "youtube-hooks-comedy-hashtags",
+      "title": "50 YouTube Comedy Hooks to Stop the Scroll",
+      "normalized": "50 youtube comedy hooks to stop the scroll"
+    },
+    {
+      "slug": "youtube-hooks-contest",
+      "title": "50 YouTube Contest Hooks to Boost Your Engagement",
+      "normalized": "50 youtube contest hooks to boost your engagement"
+    },
+    {
+      "slug": "youtube-hooks-dad",
+      "title": "50 Dad-Focused YouTube Hooks That Actually Grab Attention",
+      "normalized": "50 dad focused youtube hooks that actually grab attention"
+    },
+    {
+      "slug": "youtube-hooks-food-ideas",
+      "title": "50 YouTube Food Hooks That Actually Stop Scrolling",
+      "normalized": "50 youtube food hooks that actually stop scrolling"
+    },
+    {
+      "slug": "youtube-hooks-funny",
+      "title": "50 Funny YouTube Hooks to Stop the Scroll",
+      "normalized": "50 funny youtube hooks to stop the scroll"
+    },
+    {
+      "slug": "youtube-hooks-get-ready-with-me",
+      "title": "50 Get Ready With Me YouTube Hooks That Actually Stop Scrollers",
+      "normalized": "50 get ready with me youtube hooks that actually stop scrollers"
+    },
+    {
+      "slug": "youtube-hooks-list",
+      "title": "30 YouTube Hooks for Short-Form Creators",
+      "normalized": "30 youtube hooks for short form creators"
+    },
+    {
+      "slug": "youtube-hooks-new-arrival",
+      "title": "50 YouTube Hooks for New Arrival Content",
+      "normalized": "50 youtube hooks for new arrival content"
+    },
+    {
+      "slug": "youtube-hooks-product",
+      "title": "50 Scroll-Stopping YouTube Hooks for Product Creators",
+      "normalized": "50 scroll stopping youtube hooks for product creators"
+    },
+    {
+      "slug": "youtube-hooks-review",
+      "title": "30 YouTube Hooks for Short-Form Review Creators",
+      "normalized": "30 youtube hooks for short form review creators"
+    },
+    {
+      "slug": "youtube-hooks-unboxing",
+      "title": "50 Unboxing Hooks for YouTube Shorts That Actually Get Clicks",
+      "normalized": "50 unboxing hooks for youtube shorts that actually get clicks"
+    },
+    {
+      "slug": "youtube-hooks-wedding",
+      "title": "50 Scroll-Stopping YouTube Hooks for Wedding Content Creators",
+      "normalized": "50 scroll stopping youtube hooks for wedding content creators"
+    },
+    {
+      "slug": "youtube-script-structure",
+      "title": "YouTube Script Structure That Keeps People Watching",
+      "normalized": "youtube script structure that keeps people watching"
+    },
+    {
+      "slug": "youtube-script-template-beginners",
+      "title": "YouTube Script Template for Beginners",
+      "normalized": "youtube script template for beginners"
+    },
+    {
+      "slug": "youtube-title-examples",
+      "title": "YouTube Title Examples That Get Clicks",
+      "normalized": "youtube title examples that get clicks"
+    },
+    {
+      "slug": "youtube-title-formulas",
+      "title": "YouTube Title Formulas that Drive Clicks",
+      "normalized": "youtube title formulas that drive clicks"
+    },
+    {
+      "slug": "youtube-titles-bio-ideas",
+      "title": "30 YouTube Bio Ideas to Attract Your Niche",
+      "normalized": "30 youtube bio ideas to attract your niche"
+    },
+    {
+      "slug": "youtube-titles-business",
+      "title": "20 High-CTR YouTube Title Formulas for Business Creators",
+      "normalized": "20 high ctr youtube title formulas for business creators"
+    },
+    {
+      "slug": "youtube-titles-caption-for-business",
+      "title": "50 Business YouTube Title Formulas That Actually Get Clicks",
+      "normalized": "50 business youtube title formulas that actually get clicks"
+    },
+    {
+      "slug": "youtube-titles-caption-for-selfies",
+      "title": "30 YouTube Titles for Selfie Videos That Actually Get Clicks",
+      "normalized": "30 youtube titles for selfie videos that actually get clicks"
+    },
+    {
+      "slug": "youtube-titles-comedy-hashtags",
+      "title": "30 Comedy YouTube Title Formulas to Boost Your Views",
+      "normalized": "30 comedy youtube title formulas to boost your views"
+    },
+    {
+      "slug": "youtube-titles-dance",
+      "title": "50 YouTube Title Formulas for Dance Creators to Boost Views",
+      "normalized": "50 youtube title formulas for dance creators to boost views"
+    },
+    {
+      "slug": "youtube-titles-fitness-hashtags",
+      "title": "30 YouTube Fitness Title Formulas to Boost Your Views",
+      "normalized": "30 youtube fitness title formulas to boost your views"
+    },
+    {
+      "slug": "youtube-titles-get-ready-with-me",
+      "title": "50 Get Ready With Me YouTube Title Ideas to Boost Your Views",
+      "normalized": "50 get ready with me youtube title ideas to boost your views"
+    },
+    {
+      "slug": "youtube-titles-giveaway",
+      "title": "50 YouTube Giveaway Title Formulas to Boost Engagement",
+      "normalized": "50 youtube giveaway title formulas to boost engagement"
+    },
+    {
+      "slug": "youtube-titles-grwm",
+      "title": "50 GRWM YouTube Title Formulas to Boost Your Short-Form Views",
+      "normalized": "50 grwm youtube title formulas to boost your short form views"
+    },
+    {
+      "slug": "youtube-titles-ideas-for-beginners",
+      "title": "50 YouTube Title Ideas for Beginner Creators to Get More Views",
+      "normalized": "50 youtube title ideas for beginner creators to get more views"
+    },
+    {
+      "slug": "youtube-titles-lifestyle",
+      "title": "50 YouTube Title Formulas for Lifestyle Creators to Boost Views",
+      "normalized": "50 youtube title formulas for lifestyle creators to boost views"
+    },
+    {
+      "slug": "youtube-titles-mystery",
+      "title": "30 Mystery YouTube Titles to Hook Your Audience",
+      "normalized": "30 mystery youtube titles to hook your audience"
+    },
+    {
+      "slug": "youtube-titles-skincare",
+      "title": "50 Skincare YouTube Titles That Actually Get Clicks",
+      "normalized": "50 skincare youtube titles that actually get clicks"
+    },
+    {
+      "slug": "youtube-titles-small-business-hashtags",
+      "title": "50 YouTube Title Formulas for Small Business Hashtag Videos",
+      "normalized": "50 youtube title formulas for small business hashtag videos"
+    },
+    {
+      "slug": "youtube-titles-storytime-ideas",
+      "title": "50 Storytime YouTube Title Ideas That Actually Get Clicks",
+      "normalized": "50 storytime youtube title ideas that actually get clicks"
+    },
+    {
+      "slug": "youtube-titles-trending-sound",
+      "title": "30 YouTube Title Formulas for Trending Sounds (2024)",
+      "normalized": "30 youtube title formulas for trending sounds 2024"
+    },
+    {
+      "slug": "youtube-titles-trending",
+      "title": "30 YouTube Title Formulas for Trending Topics in 2024",
+      "normalized": "30 youtube title formulas for trending topics in 2024"
+    },
+    {
+      "slug": "youtube-video-ideas-that-work",
+      "title": "YouTube Video Ideas That Get Views",
+      "normalized": "youtube video ideas that get views"
+    }
+  ],
+  "similar_pairs": [
+    {
+      "similarity": 1,
+      "slugs": [
+        "best-tiktok-bio-ideas",
+        "best-tiktok-bios-2025"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "funny-tiktok-captions",
+        "tiktok-captions-clickbait"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "how-to-write-tiktok-hooks",
+        "tiktok-captions-how-to"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "how-to-write-viral-hooks",
+        "viral-tiktok-hooks"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "instagram-captions-script-structure",
+        "instagram-titles-caption-ideas"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "instagram-hashtags-gaming-ideas",
+        "instagram-hashtags-prank"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "instagram-hashtags-gaming-ideas",
+        "instagram-hashtags-story"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "instagram-hashtags-gaming-ideas",
+        "instagram-hashtags-storytime"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "instagram-hashtags-gaming-ideas",
+        "instagram-hashtags-sunset"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "instagram-hashtags-prank",
+        "instagram-hashtags-story"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "instagram-hashtags-prank",
+        "instagram-hashtags-storytime"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "instagram-hashtags-story",
+        "instagram-hashtags-storytime"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "instagram-hashtags-story",
+        "instagram-hashtags-sunset"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "instagram-hashtags-storytime",
+        "instagram-hashtags-sunset"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "instagram-hooks-comedy-reel",
+        "instagram-hooks-content-ideas"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "instagram-hooks-content-ideas",
+        "instagram-hooks-tips"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "instagram-hooks-content-ideas",
+        "instagram-hooks-title-for-views"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "instagram-hooks-content-ideas",
+        "instagram-hooks-tutorial"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "instagram-hooks-fitness-ideas",
+        "instagram-hooks-tutorial"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "instagram-hooks-lets-play",
+        "tiktok-hooks-lets-play"
+      ]
+    },
+    {
+      "similarity": 0.778,
+      "slugs": [
+        "instagram-hooks-mom-life",
+        "instagram-hooks-tips"
+      ]
+    },
+    {
+      "similarity": 0.778,
+      "slugs": [
+        "instagram-hooks-mom-life",
+        "instagram-hooks-title-for-views"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "instagram-hooks-sunset",
+        "instagram-hooks-tips"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "instagram-hooks-sunset",
+        "instagram-hooks-title-for-views"
+      ]
+    },
+    {
+      "similarity": 1,
+      "slugs": [
+        "instagram-hooks-tips",
+        "instagram-hooks-title-for-views"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "instagram-hooks-tips",
+        "instagram-hooks-tutorial"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "instagram-hooks-title-for-views",
+        "instagram-hooks-tutorial"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "instagram-hooks-tutorial",
+        "tiktok-hooks-relatable"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "instagram-hooks-tutorial",
+        "tiktok-hooks-tips"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "instagram-hooks-tutorial",
+        "youtube-hooks-food-ideas"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "instagram-titles-aesthetic",
+        "instagram-titles-caption-ideas"
+      ]
+    },
+    {
+      "similarity": 0.7,
+      "slugs": [
+        "instagram-titles-aesthetic",
+        "instagram-titles-love"
+      ]
+    },
+    {
+      "similarity": 0.7,
+      "slugs": [
+        "instagram-titles-best-hashtags",
+        "instagram-titles-minimalist"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "instagram-titles-caption-ideas",
+        "tiktok-captions-trending-ideas"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "instagram-titles-caption-ideas",
+        "tiktok-hashtags-caption-ideas"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-caption-ideas",
+        "tiktok-captions-comparison"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-advanced",
+        "tiktok-captions-get-ready-with-me"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-advanced",
+        "tiktok-captions-long"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-advanced",
+        "tiktok-captions-ootd"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-advanced",
+        "tiktok-captions-team"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-advanced",
+        "tiktok-captions-yoga"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-adventure",
+        "tiktok-captions-cooking"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-adventure",
+        "tiktok-captions-nature"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-adventure",
+        "tiktok-captions-sunset"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-adventure",
+        "tiktok-captions-trending"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-adventure",
+        "tiktok-captions-unboxing"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-adventure",
+        "tiktok-captions-vacation"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-adventure",
+        "tiktok-captions-viral"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-attitude"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-confidence"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-cute"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-fitness"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-food"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-friends"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-funny"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-gaming"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-gym"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-inspirational"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-love"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-motivation"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-romantic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-sarcastic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-aesthetic",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-confidence"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-cute"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-fitness"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-food"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-friends"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-funny"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-gaming"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-gym"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-inspirational"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-love"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-motivation"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-romantic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-sarcastic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-attitude",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-beginners",
+        "tiktok-captions-business"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-beginners",
+        "tiktok-captions-comedy"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-beginners",
+        "tiktok-captions-dance"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-beginners",
+        "tiktok-captions-diy"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-beginners",
+        "tiktok-captions-education"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-beginners",
+        "tiktok-captions-event"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-beginners",
+        "tiktok-captions-finance"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-beginners",
+        "tiktok-captions-lifestyle"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-beginners",
+        "tiktok-captions-makeup"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-beginners",
+        "tiktok-captions-productivity"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-beginners",
+        "tiktok-captions-recipe"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-beginners",
+        "tiktok-captions-skincare"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-beginners",
+        "tiktok-captions-vlog"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-beginners",
+        "tiktok-captions-wedding"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-business",
+        "tiktok-captions-comedy"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-business",
+        "tiktok-captions-dance"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-business",
+        "tiktok-captions-diy"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-business",
+        "tiktok-captions-education"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-business",
+        "tiktok-captions-event"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-business",
+        "tiktok-captions-finance"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-business",
+        "tiktok-captions-lets-play"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-business",
+        "tiktok-captions-lifestyle"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-business",
+        "tiktok-captions-makeup"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-business",
+        "tiktok-captions-productivity"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-business",
+        "tiktok-captions-recipe"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-business",
+        "tiktok-captions-skincare"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-business",
+        "tiktok-captions-vlog"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-business",
+        "tiktok-captions-wedding"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-coffee",
+        "tiktok-captions-product"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-collab",
+        "tiktok-captions-testimonial"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-comedy",
+        "tiktok-captions-dance"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-comedy",
+        "tiktok-captions-diy"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-comedy",
+        "tiktok-captions-education"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-comedy",
+        "tiktok-captions-event"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-comedy",
+        "tiktok-captions-finance"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-comedy",
+        "tiktok-captions-lets-play"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-comedy",
+        "tiktok-captions-lifestyle"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-comedy",
+        "tiktok-captions-makeup"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-comedy",
+        "tiktok-captions-productivity"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-comedy",
+        "tiktok-captions-recipe"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-comedy",
+        "tiktok-captions-skincare"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-comedy",
+        "tiktok-captions-vlog"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-comedy",
+        "tiktok-captions-wedding"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-cute"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-fitness"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-food"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-friends"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-funny"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-gaming"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-gym"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-inspirational"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-love"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-motivation"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-romantic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-sarcastic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-confidence",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-controversial",
+        "tiktok-hashtags-controversial"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-cooking",
+        "tiktok-captions-nature"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-cooking",
+        "tiktok-captions-sunset"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-cooking",
+        "tiktok-captions-trending"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-cooking",
+        "tiktok-captions-unboxing"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-cooking",
+        "tiktok-captions-vacation"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-cooking",
+        "tiktok-captions-viral"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cover",
+        "tiktok-captions-tips"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cover",
+        "tiktok-captions-top-10"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-cover",
+        "tiktok-captions-tutorial"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-curiosity",
+        "tiktok-captions-opening"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-curiosity",
+        "tiktok-captions-storytime"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-fitness"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-food"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-friends"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-funny"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-gaming"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-gym"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-inspirational"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-love"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-motivation"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-romantic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-sarcastic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-cute",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-dad",
+        "tiktok-captions-tech"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-dance-reel",
+        "tiktok-captions-dance"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-dance-reel",
+        "youtube-captions-dance-reel"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-dance",
+        "tiktok-captions-diy"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-dance",
+        "tiktok-captions-education"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-dance",
+        "tiktok-captions-event"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-dance",
+        "tiktok-captions-finance"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-dance",
+        "tiktok-captions-lets-play"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-dance",
+        "tiktok-captions-lifestyle"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-dance",
+        "tiktok-captions-makeup"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-dance",
+        "tiktok-captions-productivity"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-dance",
+        "tiktok-captions-recipe"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-dance",
+        "tiktok-captions-skincare"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-dance",
+        "tiktok-captions-vlog"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-dance",
+        "tiktok-captions-wedding"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-diy",
+        "tiktok-captions-education"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-diy",
+        "tiktok-captions-event"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-diy",
+        "tiktok-captions-finance"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-diy",
+        "tiktok-captions-lets-play"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-diy",
+        "tiktok-captions-lifestyle"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-diy",
+        "tiktok-captions-makeup"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-diy",
+        "tiktok-captions-productivity"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-diy",
+        "tiktok-captions-recipe"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-diy",
+        "tiktok-captions-skincare"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-diy",
+        "tiktok-captions-vlog"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-diy",
+        "tiktok-captions-wedding"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-duet",
+        "tiktok-captions-giveaway"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-duet",
+        "tiktok-captions-grwm"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-education",
+        "tiktok-captions-event"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-education",
+        "tiktok-captions-finance"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-education",
+        "tiktok-captions-lets-play"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-education",
+        "tiktok-captions-lifestyle"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-education",
+        "tiktok-captions-makeup"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-education",
+        "tiktok-captions-productivity"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-education",
+        "tiktok-captions-recipe"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-education",
+        "tiktok-captions-skincare"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-education",
+        "tiktok-captions-vlog"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-education",
+        "tiktok-captions-wedding"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-engagement",
+        "tiktok-captions-tech"
+      ]
+    },
+    {
+      "similarity": 0.7,
+      "slugs": [
+        "tiktok-captions-entrepreneur",
+        "tiktok-captions-family"
+      ]
+    },
+    {
+      "similarity": 0.7,
+      "slugs": [
+        "tiktok-captions-entrepreneur",
+        "tiktok-captions-pet"
+      ]
+    },
+    {
+      "similarity": 0.7,
+      "slugs": [
+        "tiktok-captions-entrepreneur",
+        "tiktok-captions-stitch"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-entrepreneur",
+        "tiktok-captions-tech"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-event",
+        "tiktok-captions-finance"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-event",
+        "tiktok-captions-lets-play"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-event",
+        "tiktok-captions-lifestyle"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-event",
+        "tiktok-captions-makeup"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-event",
+        "tiktok-captions-productivity"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-event",
+        "tiktok-captions-recipe"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-event",
+        "tiktok-captions-skincare"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-event",
+        "tiktok-captions-vlog"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-event",
+        "tiktok-captions-wedding"
+      ]
+    },
+    {
+      "similarity": 0.636,
+      "slugs": [
+        "tiktok-captions-family",
+        "tiktok-captions-hair"
+      ]
+    },
+    {
+      "similarity": 0.636,
+      "slugs": [
+        "tiktok-captions-family",
+        "tiktok-captions-pet"
+      ]
+    },
+    {
+      "similarity": 0.636,
+      "slugs": [
+        "tiktok-captions-family",
+        "tiktok-captions-restaurant"
+      ]
+    },
+    {
+      "similarity": 0.8,
+      "slugs": [
+        "tiktok-captions-family",
+        "tiktok-captions-stitch"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-finance",
+        "tiktok-captions-lets-play"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-finance",
+        "tiktok-captions-lifestyle"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-finance",
+        "tiktok-captions-makeup"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-finance",
+        "tiktok-captions-productivity"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-finance",
+        "tiktok-captions-recipe"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-finance",
+        "tiktok-captions-skincare"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-finance",
+        "tiktok-captions-vlog"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-finance",
+        "tiktok-captions-wedding"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness-hashtags",
+        "tiktok-captions-gaming-video"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness-hashtags",
+        "tiktok-captions-y2k"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness",
+        "tiktok-captions-food"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness",
+        "tiktok-captions-friends"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness",
+        "tiktok-captions-funny"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness",
+        "tiktok-captions-gaming"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness",
+        "tiktok-captions-gym"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness",
+        "tiktok-captions-inspirational"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness",
+        "tiktok-captions-love"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness",
+        "tiktok-captions-motivation"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness",
+        "tiktok-captions-romantic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness",
+        "tiktok-captions-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness",
+        "tiktok-captions-sarcastic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-fitness",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-food",
+        "tiktok-captions-friends"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-food",
+        "tiktok-captions-funny"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-food",
+        "tiktok-captions-gaming"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-food",
+        "tiktok-captions-gym"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-food",
+        "tiktok-captions-inspirational"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-food",
+        "tiktok-captions-love"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-food",
+        "tiktok-captions-motivation"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-food",
+        "tiktok-captions-romantic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-food",
+        "tiktok-captions-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-food",
+        "tiktok-captions-sarcastic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-food",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-food",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-food",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-food",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-friends",
+        "tiktok-captions-funny"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-friends",
+        "tiktok-captions-gaming"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-friends",
+        "tiktok-captions-gym"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-friends",
+        "tiktok-captions-inspirational"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-friends",
+        "tiktok-captions-love"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-friends",
+        "tiktok-captions-motivation"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-friends",
+        "tiktok-captions-romantic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-friends",
+        "tiktok-captions-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-friends",
+        "tiktok-captions-sarcastic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-friends",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-friends",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-friends",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-friends",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-funny",
+        "tiktok-captions-gaming"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-funny",
+        "tiktok-captions-gym"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-funny",
+        "tiktok-captions-inspirational"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-funny",
+        "tiktok-captions-love"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-funny",
+        "tiktok-captions-motivation"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-funny",
+        "tiktok-captions-romantic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-funny",
+        "tiktok-captions-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-funny",
+        "tiktok-captions-sarcastic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-funny",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-funny",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-funny",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-funny",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gaming-video",
+        "tiktok-captions-how-to"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gaming-video",
+        "tiktok-captions-secret"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-gaming-video",
+        "tiktok-captions-y2k"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gaming",
+        "tiktok-captions-gym"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gaming",
+        "tiktok-captions-inspirational"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gaming",
+        "tiktok-captions-love"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gaming",
+        "tiktok-captions-motivation"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gaming",
+        "tiktok-captions-romantic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gaming",
+        "tiktok-captions-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gaming",
+        "tiktok-captions-sarcastic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gaming",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gaming",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gaming",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gaming",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-get-ready-with-me",
+        "tiktok-captions-long"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-get-ready-with-me",
+        "tiktok-captions-ootd"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-get-ready-with-me",
+        "tiktok-captions-team"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-get-ready-with-me",
+        "tiktok-captions-yoga"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-giveaway",
+        "tiktok-captions-grwm"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gym",
+        "tiktok-captions-inspirational"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gym",
+        "tiktok-captions-love"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gym",
+        "tiktok-captions-motivation"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gym",
+        "tiktok-captions-romantic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gym",
+        "tiktok-captions-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gym",
+        "tiktok-captions-sarcastic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gym",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gym",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gym",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-gym",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.8,
+      "slugs": [
+        "tiktok-captions-hair",
+        "tiktok-captions-restaurant"
+      ]
+    },
+    {
+      "similarity": 0.636,
+      "slugs": [
+        "tiktok-captions-hair",
+        "tiktok-captions-stitch"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-how-to",
+        "tiktok-captions-y2k"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-inspirational",
+        "tiktok-captions-love"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-inspirational",
+        "tiktok-captions-motivation"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-inspirational",
+        "tiktok-captions-romantic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-inspirational",
+        "tiktok-captions-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-inspirational",
+        "tiktok-captions-sarcastic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-inspirational",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-inspirational",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-inspirational",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-inspirational",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-lets-play",
+        "tiktok-captions-lifestyle"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-lets-play",
+        "tiktok-captions-makeup"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-lets-play",
+        "tiktok-captions-productivity"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-lets-play",
+        "tiktok-captions-recipe"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-lets-play",
+        "tiktok-captions-skincare"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-lets-play",
+        "tiktok-captions-wedding"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-lifestyle",
+        "tiktok-captions-makeup"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-lifestyle",
+        "tiktok-captions-productivity"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-lifestyle",
+        "tiktok-captions-recipe"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-lifestyle",
+        "tiktok-captions-skincare"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-lifestyle",
+        "tiktok-captions-vlog"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-lifestyle",
+        "tiktok-captions-wedding"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-list",
+        "tiktok-captions-reaction"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-list",
+        "tiktok-captions-relatable"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-list",
+        "tiktok-captions-tips"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-long",
+        "tiktok-captions-ootd"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-long",
+        "tiktok-captions-team"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-long",
+        "tiktok-captions-yoga"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-love",
+        "tiktok-captions-motivation"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-love",
+        "tiktok-captions-romantic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-love",
+        "tiktok-captions-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-love",
+        "tiktok-captions-sarcastic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-love",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-love",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-love",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-love",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-makeup",
+        "tiktok-captions-productivity"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-makeup",
+        "tiktok-captions-recipe"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-makeup",
+        "tiktok-captions-skincare"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-makeup",
+        "tiktok-captions-vlog"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-makeup",
+        "tiktok-captions-wedding"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-minimalist",
+        "tiktok-hashtags-minimalist"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-motivation",
+        "tiktok-captions-romantic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-motivation",
+        "tiktok-captions-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-motivation",
+        "tiktok-captions-sarcastic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-motivation",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-motivation",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-motivation",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-motivation",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-music",
+        "tiktok-captions-study"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-mystery",
+        "tiktok-captions-story"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-nature",
+        "tiktok-captions-sunset"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-nature",
+        "tiktok-captions-trending"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-nature",
+        "tiktok-captions-unboxing"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-nature",
+        "tiktok-captions-vacation"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-nature",
+        "tiktok-captions-viral"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-ootd",
+        "tiktok-captions-team"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-ootd",
+        "tiktok-captions-yoga"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-opening",
+        "tiktok-captions-storytime"
+      ]
+    },
+    {
+      "similarity": 0.636,
+      "slugs": [
+        "tiktok-captions-pet",
+        "tiktok-captions-stitch"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-productivity",
+        "tiktok-captions-recipe"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-productivity",
+        "tiktok-captions-skincare"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-productivity",
+        "tiktok-captions-vlog"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-productivity",
+        "tiktok-captions-wedding"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-promotion",
+        "tiktok-hooks-promotion"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-reaction",
+        "tiktok-captions-relatable"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-recipe",
+        "tiktok-captions-skincare"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-recipe",
+        "tiktok-captions-vlog"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-recipe",
+        "tiktok-captions-wedding"
+      ]
+    },
+    {
+      "similarity": 0.636,
+      "slugs": [
+        "tiktok-captions-restaurant",
+        "tiktok-captions-stitch"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-romantic",
+        "tiktok-captions-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-romantic",
+        "tiktok-captions-sarcastic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-romantic",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-romantic",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-romantic",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-romantic",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-running",
+        "tiktok-captions-self-love"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-sad",
+        "tiktok-captions-sarcastic"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-sad",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-sad",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-sad",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-sad",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-sarcastic",
+        "tiktok-captions-sassy"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-sarcastic",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-sarcastic",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-sarcastic",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-sassy",
+        "tiktok-captions-savage"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-sassy",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-sassy",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-savage",
+        "tiktok-captions-selfie"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-savage",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-script-template",
+        "tiktok-captions-short"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-script-template",
+        "tiktok-captions-walkthrough"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-secret",
+        "tiktok-captions-y2k"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-selfie",
+        "tiktok-captions-travel"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-short",
+        "tiktok-captions-trending-ideas"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-short",
+        "tiktok-captions-walkthrough"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-short",
+        "tiktok-hashtags-caption-ideas"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-short",
+        "youtube-captions-top-10"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-skincare",
+        "tiktok-captions-vlog"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-captions-skincare",
+        "tiktok-captions-wedding"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-stitch-ideas",
+        "tiktok-titles-dance-ideas"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-sunset",
+        "tiktok-captions-trending"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-sunset",
+        "tiktok-captions-unboxing"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-sunset",
+        "tiktok-captions-vacation"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-sunset",
+        "tiktok-captions-viral"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-team",
+        "tiktok-captions-yoga"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-tips",
+        "tiktok-captions-tutorial"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-top-10",
+        "tiktok-captions-tutorial"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-trending-ideas",
+        "tiktok-captions-walkthrough"
+      ]
+    },
+    {
+      "similarity": 0.778,
+      "slugs": [
+        "tiktok-captions-trending-ideas",
+        "tiktok-hashtags-caption-ideas"
+      ]
+    },
+    {
+      "similarity": 0.7,
+      "slugs": [
+        "tiktok-captions-trending-ideas",
+        "tiktok-titles-trending-sounds-ideas"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-trending-reel",
+        "tiktok-captions-trending"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-trending-sound",
+        "trending-tiktok-captions"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-trending",
+        "tiktok-captions-unboxing"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-trending",
+        "tiktok-captions-vacation"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-trending",
+        "tiktok-captions-viral"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-unboxing",
+        "tiktok-captions-vacation"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-unboxing",
+        "tiktok-captions-viral"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-captions-vacation",
+        "tiktok-captions-viral"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-captions-vlog",
+        "tiktok-captions-wedding"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-captions-walkthrough",
+        "tiktok-hashtags-caption-ideas"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-hashtags-attitude",
+        "tiktok-hashtags-finance"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-hashtags-attitude",
+        "tiktok-hashtags-first-line"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-hashtags-attitude",
+        "tiktok-hashtags-nature"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-hashtags-finance",
+        "tiktok-hashtags-first-line"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-hashtags-finance",
+        "tiktok-hashtags-nature"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-hashtags-first-line",
+        "tiktok-hashtags-nature"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-hooks-business",
+        "youtube-hooks-list"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-hooks-comedy-reel",
+        "tiktok-hooks-dance-ideas"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-hooks-comedy-reel",
+        "tiktok-hooks-pov"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-hooks-comedy-reel",
+        "tiktok-hooks-viral-ideas"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-hooks-comedy-reel",
+        "youtube-hooks-comedy-hashtags"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-hooks-dance-ideas",
+        "tiktok-hooks-pov"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-hooks-dance-ideas",
+        "tiktok-hooks-viral-ideas"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-hooks-dance-ideas",
+        "tiktok-titles-intro-hooks"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-hooks-dance-ideas",
+        "viral-tiktok-hooks"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "tiktok-hooks-pov",
+        "tiktok-hooks-viral-ideas"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-hooks-pov",
+        "tiktok-titles-intro-hooks"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-hooks-pov",
+        "viral-tiktok-hooks"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "tiktok-hooks-reel-captions",
+        "tiktok-hooks-relatable"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-hooks-reel-captions",
+        "tiktok-hooks-tips"
+      ]
+    },
+    {
+      "similarity": 0.857,
+      "slugs": [
+        "tiktok-hooks-relatable",
+        "tiktok-hooks-tips"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-hooks-tips",
+        "youtube-hooks-food-ideas"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "tiktok-hooks-viral-ideas",
+        "tiktok-titles-intro-hooks"
+      ]
+    },
+    {
+      "similarity": 0.857,
+      "slugs": [
+        "tiktok-hooks-viral-ideas",
+        "viral-tiktok-hooks"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-titles-beauty-ideas",
+        "tiktok-titles-skincare"
+      ]
+    },
+    {
+      "similarity": 0.7,
+      "slugs": [
+        "tiktok-titles-clean-girl",
+        "tiktok-titles-diy"
+      ]
+    },
+    {
+      "similarity": 0.7,
+      "slugs": [
+        "tiktok-titles-clean-girl",
+        "tiktok-titles-fitness"
+      ]
+    },
+    {
+      "similarity": 0.636,
+      "slugs": [
+        "tiktok-titles-clean-girl",
+        "tiktok-titles-gaming-ideas"
+      ]
+    },
+    {
+      "similarity": 0.7,
+      "slugs": [
+        "tiktok-titles-clean-girl",
+        "tiktok-titles-travel"
+      ]
+    },
+    {
+      "similarity": 0.778,
+      "slugs": [
+        "tiktok-titles-diy",
+        "tiktok-titles-fitness"
+      ]
+    },
+    {
+      "similarity": 0.7,
+      "slugs": [
+        "tiktok-titles-diy",
+        "tiktok-titles-gaming-ideas"
+      ]
+    },
+    {
+      "similarity": 0.778,
+      "slugs": [
+        "tiktok-titles-diy",
+        "tiktok-titles-travel"
+      ]
+    },
+    {
+      "similarity": 0.7,
+      "slugs": [
+        "tiktok-titles-fitness",
+        "tiktok-titles-gaming-ideas"
+      ]
+    },
+    {
+      "similarity": 0.778,
+      "slugs": [
+        "tiktok-titles-fitness",
+        "tiktok-titles-travel"
+      ]
+    },
+    {
+      "similarity": 0.7,
+      "slugs": [
+        "tiktok-titles-gaming-ideas",
+        "tiktok-titles-travel"
+      ]
+    },
+    {
+      "similarity": 0.75,
+      "slugs": [
+        "tiktok-titles-intro-hooks",
+        "viral-tiktok-hooks"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "youtube-captions-baddie",
+        "youtube-captions-cooking"
+      ]
+    },
+    {
+      "similarity": 0.714,
+      "slugs": [
+        "youtube-captions-comedy-reel",
+        "youtube-captions-dance-reel"
+      ]
+    },
+    {
+      "similarity": 0.625,
+      "slugs": [
+        "youtube-captions-cute",
+        "youtube-hooks-list"
+      ]
+    },
+    {
+      "similarity": 0.875,
+      "slugs": [
+        "youtube-hashtags-advanced",
+        "youtube-hashtags-short"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "youtube-hashtags-advanced",
+        "youtube-hashtags-tips"
+      ]
+    },
+    {
+      "similarity": 0.7,
+      "slugs": [
+        "youtube-hashtags-aesthetic",
+        "youtube-hashtags-cover"
+      ]
+    },
+    {
+      "similarity": 0.778,
+      "slugs": [
+        "youtube-hashtags-aesthetic",
+        "youtube-hashtags-inspirational"
+      ]
+    },
+    {
+      "similarity": 0.778,
+      "slugs": [
+        "youtube-hashtags-aesthetic",
+        "youtube-hashtags-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "youtube-hashtags-aesthetic",
+        "youtube-hashtags-short"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "youtube-hashtags-aesthetic",
+        "youtube-hashtags-tips"
+      ]
+    },
+    {
+      "similarity": 0.7,
+      "slugs": [
+        "youtube-hashtags-cover",
+        "youtube-hashtags-inspirational"
+      ]
+    },
+    {
+      "similarity": 0.7,
+      "slugs": [
+        "youtube-hashtags-cover",
+        "youtube-hashtags-sad"
+      ]
+    },
+    {
+      "similarity": 0.778,
+      "slugs": [
+        "youtube-hashtags-inspirational",
+        "youtube-hashtags-sad"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "youtube-hashtags-inspirational",
+        "youtube-hashtags-short"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "youtube-hashtags-inspirational",
+        "youtube-hashtags-tips"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "youtube-hashtags-minimalist",
+        "youtube-hashtags-short"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "youtube-hashtags-minimalist",
+        "youtube-hashtags-tips"
+      ]
+    },
+    {
+      "similarity": 0.667,
+      "slugs": [
+        "youtube-hashtags-sad",
+        "youtube-hashtags-short"
+      ]
+    }
+  ]
+}

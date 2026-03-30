@@ -1,0 +1,23 @@
+{
+  "version": "194.0",
+  "generated_at": "2026-03-30T14:20:00.000Z",
+  "chain_steps": [
+    "hook-generator",
+    "tiktok-caption-generator",
+    "hashtag-generator",
+    "title-generator"
+  ],
+  "step_labels": {
+    "hook-generator": "Step 1 of 4 · Build your TikTok content chain",
+    "tiktok-caption-generator": "Step 2 of 4 · Build your TikTok content chain",
+    "hashtag-generator": "Step 3 of 4 · Build your TikTok content chain",
+    "title-generator": "Step 4 of 4 · Build your TikTok content chain"
+  },
+  "next_action_targets": {
+    "hook-generator": "/tools/tiktok-caption-generator",
+    "tiktok-caption-generator": "/tools/hashtag-generator",
+    "hashtag-generator": "/tools/title-generator",
+    "title-generator": "https://www.tiktok.com/upload"
+  },
+  "landing_experience_enabled": true
+}

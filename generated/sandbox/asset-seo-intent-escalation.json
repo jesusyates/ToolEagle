@@ -1,0 +1,32 @@
+{
+  "version": "v163.0",
+  "updatedAt": "2026-03-29T01:06:56.176Z",
+  "intent_state_distribution": {
+    "ai_citation_discovery": 15,
+    "seo_discovery": 348,
+    "high_intent_tool_entry": 102
+  },
+  "escalation_paths": [
+    {
+      "from": "seo_discovery",
+      "to": "seo_discovery",
+      "count": 348
+    },
+    {
+      "from": "high_intent_tool_entry",
+      "to": "high_intent_tool_entry",
+      "count": 102
+    },
+    {
+      "from": "ai_citation_discovery",
+      "to": "ai_citation_discovery",
+      "count": 15
+    }
+  ],
+  "top_escalated_topics": [],
+  "monetization_ready_segments": 0,
+  "notes": [
+    "V163 intent escalation refines V162; does not replace monetization safety gates",
+    "rows: 465"
+  ]
+}

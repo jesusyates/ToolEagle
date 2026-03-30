@@ -1,0 +1,31 @@
+{
+  "version": "1",
+  "updated_at": "2026-03-30T14:42:19.959Z",
+  "source_file": "C:\\Users\\44570\\Desktop\\tooleagle\\generated\\tiktok-chain-events.jsonl",
+  "derived_from": "v195-chain-completion aggregate (started sessions, strict ordered milestones)",
+  "biggest_drop_step": {
+    "transition": null,
+    "from_step": null,
+    "to_step": null,
+    "lost_sessions": 0,
+    "from_count": 0,
+    "to_count": 0,
+    "relative_drop_rate": 0,
+    "note": "no started sessions in source file"
+  },
+  "likely_reason_candidates": [
+    "No session_start rows in tiktok-chain-events.jsonl yet; collect production events before diagnosing."
+  ],
+  "sessions_stuck_at_hook_only": 0,
+  "sessions_stuck_before_caption": 0,
+  "sessions_stuck_before_hashtag": 0,
+  "sessions_stuck_before_title": 0,
+  "sessions_stuck_before_upload": 0,
+  "definitions": {
+    "stuck_at_hook_only": "Reached hook_generated in strict order but not caption_generated (reaching_hook − reaching_caption).",
+    "stuck_before_caption": "Started session but did not reach caption_generated in strict order (started − reaching_caption).",
+    "stuck_before_hashtag": "Started session but did not reach hashtag_generated in strict order.",
+    "stuck_before_title": "Started session but did not reach title_generated in strict order.",
+    "stuck_before_upload": "Started session but did not reach upload_redirect in strict order (includes all non-completers)."
+  }
+}

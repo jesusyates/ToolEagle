@@ -1,0 +1,67 @@
+{
+  "version": "175",
+  "builtAt": "2026-03-30T11:03:06.691Z",
+  "sources": {
+    "gsc_search_performance": true,
+    "growth_priority": true,
+    "tool_conversion_map": true,
+    "plausible_export": false,
+    "seo_real_metrics": true,
+    "indexing_queue": true,
+    "retrieval_utilization": true
+  },
+  "gsc_error": "fetch failed",
+  "gsc_status": "token_error",
+  "gsc_data_empty": true,
+  "gsc_fallback_used": true,
+  "analytics_fallback_used": true,
+  "pages_generated": 352,
+  "pages_indexed_approx": 352,
+  "impressions": 6029,
+  "clicks": 359,
+  "ctr": 0.0595,
+  "avg_position": 29.98,
+  "retrieval_share": 0.835,
+  "generation_success_rate": 0.792,
+  "tool_click_rate": 0,
+  "copy_rate": 0.513,
+  "generation_complete_rate": 0.487,
+  "publish_redirect_rate": 0,
+  "tool_entry_total": 0,
+  "upgrade_click_rate": null,
+  "notes": {
+    "plausible": "Client-side Plausible (next-plausible). Optional batch: export top pages JSON to generated/plausible-export.json to merge impressions here.",
+    "upgrade_rate": "Wire dashboard export or server analytics when available.",
+    "v175_data_activation": "When GSC/analytics are empty, impressions/ctr/position are proxied from content depth + topic fail rates + retrieval share so ramp logic never sees all-null growth."
+  },
+  "plausible_overlay": null,
+  "seo_real_overlay": {
+    "updatedAt": "2026-03-29T01:07:56.046Z",
+    "daily_generated_pages": 7,
+    "retrieval_share": 0,
+    "avg_cost_per_page": 2,
+    "run_success_rate": 1,
+    "last_7_day_runs": [
+      {
+        "date": "2026-03-29",
+        "success": true,
+        "zh_generated": 5,
+        "en_generated": 2,
+        "stop_reason": "success"
+      }
+    ]
+  },
+  "stale_data": true,
+  "data_freshness": {
+    "version": 175,
+    "updatedAt": "2026-03-30T11:03:06.691Z",
+    "threshold_hours": 48,
+    "gsc_last_updated": "2026-03-30T11:03:02.448Z",
+    "analytics_last_updated": null,
+    "conversion_last_updated": "2026-03-30T11:03:02.890Z",
+    "stale_data": true,
+    "stale_reasons": [
+      "analytics_missing"
+    ]
+  }
+}

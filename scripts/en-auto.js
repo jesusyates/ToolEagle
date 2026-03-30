@@ -19,6 +19,11 @@ const OUTPUT_PATH = isSeoDryRun()
   ? pathInSandbox(process.cwd(), "data", "en-how-to-new.json")
   : path.join(process.cwd(), "data", "en-how-to-new.json");
 const LIMIT = 50;
+function effectiveEnLimit() {
+  const scale = parseFloat(process.env.DAILY_ENGINE_BATCH_SCALE || "1");
+  const s = Number.isFinite(scale) && scale > 0 ? Math.min(1, scale) : 1;
+  return Math.max(1, Math.floor(LIMIT * s));
+}
 
 const ZH_TO_EN_GOALS = {
   涨粉: "grow",
@@ -87,7 +92,7 @@ function main() {
     });
   }
 
-  const toGenerate = candidates.slice(0, LIMIT);
+  const toGenerate = candidates.slice(0, effectiveEnLimit());
 
   const dir = path.dirname(OUTPUT_PATH);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });

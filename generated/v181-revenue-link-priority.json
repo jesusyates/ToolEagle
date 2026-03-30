@@ -1,0 +1,8 @@
+{
+  "version": "181",
+  "builtAt": "2026-03-30T11:03:10.424Z",
+  "note": "Applied in build-internal-link-priority-report.ts — boost inbound to high exact-revenue tools; friction tools penalized.",
+  "linkScoreBoostByToolSlug": {},
+  "linkScorePenaltyByToolSlug": {},
+  "preferredOutboundTargets": {}
+}

@@ -47,6 +47,15 @@ export function buildV106UserSuffix(locale: string, count: number, depth: "compa
   return `\n\nV106 — PUBLISH-READY VALUE PACK (mandatory, all keys):\n${packRule}\n${hookRule}\n${whyRule}\n${ctxRule}\n${rhythmRule}\n${cmpRule}\n${depthRule}`;
 }
 
+/** V172 — Retrieval-conditioned packs: distinct non-template variants. */
+export function buildV172UserSuffix(locale: string, count: number): string {
+  const zh = locale === "zh" || locale.startsWith("zh");
+  if (zh) {
+    return `\n\nV172 — 高质量生成：必须落实上文 REFERENCE_SNIPPETS 的结构与信息密度（禁止原句照抄）。每个 package 的 hook、caption、cta_line、script_talking_points 必须互不重复、可拍摄可粘贴。输出恰好 ${count} 套完整 JSON。`;
+  }
+  return `\n\nV172 — QUALITY: Apply REFERENCE_SNIPPETS above for tone/structure (never verbatim). Each package must have a distinct hook, caption with an explicit engagement CTA, teleprompter-ready script, and non-templated wording. Output exactly ${count} complete packages in JSON.`;
+}
+
 export function buildBaseUserInstruction(
   userInput: string,
   count: number,

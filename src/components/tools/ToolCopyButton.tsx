@@ -52,6 +52,7 @@ export function ToolCopyButton({
           }
         }
         await onClick();
+        onCopied?.();
         if (btn) {
           copiedRef.current = true;
           btn.dataset.copied = "true";

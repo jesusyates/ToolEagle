@@ -1,0 +1,27 @@
+{
+  "version": "173",
+  "builtAt": "2026-03-30T11:03:05.978Z",
+  "relax_streak_threshold": 3,
+  "strict_fail_streak_keys": 3,
+  "top_streaks": [
+    {
+      "key": "/tools/hook-generator|cd76c1c286074b58",
+      "streak": 2
+    },
+    {
+      "key": "/tools/hook-generator|b5c6773fcea06940",
+      "streak": 0
+    },
+    {
+      "key": "/unknown-tool|2cf24dba5fb0a30e",
+      "streak": 0
+    }
+  ],
+  "events_last_window": {
+    "strict_503": 0,
+    "router_error": 4,
+    "relaxed_salvage_success": 0,
+    "relaxed_salvage_failed": 0
+  },
+  "state_path": "generated/v173-degradation-state.json"
+}

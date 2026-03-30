@@ -1,0 +1,26 @@
+{
+  "version": "187.1",
+  "builtAt": "2026-03-29T15:36:19.985Z",
+  "storage_primary": "client_localStorage",
+  "storage_key": "te_v187_creator_memory",
+  "anonymous_id_key": "te_v187_anon_id",
+  "server_future": "Supabase table or JSONL recommended for cross-device sync",
+  "schema": {
+    "anonymous_id": "string (UUID)",
+    "user_id": "string | null when logged in",
+    "platform": "tiktok | mixed | unknown",
+    "niche_hints": "string[] inferred from recent inputs",
+    "tool_usage_history": "{ tool_slug, ts, journey_step? }[]",
+    "generation_history": "{ tool_slug, ts, input_preview }[]",
+    "copy_events": "{ tool_slug, result_type, ts }[]",
+    "publish_events": "[] placeholder",
+    "preferred_content_type": "string | null",
+    "last_v186_intent_id": "string | null",
+    "last_v186_scenario_id": "string | null"
+  },
+  "example_profile_inferred": {
+    "creator_level": "beginner | intermediate | advanced",
+    "primary_goal": "views | followers | sales",
+    "dominant_style": "educational | selling | storytelling"
+  }
+}

@@ -2,6 +2,13 @@
  * V109 — Behavioral output-quality signals (JSONL via API). No ratings UI.
  */
 
+import { recordV187CopyEvent, recordV187GenerationEvent } from "@/lib/creator-guidance/creator-memory-store";
+import {
+  emitTikTokChainCopyIfApplicable,
+  emitTikTokChainGenerationIfApplicable,
+  isTikTokChainToolSlug
+} from "@/lib/tiktok-chain-tracking";
+
 export type OutputResultType = "hook" | "caption" | "hashtags" | "full" | "script" | "block" | "cta" | "meta";
 
 const PREFIX = "v109:tool:";
@@ -80,8 +87,20 @@ function post(payload: Record<string, unknown>) {
   }).catch(() => {});
 }
 
+async function postContentEvent(eventType: "generate" | "copy", contentId: string) {
+  try {
+    await fetch("/api/content-memory/content-events", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content_id: contentId, event_type: eventType })
+    });
+  } catch {
+    // non-blocking
+  }
+}
+
 /** User copied output (button or delegated copy). */
-export function logOutputCopy(toolSlug: string, resultType: OutputResultType) {
+export function logOutputCopy(toolSlug: string, resultType: OutputResultType, contentId: string) {
   post({
     type: "output_copy",
     toolSlug,
@@ -89,14 +108,24 @@ export function logOutputCopy(toolSlug: string, resultType: OutputResultType) {
     sessionId: getOrCreateSessionId(),
     ts: new Date().toISOString()
   });
+  recordV187CopyEvent(toolSlug, resultType);
+  emitTikTokChainCopyIfApplicable(toolSlug);
+  void postContentEvent("copy", contentId);
 }
 
 /**
  * Call once after a successful generation completes (template or AI).
  * Updates session generation count and logs for aggregation.
  */
-export function recordGenerationComplete(toolSlug: string, opts: { wasRegenerate: boolean }) {
+export function recordGenerationComplete(
+  toolSlug: string,
+  opts: { wasRegenerate: boolean; inputPreview?: string; contentId: string }
+) {
   if (typeof window === "undefined") return;
+  recordV187GenerationEvent(toolSlug, {
+    wasRegenerate: opts.wasRegenerate,
+    inputPreview: opts.inputPreview
+  });
   const now = Date.now();
   const lastKey = sessionKey(toolSlug, "lastGenAt");
   const countKey = sessionKey(toolSlug, "genCount");
@@ -118,4 +147,6 @@ export function recordGenerationComplete(toolSlug: string, opts: { wasRegenerate
     timeSinceLastMs,
     ts: new Date().toISOString()
   });
+  emitTikTokChainGenerationIfApplicable(toolSlug, opts.contentId);
+  void postContentEvent("generate", opts.contentId);
 }

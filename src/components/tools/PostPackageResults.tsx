@@ -37,6 +37,9 @@ import {
   V1062PerPackageShareBlock
 } from "@/components/zh/V1062ExternalTrafficResultBlocks";
 import { logOutputCopy, mapPackageFieldKeyToResultType } from "@/lib/tool-output-quality";
+import { ReadyToPostModal } from "@/components/tools/ReadyToPostModal";
+import { defaultUploadPlatformForTool, workflowIndex } from "@/lib/creator-guidance/workflow-chain";
+import { TikTokChainBadge } from "@/components/tools/TikTokChainBadge";
 
 type Props = {
   title: string;
@@ -70,6 +73,18 @@ type Props = {
   publishReadyNotice?: boolean;
   /** V106.2 — absolute tool URL for share blocks (incl. ?q= when set) */
   toolShareUrl?: string;
+  /** V188 — show Ready to post? modal after copy on global EN workflow tools */
+  v188ReadyToPost?: boolean;
+  /** V191.2 — visible feedback that we conditioned generation with saved analysis */
+  analysisAppliedHint?: string | null;
+  /** V190.1 — monetization perception reinforcement (compact usage hint) */
+  monetizationUsageHint?: string | null;
+  /** V193.1 — show that platform observations were applied */
+  v193PlatformHint?: string | null;
+  /** V193.4 — same TikTok chain consistency is active for this result */
+  v193ChainBadge?: boolean;
+  /** V196 — stable content_id for content_events writes */
+  contentId?: string;
 };
 
 export function PostPackageResults({
@@ -93,10 +108,17 @@ export function PostPackageResults({
   packageLabelsZh,
   shareQueryParam = "q",
   publishReadyNotice = false,
-  toolShareUrl
+  toolShareUrl,
+  v188ReadyToPost = true,
+  analysisAppliedHint = null,
+  monetizationUsageHint = null,
+  v193PlatformHint = null,
+  v193ChainBadge = false,
+  contentId
 }: Props) {
   const pathname = usePathname() || "";
   const [savedToast, setSavedToast] = useState<string | null>(null);
+  const [readyPostOpen, setReadyPostOpen] = useState(false);
   const [supportModalOpen, setSupportModalOpen] = useState(false);
   const [hasRecordedSupport, setHasRecordedSupport] = useState(false);
   const [, bumpSeen] = useReducer((x: number) => x + 1, 0);
@@ -235,16 +257,21 @@ export function PostPackageResults({
     });
   }, [zh, upgradeMode, douyinConversionMode, showLocked, lockedPreview.length, toolSlug, userInput]);
 
+  const v188CopyModal =
+    v188ReadyToPost && !zh && upgradeMode === "global" && workflowIndex(toolSlug) >= 0;
+
   async function copyAll(pkg: CreatorPostPackage) {
     await safeCopyToClipboard(formatPackageAsPlainText(pkg, labels));
-    logOutputCopy(toolSlug, "full");
+    if (contentId) logOutputCopy(toolSlug, "full", contentId);
+    if (v188CopyModal) setReadyPostOpen(true);
   }
 
   async function copyField(key: keyof CreatorPostPackage, pkg: CreatorPostPackage) {
     const v = (pkg[key] ?? "").toString();
     if (v.trim()) {
       await safeCopyToClipboard(v);
-      logOutputCopy(toolSlug, mapPackageFieldKeyToResultType(String(key)));
+      if (contentId) logOutputCopy(toolSlug, mapPackageFieldKeyToResultType(String(key)), contentId);
+      if (v188CopyModal) setReadyPostOpen(true);
     }
   }
 
@@ -314,6 +341,29 @@ export function PostPackageResults({
           </DelegatedButton>
         )}
       </div>
+
+      {showContent && analysisAppliedHint ? (
+        <div className="px-4 py-2.5 bg-slate-50 border-b border-slate-100 text-[12px] text-slate-700">
+          {analysisAppliedHint}
+        </div>
+      ) : null}
+
+      {showContent && monetizationUsageHint ? (
+        <div className="px-4 py-2 bg-emerald-50 border-b border-emerald-100 text-[12px] text-emerald-900/90">
+          {monetizationUsageHint}
+        </div>
+      ) : null}
+
+      {showContent && v193PlatformHint ? (
+        <div className="px-4 py-2 bg-slate-50 border-b border-slate-100 text-[12px] text-slate-700">
+          {v193PlatformHint}
+        </div>
+      ) : null}
+      {showContent && v193ChainBadge ? (
+        <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
+          <TikTokChainBadge />
+        </div>
+      ) : null}
 
       {nearLimit && (
         <div
@@ -758,6 +808,12 @@ export function PostPackageResults({
             : `Quality mode: ${resultQuality.replace(/_/g, " ")} · Tip: tweak your idea and regenerate for a different angle.`}
         </p>
       )}
+      <ReadyToPostModal
+        open={readyPostOpen}
+        onClose={() => setReadyPostOpen(false)}
+        platform={defaultUploadPlatformForTool(toolSlug)}
+        toolSlug={toolSlug}
+      />
     </section>
   );
 }

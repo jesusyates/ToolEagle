@@ -26,7 +26,14 @@ import { useCountry } from "@/hooks/useCountry";
 import { getEnToolJourney } from "@/config/en-tool-journey";
 import { resolveToolPageCopy } from "@/config/tool-page-copy-resolve";
 import { ToolNextSteps } from "@/components/tools/ToolNextSteps";
+import { CopyPublishModal } from "@/components/tools/CopyPublishModal";
+import { getPublishUrlForToolSlug } from "@/lib/tools/tool-publish-platform";
 import { logOutputCopy, mapListCopyToResultType, recordGenerationComplete } from "@/lib/tool-output-quality";
+import { parseUsageStatusForToolUi, type UsageStatusUiSlice } from "@/lib/usage-status-client";
+import { ToolUsageStatusHints } from "@/components/tools/ToolUsageStatusHints";
+import { CreatorGuidanceCard } from "@/components/tools/CreatorGuidanceCard";
+import { CreatorScoreCard } from "@/components/tools/CreatorScoreCard";
+import { CreatorMonetizationCard } from "@/components/tools/CreatorMonetizationCard";
 
 type GenericToolClientProps = {
   slug: string;
@@ -38,13 +45,38 @@ function resolveToolMarket(slug: string, locale: string): "cn" | "global" {
   return locale.startsWith("zh") ? "cn" : "global";
 }
 
+/** V175 — attribute copy events to blog when user arrived from /blog/… */
+function blogSlugFromDocumentReferrer(): string | null {
+  if (typeof document === "undefined") return null;
+  try {
+    const ref = document.referrer;
+    if (!ref) return null;
+    const u = new URL(ref);
+    if (u.pathname.startsWith("/blog/")) {
+      const m = u.pathname.match(/^\/blog\/([^/]+)/);
+      return m?.[1] ?? null;
+    }
+  } catch {
+    /* ignore */
+  }
+  return null;
+}
+
 export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps) {
   const [input, setInput] = useState("");
   const [items, setItems] = useState<string[]>([]);
+  const [contentId, setContentId] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [historyTrigger, setHistoryTrigger] = useState(0);
   const [limitModalOpen, setLimitModalOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [publishModalOpen, setPublishModalOpen] = useState(false);
+  const [usageUi, setUsageUi] = useState<UsageStatusUiSlice>({
+    cnBilling: null,
+    cnCreditsRemaining: null,
+    cnCreditsDaysLeft: null,
+    usageRemaining: null
+  });
   const { isLoggedIn } = useAuth();
   const t = useTranslations("common");
   const locale = useLocale();
@@ -57,6 +89,17 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
     if (!toolMeta) return;
     trackEvent("tool_page_view", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
   }, [toolMeta, country]);
+
+  function refreshUsageStatus() {
+    fetch("/api/usage-status")
+      .then((r) => r.json())
+      .then((d) => setUsageUi(parseUsageStatusForToolUi(d as Record<string, unknown>)))
+      .catch(() => {});
+  }
+
+  useEffect(() => {
+    refreshUsageStatus();
+  }, []);
 
   if (!toolMeta || !config) return null;
 
@@ -89,14 +132,20 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
     }
 
     setIsGenerating(true);
+    setContentId(null);
 
     const aiPrompt = aiPrompts[slug];
     const market = resolveToolMarket(slug, locale);
     let results: string[];
+    let runContentId: string | null = null;
     if (aiPrompt) {
       try {
         const prompt = aiPrompt.replace(/\{input\}/g, trimmed);
-        results = await generateAIText(prompt, { locale });
+        const gen = await generateAIText(prompt, { locale, toolSlug: toolMeta?.slug ?? slug });
+        results = gen.results;
+        runContentId = gen.content_id;
+        setContentId(runContentId);
+        refreshUsageStatus();
         if (toolMeta) {
           trackEvent("tool_generate_ai", {
             tool_slug: toolMeta.slug,
@@ -107,11 +156,17 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
         }
       } catch (err) {
         if (err instanceof LimitReachedError) {
+          refreshUsageStatus();
           setLimitModalOpen(true);
           setIsGenerating(false);
           return;
         }
         results = config.generate(trimmed);
+        runContentId =
+          typeof crypto !== "undefined" && crypto.randomUUID
+            ? crypto.randomUUID()
+            : `c-${Date.now()}-${Math.random()}`;
+        setContentId(runContentId);
         if (toolMeta) {
           trackEvent("tool_generate_ai_fallback", {
             tool_slug: toolMeta.slug,
@@ -122,6 +177,11 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
       }
     } else {
       results = config.generate(trimmed);
+      runContentId =
+        typeof crypto !== "undefined" && crypto.randomUUID
+          ? crypto.randomUUID()
+          : `c-${Date.now()}-${Math.random()}`;
+      setContentId(runContentId);
       if (toolMeta) {
       trackEvent("tool_generate", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
       }
@@ -151,7 +211,13 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
         content_safety_profile: cse.profile
       });
       setHistoryTrigger((t) => t + 1);
-      recordGenerationComplete(toolMeta.slug, { wasRegenerate: hadPrior });
+        if (runContentId) {
+          recordGenerationComplete(toolMeta.slug, {
+            wasRegenerate: hadPrior,
+            inputPreview: trimmed,
+            contentId: runContentId
+          });
+        }
     }
   }
 
@@ -159,17 +225,32 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
     const text = items[index];
     if (!text) return;
     await safeCopyToClipboard(text);
-    if (toolMeta) {
-    trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
-    }
   }
 
   async function handleCopyAll() {
     if (items.length === 0) return;
     const text = items.join("\n\n---\n\n");
     await safeCopyToClipboard(text);
-    if (toolMeta) {
-    trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
+  }
+
+  function handleAfterSuccessfulCopy() {
+    if (!toolMeta) return;
+    trackEvent("copy_click", {
+      tool_slug: toolMeta.slug,
+      tool_category: toolMeta.category,
+      country,
+      locale,
+      market: resolveToolMarket(slug, locale)
+    });
+    const enSurface = locale === "en" || locale.startsWith("en-");
+    if (enSurface && items.length > 0) {
+      trackEvent("copy_modal_shown", {
+        tool_slug: toolMeta.slug,
+        tool_category: toolMeta.category,
+        country,
+        locale
+      });
+      setPublishModalOpen(true);
     }
   }
 
@@ -210,6 +291,14 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
 
   return (
     <>
+      <CopyPublishModal
+        open={publishModalOpen}
+        onClose={() => setPublishModalOpen(false)}
+        publishUrl={
+          locale === "en" || locale.startsWith("en-") ? getPublishUrlForToolSlug(slug) : null
+        }
+        toolSlug={slug}
+      />
       <LimitReachedModal open={limitModalOpen} onClose={() => setLimitModalOpen(false)} />
       <LoginPromptModal open={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
       <ToolPageShell
@@ -220,6 +309,9 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
       locale={locale}
       input={
         <ToolInputCard label={config.inputLabel}>
+          <ToolUsageStatusHints zhUi={zhUi} ui={usageUi} />
+          {!zhUi ? <CreatorScoreCard toolSlug={slug} locale={locale} /> : null}
+          {!zhUi ? <CreatorMonetizationCard toolSlug={slug} locale={locale} /> : null}
           <DelegatedButton
             onClick={() => setInput(config.tryExample)}
             className="text-xs font-medium text-sky-700 hover:underline mb-2 block"
@@ -259,6 +351,9 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
       }
       result={
         <>
+          {!zhUi ? <CreatorScoreCard toolSlug={slug} variant="compact" locale={locale} /> : null}
+          {!zhUi ? <CreatorMonetizationCard toolSlug={slug} variant="compact" locale={locale} /> : null}
+          {!zhUi ? <CreatorGuidanceCard toolSlug={slug} variant="above_result" locale={locale} /> : null}
           <ToolResultListCard
             title={config.resultTitle}
             items={items}
@@ -266,10 +361,24 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
             input={input}
             onCopyItem={handleCopyItem}
             onCopyAll={handleCopyAll}
+            onAfterSuccessfulCopy={handleAfterSuccessfulCopy}
             onCopyTrack={(index) => {
               if (!toolMeta) return;
+              if (!contentId) return;
               trackEvent("tool_copy", { tool_slug: toolMeta.slug, tool_category: toolMeta.category, country });
-              logOutputCopy(toolMeta.slug, mapListCopyToResultType(toolMeta.slug, index));
+              fetch("/api/analytics/tool-funnel", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  type: "tool_copy",
+                  toolSlug: toolMeta.slug,
+                  sourceSlug: blogSlugFromDocumentReferrer(),
+                  ts: new Date().toISOString()
+                })
+              }).catch(() => {});
+              if (index >= 0) {
+                logOutputCopy(toolMeta.slug, mapListCopyToResultType(toolMeta.slug, index), contentId);
+              }
             }}
             onRegenerate={handleGenerate}
             onSaveEditedItem={handleSaveEditedItem}

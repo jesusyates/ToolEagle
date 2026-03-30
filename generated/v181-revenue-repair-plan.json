@@ -1,0 +1,248 @@
+{
+  "version": "181",
+  "builtAt": "2026-03-30T11:03:10.424Z",
+  "traffic_good_but_tool_weak": [
+    {
+      "path": "/blog/youtube-video-ideas-that-work",
+      "page_value_score": 0.701,
+      "topic": null,
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-captions-travel",
+      "page_value_score": 0.7,
+      "topic": "travel",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/youtube-captions-trending-ideas",
+      "page_value_score": 0.7,
+      "topic": "trending-ideas",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/best-tiktok-bio-ideas",
+      "page_value_score": 0.699,
+      "topic": null,
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-captions-motivation",
+      "page_value_score": 0.699,
+      "topic": "motivation",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-captions-food",
+      "page_value_score": 0.698,
+      "topic": "food",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/seo-how-search-engines-find-creator-content",
+      "page_value_score": 0.697,
+      "topic": null,
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-captions-inspirational",
+      "page_value_score": 0.697,
+      "topic": "inspirational",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-captions-life-hack",
+      "page_value_score": 0.697,
+      "topic": "life-hack",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-captions-romantic",
+      "page_value_score": 0.697,
+      "topic": "romantic",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/instagram-captions-for-reels",
+      "page_value_score": 0.696,
+      "topic": "for-reels",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/instagram-hashtags-funny-usernames",
+      "page_value_score": 0.696,
+      "topic": "funny-usernames",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-captions-attitude",
+      "page_value_score": 0.696,
+      "topic": "attitude",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-captions-cute",
+      "page_value_score": 0.696,
+      "topic": "cute",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/instagram-captions-grwm",
+      "page_value_score": 0.695,
+      "topic": "grwm",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/instagram-captions-script-structure",
+      "page_value_score": 0.695,
+      "topic": "script-structure",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/instagram-hooks-tips",
+      "page_value_score": 0.695,
+      "topic": "tips",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/instagram-hooks-trending-sound",
+      "page_value_score": 0.695,
+      "topic": "trending-sound",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/instagram-hooks-viral-hashtags",
+      "page_value_score": 0.695,
+      "topic": "viral-hashtags",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-captions-friends",
+      "page_value_score": 0.695,
+      "topic": "friends",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-captions-gaming",
+      "page_value_score": 0.695,
+      "topic": "gaming",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-content-ideas-beginners",
+      "page_value_score": 0.695,
+      "topic": null,
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/youtube-captions-stitch",
+      "page_value_score": 0.695,
+      "topic": "stitch",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/youtube-hashtags-grwm",
+      "page_value_score": 0.695,
+      "topic": "grwm",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/instagram-hashtags-duet-ideas",
+      "page_value_score": 0.694,
+      "topic": "duet-ideas",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/instagram-hashtags-prank",
+      "page_value_score": 0.694,
+      "topic": "prank",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/instagram-hooks-ootd",
+      "page_value_score": 0.694,
+      "topic": "ootd",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/instagram-titles-comedy-ideas",
+      "page_value_score": 0.694,
+      "topic": "comedy-ideas",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/seo-sitemaps-robots-and-indexing",
+      "page_value_score": 0.694,
+      "topic": null,
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-captions-collab",
+      "page_value_score": 0.694,
+      "topic": "collab",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-captions-funny",
+      "page_value_score": 0.694,
+      "topic": "funny",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-captions-sarcastic",
+      "page_value_score": 0.694,
+      "topic": "sarcastic",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-hashtags-hook-examples",
+      "page_value_score": 0.694,
+      "topic": "hook-examples",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-hashtags-long",
+      "page_value_score": 0.694,
+      "topic": "long",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-hashtags-selfie",
+      "page_value_score": 0.694,
+      "topic": "selfie",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-hooks-caption-for-business",
+      "page_value_score": 0.694,
+      "topic": "caption-for-business",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/tiktok-hooks-niche-hashtags",
+      "page_value_score": 0.694,
+      "topic": "niche-hashtags",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/viral-tiktok-hooks",
+      "page_value_score": 0.694,
+      "topic": null,
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/youtube-captions-comedy-reel",
+      "page_value_score": 0.694,
+      "topic": "comedy-reel",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    },
+    {
+      "path": "/blog/youtube-hooks-comedy-hashtags",
+      "page_value_score": 0.694,
+      "topic": "comedy-hashtags",
+      "fix": "strengthen_tool_cta_and_demo_on_page"
+    }
+  ],
+  "tool_good_but_upgrade_weak": [],
+  "upgrade_good_but_payment_weak": []
+}

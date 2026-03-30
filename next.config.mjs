@@ -93,11 +93,24 @@ const nextConfig = {
   }
 };
 
+/** When unset, Sentry upload/release steps fail on Vercel and @sentry/webpack-plugin aborts the build by default. */
+const hasSentryAuth = Boolean(process.env.SENTRY_AUTH_TOKEN?.trim());
+
 const sentryConfig = {
   org: process.env.SENTRY_ORG || "tool-eagle",
   project: process.env.SENTRY_PROJECT || "tooleagle",
   silent: !process.env.CI,
-  widenClientFileUpload: true
+  widenClientFileUpload: true,
+  ...(hasSentryAuth
+    ? {}
+    : {
+        sourcemaps: { disable: true },
+        release: { create: false, finalize: false }
+      }),
+  /** Never fail `next build` on Sentry upload/API issues (transient or missing token). */
+  errorHandler(err) {
+    console.warn("[sentry] build plugin (non-fatal):", err?.message || err);
+  }
 };
 
 export default withSentryConfig(withNextIntl(nextConfig), sentryConfig);

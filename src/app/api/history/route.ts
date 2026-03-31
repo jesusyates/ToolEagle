@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
+import { resolveToolMarket } from "@/lib/tools/resolve-tool-market";
 
 export async function POST(request: NextRequest) {
   const supabase = await createClient();
@@ -19,16 +20,32 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Missing toolSlug, toolName, or items" }, { status: 400 });
   }
 
-  const { error } = await supabase.from("generation_history").insert({
+  const market = resolveToolMarket(toolSlug);
+
+  const insertAttempt = await supabase.from("generation_history").insert({
     user_id: user.id,
     tool_slug: toolSlug,
     tool_name: toolName,
     input: input ?? "",
-    items
+    items,
+    market
   });
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  if (insertAttempt.error) {
+    // Backward compatibility: migration might not be applied yet.
+    if (!insertAttempt.error.message?.includes("market")) {
+      return NextResponse.json({ error: insertAttempt.error.message }, { status: 500 });
+    }
+    const fallback = await supabase.from("generation_history").insert({
+      user_id: user.id,
+      tool_slug: toolSlug,
+      tool_name: toolName,
+      input: input ?? "",
+      items
+    });
+    if (fallback.error) {
+      return NextResponse.json({ error: fallback.error.message }, { status: 500 });
+    }
   }
 
   return NextResponse.json({ ok: true });

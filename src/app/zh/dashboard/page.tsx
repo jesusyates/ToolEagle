@@ -19,19 +19,7 @@ export default async function ZhDashboardPage() {
   }
 
   const today = new Date().toISOString().slice(0, 10);
-  const [favoritesRes, historyRes, usageRes, profileRes, projectsRes] = await Promise.all([
-    supabase
-      .from("favorites")
-      .select("id, tool_slug, tool_name, text, saved_at")
-      .eq("user_id", user.id)
-      .order("saved_at", { ascending: false })
-      .limit(50),
-    supabase
-      .from("generation_history")
-      .select("id, tool_slug, tool_name, input, items, created_at")
-      .eq("user_id", user.id)
-      .order("created_at", { ascending: false })
-      .limit(20),
+  const [usageRes, profileRes, projectsRes] = await Promise.all([
     supabase
       .from("usage_stats")
       .select("generations_count")
@@ -47,7 +35,29 @@ export default async function ZhDashboardPage() {
       .limit(20)
   ]);
 
-  const favorites = (favoritesRes.data ?? [])
+  const market = "cn";
+  const favoritesRes =
+    (await supabase
+      .from("favorites")
+      .select("id, tool_slug, tool_name, text, saved_at")
+      .eq("user_id", user.id)
+      .eq("market", market)
+      .order("saved_at", { ascending: false })
+      .limit(50)) as any;
+
+  const favoritesRows =
+    favoritesRes.error?.message?.toLowerCase?.().includes("market")
+      ? (
+          await supabase
+            .from("favorites")
+            .select("id, tool_slug, tool_name, text, saved_at")
+            .eq("user_id", user.id)
+            .order("saved_at", { ascending: false })
+            .limit(50)
+        ).data ?? []
+      : favoritesRes.data ?? [];
+
+  const favorites = (favoritesRows as any[])
     .filter((r) => isZhDashboardDouyinSlug(r.tool_slug))
     .map((r) => ({
       id: r.id,
@@ -57,7 +67,28 @@ export default async function ZhDashboardPage() {
       savedAt: new Date(r.saved_at).getTime()
     }));
 
-  const history = (historyRes.data ?? [])
+  const historyRes =
+    (await supabase
+      .from("generation_history")
+      .select("id, tool_slug, tool_name, input, items, created_at")
+      .eq("user_id", user.id)
+      .eq("market", market)
+      .order("created_at", { ascending: false })
+      .limit(20)) as any;
+
+  const historyRows =
+    historyRes.error?.message?.toLowerCase?.().includes("market")
+      ? (
+          await supabase
+            .from("generation_history")
+            .select("id, tool_slug, tool_name, input, items, created_at")
+            .eq("user_id", user.id)
+            .order("created_at", { ascending: false })
+            .limit(20)
+        ).data ?? []
+      : historyRes.data ?? [];
+
+  const history = (historyRows as any[])
     .filter((r) => isZhDashboardDouyinSlug(r.tool_slug))
     .map((r) => ({
       id: r.id,

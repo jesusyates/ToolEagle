@@ -5,6 +5,7 @@ import { buildLoginRedirect } from "@/lib/auth/login-redirect";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { History } from "lucide-react";
+import { isEnDashboardAllowedToolSlug } from "@/lib/en-dashboard-scope";
 
 export const dynamic = "force-dynamic";
 
@@ -23,21 +24,37 @@ export default async function DashboardHistoryPage() {
     redirect(buildLoginRedirect("/dashboard/history"));
   }
 
-  const { data: rows } = await supabase
+  const market = "global";
+  const rowsAttempt: any = await supabase
     .from("generation_history")
     .select("id, tool_slug, tool_name, input, items, created_at")
     .eq("user_id", user.id)
+    .eq("market", market)
     .order("created_at", { ascending: false })
     .limit(100);
 
-  const history = (rows ?? []).map((r) => ({
-    id: r.id,
-    toolSlug: r.tool_slug,
-    toolName: r.tool_name,
-    input: r.input,
-    items: (r.items as string[]) ?? [],
-    createdAt: new Date(r.created_at).getTime()
-  }));
+  const rows =
+    rowsAttempt.error?.message?.toLowerCase?.().includes("market")
+      ? (
+          await supabase
+            .from("generation_history")
+            .select("id, tool_slug, tool_name, input, items, created_at")
+            .eq("user_id", user.id)
+            .order("created_at", { ascending: false })
+            .limit(100)
+        ).data ?? []
+      : rowsAttempt.data ?? [];
+
+  const history = (rows as any[])
+    .filter((r) => isEnDashboardAllowedToolSlug(r.tool_slug))
+    .map((r) => ({
+      id: r.id,
+      toolSlug: r.tool_slug,
+      toolName: r.tool_name,
+      input: r.input,
+      items: (r.items as string[]) ?? [],
+      createdAt: new Date(r.created_at).getTime()
+    }));
 
   return (
     <main className="min-h-screen bg-page text-slate-900 flex flex-col">

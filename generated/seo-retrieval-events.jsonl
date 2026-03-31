@@ -1684,3 +1684,23 @@
 {"ts":"2026-03-31T06:17:15.689Z","event":"retrieval_hit_recorded","keyword":"Instagram 提高互动率 高效","platform":"instagram","goal":"提高互动率","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
 {"ts":"2026-03-31T06:18:17.471Z","event":"retrieval_bias_applied","keyword":"Instagram 提高互动率 实战","platform":"instagram","goal":"提高互动率","bias_applied":true,"bias_factor":0.92}
 {"ts":"2026-03-31T06:18:17.472Z","event":"retrieval_hit_recorded","keyword":"Instagram 提高互动率 实战","platform":"instagram","goal":"提高互动率","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:29:41.012Z","event":"retrieval_bias_applied","keyword":"Instagram提高互动率最新实现方法","platform":"instagram","goal":"提高互动率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:29:41.015Z","event":"retrieval_hit_recorded","keyword":"Instagram提高互动率最新实现方法","platform":"instagram","goal":"提高互动率","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:30:52.821Z","event":"retrieval_bias_applied","keyword":"Instagram账号起号2026实现方法","platform":"instagram","goal":"账号起号","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:30:52.822Z","event":"retrieval_hit_recorded","keyword":"Instagram账号起号2026实现方法","platform":"instagram","goal":"账号起号","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:31:52.042Z","event":"retrieval_bias_applied","keyword":"Instagram做爆款7天实现方法","platform":"instagram","goal":"做爆款","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:31:52.042Z","event":"retrieval_hit_recorded","keyword":"Instagram做爆款7天实现方法","platform":"instagram","goal":"做爆款","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:33:02.247Z","event":"retrieval_bias_applied","keyword":"Instagram直播带货快速实现方法","platform":"instagram","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:33:02.247Z","event":"retrieval_hit_recorded","keyword":"Instagram直播带货快速实现方法","platform":"instagram","goal":"直播带货","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:34:13.194Z","event":"retrieval_bias_applied","keyword":"Instagram品牌打造快速实现方法","platform":"instagram","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:34:13.194Z","event":"retrieval_hit_recorded","keyword":"Instagram品牌打造快速实现方法","platform":"instagram","goal":"品牌打造","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:35:21.249Z","event":"retrieval_bias_applied","keyword":"Instagram算法优化快速实现方法","platform":"instagram","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:35:21.250Z","event":"retrieval_hit_recorded","keyword":"Instagram算法优化快速实现方法","platform":"instagram","goal":"算法优化","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:36:49.311Z","event":"retrieval_bias_applied","keyword":"Instagram数据分析快速实现方法","platform":"instagram","goal":"数据分析","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:36:49.311Z","event":"retrieval_hit_recorded","keyword":"Instagram数据分析快速实现方法","platform":"instagram","goal":"数据分析","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:40:00.114Z","event":"retrieval_bias_applied","keyword":"TikTok涨粉方法大全","platform":"tiktok","goal":"涨粉","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:40:00.115Z","event":"retrieval_hit_recorded","keyword":"TikTok涨粉方法大全","platform":"tiktok","goal":"涨粉","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:41:06.507Z","event":"retrieval_bias_applied","keyword":"TikTok获得播放量方法大全","platform":"tiktok","goal":"获得播放量","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:41:06.508Z","event":"retrieval_hit_recorded","keyword":"TikTok获得播放量方法大全","platform":"tiktok","goal":"获得播放量","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:42:19.121Z","event":"retrieval_bias_applied","keyword":"TikTok提高互动率方法大全","platform":"tiktok","goal":"提高互动率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:42:19.122Z","event":"retrieval_hit_recorded","keyword":"TikTok提高互动率方法大全","platform":"tiktok","goal":"提高互动率","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}

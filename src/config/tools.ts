@@ -44,6 +44,11 @@ export type ToolConfig = {
    * 路由仍可由中文站直达（如 `/zh/douyin-*`），不删 slug。
    */
   cnOnly?: boolean;
+  /**
+   * 数据隔离用市场标记（建议未来其它国家站工具在这里标记自己的 `market`）。
+   * 当前仍默认：`cnOnly=true` => `cn`，其它 => `global`。
+   */
+  market?: string;
 };
 
 export const tools: ToolConfig[] = [

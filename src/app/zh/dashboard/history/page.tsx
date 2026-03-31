@@ -27,14 +27,28 @@ export default async function ZhDashboardHistoryPage() {
     redirect(buildLoginRedirect("/zh/dashboard/history"));
   }
 
-  const { data: rows } = await supabase
+  const market = "cn";
+  const rowsAttempt: any = await supabase
     .from("generation_history")
     .select("id, tool_slug, tool_name, input, items, created_at")
     .eq("user_id", user.id)
+    .eq("market", market)
     .order("created_at", { ascending: false })
     .limit(100);
 
-  const history = (rows ?? [])
+  const rows =
+    rowsAttempt.error?.message?.toLowerCase?.().includes("market")
+      ? (
+          await supabase
+            .from("generation_history")
+            .select("id, tool_slug, tool_name, input, items, created_at")
+            .eq("user_id", user.id)
+            .order("created_at", { ascending: false })
+            .limit(100)
+        ).data ?? []
+      : rowsAttempt.data ?? [];
+
+  const history = (rows as any[])
     .filter((r) => isZhDashboardDouyinSlug(r.tool_slug))
     .map((r) => ({
       id: r.id,

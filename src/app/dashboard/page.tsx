@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { buildLoginRedirect } from "@/lib/auth/login-redirect";
 import { isOperatorUser } from "@/lib/auth/operator";
 import { DashboardClient } from "./DashboardClient";
+import { isEnDashboardAllowedToolSlug } from "@/lib/en-dashboard-scope";
 
 export const dynamic = "force-dynamic";
 
@@ -18,19 +19,7 @@ export default async function DashboardPage() {
   }
 
   const today = new Date().toISOString().slice(0, 10);
-  const [favoritesRes, historyRes, usageRes, profileRes, projectsRes] = await Promise.all([
-    supabase
-      .from("favorites")
-      .select("id, tool_slug, tool_name, text, saved_at")
-      .eq("user_id", user.id)
-      .order("saved_at", { ascending: false })
-      .limit(50),
-    supabase
-      .from("generation_history")
-      .select("id, tool_slug, tool_name, input, items, created_at")
-      .eq("user_id", user.id)
-      .order("created_at", { ascending: false })
-      .limit(20),
+  const [usageRes, profileRes, projectsRes] = await Promise.all([
     supabase
       .from("usage_stats")
       .select("generations_count")
@@ -46,22 +35,67 @@ export default async function DashboardPage() {
       .limit(20)
   ]);
 
-  const favorites = (favoritesRes.data ?? []).map((r) => ({
-    id: r.id,
-    toolSlug: r.tool_slug,
-    toolName: r.tool_name,
-    text: r.text,
-    savedAt: new Date(r.saved_at).getTime()
-  }));
+  const market = "global";
+  const favoritesAttempt: any = await supabase
+    .from("favorites")
+    .select("id, tool_slug, tool_name, text, saved_at")
+    .eq("user_id", user.id)
+    .eq("market", market)
+    .order("saved_at", { ascending: false })
+    .limit(50);
 
-  const history = (historyRes.data ?? []).map((r) => ({
-    id: r.id,
-    toolSlug: r.tool_slug,
-    toolName: r.tool_name,
-    input: r.input,
-    items: (r.items as string[]) ?? [],
-    timestamp: new Date(r.created_at).getTime()
-  }));
+  const favoritesRows =
+    favoritesAttempt.error?.message?.toLowerCase?.().includes("market")
+      ? (
+          await supabase
+            .from("favorites")
+            .select("id, tool_slug, tool_name, text, saved_at")
+            .eq("user_id", user.id)
+            .order("saved_at", { ascending: false })
+            .limit(50)
+        ).data ?? []
+      : favoritesAttempt.data ?? [];
+
+  const favorites = (favoritesRows as any[])
+    .filter((r) => isEnDashboardAllowedToolSlug(r.tool_slug))
+    .map((r) => ({
+      id: r.id,
+      toolSlug: r.tool_slug,
+      toolName: r.tool_name,
+      text: r.text,
+      savedAt: new Date(r.saved_at).getTime()
+    }));
+
+  const historyAttempt: any = await supabase
+    .from("generation_history")
+    .select("id, tool_slug, tool_name, input, items, created_at")
+    .eq("user_id", user.id)
+    .eq("market", market)
+    .order("created_at", { ascending: false })
+    .limit(20);
+
+  const historyRows =
+    historyAttempt.error?.message?.toLowerCase?.().includes("market")
+      ? (
+          await supabase
+            .from("generation_history")
+            .select("id, tool_slug, tool_name, input, items, created_at")
+            .eq("user_id", user.id)
+            .order("created_at", { ascending: false })
+            .limit(20)
+        ).data ?? []
+      : historyAttempt.data ?? [];
+
+  const history = (historyRows as any[])
+    .filter((r) => isEnDashboardAllowedToolSlug(r.tool_slug))
+    .map((r) => ({
+      id: r.id,
+      toolSlug: r.tool_slug,
+      toolName: r.tool_name,
+      input: r.input,
+      items: (r.items as string[]) ?? [],
+      timestamp: new Date(r.created_at).getTime()
+    }));
 
   const usageToday = usageRes.data?.generations_count ?? 0;
   let plan = profileRes.data?.plan ?? "free";

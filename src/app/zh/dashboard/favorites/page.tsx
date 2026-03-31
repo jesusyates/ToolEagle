@@ -28,14 +28,28 @@ export default async function ZhDashboardFavoritesPage() {
     redirect(buildLoginRedirect("/zh/dashboard/favorites"));
   }
 
-  const { data: rows } = await supabase
+  const market = "cn";
+  const rowsAttempt: any = await supabase
     .from("favorites")
     .select("id, tool_slug, tool_name, text, saved_at")
     .eq("user_id", user.id)
+    .eq("market", market)
     .order("saved_at", { ascending: false })
     .limit(100);
 
-  const favorites = (rows ?? [])
+  const rows =
+    rowsAttempt.error?.message?.toLowerCase?.().includes("market")
+      ? (
+          await supabase
+            .from("favorites")
+            .select("id, tool_slug, tool_name, text, saved_at")
+            .eq("user_id", user.id)
+            .order("saved_at", { ascending: false })
+            .limit(100)
+        ).data ?? []
+      : rowsAttempt.data ?? [];
+
+  const favorites = (rows as any[])
     .filter((r) => isZhDashboardDouyinSlug(r.tool_slug))
     .map((r) => ({
       id: r.id,

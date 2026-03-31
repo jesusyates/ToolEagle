@@ -1,13 +1,13 @@
 {
   "version": "179",
-  "builtAt": "2026-03-30T11:03:07.891Z",
-  "upgrade_click_total": 2,
+  "builtAt": "2026-03-31T06:00:09.916Z",
+  "upgrade_click_total": 3,
   "upgrade_click_by_page": {
-    "/tools/tiktok-caption-generator": 1,
+    "/tools/tiktok-caption-generator": 2,
     "/tools/tiktok-transition-generator": 1
   },
   "upgrade_click_by_page_type": {
-    "tool": 2,
+    "tool": 3,
     "blog": 0,
     "answer": 0,
     "other": 0
@@ -34,62 +34,62 @@
     {
       "kind": "blog_value_score",
       "path": "/blog/youtube-video-ideas-that-work",
-      "score": 0.701
+      "score": 0.71
     },
     {
       "kind": "blog_value_score",
       "path": "/blog/tiktok-captions-travel",
-      "score": 0.7
-    },
-    {
-      "kind": "blog_value_score",
-      "path": "/blog/youtube-captions-trending-ideas",
-      "score": 0.7
+      "score": 0.709
     },
     {
       "kind": "blog_value_score",
       "path": "/blog/best-tiktok-bio-ideas",
-      "score": 0.699
+      "score": 0.708
+    },
+    {
+      "kind": "blog_value_score",
+      "path": "/blog/youtube-captions-trending-ideas",
+      "score": 0.708
     },
     {
       "kind": "blog_value_score",
       "path": "/blog/tiktok-captions-motivation",
-      "score": 0.699
-    },
-    {
-      "kind": "blog_value_score",
-      "path": "/blog/tiktok-captions-food",
-      "score": 0.698
+      "score": 0.707
     },
     {
       "kind": "blog_value_score",
       "path": "/blog/seo-how-search-engines-find-creator-content",
-      "score": 0.697
+      "score": 0.706
+    },
+    {
+      "kind": "blog_value_score",
+      "path": "/blog/tiktok-captions-food",
+      "score": 0.706
     },
     {
       "kind": "blog_value_score",
       "path": "/blog/tiktok-captions-inspirational",
-      "score": 0.697
+      "score": 0.706
     },
     {
       "kind": "blog_value_score",
       "path": "/blog/tiktok-captions-life-hack",
-      "score": 0.697
-    },
-    {
-      "kind": "blog_value_score",
-      "path": "/blog/tiktok-captions-romantic",
-      "score": 0.697
+      "score": 0.706
     },
     {
       "kind": "blog_value_score",
       "path": "/blog/instagram-captions-for-reels",
-      "score": 0.696
+      "score": 0.705
     },
     {
       "kind": "blog_value_score",
       "path": "/blog/instagram-hashtags-funny-usernames",
-      "score": 0.696
+      "score": 0.705
+    },
+    {
+      "kind": "blog_value_score",
+      "path": "/blog/tiktok-captions-attitude",
+      "score": 0.705
     }
   ],
   "low_revenue_high_traffic_pages": [],
@@ -101,10 +101,10 @@
       "hook-generator",
       "title-generator"
     ],
-    "pricing_adjacent_hits_core": 1
+    "pricing_adjacent_hits_core": 2
   },
   "tool_vs_blog_upgrade_rate": {
-    "tool": 2,
+    "tool": 3,
     "blog": 0,
     "answer": 0,
     "other": 0

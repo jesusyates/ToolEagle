@@ -1,6 +1,6 @@
 {
   "version": "174",
-  "builtAt": "2026-03-30T11:03:06.691Z",
+  "builtAt": "2026-03-31T06:00:08.596Z",
   "note": "Does not delete files — aligns with content-quality gate triad (noindex + sitemap + internal links).",
   "candidates": [
     {

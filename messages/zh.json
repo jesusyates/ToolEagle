@@ -31,7 +31,12 @@
     "addEmojis": "添加表情",
     "resultAttribution": "由 ToolEagle 生成 · 免费创作者工具",
     "loginPromptSave": "登录后可收藏或保存到项目。",
-    "generating": "生成中…"
+    "generating": "生成中…",
+    "creditsCompact": "算力 {remaining} / {total}",
+    "creditsLine": "算力：{remaining} / {total}",
+    "billingNav": "算力与订单",
+    "creditsLowWarning": "算力余额偏低，建议尽快充值。",
+    "creditsVeryLowWarning": "算力即将用尽，请立即充值以免中断。"
   },
   "loginPage": {
     "title": "登入",
@@ -320,7 +325,8 @@
     "recentGenerations": "最近生成",
     "noHistoryYet": "暂无历史",
     "noHistoryHint": "生成内容后即可在此查看。",
-    "useAgain": "再次使用"
+    "useAgain": "再次使用",
+    "zhDashboardScopeHint": "此处仅展示抖音专栏工具的收藏与生成记录（与英文站工具互不混排）。"
   },
   "growthMission": {
     "introP1": "下面这些任务用于在站外社区发帖：Reddit、X、海外问答等，把本站高价值页面推广出去。上方数字是今天各渠道建议完成的条数。若你主攻抖音、小红书、快手上的内容，请用顶栏「抖音」等分区与可执行教程——本区块提供的是海外发帖文案，不是站内发布。",
@@ -512,6 +518,7 @@
     "marketOptionEn": "English (Global)",
     "marketOptionZh": "简体中文（中国）",
     "marketOptionEs": "Español",
+    "globalSiteEntry": "全球主站",
     "tools": "工具",
     "discover": "发现",
     "aiPrompts": "AI 提示词",

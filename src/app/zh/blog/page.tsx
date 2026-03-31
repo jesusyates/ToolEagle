@@ -5,7 +5,7 @@ import { zhSeoTitle } from "@/config/zh-brand";
 
 export const metadata = {
   title: { absolute: zhSeoTitle("创作者博客") },
-  description: "TikTok、YouTube、Instagram 涨粉、变现与内容策略的实战文章"
+  description: "面向中国创作者的实战文章：抖音运营、短视频文案、增长与变现（非英文站镜像）。"
 };
 
 export default function ZhBlogIndexPage() {
@@ -22,9 +22,7 @@ export default function ZhBlogIndexPage() {
     <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <div className="flex-1 container py-12">
         <h1 className="text-3xl font-semibold text-slate-900">中文创作者博客</h1>
-        <p className="mt-2 text-slate-600">
-          TikTok、YouTube、Instagram 涨粉、变现与内容策略的实战文章
-        </p>
+        <p className="mt-2 text-slate-600">抖音与短视频创作向实战文章；全球向内容请访问英文主站。</p>
         <ul className="mt-8 space-y-3">
           {blogs.map((b) => (
             <li key={b.slug}>

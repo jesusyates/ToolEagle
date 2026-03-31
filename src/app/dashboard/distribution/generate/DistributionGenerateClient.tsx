@@ -24,7 +24,7 @@ export function DistributionGenerateClient() {
   const t = useTranslations("distributionGenerate");
   const tCommon = useTranslations("common");
   const searchParams = useSearchParams();
-  const initialKeyword = searchParams.get("keyword") ?? "";
+  const initialKeyword = searchParams?.get("keyword") ?? "";
   const [keyword, setKeyword] = useState(initialKeyword);
   const [content, setContent] = useState<GeneratedContent | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -32,7 +32,7 @@ export function DistributionGenerateClient() {
   const [checklist, setChecklist] = useState({ reddit: false, x: false, quora: false });
 
   useEffect(() => {
-    const k = searchParams.get("keyword");
+    const k = searchParams?.get("keyword");
     if (k) setKeyword(k);
   }, [searchParams]);
 

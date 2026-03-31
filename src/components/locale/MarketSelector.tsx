@@ -108,7 +108,7 @@ export function MarketSelector({ analyticsSource = "header", presentation = "seg
         }}
         className={`rounded px-2 py-1 ${!isZh ? "bg-sky-50 font-semibold text-sky-600" : "hover:text-sky-600"}`}
       >
-        英文主站
+        {tNav("globalSiteEntry")}
       </TranslateAwareLink>
     </div>
   );

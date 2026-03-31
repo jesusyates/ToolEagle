@@ -50,8 +50,8 @@ export function CreatorDashboardClient() {
 
   return (
     <section className="container max-w-lg py-8 pb-16">
-      <h1 className="text-xl font-bold text-slate-50">Creator</h1>
-      <p className="mt-1 text-sm text-slate-500">See the problem → fix it in one tap</p>
+      <h1 className="text-xl font-bold text-slate-900">Creator</h1>
+      <p className="mt-1 text-sm text-slate-600">See the problem → fix it in one tap</p>
 
       <div className="mt-6 space-y-4">
         <CreatorStatusPanel score={dash.score} bandLabel={score.bandLabel} stageTitle={dash.stage} />

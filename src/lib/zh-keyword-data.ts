@@ -21,6 +21,17 @@ export type ZhKeywordWithMeta = {
 };
 
 const CACHE_PATH = path.join(process.cwd(), "data", "zh-keywords.json");
+const FOREIGN_PLATFORM_RE = /\b(tiktok|youtube|instagram)\b/i;
+const FOREIGN_PLATFORM_NAMES_RE = /(TikTok|YouTube|Instagram|抖音国际版)/i;
+
+function isZhCnAllowedKeywordEntry(slug: string, keyword: string, platform?: string): boolean {
+  const p = String(platform || "").toLowerCase();
+  // 中文站不再展示英文站平台关键词与 slug。
+  if (p === "tiktok" || p === "youtube" || p === "instagram") return false;
+  if (FOREIGN_PLATFORM_RE.test(slug)) return false;
+  if (FOREIGN_PLATFORM_NAMES_RE.test(keyword)) return false;
+  return true;
+}
 
 function loadKeywordCache(): Record<string, { keyword?: string; platform?: string; goal?: string; audience?: string; format?: string; time?: string; createdAt?: number; lastModified?: number; published?: boolean }> {
   try {
@@ -37,8 +48,10 @@ export function getAllKeywordPagesWithMeta(): ZhKeywordWithMeta[] {
   const entries: ZhKeywordWithMeta[] = [];
   for (const [slug, data] of Object.entries(cache)) {
     if (data?.published === false) continue;
+    if (!isZhCnAllowedKeywordEntry(slug, data?.keyword ?? "", data?.platform)) continue;
     const entry = getKeywordBySlug(slug);
     if (!entry) continue;
+    if (!isZhCnAllowedKeywordEntry(slug, data?.keyword ?? entry.keyword, entry.platform)) continue;
     entries.push({
       slug,
       keyword: data?.keyword ?? entry.keyword,

@@ -162,10 +162,20 @@ export type RecentZhPageWithMeta = { href: string; label: string; createdAt: num
 export function getRecentZhPagesWithKeywords(limit = 100): RecentZhPageWithMeta[] {
   const guideEntries = getRecentZhPagesWithMeta();
   const keywordEntries = getRecentKeywordPagesWithMeta();
-  const combined = [...keywordEntries, ...guideEntries];
+  const combined = [...keywordEntries, ...guideEntries].filter((e) => !isEnglishBrandZhGuidePath(e.href));
   return combined
     .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
     .slice(0, limit);
+}
+
+/** 英文品牌向 /zh/how-to 等集群：不在中文站「最新」列表展示（主路径为抖音专栏）。 */
+function isEnglishBrandZhGuidePath(href: string): boolean {
+  return (
+    href.startsWith("/zh/how-to/") ||
+    href.startsWith("/zh/ai-prompts-for/") ||
+    href.startsWith("/zh/content-strategy/") ||
+    href.startsWith("/zh/viral-examples/")
+  );
 }
 
 function getRecentZhPagesWithMeta(): RecentZhPageWithMeta[] {

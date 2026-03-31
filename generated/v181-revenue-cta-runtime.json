@@ -1,6 +1,6 @@
 {
   "version": "181",
-  "builtAt": "2026-03-30T11:03:10.424Z",
+  "builtAt": "2026-03-31T06:00:12.353Z",
   "note": "Merged v180 paywall runtime + v179 boost hints + V181 revenue tiers. UI loads via v181-revenue-cta-runtime.ts",
   "tools": {
     "tiktok-caption-generator": {

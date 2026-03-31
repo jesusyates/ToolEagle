@@ -35,7 +35,7 @@ export function ZhGlobalCreativeEntry() {
 
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row sm:items-center md:flex-col md:items-stretch lg:flex-row lg:items-center">
             <GoEnglishHomeButton className="inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-600 via-amber-600 to-orange-700 px-6 text-base font-bold text-stone-950 shadow-lg shadow-amber-950/40 ring-1 ring-amber-400/25 transition hover:from-amber-500 hover:to-orange-600 active:scale-[0.99]">
-              进入英文主站首页
+              进入全球主站首页
               <ArrowUpRight className="h-5 w-5 shrink-0" aria-hidden />
             </GoEnglishHomeButton>
           </div>

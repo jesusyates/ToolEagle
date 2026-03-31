@@ -1,6 +1,6 @@
 {
   "version": "179",
-  "builtAt": "2026-03-30T11:03:07.891Z",
+  "builtAt": "2026-03-31T06:00:09.916Z",
   "policy": {
     "forbid_random_pricing_links": true,
     "runtime_source": "generated/v179-upgrade-runtime.json",

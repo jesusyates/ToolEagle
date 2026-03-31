@@ -1,33 +1,33 @@
 {
   "version": "183.1",
-  "builtAt": "2026-03-30T11:03:10.572Z",
+  "builtAt": "2026-03-31T06:00:12.491Z",
   "stale_data": true,
   "stale_reasons": [
     "analytics_missing"
   ],
   "stale_sources": {
     "data_freshness.json": {
-      "updatedAt": "2026-03-30T11:03:06.691Z",
+      "updatedAt": "2026-03-31T06:00:08.596Z",
       "staleness_applied": true,
       "reason": [
         "analytics_missing"
       ]
     },
     "search_performance.json": {
-      "updatedAt": "2026-03-30T11:03:02.448Z",
-      "age_hours": 0.0022569444444444442,
+      "updatedAt": "2026-03-31T06:00:04.837Z",
+      "age_hours": 0.002126388888888889,
       "error": "fetch failed",
       "data_empty": true,
       "is_stale": true
     },
     "tool_conversion_map.json": {
-      "updatedAt": "2026-03-30T11:03:02.890Z",
-      "age_hours": 0.0021341666666666666,
+      "updatedAt": "2026-03-31T06:00:05.197Z",
+      "age_hours": 0.0020263888888888888,
       "is_stale": false
     },
     "v180_payment_db_snapshot.json": {
-      "builtAt": "2026-03-30T11:03:10.117Z",
-      "age_hours": 0.00012666666666666666,
+      "builtAt": "2026-03-31T06:00:12.045Z",
+      "age_hours": 0.00012416666666666666,
       "payment_events_error": "Could not find the table 'public.payment_events' in the schema cache",
       "is_stale": false
     }

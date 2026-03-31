@@ -23,8 +23,8 @@ export function LoginForm({
   const t = useTranslations("loginPage");
   const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams.get("next") ?? defaultNext;
-  const urlError = searchParams.get("error");
+  const next = searchParams?.get("next") ?? defaultNext;
+  const urlError = searchParams?.get("error");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);

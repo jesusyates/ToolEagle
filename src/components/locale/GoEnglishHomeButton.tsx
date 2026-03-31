@@ -8,7 +8,7 @@ type Props = {
   className?: string;
 };
 
-/** 中文站内「进入英文主站首页」等：先写 cookie 再整页进 `/`，与 middleware 对齐 */
+/** 中文站内「进入全球主站首页」等：先写 cookie 再整页进 `/`，与 middleware 对齐 */
 export function GoEnglishHomeButton({ children, className }: Props) {
   return (
     <button type="button" onClick={() => navigateToEnglishHome()} className={className}>

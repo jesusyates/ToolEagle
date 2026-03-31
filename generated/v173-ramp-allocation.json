@@ -1,6 +1,6 @@
 {
   "version": "173",
-  "builtAt": "2026-03-30T11:03:05.977Z",
+  "builtAt": "2026-03-31T06:00:07.909Z",
   "note": "content-allocation computeTripleWeight multiplies weight by topicTailMultipliers[topic] when present (topic = slug tail in EN blog grid).",
   "topicTailMultipliers": {
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: Un": 1,

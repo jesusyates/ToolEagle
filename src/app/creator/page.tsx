@@ -19,11 +19,11 @@ export const metadata = {
 
 export default function CreatorDashboardPage() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-50 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
       <div className="flex-1">
         <Suspense
-          fallback={<div className="container py-16 text-center text-slate-400">Loading creator dashboard…</div>}
+          fallback={<div className="container py-16 text-center text-slate-600">Loading creator dashboard…</div>}
         >
           <CreatorDashboardClient />
         </Suspense>

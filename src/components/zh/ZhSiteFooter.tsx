@@ -9,10 +9,10 @@ import { ZH } from "@/lib/zh-site/paths";
 const links = [
   { href: ZH.home, label: "中文站介绍" },
   { href: ZH.douyin, label: "抖音专栏" },
-  { href: ZH.tiktokCaption, label: "短视频文案包" },
+  { href: ZH.douyinCaption, label: "短视频文案包" },
   { href: ZH.hook, label: "钩子生成" },
   { href: ZH.aiCaption, label: "文案包" },
-  { href: ZH.growthKit, label: "增长指南" },
+  { href: ZH.douyinGuide, label: "可执行教程" },
   { href: ZH.pricing, label: "定价说明" },
   { href: ZH.sitemap, label: "站点地图" },
   { href: ZH.privacy, label: "隐私" },

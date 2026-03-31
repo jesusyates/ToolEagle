@@ -185,7 +185,10 @@ export function AuthButton({
             <span className="max-w-[120px] truncate">{userDisplayName(user, t("userDisplayFallback"))}</span>
             {creditsSummary ? (
               <span className={`text-[11px] font-semibold ${veryLowCredits ? "text-rose-700" : lowCredits ? "text-amber-700" : "text-emerald-700"}`}>
-                {creditsSummary.remaining} / {creditsSummary.total}
+                {t("creditsCompact", {
+                  remaining: creditsSummary.remaining,
+                  total: creditsSummary.total
+                })}
               </span>
             ) : null}
           </span>
@@ -200,12 +203,15 @@ export function AuthButton({
               {user.email && <p className="truncate text-xs text-slate-500">{user.email}</p>}
               {creditsSummary ? (
                 <p className="truncate text-xs text-emerald-700 mt-1">
-                  Credits: {creditsSummary.remaining} / {creditsSummary.total}
+                  {t("creditsLine", {
+                    remaining: creditsSummary.remaining,
+                    total: creditsSummary.total
+                  })}
                 </p>
               ) : null}
               {lowCredits ? (
                 <p className={`text-xs mt-1 ${veryLowCredits ? "text-rose-700" : "text-amber-700"}`}>
-                  {veryLowCredits ? "Low credits: top up now to avoid interruption." : "Credits running low."}
+                  {veryLowCredits ? t("creditsVeryLowWarning") : t("creditsLowWarning")}
                 </p>
               ) : null}
             </div>
@@ -221,7 +227,7 @@ export function AuthButton({
               className="flex items-center gap-2 px-3 py-2 text-sm text-slate-700 hover:bg-red-50"
               onClick={() => setOpen(false)}
             >
-              Billing
+              {t("billingNav")}
             </Link>
             {lowCredits ? (
               <Link

@@ -1,2737 +1,2737 @@
 {
   "version": "175",
-  "builtAt": "2026-03-30T11:03:06.691Z",
+  "builtAt": "2026-03-31T06:00:08.596Z",
   "formula": "score = 0.45*seo + 0.35*conversion_proxy + 0.2*content_quality; seo from GSC last14 (or totals) when present; otherwise content depth + retrieval_share + MDX structure; conversion from tool-conversion-map classification.",
   "pages": [
     {
       "path": "/blog/youtube-video-ideas-that-work",
-      "score": 0.701,
-      "seo": 0.866,
+      "score": 0.71,
+      "seo": 0.884,
       "conversion": 0.35,
       "content_quality": 0.947
     },
     {
       "path": "/blog/tiktok-captions-travel",
-      "score": 0.7,
-      "seo": 0.864,
+      "score": 0.709,
+      "seo": 0.882,
       "conversion": 0.35,
       "content_quality": 0.945,
       "tier_hint": "STABLE"
     },
     {
+      "path": "/blog/best-tiktok-bio-ideas",
+      "score": 0.708,
+      "seo": 0.881,
+      "conversion": 0.35,
+      "content_quality": 0.943,
+      "tier_hint": "STABLE"
+    },
+    {
       "path": "/blog/youtube-captions-trending-ideas",
-      "score": 0.7,
-      "seo": 0.863,
+      "score": 0.708,
+      "seo": 0.882,
       "conversion": 0.35,
       "content_quality": 0.944,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/best-tiktok-bio-ideas",
-      "score": 0.699,
-      "seo": 0.862,
+      "path": "/blog/tiktok-captions-motivation",
+      "score": 0.707,
+      "seo": 0.881,
       "conversion": 0.35,
       "content_quality": 0.943,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-motivation",
-      "score": 0.699,
-      "seo": 0.862,
+      "path": "/blog/seo-how-search-engines-find-creator-content",
+      "score": 0.706,
+      "seo": 0.878,
       "conversion": 0.35,
-      "content_quality": 0.943,
-      "tier_hint": "STABLE"
+      "content_quality": 0.94
     },
     {
       "path": "/blog/tiktok-captions-food",
-      "score": 0.698,
-      "seo": 0.86,
+      "score": 0.706,
+      "seo": 0.879,
       "conversion": 0.35,
       "content_quality": 0.941,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/seo-how-search-engines-find-creator-content",
-      "score": 0.697,
-      "seo": 0.859,
-      "conversion": 0.35,
-      "content_quality": 0.94
-    },
-    {
       "path": "/blog/tiktok-captions-inspirational",
-      "score": 0.697,
-      "seo": 0.859,
+      "score": 0.706,
+      "seo": 0.878,
       "conversion": 0.35,
       "content_quality": 0.94,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-life-hack",
-      "score": 0.697,
-      "seo": 0.86,
+      "score": 0.706,
+      "seo": 0.879,
       "conversion": 0.35,
       "content_quality": 0.941
     },
     {
-      "path": "/blog/tiktok-captions-romantic",
-      "score": 0.697,
-      "seo": 0.859,
-      "conversion": 0.35,
-      "content_quality": 0.939,
-      "tier_hint": "STABLE"
-    },
-    {
       "path": "/blog/instagram-captions-for-reels",
-      "score": 0.696,
-      "seo": 0.858,
+      "score": 0.705,
+      "seo": 0.877,
       "conversion": 0.35,
       "content_quality": 0.938
     },
     {
       "path": "/blog/instagram-hashtags-funny-usernames",
-      "score": 0.696,
-      "seo": 0.858,
+      "score": 0.705,
+      "seo": 0.877,
       "conversion": 0.35,
       "content_quality": 0.939
     },
     {
       "path": "/blog/tiktok-captions-attitude",
-      "score": 0.696,
-      "seo": 0.858,
+      "score": 0.705,
+      "seo": 0.877,
       "conversion": 0.35,
       "content_quality": 0.938,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-cute",
-      "score": 0.696,
-      "seo": 0.857,
+      "path": "/blog/tiktok-captions-romantic",
+      "score": 0.705,
+      "seo": 0.878,
       "conversion": 0.35,
-      "content_quality": 0.938,
+      "content_quality": 0.939,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-captions-grwm",
-      "score": 0.695,
-      "seo": 0.856,
+      "score": 0.704,
+      "seo": 0.875,
       "conversion": 0.35,
       "content_quality": 0.937,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/instagram-captions-script-structure",
-      "score": 0.695,
-      "seo": 0.855,
-      "conversion": 0.35,
-      "content_quality": 0.936,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-hooks-tips",
-      "score": 0.695,
-      "seo": 0.856,
+      "score": 0.704,
+      "seo": 0.875,
       "conversion": 0.35,
       "content_quality": 0.937,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/instagram-hooks-trending-sound",
-      "score": 0.695,
-      "seo": 0.855,
+      "path": "/blog/tiktok-captions-cute",
+      "score": 0.704,
+      "seo": 0.876,
       "conversion": 0.35,
-      "content_quality": 0.936
-    },
-    {
-      "path": "/blog/instagram-hooks-viral-hashtags",
-      "score": 0.695,
-      "seo": 0.856,
-      "conversion": 0.35,
-      "content_quality": 0.936
-    },
-    {
-      "path": "/blog/tiktok-captions-friends",
-      "score": 0.695,
-      "seo": 0.855,
-      "conversion": 0.35,
-      "content_quality": 0.936,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-gaming",
-      "score": 0.695,
-      "seo": 0.856,
-      "conversion": 0.35,
-      "content_quality": 0.936,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-content-ideas-beginners",
-      "score": 0.695,
-      "seo": 0.856,
-      "conversion": 0.35,
-      "content_quality": 0.936,
+      "content_quality": 0.938,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-captions-stitch",
-      "score": 0.695,
-      "seo": 0.856,
+      "score": 0.704,
+      "seo": 0.875,
       "conversion": 0.35,
       "content_quality": 0.936,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-hashtags-grwm",
-      "score": 0.695,
-      "seo": 0.856,
+      "path": "/blog/instagram-captions-script-structure",
+      "score": 0.703,
+      "seo": 0.874,
       "conversion": 0.35,
       "content_quality": 0.936,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-hashtags-duet-ideas",
-      "score": 0.694,
-      "seo": 0.855,
+      "score": 0.703,
+      "seo": 0.874,
       "conversion": 0.35,
       "content_quality": 0.935,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/instagram-hashtags-prank",
-      "score": 0.694,
-      "seo": 0.854,
-      "conversion": 0.35,
-      "content_quality": 0.934,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-hooks-ootd",
-      "score": 0.694,
-      "seo": 0.855,
+      "score": 0.703,
+      "seo": 0.874,
       "conversion": 0.35,
       "content_quality": 0.935,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/instagram-titles-comedy-ideas",
-      "score": 0.694,
-      "seo": 0.854,
+      "path": "/blog/instagram-hooks-trending-sound",
+      "score": 0.703,
+      "seo": 0.874,
       "conversion": 0.35,
-      "content_quality": 0.934,
-      "tier_hint": "STABLE"
+      "content_quality": 0.936
     },
     {
-      "path": "/blog/seo-sitemaps-robots-and-indexing",
-      "score": 0.694,
-      "seo": 0.854,
+      "path": "/blog/instagram-hooks-viral-hashtags",
+      "score": 0.703,
+      "seo": 0.875,
       "conversion": 0.35,
-      "content_quality": 0.934
+      "content_quality": 0.936
     },
     {
-      "path": "/blog/tiktok-captions-collab",
-      "score": 0.694,
-      "seo": 0.854,
+      "path": "/blog/tiktok-captions-friends",
+      "score": 0.703,
+      "seo": 0.874,
       "conversion": 0.35,
-      "content_quality": 0.934,
+      "content_quality": 0.936,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-funny",
-      "score": 0.694,
-      "seo": 0.855,
+      "score": 0.703,
+      "seo": 0.874,
       "conversion": 0.35,
       "content_quality": 0.935,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-gaming",
+      "score": 0.703,
+      "seo": 0.874,
+      "conversion": 0.35,
+      "content_quality": 0.936,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-sarcastic",
-      "score": 0.694,
-      "seo": 0.855,
+      "score": 0.703,
+      "seo": 0.874,
       "conversion": 0.35,
       "content_quality": 0.935,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-content-ideas-beginners",
+      "score": 0.703,
+      "seo": 0.875,
+      "conversion": 0.35,
+      "content_quality": 0.936,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-hashtags-hook-examples",
-      "score": 0.694,
-      "seo": 0.855,
+      "score": 0.703,
+      "seo": 0.874,
       "conversion": 0.35,
       "content_quality": 0.935,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-hashtags-long",
-      "score": 0.694,
-      "seo": 0.854,
-      "conversion": 0.35,
-      "content_quality": 0.934,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-hashtags-selfie",
-      "score": 0.694,
-      "seo": 0.854,
-      "conversion": 0.35,
-      "content_quality": 0.934,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-hooks-caption-for-business",
-      "score": 0.694,
-      "seo": 0.855,
+      "score": 0.703,
+      "seo": 0.874,
       "conversion": 0.35,
       "content_quality": 0.935,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-hooks-niche-hashtags",
-      "score": 0.694,
-      "seo": 0.854,
-      "conversion": 0.35,
-      "content_quality": 0.934
-    },
-    {
       "path": "/blog/viral-tiktok-hooks",
-      "score": 0.694,
-      "seo": 0.855,
+      "score": 0.703,
+      "seo": 0.874,
       "conversion": 0.35,
       "content_quality": 0.935,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-captions-comedy-reel",
-      "score": 0.694,
-      "seo": 0.855,
+      "score": 0.703,
+      "seo": 0.874,
       "conversion": 0.35,
       "content_quality": 0.935
     },
     {
-      "path": "/blog/youtube-hooks-comedy-hashtags",
-      "score": 0.694,
-      "seo": 0.855,
+      "path": "/blog/youtube-hashtags-grwm",
+      "score": 0.703,
+      "seo": 0.874,
       "conversion": 0.35,
-      "content_quality": 0.935
-    },
-    {
-      "path": "/blog/youtube-hooks-food-ideas",
-      "score": 0.694,
-      "seo": 0.854,
-      "conversion": 0.35,
-      "content_quality": 0.934,
+      "content_quality": 0.936,
       "tier_hint": "STABLE"
     },
     {
+      "path": "/blog/youtube-hooks-comedy-hashtags",
+      "score": 0.703,
+      "seo": 0.874,
+      "conversion": 0.35,
+      "content_quality": 0.935
+    },
+    {
       "path": "/blog/youtube-titles-caption-for-business",
-      "score": 0.694,
-      "seo": 0.855,
+      "score": 0.703,
+      "seo": 0.874,
       "conversion": 0.35,
       "content_quality": 0.935,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-titles-get-ready-with-me",
-      "score": 0.694,
-      "seo": 0.854,
-      "conversion": 0.35,
-      "content_quality": 0.934
-    },
-    {
       "path": "/blog/instagram-captions-for-business",
-      "score": 0.693,
-      "seo": 0.853,
+      "score": 0.702,
+      "seo": 0.872,
       "conversion": 0.35,
       "content_quality": 0.933,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/instagram-hooks-mystery",
-      "score": 0.693,
-      "seo": 0.853,
+      "path": "/blog/instagram-hashtags-prank",
+      "score": 0.702,
+      "seo": 0.873,
       "conversion": 0.35,
-      "content_quality": 0.933,
+      "content_quality": 0.934,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/instagram-titles-caption-ideas",
-      "score": 0.693,
-      "seo": 0.853,
+      "path": "/blog/instagram-titles-comedy-ideas",
+      "score": 0.702,
+      "seo": 0.873,
       "conversion": 0.35,
-      "content_quality": 0.932,
+      "content_quality": 0.934,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/seo-google-vs-baidu-for-creators",
-      "score": 0.693,
-      "seo": 0.853,
+      "score": 0.702,
+      "seo": 0.872,
       "conversion": 0.35,
       "content_quality": 0.933
     },
     {
-      "path": "/blog/tiktok-captions-gym",
-      "score": 0.693,
-      "seo": 0.853,
+      "path": "/blog/seo-sitemaps-robots-and-indexing",
+      "score": 0.702,
+      "seo": 0.873,
       "conversion": 0.35,
-      "content_quality": 0.933,
+      "content_quality": 0.934
+    },
+    {
+      "path": "/blog/tiktok-captions-collab",
+      "score": 0.702,
+      "seo": 0.873,
+      "conversion": 0.35,
+      "content_quality": 0.934,
       "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-hashtags-long",
+      "score": 0.702,
+      "seo": 0.873,
+      "conversion": 0.35,
+      "content_quality": 0.934,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-hashtags-selfie",
+      "score": 0.702,
+      "seo": 0.873,
+      "conversion": 0.35,
+      "content_quality": 0.934,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-hooks-niche-hashtags",
+      "score": 0.702,
+      "seo": 0.873,
+      "conversion": 0.35,
+      "content_quality": 0.934
     },
     {
       "path": "/blog/tiktok-titles-trending-sounds-ideas",
-      "score": 0.693,
-      "seo": 0.854,
+      "score": 0.702,
+      "seo": 0.872,
       "conversion": 0.35,
       "content_quality": 0.933,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/youtube-captions-get-ready-with-me",
-      "score": 0.693,
-      "seo": 0.853,
-      "conversion": 0.35,
-      "content_quality": 0.932
-    },
-    {
-      "path": "/blog/youtube-hashtags-relatable",
-      "score": 0.693,
-      "seo": 0.853,
-      "conversion": 0.35,
-      "content_quality": 0.932,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-hashtags-script",
-      "score": 0.693,
-      "seo": 0.853,
+      "score": 0.702,
+      "seo": 0.872,
       "conversion": 0.35,
       "content_quality": 0.933,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-hook-examples",
-      "score": 0.693,
-      "seo": 0.853,
+      "score": 0.702,
+      "seo": 0.872,
       "conversion": 0.35,
       "content_quality": 0.933,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-titles-dance",
-      "score": 0.693,
-      "seo": 0.853,
+      "path": "/blog/youtube-hooks-food-ideas",
+      "score": 0.702,
+      "seo": 0.873,
       "conversion": 0.35,
-      "content_quality": 0.933,
+      "content_quality": 0.934,
       "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-titles-get-ready-with-me",
+      "score": 0.702,
+      "seo": 0.873,
+      "conversion": 0.35,
+      "content_quality": 0.934
     },
     {
       "path": "/blog/instagram-hooks-lets-play",
-      "score": 0.692,
-      "seo": 0.852,
+      "score": 0.701,
+      "seo": 0.871,
       "conversion": 0.35,
       "content_quality": 0.932
     },
     {
-      "path": "/blog/tiktok-captions-comedy",
-      "score": 0.692,
-      "seo": 0.852,
+      "path": "/blog/instagram-hooks-mystery",
+      "score": 0.701,
+      "seo": 0.872,
       "conversion": 0.35,
-      "content_quality": 0.931,
+      "content_quality": 0.933,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-how-to",
-      "score": 0.692,
-      "seo": 0.851,
+      "path": "/blog/instagram-titles-caption-ideas",
+      "score": 0.701,
+      "seo": 0.871,
       "conversion": 0.35,
-      "content_quality": 0.931
+      "content_quality": 0.932,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-gym",
+      "score": 0.701,
+      "seo": 0.872,
+      "conversion": 0.35,
+      "content_quality": 0.933,
+      "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-promotion",
-      "score": 0.692,
-      "seo": 0.852,
-      "conversion": 0.35,
-      "content_quality": 0.931,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-sad",
-      "score": 0.692,
-      "seo": 0.851,
-      "conversion": 0.35,
-      "content_quality": 0.931,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-hashtags-attitude",
-      "score": 0.692,
-      "seo": 0.851,
-      "conversion": 0.35,
-      "content_quality": 0.93,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-hooks-wedding",
-      "score": 0.692,
-      "seo": 0.851,
-      "conversion": 0.35,
-      "content_quality": 0.93,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-titles-product",
-      "score": 0.692,
-      "seo": 0.851,
+      "score": 0.701,
+      "seo": 0.871,
       "conversion": 0.35,
       "content_quality": 0.931,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/trending-tiktok-captions",
-      "score": 0.692,
-      "seo": 0.852,
+      "score": 0.701,
+      "seo": 0.871,
+      "conversion": 0.35,
+      "content_quality": 0.932,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-captions-get-ready-with-me",
+      "score": 0.701,
+      "seo": 0.871,
+      "conversion": 0.35,
+      "content_quality": 0.932
+    },
+    {
+      "path": "/blog/youtube-hashtags-relatable",
+      "score": 0.701,
+      "seo": 0.871,
       "conversion": 0.35,
       "content_quality": 0.932,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-hooks-contest",
-      "score": 0.692,
-      "seo": 0.852,
+      "score": 0.701,
+      "seo": 0.871,
       "conversion": 0.35,
       "content_quality": 0.932,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-hooks-dad",
-      "score": 0.692,
-      "seo": 0.852,
+      "score": 0.701,
+      "seo": 0.871,
       "conversion": 0.35,
       "content_quality": 0.931,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-hooks-wedding",
-      "score": 0.692,
-      "seo": 0.851,
+      "path": "/blog/youtube-titles-dance",
+      "score": 0.701,
+      "seo": 0.872,
       "conversion": 0.35,
-      "content_quality": 0.931,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/youtube-titles-ideas-for-beginners",
-      "score": 0.692,
-      "seo": 0.851,
-      "conversion": 0.35,
-      "content_quality": 0.93,
+      "content_quality": 0.933,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-captions-duet",
-      "score": 0.691,
-      "seo": 0.85,
+      "score": 0.7,
+      "seo": 0.869,
       "conversion": 0.35,
       "content_quality": 0.93,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-hooks-title-for-views",
-      "score": 0.691,
-      "seo": 0.851,
+      "score": 0.7,
+      "seo": 0.87,
       "conversion": 0.35,
       "content_quality": 0.93,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-aesthetic",
-      "score": 0.691,
-      "seo": 0.851,
+      "score": 0.7,
+      "seo": 0.87,
       "conversion": 0.35,
       "content_quality": 0.93,
       "tier_hint": "STABLE"
     },
     {
+      "path": "/blog/tiktok-captions-comedy",
+      "score": 0.7,
+      "seo": 0.87,
+      "conversion": 0.35,
+      "content_quality": 0.931,
+      "tier_hint": "STABLE"
+    },
+    {
       "path": "/blog/tiktok-captions-contest",
-      "score": 0.691,
-      "seo": 0.851,
+      "score": 0.7,
+      "seo": 0.869,
       "conversion": 0.35,
       "content_quality": 0.93,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-cover",
-      "score": 0.691,
-      "seo": 0.851,
+      "score": 0.7,
+      "seo": 0.87,
       "conversion": 0.35,
       "content_quality": 0.93,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-engagement",
-      "score": 0.691,
-      "seo": 0.85,
+      "path": "/blog/tiktok-captions-how-to",
+      "score": 0.7,
+      "seo": 0.87,
       "conversion": 0.35,
-      "content_quality": 0.929,
-      "tier_hint": "STABLE"
+      "content_quality": 0.931
     },
     {
       "path": "/blog/tiktok-captions-launch",
-      "score": 0.691,
-      "seo": 0.851,
+      "score": 0.7,
+      "seo": 0.87,
       "conversion": 0.35,
       "content_quality": 0.93,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-savage",
-      "score": 0.691,
-      "seo": 0.85,
+      "path": "/blog/tiktok-captions-sad",
+      "score": 0.7,
+      "seo": 0.87,
       "conversion": 0.35,
-      "content_quality": 0.929,
+      "content_quality": 0.931,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-stitch",
-      "score": 0.691,
-      "seo": 0.851,
+      "score": 0.7,
+      "seo": 0.869,
       "conversion": 0.35,
       "content_quality": 0.93,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-hooks-cute",
-      "score": 0.691,
-      "seo": 0.85,
+      "path": "/blog/tiktok-hashtags-attitude",
+      "score": 0.7,
+      "seo": 0.87,
       "conversion": 0.35,
-      "content_quality": 0.929,
+      "content_quality": 0.93,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-hooks-reel-captions",
-      "score": 0.691,
-      "seo": 0.851,
+      "score": 0.7,
+      "seo": 0.869,
       "conversion": 0.35,
       "content_quality": 0.93,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-captions-contest",
-      "score": 0.691,
-      "seo": 0.85,
+      "path": "/blog/tiktok-hooks-wedding",
+      "score": 0.7,
+      "seo": 0.87,
       "conversion": 0.35,
-      "content_quality": 0.929,
+      "content_quality": 0.93,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-hooks-funny",
-      "score": 0.691,
-      "seo": 0.85,
+      "path": "/blog/tiktok-titles-product",
+      "score": 0.7,
+      "seo": 0.87,
       "conversion": 0.35,
-      "content_quality": 0.929,
+      "content_quality": 0.931,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-hooks-get-ready-with-me",
-      "score": 0.691,
-      "seo": 0.85,
+      "path": "/blog/youtube-hooks-wedding",
+      "score": 0.7,
+      "seo": 0.87,
       "conversion": 0.35,
-      "content_quality": 0.929
-    },
-    {
-      "path": "/blog/youtube-hooks-unboxing",
-      "score": 0.691,
-      "seo": 0.85,
-      "conversion": 0.35,
-      "content_quality": 0.929,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/youtube-script-template-beginners",
-      "score": 0.691,
-      "seo": 0.85,
-      "conversion": 0.35,
-      "content_quality": 0.929,
+      "content_quality": 0.931,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-title-examples",
-      "score": 0.691,
-      "seo": 0.85,
+      "score": 0.7,
+      "seo": 0.869,
       "conversion": 0.35,
       "content_quality": 0.93,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-titles-grwm",
-      "score": 0.691,
-      "seo": 0.85,
+      "path": "/blog/youtube-titles-ideas-for-beginners",
+      "score": 0.7,
+      "seo": 0.87,
       "conversion": 0.35,
-      "content_quality": 0.929,
+      "content_quality": 0.93,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-titles-small-business-hashtags",
-      "score": 0.691,
-      "seo": 0.851,
+      "score": 0.7,
+      "seo": 0.87,
       "conversion": 0.35,
       "content_quality": 0.93
     },
     {
-      "path": "/blog/funny-tiktok-captions",
-      "score": 0.69,
-      "seo": 0.849,
-      "conversion": 0.35,
-      "content_quality": 0.928,
-      "tier_hint": "STABLE"
-    },
-    {
       "path": "/blog/instagram-captions-comparison",
-      "score": 0.69,
-      "seo": 0.849,
+      "score": 0.699,
+      "seo": 0.868,
       "conversion": 0.35,
       "content_quality": 0.928,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-hooks-content-ideas",
-      "score": 0.69,
-      "seo": 0.849,
+      "score": 0.699,
+      "seo": 0.868,
       "conversion": 0.35,
       "content_quality": 0.929,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/instagram-hooks-tutorial",
-      "score": 0.69,
-      "seo": 0.849,
-      "conversion": 0.35,
-      "content_quality": 0.928,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-titles-savage",
-      "score": 0.69,
-      "seo": 0.849,
+      "score": 0.699,
+      "seo": 0.868,
       "conversion": 0.35,
       "content_quality": 0.929,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-fitness",
-      "score": 0.69,
-      "seo": 0.848,
+      "path": "/blog/tiktok-captions-engagement",
+      "score": 0.699,
+      "seo": 0.869,
       "conversion": 0.35,
-      "content_quality": 0.928,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-love",
-      "score": 0.69,
-      "seo": 0.848,
-      "conversion": 0.35,
-      "content_quality": 0.928,
+      "content_quality": 0.929,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-mystery",
-      "score": 0.69,
-      "seo": 0.849,
+      "score": 0.699,
+      "seo": 0.868,
       "conversion": 0.35,
       "content_quality": 0.928,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-pov",
-      "score": 0.69,
-      "seo": 0.849,
+      "score": 0.699,
+      "seo": 0.868,
       "conversion": 0.35,
       "content_quality": 0.928,
       "tier_hint": "STABLE"
     },
     {
+      "path": "/blog/tiktok-captions-savage",
+      "score": 0.699,
+      "seo": 0.868,
+      "conversion": 0.35,
+      "content_quality": 0.929,
+      "tier_hint": "STABLE"
+    },
+    {
       "path": "/blog/tiktok-captions-vacation",
-      "score": 0.69,
-      "seo": 0.849,
+      "score": 0.699,
+      "seo": 0.868,
       "conversion": 0.35,
       "content_quality": 0.929,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-hashtags-controversial",
-      "score": 0.69,
-      "seo": 0.849,
+      "score": 0.699,
+      "seo": 0.868,
       "conversion": 0.35,
       "content_quality": 0.928,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-hooks-cute",
+      "score": 0.699,
+      "seo": 0.869,
+      "conversion": 0.35,
+      "content_quality": 0.929,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-hooks-relatable",
-      "score": 0.69,
-      "seo": 0.849,
+      "score": 0.699,
+      "seo": 0.868,
       "conversion": 0.35,
       "content_quality": 0.928,
       "tier_hint": "STABLE"
     },
     {
+      "path": "/blog/youtube-captions-contest",
+      "score": 0.699,
+      "seo": 0.869,
+      "conversion": 0.35,
+      "content_quality": 0.929,
+      "tier_hint": "STABLE"
+    },
+    {
       "path": "/blog/youtube-captions-dance-reel",
-      "score": 0.69,
-      "seo": 0.849,
+      "score": 0.699,
+      "seo": 0.868,
       "conversion": 0.35,
       "content_quality": 0.929
     },
     {
       "path": "/blog/youtube-hashtags-comedy-hashtags",
-      "score": 0.69,
-      "seo": 0.849,
+      "score": 0.699,
+      "seo": 0.868,
       "conversion": 0.35,
       "content_quality": 0.928
     },
     {
-      "path": "/blog/youtube-hashtags-short",
-      "score": 0.69,
-      "seo": 0.849,
+      "path": "/blog/youtube-hooks-funny",
+      "score": 0.699,
+      "seo": 0.869,
+      "conversion": 0.35,
+      "content_quality": 0.929,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-hooks-get-ready-with-me",
+      "score": 0.699,
+      "seo": 0.869,
+      "conversion": 0.35,
+      "content_quality": 0.929
+    },
+    {
+      "path": "/blog/youtube-hooks-new-arrival",
+      "score": 0.699,
+      "seo": 0.868,
+      "conversion": 0.35,
+      "content_quality": 0.929
+    },
+    {
+      "path": "/blog/youtube-hooks-unboxing",
+      "score": 0.699,
+      "seo": 0.869,
+      "conversion": 0.35,
+      "content_quality": 0.929,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-script-template-beginners",
+      "score": 0.699,
+      "seo": 0.869,
+      "conversion": 0.35,
+      "content_quality": 0.929,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-titles-grwm",
+      "score": 0.699,
+      "seo": 0.869,
+      "conversion": 0.35,
+      "content_quality": 0.929,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/funny-tiktok-captions",
+      "score": 0.698,
+      "seo": 0.867,
       "conversion": 0.35,
       "content_quality": 0.928,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-hooks-new-arrival",
-      "score": 0.69,
-      "seo": 0.849,
-      "conversion": 0.35,
-      "content_quality": 0.929
-    },
-    {
-      "path": "/blog/how-to-write-tiktok-hooks",
-      "score": 0.689,
-      "seo": 0.847,
-      "conversion": 0.35,
-      "content_quality": 0.926,
-      "tier_hint": "STABLE"
-    },
-    {
       "path": "/blog/instagram-captions-romantic",
-      "score": 0.689,
-      "seo": 0.848,
+      "score": 0.698,
+      "seo": 0.867,
       "conversion": 0.35,
       "content_quality": 0.927,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-hashtags-fitness",
-      "score": 0.689,
-      "seo": 0.847,
+      "score": 0.698,
+      "seo": 0.866,
       "conversion": 0.35,
       "content_quality": 0.926,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/instagram-titles-best-hashtags",
-      "score": 0.689,
-      "seo": 0.847,
+      "path": "/blog/instagram-hooks-tutorial",
+      "score": 0.698,
+      "seo": 0.868,
       "conversion": 0.35,
-      "content_quality": 0.926
+      "content_quality": 0.928,
+      "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-titles-comedy-hashtags",
-      "score": 0.689,
-      "seo": 0.847,
+      "score": 0.698,
+      "seo": 0.866,
       "conversion": 0.35,
       "content_quality": 0.926
     },
     {
-      "path": "/blog/tiktok-captions-confidence",
-      "score": 0.689,
-      "seo": 0.847,
+      "path": "/blog/tiktok-captions-fitness",
+      "score": 0.698,
+      "seo": 0.867,
       "conversion": 0.35,
-      "content_quality": 0.926,
+      "content_quality": 0.928,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-controversial",
-      "score": 0.689,
-      "seo": 0.847,
+      "path": "/blog/tiktok-captions-love",
+      "score": 0.698,
+      "seo": 0.867,
       "conversion": 0.35,
-      "content_quality": 0.926,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-day-in-my-life",
-      "score": 0.689,
-      "seo": 0.847,
-      "conversion": 0.35,
-      "content_quality": 0.925
-    },
-    {
-      "path": "/blog/tiktok-captions-new-arrival",
-      "score": 0.689,
-      "seo": 0.847,
-      "conversion": 0.35,
-      "content_quality": 0.925
-    },
-    {
-      "path": "/blog/tiktok-captions-niche-hashtags",
-      "score": 0.689,
-      "seo": 0.847,
-      "conversion": 0.35,
-      "content_quality": 0.926
-    },
-    {
-      "path": "/blog/tiktok-captions-relatable",
-      "score": 0.689,
-      "seo": 0.847,
-      "conversion": 0.35,
-      "content_quality": 0.925,
+      "content_quality": 0.928,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-hashtags-transformation",
-      "score": 0.689,
-      "seo": 0.847,
+      "score": 0.698,
+      "seo": 0.866,
       "conversion": 0.35,
       "content_quality": 0.926,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-hashtags-trending-reel",
-      "score": 0.689,
-      "seo": 0.847,
+      "score": 0.698,
+      "seo": 0.866,
       "conversion": 0.35,
       "content_quality": 0.926
     },
     {
-      "path": "/blog/tiktok-titles-travel",
-      "score": 0.689,
-      "seo": 0.847,
-      "conversion": 0.35,
-      "content_quality": 0.926,
-      "tier_hint": "STABLE"
-    },
-    {
       "path": "/blog/youtube-captions-education-ideas",
-      "score": 0.689,
-      "seo": 0.847,
+      "score": 0.698,
+      "seo": 0.866,
       "conversion": 0.35,
       "content_quality": 0.926,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-captions-life-hack",
-      "score": 0.689,
-      "seo": 0.848,
+      "score": 0.698,
+      "seo": 0.867,
       "conversion": 0.35,
       "content_quality": 0.927
     },
     {
-      "path": "/blog/youtube-hooks-product",
-      "score": 0.689,
-      "seo": 0.847,
+      "path": "/blog/youtube-hashtags-short",
+      "score": 0.698,
+      "seo": 0.868,
+      "conversion": 0.35,
+      "content_quality": 0.928,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/how-to-write-tiktok-hooks",
+      "score": 0.697,
+      "seo": 0.866,
       "conversion": 0.35,
       "content_quality": 0.926,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-captions-business",
-      "score": 0.688,
-      "seo": 0.846,
+      "score": 0.697,
+      "seo": 0.865,
       "conversion": 0.35,
       "content_quality": 0.925,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-caption-ideas",
-      "score": 0.688,
-      "seo": 0.846,
+      "path": "/blog/instagram-titles-best-hashtags",
+      "score": 0.697,
+      "seo": 0.866,
       "conversion": 0.35,
-      "content_quality": 0.924,
-      "tier_hint": "STABLE"
+      "content_quality": 0.926
     },
     {
       "path": "/blog/tiktok-captions-beginners",
-      "score": 0.688,
-      "seo": 0.846,
+      "score": 0.697,
+      "seo": 0.865,
       "conversion": 0.35,
       "content_quality": 0.925,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-behind-the-scenes",
-      "score": 0.688,
-      "seo": 0.846,
+      "score": 0.697,
+      "seo": 0.865,
       "conversion": 0.35,
       "content_quality": 0.925
     },
     {
-      "path": "/blog/tiktok-captions-clean-girl",
-      "score": 0.688,
-      "seo": 0.845,
+      "path": "/blog/tiktok-captions-confidence",
+      "score": 0.697,
+      "seo": 0.866,
       "conversion": 0.35,
-      "content_quality": 0.924
-    },
-    {
-      "path": "/blog/tiktok-captions-giveaway",
-      "score": 0.688,
-      "seo": 0.845,
-      "conversion": 0.35,
-      "content_quality": 0.924,
+      "content_quality": 0.926,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-opening",
-      "score": 0.688,
-      "seo": 0.846,
+      "path": "/blog/tiktok-captions-controversial",
+      "score": 0.697,
+      "seo": 0.866,
       "conversion": 0.35,
-      "content_quality": 0.924,
+      "content_quality": 0.926,
       "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-day-in-my-life",
+      "score": 0.697,
+      "seo": 0.865,
+      "conversion": 0.35,
+      "content_quality": 0.925
+    },
+    {
+      "path": "/blog/tiktok-captions-new-arrival",
+      "score": 0.697,
+      "seo": 0.865,
+      "conversion": 0.35,
+      "content_quality": 0.925
+    },
+    {
+      "path": "/blog/tiktok-captions-niche-hashtags",
+      "score": 0.697,
+      "seo": 0.866,
+      "conversion": 0.35,
+      "content_quality": 0.926
     },
     {
       "path": "/blog/tiktok-captions-question",
-      "score": 0.688,
-      "seo": 0.846,
+      "score": 0.697,
+      "seo": 0.865,
+      "conversion": 0.35,
+      "content_quality": 0.925,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-relatable",
+      "score": 0.697,
+      "seo": 0.865,
       "conversion": 0.35,
       "content_quality": 0.925,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-selfie",
-      "score": 0.688,
-      "seo": 0.846,
+      "score": 0.697,
+      "seo": 0.865,
       "conversion": 0.35,
       "content_quality": 0.925,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-hashtags-food-ideas",
-      "score": 0.688,
-      "seo": 0.846,
+      "score": 0.697,
+      "seo": 0.865,
       "conversion": 0.35,
       "content_quality": 0.925,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-hooks-dance-ideas",
-      "score": 0.688,
-      "seo": 0.845,
-      "conversion": 0.35,
-      "content_quality": 0.924,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-hooks-tips",
-      "score": 0.688,
-      "seo": 0.845,
-      "conversion": 0.35,
-      "content_quality": 0.924,
-      "tier_hint": "STABLE"
-    },
-    {
       "path": "/blog/tiktok-hooks-yoga",
-      "score": 0.688,
-      "seo": 0.846,
+      "score": 0.697,
+      "seo": 0.865,
       "conversion": 0.35,
       "content_quality": 0.925,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-titles-beauty-hashtags",
-      "score": 0.688,
-      "seo": 0.846,
+      "score": 0.697,
+      "seo": 0.865,
       "conversion": 0.35,
       "content_quality": 0.925
     },
     {
-      "path": "/blog/tiktok-titles-gaming-ideas",
-      "score": 0.688,
-      "seo": 0.846,
+      "path": "/blog/tiktok-titles-travel",
+      "score": 0.697,
+      "seo": 0.866,
       "conversion": 0.35,
-      "content_quality": 0.924,
+      "content_quality": 0.926,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-hooks-product",
+      "score": 0.697,
+      "seo": 0.866,
+      "conversion": 0.35,
+      "content_quality": 0.926,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-titles-giveaway",
-      "score": 0.688,
-      "seo": 0.846,
+      "score": 0.697,
+      "seo": 0.865,
       "conversion": 0.35,
       "content_quality": 0.925,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-titles-storytime-ideas",
-      "score": 0.688,
-      "seo": 0.846,
+      "score": 0.697,
+      "seo": 0.865,
       "conversion": 0.35,
       "content_quality": 0.925,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/instagram-captions-asmr",
-      "score": 0.687,
-      "seo": 0.844,
-      "conversion": 0.35,
-      "content_quality": 0.922,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/instagram-captions-creative-usernames",
-      "score": 0.687,
-      "seo": 0.844,
-      "conversion": 0.35,
-      "content_quality": 0.923
-    },
-    {
       "path": "/blog/instagram-captions-niche",
-      "score": 0.687,
-      "seo": 0.845,
+      "score": 0.696,
+      "seo": 0.863,
       "conversion": 0.35,
       "content_quality": 0.923,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/instagram-hooks-fitness-ideas",
-      "score": 0.687,
-      "seo": 0.844,
-      "conversion": 0.35,
-      "content_quality": 0.922,
-      "tier_hint": "STABLE"
-    },
-    {
       "path": "/blog/instagram-hooks-script-structure",
-      "score": 0.687,
-      "seo": 0.845,
+      "score": 0.696,
+      "seo": 0.863,
       "conversion": 0.35,
       "content_quality": 0.923,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-titles-aesthetic",
-      "score": 0.687,
-      "seo": 0.845,
+      "score": 0.696,
+      "seo": 0.864,
       "conversion": 0.35,
       "content_quality": 0.923,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-titles-minimalist",
-      "score": 0.687,
-      "seo": 0.844,
+      "score": 0.696,
+      "seo": 0.863,
       "conversion": 0.35,
       "content_quality": 0.923,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/instagram-titles-small-business",
-      "score": 0.687,
-      "seo": 0.844,
+      "path": "/blog/tiktok-caption-ideas",
+      "score": 0.696,
+      "seo": 0.865,
       "conversion": 0.35,
-      "content_quality": 0.923,
+      "content_quality": 0.924,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/seo-publish-volume-without-spam-signals",
-      "score": 0.687,
-      "seo": 0.844,
+      "path": "/blog/tiktok-captions-clean-girl",
+      "score": 0.696,
+      "seo": 0.864,
       "conversion": 0.35,
-      "content_quality": 0.922
-    },
-    {
-      "path": "/blog/tiktok-captions-asmr",
-      "score": 0.687,
-      "seo": 0.844,
-      "conversion": 0.35,
-      "content_quality": 0.923,
-      "tier_hint": "STABLE"
+      "content_quality": 0.924
     },
     {
       "path": "/blog/tiktok-captions-cottagecore",
-      "score": 0.687,
-      "seo": 0.845,
+      "score": 0.696,
+      "seo": 0.863,
       "conversion": 0.35,
       "content_quality": 0.923,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-ideas-for-beginners",
-      "score": 0.687,
-      "seo": 0.844,
+      "path": "/blog/tiktok-captions-giveaway",
+      "score": 0.696,
+      "seo": 0.864,
       "conversion": 0.35,
-      "content_quality": 0.922,
+      "content_quality": 0.924,
       "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-lets-play",
-      "score": 0.687,
-      "seo": 0.844,
-      "conversion": 0.35,
-      "content_quality": 0.922
     },
     {
       "path": "/blog/tiktok-captions-niche",
-      "score": 0.687,
-      "seo": 0.844,
+      "score": 0.696,
+      "seo": 0.863,
       "conversion": 0.35,
       "content_quality": 0.923,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-reaction",
-      "score": 0.687,
-      "seo": 0.844,
+      "path": "/blog/tiktok-captions-opening",
+      "score": 0.696,
+      "seo": 0.865,
       "conversion": 0.35,
-      "content_quality": 0.923,
+      "content_quality": 0.924,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-storytime",
-      "score": 0.687,
-      "seo": 0.845,
+      "score": 0.696,
+      "seo": 0.864,
       "conversion": 0.35,
       "content_quality": 0.923,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-hooks-comedy-reel",
-      "score": 0.687,
-      "seo": 0.844,
+      "path": "/blog/tiktok-hooks-dance-ideas",
+      "score": 0.696,
+      "seo": 0.864,
       "conversion": 0.35,
-      "content_quality": 0.922
+      "content_quality": 0.924,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-hooks-tips",
+      "score": 0.696,
+      "seo": 0.864,
+      "conversion": 0.35,
+      "content_quality": 0.924,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-titles-gaming-ideas",
+      "score": 0.696,
+      "seo": 0.864,
+      "conversion": 0.35,
+      "content_quality": 0.924,
+      "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-captions-transformation",
-      "score": 0.687,
-      "seo": 0.844,
+      "score": 0.696,
+      "seo": 0.863,
       "conversion": 0.35,
       "content_quality": 0.923,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-hashtags-ideas-for-beginners",
-      "score": 0.687,
-      "seo": 0.845,
+      "score": 0.696,
+      "seo": 0.864,
       "conversion": 0.35,
       "content_quality": 0.924,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-hashtags-travel",
-      "score": 0.687,
-      "seo": 0.844,
+      "path": "/blog/instagram-captions-asmr",
+      "score": 0.695,
+      "seo": 0.863,
       "conversion": 0.35,
       "content_quality": 0.922,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-titles-lifestyle",
-      "score": 0.687,
-      "seo": 0.844,
+      "path": "/blog/instagram-captions-creative-usernames",
+      "score": 0.695,
+      "seo": 0.863,
+      "conversion": 0.35,
+      "content_quality": 0.923
+    },
+    {
+      "path": "/blog/instagram-hooks-fitness-ideas",
+      "score": 0.695,
+      "seo": 0.863,
       "conversion": 0.35,
       "content_quality": 0.922,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-titles-skincare",
-      "score": 0.687,
-      "seo": 0.844,
+      "path": "/blog/instagram-titles-small-business",
+      "score": 0.695,
+      "seo": 0.863,
       "conversion": 0.35,
       "content_quality": 0.923,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/best-tiktok-captions-for-views",
-      "score": 0.686,
-      "seo": 0.843,
+      "path": "/blog/seo-publish-volume-without-spam-signals",
+      "score": 0.695,
+      "seo": 0.863,
       "conversion": 0.35,
-      "content_quality": 0.921,
-      "tier_hint": "STABLE"
+      "content_quality": 0.922
     },
     {
-      "path": "/blog/tiktok-captions-adventure",
-      "score": 0.686,
-      "seo": 0.843,
+      "path": "/blog/tiktok-captions-asmr",
+      "score": 0.695,
+      "seo": 0.863,
       "conversion": 0.35,
-      "content_quality": 0.921,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-baddie",
-      "score": 0.686,
-      "seo": 0.842,
-      "conversion": 0.35,
-      "content_quality": 0.921,
+      "content_quality": 0.923,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-best",
-      "score": 0.686,
-      "seo": 0.843,
+      "score": 0.695,
+      "seo": 0.862,
       "conversion": 0.35,
       "content_quality": 0.921,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-comedy-reel",
-      "score": 0.686,
-      "seo": 0.843,
+      "score": 0.695,
+      "seo": 0.862,
       "conversion": 0.35,
       "content_quality": 0.921
     },
     {
-      "path": "/blog/tiktok-captions-dance",
-      "score": 0.686,
-      "seo": 0.843,
+      "path": "/blog/tiktok-captions-ideas-for-beginners",
+      "score": 0.695,
+      "seo": 0.863,
       "conversion": 0.35,
-      "content_quality": 0.921,
+      "content_quality": 0.922,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-education",
-      "score": 0.686,
-      "seo": 0.842,
+      "path": "/blog/tiktok-captions-lets-play",
+      "score": 0.695,
+      "seo": 0.863,
       "conversion": 0.35,
-      "content_quality": 0.92,
-      "tier_hint": "STABLE"
+      "content_quality": 0.922
     },
     {
-      "path": "/blog/tiktok-captions-entrepreneur",
-      "score": 0.686,
-      "seo": 0.842,
+      "path": "/blog/tiktok-captions-reaction",
+      "score": 0.695,
+      "seo": 0.863,
       "conversion": 0.35,
-      "content_quality": 0.92,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-fashion-hashtags",
-      "score": 0.686,
-      "seo": 0.842,
-      "conversion": 0.35,
-      "content_quality": 0.92
-    },
-    {
-      "path": "/blog/tiktok-captions-prank",
-      "score": 0.686,
-      "seo": 0.842,
-      "conversion": 0.35,
-      "content_quality": 0.92,
+      "content_quality": 0.923,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-small-business",
-      "score": 0.686,
-      "seo": 0.843,
-      "conversion": 0.35,
-      "content_quality": 0.921,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-trending-reel",
-      "score": 0.686,
-      "seo": 0.843,
-      "conversion": 0.35,
-      "content_quality": 0.921
-    },
-    {
-      "path": "/blog/tiktok-captions-tutorial",
-      "score": 0.686,
-      "seo": 0.843,
+      "score": 0.695,
+      "seo": 0.862,
       "conversion": 0.35,
       "content_quality": 0.921,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-viral",
-      "score": 0.686,
-      "seo": 0.843,
+      "score": 0.695,
+      "seo": 0.862,
       "conversion": 0.35,
       "content_quality": 0.922,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-hashtags-funny",
-      "score": 0.686,
-      "seo": 0.843,
+      "score": 0.695,
+      "seo": 0.862,
       "conversion": 0.35,
       "content_quality": 0.921,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-hooks-aesthetic-reel",
-      "score": 0.686,
-      "seo": 0.843,
+      "path": "/blog/tiktok-hooks-comedy-reel",
+      "score": 0.695,
+      "seo": 0.863,
       "conversion": 0.35,
-      "content_quality": 0.921
-    },
-    {
-      "path": "/blog/tiktok-titles-clean-girl",
-      "score": 0.686,
-      "seo": 0.842,
-      "conversion": 0.35,
-      "content_quality": 0.92
+      "content_quality": 0.922
     },
     {
       "path": "/blog/youtube-hashtags-aesthetic-usernames",
-      "score": 0.686,
-      "seo": 0.843,
+      "score": 0.695,
+      "seo": 0.862,
       "conversion": 0.35,
       "content_quality": 0.921
     },
     {
+      "path": "/blog/youtube-hashtags-travel",
+      "score": 0.695,
+      "seo": 0.863,
+      "conversion": 0.35,
+      "content_quality": 0.922,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-titles-lifestyle",
+      "score": 0.695,
+      "seo": 0.863,
+      "conversion": 0.35,
+      "content_quality": 0.922,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-titles-skincare",
+      "score": 0.695,
+      "seo": 0.863,
+      "conversion": 0.35,
+      "content_quality": 0.923,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/best-tiktok-captions-for-views",
+      "score": 0.694,
+      "seo": 0.861,
+      "conversion": 0.35,
+      "content_quality": 0.921,
+      "tier_hint": "STABLE"
+    },
+    {
       "path": "/blog/instagram-hashtags-cottagecore",
-      "score": 0.685,
-      "seo": 0.842,
+      "score": 0.694,
+      "seo": 0.861,
       "conversion": 0.35,
       "content_quality": 0.92,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-hashtags-story",
-      "score": 0.685,
-      "seo": 0.842,
+      "score": 0.694,
+      "seo": 0.861,
       "conversion": 0.35,
       "content_quality": 0.92,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-hooks-comedy-reel",
-      "score": 0.685,
-      "seo": 0.842,
+      "score": 0.694,
+      "seo": 0.861,
       "conversion": 0.35,
       "content_quality": 0.92
     },
     {
-      "path": "/blog/motivational-tiktok-captions",
-      "score": 0.685,
-      "seo": 0.841,
+      "path": "/blog/tiktok-captions-adventure",
+      "score": 0.694,
+      "seo": 0.862,
       "conversion": 0.35,
-      "content_quality": 0.919,
+      "content_quality": 0.921,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/shorts-title-formulas",
-      "score": 0.685,
-      "seo": 0.841,
+      "path": "/blog/tiktok-captions-baddie",
+      "score": 0.694,
+      "seo": 0.861,
       "conversion": 0.35,
-      "content_quality": 0.919,
+      "content_quality": 0.921,
       "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-before-after",
-      "score": 0.685,
-      "seo": 0.841,
-      "conversion": 0.35,
-      "content_quality": 0.919
     },
     {
       "path": "/blog/tiktok-captions-dance-reel",
-      "score": 0.685,
-      "seo": 0.841,
+      "score": 0.694,
+      "seo": 0.86,
       "conversion": 0.35,
       "content_quality": 0.919
     },
     {
-      "path": "/blog/tiktok-captions-fitness-hashtags",
-      "score": 0.685,
-      "seo": 0.841,
+      "path": "/blog/tiktok-captions-dance",
+      "score": 0.694,
+      "seo": 0.862,
       "conversion": 0.35,
-      "content_quality": 0.919
-    },
-    {
-      "path": "/blog/tiktok-captions-list",
-      "score": 0.685,
-      "seo": 0.841,
-      "conversion": 0.35,
-      "content_quality": 0.919,
+      "content_quality": 0.921,
       "tier_hint": "STABLE"
     },
     {
+      "path": "/blog/tiktok-captions-education",
+      "score": 0.694,
+      "seo": 0.861,
+      "conversion": 0.35,
+      "content_quality": 0.92,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-entrepreneur",
+      "score": 0.694,
+      "seo": 0.861,
+      "conversion": 0.35,
+      "content_quality": 0.92,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-fashion-hashtags",
+      "score": 0.694,
+      "seo": 0.861,
+      "conversion": 0.35,
+      "content_quality": 0.92
+    },
+    {
       "path": "/blog/tiktok-captions-mom-life",
-      "score": 0.685,
-      "seo": 0.842,
+      "score": 0.694,
+      "seo": 0.861,
       "conversion": 0.35,
       "content_quality": 0.92
     },
     {
       "path": "/blog/tiktok-captions-pet",
-      "score": 0.685,
-      "seo": 0.842,
+      "score": 0.694,
+      "seo": 0.861,
+      "conversion": 0.35,
+      "content_quality": 0.92,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-prank",
+      "score": 0.694,
+      "seo": 0.861,
       "conversion": 0.35,
       "content_quality": 0.92,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-productivity",
-      "score": 0.685,
-      "seo": 0.842,
+      "score": 0.694,
+      "seo": 0.861,
       "conversion": 0.35,
       "content_quality": 0.92,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-review",
-      "score": 0.685,
-      "seo": 0.842,
+      "score": 0.694,
+      "seo": 0.861,
       "conversion": 0.35,
       "content_quality": 0.92,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-sassy",
-      "score": 0.685,
-      "seo": 0.842,
+      "score": 0.694,
+      "seo": 0.861,
       "conversion": 0.35,
       "content_quality": 0.92,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-secret",
-      "score": 0.685,
-      "seo": 0.842,
+      "score": 0.694,
+      "seo": 0.861,
       "conversion": 0.35,
       "content_quality": 0.92,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-study",
-      "score": 0.685,
-      "seo": 0.842,
+      "score": 0.694,
+      "seo": 0.861,
       "conversion": 0.35,
       "content_quality": 0.92,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-tech",
-      "score": 0.685,
-      "seo": 0.842,
+      "score": 0.694,
+      "seo": 0.861,
       "conversion": 0.35,
       "content_quality": 0.92,
       "tier_hint": "STABLE"
     },
     {
+      "path": "/blog/tiktok-captions-trending-reel",
+      "score": 0.694,
+      "seo": 0.862,
+      "conversion": 0.35,
+      "content_quality": 0.921
+    },
+    {
+      "path": "/blog/tiktok-captions-tutorial",
+      "score": 0.694,
+      "seo": 0.862,
+      "conversion": 0.35,
+      "content_quality": 0.921,
+      "tier_hint": "STABLE"
+    },
+    {
       "path": "/blog/tiktok-captions-unboxing",
-      "score": 0.685,
-      "seo": 0.842,
+      "score": 0.694,
+      "seo": 0.861,
       "conversion": 0.35,
       "content_quality": 0.92,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-vs",
-      "score": 0.685,
-      "seo": 0.842,
+      "score": 0.694,
+      "seo": 0.861,
       "conversion": 0.35,
       "content_quality": 0.92,
       "tier_hint": "STABLE"
     },
     {
+      "path": "/blog/tiktok-hooks-aesthetic-reel",
+      "score": 0.694,
+      "seo": 0.862,
+      "conversion": 0.35,
+      "content_quality": 0.921
+    },
+    {
       "path": "/blog/tiktok-hooks-lets-play",
-      "score": 0.685,
-      "seo": 0.842,
+      "score": 0.694,
+      "seo": 0.861,
       "conversion": 0.35,
       "content_quality": 0.92
     },
     {
       "path": "/blog/tiktok-titles-asmr",
-      "score": 0.685,
-      "seo": 0.842,
+      "score": 0.694,
+      "seo": 0.86,
       "conversion": 0.35,
       "content_quality": 0.92,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-titles-fitness",
-      "score": 0.685,
-      "seo": 0.841,
+      "path": "/blog/tiktok-titles-clean-girl",
+      "score": 0.694,
+      "seo": 0.861,
+      "conversion": 0.35,
+      "content_quality": 0.92
+    },
+    {
+      "path": "/blog/motivational-tiktok-captions",
+      "score": 0.693,
+      "seo": 0.86,
       "conversion": 0.35,
       "content_quality": 0.919,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/best-youtube-titles-for-views",
-      "score": 0.684,
-      "seo": 0.84,
+      "path": "/blog/shorts-title-formulas",
+      "score": 0.693,
+      "seo": 0.86,
       "conversion": 0.35,
-      "content_quality": 0.918,
+      "content_quality": 0.919,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/instagram-titles-transformation",
-      "score": 0.684,
-      "seo": 0.84,
+      "path": "/blog/tiktok-captions-before-after",
+      "score": 0.693,
+      "seo": 0.86,
       "conversion": 0.35,
-      "content_quality": 0.918,
-      "tier_hint": "STABLE"
+      "content_quality": 0.919
     },
     {
       "path": "/blog/tiktok-captions-clickbait",
-      "score": 0.684,
-      "seo": 0.841,
+      "score": 0.693,
+      "seo": 0.859,
       "conversion": 0.35,
       "content_quality": 0.918,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-fitness-hashtags",
+      "score": 0.693,
+      "seo": 0.86,
+      "conversion": 0.35,
+      "content_quality": 0.919
+    },
+    {
+      "path": "/blog/tiktok-captions-list",
+      "score": 0.693,
+      "seo": 0.86,
+      "conversion": 0.35,
+      "content_quality": 0.919,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-tips",
-      "score": 0.684,
-      "seo": 0.84,
+      "score": 0.693,
+      "seo": 0.859,
       "conversion": 0.35,
       "content_quality": 0.918,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-transformation",
-      "score": 0.684,
-      "seo": 0.84,
+      "score": 0.693,
+      "seo": 0.859,
       "conversion": 0.35,
       "content_quality": 0.918,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-travel-hashtags",
-      "score": 0.684,
-      "seo": 0.84,
-      "conversion": 0.35,
-      "content_quality": 0.918
-    },
-    {
-      "path": "/blog/tiktok-captions-work-from-home",
-      "score": 0.684,
-      "seo": 0.839,
-      "conversion": 0.35,
-      "content_quality": 0.917
-    },
-    {
       "path": "/blog/tiktok-hooks-dance-hashtags",
-      "score": 0.684,
-      "seo": 0.84,
+      "score": 0.693,
+      "seo": 0.859,
       "conversion": 0.35,
       "content_quality": 0.918
     },
     {
       "path": "/blog/tiktok-titles-dance-ideas",
-      "score": 0.684,
-      "seo": 0.84,
+      "score": 0.693,
+      "seo": 0.859,
       "conversion": 0.35,
       "content_quality": 0.918,
       "tier_hint": "STABLE"
     },
     {
+      "path": "/blog/tiktok-titles-fitness",
+      "score": 0.693,
+      "seo": 0.86,
+      "conversion": 0.35,
+      "content_quality": 0.919,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/best-youtube-titles-for-views",
+      "score": 0.692,
+      "seo": 0.859,
+      "conversion": 0.35,
+      "content_quality": 0.918,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/instagram-titles-transformation",
+      "score": 0.692,
+      "seo": 0.859,
+      "conversion": 0.35,
+      "content_quality": 0.918,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-hacks",
+      "score": 0.692,
+      "seo": 0.858,
+      "conversion": 0.35,
+      "content_quality": 0.917,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-travel-hashtags",
+      "score": 0.692,
+      "seo": 0.859,
+      "conversion": 0.35,
+      "content_quality": 0.918
+    },
+    {
+      "path": "/blog/tiktok-captions-vlog",
+      "score": 0.692,
+      "seo": 0.858,
+      "conversion": 0.35,
+      "content_quality": 0.917,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-work-from-home",
+      "score": 0.692,
+      "seo": 0.858,
+      "conversion": 0.35,
+      "content_quality": 0.917
+    },
+    {
       "path": "/blog/tiktok-titles-engagement",
-      "score": 0.684,
-      "seo": 0.839,
+      "score": 0.692,
+      "seo": 0.858,
       "conversion": 0.35,
       "content_quality": 0.917,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-titles-productivity",
-      "score": 0.684,
-      "seo": 0.84,
+      "score": 0.692,
+      "seo": 0.859,
       "conversion": 0.35,
       "content_quality": 0.917,
       "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-family",
-      "score": 0.683,
-      "seo": 0.838,
-      "conversion": 0.35,
-      "content_quality": 0.916,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-hacks",
-      "score": 0.683,
-      "seo": 0.839,
-      "conversion": 0.35,
-      "content_quality": 0.917,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-makeup",
-      "score": 0.683,
-      "seo": 0.838,
-      "conversion": 0.35,
-      "content_quality": 0.916,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-vlog",
-      "score": 0.683,
-      "seo": 0.839,
-      "conversion": 0.35,
-      "content_quality": 0.917,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-y2k",
-      "score": 0.683,
-      "seo": 0.838,
-      "conversion": 0.35,
-      "content_quality": 0.915,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-hashtags-first-line",
-      "score": 0.683,
-      "seo": 0.838,
-      "conversion": 0.35,
-      "content_quality": 0.916
     },
     {
       "path": "/blog/tiktok-titles-tutorial-reel",
-      "score": 0.683,
-      "seo": 0.839,
+      "score": 0.692,
+      "seo": 0.858,
       "conversion": 0.35,
       "content_quality": 0.917
     },
     {
       "path": "/blog/instagram-captions-for-selfies",
-      "score": 0.682,
-      "seo": 0.837,
+      "score": 0.691,
+      "seo": 0.856,
       "conversion": 0.35,
       "content_quality": 0.915
     },
     {
-      "path": "/blog/instagram-hooks-mom-life",
-      "score": 0.682,
-      "seo": 0.836,
+      "path": "/blog/tiktok-captions-family",
+      "score": 0.691,
+      "seo": 0.857,
       "conversion": 0.35,
-      "content_quality": 0.914
+      "content_quality": 0.916,
+      "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-curiosity",
-      "score": 0.682,
-      "seo": 0.837,
+      "path": "/blog/tiktok-captions-makeup",
+      "score": 0.691,
+      "seo": 0.857,
       "conversion": 0.35,
-      "content_quality": 0.914,
+      "content_quality": 0.916,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-self-love",
-      "score": 0.682,
-      "seo": 0.837,
+      "score": 0.691,
+      "seo": 0.856,
       "conversion": 0.35,
       "content_quality": 0.915,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-stitch-ideas",
-      "score": 0.682,
-      "seo": 0.838,
+      "score": 0.691,
+      "seo": 0.857,
       "conversion": 0.35,
       "content_quality": 0.915,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-testimonial",
-      "score": 0.682,
-      "seo": 0.838,
+      "score": 0.691,
+      "seo": 0.857,
       "conversion": 0.35,
       "content_quality": 0.915,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-that-girl",
-      "score": 0.682,
-      "seo": 0.837,
+      "score": 0.691,
+      "seo": 0.856,
       "conversion": 0.35,
       "content_quality": 0.914
     },
     {
+      "path": "/blog/tiktok-captions-y2k",
+      "score": 0.691,
+      "seo": 0.857,
+      "conversion": 0.35,
+      "content_quality": 0.915,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-hashtags-first-line",
+      "score": 0.691,
+      "seo": 0.857,
+      "conversion": 0.35,
+      "content_quality": 0.916
+    },
+    {
       "path": "/blog/instagram-hooks-challenge-ideas",
-      "score": 0.681,
-      "seo": 0.836,
+      "score": 0.69,
+      "seo": 0.855,
       "conversion": 0.35,
       "content_quality": 0.913,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/instagram-hooks-mom-life",
+      "score": 0.69,
+      "seo": 0.855,
+      "conversion": 0.35,
+      "content_quality": 0.914
+    },
+    {
+      "path": "/blog/tiktok-captions-curiosity",
+      "score": 0.69,
+      "seo": 0.855,
+      "conversion": 0.35,
+      "content_quality": 0.914,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-gaming-video",
-      "score": 0.681,
-      "seo": 0.836,
+      "score": 0.69,
+      "seo": 0.855,
       "conversion": 0.35,
       "content_quality": 0.913
     },
     {
-      "path": "/blog/tiktok-captions-lifestyle",
-      "score": 0.681,
-      "seo": 0.835,
-      "conversion": 0.35,
-      "content_quality": 0.912,
-      "tier_hint": "STABLE"
-    },
-    {
       "path": "/blog/tiktok-captions-skincare",
-      "score": 0.681,
-      "seo": 0.836,
+      "score": 0.69,
+      "seo": 0.854,
       "conversion": 0.35,
       "content_quality": 0.913,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-captions-finance",
-      "score": 0.681,
-      "seo": 0.835,
-      "conversion": 0.35,
-      "content_quality": 0.912,
-      "tier_hint": "STABLE"
-    },
-    {
       "path": "/blog/instagram-hashtags-challenge",
-      "score": 0.68,
-      "seo": 0.834,
+      "score": 0.689,
+      "seo": 0.853,
       "conversion": 0.35,
       "content_quality": 0.911,
       "tier_hint": "STABLE"
     },
     {
+      "path": "/blog/tiktok-captions-lifestyle",
+      "score": 0.689,
+      "seo": 0.854,
+      "conversion": 0.35,
+      "content_quality": 0.912,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-hashtags-before-after",
+      "score": 0.689,
+      "seo": 0.854,
+      "conversion": 0.35,
+      "content_quality": 0.912
+    },
+    {
+      "path": "/blog/tiktok-hashtags-team",
+      "score": 0.689,
+      "seo": 0.853,
+      "conversion": 0.35,
+      "content_quality": 0.912,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-captions-finance",
+      "score": 0.689,
+      "seo": 0.854,
+      "conversion": 0.35,
+      "content_quality": 0.912,
+      "tier_hint": "STABLE"
+    },
+    {
       "path": "/blog/tiktok-captions-coffee",
-      "score": 0.68,
-      "seo": 0.833,
+      "score": 0.688,
+      "seo": 0.852,
       "conversion": 0.35,
       "content_quality": 0.91,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-tutorial-reel",
-      "score": 0.68,
-      "seo": 0.834,
+      "score": 0.688,
+      "seo": 0.853,
       "conversion": 0.35,
       "content_quality": 0.911
     },
     {
-      "path": "/blog/tiktok-hashtags-before-after",
-      "score": 0.68,
-      "seo": 0.835,
-      "conversion": 0.35,
-      "content_quality": 0.912
-    },
-    {
-      "path": "/blog/tiktok-hashtags-team",
-      "score": 0.68,
-      "seo": 0.835,
-      "conversion": 0.35,
-      "content_quality": 0.912,
-      "tier_hint": "STABLE"
-    },
-    {
       "path": "/blog/youtube-captions-review",
-      "score": 0.68,
-      "seo": 0.834,
+      "score": 0.688,
+      "seo": 0.853,
       "conversion": 0.35,
       "content_quality": 0.911,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-music",
-      "score": 0.679,
-      "seo": 0.833,
-      "conversion": 0.35,
-      "content_quality": 0.909,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-hashtags-caption-ideas",
-      "score": 0.679,
-      "seo": 0.832,
-      "conversion": 0.35,
-      "content_quality": 0.909,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-hashtags-question",
-      "score": 0.679,
-      "seo": 0.832,
-      "conversion": 0.35,
-      "content_quality": 0.909,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-hashtags-script-structure",
-      "score": 0.679,
-      "seo": 0.832,
-      "conversion": 0.35,
-      "content_quality": 0.909,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/youtube-hashtags-advanced",
-      "score": 0.679,
-      "seo": 0.832,
-      "conversion": 0.35,
-      "content_quality": 0.909,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/youtube-hashtags-cute",
-      "score": 0.679,
-      "seo": 0.832,
-      "conversion": 0.35,
-      "content_quality": 0.909,
-      "tier_hint": "STABLE"
-    },
-    {
       "path": "/blog/youtube-titles-bio-ideas",
-      "score": 0.679,
-      "seo": 0.833,
+      "score": 0.688,
+      "seo": 0.852,
       "conversion": 0.35,
       "content_quality": 0.91,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-titles-comedy-hashtags",
-      "score": 0.679,
-      "seo": 0.833,
+      "score": 0.688,
+      "seo": 0.852,
       "conversion": 0.35,
       "content_quality": 0.909
     },
     {
-      "path": "/blog/youtube-titles-trending",
-      "score": 0.679,
-      "seo": 0.832,
+      "path": "/blog/tiktok-captions-music",
+      "score": 0.687,
+      "seo": 0.851,
       "conversion": 0.35,
       "content_quality": 0.909,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/short-tiktok-captions",
-      "score": 0.678,
-      "seo": 0.831,
+      "path": "/blog/tiktok-hashtags-caption-ideas",
+      "score": 0.687,
+      "seo": 0.851,
       "conversion": 0.35,
-      "content_quality": 0.907,
+      "content_quality": 0.909,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-captions-aesthetic-reel",
-      "score": 0.678,
-      "seo": 0.831,
+      "path": "/blog/tiktok-hashtags-question",
+      "score": 0.687,
+      "seo": 0.851,
       "conversion": 0.35,
-      "content_quality": 0.907
-    },
-    {
-      "path": "/blog/youtube-hashtags-aesthetic",
-      "score": 0.678,
-      "seo": 0.831,
-      "conversion": 0.35,
-      "content_quality": 0.907,
+      "content_quality": 0.909,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-hashtags-curiosity",
-      "score": 0.678,
-      "seo": 0.831,
+      "path": "/blog/tiktok-hashtags-script-structure",
+      "score": 0.687,
+      "seo": 0.851,
       "conversion": 0.35,
-      "content_quality": 0.907,
+      "content_quality": 0.909,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-hashtags-advanced",
+      "score": 0.687,
+      "seo": 0.851,
+      "conversion": 0.35,
+      "content_quality": 0.909,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-hashtags-cute",
+      "score": 0.687,
+      "seo": 0.851,
+      "conversion": 0.35,
+      "content_quality": 0.909,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-titles-mystery",
-      "score": 0.678,
-      "seo": 0.831,
+      "score": 0.687,
+      "seo": 0.85,
       "conversion": 0.35,
       "content_quality": 0.908,
       "tier_hint": "STABLE"
     },
     {
+      "path": "/blog/youtube-titles-trending",
+      "score": 0.687,
+      "seo": 0.851,
+      "conversion": 0.35,
+      "content_quality": 0.909,
+      "tier_hint": "STABLE"
+    },
+    {
       "path": "/blog/instagram-hooks-sunset",
-      "score": 0.677,
-      "seo": 0.83,
+      "score": 0.686,
+      "seo": 0.849,
+      "conversion": 0.35,
+      "content_quality": 0.907,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/short-tiktok-captions",
+      "score": 0.686,
+      "seo": 0.849,
       "conversion": 0.35,
       "content_quality": 0.907,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-first-line",
-      "score": 0.677,
-      "seo": 0.83,
+      "score": 0.686,
+      "seo": 0.849,
       "conversion": 0.35,
       "content_quality": 0.906
-    },
-    {
-      "path": "/blog/tiktok-captions-long",
-      "score": 0.677,
-      "seo": 0.829,
-      "conversion": 0.35,
-      "content_quality": 0.905,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-hashtags-nature",
-      "score": 0.677,
-      "seo": 0.829,
-      "conversion": 0.35,
-      "content_quality": 0.905,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-hooks-day-in-my-life",
-      "score": 0.677,
-      "seo": 0.829,
-      "conversion": 0.35,
-      "content_quality": 0.905
     },
     {
       "path": "/blog/tiktok-hooks-self-love",
-      "score": 0.677,
-      "seo": 0.83,
+      "score": 0.686,
+      "seo": 0.849,
       "conversion": 0.35,
       "content_quality": 0.906,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-captions-cooking",
-      "score": 0.677,
-      "seo": 0.829,
+      "path": "/blog/youtube-captions-aesthetic-reel",
+      "score": 0.686,
+      "seo": 0.85,
       "conversion": 0.35,
-      "content_quality": 0.905,
-      "tier_hint": "STABLE"
+      "content_quality": 0.907
     },
     {
       "path": "/blog/youtube-captions-creative-usernames",
-      "score": 0.677,
-      "seo": 0.83,
+      "score": 0.686,
+      "seo": 0.849,
       "conversion": 0.35,
       "content_quality": 0.906
     },
     {
-      "path": "/blog/youtube-captions-skincare",
-      "score": 0.677,
-      "seo": 0.83,
+      "path": "/blog/youtube-hashtags-aesthetic",
+      "score": 0.686,
+      "seo": 0.85,
       "conversion": 0.35,
-      "content_quality": 0.906,
+      "content_quality": 0.907,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-hashtags-curiosity",
+      "score": 0.686,
+      "seo": 0.85,
+      "conversion": 0.35,
+      "content_quality": 0.907,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-hashtags-walkthrough",
-      "score": 0.677,
-      "seo": 0.83,
+      "score": 0.686,
+      "seo": 0.849,
       "conversion": 0.35,
       "content_quality": 0.906,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-hooks-list",
-      "score": 0.677,
-      "seo": 0.83,
+      "score": 0.686,
+      "seo": 0.849,
+      "conversion": 0.35,
+      "content_quality": 0.906,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/instagram-hashtags-storytime",
+      "score": 0.685,
+      "seo": 0.847,
+      "conversion": 0.35,
+      "content_quality": 0.904,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-long",
+      "score": 0.685,
+      "seo": 0.848,
+      "conversion": 0.35,
+      "content_quality": 0.905,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-top-10",
+      "score": 0.685,
+      "seo": 0.847,
+      "conversion": 0.35,
+      "content_quality": 0.904
+    },
+    {
+      "path": "/blog/tiktok-hashtags-nature",
+      "score": 0.685,
+      "seo": 0.848,
+      "conversion": 0.35,
+      "content_quality": 0.905,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-hooks-day-in-my-life",
+      "score": 0.685,
+      "seo": 0.848,
+      "conversion": 0.35,
+      "content_quality": 0.905
+    },
+    {
+      "path": "/blog/tiktok-titles-title-formulas",
+      "score": 0.685,
+      "seo": 0.847,
+      "conversion": 0.35,
+      "content_quality": 0.904,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-captions-cooking",
+      "score": 0.685,
+      "seo": 0.848,
+      "conversion": 0.35,
+      "content_quality": 0.905,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-captions-skincare",
+      "score": 0.685,
+      "seo": 0.848,
       "conversion": 0.35,
       "content_quality": 0.906,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-titles-trending-sound",
-      "score": 0.677,
-      "seo": 0.83,
+      "score": 0.685,
+      "seo": 0.849,
       "conversion": 0.35,
       "content_quality": 0.906
     },
     {
-      "path": "/blog/instagram-hashtags-storytime",
-      "score": 0.676,
-      "seo": 0.828,
-      "conversion": 0.35,
-      "content_quality": 0.904,
-      "tier_hint": "STABLE"
-    },
-    {
       "path": "/blog/instagram-titles-love",
-      "score": 0.676,
-      "seo": 0.828,
+      "score": 0.684,
+      "seo": 0.847,
       "conversion": 0.35,
       "content_quality": 0.904,
       "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-dad",
-      "score": 0.676,
-      "seo": 0.828,
-      "conversion": 0.35,
-      "content_quality": 0.904,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-top-10",
-      "score": 0.676,
-      "seo": 0.828,
-      "conversion": 0.35,
-      "content_quality": 0.904
-    },
-    {
-      "path": "/blog/tiktok-titles-title-formulas",
-      "score": 0.676,
-      "seo": 0.828,
-      "conversion": 0.35,
-      "content_quality": 0.904,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/youtube-hashtags-cover",
-      "score": 0.676,
-      "seo": 0.828,
-      "conversion": 0.35,
-      "content_quality": 0.903,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/youtube-hooks-caption-for-selfies",
-      "score": 0.676,
-      "seo": 0.828,
-      "conversion": 0.35,
-      "content_quality": 0.904
-    },
-    {
-      "path": "/blog/youtube-titles-caption-for-selfies",
-      "score": 0.676,
-      "seo": 0.828,
-      "conversion": 0.35,
-      "content_quality": 0.904
-    },
-    {
-      "path": "/blog/youtube-titles-fitness-hashtags",
-      "score": 0.676,
-      "seo": 0.828,
-      "conversion": 0.35,
-      "content_quality": 0.904
     },
     {
       "path": "/blog/tiktok-captions-advanced",
-      "score": 0.675,
-      "seo": 0.827,
+      "score": 0.684,
+      "seo": 0.846,
       "conversion": 0.35,
       "content_quality": 0.903,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-cooking",
-      "score": 0.675,
-      "seo": 0.827,
+      "score": 0.684,
+      "seo": 0.846,
       "conversion": 0.35,
       "content_quality": 0.902,
       "tier_hint": "STABLE"
     },
     {
+      "path": "/blog/tiktok-captions-dad",
+      "score": 0.684,
+      "seo": 0.847,
+      "conversion": 0.35,
+      "content_quality": 0.904,
+      "tier_hint": "STABLE"
+    },
+    {
       "path": "/blog/tiktok-captions-restaurant",
-      "score": 0.675,
-      "seo": 0.827,
+      "score": 0.684,
+      "seo": 0.846,
       "conversion": 0.35,
       "content_quality": 0.903,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-views",
-      "score": 0.675,
-      "seo": 0.827,
+      "score": 0.684,
+      "seo": 0.846,
       "conversion": 0.35,
       "content_quality": 0.902,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-hashtags-minimalist",
-      "score": 0.675,
-      "seo": 0.827,
+      "score": 0.684,
+      "seo": 0.846,
       "conversion": 0.35,
       "content_quality": 0.903,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-hashtags-recipe",
-      "score": 0.675,
-      "seo": 0.827,
+      "score": 0.684,
+      "seo": 0.846,
       "conversion": 0.35,
       "content_quality": 0.903,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-titles-study",
-      "score": 0.675,
-      "seo": 0.827,
+      "score": 0.684,
+      "seo": 0.846,
       "conversion": 0.35,
       "content_quality": 0.903,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-captions-top-10",
-      "score": 0.675,
-      "seo": 0.827,
+      "score": 0.684,
+      "seo": 0.846,
       "conversion": 0.35,
       "content_quality": 0.903
     },
     {
+      "path": "/blog/youtube-hashtags-cover",
+      "score": 0.684,
+      "seo": 0.846,
+      "conversion": 0.35,
+      "content_quality": 0.903,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-hooks-caption-for-selfies",
+      "score": 0.684,
+      "seo": 0.847,
+      "conversion": 0.35,
+      "content_quality": 0.904
+    },
+    {
+      "path": "/blog/youtube-titles-caption-for-selfies",
+      "score": 0.684,
+      "seo": 0.847,
+      "conversion": 0.35,
+      "content_quality": 0.904
+    },
+    {
+      "path": "/blog/youtube-titles-fitness-hashtags",
+      "score": 0.684,
+      "seo": 0.847,
+      "conversion": 0.35,
+      "content_quality": 0.904
+    },
+    {
+      "path": "/blog/tiktok-hooks-mystery",
+      "score": 0.683,
+      "seo": 0.845,
+      "conversion": 0.35,
+      "content_quality": 0.901,
+      "tier_hint": "STABLE"
+    },
+    {
       "path": "/blog/youtube-hooks-brand-hashtags",
-      "score": 0.675,
-      "seo": 0.827,
+      "score": 0.683,
+      "seo": 0.845,
       "conversion": 0.35,
       "content_quality": 0.902
     },
     {
       "path": "/blog/instagram-captions-ootd",
-      "score": 0.674,
-      "seo": 0.825,
+      "score": 0.682,
+      "seo": 0.843,
       "conversion": 0.35,
       "content_quality": 0.9,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-reel-hashtag-strategy",
-      "score": 0.674,
-      "seo": 0.825,
+      "score": 0.682,
+      "seo": 0.844,
       "conversion": 0.35,
       "content_quality": 0.9
     },
     {
       "path": "/blog/tiktok-captions-beauty-hashtags",
-      "score": 0.674,
-      "seo": 0.825,
+      "score": 0.682,
+      "seo": 0.844,
       "conversion": 0.35,
       "content_quality": 0.9
     },
     {
       "path": "/blog/tiktok-captions-duet",
-      "score": 0.674,
-      "seo": 0.825,
+      "score": 0.682,
+      "seo": 0.844,
       "conversion": 0.35,
       "content_quality": 0.9,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-grwm",
-      "score": 0.674,
-      "seo": 0.825,
+      "score": 0.682,
+      "seo": 0.844,
       "conversion": 0.35,
       "content_quality": 0.9,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-hooks-mystery",
-      "score": 0.674,
-      "seo": 0.826,
-      "conversion": 0.35,
-      "content_quality": 0.901,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/youtube-captions-story",
-      "score": 0.674,
-      "seo": 0.825,
-      "conversion": 0.35,
-      "content_quality": 0.9,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/youtube-hooks-review",
-      "score": 0.674,
-      "seo": 0.825,
-      "conversion": 0.35,
-      "content_quality": 0.9,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/instagram-hooks-sale",
-      "score": 0.673,
-      "seo": 0.823,
-      "conversion": 0.35,
-      "content_quality": 0.899,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/instagram-titles-food-ideas",
-      "score": 0.673,
-      "seo": 0.824,
-      "conversion": 0.35,
-      "content_quality": 0.899,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-comparison",
-      "score": 0.673,
-      "seo": 0.824,
-      "conversion": 0.35,
-      "content_quality": 0.899,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-hair",
-      "score": 0.673,
-      "seo": 0.824,
+      "score": 0.682,
+      "seo": 0.843,
       "conversion": 0.35,
       "content_quality": 0.899,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-minimalist",
-      "score": 0.673,
-      "seo": 0.824,
+      "score": 0.682,
+      "seo": 0.843,
       "conversion": 0.35,
       "content_quality": 0.9,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-nature",
-      "score": 0.673,
-      "seo": 0.824,
+      "score": 0.682,
+      "seo": 0.843,
       "conversion": 0.35,
       "content_quality": 0.9,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-short",
-      "score": 0.673,
-      "seo": 0.824,
-      "conversion": 0.35,
-      "content_quality": 0.899,
-      "tier_hint": "STABLE"
-    },
-    {
       "path": "/blog/tiktok-captions-sunset",
-      "score": 0.673,
-      "seo": 0.824,
+      "score": 0.682,
+      "seo": 0.843,
       "conversion": 0.35,
       "content_quality": 0.899,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-trending-ideas",
-      "score": 0.673,
-      "seo": 0.824,
+      "score": 0.682,
+      "seo": 0.843,
       "conversion": 0.35,
       "content_quality": 0.9,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-hooks-brand-hashtags",
-      "score": 0.673,
-      "seo": 0.823,
-      "conversion": 0.35,
-      "content_quality": 0.898
-    },
-    {
       "path": "/blog/tiktok-hooks-business",
-      "score": 0.673,
-      "seo": 0.824,
-      "conversion": 0.35,
-      "content_quality": 0.899,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-hooks-duet-ideas",
-      "score": 0.673,
-      "seo": 0.824,
+      "score": 0.682,
+      "seo": 0.843,
       "conversion": 0.35,
       "content_quality": 0.899,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-captions-baddie",
-      "score": 0.673,
-      "seo": 0.824,
+      "score": 0.682,
+      "seo": 0.843,
       "conversion": 0.35,
       "content_quality": 0.9,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-titles-business",
-      "score": 0.673,
-      "seo": 0.823,
+      "path": "/blog/youtube-captions-story",
+      "score": 0.682,
+      "seo": 0.844,
+      "conversion": 0.35,
+      "content_quality": 0.9,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-hooks-review",
+      "score": 0.682,
+      "seo": 0.844,
+      "conversion": 0.35,
+      "content_quality": 0.9,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/instagram-hooks-sale",
+      "score": 0.681,
+      "seo": 0.842,
+      "conversion": 0.35,
+      "content_quality": 0.899,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/instagram-titles-food-ideas",
+      "score": 0.681,
+      "seo": 0.842,
+      "conversion": 0.35,
+      "content_quality": 0.899,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-comparison",
+      "score": 0.681,
+      "seo": 0.843,
       "conversion": 0.35,
       "content_quality": 0.899,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-ootd",
-      "score": 0.672,
-      "seo": 0.823,
+      "score": 0.681,
+      "seo": 0.842,
       "conversion": 0.35,
       "content_quality": 0.898,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-script-template",
-      "score": 0.672,
-      "seo": 0.823,
+      "score": 0.681,
+      "seo": 0.842,
       "conversion": 0.35,
       "content_quality": 0.898
     },
     {
-      "path": "/blog/tiktok-captions-wedding",
-      "score": 0.672,
-      "seo": 0.822,
+      "path": "/blog/tiktok-captions-short",
+      "score": 0.681,
+      "seo": 0.843,
       "conversion": 0.35,
-      "content_quality": 0.897,
+      "content_quality": 0.899,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-yoga",
-      "score": 0.672,
-      "seo": 0.823,
+      "score": 0.681,
+      "seo": 0.842,
       "conversion": 0.35,
       "content_quality": 0.898,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-hashtags-finance",
-      "score": 0.672,
-      "seo": 0.823,
+      "score": 0.681,
+      "seo": 0.842,
       "conversion": 0.35,
       "content_quality": 0.898,
       "tier_hint": "STABLE"
     },
     {
+      "path": "/blog/tiktok-hooks-brand-hashtags",
+      "score": 0.681,
+      "seo": 0.842,
+      "conversion": 0.35,
+      "content_quality": 0.898
+    },
+    {
+      "path": "/blog/tiktok-hooks-duet-ideas",
+      "score": 0.681,
+      "seo": 0.842,
+      "conversion": 0.35,
+      "content_quality": 0.899,
+      "tier_hint": "STABLE"
+    },
+    {
       "path": "/blog/tiktok-hooks-promotion",
-      "score": 0.672,
-      "seo": 0.822,
+      "score": 0.681,
+      "seo": 0.841,
       "conversion": 0.35,
       "content_quality": 0.897,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-titles-bio-ideas",
-      "score": 0.672,
-      "seo": 0.822,
+      "path": "/blog/youtube-titles-business",
+      "score": 0.681,
+      "seo": 0.842,
       "conversion": 0.35,
-      "content_quality": 0.897,
+      "content_quality": 0.899,
       "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/youtube-captions-cute",
-      "score": 0.672,
-      "seo": 0.822,
-      "conversion": 0.35,
-      "content_quality": 0.897,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/youtube-hashtags-tips",
-      "score": 0.672,
-      "seo": 0.822,
-      "conversion": 0.35,
-      "content_quality": 0.897,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/instagram-hashtag-ideas-2025",
-      "score": 0.671,
-      "seo": 0.821,
-      "conversion": 0.35,
-      "content_quality": 0.895
     },
     {
       "path": "/blog/tiktok-captions-business",
-      "score": 0.671,
-      "seo": 0.821,
+      "score": 0.68,
+      "seo": 0.84,
       "conversion": 0.35,
       "content_quality": 0.896,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-diy",
-      "score": 0.671,
-      "seo": 0.821,
+      "score": 0.68,
+      "seo": 0.84,
       "conversion": 0.35,
       "content_quality": 0.896,
       "tier_hint": "STABLE"
     },
     {
+      "path": "/blog/tiktok-captions-sale",
+      "score": 0.68,
+      "seo": 0.84,
+      "conversion": 0.35,
+      "content_quality": 0.896,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-trending-sound",
+      "score": 0.68,
+      "seo": 0.84,
+      "conversion": 0.35,
+      "content_quality": 0.896
+    },
+    {
+      "path": "/blog/tiktok-captions-wedding",
+      "score": 0.68,
+      "seo": 0.841,
+      "conversion": 0.35,
+      "content_quality": 0.897,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-titles-bio-ideas",
+      "score": 0.68,
+      "seo": 0.841,
+      "conversion": 0.35,
+      "content_quality": 0.897,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-captions-cute",
+      "score": 0.68,
+      "seo": 0.841,
+      "conversion": 0.35,
+      "content_quality": 0.897,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-hashtags-tips",
+      "score": 0.68,
+      "seo": 0.841,
+      "conversion": 0.35,
+      "content_quality": 0.897,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/instagram-hashtag-ideas-2025",
+      "score": 0.679,
+      "seo": 0.84,
+      "conversion": 0.35,
+      "content_quality": 0.895
+    },
+    {
+      "path": "/blog/tiktok-captions-aesthetic-reel",
+      "score": 0.679,
+      "seo": 0.838,
+      "conversion": 0.35,
+      "content_quality": 0.894
+    },
+    {
+      "path": "/blog/tiktok-captions-brand",
+      "score": 0.679,
+      "seo": 0.839,
+      "conversion": 0.35,
+      "content_quality": 0.895,
+      "tier_hint": "STABLE"
+    },
+    {
       "path": "/blog/tiktok-captions-edgy",
-      "score": 0.671,
-      "seo": 0.821,
+      "score": 0.679,
+      "seo": 0.839,
       "conversion": 0.35,
       "content_quality": 0.895,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-finance",
-      "score": 0.671,
-      "seo": 0.821,
+      "score": 0.679,
+      "seo": 0.84,
       "conversion": 0.35,
       "content_quality": 0.895,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-food-hashtags",
-      "score": 0.671,
-      "seo": 0.82,
+      "score": 0.679,
+      "seo": 0.839,
       "conversion": 0.35,
       "content_quality": 0.895
     },
     {
-      "path": "/blog/tiktok-captions-sale",
-      "score": 0.671,
-      "seo": 0.822,
-      "conversion": 0.35,
-      "content_quality": 0.896,
-      "tier_hint": "STABLE"
-    },
-    {
       "path": "/blog/tiktok-captions-story",
-      "score": 0.671,
-      "seo": 0.821,
+      "score": 0.679,
+      "seo": 0.84,
       "conversion": 0.35,
       "content_quality": 0.895,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-trending-sound",
-      "score": 0.671,
-      "seo": 0.821,
-      "conversion": 0.35,
-      "content_quality": 0.896
-    },
-    {
-      "path": "/blog/instagram-hashtags-gaming-ideas",
-      "score": 0.67,
-      "seo": 0.819,
-      "conversion": 0.35,
-      "content_quality": 0.893,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-aesthetic-reel",
-      "score": 0.67,
-      "seo": 0.819,
-      "conversion": 0.35,
-      "content_quality": 0.894
-    },
-    {
-      "path": "/blog/tiktok-captions-brand",
-      "score": 0.67,
-      "seo": 0.82,
-      "conversion": 0.35,
-      "content_quality": 0.895,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-product",
-      "score": 0.67,
-      "seo": 0.819,
-      "conversion": 0.35,
-      "content_quality": 0.893,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-walkthrough",
-      "score": 0.67,
-      "seo": 0.819,
+      "score": 0.679,
+      "seo": 0.838,
       "conversion": 0.35,
       "content_quality": 0.894,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-titles-beauty-ideas",
-      "score": 0.67,
-      "seo": 0.82,
+      "score": 0.679,
+      "seo": 0.839,
       "conversion": 0.35,
       "content_quality": 0.895,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-titles-team",
-      "score": 0.67,
-      "seo": 0.82,
+      "score": 0.679,
+      "seo": 0.839,
       "conversion": 0.35,
       "content_quality": 0.895,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-challenge",
-      "score": 0.669,
-      "seo": 0.818,
+      "path": "/blog/instagram-hashtags-gaming-ideas",
+      "score": 0.678,
+      "seo": 0.838,
       "conversion": 0.35,
       "content_quality": 0.893,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-recipe",
-      "score": 0.669,
-      "seo": 0.817,
+      "path": "/blog/tiktok-captions-challenge",
+      "score": 0.678,
+      "seo": 0.837,
       "conversion": 0.35,
-      "content_quality": 0.892,
+      "content_quality": 0.893,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-running",
-      "score": 0.669,
-      "seo": 0.818,
+      "path": "/blog/tiktok-captions-product",
+      "score": 0.678,
+      "seo": 0.838,
       "conversion": 0.35,
-      "content_quality": 0.892,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-captions-team",
-      "score": 0.669,
-      "seo": 0.818,
-      "conversion": 0.35,
-      "content_quality": 0.892,
+      "content_quality": 0.893,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-hooks-pov",
-      "score": 0.669,
-      "seo": 0.819,
+      "score": 0.678,
+      "seo": 0.838,
       "conversion": 0.35,
       "content_quality": 0.893,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-titles-diy",
-      "score": 0.669,
-      "seo": 0.818,
-      "conversion": 0.35,
-      "content_quality": 0.892,
-      "tier_hint": "STABLE"
-    },
-    {
-      "path": "/blog/tiktok-titles-skincare",
-      "score": 0.669,
-      "seo": 0.818,
+      "score": 0.678,
+      "seo": 0.837,
       "conversion": 0.35,
       "content_quality": 0.892,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-titles-wedding",
-      "score": 0.669,
-      "seo": 0.818,
+      "score": 0.678,
+      "seo": 0.837,
       "conversion": 0.35,
       "content_quality": 0.893,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/youtube-hashtags-minimalist",
-      "score": 0.669,
-      "seo": 0.817,
+      "path": "/blog/tiktok-captions-event",
+      "score": 0.677,
+      "seo": 0.836,
       "conversion": 0.35,
       "content_quality": 0.891,
       "tier_hint": "STABLE"
     },
     {
-      "path": "/blog/tiktok-captions-event",
-      "score": 0.668,
-      "seo": 0.817,
+      "path": "/blog/tiktok-captions-recipe",
+      "score": 0.677,
+      "seo": 0.836,
+      "conversion": 0.35,
+      "content_quality": 0.892,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-running",
+      "score": 0.677,
+      "seo": 0.836,
+      "conversion": 0.35,
+      "content_quality": 0.892,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-captions-team",
+      "score": 0.677,
+      "seo": 0.837,
+      "conversion": 0.35,
+      "content_quality": 0.892,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/tiktok-titles-skincare",
+      "score": 0.677,
+      "seo": 0.837,
+      "conversion": 0.35,
+      "content_quality": 0.892,
+      "tier_hint": "STABLE"
+    },
+    {
+      "path": "/blog/youtube-hashtags-minimalist",
+      "score": 0.677,
+      "seo": 0.836,
       "conversion": 0.35,
       "content_quality": 0.891,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-captions-get-ready-with-me",
-      "score": 0.668,
-      "seo": 0.816,
+      "score": 0.676,
+      "seo": 0.835,
       "conversion": 0.35,
       "content_quality": 0.89
     },
     {
       "path": "/blog/tiktok-captions-trending",
-      "score": 0.667,
-      "seo": 0.815,
+      "score": 0.676,
+      "seo": 0.834,
       "conversion": 0.35,
       "content_quality": 0.889,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-hashtags-inspirational",
-      "score": 0.667,
-      "seo": 0.815,
+      "score": 0.675,
+      "seo": 0.834,
       "conversion": 0.35,
       "content_quality": 0.888,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-hashtags-sunset",
-      "score": 0.666,
-      "seo": 0.813,
+      "score": 0.674,
+      "seo": 0.832,
       "conversion": 0.35,
       "content_quality": 0.886,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-titles-intro-hooks",
-      "score": 0.666,
-      "seo": 0.813,
+      "score": 0.674,
+      "seo": 0.832,
       "conversion": 0.35,
       "content_quality": 0.887,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-hashtags-sarcastic",
-      "score": 0.665,
-      "seo": 0.812,
+      "score": 0.673,
+      "seo": 0.831,
       "conversion": 0.35,
       "content_quality": 0.885,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-hashtags-sad",
-      "score": 0.662,
-      "seo": 0.808,
+      "score": 0.671,
+      "seo": 0.827,
       "conversion": 0.35,
       "content_quality": 0.881,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-hooks-viral-ideas",
-      "score": 0.66,
-      "seo": 0.805,
+      "score": 0.669,
+      "seo": 0.824,
       "conversion": 0.35,
       "content_quality": 0.878,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/best-hashtags-for-reels",
-      "score": 0.619,
-      "seo": 0.755,
+      "score": 0.628,
+      "seo": 0.774,
       "conversion": 0.35,
       "content_quality": 0.785
     },
     {
       "path": "/blog/how-to-go-viral-on-tiktok",
-      "score": 0.619,
-      "seo": 0.754,
+      "score": 0.627,
+      "seo": 0.773,
       "conversion": 0.35,
       "content_quality": 0.784
     },
     {
       "path": "/blog/tiktok-content-ideas-that-work",
-      "score": 0.617,
-      "seo": 0.752,
+      "score": 0.626,
+      "seo": 0.771,
       "conversion": 0.35,
       "content_quality": 0.782
     },
     {
       "path": "/blog/best-tiktok-bios-2025",
-      "score": 0.615,
-      "seo": 0.749,
+      "score": 0.624,
+      "seo": 0.768,
       "conversion": 0.35,
       "content_quality": 0.779
     },
     {
       "path": "/blog/youtube-title-formulas",
-      "score": 0.615,
-      "seo": 0.748,
+      "score": 0.623,
+      "seo": 0.767,
       "conversion": 0.35,
       "content_quality": 0.777,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/youtube-script-structure",
-      "score": 0.613,
-      "seo": 0.745,
+      "score": 0.621,
+      "seo": 0.764,
       "conversion": 0.35,
       "content_quality": 0.774,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/how-to-write-viral-hooks",
-      "score": 0.612,
-      "seo": 0.744,
+      "score": 0.62,
+      "seo": 0.763,
       "conversion": 0.35,
       "content_quality": 0.772,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/tiktok-username-ideas",
-      "score": 0.612,
-      "seo": 0.744,
+      "score": 0.62,
+      "seo": 0.763,
       "conversion": 0.35,
       "content_quality": 0.772,
       "tier_hint": "STABLE"
     },
     {
       "path": "/blog/instagram-reel-captions-2025",
-      "score": 0.602,
-      "seo": 0.73,
+      "score": 0.611,
+      "seo": 0.749,
       "conversion": 0.35,
       "content_quality": 0.756
     }

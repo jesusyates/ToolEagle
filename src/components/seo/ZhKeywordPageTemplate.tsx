@@ -27,7 +27,6 @@ import { ZhExitIntentPopup } from "@/components/zh/ZhExitIntentPopup";
 import { getKeywordContent, type ZhKeywordContent } from "@/lib/zh-keyword-content";
 import { ZH_BASE_PATHS } from "@/lib/zh-hub-data";
 import { getRecentZhLinks } from "@/lib/zh-sitemap-data";
-import { ZhRelatedRecommendations } from "@/components/zh/ZhRelatedRecommendations";
 import { parseZhFaqForSchema, buildZhFaqSchemaWithDirectAnswer, buildZhArticleSchema, buildZhHowToSchema } from "@/lib/zh-ctr";
 import { buildBreadcrumbSchema } from "@/lib/zh-breadcrumb-schema";
 import { getIntroVariant, getCtaVariant } from "@/lib/zh-uniqueness";
@@ -374,15 +373,6 @@ export async function ZhKeywordPageTemplate({ entry, content, existingSlugs }: P
             <RelatedQuestionsBlock
               links={getRelatedQuestionLinks(entry, slugs, 20)}
               lang="zh"
-            />
-
-            <ZhRelatedRecommendations
-              context={{
-                platform: entry.platform,
-                goal: entry.goal,
-                excludeSlug: entry.slug
-              }}
-              limit={15}
             />
 
             {relatedBlogs.length > 0 && (

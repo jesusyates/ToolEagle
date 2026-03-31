@@ -102,13 +102,13 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
   const [keScenario, setKeScenario] = useState(keDefault.scenarioId);
 
   useEffect(() => {
-    const q = searchParams.get("q");
-    if (q !== null) setTopic(q);
+    const q = searchParams?.get("q");
+    if (q != null) setTopic(q);
   }, [searchParams]);
 
   useEffect(() => {
-    const vi = searchParams.get("v186_intent");
-    const vs = searchParams.get("v186_scenario");
+    const vi = searchParams?.get("v186_intent");
+    const vs = searchParams?.get("v186_scenario");
     setKeIntent(vi || keDefault.intentId);
     setKeScenario(vs || keDefault.scenarioId);
   }, [searchParams, keDefault.intentId, keDefault.scenarioId]);
@@ -181,7 +181,7 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
     setV193ResultHint(null);
     setV193ChainBadge(false);
 
-    const urlSummary = searchParams.get("creatorAnalysisSummary")?.trim();
+    const urlSummary = searchParams?.get("creatorAnalysisSummary")?.trim();
     const analysisStored = loadCreatorAnalysis();
     const creatorAnalysisSummary =
       v186En && urlSummary && urlSummary.length > 0

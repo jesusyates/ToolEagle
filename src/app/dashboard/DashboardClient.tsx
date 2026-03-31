@@ -8,6 +8,7 @@ import { useSearchParams } from "next/navigation";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { ZH } from "@/lib/zh-site/paths";
+import { zhDashboardToolDisplayName, zhDashboardToolHref } from "@/lib/zh-dashboard-scope";
 import { FREE_DAILY_LIMIT } from "@/lib/usage";
 import { ToolCopyButton } from "@/components/tools/ToolCopyButton";
 import { useSyncOnLogin } from "@/hooks/useSyncOnLogin";
@@ -70,8 +71,13 @@ export function DashboardClient({
   const isZh = variant === "zh";
   const dashPrefix = isZh ? "/zh" : "";
 
+  const toolHref = (slug: string) =>
+    isZh ? zhDashboardToolHref(slug) : `/tools/${slug}`;
+  const toolLabel = (slug: string, stored: string) =>
+    isZh ? zhDashboardToolDisplayName(slug, stored) : stored;
+
   useEffect(() => {
-    const fromSignup = searchParams.get("from") === "signup";
+    const fromSignup = searchParams?.get("from") === "signup";
     if (fromSignup) {
       trackConversion("signup");
       if (!onboardingCompleted) {
@@ -207,7 +213,7 @@ export function DashboardClient({
                 </div>
                 {initialFavorites.length > 0 && (
                   <Link
-                    href="/dashboard/favorites"
+                    href={`${dashPrefix}/dashboard/favorites`}
                     className="text-sm font-medium text-sky-600 hover:underline"
                   >
                     {t("viewAll")} →
@@ -220,6 +226,9 @@ export function DashboardClient({
                   <p className="text-sm text-slate-500 mt-1">
                     {t("noFavoritesHint")}
                   </p>
+                  {isZh && (
+                    <p className="text-xs text-slate-400 mt-2">{t("zhDashboardScopeHint")}</p>
+                  )}
                   <Link
                     href={isZh ? ZH.douyin : "/tools"}
                     className="mt-4 inline-flex rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
@@ -236,7 +245,7 @@ export function DashboardClient({
                       className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
                     >
                       <p className="text-xs font-medium text-slate-500 mb-1">
-                        {fav.toolName}
+                        {toolLabel(fav.toolSlug, fav.toolName)}
                       </p>
                       <p className="text-sm text-slate-800 line-clamp-2 mb-3" data-copy-source>
                         {fav.text}
@@ -252,7 +261,7 @@ export function DashboardClient({
                           }}
                         />
                         <Link
-                          href={`/tools/${fav.toolSlug}`}
+                          href={toolHref(fav.toolSlug)}
                           className="text-sm font-medium text-sky-600 hover:underline"
                         >
                           {t("useTool")}
@@ -264,7 +273,7 @@ export function DashboardClient({
               )}
               {initialFavorites.length > 10 && (
                 <Link
-                  href="/dashboard/favorites"
+                  href={`${dashPrefix}/dashboard/favorites`}
                   className="mt-4 inline-block text-sm font-medium text-sky-600 hover:underline"
                 >
                   {t("viewAll")} {initialFavorites.length} {t("favorites")} →
@@ -282,7 +291,7 @@ export function DashboardClient({
                 </div>
                 {initialHistory.length > 0 && (
                   <Link
-                    href="/dashboard/history"
+                    href={`${dashPrefix}/dashboard/history`}
                     className="text-sm font-medium text-sky-600 hover:underline"
                   >
                     {t("viewAll")} →
@@ -295,6 +304,9 @@ export function DashboardClient({
                   <p className="text-sm text-slate-500 mt-1">
                     {t("noHistoryHint")}
                   </p>
+                  {isZh && (
+                    <p className="text-xs text-slate-400 mt-2">{t("zhDashboardScopeHint")}</p>
+                  )}
                   <Link
                     href={isZh ? ZH.douyin : "/tools"}
                     className="mt-4 inline-flex rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
@@ -310,13 +322,13 @@ export function DashboardClient({
                       className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
                     >
                       <p className="text-xs font-medium text-slate-500 mb-1">
-                        {h.toolName}
+                        {toolLabel(h.toolSlug, h.toolName)}
                       </p>
                       <p className="text-sm text-slate-700 line-clamp-2 mb-2">
                         {h.input}
                       </p>
                       <Link
-                        href={`/tools/${h.toolSlug}`}
+                        href={toolHref(h.toolSlug)}
                         className="text-sm font-medium text-sky-600 hover:underline"
                       >
                         {t("useAgain")}

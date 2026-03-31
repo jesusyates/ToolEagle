@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { buildLoginRedirect } from "@/lib/auth/login-redirect";
 import { isOperatorUser } from "@/lib/auth/operator";
 import { DashboardClient } from "@/app/dashboard/DashboardClient";
+import { isZhDashboardDouyinSlug } from "@/lib/zh-dashboard-scope";
 
 export const dynamic = "force-dynamic";
 
@@ -46,22 +47,26 @@ export default async function ZhDashboardPage() {
       .limit(20)
   ]);
 
-  const favorites = (favoritesRes.data ?? []).map((r) => ({
-    id: r.id,
-    toolSlug: r.tool_slug,
-    toolName: r.tool_name,
-    text: r.text,
-    savedAt: new Date(r.saved_at).getTime()
-  }));
+  const favorites = (favoritesRes.data ?? [])
+    .filter((r) => isZhDashboardDouyinSlug(r.tool_slug))
+    .map((r) => ({
+      id: r.id,
+      toolSlug: r.tool_slug,
+      toolName: r.tool_name,
+      text: r.text,
+      savedAt: new Date(r.saved_at).getTime()
+    }));
 
-  const history = (historyRes.data ?? []).map((r) => ({
-    id: r.id,
-    toolSlug: r.tool_slug,
-    toolName: r.tool_name,
-    input: r.input,
-    items: (r.items as string[]) ?? [],
-    timestamp: new Date(r.created_at).getTime()
-  }));
+  const history = (historyRes.data ?? [])
+    .filter((r) => isZhDashboardDouyinSlug(r.tool_slug))
+    .map((r) => ({
+      id: r.id,
+      toolSlug: r.tool_slug,
+      toolName: r.tool_name,
+      input: r.input,
+      items: (r.items as string[]) ?? [],
+      timestamp: new Date(r.created_at).getTime()
+    }));
 
   const usageToday = usageRes.data?.generations_count ?? 0;
   let plan = profileRes.data?.plan ?? "free";

@@ -1,6 +1,6 @@
 {
   "version": "176",
-  "builtAt": "2026-03-30T11:03:07.596Z",
+  "builtAt": "2026-03-31T06:00:09.536Z",
   "scope": "title_and_cta_only",
   "variants": [
     {
@@ -36,22 +36,6 @@
       "measurement": "Track tool_click + upgrade_clicked from this page segment"
     },
     {
-      "page": "/blog/youtube-captions-trending-ideas",
-      "slug": "youtube-captions-trending-ideas",
-      "axis": "title",
-      "variant_a": "50 Trending YouTube Shorts Caption Ideas to Stop the Scroll",
-      "variant_b": "50 Trending YouTube Shorts Caption Ideas to Stop the Scroll — Templates & Examples",
-      "measurement": "Compare CTR in GSC after deploy; keep winner after 14d"
-    },
-    {
-      "page": "/blog/youtube-captions-trending-ideas",
-      "slug": "youtube-captions-trending-ideas",
-      "axis": "cta",
-      "variant_a": "Try the free generator",
-      "variant_b": "Generate your next post in one click",
-      "measurement": "Track tool_click + upgrade_clicked from this page segment"
-    },
-    {
       "page": "/blog/best-tiktok-bio-ideas",
       "slug": "best-tiktok-bio-ideas",
       "axis": "title",
@@ -62,6 +46,22 @@
     {
       "page": "/blog/best-tiktok-bio-ideas",
       "slug": "best-tiktok-bio-ideas",
+      "axis": "cta",
+      "variant_a": "Try the free generator",
+      "variant_b": "Generate your next post in one click",
+      "measurement": "Track tool_click + upgrade_clicked from this page segment"
+    },
+    {
+      "page": "/blog/youtube-captions-trending-ideas",
+      "slug": "youtube-captions-trending-ideas",
+      "axis": "title",
+      "variant_a": "50 Trending YouTube Shorts Caption Ideas to Stop the Scroll",
+      "variant_b": "50 Trending YouTube Shorts Caption Ideas to Stop the Scroll — Templates & Examples",
+      "measurement": "Compare CTR in GSC after deploy; keep winner after 14d"
+    },
+    {
+      "page": "/blog/youtube-captions-trending-ideas",
+      "slug": "youtube-captions-trending-ideas",
       "axis": "cta",
       "variant_a": "Try the free generator",
       "variant_b": "Generate your next post in one click",
@@ -84,22 +84,6 @@
       "measurement": "Track tool_click + upgrade_clicked from this page segment"
     },
     {
-      "page": "/blog/tiktok-captions-food",
-      "slug": "tiktok-captions-food",
-      "axis": "title",
-      "variant_a": "50 Food TikTok Captions Ideas (2026)",
-      "variant_b": "50 Food TikTok Captions Ideas (2026) — Templates & Examples",
-      "measurement": "Compare CTR in GSC after deploy; keep winner after 14d"
-    },
-    {
-      "page": "/blog/tiktok-captions-food",
-      "slug": "tiktok-captions-food",
-      "axis": "cta",
-      "variant_a": "Try the free generator",
-      "variant_b": "Generate your next post in one click",
-      "measurement": "Track tool_click + upgrade_clicked from this page segment"
-    },
-    {
       "page": "/blog/seo-how-search-engines-find-creator-content",
       "slug": "seo-how-search-engines-find-creator-content",
       "axis": "title",
@@ -110,6 +94,22 @@
     {
       "page": "/blog/seo-how-search-engines-find-creator-content",
       "slug": "seo-how-search-engines-find-creator-content",
+      "axis": "cta",
+      "variant_a": "Try the free generator",
+      "variant_b": "Generate your next post in one click",
+      "measurement": "Track tool_click + upgrade_clicked from this page segment"
+    },
+    {
+      "page": "/blog/tiktok-captions-food",
+      "slug": "tiktok-captions-food",
+      "axis": "title",
+      "variant_a": "50 Food TikTok Captions Ideas (2026)",
+      "variant_b": "50 Food TikTok Captions Ideas (2026) — Templates & Examples",
+      "measurement": "Compare CTR in GSC after deploy; keep winner after 14d"
+    },
+    {
+      "page": "/blog/tiktok-captions-food",
+      "slug": "tiktok-captions-food",
       "axis": "cta",
       "variant_a": "Try the free generator",
       "variant_b": "Generate your next post in one click",
@@ -148,22 +148,6 @@
       "measurement": "Track tool_click + upgrade_clicked from this page segment"
     },
     {
-      "page": "/blog/tiktok-captions-romantic",
-      "slug": "tiktok-captions-romantic",
-      "axis": "title",
-      "variant_a": "50 Romantic TikTok Captions Ideas (2026)",
-      "variant_b": "50 Romantic TikTok Captions Ideas (2026) — Templates & Examples",
-      "measurement": "Compare CTR in GSC after deploy; keep winner after 14d"
-    },
-    {
-      "page": "/blog/tiktok-captions-romantic",
-      "slug": "tiktok-captions-romantic",
-      "axis": "cta",
-      "variant_a": "Try the free generator",
-      "variant_b": "Generate your next post in one click",
-      "measurement": "Track tool_click + upgrade_clicked from this page segment"
-    },
-    {
       "page": "/blog/instagram-captions-for-reels",
       "slug": "instagram-captions-for-reels",
       "axis": "title",
@@ -190,6 +174,22 @@
     {
       "page": "/blog/instagram-hashtags-funny-usernames",
       "slug": "instagram-hashtags-funny-usernames",
+      "axis": "cta",
+      "variant_a": "Try the free generator",
+      "variant_b": "Generate your next post in one click",
+      "measurement": "Track tool_click + upgrade_clicked from this page segment"
+    },
+    {
+      "page": "/blog/tiktok-captions-attitude",
+      "slug": "tiktok-captions-attitude",
+      "axis": "title",
+      "variant_a": "50 Attitude TikTok Captions Ideas (2026)",
+      "variant_b": "50 Attitude TikTok Captions Ideas (2026) — Templates & Examples",
+      "measurement": "Compare CTR in GSC after deploy; keep winner after 14d"
+    },
+    {
+      "page": "/blog/tiktok-captions-attitude",
+      "slug": "tiktok-captions-attitude",
       "axis": "cta",
       "variant_a": "Try the free generator",
       "variant_b": "Generate your next post in one click",

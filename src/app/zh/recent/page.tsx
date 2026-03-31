@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { getRecentZhPagesWithKeywords } from "@/lib/zh-sitemap-data";
-import { ZhRelatedRecommendations } from "@/components/zh/ZhRelatedRecommendations";
 import { getZhPageMetadata } from "@/lib/zh-metadata";
 import { BASE_URL } from "@/config/site";
 
@@ -15,9 +14,7 @@ export default async function ZhRecentPage({ searchParams }: Props) {
   const pageNum = Math.max(1, parseInt(page ?? "1", 10) || 1);
   const all = getRecentZhPagesWithKeywords(100);
   const douyinBoost = (href: string) =>
-    href.includes("/douyin") ||
-    href.includes("/zh/tiktok-caption-generator") ||
-    href.includes("/zh/how-to/tiktok");
+    href.includes("/douyin") || href.includes("/zh/douyin-") || href.includes("/zh/douyin/");
   const byTime = (a: (typeof all)[0], b: (typeof all)[0]) => (b.createdAt || 0) - (a.createdAt || 0);
   const douyinFirst = all.filter((e) => douyinBoost(e.href)).sort(byTime);
   const rest = all.filter((e) => !douyinBoost(e.href)).sort(byTime);
@@ -62,8 +59,6 @@ export default async function ZhRecentPage({ searchParams }: Props) {
                 </li>
               ))}
             </ul>
-
-            <ZhRelatedRecommendations limit={15} />
 
             {totalPages > 1 && (
               <nav className="mt-8 flex flex-wrap gap-2" aria-label="分页">

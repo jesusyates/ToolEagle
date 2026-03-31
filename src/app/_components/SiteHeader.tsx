@@ -32,7 +32,7 @@ function isPrimaryNavActive(pathname: string, key: (typeof primaryNav)[number]["
 
 export function SiteHeader() {
   const t = useTranslations("nav");
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "/";
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-page/90 backdrop-blur">

@@ -1,6 +1,6 @@
 {
   "version": "174",
-  "builtAt": "2026-03-30T11:03:06.691Z",
+  "builtAt": "2026-03-31T06:00:08.596Z",
   "tierPolicy": {
     "HIGH_PERFORMING": {
       "frequency_range": "+50% to +200% vs baseline",
@@ -437,11 +437,11 @@
   "note": "Used by scripts/lib/content-allocation.js computeTripleWeight (V174 layer after V173).",
   "data_freshness": {
     "version": 175,
-    "updatedAt": "2026-03-30T11:03:06.691Z",
+    "updatedAt": "2026-03-31T06:00:08.596Z",
     "threshold_hours": 48,
-    "gsc_last_updated": "2026-03-30T11:03:02.448Z",
+    "gsc_last_updated": "2026-03-31T06:00:04.837Z",
     "analytics_last_updated": null,
-    "conversion_last_updated": "2026-03-30T11:03:02.890Z",
+    "conversion_last_updated": "2026-03-31T06:00:05.197Z",
     "stale_data": true,
     "stale_reasons": [
       "analytics_missing"

@@ -190,7 +190,7 @@ export function PostPackageToolClient({
   const locale = siteMode === "china" ? "zh" : intlLocale;
   const country = useCountry();
   const pathname = usePathname() || "";
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams() ?? new URLSearchParams();
   const router = useRouter();
   const prefill = parseToolPrefillParams(searchParams);
   const q = searchParams.get(seedFromQueryParam) ?? "";

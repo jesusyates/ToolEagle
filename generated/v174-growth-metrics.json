@@ -1,6 +1,6 @@
 {
   "version": "175",
-  "builtAt": "2026-03-30T11:03:06.691Z",
+  "builtAt": "2026-03-31T06:00:08.596Z",
   "sources": {
     "gsc_search_performance": true,
     "growth_priority": true,
@@ -20,8 +20,8 @@
   "impressions": 6029,
   "clicks": 359,
   "ctr": 0.0595,
-  "avg_position": 29.98,
-  "retrieval_share": 0.835,
+  "avg_position": 29.33,
+  "retrieval_share": 0.889,
   "generation_success_rate": 0.792,
   "tool_click_rate": 0,
   "copy_rate": 0.513,
@@ -54,11 +54,11 @@
   "stale_data": true,
   "data_freshness": {
     "version": 175,
-    "updatedAt": "2026-03-30T11:03:06.691Z",
+    "updatedAt": "2026-03-31T06:00:08.596Z",
     "threshold_hours": 48,
-    "gsc_last_updated": "2026-03-30T11:03:02.448Z",
+    "gsc_last_updated": "2026-03-31T06:00:04.837Z",
     "analytics_last_updated": null,
-    "conversion_last_updated": "2026-03-30T11:03:02.890Z",
+    "conversion_last_updated": "2026-03-31T06:00:05.197Z",
     "stale_data": true,
     "stale_reasons": [
       "analytics_missing"

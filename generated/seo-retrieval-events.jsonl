@@ -1624,3 +1624,63 @@
 {"ts":"2026-03-30T15:08:46.713Z","event":"retrieval_hit_recorded","keyword":"TikTok 快速 做内容","platform":"tiktok","goal":"做内容","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
 {"ts":"2026-03-30T15:09:47.166Z","event":"retrieval_bias_applied","keyword":"TikTok 做内容 实战","platform":"tiktok","goal":"做内容","bias_applied":true,"bias_factor":0.92}
 {"ts":"2026-03-30T15:09:47.167Z","event":"retrieval_hit_recorded","keyword":"TikTok 做内容 实战","platform":"tiktok","goal":"做内容","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:00:14.755Z","event":"retrieval_bias_applied","keyword":"YouTube引流真的能赚钱吗","platform":"youtube","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:00:14.756Z","event":"retrieval_hit_recorded","keyword":"YouTube引流真的能赚钱吗","platform":"youtube","goal":"引流","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:00:28.484Z","event":"retrieval_bias_applied","keyword":"Instagram引流真的能赚钱吗","platform":"instagram","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:00:28.485Z","event":"retrieval_hit_recorded","keyword":"Instagram引流真的能赚钱吗","platform":"instagram","goal":"引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:00:42.146Z","event":"retrieval_bias_applied","keyword":"Instagram私域引流7天实现方法","platform":"instagram","goal":"私域引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:00:42.146Z","event":"retrieval_hit_recorded","keyword":"Instagram私域引流7天实现方法","platform":"instagram","goal":"私域引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:00:55.819Z","event":"retrieval_bias_applied","keyword":"Instagram提高完播率2026实现方法","platform":"instagram","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:00:55.820Z","event":"retrieval_hit_recorded","keyword":"Instagram提高完播率2026实现方法","platform":"instagram","goal":"提高完播率","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:01:09.475Z","event":"retrieval_bias_applied","keyword":"Instagram提高完播率教程大全","platform":"instagram","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:01:09.475Z","event":"retrieval_hit_recorded","keyword":"Instagram提高完播率教程大全","platform":"instagram","goal":"提高完播率","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:01:23.111Z","event":"retrieval_bias_applied","keyword":"Instagram提高完播率最快的方法","platform":"instagram","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:01:23.111Z","event":"retrieval_hit_recorded","keyword":"Instagram提高完播率最快的方法","platform":"instagram","goal":"提高完播率","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:01:36.768Z","event":"retrieval_bias_applied","keyword":"Instagram提高完播率详细教程","platform":"instagram","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:01:36.769Z","event":"retrieval_hit_recorded","keyword":"Instagram提高完播率详细教程","platform":"instagram","goal":"提高完播率","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:01:50.385Z","event":"retrieval_bias_applied","keyword":"Instagram提高完播率适合新手吗","platform":"instagram","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:01:50.386Z","event":"retrieval_hit_recorded","keyword":"Instagram提高完播率适合新手吗","platform":"instagram","goal":"提高完播率","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:02:04.039Z","event":"retrieval_bias_applied","keyword":"YouTube新手如何引流","platform":"youtube","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:02:04.040Z","event":"retrieval_hit_recorded","keyword":"YouTube新手如何引流","platform":"youtube","goal":"引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:02:17.691Z","event":"retrieval_bias_applied","keyword":"YouTube变现2026实现方法","platform":"youtube","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:02:17.691Z","event":"retrieval_hit_recorded","keyword":"YouTube变现2026实现方法","platform":"youtube","goal":"变现","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:02:31.347Z","event":"retrieval_bias_applied","keyword":"YouTube变现最新实现方法","platform":"youtube","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:02:31.348Z","event":"retrieval_hit_recorded","keyword":"YouTube变现最新实现方法","platform":"youtube","goal":"变现","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:02:44.973Z","event":"retrieval_bias_applied","keyword":"Instagram变现最新实现方法","platform":"instagram","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:02:44.973Z","event":"retrieval_hit_recorded","keyword":"Instagram变现最新实现方法","platform":"instagram","goal":"变现","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:02:58.618Z","event":"retrieval_bias_applied","keyword":"YouTube变现教程大全","platform":"youtube","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:02:58.619Z","event":"retrieval_hit_recorded","keyword":"YouTube变现教程大全","platform":"youtube","goal":"变现","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:03:12.248Z","event":"retrieval_bias_applied","keyword":"Instagram变现教程大全","platform":"instagram","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:03:12.249Z","event":"retrieval_hit_recorded","keyword":"Instagram变现教程大全","platform":"instagram","goal":"变现","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:03:25.875Z","event":"retrieval_bias_applied","keyword":"YouTube变现最快的方法","platform":"youtube","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:03:25.876Z","event":"retrieval_hit_recorded","keyword":"YouTube变现最快的方法","platform":"youtube","goal":"变现","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:03:39.510Z","event":"retrieval_bias_applied","keyword":"YouTube变现详细教程","platform":"youtube","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:03:39.511Z","event":"retrieval_hit_recorded","keyword":"YouTube变现详细教程","platform":"youtube","goal":"变现","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:03:53.130Z","event":"retrieval_bias_applied","keyword":"Instagram变现详细教程","platform":"instagram","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:03:53.131Z","event":"retrieval_hit_recorded","keyword":"Instagram变现详细教程","platform":"instagram","goal":"变现","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:04:06.762Z","event":"retrieval_bias_applied","keyword":"YouTube变现适合新手吗","platform":"youtube","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:04:06.763Z","event":"retrieval_hit_recorded","keyword":"YouTube变现适合新手吗","platform":"youtube","goal":"变现","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:04:20.394Z","event":"retrieval_bias_applied","keyword":"Instagram变现适合新手吗","platform":"instagram","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:04:20.395Z","event":"retrieval_hit_recorded","keyword":"Instagram变现适合新手吗","platform":"instagram","goal":"变现","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:06:40.840Z","event":"retrieval_bias_applied","keyword":"Instagram私域引流模板大全","platform":"instagram","goal":"私域引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:06:40.841Z","event":"retrieval_hit_recorded","keyword":"Instagram私域引流模板大全","platform":"instagram","goal":"私域引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:07:57.661Z","event":"retrieval_bias_applied","keyword":"Instagram 获得播放量 高效","platform":"instagram","goal":"获得播放量","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:07:57.661Z","event":"retrieval_hit_recorded","keyword":"Instagram 获得播放量 高效","platform":"instagram","goal":"获得播放量","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:08:59.428Z","event":"retrieval_bias_applied","keyword":"Instagram 获得播放量 实战","platform":"instagram","goal":"获得播放量","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:08:59.428Z","event":"retrieval_hit_recorded","keyword":"Instagram 获得播放量 实战","platform":"instagram","goal":"获得播放量","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:10:04.998Z","event":"retrieval_bias_applied","keyword":"Instagram 获得播放量 完整指南","platform":"instagram","goal":"获得播放量","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:10:04.999Z","event":"retrieval_hit_recorded","keyword":"Instagram 获得播放量 完整指南","platform":"instagram","goal":"获得播放量","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:11:20.341Z","event":"retrieval_bias_applied","keyword":"Instagram 获得播放量 进阶","platform":"instagram","goal":"获得播放量","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:11:20.341Z","event":"retrieval_hit_recorded","keyword":"Instagram 获得播放量 进阶","platform":"instagram","goal":"获得播放量","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:12:29.673Z","event":"retrieval_bias_applied","keyword":"Instagram 做爆款视频 高效","platform":"instagram","goal":"做爆款视频","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:12:29.674Z","event":"retrieval_hit_recorded","keyword":"Instagram 做爆款视频 高效","platform":"instagram","goal":"做爆款视频","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:13:44.149Z","event":"retrieval_bias_applied","keyword":"Instagram 做爆款视频 实战","platform":"instagram","goal":"做爆款视频","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:13:44.150Z","event":"retrieval_hit_recorded","keyword":"Instagram 做爆款视频 实战","platform":"instagram","goal":"做爆款视频","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:14:55.097Z","event":"retrieval_bias_applied","keyword":"Instagram 做爆款视频 完整指南","platform":"instagram","goal":"做爆款视频","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:14:55.097Z","event":"retrieval_hit_recorded","keyword":"Instagram 做爆款视频 完整指南","platform":"instagram","goal":"做爆款视频","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:16:08.144Z","event":"retrieval_bias_applied","keyword":"Instagram 做爆款视频 进阶","platform":"instagram","goal":"做爆款视频","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:16:08.145Z","event":"retrieval_hit_recorded","keyword":"Instagram 做爆款视频 进阶","platform":"instagram","goal":"做爆款视频","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:17:15.688Z","event":"retrieval_bias_applied","keyword":"Instagram 提高互动率 高效","platform":"instagram","goal":"提高互动率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:17:15.689Z","event":"retrieval_hit_recorded","keyword":"Instagram 提高互动率 高效","platform":"instagram","goal":"提高互动率","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T06:18:17.471Z","event":"retrieval_bias_applied","keyword":"Instagram 提高互动率 实战","platform":"instagram","goal":"提高互动率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T06:18:17.472Z","event":"retrieval_hit_recorded","keyword":"Instagram 提高互动率 实战","platform":"instagram","goal":"提高互动率","top_score":0.8,"primary_lane":"agent_high_quality_assets"}

@@ -1,0 +1,11 @@
+{
+  "version": "V212",
+  "feature": "generation_policy",
+  "status": "wired",
+  "injection_order": [
+    "input",
+    "generationPolicyBlock",
+    "creatorStateBlock",
+    "optimizationHint"
+  ]
+}

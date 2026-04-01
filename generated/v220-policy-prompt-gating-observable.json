@@ -1,0 +1,10 @@
+{
+"version": "V220",
+"feature": "generation_policy_prompt_gating_observable",
+"status": "wired",
+"includes": [
+"should_include_creator_state_block",
+"should_include_optimization_hint",
+"creator_generation_policy_built"
+]
+}

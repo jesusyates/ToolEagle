@@ -1,0 +1,6 @@
+{
+  "real_baseline": "V211",
+  "trusted_range": "V1-V211",
+  "untrusted_range": "V212+ and all VNext.*",
+  "note": "Later claimed features were not verified in filesystem/import/payload checks and must be reimplemented."
+}

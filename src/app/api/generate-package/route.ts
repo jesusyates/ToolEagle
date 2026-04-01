@@ -59,6 +59,16 @@ import {
   resolveV186
 } from "@/lib/creator-knowledge-engine/resolve-v186";
 import type { PlatformId } from "@/lib/platform-intelligence/resolve-patterns";
+import { getTopPerformingPatterns } from "@/lib/content/optimization";
+import { getCreatorStateSnapshot, saveCreatorStateSnapshot } from "@/lib/content/creator-state-cache";
+import { scoreCreatorStateApply } from "@/lib/content/creator-state-apply-score";
+import { buildCreatorStatePromptBlock } from "@/lib/content/creator-state-gate";
+import { buildCreatorStateStrategy } from "@/lib/content/creator-state-strategy";
+import { buildCreatorStateToolContext } from "@/lib/content/creator-state-tool-context";
+import { scoreCreatorStateToolContext } from "@/lib/content/creator-state-tool-weight";
+import { classifyCreatorStateToolWeight } from "@/lib/content/creator-state-tool-band";
+import { buildGenerationPolicy } from "@/lib/content/generation-policy";
+import { logContentEventServer } from "@/lib/content/content-event-log";
 import v193PlatformPatterns from "../../../../generated/v193-platform-patterns.json";
 
 function sanitizeClientRoute(s: unknown): string | undefined {
@@ -69,7 +79,7 @@ function sanitizeClientRoute(s: unknown): string | undefined {
   return t;
 }
 
-/** V104.2 — Douyin tool URLs on /zh (caption · hook · script · V105.1 growth tools). */
+/** V104.2 ??Douyin tool URLs on /zh (caption ?? hook ?? script ?? V105.1 growth tools). */
 function isDouyinToolRoute(route?: string): boolean {
   if (!route) return false;
   return /\/douyin-(caption|hook|script|topic|comment-cta|structure)-generator/.test(route);
@@ -138,7 +148,7 @@ function fallbackPackages(
     "faster publish workflow"
   ];
   let hooks = [
-    `Most creators miss this in ${short} — quick fix:`,
+    `Most creators miss this in ${short} ??quick fix:`,
     `Before you post about ${short}, do this first:`,
     `The ${short} format that keeps people watching:`,
     `If your ${short} feels weak, try this angle:`,
@@ -196,10 +206,10 @@ function fallbackPackages(
         topic: short,
         hook: h,
         script_talking_points:
-          `• Setup: name one problem creators hit with ${short}\n` +
-          `• Shift: ${variantAction}\n` +
-          `• Proof: show one before/after or mini example\n` +
-          `• Wrap: give one next step for ${variantOutcome}`,
+          `??Setup: name one problem creators hit with ${short}\n` +
+          `??Shift: ${variantAction}\n` +
+          `??Proof: show one before/after or mini example\n` +
+          `??Wrap: give one next step for ${variantOutcome}`,
         caption:
           `${h}\n\n` +
           `Use this on ${short}: keep one promise, one proof point, one CTA.\n\n` +
@@ -208,7 +218,7 @@ function fallbackPackages(
         hashtags: variantTag,
         why_it_works: `Clear promise + specific next step helps ${variantOutcome}.`,
         posting_tips:
-          "Lead with one concrete claim in the first line · Keep script under 4 beats · Reply to first comments quickly",
+          "Lead with one concrete claim in the first line ?? Keep script under 4 beats ?? Reply to first comments quickly",
         best_for: `Creators who want faster ${short} drafts without losing clarity.`,
         variation_pack: packs[i % 4],
         hook_strength_label: strengths[i % 3],
@@ -218,7 +228,7 @@ function fallbackPackages(
         context_account: "Solo creators, small teams, and service creators",
         context_scenario: "Educational posts, quick demos, and before/after content",
         context_audience: "Viewers looking for practical creator tactics",
-        publish_rhythm: "0-2s hook · 2-8s context · 8-15s proof/demo · 15-20s CTA",
+        publish_rhythm: "0-2s hook ?? 2-8s context ?? 8-15s proof/demo ?? 15-20s CTA",
         version_plain: `${h} - practical angle on ${short}.`,
         version_optimized: `${h} - same idea with tighter proof and stronger CTA for ${variantOutcome}.`
       })
@@ -268,7 +278,7 @@ function estimatePackageQuality(packages: CreatorPostPackage[]): {
   return { ok: false, score, reason: "boilerplate_detected" };
 }
 
-/** V103.1 — Pro: 10 packages; Free: 5 (for locked previews) */
+/** V103.1 ??Pro: 10 packages; Free: 5 (for locked previews) */
 function padToMin(
   packages: CreatorPostPackage[],
   userInput: string,
@@ -645,9 +655,121 @@ export async function POST(request: NextRequest) {
     let genBad = true;
     let v173SuccessEventPending = true;
 
-    const callModel = (input: string) =>
-      routerGeneratePostPackage({
-        userInput: input,
+    let creatorStateBlock = "";
+    let generationPolicyBlock = "";
+    let policyStructureHint = "";
+    let shouldIncludeCreatorStateBlock = false;
+    let shouldIncludeOptimizationHint = true;
+    let generationPolicyMode: "safe_growth" | "growth" | "monetization_ready" | null = null;
+    let generationPolicyRules: string[] = [];
+    let creatorStateSource: "fresh" | "cached" = "fresh";
+    let creatorStateMode: "minimal" | "standard" | "full" = "minimal";
+    let creatorStateApplyScore = 0;
+    let creatorStateApplyLevel: "weak" | "medium" | "strong" = "weak";
+    let refreshReason = "stable";
+    let triggerScore = 0;
+    let creatorStateForEvents: any = null;
+    let compactStrategy: any = null;
+    let toolContextForEvents: any = null;
+    let weightedToolContextForEvents: any = null;
+    let toolBandForEvents: "strong" | "medium" | "weak" | "empty" = "empty";
+
+    if (identity.userId) {
+      try {
+        const snapshot = await getCreatorStateSnapshot(identity.userId, toolSlug);
+        const generationPolicy = buildGenerationPolicy({
+          stage: snapshot.state.stage,
+          uploadCount7d: 0
+        });
+        creatorStateSource = snapshot.source;
+        refreshReason = snapshot.refreshReason;
+        triggerScore = snapshot.triggerScore;
+        const apply = scoreCreatorStateApply(snapshot.state);
+        creatorStateApplyScore = apply.applyScore;
+        creatorStateApplyLevel = apply.level;
+        const gated = buildCreatorStatePromptBlock(snapshot.state, apply, snapshot.source, toolSlug);
+
+        creatorStateBlock = gated.block;
+        generationPolicyMode = generationPolicy.policyMode;
+        if (generationPolicyMode === "safe_growth") {
+          policyStructureHint = "Use simple, clear structure. Prioritize value over novelty.";
+        } else if (generationPolicyMode === "growth") {
+          policyStructureHint = "Use strong hook first, then concise value delivery.";
+        } else if (generationPolicyMode === "monetization_ready") {
+          policyStructureHint =
+            "Use value-first structure, then soft trust-building transition.";
+        }
+        if (generationPolicyMode === "safe_growth") {
+          shouldIncludeOptimizationHint = false;
+        }
+        generationPolicyRules = generationPolicy.policyRules;
+        generationPolicyBlock = generationPolicy.policyBlock;
+        if (generationPolicyMode === "safe_growth") {
+          shouldIncludeCreatorStateBlock = apply.applyScore >= 70;
+        } else if (generationPolicyMode === "growth") {
+          shouldIncludeCreatorStateBlock = apply.applyScore >= 40;
+        } else {
+          shouldIncludeCreatorStateBlock = Boolean(creatorStateBlock);
+        }
+        creatorStateMode = gated.mode;
+        creatorStateForEvents = snapshot.state;
+        compactStrategy = buildCreatorStateStrategy(snapshot.state);
+        toolContextForEvents = buildCreatorStateToolContext(toolSlug, compactStrategy);
+        weightedToolContextForEvents = scoreCreatorStateToolContext(
+          toolContextForEvents.toolType,
+          toolContextForEvents.contextLines
+        );
+        toolBandForEvents = classifyCreatorStateToolWeight(weightedToolContextForEvents.weightScore).band;
+      } catch {
+        // Non-blocking
+      }
+    }
+
+    const callModel = async (input: string) => {
+      // V196 Phase 2 ??content optimization patterns (MVP).
+      let optimizationHint = "";
+      try {
+        const userIdForPatterns = identity.userId ?? null;
+        const { patterns, patternSource } = await getTopPerformingPatterns(userIdForPatterns, toolSlug);
+        const hints: string[] = [];
+        if (patterns.topHooks.length > 0 && toolKind === "hook_focus") {
+          const sample = patterns.topHooks.slice(0, 3).join(" | ");
+          hints.push(
+            `Your historically best-performing hook openings often start like: "${sample}". Prefer similar opening structures while staying fresh.`
+          );
+        }
+        if (patterns.hashtagCountRange > 0 && (toolKind === "tiktok_caption" || toolKind === "ai_caption")) {
+          hints.push(
+            `Your best posts tend to use around ${patterns.hashtagCountRange} hashtags. Keep hashtag count close to this range.`
+          );
+        }
+        if (toolKind === "tiktok_caption" || toolKind === "ai_caption") {
+          const lenLabel =
+            patterns.captionLengthType === "short"
+              ? "short, punchy captions (under ~60 characters)"
+              : patterns.captionLengthType === "medium"
+                ? "medium-length captions (around 60??80 characters)"
+                : "longer captions (above ~180 characters)";
+          hints.push(`Caption length that tends to work best for this creator is: ${lenLabel}.`);
+        }
+        if (hints.length > 0) {
+          optimizationHint =
+            `\n\n[Content optimization hints ??source: ${patternSource === "user" ? "your past high-performing posts" : "default guidance"}]\n` +
+            hints.join("\n");
+        }
+      } catch {
+        // Non-blocking: if optimization fails, fall back to original behavior.
+      }
+
+      const pieces = [input];
+      if (generationPolicyBlock) pieces.push(generationPolicyBlock);
+      if (policyStructureHint) pieces.push(policyStructureHint);
+      if (creatorStateBlock && shouldIncludeCreatorStateBlock) pieces.push(creatorStateBlock);
+      if (optimizationHint && shouldIncludeOptimizationHint) pieces.push(optimizationHint);
+      const effectiveInput = pieces.join("\n\n");
+
+      return routerGeneratePostPackage({
+        userInput: effectiveInput,
         toolType: toolKind,
         userPlan: tier,
         market,
@@ -657,6 +779,7 @@ export async function POST(request: NextRequest) {
         riskScore: risk.riskScore,
         retrievalReferenceBlock: retrievalCtx.block
       });
+    };
 
     const mergeRouterMeta = (meta: GenerationRouterMeta): GenerationRouterMeta => ({
       ...meta,
@@ -954,7 +1077,7 @@ export async function POST(request: NextRequest) {
 
     const extraVisible = gate.supporterPerks.freeVisibleExtraSlots;
     const douyinTool = market === "cn" && isDouyinToolRoute(clientRoute);
-    /** V102.2 — CN free: 2 base visible; V104.2 — Douyin: 1 visible + richer locked previews */
+    /** V102.2 ??CN free: 2 base visible; V104.2 ??Douyin: 1 visible + richer locked previews */
     const baseVisible = market === "cn" ? (douyinTool ? 1 : 2) : 3;
     const freeVisibleCount = Math.min(5, baseVisible + extraVisible);
 
@@ -1105,6 +1228,128 @@ export async function POST(request: NextRequest) {
     const json = NextResponse.json(responseBody);
     await finalizeGenerationUsage(gate, json);
     await incrementDailyUsage(identity, 1);
+
+    if (identity.userId) {
+      const eid =
+        typeof crypto !== "undefined" && crypto.randomUUID
+          ? crypto.randomUUID()
+          : `state-${Date.now()}-${Math.random()}`;
+
+      await logContentEventServer({
+        content_id: `${eid}-generation-policy`,
+        event_type: "creator_generation_policy_built",
+        user_id: identity.userId,
+        tool_slug: toolSlug,
+        policy_mode: generationPolicyMode,
+        policy_rules: generationPolicyRules,
+        policy_structure_hint: policyStructureHint,
+        should_include_creator_state_block: shouldIncludeCreatorStateBlock,
+        should_include_optimization_hint: shouldIncludeOptimizationHint
+      });
+      await logContentEventServer({
+        content_id: eid,
+        event_type: "creator_state_scope_applied",
+        user_id: identity.userId,
+        tool_slug: toolSlug,
+        source: creatorStateSource,
+        route_kind: "generate_package"
+      });
+      await logContentEventServer({
+        content_id: `${eid}-refresh`,
+        event_type: "creator_state_refresh_decision",
+        user_id: identity.userId,
+        tool_slug: toolSlug,
+        should_refresh: triggerScore > 0,
+        reason: refreshReason
+      });
+      await logContentEventServer({
+        content_id: `${eid}-trigger`,
+        event_type: "creator_state_trigger_scored",
+        user_id: identity.userId,
+        tool_slug: toolSlug,
+        should_refresh: triggerScore > 0,
+        reason: refreshReason,
+        trigger_score: triggerScore
+      });
+      await logContentEventServer({
+        content_id: `${eid}-apply`,
+        event_type: "creator_state_apply_scored",
+        user_id: identity.userId,
+        tool_slug: toolSlug,
+        apply_score: creatorStateApplyScore,
+        apply_level: creatorStateApplyLevel
+      });
+      await logContentEventServer({
+        content_id: `${eid}-gated`,
+        event_type: "creator_state_gated",
+        user_id: identity.userId,
+        tool_slug: toolSlug,
+        apply_score: creatorStateApplyScore,
+        apply_level: creatorStateApplyLevel,
+        mode: creatorStateMode,
+        source: creatorStateSource
+      });
+      if (compactStrategy) {
+        await logContentEventServer({
+          content_id: `${eid}-strategy`,
+          event_type: "creator_state_strategy_built",
+          user_id: identity.userId,
+          tool_slug: toolSlug,
+          hashtag_count: compactStrategy.hashtagCount,
+          caption_length_type: compactStrategy.captionLengthType,
+          top_hooks_used: compactStrategy.topHooks,
+          preferred_action: compactStrategy.preferredAction
+        });
+      }
+      if (toolContextForEvents) {
+        await logContentEventServer({
+          content_id: `${eid}-tool-context`,
+          event_type: "creator_state_tool_context_built",
+          user_id: identity.userId,
+          tool_slug: toolSlug,
+          tool_type: toolContextForEvents.toolType,
+          context_lines: toolContextForEvents.contextLines,
+          preferred_action: compactStrategy?.preferredAction ?? ""
+        });
+      }
+      if (weightedToolContextForEvents) {
+        await logContentEventServer({
+          content_id: `${eid}-tool-weight`,
+          event_type: "creator_state_tool_weighted",
+          user_id: identity.userId,
+          tool_slug: toolSlug,
+          tool_type: toolContextForEvents?.toolType ?? "other",
+          ranked_lines: weightedToolContextForEvents.rankedLines,
+          top_line: weightedToolContextForEvents.topLine,
+          weight_score: weightedToolContextForEvents.weightScore
+        });
+        await logContentEventServer({
+          content_id: `${eid}-tool-band`,
+          event_type: "creator_state_tool_band_classified",
+          user_id: identity.userId,
+          tool_slug: toolSlug,
+          tool_type: toolContextForEvents?.toolType ?? "other",
+          weight_score: weightedToolContextForEvents.weightScore,
+          band: toolBandForEvents
+        });
+      }
+      if (creatorStateForEvents) {
+        await logContentEventServer({
+          content_id: `${eid}-applied`,
+          event_type: "creator_state_applied",
+          user_id: identity.userId,
+          tool_slug: toolSlug,
+          stage: creatorStateForEvents.stage,
+          priority: creatorStateForEvents.priority,
+          focus: creatorStateForEvents.focus,
+          problems_used: creatorStateForEvents.problems,
+          actions_used: creatorStateForEvents.actions,
+          strategy_used: creatorStateForEvents.strategy,
+          summary: creatorStateForEvents.summary
+        });
+        await saveCreatorStateSnapshot(identity.userId, toolSlug, creatorStateForEvents);
+      }
+    }
     logAiTelemetry({
       task_type: "post_package",
       market,
@@ -1163,3 +1408,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Generation failed" }, { status: 500 });
   }
 }
+
+
+
+
+

@@ -3,6 +3,9 @@
  * Supports 50k URLs per sitemap.
  */
 
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 import { tools } from "@/config/tools";
 import { generators } from "@/config/generators";
 import { getSeoPageSlugs } from "@/config/seoPages";
@@ -531,6 +534,40 @@ export async function blogUrls(): Promise<SitemapEntry[]> {
   }
 }
 
+/** `/guides/[slug]` from `content/auto-posts` (cluster / SEO auto guides). */
+function autoPostGuideUrls(): SitemapEntry[] {
+  const dir = path.join(process.cwd(), "content", "auto-posts");
+  let files: string[] = [];
+  try {
+    files = fs.readdirSync(dir).filter((f) => f.endsWith(".md"));
+  } catch {
+    return [];
+  }
+  const now = new Date();
+  const out: SitemapEntry[] = [];
+  for (const f of files) {
+    try {
+      const raw = fs.readFileSync(path.join(dir, f), "utf8");
+      const { data } = matter(raw);
+      const slug = typeof data.slug === "string" ? data.slug.trim() : "";
+      if (!slug) continue;
+      const lm =
+        typeof data.publishedAt === "string" && data.publishedAt
+          ? new Date(data.publishedAt)
+          : now;
+      out.push({
+        url: `${BASE_URL}/guides/${slug}`,
+        lastModified: Number.isNaN(lm.getTime()) ? now : lm,
+        changeFrequency: "weekly" as const,
+        priority: 0.78
+      });
+    } catch {
+      /* skip bad file */
+    }
+  }
+  return out;
+}
+
 export function guideUrls(): SitemapEntry[] {
   const now = new Date();
   const params = getAllGuideParams();
@@ -549,7 +586,7 @@ export function guideUrls(): SitemapEntry[] {
     changeFrequency: "daily" as const,
     priority: 0.82
   }));
-  return [...legacy, ...enHowTo];
+  return [...legacy, ...enHowTo, ...autoPostGuideUrls()];
 }
 
 export async function creatorUrls(): Promise<SitemapEntry[]> {

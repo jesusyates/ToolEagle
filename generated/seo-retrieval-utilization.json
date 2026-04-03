@@ -1,9 +1,9 @@
 {
   "version": "166",
-  "updatedAt": "2026-03-30T15:11:43.379Z",
+  "updatedAt": "2026-04-03T06:01:35.970Z",
   "retrieval_share": 1,
   "ai_share": 0,
-  "retrieval_hits": 813,
+  "retrieval_hits": 997,
   "retrieval_fallbacks": 0,
   "top_retrieval_topics": [
     {
@@ -108,28 +108,28 @@
   "workflow_retrieval_performance": [
     {
       "topic_key": "tiktok",
-      "retrieval_hits": 264,
+      "retrieval_hits": 343,
       "retrieval_fallbacks": 0,
       "hit_rate": 1
     },
     {
       "topic_key": "youtube",
-      "retrieval_hits": 270,
+      "retrieval_hits": 316,
       "retrieval_fallbacks": 0,
       "hit_rate": 1
     },
     {
       "topic_key": "instagram",
-      "retrieval_hits": 279,
+      "retrieval_hits": 338,
       "retrieval_fallbacks": 0,
       "hit_rate": 1
     }
   ],
   "fallback_reason_breakdown": {},
-  "production_retrieval_share": 0.889,
-  "production_ai_share": 0.111,
-  "production_retrieval_count": 490,
+  "production_retrieval_share": 0.912,
+  "production_ai_share": 0.088,
+  "production_retrieval_count": 636,
   "production_ai_count": 61,
-  "bias_events_in_window": 813,
-  "notes": "Window utilization: retrieval_share = retrieval_hits / (retrieval_hits + retrieval_fallbacks); source: 1626 parsed event rows (capped). Production (seo-retrieval-stats): retrieval_share = retrieval_count / (retrieval_count + ai_generation_count). Top fallback reason: n/a."
+  "bias_events_in_window": 997,
+  "notes": "Window utilization: retrieval_share = retrieval_hits / (retrieval_hits + retrieval_fallbacks); source: 1994 parsed event rows (capped). Production (seo-retrieval-stats): retrieval_share = retrieval_count / (retrieval_count + ai_generation_count). Top fallback reason: n/a."
 }

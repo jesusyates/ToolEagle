@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "updated_at": "2026-03-30T16:06:05.339Z",
+  "updated_at": "2026-03-31T08:28:14.033Z",
   "migration_sql_reference": "supabase/migrations/0038_v196_content_memory.sql",
   "migration_applied": true,
   "content_items_ok": true,
@@ -20,5 +20,6 @@
     ]
   },
   "activation_status": "ok",
+  "blocking_reason": null,
   "notes": []
 }

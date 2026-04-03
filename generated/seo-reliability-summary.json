@@ -1,24 +1,22 @@
 {
   "version": "v155.0",
-  "updatedAt": "2026-03-31T09:22:29.368Z",
-  "reliability_score": 19,
+  "updatedAt": "2026-04-03T06:01:45.191Z",
+  "reliability_score": 51,
   "recent_days": 7,
   "missed_runs": [
-    "2026-03-27",
-    "2026-03-26",
-    "2026-03-25",
-    "2026-03-24"
+    "2026-04-01",
+    "2026-03-27"
   ],
-  "missed_run_count": 4,
+  "missed_run_count": 2,
   "stale_runs": 0,
-  "partial_runs": 11,
-  "safe_mode_days": 2,
+  "partial_runs": 14,
+  "safe_mode_days": 0,
   "avg_retries": 0,
   "en_health": "degraded",
   "zh_health": "degraded",
   "long_running_lanes": [],
   "orchestrator_incomplete_cycle": false,
-  "stale_report_age_ms": 2289,
+  "stale_report_age_ms": 3654,
   "notes": [
     "recovery_disabled_set_SEO_WATCHDOG_RECOVERY=1",
     "stale_source:updatedAt"

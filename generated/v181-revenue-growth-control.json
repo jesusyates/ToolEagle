@@ -1,6 +1,6 @@
 {
   "version": "181",
-  "builtAt": "2026-03-31T06:00:12.353Z",
+  "builtAt": "2026-04-03T06:00:45.692Z",
   "note": "Exact V180.1 revenue drives promote/demote; inferred-only paths excluded from max priority.",
   "top_revenue_tools_exact": [],
   "top_revenue_pages_exact": [],
@@ -9,361 +9,361 @@
     {
       "topic": "travel",
       "path": "/blog/tiktok-captions-travel",
-      "page_value_proxy": 0.709,
+      "page_value_proxy": 0.712,
       "action": "demote_allocation"
     },
     {
       "topic": "trending-ideas",
       "path": "/blog/youtube-captions-trending-ideas",
-      "page_value_proxy": 0.708,
+      "page_value_proxy": 0.712,
       "action": "demote_allocation"
     },
     {
       "topic": "motivation",
       "path": "/blog/tiktok-captions-motivation",
-      "page_value_proxy": 0.707,
+      "page_value_proxy": 0.711,
       "action": "demote_allocation"
     },
     {
       "topic": "food",
       "path": "/blog/tiktok-captions-food",
-      "page_value_proxy": 0.706,
-      "action": "demote_allocation"
-    },
-    {
-      "topic": "inspirational",
-      "path": "/blog/tiktok-captions-inspirational",
-      "page_value_proxy": 0.706,
+      "page_value_proxy": 0.71,
       "action": "demote_allocation"
     },
     {
       "topic": "life-hack",
       "path": "/blog/tiktok-captions-life-hack",
-      "page_value_proxy": 0.706,
-      "action": "demote_allocation"
-    },
-    {
-      "topic": "for-reels",
-      "path": "/blog/instagram-captions-for-reels",
-      "page_value_proxy": 0.705,
+      "page_value_proxy": 0.71,
       "action": "demote_allocation"
     },
     {
       "topic": "funny-usernames",
       "path": "/blog/instagram-hashtags-funny-usernames",
-      "page_value_proxy": 0.705,
+      "page_value_proxy": 0.709,
       "action": "demote_allocation"
     },
     {
-      "topic": "attitude",
-      "path": "/blog/tiktok-captions-attitude",
-      "page_value_proxy": 0.705,
+      "topic": "inspirational",
+      "path": "/blog/tiktok-captions-inspirational",
+      "page_value_proxy": 0.709,
       "action": "demote_allocation"
     },
     {
       "topic": "romantic",
       "path": "/blog/tiktok-captions-romantic",
-      "page_value_proxy": 0.705,
+      "page_value_proxy": 0.709,
       "action": "demote_allocation"
     },
     {
-      "topic": "grwm",
-      "path": "/blog/instagram-captions-grwm",
-      "page_value_proxy": 0.704,
+      "topic": "for-reels",
+      "path": "/blog/instagram-captions-for-reels",
+      "page_value_proxy": 0.708,
       "action": "demote_allocation"
     },
     {
-      "topic": "tips",
-      "path": "/blog/instagram-hooks-tips",
-      "page_value_proxy": 0.704,
+      "topic": "attitude",
+      "path": "/blog/tiktok-captions-attitude",
+      "page_value_proxy": 0.708,
       "action": "demote_allocation"
     },
     {
       "topic": "cute",
       "path": "/blog/tiktok-captions-cute",
-      "page_value_proxy": 0.704,
+      "page_value_proxy": 0.708,
       "action": "demote_allocation"
     },
     {
-      "topic": "stitch",
-      "path": "/blog/youtube-captions-stitch",
-      "page_value_proxy": 0.704,
+      "topic": "grwm",
+      "path": "/blog/instagram-captions-grwm",
+      "page_value_proxy": 0.707,
       "action": "demote_allocation"
     },
     {
       "topic": "script-structure",
       "path": "/blog/instagram-captions-script-structure",
-      "page_value_proxy": 0.703,
+      "page_value_proxy": 0.707,
       "action": "demote_allocation"
     },
     {
-      "topic": "duet-ideas",
-      "path": "/blog/instagram-hashtags-duet-ideas",
-      "page_value_proxy": 0.703,
-      "action": "demote_allocation"
-    },
-    {
-      "topic": "ootd",
-      "path": "/blog/instagram-hooks-ootd",
-      "page_value_proxy": 0.703,
+      "topic": "tips",
+      "path": "/blog/instagram-hooks-tips",
+      "page_value_proxy": 0.707,
       "action": "demote_allocation"
     },
     {
       "topic": "trending-sound",
       "path": "/blog/instagram-hooks-trending-sound",
-      "page_value_proxy": 0.703,
+      "page_value_proxy": 0.707,
       "action": "demote_allocation"
     },
     {
       "topic": "viral-hashtags",
       "path": "/blog/instagram-hooks-viral-hashtags",
-      "page_value_proxy": 0.703,
+      "page_value_proxy": 0.707,
       "action": "demote_allocation"
     },
     {
       "topic": "friends",
       "path": "/blog/tiktok-captions-friends",
-      "page_value_proxy": 0.703,
-      "action": "demote_allocation"
-    },
-    {
-      "topic": "funny",
-      "path": "/blog/tiktok-captions-funny",
-      "page_value_proxy": 0.703,
+      "page_value_proxy": 0.707,
       "action": "demote_allocation"
     },
     {
       "topic": "gaming",
       "path": "/blog/tiktok-captions-gaming",
-      "page_value_proxy": 0.703,
+      "page_value_proxy": 0.707,
       "action": "demote_allocation"
     },
     {
       "topic": "sarcastic",
       "path": "/blog/tiktok-captions-sarcastic",
-      "page_value_proxy": 0.703,
-      "action": "demote_allocation"
-    },
-    {
-      "topic": "hook-examples",
-      "path": "/blog/tiktok-hashtags-hook-examples",
-      "page_value_proxy": 0.703,
+      "page_value_proxy": 0.707,
       "action": "demote_allocation"
     },
     {
       "topic": "caption-for-business",
       "path": "/blog/tiktok-hooks-caption-for-business",
-      "page_value_proxy": 0.703,
+      "page_value_proxy": 0.707,
       "action": "demote_allocation"
     },
     {
-      "topic": "comedy-reel",
-      "path": "/blog/youtube-captions-comedy-reel",
-      "page_value_proxy": 0.703,
+      "topic": "stitch",
+      "path": "/blog/youtube-captions-stitch",
+      "page_value_proxy": 0.707,
       "action": "demote_allocation"
     },
     {
       "topic": "grwm",
       "path": "/blog/youtube-hashtags-grwm",
-      "page_value_proxy": 0.703,
+      "page_value_proxy": 0.707,
       "action": "demote_allocation"
     },
     {
-      "topic": "comedy-hashtags",
-      "path": "/blog/youtube-hooks-comedy-hashtags",
-      "page_value_proxy": 0.703,
-      "action": "demote_allocation"
-    },
-    {
-      "topic": "caption-for-business",
-      "path": "/blog/youtube-titles-caption-for-business",
-      "page_value_proxy": 0.703,
-      "action": "demote_allocation"
-    },
-    {
-      "topic": "for-business",
-      "path": "/blog/instagram-captions-for-business",
-      "page_value_proxy": 0.702,
+      "topic": "duet-ideas",
+      "path": "/blog/instagram-hashtags-duet-ideas",
+      "page_value_proxy": 0.706,
       "action": "demote_allocation"
     },
     {
       "topic": "prank",
       "path": "/blog/instagram-hashtags-prank",
-      "page_value_proxy": 0.702,
+      "page_value_proxy": 0.706,
+      "action": "demote_allocation"
+    },
+    {
+      "topic": "ootd",
+      "path": "/blog/instagram-hooks-ootd",
+      "page_value_proxy": 0.706,
       "action": "demote_allocation"
     },
     {
       "topic": "comedy-ideas",
       "path": "/blog/instagram-titles-comedy-ideas",
-      "page_value_proxy": 0.702,
+      "page_value_proxy": 0.706,
       "action": "demote_allocation"
     },
     {
       "topic": "collab",
       "path": "/blog/tiktok-captions-collab",
-      "page_value_proxy": 0.702,
+      "page_value_proxy": 0.706,
+      "action": "demote_allocation"
+    },
+    {
+      "topic": "funny",
+      "path": "/blog/tiktok-captions-funny",
+      "page_value_proxy": 0.706,
+      "action": "demote_allocation"
+    },
+    {
+      "topic": "hook-examples",
+      "path": "/blog/tiktok-hashtags-hook-examples",
+      "page_value_proxy": 0.706,
       "action": "demote_allocation"
     },
     {
       "topic": "long",
       "path": "/blog/tiktok-hashtags-long",
-      "page_value_proxy": 0.702,
+      "page_value_proxy": 0.706,
       "action": "demote_allocation"
     },
     {
       "topic": "selfie",
       "path": "/blog/tiktok-hashtags-selfie",
-      "page_value_proxy": 0.702,
+      "page_value_proxy": 0.706,
       "action": "demote_allocation"
     },
     {
       "topic": "niche-hashtags",
       "path": "/blog/tiktok-hooks-niche-hashtags",
-      "page_value_proxy": 0.702,
+      "page_value_proxy": 0.706,
       "action": "demote_allocation"
     },
     {
-      "topic": "trending-sounds-ideas",
-      "path": "/blog/tiktok-titles-trending-sounds-ideas",
-      "page_value_proxy": 0.702,
+      "topic": "comedy-reel",
+      "path": "/blog/youtube-captions-comedy-reel",
+      "page_value_proxy": 0.706,
       "action": "demote_allocation"
     },
     {
-      "topic": "script",
-      "path": "/blog/youtube-hashtags-script",
-      "page_value_proxy": 0.702,
+      "topic": "comedy-hashtags",
+      "path": "/blog/youtube-hooks-comedy-hashtags",
+      "page_value_proxy": 0.706,
       "action": "demote_allocation"
     },
     {
       "topic": "food-ideas",
       "path": "/blog/youtube-hooks-food-ideas",
-      "page_value_proxy": 0.702,
+      "page_value_proxy": 0.706,
+      "action": "demote_allocation"
+    },
+    {
+      "topic": "caption-for-business",
+      "path": "/blog/youtube-titles-caption-for-business",
+      "page_value_proxy": 0.706,
       "action": "demote_allocation"
     },
     {
       "topic": "get-ready-with-me",
       "path": "/blog/youtube-titles-get-ready-with-me",
-      "page_value_proxy": 0.702,
+      "page_value_proxy": 0.706,
       "action": "demote_allocation"
     },
     {
-      "topic": "lets-play",
-      "path": "/blog/instagram-hooks-lets-play",
-      "page_value_proxy": 0.701,
+      "topic": "for-business",
+      "path": "/blog/instagram-captions-for-business",
+      "page_value_proxy": 0.705,
       "action": "demote_allocation"
     },
     {
       "topic": "mystery",
       "path": "/blog/instagram-hooks-mystery",
-      "page_value_proxy": 0.701,
+      "page_value_proxy": 0.705,
       "action": "demote_allocation"
     },
     {
       "topic": "caption-ideas",
       "path": "/blog/instagram-titles-caption-ideas",
-      "page_value_proxy": 0.701,
+      "page_value_proxy": 0.705,
       "action": "demote_allocation"
     },
     {
       "topic": "gym",
       "path": "/blog/tiktok-captions-gym",
-      "page_value_proxy": 0.701,
+      "page_value_proxy": 0.705,
       "action": "demote_allocation"
     },
     {
-      "topic": "promotion",
-      "path": "/blog/tiktok-captions-promotion",
-      "page_value_proxy": 0.701,
+      "topic": "trending-sounds-ideas",
+      "path": "/blog/tiktok-titles-trending-sounds-ideas",
+      "page_value_proxy": 0.705,
       "action": "demote_allocation"
     },
     {
       "topic": "get-ready-with-me",
       "path": "/blog/youtube-captions-get-ready-with-me",
-      "page_value_proxy": 0.701,
+      "page_value_proxy": 0.705,
       "action": "demote_allocation"
     },
     {
       "topic": "relatable",
       "path": "/blog/youtube-hashtags-relatable",
-      "page_value_proxy": 0.701,
+      "page_value_proxy": 0.705,
       "action": "demote_allocation"
     },
     {
-      "topic": "contest",
-      "path": "/blog/youtube-hooks-contest",
-      "page_value_proxy": 0.701,
-      "action": "demote_allocation"
-    },
-    {
-      "topic": "dad",
-      "path": "/blog/youtube-hooks-dad",
-      "page_value_proxy": 0.701,
+      "topic": "script",
+      "path": "/blog/youtube-hashtags-script",
+      "page_value_proxy": 0.705,
       "action": "demote_allocation"
     },
     {
       "topic": "dance",
       "path": "/blog/youtube-titles-dance",
-      "page_value_proxy": 0.701,
+      "page_value_proxy": 0.705,
       "action": "demote_allocation"
     },
     {
-      "topic": "duet",
-      "path": "/blog/instagram-captions-duet",
-      "page_value_proxy": 0.7,
-      "action": "demote_allocation"
-    },
-    {
-      "topic": "title-for-views",
-      "path": "/blog/instagram-hooks-title-for-views",
-      "page_value_proxy": 0.7,
+      "topic": "lets-play",
+      "path": "/blog/instagram-hooks-lets-play",
+      "page_value_proxy": 0.704,
       "action": "demote_allocation"
     },
     {
       "topic": "aesthetic",
       "path": "/blog/tiktok-captions-aesthetic",
-      "page_value_proxy": 0.7,
+      "page_value_proxy": 0.704,
       "action": "demote_allocation"
     },
     {
       "topic": "comedy",
       "path": "/blog/tiktok-captions-comedy",
-      "page_value_proxy": 0.7,
-      "action": "demote_allocation"
-    },
-    {
-      "topic": "contest",
-      "path": "/blog/tiktok-captions-contest",
-      "page_value_proxy": 0.7,
+      "page_value_proxy": 0.704,
       "action": "demote_allocation"
     },
     {
       "topic": "cover",
       "path": "/blog/tiktok-captions-cover",
-      "page_value_proxy": 0.7,
+      "page_value_proxy": 0.704,
       "action": "demote_allocation"
     },
     {
       "topic": "how-to",
       "path": "/blog/tiktok-captions-how-to",
-      "page_value_proxy": 0.7,
+      "page_value_proxy": 0.704,
       "action": "demote_allocation"
     },
     {
-      "topic": "launch",
-      "path": "/blog/tiktok-captions-launch",
-      "page_value_proxy": 0.7,
+      "topic": "promotion",
+      "path": "/blog/tiktok-captions-promotion",
+      "page_value_proxy": 0.704,
       "action": "demote_allocation"
     },
     {
       "topic": "sad",
       "path": "/blog/tiktok-captions-sad",
-      "page_value_proxy": 0.7,
+      "page_value_proxy": 0.704,
       "action": "demote_allocation"
     },
     {
-      "topic": "stitch",
-      "path": "/blog/tiktok-captions-stitch",
-      "page_value_proxy": 0.7,
+      "topic": "attitude",
+      "path": "/blog/tiktok-hashtags-attitude",
+      "page_value_proxy": 0.704,
+      "action": "demote_allocation"
+    },
+    {
+      "topic": "wedding",
+      "path": "/blog/tiktok-hooks-wedding",
+      "page_value_proxy": 0.704,
+      "action": "demote_allocation"
+    },
+    {
+      "topic": "product",
+      "path": "/blog/tiktok-titles-product",
+      "page_value_proxy": 0.704,
+      "action": "demote_allocation"
+    },
+    {
+      "topic": "contest",
+      "path": "/blog/youtube-hooks-contest",
+      "page_value_proxy": 0.704,
+      "action": "demote_allocation"
+    },
+    {
+      "topic": "dad",
+      "path": "/blog/youtube-hooks-dad",
+      "page_value_proxy": 0.704,
+      "action": "demote_allocation"
+    },
+    {
+      "topic": "wedding",
+      "path": "/blog/youtube-hooks-wedding",
+      "page_value_proxy": 0.704,
+      "action": "demote_allocation"
+    },
+    {
+      "topic": "ideas-for-beginners",
+      "path": "/blog/youtube-titles-ideas-for-beginners",
+      "page_value_proxy": 0.704,
       "action": "demote_allocation"
     }
   ],
@@ -466,6 +466,8 @@
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: or": 1,
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: [V": 1,
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: Us": 1,
+    "Creator intent: Promote a product. Content scenario: Small business. Topic or pr": 1,
+    "Test post about morning coffee routine for TikTok": 1,
     "for-reels": 0.9,
     "bio-ideas": 0.9,
     "bios-2025": 1,
@@ -478,7 +480,7 @@
     "asmr": 0.7290000000000001,
     "business": 0.9,
     "comparison": 0.9,
-    "creative-usernames": 0.81,
+    "creative-usernames": 0.9,
     "duet": 0.9,
     "for-business": 0.9,
     "for-selfies": 0.9,
@@ -513,7 +515,7 @@
     "viral-hashtags": 0.9,
     "captions-2025": 1,
     "hashtag-strategy": 1,
-    "aesthetic": 0.81,
+    "aesthetic": 0.7290000000000001,
     "best-hashtags": 0.9,
     "caption-ideas": 0.81,
     "comedy-hashtags": 0.6561000000000001,
@@ -551,7 +553,7 @@
     "controversial": 0.81,
     "cooking": 1,
     "cover": 0.9,
-    "curiosity": 0.9,
+    "curiosity": 0.81,
     "cute": 0.7290000000000001,
     "dad": 0.9,
     "dance-reel": 0.81,
@@ -611,7 +613,7 @@
     "sassy": 0.9,
     "script-template": 1,
     "secret": 0.9,
-    "self-love": 0.81,
+    "self-love": 0.9,
     "selfie": 0.81,
     "short": 0.9,
     "skincare": 0.81,

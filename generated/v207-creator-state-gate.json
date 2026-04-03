@@ -1,0 +1,10 @@
+{
+  "modes": ["minimal", "standard", "full"],
+  "mapping": {
+    "weak": "minimal",
+    "medium": "standard",
+    "strong": "full"
+  },
+  "wired_into_generate_package": true,
+  "final_status": "ok"
+}

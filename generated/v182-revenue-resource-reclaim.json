@@ -1,6 +1,6 @@
 {
   "version": "182",
-  "builtAt": "2026-03-31T06:00:12.427Z",
+  "builtAt": "2026-04-03T06:00:45.770Z",
   "reclaim_internal_links": [
     {
       "path": "/blog/youtube-video-ideas-that-work",
@@ -13,12 +13,12 @@
       "target": "prefer links to /tools/* in amplify_tools list"
     },
     {
-      "path": "/blog/best-tiktok-bio-ideas",
+      "path": "/blog/youtube-captions-trending-ideas",
       "action": "reduce_inbound_priority_direct_to_amplify_tools",
       "target": "prefer links to /tools/* in amplify_tools list"
     },
     {
-      "path": "/blog/youtube-captions-trending-ideas",
+      "path": "/blog/best-tiktok-bio-ideas",
       "action": "reduce_inbound_priority_direct_to_amplify_tools",
       "target": "prefer links to /tools/* in amplify_tools list"
     },
@@ -28,17 +28,7 @@
       "target": "prefer links to /tools/* in amplify_tools list"
     },
     {
-      "path": "/blog/seo-how-search-engines-find-creator-content",
-      "action": "reduce_inbound_priority_direct_to_amplify_tools",
-      "target": "prefer links to /tools/* in amplify_tools list"
-    },
-    {
       "path": "/blog/tiktok-captions-food",
-      "action": "reduce_inbound_priority_direct_to_amplify_tools",
-      "target": "prefer links to /tools/* in amplify_tools list"
-    },
-    {
-      "path": "/blog/tiktok-captions-inspirational",
       "action": "reduce_inbound_priority_direct_to_amplify_tools",
       "target": "prefer links to /tools/* in amplify_tools list"
     },
@@ -48,17 +38,17 @@
       "target": "prefer links to /tools/* in amplify_tools list"
     },
     {
-      "path": "/blog/instagram-captions-for-reels",
-      "action": "reduce_inbound_priority_direct_to_amplify_tools",
-      "target": "prefer links to /tools/* in amplify_tools list"
-    },
-    {
       "path": "/blog/instagram-hashtags-funny-usernames",
       "action": "reduce_inbound_priority_direct_to_amplify_tools",
       "target": "prefer links to /tools/* in amplify_tools list"
     },
     {
-      "path": "/blog/tiktok-captions-attitude",
+      "path": "/blog/seo-how-search-engines-find-creator-content",
+      "action": "reduce_inbound_priority_direct_to_amplify_tools",
+      "target": "prefer links to /tools/* in amplify_tools list"
+    },
+    {
+      "path": "/blog/tiktok-captions-inspirational",
       "action": "reduce_inbound_priority_direct_to_amplify_tools",
       "target": "prefer links to /tools/* in amplify_tools list"
     },
@@ -68,12 +58,12 @@
       "target": "prefer links to /tools/* in amplify_tools list"
     },
     {
-      "path": "/blog/instagram-captions-grwm",
+      "path": "/blog/instagram-captions-for-reels",
       "action": "reduce_inbound_priority_direct_to_amplify_tools",
       "target": "prefer links to /tools/* in amplify_tools list"
     },
     {
-      "path": "/blog/instagram-hooks-tips",
+      "path": "/blog/tiktok-captions-attitude",
       "action": "reduce_inbound_priority_direct_to_amplify_tools",
       "target": "prefer links to /tools/* in amplify_tools list"
     },
@@ -83,7 +73,7 @@
       "target": "prefer links to /tools/* in amplify_tools list"
     },
     {
-      "path": "/blog/youtube-captions-stitch",
+      "path": "/blog/instagram-captions-grwm",
       "action": "reduce_inbound_priority_direct_to_amplify_tools",
       "target": "prefer links to /tools/* in amplify_tools list"
     },
@@ -93,12 +83,7 @@
       "target": "prefer links to /tools/* in amplify_tools list"
     },
     {
-      "path": "/blog/instagram-hashtags-duet-ideas",
-      "action": "reduce_inbound_priority_direct_to_amplify_tools",
-      "target": "prefer links to /tools/* in amplify_tools list"
-    },
-    {
-      "path": "/blog/instagram-hooks-ootd",
+      "path": "/blog/instagram-hooks-tips",
       "action": "reduce_inbound_priority_direct_to_amplify_tools",
       "target": "prefer links to /tools/* in amplify_tools list"
     },
@@ -118,12 +103,27 @@
       "target": "prefer links to /tools/* in amplify_tools list"
     },
     {
-      "path": "/blog/tiktok-captions-funny",
+      "path": "/blog/tiktok-captions-gaming",
       "action": "reduce_inbound_priority_direct_to_amplify_tools",
       "target": "prefer links to /tools/* in amplify_tools list"
     },
     {
-      "path": "/blog/tiktok-captions-gaming",
+      "path": "/blog/tiktok-captions-sarcastic",
+      "action": "reduce_inbound_priority_direct_to_amplify_tools",
+      "target": "prefer links to /tools/* in amplify_tools list"
+    },
+    {
+      "path": "/blog/tiktok-content-ideas-beginners",
+      "action": "reduce_inbound_priority_direct_to_amplify_tools",
+      "target": "prefer links to /tools/* in amplify_tools list"
+    },
+    {
+      "path": "/blog/tiktok-hooks-caption-for-business",
+      "action": "reduce_inbound_priority_direct_to_amplify_tools",
+      "target": "prefer links to /tools/* in amplify_tools list"
+    },
+    {
+      "path": "/blog/youtube-captions-stitch",
       "action": "reduce_inbound_priority_direct_to_amplify_tools",
       "target": "prefer links to /tools/* in amplify_tools list"
     }
@@ -135,22 +135,22 @@
       "trending-ideas",
       "motivation",
       "food",
-      "inspirational",
       "life-hack",
-      "for-reels",
       "funny-usernames",
-      "attitude",
+      "inspirational",
       "romantic",
-      "grwm",
-      "tips",
+      "for-reels",
+      "attitude",
       "cute",
-      "stitch",
+      "grwm",
       "script-structure",
-      "duet-ideas",
-      "ootd",
+      "tips",
       "trending-sound",
       "viral-hashtags",
-      "friends"
+      "friends",
+      "gaming",
+      "sarcastic",
+      "caption-for-business"
     ]
   },
   "reclaim_cta_priority": [],

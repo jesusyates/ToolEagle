@@ -1,6 +1,6 @@
 {
   "version": "183.1",
-  "builtAt": "2026-03-31T06:00:12.491Z",
+  "builtAt": "2026-04-03T06:00:45.862Z",
   "exact_revenue_empty_reason": "no_paid_orders_in_payment_snapshot (orders.status != 'paid', paid_at is null); payment_events_table_issue: Could not find the table 'public.payment_events' in the schema cache; no_exact_attributed_orders (v180 attribution contains no attribution_confidence='exact' for paid/callback stages); orders_attributed_with_tool_slug_missing => tool_slug=null => exact revenue can't be mapped to monetization tools",
   "orders_found": 3,
   "callbacks_found": 0,
@@ -47,34 +47,34 @@
   },
   "freshness_audit": {
     "version": "183.1",
-    "builtAt": "2026-03-31T06:00:12.491Z",
+    "builtAt": "2026-04-03T06:00:45.862Z",
     "stale_data": true,
     "stale_reasons": [
       "analytics_missing"
     ],
     "stale_sources": {
       "data_freshness.json": {
-        "updatedAt": "2026-03-31T06:00:08.596Z",
+        "updatedAt": "2026-04-03T06:00:41.546Z",
         "staleness_applied": true,
         "reason": [
           "analytics_missing"
         ]
       },
       "search_performance.json": {
-        "updatedAt": "2026-03-31T06:00:04.837Z",
-        "age_hours": 0.002126388888888889,
+        "updatedAt": "2026-04-03T06:00:37.552Z",
+        "age_hours": 0.002308611111111111,
         "error": "fetch failed",
         "data_empty": true,
         "is_stale": true
       },
       "tool_conversion_map.json": {
-        "updatedAt": "2026-03-31T06:00:05.197Z",
-        "age_hours": 0.0020263888888888888,
+        "updatedAt": "2026-04-03T06:00:38.002Z",
+        "age_hours": 0.002183611111111111,
         "is_stale": false
       },
       "v180_payment_db_snapshot.json": {
-        "builtAt": "2026-03-31T06:00:12.045Z",
-        "age_hours": 0.00012416666666666666,
+        "builtAt": "2026-04-03T06:00:45.361Z",
+        "age_hours": 0.00013944444444444445,
         "payment_events_error": "Could not find the table 'public.payment_events' in the schema cache",
         "is_stale": false
       }
@@ -83,7 +83,7 @@
   },
   "v182_activation_threshold": {
     "version": "183.1",
-    "builtAt": "2026-03-31T06:00:12.491Z",
+    "builtAt": "2026-04-03T06:00:45.862Z",
     "thresholds": {
       "exact_orders_min": 2,
       "data_freshness_max_age_hours": 48,

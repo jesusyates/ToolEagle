@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-30T09:48:07.575Z",
+  "updatedAt": "2026-04-03T06:01:43.888Z",
   "seoGrowthActive": true,
   "indexingActive": true,
   "optimizationWatcherActive": true,
@@ -11,18 +11,18 @@
     "enDailyGrowth": {
       "exists": true,
       "running": true,
-      "pid": 23172,
-      "startedAt": "2026-03-30T09:45:56.164Z"
+      "pid": 22540,
+      "startedAt": "2026-04-03T06:01:43.294Z"
     },
     "optimizationWatcher": {
-      "exists": false,
+      "exists": true,
       "running": false,
-      "pid": null,
-      "startedAt": null
+      "pid": 10900,
+      "startedAt": "2026-04-03T05:45:02.284Z"
     }
   },
   "latestWatcherState": {
-    "checkedAt": "2026-03-30T05:45:37.842Z",
+    "checkedAt": "2026-04-02T05:45:38.616Z",
     "inputMode": "stub",
     "ready": false,
     "schedulerNextAction": "PAUSE_NO_DATA",

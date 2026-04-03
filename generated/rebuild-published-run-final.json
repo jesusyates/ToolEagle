@@ -1,0 +1,22 @@
+{
+  "runAt": "2026-04-02T10:17:49.625Z",
+  "attempted": 0,
+  "replaced": 0,
+  "frozen": 0,
+  "skipped": 0,
+  "filenames": [],
+  "frozenDetail": [],
+  "skippedFilenames": [],
+  "replacedFilenames": [],
+  "sourceAudit": "generated/published-guides-audit.json",
+  "repairCountInAudit": 0,
+  "previousRebuildPublishedRun": {
+    "runAt": "2026-04-02T08:57:04.036Z",
+    "limit": null,
+    "attempted": 35,
+    "passed": 33,
+    "replaced": 33,
+    "skipped": 2
+  },
+  "note": "No repair-tier items in published-guides-audit.json; EN formal pool needs no further repair actions."
+}

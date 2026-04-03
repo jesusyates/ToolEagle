@@ -69,6 +69,9 @@ import { scoreCreatorStateToolContext } from "@/lib/content/creator-state-tool-w
 import { classifyCreatorStateToolWeight } from "@/lib/content/creator-state-tool-band";
 import { buildGenerationPolicy } from "@/lib/content/generation-policy";
 import { logContentEventServer } from "@/lib/content/content-event-log";
+import { mkdir, writeFile } from "fs/promises";
+import { composeAutoPost, AUTO_POSTS_DIR } from "@/lib/auto-posts";
+import { auditPublishedGuideMarkdown } from "@/lib/seo/published-guide-audit";
 import v193PlatformPatterns from "../../../../generated/v193-platform-patterns.json";
 
 function sanitizeClientRoute(s: unknown): string | undefined {
@@ -1166,6 +1169,44 @@ export async function POST(request: NextRequest) {
           }
         : {})
     };
+
+    try {
+      if (modelParseOk && packages.length > 0) {
+        const r = packages[0];
+        const combinedBody = [
+          r.hook,
+          r.script_talking_points,
+          r.caption,
+          r.cta_line,
+          r.hashtags,
+          r.why_it_works,
+          r.posting_tips
+        ]
+          .filter((s) => typeof s === "string" && s.trim().length > 0)
+          .join("\n\n");
+        const composed = await composeAutoPost({
+          title: r.topic || r.hook,
+          body: combinedBody,
+          hashtags: r.hashtags,
+          seoDescription: r.why_it_works || r.caption,
+          seoTitle: r.topic || r.hook
+        });
+        const finalAudit = auditPublishedGuideMarkdown(composed.filename, composed.markdown);
+        if (finalAudit.decision !== "pass") {
+          console.error(
+            "[auto-publish] final audit rejected (not written)",
+            finalAudit.decision,
+            finalAudit.reasons
+          );
+        } else {
+          await mkdir(AUTO_POSTS_DIR, { recursive: true });
+          await writeFile(composed.fullPath, composed.markdown, "utf8");
+          console.log("[auto-publish] created:", composed.relativePath, composed.urlPath);
+        }
+      }
+    } catch (e) {
+      console.error("[auto-publish] failed:", e);
+    }
 
     if (gate.creditsMode && creditCost > 0) {
       const dummy = {} as NextResponse;

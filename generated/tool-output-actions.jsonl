@@ -37,3 +37,6 @@
 {"type":"output_copy","toolSlug":"hook-generator","resultType":"full","sessionId":"d1af9151-e821-478e-8b1a-60203711573d","ts":"2026-03-30T08:13:13.515Z","receivedAt":"2026-03-30T08:13:14.025Z"}
 {"type":"output_copy","toolSlug":"hook-generator","resultType":"meta","sessionId":"d1af9151-e821-478e-8b1a-60203711573d","ts":"2026-03-30T08:13:15.638Z","receivedAt":"2026-03-30T08:13:15.844Z"}
 {"type":"generation_complete","toolSlug":"hook-generator","sessionId":"d1af9151-e821-478e-8b1a-60203711573d","generationCount":5,"wasRegenerate":false,"timeSinceLastMs":null,"ts":"2026-03-30T08:15:05.721Z","receivedAt":"2026-03-30T08:15:06.212Z"}
+{"type":"generation_complete","toolSlug":"hook-generator","sessionId":"585cb503-5c47-4907-9e08-7094ba383693","generationCount":1,"wasRegenerate":false,"timeSinceLastMs":null,"ts":"2026-04-01T15:19:47.660Z","receivedAt":"2026-04-01T15:19:49.469Z"}
+{"type":"output_copy","toolSlug":"hook-generator","resultType":"full","sessionId":"585cb503-5c47-4907-9e08-7094ba383693","ts":"2026-04-01T15:19:53.136Z","receivedAt":"2026-04-01T15:19:53.648Z"}
+{"type":"generation_complete","toolSlug":"tiktok-caption-generator","sessionId":"585cb503-5c47-4907-9e08-7094ba383693","generationCount":1,"wasRegenerate":false,"timeSinceLastMs":null,"ts":"2026-04-01T15:23:45.746Z","receivedAt":"2026-04-01T15:23:47.755Z"}

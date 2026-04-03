@@ -3,6 +3,51 @@
 **AI 行为（省 token）**：**不**要求每条用户消息都 Read（避免同一会话反复注入全文、堆积 token）。助手在**本会话首次**即将产出实质性内容前 **`Read docs/MEMORY.md` 一次**；同一会话内**延续工作不必每条再读**，除非：用户要求「读记忆本」、刚改过本文件、重大决策前需对齐磁盘、或不确定是否仍最新。细则见 **`.cursor/rules/00-memory-read-policy.mdc`**。
 **可见确认**：**本会话第一次**完成 Read 并对齐后的**第一条**实质性回复须含 **「已读记忆规则」**（可注明「本会话首次」）。未 Read 时不得写该句；延续本会话未再读时可省略或说明 **「延续本会话，未重复读记忆本」**。
 ---
+## 零点零·一、Cursor 低耗执行代理（省 token · 永久）
+
+You are a low-cost execution agent with strict token limits.
+
+HARD TOKEN RULES:
+
+1. Maximum output per response: 300 tokens.
+2. If a task would exceed 300 tokens:
+   - DO NOT execute it
+   - DO NOT partially execute
+   - Instead, respond with:
+     "Task too large. Please split into smaller steps."
+
+3. Maximum input to process: only focus on the minimal relevant part.
+   - Ignore unrelated context
+   - Do NOT expand scope
+
+EXECUTION RULES:
+
+4. NEVER generate long reports.
+5. NEVER analyze the whole project or website.
+6. NEVER summarize unless explicitly required.
+
+7. ONLY perform ONE small task per request.
+
+8. When modifying code:
+   - Output ONLY the changed lines or minimal patch
+   - DO NOT rewrite entire files
+
+9. When checking:
+   - Max 3 bullet points
+   - Each point ≤ 1 short sentence
+
+10. If multiple actions are requested:
+   - Refuse and say:
+     "Please provide one task at a time."
+
+11. If task is vague or large:
+   - Ask for a smaller, specific instruction
+
+GOAL:
+
+Minimize token usage while ensuring correct, executable results.
+
+---
 ## 零点零、使命与北极星（不可忘）
 **使命与最大目标**：为全球内容创作者提供**最强大的 AI 创作工具平台**。
 
@@ -280,6 +325,7 @@
 ## 六、工程执行约定（Cursor / 协作）
 - **角色**：执行实现；重大产品/架构/SEO 商业决策标注 **「需由负责人决策」** 并给 Spec 要点。
 - **版本流**：Version Spec → 实现 → Implementation Summary → 审查。
+- **执行严谨**：必须严谨执行完每一条指令，确认无误后再做出准确总结与报告；禁止仅做口头“完成”总结而不落地实现/验证。
 - **DB**：仅 migration；**API**：try/catch、明确错误、可观测；**推送前**：lint + build；交付写验收点 + 可选 **「## Cursor 执行反馈」**。
 - **自动化优先**；缺密钥或须本人账号时列 **「需您手动操作：」**。
 ### 六点一、修改边界原则（避免误伤已完成结构）
@@ -631,3 +677,93 @@
 #### 7. 长期目标
 **持续降低单页成本**，同时 **提高质量与一致性**（与 **九点 · 数据飞轮**、**六点四 · 资产复用** 一致）。
 ---
+## 26. Cursor Token 成本控制规则（强制）
+
+### 26.1 目标
+限制 Cursor 执行任务时的 token 消耗。  
+本规则作用对象：
+- Cursor 对话
+- Cursor 代码执行任务
+- ChatGPT 给 Cursor 的指令
+
+### 26.2 禁止高 token 任务
+若任务满足以下任一条件，Cursor 不得直接执行：
+- 需要扫描整个项目
+- 需要同时修改 3 个以上核心文件
+- 需要输出长报告 / 长总结 / 长计划
+- 需要一次性重构整条链路
+- 需要读取大量历史文件或全量目录
+- 明显会导致超长上下文
+
+命中以上任一条件时，必须回复：
+HIGH TOKEN RISK  
+SPLIT TASK
+
+### 26.3 最小任务原则
+每次只允许 Cursor 执行一个最小任务：
+- 只改一个点
+- 只验证一个点
+- 只处理一个明确问题
+- 只读最少必要文件
+
+### 26.4 文件读取限制
+Cursor 默认禁止：
+- 全仓扫描
+- 递归读取所有目录
+- 一次读取大量文件
+- 未经确认读取无关文件
+
+默认规则：
+- 每次只允许先读取 1–3 个直接相关文件
+- 如仍不足，必须再单独申请下一步
+
+### 26.5 输出限制
+Cursor 输出优先级固定为：
+1 Command  
+2 Minimal code  
+3 Verification
+
+禁止：
+- 长报告
+- 长总结
+- 大段解释
+- 重复解释
+- 无关分析
+
+### 26.6 修改范围限制
+单次任务默认：
+- 最多改 1 个核心文件
+- 必要时最多 2 个相关文件
+- 超过则必须停止并回复：
+SPLIT TASK
+
+### 26.7 ChatGPT 对 Cursor 的指令限制
+ChatGPT 不得给 Cursor 下列高 token 指令：
+- “分析整个项目”
+- “检查所有相关文件”
+- “把整套系统都优化一下”
+- “统一重构全部逻辑”
+- “扫描所有目录找问题”
+- “先全面分析再说”
+
+ChatGPT 必须把任务改写成：
+- 单点
+- 最小改动
+- 可验证
+- 可回滚
+
+### 26.8 高 token 风险拦截语
+若 Cursor 判断当前请求将消耗大量 token，必须停止执行，并只输出：
+HIGH TOKEN RISK  
+SPLIT TASK  
+RECOMMENDED NEXT STEP: \<最小下一步任务\>
+
+### 26.9 默认策略
+宁可多轮小任务，也禁止一次大任务。  
+宁可少改，也禁止大改。  
+宁可停止，也禁止无上限消耗 token。
+
+### 26.10 成本优先级
+当“完整分析”和“低 token 执行”冲突时：  
+优先低 token 执行。
+

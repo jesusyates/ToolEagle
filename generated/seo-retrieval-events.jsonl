@@ -1704,3 +1704,291 @@
 {"ts":"2026-03-31T07:41:06.508Z","event":"retrieval_hit_recorded","keyword":"TikTok获得播放量方法大全","platform":"tiktok","goal":"获得播放量","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
 {"ts":"2026-03-31T07:42:19.121Z","event":"retrieval_bias_applied","keyword":"TikTok提高互动率方法大全","platform":"tiktok","goal":"提高互动率","bias_applied":true,"bias_factor":0.92}
 {"ts":"2026-03-31T07:42:19.122Z","event":"retrieval_hit_recorded","keyword":"TikTok提高互动率方法大全","platform":"tiktok","goal":"提高互动率","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:43:27.418Z","event":"retrieval_bias_applied","keyword":"TikTok账号起号方法大全","platform":"tiktok","goal":"账号起号","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:43:27.419Z","event":"retrieval_hit_recorded","keyword":"TikTok账号起号方法大全","platform":"tiktok","goal":"账号起号","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:44:34.994Z","event":"retrieval_bias_applied","keyword":"TikTok做内容方法大全","platform":"tiktok","goal":"做内容","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:44:34.994Z","event":"retrieval_hit_recorded","keyword":"TikTok做内容方法大全","platform":"tiktok","goal":"做内容","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:45:46.688Z","event":"retrieval_bias_applied","keyword":"TikTok提高完播率教程大全","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:45:46.689Z","event":"retrieval_hit_recorded","keyword":"TikTok提高完播率教程大全","platform":"tiktok","goal":"提高完播率","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:47:00.012Z","event":"retrieval_bias_applied","keyword":"TikTok直播带货方法大全","platform":"tiktok","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:47:00.013Z","event":"retrieval_hit_recorded","keyword":"TikTok直播带货方法大全","platform":"tiktok","goal":"直播带货","top_score":0.45999999999999996,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:48:01.617Z","event":"retrieval_bias_applied","keyword":"TikTok品牌打造方法大全","platform":"tiktok","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:48:01.618Z","event":"retrieval_hit_recorded","keyword":"TikTok品牌打造方法大全","platform":"tiktok","goal":"品牌打造","top_score":0.45999999999999996,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:49:04.001Z","event":"retrieval_bias_applied","keyword":"TikTok算法优化方法大全","platform":"tiktok","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:49:04.002Z","event":"retrieval_hit_recorded","keyword":"TikTok算法优化方法大全","platform":"tiktok","goal":"算法优化","top_score":0.45999999999999996,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:50:11.341Z","event":"retrieval_bias_applied","keyword":"TikTok数据分析方法大全","platform":"tiktok","goal":"数据分析","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:50:11.341Z","event":"retrieval_hit_recorded","keyword":"TikTok数据分析方法大全","platform":"tiktok","goal":"数据分析","top_score":0.45999999999999996,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:51:26.529Z","event":"retrieval_bias_applied","keyword":"YouTube涨粉方法大全","platform":"youtube","goal":"涨粉","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:51:26.530Z","event":"retrieval_hit_recorded","keyword":"YouTube涨粉方法大全","platform":"youtube","goal":"涨粉","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:52:21.701Z","event":"retrieval_bias_applied","keyword":"YouTube获得播放量方法大全","platform":"youtube","goal":"获得播放量","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:52:21.702Z","event":"retrieval_hit_recorded","keyword":"YouTube获得播放量方法大全","platform":"youtube","goal":"获得播放量","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:53:20.159Z","event":"retrieval_bias_applied","keyword":"YouTube提高互动率方法大全","platform":"youtube","goal":"提高互动率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:53:20.160Z","event":"retrieval_hit_recorded","keyword":"YouTube提高互动率方法大全","platform":"youtube","goal":"提高互动率","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:54:30.987Z","event":"retrieval_bias_applied","keyword":"YouTube账号起号方法大全","platform":"youtube","goal":"账号起号","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:54:30.988Z","event":"retrieval_hit_recorded","keyword":"YouTube账号起号方法大全","platform":"youtube","goal":"账号起号","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:55:43.334Z","event":"retrieval_bias_applied","keyword":"YouTube做内容方法大全","platform":"youtube","goal":"做内容","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:55:43.335Z","event":"retrieval_hit_recorded","keyword":"YouTube做内容方法大全","platform":"youtube","goal":"做内容","top_score":0.45999999999999996,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:57:00.413Z","event":"retrieval_bias_applied","keyword":"YouTube提高完播率教程大全","platform":"youtube","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:57:00.415Z","event":"retrieval_hit_recorded","keyword":"YouTube提高完播率教程大全","platform":"youtube","goal":"提高完播率","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:58:12.093Z","event":"retrieval_bias_applied","keyword":"YouTube直播带货方法大全","platform":"youtube","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:58:12.094Z","event":"retrieval_hit_recorded","keyword":"YouTube直播带货方法大全","platform":"youtube","goal":"直播带货","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T07:59:16.601Z","event":"retrieval_bias_applied","keyword":"YouTube品牌打造方法大全","platform":"youtube","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T07:59:16.602Z","event":"retrieval_hit_recorded","keyword":"YouTube品牌打造方法大全","platform":"youtube","goal":"品牌打造","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:00:27.451Z","event":"retrieval_bias_applied","keyword":"YouTube算法优化方法大全","platform":"youtube","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:00:27.452Z","event":"retrieval_hit_recorded","keyword":"YouTube算法优化方法大全","platform":"youtube","goal":"算法优化","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:01:45.635Z","event":"retrieval_bias_applied","keyword":"YouTube数据分析方法大全","platform":"youtube","goal":"数据分析","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:01:45.640Z","event":"retrieval_hit_recorded","keyword":"YouTube数据分析方法大全","platform":"youtube","goal":"数据分析","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:02:33.712Z","event":"retrieval_bias_applied","keyword":"Instagram涨粉方法大全","platform":"instagram","goal":"涨粉","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:02:33.713Z","event":"retrieval_hit_recorded","keyword":"Instagram涨粉方法大全","platform":"instagram","goal":"涨粉","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:03:24.167Z","event":"retrieval_bias_applied","keyword":"Instagram获得播放量方法大全","platform":"instagram","goal":"获得播放量","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:03:24.169Z","event":"retrieval_hit_recorded","keyword":"Instagram获得播放量方法大全","platform":"instagram","goal":"获得播放量","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:04:07.581Z","event":"retrieval_bias_applied","keyword":"Instagram做爆款视频方法大全","platform":"instagram","goal":"做爆款视频","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:04:07.584Z","event":"retrieval_hit_recorded","keyword":"Instagram做爆款视频方法大全","platform":"instagram","goal":"做爆款视频","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:05:08.951Z","event":"retrieval_bias_applied","keyword":"Instagram提高互动率方法大全","platform":"instagram","goal":"提高互动率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:05:08.952Z","event":"retrieval_hit_recorded","keyword":"Instagram提高互动率方法大全","platform":"instagram","goal":"提高互动率","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:05:53.678Z","event":"retrieval_bias_applied","keyword":"Instagram账号起号方法大全","platform":"instagram","goal":"账号起号","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:05:53.680Z","event":"retrieval_hit_recorded","keyword":"Instagram账号起号方法大全","platform":"instagram","goal":"账号起号","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:06:38.150Z","event":"retrieval_bias_applied","keyword":"Instagram直播带货方法大全","platform":"instagram","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:06:38.151Z","event":"retrieval_hit_recorded","keyword":"Instagram直播带货方法大全","platform":"instagram","goal":"直播带货","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:07:28.614Z","event":"retrieval_bias_applied","keyword":"Instagram品牌打造方法大全","platform":"instagram","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:07:28.616Z","event":"retrieval_hit_recorded","keyword":"Instagram品牌打造方法大全","platform":"instagram","goal":"品牌打造","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:08:28.597Z","event":"retrieval_bias_applied","keyword":"Instagram算法优化方法大全","platform":"instagram","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:08:28.600Z","event":"retrieval_hit_recorded","keyword":"Instagram算法优化方法大全","platform":"instagram","goal":"算法优化","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:09:37.041Z","event":"retrieval_bias_applied","keyword":"Instagram数据分析方法大全","platform":"instagram","goal":"数据分析","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:09:37.043Z","event":"retrieval_hit_recorded","keyword":"Instagram数据分析方法大全","platform":"instagram","goal":"数据分析","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:11:07.253Z","event":"retrieval_bias_applied","keyword":"TikTok做内容最快的方法","platform":"tiktok","goal":"做内容","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:11:07.254Z","event":"retrieval_hit_recorded","keyword":"TikTok做内容最快的方法","platform":"tiktok","goal":"做内容","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:12:14.649Z","event":"retrieval_bias_applied","keyword":"TikTok提高完播率最快的方法","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:12:14.650Z","event":"retrieval_hit_recorded","keyword":"TikTok提高完播率最快的方法","platform":"tiktok","goal":"提高完播率","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:13:16.121Z","event":"retrieval_bias_applied","keyword":"TikTok提高完播率详细教程","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:13:16.125Z","event":"retrieval_hit_recorded","keyword":"TikTok提高完播率详细教程","platform":"tiktok","goal":"提高完播率","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:14:33.561Z","event":"retrieval_bias_applied","keyword":"TikTok数据分析最快的方法","platform":"tiktok","goal":"数据分析","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:14:33.561Z","event":"retrieval_hit_recorded","keyword":"TikTok数据分析最快的方法","platform":"tiktok","goal":"数据分析","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:15:59.342Z","event":"retrieval_bias_applied","keyword":"YouTube获得播放量最快的方法","platform":"youtube","goal":"获得播放量","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:15:59.344Z","event":"retrieval_hit_recorded","keyword":"YouTube获得播放量最快的方法","platform":"youtube","goal":"获得播放量","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:17:08.431Z","event":"retrieval_bias_applied","keyword":"YouTube提高互动率最快的方法","platform":"youtube","goal":"提高互动率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:17:08.432Z","event":"retrieval_hit_recorded","keyword":"YouTube提高互动率最快的方法","platform":"youtube","goal":"提高互动率","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:18:16.045Z","event":"retrieval_bias_applied","keyword":"YouTube账号起号最快的方法","platform":"youtube","goal":"账号起号","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:18:16.048Z","event":"retrieval_hit_recorded","keyword":"YouTube账号起号最快的方法","platform":"youtube","goal":"账号起号","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:19:23.743Z","event":"retrieval_bias_applied","keyword":"YouTube做内容最快的方法","platform":"youtube","goal":"做内容","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:19:23.743Z","event":"retrieval_hit_recorded","keyword":"YouTube做内容最快的方法","platform":"youtube","goal":"做内容","top_score":0.45999999999999996,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:20:24.351Z","event":"retrieval_bias_applied","keyword":"YouTube提高完播率详细教程","platform":"youtube","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:20:24.352Z","event":"retrieval_hit_recorded","keyword":"YouTube提高完播率详细教程","platform":"youtube","goal":"提高完播率","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:21:28.304Z","event":"retrieval_bias_applied","keyword":"YouTube直播带货最快的方法","platform":"youtube","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:21:28.308Z","event":"retrieval_hit_recorded","keyword":"YouTube直播带货最快的方法","platform":"youtube","goal":"直播带货","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:22:47.414Z","event":"retrieval_bias_applied","keyword":"YouTube品牌打造最快的方法","platform":"youtube","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:22:47.415Z","event":"retrieval_hit_recorded","keyword":"YouTube品牌打造最快的方法","platform":"youtube","goal":"品牌打造","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:23:47.996Z","event":"retrieval_bias_applied","keyword":"YouTube算法优化最快的方法","platform":"youtube","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:23:47.997Z","event":"retrieval_hit_recorded","keyword":"YouTube算法优化最快的方法","platform":"youtube","goal":"算法优化","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:25:00.034Z","event":"retrieval_bias_applied","keyword":"YouTube数据分析最快的方法","platform":"youtube","goal":"数据分析","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:25:00.035Z","event":"retrieval_hit_recorded","keyword":"YouTube数据分析最快的方法","platform":"youtube","goal":"数据分析","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:26:04.793Z","event":"retrieval_bias_applied","keyword":"Instagram涨粉最快的方法","platform":"instagram","goal":"涨粉","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:26:04.795Z","event":"retrieval_hit_recorded","keyword":"Instagram涨粉最快的方法","platform":"instagram","goal":"涨粉","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:27:15.373Z","event":"retrieval_bias_applied","keyword":"Instagram账号起号最快的方法","platform":"instagram","goal":"账号起号","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:27:15.374Z","event":"retrieval_hit_recorded","keyword":"Instagram账号起号最快的方法","platform":"instagram","goal":"账号起号","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:28:24.915Z","event":"retrieval_bias_applied","keyword":"Instagram直播带货最快的方法","platform":"instagram","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:28:24.916Z","event":"retrieval_hit_recorded","keyword":"Instagram直播带货最快的方法","platform":"instagram","goal":"直播带货","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:29:44.751Z","event":"retrieval_bias_applied","keyword":"Instagram品牌打造最快的方法","platform":"instagram","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:29:44.752Z","event":"retrieval_hit_recorded","keyword":"Instagram品牌打造最快的方法","platform":"instagram","goal":"品牌打造","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:30:59.712Z","event":"retrieval_bias_applied","keyword":"Instagram算法优化最快的方法","platform":"instagram","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:30:59.713Z","event":"retrieval_hit_recorded","keyword":"Instagram算法优化最快的方法","platform":"instagram","goal":"算法优化","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:32:25.789Z","event":"retrieval_bias_applied","keyword":"Instagram数据分析最快的方法","platform":"instagram","goal":"数据分析","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:32:25.789Z","event":"retrieval_hit_recorded","keyword":"Instagram数据分析最快的方法","platform":"instagram","goal":"数据分析","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:33:41.492Z","event":"retrieval_bias_applied","keyword":"TikTok提高完播率适合新手吗","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:33:41.493Z","event":"retrieval_hit_recorded","keyword":"TikTok提高完播率适合新手吗","platform":"tiktok","goal":"提高完播率","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:34:43.303Z","event":"retrieval_bias_applied","keyword":"YouTube提高完播率适合新手吗","platform":"youtube","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:34:43.304Z","event":"retrieval_hit_recorded","keyword":"YouTube提高完播率适合新手吗","platform":"youtube","goal":"提高完播率","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:36:10.299Z","event":"retrieval_bias_applied","keyword":"TikTok 做内容 完整指南","platform":"tiktok","goal":"做内容","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:36:10.302Z","event":"retrieval_hit_recorded","keyword":"TikTok 做内容 完整指南","platform":"tiktok","goal":"做内容","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:37:17.614Z","event":"retrieval_bias_applied","keyword":"TikTok 做内容 进阶","platform":"tiktok","goal":"做内容","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:37:17.614Z","event":"retrieval_hit_recorded","keyword":"TikTok 做内容 进阶","platform":"tiktok","goal":"做内容","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:38:19.074Z","event":"retrieval_bias_applied","keyword":"如何在 TikTok 上 提高完播率","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:38:19.076Z","event":"retrieval_hit_recorded","keyword":"如何在 TikTok 上 提高完播率","platform":"tiktok","goal":"提高完播率","top_score":0.43999999999999995,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:39:23.320Z","event":"retrieval_bias_applied","keyword":"TikTok 怎么 提高完播率","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:39:23.323Z","event":"retrieval_hit_recorded","keyword":"TikTok 怎么 提高完播率","platform":"tiktok","goal":"提高完播率","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:40:48.664Z","event":"retrieval_bias_applied","keyword":"TikTok 提高完播率 技巧","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:40:48.665Z","event":"retrieval_hit_recorded","keyword":"TikTok 提高完播率 技巧","platform":"tiktok","goal":"提高完播率","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:42:11.617Z","event":"retrieval_bias_applied","keyword":"TikTok 提高完播率 2026","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:42:11.619Z","event":"retrieval_hit_recorded","keyword":"TikTok 提高完播率 2026","platform":"tiktok","goal":"提高完播率","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:43:13.722Z","event":"retrieval_bias_applied","keyword":"TikTok 提高完播率 秘诀","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:43:13.723Z","event":"retrieval_hit_recorded","keyword":"TikTok 提高完播率 秘诀","platform":"tiktok","goal":"提高完播率","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:44:25.014Z","event":"retrieval_bias_applied","keyword":"TikTok 提高完播率 攻略","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:44:25.016Z","event":"retrieval_hit_recorded","keyword":"TikTok 提高完播率 攻略","platform":"tiktok","goal":"提高完播率","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:45:54.541Z","event":"retrieval_bias_applied","keyword":"TikTok 提高完播率 入门","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:45:54.542Z","event":"retrieval_hit_recorded","keyword":"TikTok 提高完播率 入门","platform":"tiktok","goal":"提高完播率","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:47:19.558Z","event":"retrieval_bias_applied","keyword":"TikTok 提高完播率 高效","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:47:19.559Z","event":"retrieval_hit_recorded","keyword":"TikTok 提高完播率 高效","platform":"tiktok","goal":"提高完播率","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:48:34.074Z","event":"retrieval_bias_applied","keyword":"TikTok 快速 提高完播率","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:48:34.076Z","event":"retrieval_hit_recorded","keyword":"TikTok 快速 提高完播率","platform":"tiktok","goal":"提高完播率","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:49:46.555Z","event":"retrieval_bias_applied","keyword":"TikTok 提高完播率 实战","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:49:46.557Z","event":"retrieval_hit_recorded","keyword":"TikTok 提高完播率 实战","platform":"tiktok","goal":"提高完播率","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:51:02.802Z","event":"retrieval_bias_applied","keyword":"TikTok 提高完播率 完整指南","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:51:02.805Z","event":"retrieval_hit_recorded","keyword":"TikTok 提高完播率 完整指南","platform":"tiktok","goal":"提高完播率","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:52:21.832Z","event":"retrieval_bias_applied","keyword":"TikTok 提高完播率 进阶","platform":"tiktok","goal":"提高完播率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:52:21.834Z","event":"retrieval_hit_recorded","keyword":"TikTok 提高完播率 进阶","platform":"tiktok","goal":"提高完播率","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:53:31.186Z","event":"retrieval_bias_applied","keyword":"如何在 TikTok 上 直播带货","platform":"tiktok","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:53:31.189Z","event":"retrieval_hit_recorded","keyword":"如何在 TikTok 上 直播带货","platform":"tiktok","goal":"直播带货","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:54:40.035Z","event":"retrieval_bias_applied","keyword":"TikTok 怎么 直播带货","platform":"tiktok","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:54:40.036Z","event":"retrieval_hit_recorded","keyword":"TikTok 怎么 直播带货","platform":"tiktok","goal":"直播带货","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:55:58.093Z","event":"retrieval_bias_applied","keyword":"TikTok 直播带货 技巧","platform":"tiktok","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:55:58.095Z","event":"retrieval_hit_recorded","keyword":"TikTok 直播带货 技巧","platform":"tiktok","goal":"直播带货","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:57:13.464Z","event":"retrieval_bias_applied","keyword":"TikTok 直播带货 2026","platform":"tiktok","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:57:13.465Z","event":"retrieval_hit_recorded","keyword":"TikTok 直播带货 2026","platform":"tiktok","goal":"直播带货","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:58:21.357Z","event":"retrieval_bias_applied","keyword":"TikTok 直播带货 秘诀","platform":"tiktok","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:58:21.358Z","event":"retrieval_hit_recorded","keyword":"TikTok 直播带货 秘诀","platform":"tiktok","goal":"直播带货","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T08:59:28.305Z","event":"retrieval_bias_applied","keyword":"TikTok 直播带货 攻略","platform":"tiktok","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T08:59:28.306Z","event":"retrieval_hit_recorded","keyword":"TikTok 直播带货 攻略","platform":"tiktok","goal":"直播带货","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:00:53.053Z","event":"retrieval_bias_applied","keyword":"TikTok 直播带货 入门","platform":"tiktok","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:00:53.057Z","event":"retrieval_hit_recorded","keyword":"TikTok 直播带货 入门","platform":"tiktok","goal":"直播带货","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:02:21.010Z","event":"retrieval_bias_applied","keyword":"TikTok 直播带货 高效","platform":"tiktok","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:02:21.011Z","event":"retrieval_hit_recorded","keyword":"TikTok 直播带货 高效","platform":"tiktok","goal":"直播带货","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:05:32.994Z","event":"retrieval_bias_applied","keyword":"TikTok 快速 直播带货","platform":"tiktok","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:05:32.995Z","event":"retrieval_hit_recorded","keyword":"TikTok 快速 直播带货","platform":"tiktok","goal":"直播带货","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:06:56.803Z","event":"retrieval_bias_applied","keyword":"TikTok 直播带货 实战","platform":"tiktok","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:06:56.804Z","event":"retrieval_hit_recorded","keyword":"TikTok 直播带货 实战","platform":"tiktok","goal":"直播带货","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:08:08.949Z","event":"retrieval_bias_applied","keyword":"TikTok 直播带货 完整指南","platform":"tiktok","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:08:08.951Z","event":"retrieval_hit_recorded","keyword":"TikTok 直播带货 完整指南","platform":"tiktok","goal":"直播带货","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:09:30.297Z","event":"retrieval_bias_applied","keyword":"TikTok 直播带货 进阶","platform":"tiktok","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:09:30.298Z","event":"retrieval_hit_recorded","keyword":"TikTok 直播带货 进阶","platform":"tiktok","goal":"直播带货","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:10:37.007Z","event":"retrieval_bias_applied","keyword":"如何在 TikTok 上 品牌打造","platform":"tiktok","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:10:37.012Z","event":"retrieval_hit_recorded","keyword":"如何在 TikTok 上 品牌打造","platform":"tiktok","goal":"品牌打造","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:11:58.337Z","event":"retrieval_bias_applied","keyword":"TikTok 怎么 品牌打造","platform":"tiktok","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:11:58.340Z","event":"retrieval_hit_recorded","keyword":"TikTok 怎么 品牌打造","platform":"tiktok","goal":"品牌打造","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:13:06.284Z","event":"retrieval_bias_applied","keyword":"TikTok 品牌打造 技巧","platform":"tiktok","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:13:06.285Z","event":"retrieval_hit_recorded","keyword":"TikTok 品牌打造 技巧","platform":"tiktok","goal":"品牌打造","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:14:34.149Z","event":"retrieval_bias_applied","keyword":"TikTok 品牌打造 2026","platform":"tiktok","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:14:34.151Z","event":"retrieval_hit_recorded","keyword":"TikTok 品牌打造 2026","platform":"tiktok","goal":"品牌打造","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:15:56.087Z","event":"retrieval_bias_applied","keyword":"TikTok 品牌打造 秘诀","platform":"tiktok","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:15:56.089Z","event":"retrieval_hit_recorded","keyword":"TikTok 品牌打造 秘诀","platform":"tiktok","goal":"品牌打造","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:16:13.061Z","event":"retrieval_bias_applied","keyword":"TikTok 品牌打造 攻略","platform":"tiktok","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:16:13.062Z","event":"retrieval_hit_recorded","keyword":"TikTok 品牌打造 攻略","platform":"tiktok","goal":"品牌打造","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:16:26.743Z","event":"retrieval_bias_applied","keyword":"TikTok 品牌打造 入门","platform":"tiktok","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:16:26.744Z","event":"retrieval_hit_recorded","keyword":"TikTok 品牌打造 入门","platform":"tiktok","goal":"品牌打造","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:16:40.413Z","event":"retrieval_bias_applied","keyword":"TikTok 品牌打造 高效","platform":"tiktok","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:16:40.414Z","event":"retrieval_hit_recorded","keyword":"TikTok 品牌打造 高效","platform":"tiktok","goal":"品牌打造","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:16:54.122Z","event":"retrieval_bias_applied","keyword":"TikTok 快速 品牌打造","platform":"tiktok","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:16:54.124Z","event":"retrieval_hit_recorded","keyword":"TikTok 快速 品牌打造","platform":"tiktok","goal":"品牌打造","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:17:07.820Z","event":"retrieval_bias_applied","keyword":"TikTok 品牌打造 实战","platform":"tiktok","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:17:07.821Z","event":"retrieval_hit_recorded","keyword":"TikTok 品牌打造 实战","platform":"tiktok","goal":"品牌打造","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:17:21.530Z","event":"retrieval_bias_applied","keyword":"TikTok 品牌打造 完整指南","platform":"tiktok","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:17:21.531Z","event":"retrieval_hit_recorded","keyword":"TikTok 品牌打造 完整指南","platform":"tiktok","goal":"品牌打造","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:17:35.245Z","event":"retrieval_bias_applied","keyword":"TikTok 品牌打造 进阶","platform":"tiktok","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:17:35.250Z","event":"retrieval_hit_recorded","keyword":"TikTok 品牌打造 进阶","platform":"tiktok","goal":"品牌打造","top_score":0.8,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:17:49.004Z","event":"retrieval_bias_applied","keyword":"如何在 TikTok 上 算法优化","platform":"tiktok","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:17:49.005Z","event":"retrieval_hit_recorded","keyword":"如何在 TikTok 上 算法优化","platform":"tiktok","goal":"算法优化","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:18:02.733Z","event":"retrieval_bias_applied","keyword":"TikTok 怎么 算法优化","platform":"tiktok","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:18:02.734Z","event":"retrieval_hit_recorded","keyword":"TikTok 怎么 算法优化","platform":"tiktok","goal":"算法优化","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:18:16.416Z","event":"retrieval_bias_applied","keyword":"TikTok 算法优化 技巧","platform":"tiktok","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:18:16.416Z","event":"retrieval_hit_recorded","keyword":"TikTok 算法优化 技巧","platform":"tiktok","goal":"算法优化","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:18:30.109Z","event":"retrieval_bias_applied","keyword":"TikTok 算法优化 2026","platform":"tiktok","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:18:30.111Z","event":"retrieval_hit_recorded","keyword":"TikTok 算法优化 2026","platform":"tiktok","goal":"算法优化","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:18:43.812Z","event":"retrieval_bias_applied","keyword":"TikTok 算法优化 秘诀","platform":"tiktok","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:18:43.814Z","event":"retrieval_hit_recorded","keyword":"TikTok 算法优化 秘诀","platform":"tiktok","goal":"算法优化","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:18:57.477Z","event":"retrieval_bias_applied","keyword":"TikTok 算法优化 攻略","platform":"tiktok","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:18:57.478Z","event":"retrieval_hit_recorded","keyword":"TikTok 算法优化 攻略","platform":"tiktok","goal":"算法优化","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:19:11.285Z","event":"retrieval_bias_applied","keyword":"TikTok 算法优化 入门","platform":"tiktok","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:19:11.289Z","event":"retrieval_hit_recorded","keyword":"TikTok 算法优化 入门","platform":"tiktok","goal":"算法优化","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:19:25.168Z","event":"retrieval_bias_applied","keyword":"TikTok 算法优化 高效","platform":"tiktok","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:19:25.172Z","event":"retrieval_hit_recorded","keyword":"TikTok 算法优化 高效","platform":"tiktok","goal":"算法优化","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:19:38.943Z","event":"retrieval_bias_applied","keyword":"TikTok 快速 算法优化","platform":"tiktok","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:19:38.944Z","event":"retrieval_hit_recorded","keyword":"TikTok 快速 算法优化","platform":"tiktok","goal":"算法优化","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:19:52.645Z","event":"retrieval_bias_applied","keyword":"TikTok 算法优化 实战","platform":"tiktok","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:19:52.647Z","event":"retrieval_hit_recorded","keyword":"TikTok 算法优化 实战","platform":"tiktok","goal":"算法优化","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:20:06.276Z","event":"retrieval_bias_applied","keyword":"TikTok 算法优化 完整指南","platform":"tiktok","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:20:06.277Z","event":"retrieval_hit_recorded","keyword":"TikTok 算法优化 完整指南","platform":"tiktok","goal":"算法优化","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:20:19.944Z","event":"retrieval_bias_applied","keyword":"TikTok 算法优化 进阶","platform":"tiktok","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:20:19.946Z","event":"retrieval_hit_recorded","keyword":"TikTok 算法优化 进阶","platform":"tiktok","goal":"算法优化","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:20:33.710Z","event":"retrieval_bias_applied","keyword":"如何在 TikTok 上 数据分析","platform":"tiktok","goal":"数据分析","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:20:33.711Z","event":"retrieval_hit_recorded","keyword":"如何在 TikTok 上 数据分析","platform":"tiktok","goal":"数据分析","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:20:47.413Z","event":"retrieval_bias_applied","keyword":"TikTok 怎么 数据分析","platform":"tiktok","goal":"数据分析","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:20:47.414Z","event":"retrieval_hit_recorded","keyword":"TikTok 怎么 数据分析","platform":"tiktok","goal":"数据分析","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:21:01.205Z","event":"retrieval_bias_applied","keyword":"TikTok 数据分析 技巧","platform":"tiktok","goal":"数据分析","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:21:01.207Z","event":"retrieval_hit_recorded","keyword":"TikTok 数据分析 技巧","platform":"tiktok","goal":"数据分析","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-03-31T09:21:14.904Z","event":"retrieval_bias_applied","keyword":"TikTok 数据分析 2026","platform":"tiktok","goal":"数据分析","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-03-31T09:21:14.905Z","event":"retrieval_hit_recorded","keyword":"TikTok 数据分析 2026","platform":"tiktok","goal":"数据分析","top_score":0.6,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:00:15.840Z","event":"retrieval_bias_applied","keyword":"YouTube引流真的能赚钱吗","platform":"youtube","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:00:15.841Z","event":"retrieval_hit_recorded","keyword":"YouTube引流真的能赚钱吗","platform":"youtube","goal":"引流","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:00:29.593Z","event":"retrieval_bias_applied","keyword":"Instagram引流真的能赚钱吗","platform":"instagram","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:00:29.594Z","event":"retrieval_hit_recorded","keyword":"Instagram引流真的能赚钱吗","platform":"instagram","goal":"引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:00:43.202Z","event":"retrieval_bias_applied","keyword":"Instagram新手如何引流","platform":"instagram","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:00:43.202Z","event":"retrieval_hit_recorded","keyword":"Instagram新手如何引流","platform":"instagram","goal":"引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:00:56.927Z","event":"retrieval_bias_applied","keyword":"YouTube新手如何引流","platform":"youtube","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:00:56.929Z","event":"retrieval_hit_recorded","keyword":"YouTube新手如何引流","platform":"youtube","goal":"引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:01:10.652Z","event":"retrieval_bias_applied","keyword":"YouTube变现2026实现方法","platform":"youtube","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:01:10.654Z","event":"retrieval_hit_recorded","keyword":"YouTube变现2026实现方法","platform":"youtube","goal":"变现","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:01:24.296Z","event":"retrieval_bias_applied","keyword":"YouTube变现最新实现方法","platform":"youtube","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:01:24.297Z","event":"retrieval_hit_recorded","keyword":"YouTube变现最新实现方法","platform":"youtube","goal":"变现","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:01:38.014Z","event":"retrieval_bias_applied","keyword":"YouTube引流快速实现方法","platform":"youtube","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:01:38.015Z","event":"retrieval_hit_recorded","keyword":"YouTube引流快速实现方法","platform":"youtube","goal":"引流","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:01:51.843Z","event":"retrieval_bias_applied","keyword":"Instagram变现2026实现方法","platform":"instagram","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:01:51.847Z","event":"retrieval_hit_recorded","keyword":"Instagram变现2026实现方法","platform":"instagram","goal":"变现","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:02:05.665Z","event":"retrieval_bias_applied","keyword":"Instagram变现最新实现方法","platform":"instagram","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:02:05.668Z","event":"retrieval_hit_recorded","keyword":"Instagram变现最新实现方法","platform":"instagram","goal":"变现","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:02:19.435Z","event":"retrieval_bias_applied","keyword":"Instagram引流快速实现方法","platform":"instagram","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:02:19.438Z","event":"retrieval_hit_recorded","keyword":"Instagram引流快速实现方法","platform":"instagram","goal":"引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:02:33.178Z","event":"retrieval_bias_applied","keyword":"Instagram私域引流7天实现方法","platform":"instagram","goal":"私域引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:02:33.179Z","event":"retrieval_hit_recorded","keyword":"Instagram私域引流7天实现方法","platform":"instagram","goal":"私域引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:02:46.927Z","event":"retrieval_bias_applied","keyword":"YouTube变现教程大全","platform":"youtube","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:02:46.929Z","event":"retrieval_hit_recorded","keyword":"YouTube变现教程大全","platform":"youtube","goal":"变现","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:03:00.817Z","event":"retrieval_bias_applied","keyword":"Instagram变现教程大全","platform":"instagram","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:03:00.819Z","event":"retrieval_hit_recorded","keyword":"Instagram变现教程大全","platform":"instagram","goal":"变现","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:03:14.526Z","event":"retrieval_bias_applied","keyword":"Instagram引流方法大全","platform":"instagram","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:03:14.527Z","event":"retrieval_hit_recorded","keyword":"Instagram引流方法大全","platform":"instagram","goal":"引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:03:28.264Z","event":"retrieval_bias_applied","keyword":"YouTube变现最快的方法","platform":"youtube","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:03:28.265Z","event":"retrieval_hit_recorded","keyword":"YouTube变现最快的方法","platform":"youtube","goal":"变现","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:03:41.943Z","event":"retrieval_bias_applied","keyword":"YouTube变现详细教程","platform":"youtube","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:03:41.945Z","event":"retrieval_hit_recorded","keyword":"YouTube变现详细教程","platform":"youtube","goal":"变现","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:03:55.632Z","event":"retrieval_bias_applied","keyword":"Instagram变现详细教程","platform":"instagram","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:03:55.635Z","event":"retrieval_hit_recorded","keyword":"Instagram变现详细教程","platform":"instagram","goal":"变现","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:04:09.372Z","event":"retrieval_bias_applied","keyword":"YouTube变现适合新手吗","platform":"youtube","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:04:09.374Z","event":"retrieval_hit_recorded","keyword":"YouTube变现适合新手吗","platform":"youtube","goal":"变现","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:04:22.986Z","event":"retrieval_bias_applied","keyword":"TikTok私域引流模板大全","platform":"tiktok","goal":"私域引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:04:22.986Z","event":"retrieval_hit_recorded","keyword":"TikTok私域引流模板大全","platform":"tiktok","goal":"私域引流","top_score":0.45999999999999996,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:04:36.645Z","event":"retrieval_bias_applied","keyword":"YouTube私域引流模板大全","platform":"youtube","goal":"私域引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:04:36.646Z","event":"retrieval_hit_recorded","keyword":"YouTube私域引流模板大全","platform":"youtube","goal":"私域引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:04:50.265Z","event":"retrieval_bias_applied","keyword":"TikTok涨粉3天实现方法","platform":"tiktok","goal":"涨粉","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:04:50.266Z","event":"retrieval_hit_recorded","keyword":"TikTok涨粉3天实现方法","platform":"tiktok","goal":"涨粉","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:05:04.032Z","event":"retrieval_bias_applied","keyword":"TikTok获得播放量3天实现方法","platform":"tiktok","goal":"获得播放量","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:05:04.033Z","event":"retrieval_hit_recorded","keyword":"TikTok获得播放量3天实现方法","platform":"tiktok","goal":"获得播放量","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:05:17.746Z","event":"retrieval_bias_applied","keyword":"TikTok提高互动率3天实现方法","platform":"tiktok","goal":"提高互动率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:05:17.747Z","event":"retrieval_hit_recorded","keyword":"TikTok提高互动率3天实现方法","platform":"tiktok","goal":"提高互动率","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:05:31.438Z","event":"retrieval_bias_applied","keyword":"TikTok账号起号3天实现方法","platform":"tiktok","goal":"账号起号","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:05:31.439Z","event":"retrieval_hit_recorded","keyword":"TikTok账号起号3天实现方法","platform":"tiktok","goal":"账号起号","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:05:45.121Z","event":"retrieval_bias_applied","keyword":"TikTok做内容3天实现方法","platform":"tiktok","goal":"做内容","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:05:45.122Z","event":"retrieval_hit_recorded","keyword":"TikTok做内容3天实现方法","platform":"tiktok","goal":"做内容","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:05:58.872Z","event":"retrieval_bias_applied","keyword":"TikTok直播带货3天实现方法","platform":"tiktok","goal":"直播带货","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:05:58.874Z","event":"retrieval_hit_recorded","keyword":"TikTok直播带货3天实现方法","platform":"tiktok","goal":"直播带货","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:06:12.678Z","event":"retrieval_bias_applied","keyword":"TikTok品牌打造3天实现方法","platform":"tiktok","goal":"品牌打造","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:06:12.683Z","event":"retrieval_hit_recorded","keyword":"TikTok品牌打造3天实现方法","platform":"tiktok","goal":"品牌打造","top_score":0.6666666666666666,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:06:26.479Z","event":"retrieval_bias_applied","keyword":"TikTok算法优化3天实现方法","platform":"tiktok","goal":"算法优化","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:06:26.481Z","event":"retrieval_hit_recorded","keyword":"TikTok算法优化3天实现方法","platform":"tiktok","goal":"算法优化","top_score":0.45999999999999996,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:06:40.263Z","event":"retrieval_bias_applied","keyword":"TikTok数据分析7天实现方法","platform":"tiktok","goal":"数据分析","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:06:40.265Z","event":"retrieval_hit_recorded","keyword":"TikTok数据分析7天实现方法","platform":"tiktok","goal":"数据分析","top_score":0.45999999999999996,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:06:53.996Z","event":"retrieval_bias_applied","keyword":"YouTube涨粉7天实现方法","platform":"youtube","goal":"涨粉","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:06:53.997Z","event":"retrieval_hit_recorded","keyword":"YouTube涨粉7天实现方法","platform":"youtube","goal":"涨粉","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:07:07.786Z","event":"retrieval_bias_applied","keyword":"YouTube获得播放量7天实现方法","platform":"youtube","goal":"获得播放量","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:07:07.788Z","event":"retrieval_hit_recorded","keyword":"YouTube获得播放量7天实现方法","platform":"youtube","goal":"获得播放量","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-01T06:07:21.504Z","event":"retrieval_bias_applied","keyword":"YouTube提高互动率7天实现方法","platform":"youtube","goal":"提高互动率","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-01T06:07:21.505Z","event":"retrieval_hit_recorded","keyword":"YouTube提高互动率7天实现方法","platform":"youtube","goal":"提高互动率","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-02T04:45:27.765Z","event":"retrieval_bias_applied","keyword":"YouTube引流真的能赚钱吗","platform":"youtube","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-02T04:45:27.767Z","event":"retrieval_hit_recorded","keyword":"YouTube引流真的能赚钱吗","platform":"youtube","goal":"引流","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-02T04:46:35.571Z","event":"retrieval_bias_applied","keyword":"Instagram引流真的能赚钱吗","platform":"instagram","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-02T04:46:35.572Z","event":"retrieval_hit_recorded","keyword":"Instagram引流真的能赚钱吗","platform":"instagram","goal":"引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-02T04:47:36.223Z","event":"retrieval_bias_applied","keyword":"Instagram新手如何引流","platform":"instagram","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-02T04:47:36.224Z","event":"retrieval_hit_recorded","keyword":"Instagram新手如何引流","platform":"instagram","goal":"引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-02T04:48:47.752Z","event":"retrieval_bias_applied","keyword":"YouTube新手如何引流","platform":"youtube","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-02T04:48:47.753Z","event":"retrieval_hit_recorded","keyword":"YouTube新手如何引流","platform":"youtube","goal":"引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-02T04:49:50.156Z","event":"retrieval_bias_applied","keyword":"YouTube变现2026实现方法","platform":"youtube","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-02T04:49:50.158Z","event":"retrieval_hit_recorded","keyword":"YouTube变现2026实现方法","platform":"youtube","goal":"变现","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-02T04:50:53.879Z","event":"retrieval_bias_applied","keyword":"YouTube变现最新实现方法","platform":"youtube","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-02T04:50:53.881Z","event":"retrieval_hit_recorded","keyword":"YouTube变现最新实现方法","platform":"youtube","goal":"变现","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-02T04:52:07.203Z","event":"retrieval_bias_applied","keyword":"YouTube引流快速实现方法","platform":"youtube","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-02T04:52:07.203Z","event":"retrieval_hit_recorded","keyword":"YouTube引流快速实现方法","platform":"youtube","goal":"引流","top_score":0.4507692307692307,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-02T04:53:21.233Z","event":"retrieval_bias_applied","keyword":"Instagram变现2026实现方法","platform":"instagram","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-02T04:53:21.234Z","event":"retrieval_hit_recorded","keyword":"Instagram变现2026实现方法","platform":"instagram","goal":"变现","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-02T04:54:41.654Z","event":"retrieval_bias_applied","keyword":"Instagram变现最新实现方法","platform":"instagram","goal":"变现","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-02T04:54:41.656Z","event":"retrieval_hit_recorded","keyword":"Instagram变现最新实现方法","platform":"instagram","goal":"变现","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-02T04:55:41.426Z","event":"retrieval_bias_applied","keyword":"Instagram引流快速实现方法","platform":"instagram","goal":"引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-02T04:55:41.428Z","event":"retrieval_hit_recorded","keyword":"Instagram引流快速实现方法","platform":"instagram","goal":"引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}
+{"ts":"2026-04-02T05:00:02.167Z","event":"retrieval_bias_applied","keyword":"Instagram私域引流7天实现方法","platform":"instagram","goal":"私域引流","bias_applied":true,"bias_factor":0.92}
+{"ts":"2026-04-02T05:00:02.167Z","event":"retrieval_hit_recorded","keyword":"Instagram私域引流7天实现方法","platform":"instagram","goal":"私域引流","top_score":0.46,"primary_lane":"agent_high_quality_assets"}

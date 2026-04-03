@@ -1,0 +1,12 @@
+{
+  "refresh_reasons": [
+    "no_snapshot",
+    "snapshot_expired",
+    "new_copy",
+    "new_upload",
+    "new_guidance_signal",
+    "stable"
+  ],
+  "wired_into_generate_package": true,
+  "final_status": "ok"
+}

@@ -1,6 +1,6 @@
 {
   "version": "171.1",
-  "generatedAt": "2026-03-30T15:11:30.325Z",
+  "generatedAt": "2026-04-03T06:01:09.033Z",
   "note": "Higher score = preferred internal link target for conversion-first navigation (platform → workflow → monetization path). V181 boost/penalty merged here for tool→tool ranking. EN programmatic blogs use scripts/lib/en-internal-linking.js (same v181 JSON + v176) for Related pages / backlinks / Related tools — see generated/v181-final-link-control.json.",
   "byToolSlug": {
     "creator-analysis": [

@@ -58,6 +58,9 @@ function isRecentlySubmitted(submittedAt: Record<string, string>, url: string) {
 }
 
 export function enqueueIndexingUrl(opts: { url?: string; source?: string }) {
+  if (process.env.SEO_DRY_RUN === "1" || process.env.SEO_SANDBOX === "1") {
+    return { queued: false, reason: "dry_run_skipped" as const };
+  }
   const url = typeof opts?.url === "string" ? opts.url.trim() : "";
   if (!url || !url.startsWith("http")) return { queued: false, reason: "invalid_url" as const };
 

@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "clusters": {
+    "TikTok growth and discoverability": {
+      "articlesPassedTotal": 0,
+      "consecutiveZeroRuns": 3
+    },
+    "Instagram consistency for busy creators": {
+      "articlesPassedTotal": 2,
+      "consecutiveZeroRuns": 5
+    },
+    "TikTok beginners and first posts": {
+      "articlesPassedTotal": 0,
+      "consecutiveZeroRuns": 3
+    },
+    "YouTube Shorts and weekly growth for small channels": {
+      "articlesPassedTotal": 0,
+      "consecutiveZeroRuns": 3
+    },
+    "Cross platform workflow and batching": {
+      "articlesPassedTotal": 0,
+      "consecutiveZeroRuns": 3
+    },
+    "Instagram burnout boundaries and rest days": {
+      "articlesPassedTotal": 3,
+      "consecutiveZeroRuns": 5
+    },
+    "Instagram posting habits and weekly content planning rhythm": {
+      "articlesPassedTotal": 2,
+      "consecutiveZeroRuns": 4
+    },
+    "Small business creator growth content on Instagram": {
+      "articlesPassedTotal": 3,
+      "consecutiveZeroRuns": 5
+    },
+    "YouTube creative routines and content planning before filming": {
+      "articlesPassedTotal": 0,
+      "consecutiveZeroRuns": 3
+    },
+    "TikTok weekly planning and batch scripts": {
+      "articlesPassedTotal": 2,
+      "consecutiveZeroRuns": 5
+    },
+    "TikTok low views and stalled reach": {
+      "articlesPassedTotal": 2,
+      "consecutiveZeroRuns": 4
+    },
+    "No time no team low budget creator workflow on YouTube and TikTok": {
+      "articlesPassedTotal": 3,
+      "consecutiveZeroRuns": 0
+    },
+    "Stuck creators and growth plateaus on Instagram and TikTok": {
+      "articlesPassedTotal": 3,
+      "consecutiveZeroRuns": 0
+    },
+    "Scaling TikTok and Instagram with systems not hacks": {
+      "articlesPassedTotal": 1,
+      "consecutiveZeroRuns": 0
+    },
+    "Service business routines on Instagram and TikTok for consultants": {
+      "articlesPassedTotal": 3,
+      "consecutiveZeroRuns": 0
+    }
+  },
+  "platforms": {
+    "tiktok": {
+      "passed": 14,
+      "runs": 27
+    },
+    "instagram": {
+      "passed": 10,
+      "runs": 23
+    },
+    "youtube": {
+      "passed": 0,
+      "runs": 6
+    },
+    "cross": {
+      "passed": 0,
+      "runs": 3
+    }
+  },
+  "kinds": {
+    "growth": {
+      "passed": 0,
+      "runs": 6
+    },
+    "consistency": {
+      "passed": 2,
+      "runs": 6
+    },
+    "beginners": {
+      "passed": 0,
+      "runs": 3
+    },
+    "workflow": {
+      "passed": 0,
+      "runs": 3
+    },
+    "wellbeing": {
+      "passed": 3,
+      "runs": 6
+    },
+    "routines_habits": {
+      "passed": 2,
+      "runs": 8
+    },
+    "small_business": {
+      "passed": 3,
+      "runs": 6
+    },
+    "plan_ops": {
+      "passed": 2,
+      "runs": 6
+    },
+    "low_views": {
+      "passed": 2,
+      "runs": 5
+    },
+    "constraints_hard": {
+      "passed": 3,
+      "runs": 3
+    },
+    "stuck_plateau": {
+      "passed": 3,
+      "runs": 3
+    },
+    "scaling_systems": {
+      "passed": 1,
+      "runs": 1
+    },
+    "service_freelancer": {
+      "passed": 3,
+      "runs": 3
+    }
+  }
+}

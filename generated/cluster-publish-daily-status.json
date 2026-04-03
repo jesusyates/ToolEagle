@@ -1,0 +1,11 @@
+{
+  "runAt": "2026-04-03T13:37:15.212Z",
+  "success": false,
+  "failed": true,
+  "clustersGenerated": 11,
+  "topicsPassed": 10,
+  "articlesPassed": 0,
+  "articlesPassedByCluster": {},
+  "error": "low_throughput: staged_files_written=0 min_required=4 (directory delta; articlesPassed=0)",
+  "source": "scheduler"
+}

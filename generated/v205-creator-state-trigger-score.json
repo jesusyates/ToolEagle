@@ -1,0 +1,12 @@
+{
+  "score_map": {
+    "no_snapshot": 100,
+    "snapshot_expired": 80,
+    "new_upload": 70,
+    "new_copy": 50,
+    "new_guidance_signal": 40,
+    "stable": 0
+  },
+  "wired_into_generate_package": true,
+  "final_status": "ok"
+}

@@ -33,6 +33,8 @@ function isPrimaryNavActive(pathname: string, key: (typeof primaryNav)[number]["
 export function SiteHeader() {
   const t = useTranslations("nav");
   const pathname = usePathname() ?? "/";
+  const guidesHubActive =
+    pathname === "/guides" || pathname.startsWith("/guides/") || pathname === "/auto-posts" || pathname.startsWith("/auto-posts/");
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-page/90 backdrop-blur">
@@ -75,6 +77,18 @@ export function SiteHeader() {
                 </Link>
               );
             })}
+            <Link
+              href="/guides"
+              prefetch
+              aria-current={guidesHubActive ? "page" : undefined}
+              className={
+                guidesHubActive
+                  ? "px-2 sm:px-3 py-1.5 sm:py-2 rounded-full whitespace-nowrap font-semibold text-sky-800 bg-sky-100 ring-1 ring-sky-200/80 shadow-sm"
+                  : "px-2 sm:px-3 py-1.5 sm:py-2 rounded-full text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition duration-150 whitespace-nowrap"
+              }
+            >
+              Guides
+            </Link>
           </nav>
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             <MarketSelector analyticsSource="en_header" presentation="dropdown" />

@@ -1,6 +1,6 @@
 {
   "version": "173",
-  "builtAt": "2026-03-31T06:00:07.909Z",
+  "builtAt": "2026-04-03T06:00:40.708Z",
   "note": "content-allocation computeTripleWeight multiplies weight by topicTailMultipliers[topic] when present (topic = slug tail in EN blog grid).",
   "topicTailMultipliers": {
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: Un": 1,
@@ -11,6 +11,8 @@
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: or": 1,
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: [V": 1,
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: Us": 1,
+    "Creator intent: Promote a product. Content scenario: Small business. Topic or pr": 1,
+    "Test post about morning coffee routine for TikTok": 1,
     "ideas": 0.52,
     "dad": 0.52,
     "y2k": 0.52
@@ -21,6 +23,8 @@
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: or",
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: [V",
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: Us",
+    "Creator intent: Promote a product. Content scenario: Small business. Topic or pr",
+    "Test post about morning coffee routine for TikTok",
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: Ge",
     "hello",
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: Un"

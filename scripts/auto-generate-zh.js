@@ -13,6 +13,9 @@
 require("dotenv").config({ path: ".env.local" });
 require("dotenv").config();
 
+const { exitIfLegacyZhSeoDisabled } = require("./lib/legacy-zh-seo-flag");
+exitIfLegacyZhSeoDisabled();
+
 const path = require("path");
 const fs = require("fs");
 const { isSeoDryRun, ensureSandboxDir } = require("./lib/seo-sandbox-context");

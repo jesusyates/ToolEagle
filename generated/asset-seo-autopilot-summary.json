@@ -1,56 +1,56 @@
 {
   "version": "v160.1.0",
-  "updatedAt": "2026-03-30T15:11:02.049Z",
+  "updatedAt": "2026-03-31T09:21:30.348Z",
   "citation_ready_rate": 1,
   "top_ai_citable_topics": [],
   "emerging_ai_citable_topics": [
-    "tiktok 算法优化 教程",
-    "youtube涨粉2026实现方法",
-    "youtube小白如何变现",
-    "instagram引流模板大全",
-    "instagram提高完播率真的能赚钱吗",
-    "instagram私域引流详细步骤",
-    "youtube 品牌打造 新手",
-    "youtube 算法优化 教程",
-    "youtube 算法优化 新手",
-    "youtube 数据分析 方法",
-    "youtube 数据分析 教程",
-    "instagram引流最快的方法"
+    "instagram新手如何做爆款",
+    "instagram私域引流模板大全",
+    "instagram 获得播放量 高效",
+    "instagram 获得播放量 实战",
+    "instagram 获得播放量 完整指南",
+    "instagram 获得播放量 进阶",
+    "instagram 做爆款视频 高效",
+    "instagram 做爆款视频 实战",
+    "instagram 做爆款视频 完整指南",
+    "instagram 做爆款视频 进阶",
+    "instagram 提高互动率 高效",
+    "instagram做爆款视频最新实现方法"
   ],
-  "overall_ai_citation_score": 97,
+  "overall_ai_citation_score": 94,
   "ai_citation_dominance_bonus_count": 15,
   "weak_ai_citation_penalty_count": 0,
-  "queue_item_count": 814,
+  "queue_item_count": 303,
   "established_topic_count": 0,
-  "emerging_topic_count": 814,
+  "emerging_topic_count": 303,
   "notes": [
     "Merged V160.1 citation dominance slice; full metrics in asset-seo-ai-citation-dominance.json"
   ],
   "top_allocated_topics": [
-    "Instagram引流模板大全",
-    "Instagram提高完播率真的能赚钱吗",
-    "Instagram私域引流详细步骤",
-    "YouTube 品牌打造 新手",
-    "YouTube 算法优化 教程",
-    "YouTube 算法优化 新手",
-    "YouTube 数据分析 方法",
-    "YouTube 数据分析 教程",
-    "YouTube 数据分析 新手",
-    "Instagram引流最快的方法",
-    "Instagram私域引流最快的方法",
-    "Instagram博主如何变现"
+    "Instagram新手如何做爆款",
+    "instagram-grwm-captions",
+    "youtube-grwm-hashtags",
+    "youtube-grwm-titles",
+    "tiktok-cute-hooks",
+    "tiktok-script-structure-hashtags",
+    "tiktok-wedding-titles",
+    "instagram-script-structure-captions",
+    "instagram-script-structure-hooks",
+    "youtube-dance-reel-captions",
+    "tiktok-relatable-hooks",
+    "tiktok-finance-hashtags"
   ],
   "top_allocated_workflows": [
-    "youtube",
-    "tiktok",
     "instagram",
+    "tiktok",
+    "youtube",
     "en_topic_registry"
   ],
   "top_allocated_page_types": [
     "zh_search",
     "en_topic_registry"
   ],
-  "suppressed_segment_count": 36,
+  "suppressed_segment_count": 0,
   "exploration_quota_count": 8,
   "top_segments_by_value": [
     "balanced_default",
@@ -58,35 +58,35 @@
     "emerging_topic_exploration"
   ],
   "segment_distribution": {
-    "seo_discovery": 283,
-    "emerging_topic_exploration": 17,
-    "balanced_default": 514
+    "emerging_topic_exploration": 22,
+    "seo_discovery": 55,
+    "balanced_default": 226
   },
   "segment_bias_counts": {
     "prioritized": 0,
-    "deprioritized": 283,
-    "neutral": 531
+    "deprioritized": 55,
+    "neutral": 248
   },
   "intent_state_distribution": {
-    "ai_citation_discovery": 371,
-    "seo_discovery": 349,
+    "ai_citation_discovery": 161,
+    "seo_discovery": 48,
     "high_intent_tool_entry": 94
   },
   "intent_escalation_paths_sample": [
     {
       "from": "ai_citation_discovery",
       "to": "ai_citation_discovery",
-      "count": 371
-    },
-    {
-      "from": "seo_discovery",
-      "to": "seo_discovery",
-      "count": 349
+      "count": 161
     },
     {
       "from": "high_intent_tool_entry",
       "to": "high_intent_tool_entry",
       "count": 94
+    },
+    {
+      "from": "seo_discovery",
+      "to": "seo_discovery",
+      "count": 48
     }
   ],
   "monetization_ready_segments": 0

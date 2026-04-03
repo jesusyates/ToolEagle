@@ -1,0 +1,11 @@
+{
+  "bands": {
+    "strong": [80, 100],
+    "medium": [40, 79],
+    "weak": [1, 39],
+    "empty": [0, 0]
+  },
+  "wired_into_gate": true,
+  "wired_into_generate_package": true,
+  "final_status": "ok"
+}

@@ -1,26 +1,26 @@
 {
   "version": "v162.0",
-  "updatedAt": "2026-03-30T15:11:02.038Z",
+  "updatedAt": "2026-03-31T09:21:30.341Z",
   "segment_distribution": {
-    "seo_discovery": 283,
-    "emerging_topic_exploration": 17,
-    "balanced_default": 514
+    "emerging_topic_exploration": 22,
+    "seo_discovery": 55,
+    "balanced_default": 226
   },
   "top_segments_by_value": [
     {
       "segment_key": "balanced_default",
-      "value_score": 514,
-      "count": 514
+      "value_score": 226,
+      "count": 226
     },
     {
       "segment_key": "seo_discovery",
-      "value_score": 274.51,
-      "count": 283
+      "value_score": 53.35,
+      "count": 55
     },
     {
       "segment_key": "emerging_topic_exploration",
-      "value_score": 17.34,
-      "count": 17
+      "value_score": 22.44,
+      "count": 22
     }
   ],
   "low_value_segments": [
@@ -28,21 +28,21 @@
   ],
   "recommended_biases": {
     "page_bias": {
-      "seo_first": 283,
-      "balanced": 531
+      "balanced": 248,
+      "seo_first": 55
     },
     "cta_style": {
-      "minimal": 300,
-      "standard": 514
+      "minimal": 77,
+      "standard": 226
     }
   },
   "segment_bias_counts": {
     "prioritized": 0,
-    "deprioritized": 283,
-    "neutral": 531
+    "deprioritized": 55,
+    "neutral": 248
   },
   "notes": [
     "V162 segment strategy biases queue/CTA/conversion; does not replace V161 or risk controls",
-    "rows: 814"
+    "rows: 303"
   ]
 }

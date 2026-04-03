@@ -1,50 +1,49 @@
 {
   "version": "1",
-  "updated_at": "2026-03-30T14:42:19.964Z",
+  "updated_at": "2026-04-03T06:01:44.266Z",
   "inputs": {
     "completion": "C:\\Users\\44570\\Desktop\\tooleagle\\generated\\v195-chain-completion.json",
     "diagnosis": "C:\\Users\\44570\\Desktop\\tooleagle\\generated\\v195-chain-dropoff-diagnosis.json"
   },
   "data_snapshot": {
-    "started_sessions": 0,
-    "biggest_drop_transition": null,
-    "lost_sessions": 0,
-    "from_count": 0,
-    "to_count": 0
+    "started_sessions": 2,
+    "biggest_drop_transition": "session_start → hook",
+    "lost_sessions": 1,
+    "from_count": 2,
+    "to_count": 1
   },
   "biggest_drop_step": {
-    "transition": null,
-    "from_step": null,
-    "to_step": null,
-    "lost_sessions": 0,
-    "from_count": 0,
-    "to_count": 0,
-    "relative_drop_rate": 0,
-    "note": "no started sessions in source file"
+    "transition": "session_start → hook",
+    "from_step": "session_start",
+    "to_step": "hook",
+    "lost_sessions": 1,
+    "from_count": 2,
+    "to_count": 1,
+    "relative_drop_rate": 50
   },
-  "optimize_target_step": "insufficient_data_or_ambiguous_drop",
-  "recommended_fix_type": "mixed",
-  "recommended_copy_adjustment": "Re-run npm run v195 after more production events, or inspect v195-chain-dropoff-diagnosis.json for the dominant transition.",
-  "recommended_cta_adjustment": "Avoid CTA experiments until the largest drop transition is stable across a minimum sample (e.g. n ≥ 30 started sessions).",
-  "recommended_visibility_adjustment": "Prefer measuring before broad visibility changes; ensure chain telemetry (session_start + steps) is firing.",
-  "confidence": 0,
+  "optimize_target_step": "hook_entry_and_first_generate",
+  "recommended_fix_type": "visibility",
+  "recommended_copy_adjustment": "Strengthen the one-line explanation of what the hook tool does and what the user receives after generating (outcome-focused, not feature-focused).",
+  "recommended_cta_adjustment": "Make the primary Generate control the single obvious next action; avoid competing secondary CTAs at first glance.",
+  "recommended_visibility_adjustment": "Ensure the chain progress hint and first-step framing are visible without scrolling on mobile; reduce noise above the fold.",
+  "confidence": 0.35,
   "confidence_meta": {
-    "tier": "none",
-    "note": "No started_sessions; rules are placeholders until data exists.",
-    "started_sessions": 0
+    "tier": "low",
+    "note": "Sample < 30: use directionally only.",
+    "started_sessions": 2
   },
   "top_1_fix": {
-    "dimension": "measurement",
-    "action": "Collect more tiktok-chain-events.jsonl data and re-aggregate so biggest_drop_step is non-null.",
-    "rationale": "Rules require a identified transition; current data does not support a single target."
+    "dimension": "visibility",
+    "action": "Increase prominence of the first-step chain framing and primary Generate entry on hook landing.",
+    "rationale": "Largest loss is before first hook: users are not starting generation."
   },
   "top_2_fix": {
-    "dimension": "measurement",
-    "action": "Verify client emits session_start and step events for all four tools in production.",
-    "rationale": "Wrong or missing telemetry will mis-rank drops."
+    "dimension": "cta",
+    "action": "Tighten primary button hierarchy so Generate clearly wins over secondary actions.",
+    "rationale": "If the action exists but is missed, CTA weight fixes convert faster than new copy alone."
   },
   "do_not_change_yet": [
-    "Simultaneous UI changes across hook, caption, hashtag, title, and upload until one dominant drop is confirmed."
+    "Caption / hashtag / title tools and upload handoff until first-step generation rate improves (avoid diluting signal)."
   ],
   "priority_note": "Change only top_1_fix first in the next iteration; treat top_2_fix as the second experiment. Defer items in do_not_change_yet until the primary drop moves."
 }

@@ -1,10 +1,10 @@
 {
   "version": 175,
-  "updatedAt": "2026-03-31T06:00:08.596Z",
+  "updatedAt": "2026-04-03T06:00:41.546Z",
   "threshold_hours": 48,
-  "gsc_last_updated": "2026-03-31T06:00:04.837Z",
+  "gsc_last_updated": "2026-04-03T06:00:37.552Z",
   "analytics_last_updated": null,
-  "conversion_last_updated": "2026-03-31T06:00:05.197Z",
+  "conversion_last_updated": "2026-04-03T06:00:38.002Z",
   "stale_data": true,
   "stale_reasons": [
     "analytics_missing"

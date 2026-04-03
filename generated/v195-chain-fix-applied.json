@@ -1,22 +1,24 @@
 {
   "version": "1",
-  "updated_at": "2026-03-30T14:42:19.966Z",
-  "status": "skipped",
-  "applied_fix": null,
-  "target_step": null,
+  "updated_at": "2026-04-03T06:01:44.268Z",
+  "status": "applied",
+  "applied_fix": {
+    "dimension": "visibility",
+    "action": "Increase prominence of the first-step chain framing and primary Generate entry on hook landing.",
+    "rationale": "Largest loss is before first hook: users are not starting generation."
+  },
+  "target_step": "hook_entry_and_first_generate",
   "changed_files": [
     "src/config/v195-chain-top1-fix.json"
   ],
-  "change_type": "none",
-  "expected_effect": "No product behavior change; v195-chain-top1-fix.json reset to mode=none.",
-  "skip_reason": "No UI fix: data insufficient or top_1_fix is measurement-only. Collect events and run npm run v195 before applying.",
-  "top_1_fix_snapshot": {
-    "dimension": "measurement",
-    "action": "Collect more tiktok-chain-events.jsonl data and re-aggregate so biggest_drop_step is non-null.",
-    "rationale": "Rules require a identified transition; current data does not support a single target."
-  },
-  "rules_snapshot": {
-    "optimize_target_step": "insufficient_data_or_ambiguous_drop",
-    "confidence": 0
+  "behavior_surface": "Only src/config/v195-chain-top1-fix.json is modified by this script; TikTokChainProgressHint / WorkflowNextStepCard / ReadyToPostModal read it when mode !== none.",
+  "change_type": "visibility",
+  "expected_effect": "Stronger TikTok chain progress hint framing (single module: TikTokChainProgressHint) to improve session_start→hook.",
+  "config_mode": "hook_entry_visibility",
+  "note": "top_2_fix not applied per V195.3 (single-variable experiment).",
+  "top_2_fix_unchanged": {
+    "dimension": "cta",
+    "action": "Tighten primary button hierarchy so Generate clearly wins over secondary actions.",
+    "rationale": "If the action exists but is missed, CTA weight fixes convert faster than new copy alone."
   }
 }

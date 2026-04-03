@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
  * V167 + V170 — Daily SEO / content automation hub (sequential); **single production entry**.
+ * SEO cluster guide publish (`npm run seo:cluster-publish`) runs **once on process exit** (success or mustStop), non-fatal; health: `generated/seo-guides-publish-health.json` (also `cluster-publish-daily-status.json`).
  *
  * CLI:
  *   --dry-run          set SEO_DRY_RUN=1 for children where respected
@@ -22,6 +23,9 @@ require("dotenv").config({ path: path.join(REPO_ROOT, ".env.local") });
 require("dotenv").config({ path: path.join(REPO_ROOT, ".env") });
 
 const CWD = REPO_ROOT;
+
+/** Legacy Chinese SEO (v63/v153 keyword + retrieval auto-gen). Off = skip step2_zh in this engine. */
+const ENABLE_LEGACY_ZH_SEO = false;
 
 function initLogPaths(dryRun) {
   const logDir = dryRun ? path.join(REPO_ROOT, "logs", "sandbox") : path.join(REPO_ROOT, "logs");
@@ -78,6 +82,43 @@ function resolveNpmCmd() {
     if (out) return out;
   } catch {}
   return "npm.cmd";
+}
+
+/**
+ * Registers a one-shot exit hook so cluster publish runs after the rest of the pipeline
+ * (including when mustStop calls process.exit). Skipped in --dry-run. Never throws.
+ */
+function registerClusterPublishOnExit(opts) {
+  if (global.__teClusterPublishExitRegistered) return;
+  global.__teClusterPublishExitRegistered = true;
+  process.on("exit", () => {
+    if (opts.dryRun) return;
+    try {
+      const npmBin = resolveNpmCmd();
+      const r =
+        process.platform === "win32"
+          ? spawnSync(process.env.ComSpec || "cmd.exe", ["/c", `${npmBin} run seo:cluster-publish`], {
+              cwd: CWD,
+              stdio: "inherit",
+              env: { ...process.env, SEO_CLUSTER_PUBLISH_SOURCE: "daily-engine" }
+            })
+          : spawnSync(npmBin, ["run", "seo:cluster-publish"], {
+              cwd: CWD,
+              stdio: "inherit",
+              env: { ...process.env, SEO_CLUSTER_PUBLISH_SOURCE: "daily-engine" }
+            });
+      appendEngineLog({
+        step: "cluster_publish",
+        event: r.status === 0 ? "ok" : "fail_nonfatal",
+        exitCode: r.status,
+        note: "exit hook; see generated/cluster-publish-daily-status.json"
+      });
+    } catch (e) {
+      try {
+        appendEngineLog({ step: "cluster_publish", event: "fail_nonfatal", err: String(e) });
+      } catch {}
+    }
+  });
 }
 
 function runNpm(script, step) {
@@ -250,6 +291,7 @@ function appendProductionHistoryLine(ctx) {
 
 function main() {
   const opts = parseArgs();
+  process.env.ENABLE_LEGACY_ZH_SEO = ENABLE_LEGACY_ZH_SEO ? "1" : "0";
   if (opts.dryRun) process.env.SEO_DRY_RUN = "1";
   ({ LOG_DIR, LOG_JSONL, DAILY_REPORT } = initLogPaths(opts.dryRun));
 
@@ -265,7 +307,10 @@ function main() {
       "logs/daily-engine-log.jsonl",
       "generated/v185-first-payment.json",
       "generated/v185-revenue-system-state.json",
-      "generated/system-map.json"
+      "generated/system-map.json",
+      "generated/cluster-publish-last-run.json",
+      "generated/cluster-publish-daily-status.json",
+      "generated/cluster-priority-state.json"
     ]
   };
 
@@ -274,6 +319,8 @@ function main() {
     execution,
     automation_hook: { cron: "daily (recommended)", note: "0 2 * * * UTC example" }
   });
+
+  registerClusterPublishOnExit(opts);
 
   applyOptimizerEnvFromDisk();
   assessHighFallbackAndScaleBatch();
@@ -465,7 +512,12 @@ function main() {
   }
 
   if (!runNpm("seo:generate:en", "step2_en")) mustStop("step2_en");
-  if (!runNpm("seo:generate:zh", "step2_zh")) mustStop("step2_zh");
+  if (!ENABLE_LEGACY_ZH_SEO) {
+    console.log("[skip] legacy zh seo disabled");
+    stepsOk.step2_zh = "skipped_legacy_disabled";
+  } else if (!runNpm("seo:generate:zh", "step2_zh")) {
+    mustStop("step2_zh");
+  }
 
   try {
     execSync("npx tsx scripts/build-content-quality-status.ts", {

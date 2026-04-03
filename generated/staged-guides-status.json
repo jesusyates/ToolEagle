@@ -1,0 +1,15 @@
+{
+  "updatedAt": "2026-04-03T11:57:58.148Z",
+  "stagedCount": 0,
+  "remainingStagedCount": 0,
+  "publishedCountThisRun": 1,
+  "publishedFiles": [
+    "20260403-002-how-to-book-calls-via-tiktok-as-a-service-business-without-a-sales-team-a-practi.md"
+  ],
+  "finalAuditPassed": 1,
+  "finalAuditFailed": 0,
+  "finalAuditFailedReasonsTop": {},
+  "publishedFilesWrittenThisRun": 1,
+  "fileThroughputSatisfied": true,
+  "throughputFailureReason": null
+}

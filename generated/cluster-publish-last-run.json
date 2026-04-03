@@ -1,0 +1,340 @@
+{
+  "runAt": "2026-04-03T13:37:15.212Z",
+  "clustersGenerated": 11,
+  "clustersPassed": 4,
+  "topicsGenerated": 96,
+  "topicsPassed": 10,
+  "articlesPassed": 0,
+  "topicsPassedByContentType": {
+    "guide": 10,
+    "ideas": 0
+  },
+  "articlesPassedByContentType": {
+    "guide": 0,
+    "ideas": 0
+  },
+  "articlesPassedByCluster": {},
+  "priorityChoices": [
+    {
+      "cluster": "Stuck creators and growth plateaus on Instagram and TikTok",
+      "score": 168.9,
+      "reason": "base=100; cluster_articles_total+36; tiktok_rate=52%; kind_stuck_plateau_rate=100%; jitter"
+    },
+    {
+      "cluster": "No time no team low budget creator workflow on YouTube and TikTok",
+      "score": 166.9,
+      "reason": "base=100; cluster_articles_total+36; tiktok_rate=52%; kind_constraints_hard_rate=100%; jitter"
+    },
+    {
+      "cluster": "Service business routines on Instagram and TikTok for consultants",
+      "score": 163.7,
+      "reason": "base=100; cluster_articles_total+36; tiktok_rate=52%; kind_service_freelancer_rate=100%; jitter"
+    },
+    {
+      "cluster": "Scaling TikTok and Instagram with systems not hacks",
+      "score": 144.7,
+      "reason": "base=100; cluster_articles_total+12; tiktok_rate=52%; kind_scaling_systems_rate=100%; jitter"
+    },
+    {
+      "cluster": "Part time creators and weekend filming",
+      "score": 124.3,
+      "reason": "base=100; tiktok_rate=52%; kind_part_time_rate=50%; jitter"
+    },
+    {
+      "cluster": "Faceless TikTok tips without showing your face",
+      "score": 124.1,
+      "reason": "base=100; tiktok_rate=52%; kind_faceless_rate=50%; jitter"
+    },
+    {
+      "cluster": "Voiceover and storytelling on TikTok without talking head setups",
+      "score": 119.7,
+      "reason": "base=100; tiktok_rate=52%; kind_content_mode_voiceover_rate=50%; jitter"
+    },
+    {
+      "cluster": "Instagram reels versus feed posts for coaches and consultants",
+      "score": 113.9,
+      "reason": "base=100; instagram_rate=43%; kind_growth_rate=0%; jitter"
+    },
+    {
+      "cluster": "Evergreen versus trend-led TikTok content for small channels",
+      "score": 113.8,
+      "reason": "base=100; tiktok_rate=52%; kind_growth_rate=0%; jitter"
+    },
+    {
+      "cluster": "Coaches and freelancers booking calls via short-form video",
+      "score": 112.6,
+      "reason": "base=100; tiktok_rate=52%; kind_growth_rate=0%; jitter"
+    },
+    {
+      "cluster": "YouTube creative blocks and no ideas",
+      "score": 110.3,
+      "reason": "base=100; youtube_rate=0%; kind_creative_blocks_rate=50%; jitter"
+    }
+  ],
+  "skippedClusters": [
+    {
+      "cluster": "Part time creators and weekend filming",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Part time creators and weekend filming",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Voiceover and storytelling on TikTok without talking head setups",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Faceless TikTok tips without showing your face",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Voiceover and storytelling on TikTok without talking head setups",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Part time creators and weekend filming",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Voiceover and storytelling on TikTok without talking head setups",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Part time creators and weekend filming",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Faceless TikTok tips without showing your face",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Evergreen versus trend-led TikTok content for small channels",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Faceless TikTok tips without showing your face",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Part time creators and weekend filming",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Voiceover and storytelling on TikTok without talking head setups",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "YouTube Shorts versus long form for solo creators without editors",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Instagram reels versus feed posts for coaches and consultants",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Part time creators and weekend filming",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Faceless TikTok tips without showing your face",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Voiceover and storytelling on TikTok without talking head setups",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Instagram reels versus feed posts for coaches and consultants",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Coaches and freelancers booking calls via short-form video",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "YouTube Shorts versus long form for solo creators without editors",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Part time creators and weekend filming",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Faceless TikTok tips without showing your face",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Voiceover and storytelling on TikTok without talking head setups",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Instagram reels versus feed posts for coaches and consultants",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Evergreen versus trend-led TikTok content for small channels",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Coaches and freelancers booking calls via short-form video",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "YouTube creative blocks and no ideas",
+      "decision": "rewrite",
+      "score": 54,
+      "reasons": [
+        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    }
+  ],
+  "languageGatePassed": 10,
+  "languageGateFailedCount": 0,
+  "finalAuditPassed": 0,
+  "finalAuditFailed": 0,
+  "finalAuditFailedReasonsTop": {},
+  "retryCount": 7,
+  "topicPreDedupDropped": 84,
+  "preIndexDedupDropped": 0,
+  "inventoryLow": true,
+  "forcedSuccessTarget": 4,
+  "attemptsUsed": 96,
+  "minStagedTarget": 10,
+  "stagedFilesWrittenThisRun": 0,
+  "publishedFilesWrittenThisRun": 0,
+  "minFilesWrittenPerRun": 4,
+  "fileThroughputSatisfied": false,
+  "throughputFailureReason": "low_throughput: staged_files_written=0 min_required=4 (directory delta; articlesPassed=0)",
+  "success": false,
+  "failed": true,
+  "error": "low_throughput: staged_files_written=0 min_required=4 (directory delta; articlesPassed=0)",
+  "source": "scheduler"
+}

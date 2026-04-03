@@ -1,13 +1,13 @@
 {
-  "date": "2026-03-30",
+  "date": "2026-04-03",
   "targetDailyLimit": 30,
   "caps": {
     "blogPrimary": 30,
     "answersSecondary": 5,
     "guidesSecondary": 2
   },
-  "actualBatchesRun": 1,
-  "attempted": 10,
+  "actualBatchesRun": 0,
+  "attempted": 0,
   "created": 0,
   "blogCreated": 0,
   "answersCreated": 0,
@@ -18,8 +18,8 @@
   "skippedDueToConflict": 5,
   "downgradedGenerations": 3,
   "cannibalizationPreventedCount": 5,
-  "rejected": 10,
-  "rejectionRate": 1,
+  "rejected": 0,
+  "rejectionRate": 0,
   "indexingSubmitted": 0,
   "indexingSubmittedByType": {
     "blog": 0,
@@ -27,5 +27,5 @@
     "guides": 0
   },
   "fallbackTriggered": true,
-  "summary": "V122 daily autopilot run at 2026-03-30T09:45:56.165Z. Blog=0, answers=0, guides=0, rejected=10, rejectionRate=100.0%. Primary=0, supporting=0, downgraded=3, conflictsPrevented=5. IndexingSubmitted=0 (blog=0, answers=0, guides=0)."
+  "summary": "V122 daily autopilot run at 2026-04-03T06:01:43.295Z. Blog=0, answers=0, guides=0, rejected=0, rejectionRate=0.0%. Primary=0, supporting=0, downgraded=3, conflictsPrevented=5. IndexingSubmitted=0 (blog=0, answers=0, guides=0)."
 }

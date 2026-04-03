@@ -1,6 +1,6 @@
 {
   "version": "179",
-  "builtAt": "2026-03-31T06:00:09.916Z",
+  "builtAt": "2026-04-03T06:00:42.961Z",
   "high_upgrade_click_pages": [
     {
       "path": "/tools/tiktok-caption-generator",
@@ -17,11 +17,11 @@
       "copies": 14
     },
     {
-      "tool_slug": "instagram-username-generator",
-      "copies": 3
+      "tool_slug": "hook-generator",
+      "copies": 4
     },
     {
-      "tool_slug": "hook-generator",
+      "tool_slug": "instagram-username-generator",
       "copies": 3
     }
   ],

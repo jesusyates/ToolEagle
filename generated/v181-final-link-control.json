@@ -1,6 +1,6 @@
 {
   "version": "181.1",
-  "builtAt": "2026-03-31T06:00:12.353Z",
+  "builtAt": "2026-04-03T06:00:45.692Z",
   "final_weight_order": [
     "base_relevance_jaccard_similarity",
     "search_growth_priority_and_weak_sets",
@@ -21,12 +21,12 @@
     },
     {
       "layer": "v176",
-      "slug": "best-tiktok-bio-ideas",
+      "slug": "youtube-captions-trending-ideas",
       "kind": "blog_slug"
     },
     {
       "layer": "v176",
-      "slug": "youtube-captions-trending-ideas",
+      "slug": "best-tiktok-bio-ideas",
       "kind": "blog_slug"
     },
     {
@@ -36,17 +36,7 @@
     },
     {
       "layer": "v176",
-      "slug": "seo-how-search-engines-find-creator-content",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
       "slug": "tiktok-captions-food",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
-      "slug": "tiktok-captions-inspirational",
       "kind": "blog_slug"
     },
     {
@@ -56,17 +46,17 @@
     },
     {
       "layer": "v176",
-      "slug": "instagram-captions-for-reels",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
       "slug": "instagram-hashtags-funny-usernames",
       "kind": "blog_slug"
     },
     {
       "layer": "v176",
-      "slug": "tiktok-captions-attitude",
+      "slug": "seo-how-search-engines-find-creator-content",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-inspirational",
       "kind": "blog_slug"
     },
     {
@@ -76,12 +66,12 @@
     },
     {
       "layer": "v176",
-      "slug": "instagram-captions-grwm",
+      "slug": "instagram-captions-for-reels",
       "kind": "blog_slug"
     },
     {
       "layer": "v176",
-      "slug": "instagram-hooks-tips",
+      "slug": "tiktok-captions-attitude",
       "kind": "blog_slug"
     },
     {
@@ -91,7 +81,7 @@
     },
     {
       "layer": "v176",
-      "slug": "youtube-captions-stitch",
+      "slug": "instagram-captions-grwm",
       "kind": "blog_slug"
     },
     {
@@ -101,12 +91,7 @@
     },
     {
       "layer": "v176",
-      "slug": "instagram-hashtags-duet-ideas",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
-      "slug": "instagram-hooks-ootd",
+      "slug": "instagram-hooks-tips",
       "kind": "blog_slug"
     },
     {
@@ -126,11 +111,6 @@
     },
     {
       "layer": "v176",
-      "slug": "tiktok-captions-funny",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
       "slug": "tiktok-captions-gaming",
       "kind": "blog_slug"
     },
@@ -146,22 +126,12 @@
     },
     {
       "layer": "v176",
-      "slug": "tiktok-hashtags-hook-examples",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
       "slug": "tiktok-hooks-caption-for-business",
       "kind": "blog_slug"
     },
     {
       "layer": "v176",
-      "slug": "viral-tiktok-hooks",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
-      "slug": "youtube-captions-comedy-reel",
+      "slug": "youtube-captions-stitch",
       "kind": "blog_slug"
     },
     {
@@ -171,22 +141,52 @@
     },
     {
       "layer": "v176",
-      "slug": "youtube-hooks-comedy-hashtags",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
-      "slug": "youtube-titles-caption-for-business",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
-      "slug": "instagram-captions-for-business",
+      "slug": "instagram-hashtags-duet-ideas",
       "kind": "blog_slug"
     },
     {
       "layer": "v176",
       "slug": "instagram-hashtags-prank",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-hooks-ootd",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "instagram-titles-comedy-ideas",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "seo-sitemaps-robots-and-indexing",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-collab",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-funny",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-hashtags-hook-examples",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-hashtags-long",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-hashtags-selfie",
       "kind": "blog_slug"
     }
   ],
@@ -218,37 +218,7 @@
     },
     {
       "layer": "v176",
-      "slug": "tiktok-captions-hair",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
-      "slug": "tiktok-captions-minimalist",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
       "slug": "tiktok-captions-nature",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
-      "slug": "tiktok-captions-sunset",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
-      "slug": "tiktok-captions-trending-ideas",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
-      "slug": "tiktok-hooks-business",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
-      "slug": "youtube-captions-baddie",
       "kind": "blog_slug"
     },
     {
@@ -278,6 +248,16 @@
     },
     {
       "layer": "v176",
+      "slug": "tiktok-captions-hair",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-minimalist",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
       "slug": "tiktok-captions-ootd",
       "kind": "blog_slug"
     },
@@ -289,6 +269,16 @@
     {
       "layer": "v176",
       "slug": "tiktok-captions-short",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-sunset",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-trending-ideas",
       "kind": "blog_slug"
     },
     {
@@ -308,12 +298,17 @@
     },
     {
       "layer": "v176",
+      "slug": "tiktok-hooks-business",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
       "slug": "tiktok-hooks-duet-ideas",
       "kind": "blog_slug"
     },
     {
       "layer": "v176",
-      "slug": "tiktok-hooks-promotion",
+      "slug": "youtube-captions-baddie",
       "kind": "blog_slug"
     },
     {
@@ -328,22 +323,17 @@
     },
     {
       "layer": "v176",
-      "slug": "tiktok-captions-diy",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
       "slug": "tiktok-captions-sale",
       "kind": "blog_slug"
     },
     {
       "layer": "v176",
-      "slug": "tiktok-captions-trending-sound",
+      "slug": "tiktok-captions-wedding",
       "kind": "blog_slug"
     },
     {
       "layer": "v176",
-      "slug": "tiktok-captions-wedding",
+      "slug": "tiktok-hooks-promotion",
       "kind": "blog_slug"
     },
     {
@@ -368,12 +358,7 @@
     },
     {
       "layer": "v176",
-      "slug": "tiktok-captions-aesthetic-reel",
-      "kind": "blog_slug"
-    },
-    {
-      "layer": "v176",
-      "slug": "tiktok-captions-brand",
+      "slug": "tiktok-captions-diy",
       "kind": "blog_slug"
     },
     {
@@ -389,6 +374,21 @@
     {
       "layer": "v176",
       "slug": "tiktok-captions-food-hashtags",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-story",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-captions-trending-sound",
+      "kind": "blog_slug"
+    },
+    {
+      "layer": "v176",
+      "slug": "tiktok-titles-beauty-ideas",
       "kind": "blog_slug"
     }
   ],

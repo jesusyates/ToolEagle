@@ -19,7 +19,26 @@ export function getCnProviderName(): CnProviderName {
 }
 
 export function getOpenAiModel(): string {
-  return process.env.OPENAI_MODEL?.trim() || "gpt-4o-mini";
+  const m = process.env.OPENAI_MODEL?.trim();
+  return m && m.length > 0 ? m : "gpt-4o-mini";
+}
+
+export function getGeminiModel(): string {
+  const m = process.env.GEMINI_MODEL?.trim();
+  return m && m.length > 0 ? m : "gemini-2.5-flash";
+}
+
+/** Fixed default for EN guides cluster publish (rebuild-article). */
+export const CLUSTER_PUBLISH_DEFAULT_MODEL = "gemini-2.5-flash" as const;
+
+/**
+ * Cluster SEO rebuild (`rebuild-article.ts`) — defaults to Gemini model.
+ * Override: CLUSTER_PUBLISH_GEMINI_MODEL.
+ */
+export function getClusterPublishGeminiModel(): string {
+  const m = process.env.CLUSTER_PUBLISH_GEMINI_MODEL?.trim();
+  if (m && m.length > 0) return m;
+  return getGeminiModel().trim() || CLUSTER_PUBLISH_DEFAULT_MODEL;
 }
 
 export function getDeepseekModel(): string {

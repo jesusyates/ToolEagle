@@ -1,6 +1,6 @@
 {
   "version": "179",
-  "builtAt": "2026-03-31T06:00:09.916Z",
+  "builtAt": "2026-04-03T06:00:42.961Z",
   "upgrade_click_total": 3,
   "upgrade_click_by_page": {
     "/tools/tiktok-caption-generator": 2,
@@ -21,75 +21,75 @@
     },
     {
       "kind": "tool_copy_publish",
-      "path": "/tools/instagram-username-generator",
+      "path": "/tools/hook-generator",
       "signal": "high_copy_events",
-      "weight": 3
+      "weight": 4
     },
     {
       "kind": "tool_copy_publish",
-      "path": "/tools/hook-generator",
+      "path": "/tools/instagram-username-generator",
       "signal": "high_copy_events",
       "weight": 3
     },
     {
       "kind": "blog_value_score",
       "path": "/blog/youtube-video-ideas-that-work",
-      "score": 0.71
+      "score": 0.714
     },
     {
       "kind": "blog_value_score",
       "path": "/blog/tiktok-captions-travel",
-      "score": 0.709
-    },
-    {
-      "kind": "blog_value_score",
-      "path": "/blog/best-tiktok-bio-ideas",
-      "score": 0.708
+      "score": 0.712
     },
     {
       "kind": "blog_value_score",
       "path": "/blog/youtube-captions-trending-ideas",
-      "score": 0.708
+      "score": 0.712
+    },
+    {
+      "kind": "blog_value_score",
+      "path": "/blog/best-tiktok-bio-ideas",
+      "score": 0.711
     },
     {
       "kind": "blog_value_score",
       "path": "/blog/tiktok-captions-motivation",
-      "score": 0.707
-    },
-    {
-      "kind": "blog_value_score",
-      "path": "/blog/seo-how-search-engines-find-creator-content",
-      "score": 0.706
+      "score": 0.711
     },
     {
       "kind": "blog_value_score",
       "path": "/blog/tiktok-captions-food",
-      "score": 0.706
-    },
-    {
-      "kind": "blog_value_score",
-      "path": "/blog/tiktok-captions-inspirational",
-      "score": 0.706
+      "score": 0.71
     },
     {
       "kind": "blog_value_score",
       "path": "/blog/tiktok-captions-life-hack",
-      "score": 0.706
-    },
-    {
-      "kind": "blog_value_score",
-      "path": "/blog/instagram-captions-for-reels",
-      "score": 0.705
+      "score": 0.71
     },
     {
       "kind": "blog_value_score",
       "path": "/blog/instagram-hashtags-funny-usernames",
-      "score": 0.705
+      "score": 0.709
     },
     {
       "kind": "blog_value_score",
-      "path": "/blog/tiktok-captions-attitude",
-      "score": 0.705
+      "path": "/blog/seo-how-search-engines-find-creator-content",
+      "score": 0.709
+    },
+    {
+      "kind": "blog_value_score",
+      "path": "/blog/tiktok-captions-inspirational",
+      "score": 0.709
+    },
+    {
+      "kind": "blog_value_score",
+      "path": "/blog/tiktok-captions-romantic",
+      "score": 0.709
+    },
+    {
+      "kind": "blog_value_score",
+      "path": "/blog/instagram-captions-for-reels",
+      "score": 0.708
     }
   ],
   "low_revenue_high_traffic_pages": [],

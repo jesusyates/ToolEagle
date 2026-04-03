@@ -39,6 +39,7 @@ type ActivationPayload = {
     event_types_present: string[];
   };
   activation_status: "ok" | "partial" | "failed";
+  blocking_reason: string | null;
   notes: string[];
 };
 
@@ -65,12 +66,14 @@ async function main() {
   loadEnv();
 
   const notes: string[] = [];
+  let admin_client_created_ok = false;
   let migration_applied = false;
   let content_items_ok = false;
   let content_events_ok = false;
   let content_items_row_count: number | null = null;
   let content_events_row_count: number | null = null;
   let sample_dump_ok = false;
+  let blocking_reason: string | null = null;
   const has_service_role_env = hasServiceRoleKey();
 
   let event_types_present: string[] = [];
@@ -79,6 +82,7 @@ async function main() {
 
   try {
     const supabase = createAdminClient();
+    admin_client_created_ok = true;
 
     const probeCi = await supabase.from("content_items").select("id").limit(1);
     if (probeCi.error) {
@@ -195,16 +199,29 @@ async function main() {
         notes.push(
           "No single content_id found with generate + copy + upload_redirect; run hook-generator flow once."
         );
+        blocking_reason = "verified flow incomplete (no generate+copy+upload_redirect for same content_id)";
       }
       if ((content_items_row_count ?? 0) === 0) {
         notes.push("content_items is empty; generate once to verify persistence.");
+        blocking_reason = "content_items is empty";
       }
     }
   } else {
     activation_status = "failed";
     if (!has_service_role_env && !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim()) {
       notes.push("Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY (or SUPABASE_SERVICE_ROLE_KEY for server parity).");
+      blocking_reason = "missing supabase env keys for admin client";
     }
+    if (admin_client_created_ok && (!content_items_ok || !content_events_ok)) {
+      blocking_reason = "migration 未执行：content_items / content_events 表不存在";
+    }
+    if (content_items_ok && content_events_ok && !sample_dump_ok) {
+      blocking_reason = "sample dump failed";
+    }
+  }
+
+  if (activation_status !== "ok" && !blocking_reason) {
+    blocking_reason = notes[0] ?? "activation precheck failed";
   }
 
   const out: ActivationPayload = {
@@ -225,6 +242,7 @@ async function main() {
       event_types_present
     },
     activation_status,
+    blocking_reason,
     notes
   };
 

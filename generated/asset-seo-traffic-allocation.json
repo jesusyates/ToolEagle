@@ -1,132 +1,132 @@
 {
   "version": "v161.0",
-  "updatedAt": "2026-03-30T15:11:02.012Z",
+  "updatedAt": "2026-03-31T09:21:30.335Z",
   "total_daily_capacity": 100,
   "top_allocated_topics": [
     {
-      "topic_key": "Instagram引流模板大全",
-      "units": 1,
-      "score": 60,
-      "tier": "exploration"
-    },
-    {
-      "topic_key": "Instagram提高完播率真的能赚钱吗",
-      "units": 1,
-      "score": 60,
-      "tier": "exploration"
-    },
-    {
-      "topic_key": "Instagram私域引流详细步骤",
-      "units": 1,
-      "score": 60,
-      "tier": "exploration"
-    },
-    {
-      "topic_key": "YouTube 品牌打造 新手",
-      "units": 1,
-      "score": 60,
-      "tier": "exploration"
-    },
-    {
-      "topic_key": "YouTube 算法优化 教程",
-      "units": 1,
-      "score": 60,
-      "tier": "exploration"
-    },
-    {
-      "topic_key": "YouTube 算法优化 新手",
-      "units": 1,
-      "score": 60,
-      "tier": "exploration"
-    },
-    {
-      "topic_key": "YouTube 数据分析 方法",
-      "units": 1,
-      "score": 60,
-      "tier": "exploration"
-    },
-    {
-      "topic_key": "YouTube 数据分析 教程",
-      "units": 1,
-      "score": 60,
-      "tier": "exploration"
-    },
-    {
-      "topic_key": "YouTube 数据分析 新手",
-      "units": 1,
-      "score": 60,
-      "tier": "low"
-    },
-    {
-      "topic_key": "Instagram引流最快的方法",
-      "units": 1,
-      "score": 56,
-      "tier": "low"
-    },
-    {
-      "topic_key": "Instagram私域引流最快的方法",
-      "units": 1,
-      "score": 56,
-      "tier": "low"
-    },
-    {
-      "topic_key": "Instagram博主如何变现",
-      "units": 1,
-      "score": 56,
-      "tier": "low"
-    },
-    {
-      "topic_key": "Instagram博主如何私域引流",
-      "units": 1,
-      "score": 56,
-      "tier": "low"
-    },
-    {
-      "topic_key": "TikTok引流详细步骤",
+      "topic_key": "Instagram新手如何做爆款",
       "units": 1,
       "score": 50,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "instagram-grwm-captions",
+      "units": 1,
+      "score": 50,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "youtube-grwm-hashtags",
+      "units": 1,
+      "score": 50,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "youtube-grwm-titles",
+      "units": 1,
+      "score": 50,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "tiktok-cute-hooks",
+      "units": 1,
+      "score": 46,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "tiktok-script-structure-hashtags",
+      "units": 1,
+      "score": 46,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "tiktok-wedding-titles",
+      "units": 1,
+      "score": 46,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "instagram-script-structure-captions",
+      "units": 1,
+      "score": 46,
+      "tier": "exploration"
+    },
+    {
+      "topic_key": "instagram-script-structure-hooks",
+      "units": 1,
+      "score": 46,
       "tier": "low"
     },
     {
-      "topic_key": "YouTube变现真的能赚钱吗",
+      "topic_key": "youtube-dance-reel-captions",
       "units": 1,
-      "score": 50,
+      "score": 46,
       "tier": "low"
     },
     {
-      "topic_key": "YouTube引流详细步骤",
+      "topic_key": "tiktok-relatable-hooks",
       "units": 1,
-      "score": 50,
+      "score": 46,
       "tier": "low"
     },
     {
-      "topic_key": "YouTube提高完播率真的能赚钱吗",
+      "topic_key": "tiktok-finance-hashtags",
       "units": 1,
-      "score": 50,
+      "score": 46,
       "tier": "low"
     },
     {
-      "topic_key": "Instagram 获得播放量 新手",
+      "topic_key": "youtube-relatable-hashtags",
       "units": 1,
-      "score": 50,
+      "score": 46,
       "tier": "low"
     },
     {
-      "topic_key": "Instagram 做爆款视频 新手",
+      "topic_key": "youtube-cute-hashtags",
       "units": 1,
-      "score": 50,
+      "score": 46,
       "tier": "low"
     },
     {
-      "topic_key": "Instagram 提高互动率 新手",
+      "topic_key": "youtube-cute-captions",
       "units": 1,
-      "score": 50,
+      "score": 46,
+      "tier": "low"
+    },
+    {
+      "topic_key": "tiktok-product-titles",
+      "units": 1,
+      "score": 46,
+      "tier": "low"
+    },
+    {
+      "topic_key": "youtube-finance-captions",
+      "units": 1,
+      "score": 46,
+      "tier": "low"
+    },
+    {
+      "topic_key": "instagram-ootd-captions",
+      "units": 1,
+      "score": 46,
+      "tier": "low"
+    },
+    {
+      "topic_key": "youtube-wedding-hooks",
+      "units": 1,
+      "score": 46,
+      "tier": "low"
+    },
+    {
+      "topic_key": "instagram-funny-usernames-hashtags",
+      "units": 1,
+      "score": 46,
       "tier": "low"
     }
   ],
   "top_allocated_workflows": [
     {
-      "workflow_id": "youtube",
+      "workflow_id": "instagram",
       "units": 8,
       "score": 52,
       "tier": "mid"
@@ -138,7 +138,7 @@
       "tier": "mid"
     },
     {
-      "workflow_id": "instagram",
+      "workflow_id": "youtube",
       "units": 8,
       "score": 52,
       "tier": "mid"
@@ -164,188 +164,7 @@
       "tier": "high"
     }
   ],
-  "suppressed_segments": [
-    {
-      "segment": "youtube-baokuan-fangfa",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-baokuan-mijue",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-baokuan-gonglue",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-baokuan-rumen",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-baokuan-jiaocheng",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-bianxian-ruhe",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-bianxian-fangfa",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-bianxian-zenme",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-bianxian-jiqiao",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-bianxian-2026",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-bianxian-mijue",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-bianxian-gonglue",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-bianxian-rumen",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-bianxian-jiaocheng",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-baokuan-v2-ruhe",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-baokuan-v2-fangfa",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-baokuan-v2-zenme",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-baokuan-v2-jiqiao",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-baokuan-v2-2026",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-baokuan-v2-mijue",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-baokuan-v2-gonglue",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-baokuan-v2-rumen",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "tiktok-baokuan-v2-jiaocheng",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "youtube-baokuan-mijue",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "youtube-baokuan-gonglue",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "youtube-baokuan-rumen",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "youtube-baokuan-jiaocheng",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "youtube-baokuan-v2-ruhe",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "youtube-baokuan-v2-fangfa",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "youtube-baokuan-v2-zenme",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "youtube-baokuan-v2-jiqiao",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "youtube-baokuan-v2-2026",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "youtube-baokuan-v2-mijue",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "youtube-baokuan-v2-gonglue",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "youtube-baokuan-v2-rumen",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    },
-    {
-      "segment": "youtube-baokuan-v2-jiaocheng",
-      "kind": "topic",
-      "reason": "low_composite_score"
-    }
-  ],
+  "suppressed_segments": [],
   "allocation_reasoning": [
     "topic_score = clamp(0,100, base38 + revenue(0-22) + conversion(0-18) + citation(-14..+18) + risk(-22..0) + quality(0-12))",
     "main_units ≈ 92 with per-topic cap 12 and floor 0.35",
@@ -354,18 +173,18 @@
   ],
   "notes": [
     "V161 allocation guides queue bonus and batch scaling; safety/risk engines remain authoritative",
-    "suppressed_segments: 36"
+    "suppressed_segments: 0"
   ],
   "recommended_zh_batch_scale": 0.88,
-  "recommended_en_batch_scale": 0.905,
+  "recommended_en_batch_scale": 0.902,
   "exploration_quota_assignments": [
-    "Instagram引流模板大全",
-    "Instagram提高完播率真的能赚钱吗",
-    "Instagram私域引流详细步骤",
-    "YouTube 品牌打造 新手",
-    "YouTube 算法优化 教程",
-    "YouTube 算法优化 新手",
-    "YouTube 数据分析 方法",
-    "YouTube 数据分析 教程"
+    "Instagram新手如何做爆款",
+    "instagram-grwm-captions",
+    "youtube-grwm-hashtags",
+    "youtube-grwm-titles",
+    "tiktok-cute-hooks",
+    "tiktok-script-structure-hashtags",
+    "tiktok-wedding-titles",
+    "instagram-script-structure-captions"
   ]
 }

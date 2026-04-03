@@ -1,6 +1,6 @@
 {
   "version": "176",
-  "builtAt": "2026-03-31T06:00:09.536Z",
+  "builtAt": "2026-04-03T06:00:42.568Z",
   "upgrade_click_events_observed": 0,
   "pricing_referrer_touchpoints": 3,
   "funnel_publish_redirect": 0,
@@ -9,63 +9,63 @@
   "high_value_pages_sample": [
     {
       "path": "/blog/youtube-video-ideas-that-work",
-      "score": 0.71
+      "score": 0.714
     },
     {
       "path": "/blog/tiktok-captions-travel",
-      "score": 0.709
-    },
-    {
-      "path": "/blog/best-tiktok-bio-ideas",
-      "score": 0.708
+      "score": 0.712
     },
     {
       "path": "/blog/youtube-captions-trending-ideas",
-      "score": 0.708
+      "score": 0.712
+    },
+    {
+      "path": "/blog/best-tiktok-bio-ideas",
+      "score": 0.711
     },
     {
       "path": "/blog/tiktok-captions-motivation",
-      "score": 0.707
-    },
-    {
-      "path": "/blog/seo-how-search-engines-find-creator-content",
-      "score": 0.706
+      "score": 0.711
     },
     {
       "path": "/blog/tiktok-captions-food",
-      "score": 0.706
-    },
-    {
-      "path": "/blog/tiktok-captions-inspirational",
-      "score": 0.706
+      "score": 0.71
     },
     {
       "path": "/blog/tiktok-captions-life-hack",
-      "score": 0.706
-    },
-    {
-      "path": "/blog/instagram-captions-for-reels",
-      "score": 0.705
+      "score": 0.71
     },
     {
       "path": "/blog/instagram-hashtags-funny-usernames",
-      "score": 0.705
+      "score": 0.709
     },
     {
-      "path": "/blog/tiktok-captions-attitude",
-      "score": 0.705
+      "path": "/blog/seo-how-search-engines-find-creator-content",
+      "score": 0.709
+    },
+    {
+      "path": "/blog/tiktok-captions-inspirational",
+      "score": 0.709
     },
     {
       "path": "/blog/tiktok-captions-romantic",
-      "score": 0.705
+      "score": 0.709
+    },
+    {
+      "path": "/blog/instagram-captions-for-reels",
+      "score": 0.708
+    },
+    {
+      "path": "/blog/tiktok-captions-attitude",
+      "score": 0.708
+    },
+    {
+      "path": "/blog/tiktok-captions-cute",
+      "score": 0.708
     },
     {
       "path": "/blog/instagram-captions-grwm",
-      "score": 0.704
-    },
-    {
-      "path": "/blog/instagram-hooks-tips",
-      "score": 0.704
+      "score": 0.707
     }
   ],
   "note": "Server-side upgrade streams may live outside tool-click-events.jsonl — this is the minimum on-disk signal."

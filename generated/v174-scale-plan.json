@@ -1,6 +1,6 @@
 {
   "version": "174",
-  "builtAt": "2026-03-31T06:00:08.596Z",
+  "builtAt": "2026-04-03T06:00:41.546Z",
   "tierPolicy": {
     "HIGH_PERFORMING": {
       "frequency_range": "+50% to +200% vs baseline",
@@ -24,6 +24,8 @@
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: or": "STABLE",
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: [V": "STABLE",
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: Us": "STABLE",
+    "Creator intent: Promote a product. Content scenario: Small business. Topic or pr": "STABLE",
+    "Test post about morning coffee routine for TikTok": "STABLE",
     "for-reels": "STABLE",
     "bio-ideas": "STABLE",
     "bios-2025": "STABLE",
@@ -231,6 +233,8 @@
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: or": 1,
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: [V": 1,
     "Creator intent: Get more views. Content scenario: Tutorial. Hook/video topic: Us": 1,
+    "Creator intent: Promote a product. Content scenario: Small business. Topic or pr": 1,
+    "Test post about morning coffee routine for TikTok": 1,
     "for-reels": 1,
     "bio-ideas": 1,
     "bios-2025": 1,
@@ -437,11 +441,11 @@
   "note": "Used by scripts/lib/content-allocation.js computeTripleWeight (V174 layer after V173).",
   "data_freshness": {
     "version": 175,
-    "updatedAt": "2026-03-31T06:00:08.596Z",
+    "updatedAt": "2026-04-03T06:00:41.546Z",
     "threshold_hours": 48,
-    "gsc_last_updated": "2026-03-31T06:00:04.837Z",
+    "gsc_last_updated": "2026-04-03T06:00:37.552Z",
     "analytics_last_updated": null,
-    "conversion_last_updated": "2026-03-31T06:00:05.197Z",
+    "conversion_last_updated": "2026-04-03T06:00:38.002Z",
     "stale_data": true,
     "stale_reasons": [
       "analytics_missing"

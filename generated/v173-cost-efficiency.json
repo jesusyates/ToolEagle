@@ -1,12 +1,12 @@
 {
   "version": "173",
-  "builtAt": "2026-03-31T06:00:07.909Z",
-  "generated_count": 52,
+  "builtAt": "2026-04-03T06:00:40.708Z",
+  "generated_count": 55,
   "blocked_before_generation": 1,
   "rejected_after_generation": 11,
   "estimated_saved_calls": 1,
   "estimated_wasted_calls": 4,
-  "strict_mode_efficiency": 0.826,
+  "strict_mode_efficiency": 0.846,
   "notes": {
     "saved_calls": "pregen/dedup/blog V172 skips avoid model invocation.",
     "wasted_calls": "Model ran but post_package returned strict 503 or router_error.",

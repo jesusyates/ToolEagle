@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "mode": "none",
+  "mode": "hook_entry_visibility",
   "progressHint": {
-    "variant": "default"
+    "variant": "emphasized"
   },
   "workflowNext": {},
   "readyToPost": {}

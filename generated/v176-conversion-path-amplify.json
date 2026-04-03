@@ -1,12 +1,12 @@
 {
   "version": "176",
-  "builtAt": "2026-03-31T06:00:09.536Z",
+  "builtAt": "2026-04-03T06:00:42.568Z",
   "inputs_ok": true,
   "funnel_totals": {
     "tool_click": 0,
     "tool_entry": 0,
-    "copy": 20,
-    "generation_complete": 19,
+    "copy": 21,
+    "generation_complete": 21,
     "publish_redirect_click": 0
   },
   "copy_to_generation_ratio": 1,
@@ -16,11 +16,11 @@
       "copy_events": 14
     },
     {
-      "tool_slug": "instagram-username-generator",
-      "copy_events": 3
+      "tool_slug": "hook-generator",
+      "copy_events": 4
     },
     {
-      "tool_slug": "hook-generator",
+      "tool_slug": "instagram-username-generator",
       "copy_events": 3
     }
   ],

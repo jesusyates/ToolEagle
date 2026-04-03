@@ -87,12 +87,32 @@ function post(payload: Record<string, unknown>) {
   }).catch(() => {});
 }
 
-async function postContentEvent(eventType: "generate" | "copy", contentId: string) {
+async function postContentEvent(
+  eventType:
+    | "generate"
+    | "copy"
+    | "upload_redirect"
+    | "optimization_applied"
+    | "analysis_generated"
+    | "guidance_generated"
+    | "guidance_memory_applied"
+    | "creator_state_applied"
+    | "creator_state_snapshot"
+    | "creator_state_refresh_decision"
+    | "creator_state_trigger_scored"
+    | "creator_state_apply_scored"
+    | "creator_state_gated"
+    | "creator_state_scope_applied",
+  contentId: string,
+  extra?: Record<string, unknown>
+) {
   try {
+    const payload: Record<string, unknown> = { content_id: contentId, event_type: eventType };
+    if (extra) Object.assign(payload, extra);
     await fetch("/api/content-memory/content-events", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content_id: contentId, event_type: eventType })
+      body: JSON.stringify(payload)
     });
   } catch {
     // non-blocking
@@ -149,4 +169,37 @@ export function recordGenerationComplete(
   });
   emitTikTokChainGenerationIfApplicable(toolSlug, opts.contentId);
   void postContentEvent("generate", opts.contentId);
+}
+
+export function logOptimizationApplied(contentId: string, patternSource: "user" | "default", patternsUsed: unknown) {
+  void postContentEvent("optimization_applied", contentId, {
+    pattern_source: patternSource,
+    patterns_used: patternsUsed
+  });
+}
+
+export function logAnalysisGenerated(contentId: string) {
+  void postContentEvent("analysis_generated", contentId);
+}
+
+export function logAnalysisReturnApplied(
+  contentId: string,
+  stage: "new" | "growing" | "monetizing",
+  problemsUsed: unknown,
+  suggestionsUsed: unknown,
+  patternsUsed: unknown
+) {
+  void postContentEvent("analysis_generated", contentId, {
+    stage,
+    problems_used: problemsUsed,
+    suggestions_used: suggestionsUsed,
+    patterns_used: patternsUsed
+  });
+}
+
+export function logGuidanceGenerated(contentId: string, actions: unknown, priority: "low" | "medium" | "high") {
+  void postContentEvent("guidance_generated", contentId, {
+    actions,
+    priority
+  });
 }

@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "updated_at": "2026-03-30T14:42:19.958Z",
+  "updated_at": "2026-04-03T06:01:44.262Z",
   "source_file": "C:\\Users\\44570\\Desktop\\tooleagle\\generated\\tiktok-chain-events.jsonl",
   "chain_definition": {
     "completion_requires_ordered": [
@@ -12,13 +12,13 @@
     ],
     "notes": "completion = strict chronological order of first occurrence of each milestone; copy_event tracked separately and not required for completion"
   },
-  "total_sessions": 0,
-  "started_sessions": 0,
+  "total_sessions": 2,
+  "started_sessions": 2,
   "completed_sessions": 0,
   "completion_rate": 0,
-  "copy_events_total": 0,
-  "sessions_reaching_hook": 0,
-  "sessions_reaching_caption": 0,
+  "copy_events_total": 1,
+  "sessions_reaching_hook": 1,
+  "sessions_reaching_caption": 1,
   "sessions_reaching_hashtag": 0,
   "sessions_reaching_title": 0,
   "sessions_reaching_upload": 0,
@@ -26,24 +26,24 @@
     {
       "from": "session_start",
       "to": "hook_generated",
-      "numerator": 0,
-      "denominator": 0,
-      "rate": 0,
-      "rate_pct": 0
+      "numerator": 1,
+      "denominator": 2,
+      "rate": 0.5,
+      "rate_pct": 50
     },
     {
       "from": "hook_generated",
       "to": "caption_generated",
-      "numerator": 0,
-      "denominator": 0,
-      "rate": 0,
-      "rate_pct": 0
+      "numerator": 1,
+      "denominator": 1,
+      "rate": 1,
+      "rate_pct": 100
     },
     {
       "from": "caption_generated",
       "to": "hashtag_generated",
       "numerator": 0,
-      "denominator": 0,
+      "denominator": 1,
       "rate": 0,
       "rate_pct": 0
     },
@@ -65,19 +65,27 @@
     }
   ],
   "biggest_drop_step": {
-    "transition": null,
-    "from_step": null,
-    "to_step": null,
-    "lost_sessions": 0,
-    "from_count": 0,
-    "to_count": 0,
-    "relative_drop_rate": 0,
-    "note": "no started sessions in source file"
+    "transition": "session_start → hook",
+    "from_step": "session_start",
+    "to_step": "hook",
+    "lost_sessions": 1,
+    "from_count": 2,
+    "to_count": 1,
+    "relative_drop_rate": 50
   },
-  "common_partial_paths": [],
+  "common_partial_paths": [
+    {
+      "path_signature": "(no_chain_milestone_yet)",
+      "session_count": 1
+    },
+    {
+      "path_signature": "hook → caption",
+      "session_count": 1
+    }
+  ],
   "reached_milestone_counts": {
-    "hook_generated": 0,
-    "caption_generated": 0,
+    "hook_generated": 1,
+    "caption_generated": 1,
     "hashtag_generated": 0,
     "title_generated": 0,
     "upload_redirect": 0
@@ -86,24 +94,24 @@
     {
       "step": "session_start",
       "next_milestone": "hook_generated",
-      "reached_with_session_start": 0,
-      "reached_next_milestone": 0,
-      "lost_to_next": 0,
+      "reached_with_session_start": 2,
+      "reached_next_milestone": 1,
+      "lost_to_next": 1,
       "note": "Among sessions that emitted session_start, how many reached hook_generated (first chain step)"
     },
     {
       "step": "hook",
       "milestone": "hook_generated",
       "next_milestone": "caption_generated",
-      "reached_count": 0,
+      "reached_count": 1,
       "lost_to_next": 0
     },
     {
       "step": "caption",
       "milestone": "caption_generated",
       "next_milestone": "hashtag_generated",
-      "reached_count": 0,
-      "lost_to_next": 0
+      "reached_count": 1,
+      "lost_to_next": 1
     },
     {
       "step": "hashtag",

@@ -160,32 +160,42 @@ export function runBackgroundSeoTick(opts: BackgroundTickOptions): BackgroundTic
 
   let anyFail = false;
 
+  const legacyZhSeoEnabled =
+    process.env.ENABLE_LEGACY_ZH_SEO === "1" || process.env.ENABLE_LEGACY_ZH_SEO === "true";
+
   if (opts.zh) {
-    detail.zhAttempted = true;
-    state.zh_status = "running";
-    state.lane_running_since = { ...state.lane_running_since, zh: new Date().toISOString() };
-    savePipelineState(state, statePath);
-    let zhBatch = opts.zhBatchOverride ?? Math.min(20, Math.max(5, state.zh_batch_size));
-    const rZh = opts.riskZhBatchMultiplier;
-    if (rZh != null && rZh > 0 && rZh < 1) {
-      zhBatch = Math.max(5, Math.floor(zhBatch * rZh));
-    }
-    const aZh = opts.allocationZhBatchScale;
-    if (aZh != null && aZh > 0 && Number.isFinite(aZh)) {
-      zhBatch = Math.max(5, Math.min(20, Math.floor(zhBatch * aZh)));
-    }
-    detail.zhOk = runNode(cwd, "scripts/auto-generate-zh.js", [`--batch-size=${zhBatch}`, "--no-git"], childEnv);
-    if (detail.zhOk) {
-      state.zh_status = "completed";
-      state.zh_progress_count += zhBatch;
+    if (!legacyZhSeoEnabled) {
+      console.log("[skip] legacy zh seo disabled");
+      state.zh_status = "idle";
+      const { zh: _z, ...restLanes } = state.lane_running_since;
+      state.lane_running_since = restLanes;
     } else {
-      state.zh_status = "partial";
-      anyFail = true;
-      state.consecutive_failures = Math.min(20, state.consecutive_failures + 1);
-      state.high_failure_streak = Math.min(50, state.high_failure_streak + 1);
+      detail.zhAttempted = true;
+      state.zh_status = "running";
+      state.lane_running_since = { ...state.lane_running_since, zh: new Date().toISOString() };
+      savePipelineState(state, statePath);
+      let zhBatch = opts.zhBatchOverride ?? Math.min(20, Math.max(5, state.zh_batch_size));
+      const rZh = opts.riskZhBatchMultiplier;
+      if (rZh != null && rZh > 0 && rZh < 1) {
+        zhBatch = Math.max(5, Math.floor(zhBatch * rZh));
+      }
+      const aZh = opts.allocationZhBatchScale;
+      if (aZh != null && aZh > 0 && Number.isFinite(aZh)) {
+        zhBatch = Math.max(5, Math.min(20, Math.floor(zhBatch * aZh)));
+      }
+      detail.zhOk = runNode(cwd, "scripts/auto-generate-zh.js", [`--batch-size=${zhBatch}`, "--no-git"], childEnv);
+      if (detail.zhOk) {
+        state.zh_status = "completed";
+        state.zh_progress_count += zhBatch;
+      } else {
+        state.zh_status = "partial";
+        anyFail = true;
+        state.consecutive_failures = Math.min(20, state.consecutive_failures + 1);
+        state.high_failure_streak = Math.min(50, state.high_failure_streak + 1);
+      }
+      const { zh: _z, ...restLanes } = state.lane_running_since;
+      state.lane_running_since = restLanes;
     }
-    const { zh: _z, ...restLanes } = state.lane_running_since;
-    state.lane_running_since = restLanes;
   } else {
     state.zh_status = "idle";
     const { zh: _z, ...restLanes } = state.lane_running_since;

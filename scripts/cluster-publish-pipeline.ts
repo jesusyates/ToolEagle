@@ -484,21 +484,26 @@ export async function runClusterPublishPipeline(options?: { source?: string }): 
       }
     }
 
-    if (topicsPassed > 0 && articlesPassed === 0 && fallbackReleaseCandidate) {
-      const candidate = fallbackReleaseCandidate;
-      const plainDesc = candidate.article.body.replace(/#{1,6}\s+/g, "").replace(/\n+/g, " ").trim().slice(0, 220);
-      try {
-        const composed = await composeStagedGuide({
-          title: candidate.article.title,
-          body: candidate.article.body,
-          hashtags: candidate.article.hashtags,
-          seoTitle: candidate.article.title,
-          seoDescription: plainDesc,
-          aiSummary: candidate.article.aiSummary,
-          faqs: candidate.article.faqs,
-          contentType: candidate.contentType,
-          clusterTheme: candidate.cluster
-        });
+if (topicsPassed > 0 && articlesPassed === 0 && fallbackReleaseCandidate !== null) {
+  const candidate = fallbackReleaseCandidate as FallbackReleaseCandidate;
+  const plainDesc = candidate.article.body
+    .replace(/#{1,6}\s+/g, "")
+    .replace(/\n+/g, " ")
+    .trim()
+    .slice(0, 220);
+
+  try {
+    const composed = await composeStagedGuide({
+      title: candidate.article.title,
+      body: candidate.article.body,
+      hashtags: candidate.article.hashtags,
+      seoTitle: candidate.article.title,
+      seoDescription: plainDesc,
+      aiSummary: candidate.article.aiSummary,
+      faqs: candidate.article.faqs,
+      contentType: candidate.contentType,
+      clusterTheme: candidate.cluster
+    });
         const fin = auditPublishedGuideMarkdown(composed.filename, composed.markdown);
         if (fin.decision === "pass") {
           await mkdir(STAGED_GUIDES_DIR, { recursive: true });

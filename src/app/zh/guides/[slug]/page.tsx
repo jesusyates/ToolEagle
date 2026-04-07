@@ -14,11 +14,12 @@ import { SITE_URL } from "@/config/site";
 
 type Params = Promise<{ slug: string }>;
 
-/** SSG: params from `content/zh-guides` (see getZhGuideSlugs). */
+/** SSG: params.slug 为 reader 的 ASCII publicSlug（与 getZhGuideSlugs 一致）。 */
 export const dynamic = "force-static";
 
 export async function generateStaticParams() {
   const slugs = await getZhGuideSlugs();
+  console.log("[zh-gsp] slugs=", slugs.length);
   return slugs.map((slug) => ({ slug }));
 }
 
@@ -47,10 +48,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-export default async function ZhGuideDetailPage({ params }: { params: Params }) {
+export default async function Page({ params }: { params: Params }) {
   const { slug } = await params;
   const post = await getZhGuideBySlug(slug);
-  if (!post) notFound();
+  if (!post) {
+    console.log("[zh-404]", slug);
+    notFound();
+  }
 
   const related = await getRelatedZhGuideLinks(slug, 5);
   const paragraphs = post.body.split(/\n\n+/).filter((p) => p.trim().length > 0);
@@ -70,7 +74,7 @@ export default async function ZhGuideDetailPage({ params }: { params: Params }) 
         headline: jsonLdTitle,
         description: sanitizeZhDisplayForJsonLd(desc.slice(0, 320)),
         mainEntityOfPage: pageUrl,
-    author: {
+        author: {
           "@type": "Organization",
           name: "ToolEagle"
         },
@@ -138,7 +142,10 @@ export default async function ZhGuideDetailPage({ params }: { params: Params }) 
               <ul className="mt-4 list-none space-y-3 pl-0">
                 {related.map((r) => (
                   <li key={r.slug}>
-                    <Link href={`/zh/guides/${r.slug}`} className="text-sky-700 hover:underline">
+                    <Link
+                      href={`/zh/guides/${r.slug}`}
+                      className="text-sky-700 hover:underline"
+                    >
                       {r.title}
                     </Link>
                   </li>

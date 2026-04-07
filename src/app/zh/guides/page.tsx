@@ -25,7 +25,7 @@ export default async function ZhGuidesIndexPage() {
             {posts.map((p) => (
               <li key={p.slug}>
                 <a
-                  href={`/zh/guides/${encodeURIComponent(p.slug)}`}
+                  href={`/zh/guides/${p.slug}`}
                   className="text-lg font-medium text-sky-700 hover:underline"
                 >
                   {p.title || p.slug}

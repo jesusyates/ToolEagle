@@ -30,6 +30,7 @@ import { getAllGuideParams } from "@/config/traffic-topics";
 import { SITE_URL } from "@/config/site";
 import { getAllEnHowToSlugs } from "@/lib/en-how-to-content";
 import { mapZhGuideDataToRecordFields } from "@/lib/seo-zh/zh-frontmatter-keys";
+import { publicSlugFromMdBasename } from "@/lib/zh-guides-reader";
 import { createAdminClient } from "@/lib/supabase/admin";
 import {
   loadContentQualityStatus,
@@ -573,27 +574,31 @@ function autoPostGuideUrls(): SitemapEntry[] {
   return [...byUrl.values()];
 }
 
-/** `/zh/guides/[slug]` from `content/zh-guides` (Chinese frontmatter keys). */
+/** `/zh/guides/[slug]` — public slug 与 zh-guides-reader（文件名派生 ASCII）一致。 */
 function zhGuideUrls(): SitemapEntry[] {
   const dir = path.join(process.cwd(), "content", "zh-guides");
   const now = new Date();
   const out: SitemapEntry[] = [];
   let files: string[] = [];
   try {
-    files = fs.readdirSync(dir).filter((f) => f.endsWith(".md"));
+    files = fs.readdirSync(dir).filter((f) => f.endsWith(".md")).sort();
   } catch {
     return [];
   }
+  const slugOrder = new Map<string, number>();
   for (const f of files) {
     try {
       const raw = fs.readFileSync(path.join(dir, f), "utf8");
       const { data } = matter(raw);
       const m = mapZhGuideDataToRecordFields(data as Record<string, unknown>);
-      if (!m.slug?.trim()) continue;
+      const base = publicSlugFromMdBasename(f);
+      const prev = slugOrder.get(base) ?? 0;
+      slugOrder.set(base, prev + 1);
+      const slug = prev > 0 ? `${base}-${prev + 1}` : base;
       const lmRaw = m.updatedAt || m.publishedAt;
       const lm = lmRaw ? new Date(lmRaw) : now;
       out.push({
-        url: `${BASE_URL}/zh/guides/${m.slug.trim()}`,
+        url: `${BASE_URL}/zh/guides/${slug}`,
         lastModified: Number.isNaN(lm.getTime()) ? now : lm,
         changeFrequency: "weekly" as const,
         priority: 0.78

@@ -2,8 +2,8 @@
  * 读取 content/zh-guides 下正式中文指南（与 auto-posts-reader 隔离）。
  * Frontmatter 键名为中文（见 seo-zh/zh-frontmatter-keys）。
  *
- * 公开 URL 的 slug 唯一来源：frontmatter「别名」；若为空则回退为文件名（不含 .md），
- * 全链路 trim + Unicode NFC，与列表 / generateStaticParams / getZhGuideBySlug 一致。
+ * 公开 URL 段（ZhGuideRecord.slug）仅使用 ASCII-safe public slug：
+ * 优先从文件名提取 `zh-<数字>` 前缀；否则将文件名 ASCII 化。不再使用 frontmatter「别名」作路由。
  */
 
 import fs from "fs/promises";
@@ -27,6 +27,7 @@ function logContentSourceZhOnce(zhGuides: number) {
 export type ZhGuideRecord = {
   title: string;
   description: string;
+  /** ASCII-safe 公开路由段，与 /zh/guides/[slug]、getZhGuideSlugs 一致 */
   slug: string;
   publishedAt: string;
   platform?: string;
@@ -37,17 +38,32 @@ export type ZhGuideRecord = {
   updatedAt?: string;
 };
 
-/** 与路由 param、href 比较时统一使用（避免 NFC/NFD、首尾空白差异导致 404）。 */
+/** 路由与 param 比较：ASCII slug 仅 trim。 */
 export function normalizeZhGuideSlug(raw: string): string {
-  return raw.trim().normalize("NFC");
+  return raw.trim();
 }
 
-function mapDataToRecord(data: Record<string, unknown>): Omit<ZhGuideRecord, "body"> {
+/**
+ * 从 md 文件名得到公开 slug（ASCII-only）。
+ * 现有文件多为 `zh-<timestamp>-<中文标题>.md` → 取 `zh-<timestamp>`。
+ */
+export function publicSlugFromMdBasename(file: string): string {
+  const stem = path.basename(file, ".md");
+  const prefix = /^zh-\d+/.exec(stem);
+  if (prefix) return prefix[0];
+  const ascii = stem
+    .replace(/[^\u0000-\u007F]+/g, "-")
+    .replace(/[^a-zA-Z0-9._-]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return ascii || "zh-guide";
+}
+
+function mapDataToRecord(data: Record<string, unknown>): Omit<ZhGuideRecord, "body" | "slug"> {
   const m = mapZhGuideDataToRecordFields(data);
   return {
     title: m.title,
     description: m.description,
-    slug: m.slug,
     publishedAt: m.publishedAt,
     platform: m.platform,
     hashtags: m.hashtags,
@@ -57,29 +73,22 @@ function mapDataToRecord(data: Record<string, unknown>): Omit<ZhGuideRecord, "bo
   };
 }
 
-/**
- * 单篇 canonical slug：优先 frontmatter「别名」，否则文件名（不含 .md）。
- * 全站列表 / [slug] / generateStaticParams 必须使用此值。
- */
-function canonicalSlugForFile(file: string, data: Record<string, unknown>): string {
-  const m = mapZhGuideDataToRecordFields(data);
-  const fromFm = normalizeZhGuideSlug(m.slug);
-  if (fromFm) return fromFm;
-  return normalizeZhGuideSlug(path.basename(file, ".md"));
-}
-
 const loadZhGuideRecords = cache(async (): Promise<ZhGuideRecord[]> => {
-  const files = await fs.readdir(ZH_GUIDES_DIR).catch(() => [] as string[]);
+  const files = (await fs.readdir(ZH_GUIDES_DIR).catch(() => [] as string[]))
+    .filter((f) => f.endsWith(".md"))
+    .sort();
   const posts: ZhGuideRecord[] = [];
+  const slugOrder = new Map<string, number>();
   for (const f of files) {
-    if (!f.endsWith(".md")) continue;
     const raw = await fs.readFile(path.join(ZH_GUIDES_DIR, f), "utf8");
     const { data, content } = matter(raw);
     const d = data as Record<string, unknown>;
-    const slug = canonicalSlugForFile(f, d);
-    const mapped = mapDataToRecord(d);
+    const base = publicSlugFromMdBasename(f);
+    const prev = slugOrder.get(base) ?? 0;
+    slugOrder.set(base, prev + 1);
+    const slug = prev > 0 ? `${base}-${prev + 1}` : base;
     posts.push({
-      ...mapped,
+      ...mapDataToRecord(d),
       slug,
       body: content.trim()
     });
@@ -90,8 +99,7 @@ const loadZhGuideRecords = cache(async (): Promise<ZhGuideRecord[]> => {
 export async function getZhGuideSlugs(): Promise<string[]> {
   const posts = await loadZhGuideRecords();
   logContentSourceZhOnce(posts.length);
-  const slugs = [...new Set(posts.map((p) => p.slug).filter(Boolean))];
-  return slugs;
+  return [...new Set(posts.map((p) => p.slug).filter(Boolean))];
 }
 
 export async function getAllZhGuides(): Promise<ZhGuideRecord[]> {

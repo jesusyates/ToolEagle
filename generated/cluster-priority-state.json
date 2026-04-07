@@ -62,8 +62,8 @@
       "consecutiveZeroRuns": 0
     },
     "SEO fallback pool": {
-      "articlesPassedTotal": 39,
-      "consecutiveZeroRuns": 5
+      "articlesPassedTotal": 41,
+      "consecutiveZeroRuns": 0
     },
     "Short-form editing workflow versioning and handoffs for solo creators": {
       "articlesPassedTotal": 132,
@@ -92,8 +92,8 @@
   },
   "platforms": {
     "tiktok": {
-      "passed": 577,
-      "runs": 219
+      "passed": 579,
+      "runs": 220
     },
     "instagram": {
       "passed": 10,
@@ -110,8 +110,8 @@
   },
   "kinds": {
     "growth": {
-      "passed": 50,
-      "runs": 43
+      "passed": 52,
+      "runs": 44
     },
     "consistency": {
       "passed": 2,

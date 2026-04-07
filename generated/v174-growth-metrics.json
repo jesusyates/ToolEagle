@@ -1,6 +1,6 @@
 {
   "version": "175",
-  "builtAt": "2026-04-06T06:00:40.335Z",
+  "builtAt": "2026-04-07T06:00:40.369Z",
   "sources": {
     "gsc_search_performance": true,
     "growth_priority": true,
@@ -16,7 +16,7 @@
   "gsc_fallback_used": true,
   "analytics_fallback_used": true,
   "pages_generated": 352,
-  "pages_indexed_approx": 352,
+  "pages_indexed_approx": 323,
   "impressions": 6029,
   "clicks": 373,
   "ctr": 0.0619,
@@ -54,11 +54,11 @@
   "stale_data": true,
   "data_freshness": {
     "version": 175,
-    "updatedAt": "2026-04-06T06:00:40.335Z",
+    "updatedAt": "2026-04-07T06:00:40.369Z",
     "threshold_hours": 48,
-    "gsc_last_updated": "2026-04-06T06:00:36.583Z",
+    "gsc_last_updated": "2026-04-07T06:00:36.261Z",
     "analytics_last_updated": null,
-    "conversion_last_updated": "2026-04-06T06:00:36.978Z",
+    "conversion_last_updated": "2026-04-07T06:00:36.694Z",
     "stale_data": true,
     "stale_reasons": [
       "analytics_missing"

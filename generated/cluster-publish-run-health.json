@@ -1,43 +1,38 @@
 {
-  "timestamp": "2026-04-06T12:35:34.328Z",
-  "success": true,
-  "stagedFilesWrittenThisRun": 12,
-  "mainlineWritten": 12,
-  "fallbackWritten": 0,
-  "clustersConsidered": 11,
-  "clustersPassed": 4,
-  "clusterPassRate": 0.3636,
-  "runHealth": "healthy",
-  "runHealthReason": "mainline_dominant",
+  "timestamp": "2026-04-07T06:01:34.127Z",
+  "success": false,
+  "stagedFilesWrittenThisRun": 2,
+  "mainlineWritten": 0,
+  "fallbackWritten": 2,
+  "clustersConsidered": 14,
+  "clustersPassed": 6,
+  "clusterPassRate": 0.4286,
+  "runHealth": "degraded",
+  "runHealthReason": "fallback_dominant",
   "blockerReasonCounts": {
-    "cluster_gate:score_below_pass_threshold": 35,
-    "pre_dedup_softpass:title_duplicate:content_jaccard": 75,
-    "topic_gate_softpass:title_duplicate:content_jaccard": 12,
-    "publish_gate_softpass:title_duplicate:content_jaccard": 12,
-    "topic_pool:topic_reused_recently": 63
+    "cluster_gate:score_below_pass_threshold": 89,
+    "pre_dedup_softpass:title_duplicate:content_jaccard": 189,
+    "topic_pool:topic_already_staged": 176,
+    "topic_gate:length_out_of_range": 17
   },
   "topBlockers": [
     [
       "pre_dedup_softpass:title_duplicate:content_jaccard",
-      75
+      189
     ],
     [
-      "topic_pool:topic_reused_recently",
-      63
+      "topic_pool:topic_already_staged",
+      176
     ],
     [
       "cluster_gate:score_below_pass_threshold",
-      35
+      89
     ],
     [
-      "topic_gate_softpass:title_duplicate:content_jaccard",
-      12
-    ],
-    [
-      "publish_gate_softpass:title_duplicate:content_jaccard",
-      12
+      "topic_gate:length_out_of_range",
+      17
     ]
   ],
-  "duplicatePressure": 99,
-  "gatePressure": 35
+  "duplicatePressure": 189,
+  "gatePressure": 106
 }

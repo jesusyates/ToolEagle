@@ -1,6 +1,6 @@
 {
   "version": "175",
-  "builtAt": "2026-04-06T06:00:40.335Z",
+  "builtAt": "2026-04-07T06:00:40.369Z",
   "formula": "score = 0.45*seo + 0.35*conversion_proxy + 0.2*content_quality; seo from GSC last14 (or totals) when present; otherwise content depth + retrieval_share + MDX structure; conversion from tool-conversion-map classification.",
   "pages": [
     {

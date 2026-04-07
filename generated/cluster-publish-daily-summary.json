@@ -1,11 +1,11 @@
 {
-  "date": "2026-04-06",
-  "runsCount": 28,
-  "totalStagedFilesWritten": 134,
-  "totalMainlineWritten": 126,
-  "totalFallbackWritten": 8,
-  "healthyRuns": 16,
-  "degradedRuns": 4,
-  "blockedRuns": 8,
-  "latestRunHealth": "healthy"
+  "date": "2026-04-07",
+  "runsCount": 1,
+  "totalStagedFilesWritten": 2,
+  "totalMainlineWritten": 0,
+  "totalFallbackWritten": 2,
+  "healthyRuns": 0,
+  "degradedRuns": 1,
+  "blockedRuns": 0,
+  "latestRunHealth": "degraded"
 }

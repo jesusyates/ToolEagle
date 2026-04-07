@@ -1,6 +1,6 @@
 {
   "version": "184.1",
-  "builtAt": "2026-04-06T06:00:44.108Z",
+  "builtAt": "2026-04-07T06:00:44.603Z",
   "status": "manual_required",
   "checklist": [
     "Apply Supabase migration 0037_v184_payment_events_closure.sql (or full chain including 0036).",

@@ -3,9 +3,10 @@
  * Frontmatter 键名为中文（见 seo-zh/zh-frontmatter-keys）。
  *
  * 公开 URL 段（ZhGuideRecord.slug）仅使用 ASCII-safe public slug：
- * 优先从文件名提取 `zh-<数字>` 前缀；否则将文件名 ASCII 化。不再使用 frontmatter「别名」作路由。
+ * 从文件名提取 `zh-<数字>` 前缀为 base；同 base 多文件时，字典序最小的 stem 使用纯 base，其余使用 base + '-' + sha256(stem) 前 8 位（与排序无关、跨平台稳定）。
  */
 
+import { createHash } from "node:crypto";
 import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
@@ -44,7 +45,7 @@ export function normalizeZhGuideSlug(raw: string): string {
 }
 
 /**
- * 从 md 文件名得到公开 slug（ASCII-only）。
+ * 从 md 文件名得到 base 段（ASCII-only）。
  * 现有文件多为 `zh-<timestamp>-<中文标题>.md` → 取 `zh-<timestamp>`。
  */
 export function publicSlugFromMdBasename(file: string): string {
@@ -57,6 +58,39 @@ export function publicSlugFromMdBasename(file: string): string {
     .replace(/-+/g, "-")
     .replace(/^-+|-+$/g, "");
   return ascii || "zh-guide";
+}
+
+/**
+ * 与 loadZhGuideRecords / sitemap 共用：同一批 md 文件名（basename）→ stem → 公开 slug。
+ * 文件名排序使用 localeCompare('en')，保证跨环境稳定。
+ */
+export function zhGuideStemToSlugMap(mdBasenames: string[]): Map<string, string> {
+  const sorted = [...mdBasenames].sort((a, b) => a.localeCompare(b, "en"));
+  const baseOf = (f: string) => publicSlugFromMdBasename(f);
+  const byBase = new Map<string, string[]>();
+  for (const f of sorted) {
+    const stem = path.basename(f, ".md");
+    const b = baseOf(f);
+    if (!byBase.has(b)) byBase.set(b, []);
+    byBase.get(b)!.push(stem);
+  }
+  for (const stems of byBase.values()) {
+    stems.sort((a, b) => a.localeCompare(b, "en"));
+  }
+  const out = new Map<string, string>();
+  for (const [base, stemList] of byBase) {
+    const primary = stemList[0];
+    for (const stem of stemList) {
+      const slug =
+        stemList.length === 1
+          ? base
+          : stem === primary
+            ? base
+            : `${base}-${createHash("sha256").update(stem).digest("hex").slice(0, 8)}`;
+      out.set(stem, slug);
+    }
+  }
+  return out;
 }
 
 function mapDataToRecord(data: Record<string, unknown>): Omit<ZhGuideRecord, "body" | "slug"> {
@@ -76,17 +110,15 @@ function mapDataToRecord(data: Record<string, unknown>): Omit<ZhGuideRecord, "bo
 const loadZhGuideRecords = cache(async (): Promise<ZhGuideRecord[]> => {
   const files = (await fs.readdir(ZH_GUIDES_DIR).catch(() => [] as string[]))
     .filter((f) => f.endsWith(".md"))
-    .sort();
+    .sort((a, b) => a.localeCompare(b, "en"));
+  const stemToSlug = zhGuideStemToSlugMap(files);
   const posts: ZhGuideRecord[] = [];
-  const slugOrder = new Map<string, number>();
   for (const f of files) {
+    const stem = path.basename(f, ".md");
+    const slug = stemToSlug.get(stem)!;
     const raw = await fs.readFile(path.join(ZH_GUIDES_DIR, f), "utf8");
     const { data, content } = matter(raw);
     const d = data as Record<string, unknown>;
-    const base = publicSlugFromMdBasename(f);
-    const prev = slugOrder.get(base) ?? 0;
-    slugOrder.set(base, prev + 1);
-    const slug = prev > 0 ? `${base}-${prev + 1}` : base;
     posts.push({
       ...mapDataToRecord(d),
       slug,

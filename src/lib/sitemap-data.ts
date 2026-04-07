@@ -30,7 +30,7 @@ import { getAllGuideParams } from "@/config/traffic-topics";
 import { SITE_URL } from "@/config/site";
 import { getAllEnHowToSlugs } from "@/lib/en-how-to-content";
 import { mapZhGuideDataToRecordFields } from "@/lib/seo-zh/zh-frontmatter-keys";
-import { publicSlugFromMdBasename } from "@/lib/zh-guides-reader";
+import { zhGuideStemToSlugMap } from "@/lib/zh-guides-reader";
 import { createAdminClient } from "@/lib/supabase/admin";
 import {
   loadContentQualityStatus,
@@ -581,20 +581,20 @@ function zhGuideUrls(): SitemapEntry[] {
   const out: SitemapEntry[] = [];
   let files: string[] = [];
   try {
-    files = fs.readdirSync(dir).filter((f) => f.endsWith(".md")).sort();
+    files = fs.readdirSync(dir)
+      .filter((f) => f.endsWith(".md"))
+      .sort((a, b) => a.localeCompare(b, "en"));
   } catch {
     return [];
   }
-  const slugOrder = new Map<string, number>();
+  const stemToSlug = zhGuideStemToSlugMap(files);
   for (const f of files) {
     try {
+      const stem = path.basename(f, ".md");
+      const slug = stemToSlug.get(stem)!;
       const raw = fs.readFileSync(path.join(dir, f), "utf8");
       const { data } = matter(raw);
       const m = mapZhGuideDataToRecordFields(data as Record<string, unknown>);
-      const base = publicSlugFromMdBasename(f);
-      const prev = slugOrder.get(base) ?? 0;
-      slugOrder.set(base, prev + 1);
-      const slug = prev > 0 ? `${base}-${prev + 1}` : base;
       const lmRaw = m.updatedAt || m.publishedAt;
       const lm = lmRaw ? new Date(lmRaw) : now;
       out.push({

@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { SiteHeader } from "../../../_components/SiteHeader";
-import { SiteFooter } from "../../../_components/SiteFooter";
 import { getZhGuideBySlug, getZhGuideSlugs } from "@/lib/zh-guides-reader";
 import { getRelatedZhGuideLinks } from "@/lib/zh-guide-related";
 import {
@@ -19,8 +17,9 @@ export const dynamic = "force-static";
 
 export async function generateStaticParams() {
   const slugs = await getZhGuideSlugs();
-  console.log("[zh-gsp] slugs=", slugs.length);
-  return slugs.map((slug) => ({ slug }));
+  const sorted = [...slugs].sort((a, b) => a.localeCompare(b, "en"));
+  console.log("[zh-gsp] count=", sorted.length, "slugs=", JSON.stringify(sorted));
+  return sorted.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
@@ -100,7 +99,6 @@ export default async function Page({ params }: { params: Params }) {
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c")
         }}
       />
-      <SiteHeader />
       <article className="flex-1">
         <div className="container pt-10 pb-16 max-w-3xl">
           <p className="text-xs text-slate-500">
@@ -155,7 +153,6 @@ export default async function Page({ params }: { params: Params }) {
           ) : null}
         </div>
       </article>
-      <SiteFooter />
     </main>
   );
 }

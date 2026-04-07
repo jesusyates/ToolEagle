@@ -6,11 +6,12 @@ import matter from "gray-matter";
 
 const CJK = /[\u4e00-\u9fff]/;
 const MIN_BODY = 350;
-const SOFT_BODY = 1200;
+/** Aligned with MIN_BODY so short freeform guides are not blocked as “repair” for length alone. */
+const SOFT_BODY = MIN_BODY;
 const MIN_ANSWER_SOFT = 60;
 const ANSWER_FREEZE_BELOW = 28;
 const MIN_AI_SUMMARY = 80;
-const MIN_H2 = 4;
+const MIN_H2 = 3;
 
 export type PublishedGuideAuditDecision = "pass" | "repair" | "freeze";
 
@@ -102,6 +103,45 @@ function templatePhrases(body: string): number {
   return n;
 }
 
+/** Observed EN cluster-publish filler: fixed H2 ladder + same paragraphs across topics. */
+const KNOWN_BOILERPLATE_H2_SEQUENCE: readonly string[] = [
+  "introduction",
+  "why it matters",
+  "step 1: define the outcome in one sentence",
+  "step 2: build one arc per post",
+  "step 3: publish, read comments, iterate once",
+  "common mistakes",
+  "practical tips",
+  "conclusion",
+];
+
+function normalizedH2Sequence(body: string): string[] {
+  const m = body.match(/^##\s+([^\n]+)/gm);
+  if (!m) return [];
+  return m.map((line) =>
+    line
+      .replace(/^##\s+/, "")
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, " ")
+  );
+}
+
+function matchesKnownBoilerplateSkeleton(h2s: readonly string[]): boolean {
+  if (h2s.length !== KNOWN_BOILERPLATE_H2_SEQUENCE.length) return false;
+  for (let i = 0; i < h2s.length; i++) {
+    if (h2s[i] !== KNOWN_BOILERPLATE_H2_SEQUENCE[i]) return false;
+  }
+  return true;
+}
+
+const BOILERPLATE_WHY_SNIPPET =
+  "getting this right changes whether your content compounds or resets to zero every week";
+
+function hasBoilerplateWhyParagraph(body: string): boolean {
+  return stripMd(body).toLowerCase().includes(BOILERPLATE_WHY_SNIPPET);
+}
+
 /** Full audit for one markdown document (body + frontmatter). */
 export function auditPublishedGuideMarkdown(filename: string, raw: string): PublishedGuideAuditResult {
   const { data, content: body } = matter(raw);
@@ -129,6 +169,13 @@ export function auditPublishedGuideMarkdown(filename: string, raw: string): Publ
 
   const tpl = templatePhrases(body);
   if (tpl >= 4) reasons.push("strong_template_wording");
+
+  const h2Seq = normalizedH2Sequence(body);
+  if (matchesKnownBoilerplateSkeleton(h2Seq)) {
+    reasons.push("body_template_duplicate");
+  } else if (hasBoilerplateWhyParagraph(body) && tpl >= 2) {
+    reasons.push("repetitive_structure");
+  }
 
   const overlap = titleBodyOverlap(title, body.slice(0, 2500));
   if (overlap < 0.12) reasons.push("title_body_keyword_overlap_low");

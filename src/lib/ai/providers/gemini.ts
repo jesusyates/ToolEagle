@@ -41,13 +41,29 @@ async function generateViaGemini(input: ProviderGenerateInput | ProviderTextInpu
 
   if (!response.ok) {
     const err = await response.text();
+    console.error("[gemini] providerAttempted=gemini providerFailed=gemini", `HTTP ${response.status}`, err.slice(0, 400));
     throw new Error(`Gemini HTTP ${response.status}: ${err.slice(0, 500)}`);
   }
 
   const data = (await response.json()) as {
     candidates?: { content?: { parts?: { text?: string }[] } }[];
+    error?: { message?: string };
   };
   const rawText = data.candidates?.[0]?.content?.parts?.map((p) => p?.text ?? "").join("") ?? "";
+  if (!rawText.trim()) {
+    const payload = JSON.stringify(data).slice(0, 800);
+    console.error(
+      "[gemini] providerAttempted=gemini providerFailed=gemini responseEmpty=true",
+      data.error?.message ?? payload
+    );
+    throw new Error(
+      `Gemini returned empty text (blocked, no candidates, or API error). ${data.error?.message ?? payload.slice(0, 200)}`
+    );
+  }
+  console.info(
+    "[gemini] providerAttempted=gemini providerFailed=none responseEmpty=false chars=",
+    rawText.length
+  );
   return { rawText, model, providerId: "gemini" };
 }
 

@@ -2,13 +2,22 @@
  * Cluster → topic → article → publish + priority state (CLI, scheduler, daily-engine).
  */
 
+import crypto from "node:crypto";
 import fs from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { rebuildToSeoArticle } from "../src/lib/seo/rebuild-article";
 import { composeStagedGuide, STAGED_GUIDES_DIR } from "../src/lib/auto-posts";
 import { auditPublishedGuideMarkdown } from "../src/lib/seo/published-guide-audit";
-import { generateTopicClusters, generateTopics, recordClusterRunOutcome } from "../src/lib/seo/topic-engine";
+import {
+  computeMinYieldFallbackNeed,
+  generateTopicClusters,
+  generateTopics,
+  MIN_FILES_PER_RUN,
+  recordClusterRunOutcome,
+  rewriteMainlineTopicTitleForDedupV1,
+  rewriteMainlineTopicTitleForDedupV2
+} from "../src/lib/seo/topic-engine";
 import { evaluateClusterReadiness } from "../src/lib/seo/cluster-gate";
 import { evaluatePublishReadiness } from "../src/lib/seo/publish-gate";
 import { evaluateEnContentLanguage } from "../src/lib/seo/language-gate";
@@ -16,9 +25,28 @@ import {
   evaluateTopicReadiness,
   shouldPreDropTopicBeforeModel
 } from "../src/lib/seo/topic-gate";
-import { loadContentAssetIndexEntries, topicHitsAssetIndex } from "../src/lib/seo/content-asset-index";
+import { describeEnAssetIndexHit, loadContentAssetIndexEntries } from "../src/lib/seo/content-asset-index";
 import { getAllAutoPosts, getAllStagedPosts, getStagedGuideCount } from "../src/lib/auto-posts-reader";
 import type { ClusterPriorityMeta } from "../src/lib/seo/cluster-priority";
+
+/** Stable SHA-256 of markdown body text (matches gray-matter `content` after trim). */
+function hashStagedGuideBody(body: string): string {
+  const n = String(body ?? "").replace(/\r\n/g, "\n").trim();
+  return crypto.createHash("sha256").update(n, "utf8").digest("hex");
+}
+
+function normalizeTopicKey(s: string): string {
+  return s.replace(/\s+/g, " ").trim().toLowerCase();
+}
+
+/** Adds normalized title + optional stripped guide suffix for topic-pool matching. */
+function addTopicKeyVariants(raw: string, set: Set<string>): void {
+  const t = raw.replace(/\s+/g, " ").trim();
+  if (!t) return;
+  set.add(normalizeTopicKey(t));
+  const stripped = t.replace(/:\s*a practical guide\s*$/i, "").trim();
+  if (stripped) set.add(normalizeTopicKey(stripped));
+}
 
 export const CLUSTER_PUBLISH_LAST_RUN_JSON = path.join(
   process.cwd(),
@@ -37,6 +65,27 @@ export const SEO_GUIDES_PUBLISH_HEALTH_JSON = path.join(
   process.cwd(),
   "generated",
   "seo-guides-publish-health.json"
+);
+
+/** Machine-readable run health for automation / dashboards (minimal fields). */
+export const CLUSTER_PUBLISH_RUN_HEALTH_JSON = path.join(
+  process.cwd(),
+  "generated",
+  "cluster-publish-run-health.json"
+);
+
+/** Last healthy mainline-dominant snapshot for regression comparison (updated only when healthy). */
+export const CLUSTER_PUBLISH_BASELINE_JSON = path.join(
+  process.cwd(),
+  "generated",
+  "cluster-publish-baseline.json"
+);
+
+/** Rolling same-calendar-day (UTC) totals for cluster-publish runs. */
+export const CLUSTER_PUBLISH_DAILY_SUMMARY_JSON = path.join(
+  process.cwd(),
+  "generated",
+  "cluster-publish-daily-summary.json"
 );
 
 export type SeoGuidesPublishHealth = {
@@ -71,7 +120,7 @@ export type SeoGuidesPublishHealth = {
   minStagedTarget?: number;
   /** 本轮实际新增 staged 文件数（以目录增量为准）。 */
   stagedFilesWrittenThisRun?: number;
-  /** 本轮发布脚本写入 auto-posts 数（generate 阶段恒为 0）。 */
+  /** 本轮发布脚本写入 sent-guides 数（generate 阶段恒为 0）。 */
   publishedFilesWrittenThisRun?: number;
   minFilesWrittenPerRun?: number;
   fileThroughputSatisfied?: boolean;
@@ -80,6 +129,10 @@ export type SeoGuidesPublishHealth = {
   publishGateThresholdEn?: number;
   fallbackReleaseUsed?: boolean;
   fallbackReleaseTopic?: string | null;
+  mainlineWritten?: number;
+  fallbackWritten?: number;
+  runHealth?: "healthy" | "degraded" | "blocked";
+  runHealthReason?: string;
 };
 
 export type ClusterPublishRunResult = {
@@ -116,6 +169,12 @@ export type ClusterPublishRunResult = {
   minFilesWrittenPerRun: number;
   fileThroughputSatisfied: boolean;
   throughputFailureReason: string | null;
+  /** Staged files from cluster mainline path (not SEO fallback pool / not fallback-release). */
+  mainlineWritten?: number;
+  /** Staged files from SEO fallback pool or fallback-release staging. */
+  fallbackWritten?: number;
+  runHealth?: "healthy" | "degraded" | "blocked";
+  runHealthReason?: string;
 };
 
 /** Last-run + daily-engine observability (always written when the pipeline runs). */
@@ -157,12 +216,115 @@ function emptyMetrics(runAt: string): ClusterPublishRunResult {
     publishedFilesWrittenThisRun: 0,
     minFilesWrittenPerRun: 1,
     fileThroughputSatisfied: false,
-    throughputFailureReason: null
+    throughputFailureReason: null,
+    mainlineWritten: 0,
+    fallbackWritten: 0,
+    runHealth: "blocked",
+    runHealthReason: "no_files_written"
   };
 }
 
 function topFailedReasons(counts: Record<string, number>): Record<string, number> {
   return Object.fromEntries(Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 15));
+}
+
+/** Minimal run health: mainline vs fallback dominance and throughput (no external config). */
+export function computeClusterPublishRunHealth(input: {
+  stagedFilesWrittenThisRun: number;
+  mainlineWritten: number;
+  fallbackWritten: number;
+  clustersPassed: number;
+}): { runHealth: "healthy" | "degraded" | "blocked"; runHealthReason: string } {
+  const s = input.stagedFilesWrittenThisRun;
+  const m = input.mainlineWritten;
+  const f = input.fallbackWritten;
+  const c = input.clustersPassed;
+  if (c === 0) {
+    return { runHealth: "blocked", runHealthReason: "no_clusters_passed" };
+  }
+  if (s === 0) {
+    return { runHealth: "blocked", runHealthReason: "no_files_written" };
+  }
+  if (s >= 3 && m >= 2 && m > f) {
+    return { runHealth: "healthy", runHealthReason: "mainline_dominant" };
+  }
+  if (f >= m && f > 0) {
+    return { runHealth: "degraded", runHealthReason: "fallback_dominant" };
+  }
+  return { runHealth: "degraded", runHealthReason: "low_mainline_yield" };
+}
+
+/** Observability only: aggregate blocker counts for duplicate-style softpass vs gate rejections. */
+function computeSupplyPressureFromBlockers(counts: Record<string, number>): {
+  duplicatePressure: number;
+  gatePressure: number;
+} {
+  let duplicatePressure = 0;
+  let gatePressure = 0;
+  for (const [k, v] of Object.entries(counts)) {
+    if (
+      k.startsWith("pre_dedup_softpass:") ||
+      k.startsWith("topic_gate_softpass:") ||
+      k.startsWith("publish_gate_softpass:")
+    ) {
+      duplicatePressure += v;
+    } else if (k.startsWith("cluster_gate:")) {
+      gatePressure += v;
+    } else if (k.startsWith("topic_gate:") && !k.startsWith("topic_gate_softpass:")) {
+      gatePressure += v;
+    } else if (k.startsWith("publish_gate:") && !k.startsWith("publish_gate_softpass:")) {
+      gatePressure += v;
+    } else if (k.startsWith("final_audit:")) {
+      const sub = k.slice("final_audit:".length).toLowerCase();
+      if (/duplicate|body_template|repetitive|similar|jaccard|title_near/.test(sub)) duplicatePressure += v;
+      else gatePressure += v;
+    }
+  }
+  return { duplicatePressure, gatePressure };
+}
+
+function writeClusterPublishDailySummary(opts: {
+  runAt: string;
+  stagedFilesWrittenThisRun: number;
+  mainlineWritten: number;
+  fallbackWritten: number;
+  runHealth: "healthy" | "degraded" | "blocked";
+}): void {
+  const day = opts.runAt.slice(0, 10);
+  type Row = {
+    date: string;
+    runsCount: number;
+    totalStagedFilesWritten: number;
+    totalMainlineWritten: number;
+    totalFallbackWritten: number;
+    healthyRuns: number;
+    degradedRuns: number;
+    blockedRuns: number;
+    latestRunHealth: "healthy" | "degraded" | "blocked";
+  };
+  let prev: Row | null = null;
+  try {
+    if (fs.existsSync(CLUSTER_PUBLISH_DAILY_SUMMARY_JSON)) {
+      prev = JSON.parse(fs.readFileSync(CLUSTER_PUBLISH_DAILY_SUMMARY_JSON, "utf8")) as Row;
+    }
+  } catch {
+    prev = null;
+  }
+  const same = prev && prev.date === day;
+  const next: Row = {
+    date: day,
+    runsCount: (same ? prev!.runsCount : 0) + 1,
+    totalStagedFilesWritten: (same ? prev!.totalStagedFilesWritten : 0) + opts.stagedFilesWrittenThisRun,
+    totalMainlineWritten: (same ? prev!.totalMainlineWritten : 0) + opts.mainlineWritten,
+    totalFallbackWritten: (same ? prev!.totalFallbackWritten : 0) + opts.fallbackWritten,
+    healthyRuns: (same ? prev!.healthyRuns : 0) + (opts.runHealth === "healthy" ? 1 : 0),
+    degradedRuns: (same ? prev!.degradedRuns : 0) + (opts.runHealth === "degraded" ? 1 : 0),
+    blockedRuns: (same ? prev!.blockedRuns : 0) + (opts.runHealth === "blocked" ? 1 : 0),
+    latestRunHealth: opts.runHealth
+  };
+  fs.mkdirSync(path.dirname(CLUSTER_PUBLISH_DAILY_SUMMARY_JSON), { recursive: true });
+  fs.writeFileSync(CLUSTER_PUBLISH_DAILY_SUMMARY_JSON, JSON.stringify(next, null, 2), "utf8");
+  console.log("[cluster-publish] wrote generated/cluster-publish-daily-summary.json");
 }
 
 function writeClusterPublishArtifacts(payload: ClusterPublishLastRunFile, health: SeoGuidesPublishHealth): void {
@@ -188,24 +350,71 @@ function writeClusterPublishArtifacts(payload: ClusterPublishLastRunFile, health
  * Full pipeline. Always writes `cluster-publish-last-run.json` and `cluster-publish-daily-status.json`.
  * Does not throw: returns `success: false` and `error` on failure (daily-engine stays non-fatal).
  */
-export async function runClusterPublishPipeline(options?: { source?: string }): Promise<ClusterPublishLastRunFile> {
+export async function runClusterPublishPipeline(options?: {
+  source?: string;
+  /** With `source: "content-batch"`, cap articles to stage this invocation (e.g. batch EN target). */
+  contentBatchStagedTarget?: number;
+}): Promise<ClusterPublishLastRunFile> {
   const source = options?.source ?? process.env.SEO_CLUSTER_PUBLISH_SOURCE ?? "cli";
   const runAt = new Date().toISOString();
+  const isContentBatch = source === "content-batch";
 
   try {
     const MIN_STAGED_TARGET = 10;
-    const MIN_FILES_DEFAULT = Math.max(1, parseInt(process.env.MIN_FILES_WRITTEN_PER_RUN ?? "3", 10) || 1);
-    const MIN_FILES_INV = Math.max(1, parseInt(process.env.MIN_FILES_WRITTEN_PER_RUN_INVENTORY_LOW ?? "4", 10) || 1);
+    /** Stopping target: same as `MIN_FILES_PER_RUN` in topic-engine (single source; env may override). */
+    const MIN_FILES_DEFAULT = Math.max(
+      1,
+      parseInt(process.env.MIN_FILES_WRITTEN_PER_RUN ?? String(MIN_FILES_PER_RUN), 10) || MIN_FILES_PER_RUN
+    );
+    const MIN_FILES_INV = Math.max(
+      1,
+      parseInt(process.env.MIN_FILES_WRITTEN_PER_RUN_INVENTORY_LOW ?? String(MIN_FILES_PER_RUN), 10) ||
+        MIN_FILES_PER_RUN
+    );
     const stagedCountBeforeRun = await getStagedGuideCount();
     const inventoryLow = stagedCountBeforeRun < MIN_STAGED_TARGET;
     const minFilesWrittenThisRun = inventoryLow ? MIN_FILES_INV : MIN_FILES_DEFAULT;
-    const MIN_SUCCESS = minFilesWrittenThisRun;
+    const batchCap =
+      isContentBatch &&
+      typeof options?.contentBatchStagedTarget === "number" &&
+      options.contentBatchStagedTarget > 0
+        ? options.contentBatchStagedTarget
+        : 0;
+    const MIN_SUCCESS =
+      batchCap > 0 ? Math.min(batchCap, minFilesWrittenThisRun) : minFilesWrittenThisRun;
+    const MAINLINE_MIN_BEFORE_BROAD_FALLBACK = 2;
+    /** 8+ target: require 4 mainline before fallback can freely backfill (see SEO / min-yield caps). */
+    const mainlineMinRequiredBeforeFallback =
+      minFilesWrittenThisRun >= 8 ? 4 : MAINLINE_MIN_BEFORE_BROAD_FALLBACK;
     const MAX_TOPIC_ATTEMPTS = inventoryLow ? Math.max(32, minFilesWrittenThisRun * 24) : Math.max(20, minFilesWrittenThisRun * 16);
     const MAX_CLUSTER_ROUNDS = inventoryLow ? Math.max(6, minFilesWrittenThisRun + 4) : Math.max(5, minFilesWrittenThisRun + 3);
 
     const [diskPosts, stagedPosts] = await Promise.all([getAllAutoPosts(), getAllStagedPosts()]);
+    /** diskPosts = legacy auto-posts ∪ sent-guides; with staged = full dedup corpus for title/body/slug. */
     const autoTitles = diskPosts.map((p) => p.title);
     const stagedTitles = stagedPosts.map((p) => p.title);
+    const knownStagedBodyHashes = new Set<string>();
+    for (const p of [...stagedPosts, ...diskPosts]) {
+      knownStagedBodyHashes.add(hashStagedGuideBody(p.body));
+    }
+    const knownGuideSlugs = new Set<string>();
+    for (const p of [...stagedPosts, ...diskPosts]) {
+      if (p.slug) knownGuideSlugs.add(p.slug);
+    }
+
+    const initialStagedKeys = new Set<string>();
+    const usedTopicKeys = new Set<string>();
+    /** Manual batch: allow pool topics that already exist as staged files so new bodies can ship for review. */
+    if (!isContentBatch) {
+      for (const p of stagedPosts) {
+        addTopicKeyVariants(p.title, usedTopicKeys);
+        addTopicKeyVariants(p.title, initialStagedKeys);
+      }
+    }
+    for (const p of diskPosts) {
+      addTopicKeyVariants(p.title, usedTopicKeys);
+      addTopicKeyVariants(p.title, initialStagedKeys);
+    }
 
     const sessionArticleTitles: string[] = [];
     const sessionTopicStrings: string[] = [];
@@ -245,6 +454,31 @@ export async function runClusterPublishPipeline(options?: { source?: string }): 
     const enAssetIndex = loadContentAssetIndexEntries(process.cwd(), "en");
     let preIndexDedupDropped = 0;
 
+    /** Normalized keys for blocker top-N (strip numeric =… tails). */
+    const blockerReasonCounts: Record<string, number> = {};
+    function normalizeBlockerKey(raw: string): string {
+      return raw
+        .trim()
+        .replace(/=[\d.]+/g, "")
+        .replace(/\s+/g, " ")
+        .slice(0, 140);
+    }
+    function bumpBlocker(prefix: string, raw: string) {
+      const nk = normalizeBlockerKey(raw) || "(empty)";
+      const key = `${prefix}:${nk}`;
+      blockerReasonCounts[key] = (blockerReasonCounts[key] ?? 0) + 1;
+    }
+
+    function maybeBumpPreDedupSoftpass(
+      pre: ReturnType<typeof shouldPreDropTopicBeforeModel>,
+      cluster: string
+    ) {
+      if (!pre.drop && pre.preDedupSoftpassNote) {
+        bumpBlocker("pre_dedup_softpass", pre.preDedupSoftpassNote);
+        console.log(`[pre-dedup] cluster="${cluster}" pre_dedup_softpass:${pre.preDedupSoftpassNote}`);
+      }
+    }
+
     function preDedupCorpus(): string[] {
       return [
         ...autoTitles,
@@ -262,31 +496,54 @@ export async function runClusterPublishPipeline(options?: { source?: string }): 
       article: Awaited<ReturnType<typeof rebuildToSeoArticle>>;
       score: number;
     };
-    let fallbackReleaseCandidate: FallbackReleaseCandidate | null = null;
+    /** Best publish-gate “similar title” candidate per topic (for min-yield fallback staging). */
+    const fallbackByTopic = new Map<string, FallbackReleaseCandidate>();
+    /** Count of staged files written this run (same meaning as metrics field `stagedFilesWrittenThisRun`). */
+    let stagedFilesWrittenThisRun = 0;
+    let mainlineWritten = 0;
+    let fallbackWritten = 0;
+
+    type PipelineOpts = { fromMainlineCluster?: boolean; publishRetryUsed?: boolean };
 
     async function processTopicThroughPipeline(
       topicStr: string,
       cluster: string,
       keyword: string,
-      angle: string
+      angle: string,
+      opts?: PipelineOpts
     ): Promise<boolean> {
+      const topicKey = normalizeTopicKey(topicStr);
+      if (usedTopicKeys.has(topicKey)) {
+        const reason = initialStagedKeys.has(topicKey) ? "topic_already_staged" : "topic_reused_recently";
+        bumpBlocker("topic_pool", reason);
+        console.log(`[topic-pool] cluster="${cluster}" skip ${reason} topic="${topicStr.slice(0, 80)}"`);
+        return false;
+      }
+
       const tr = evaluateTopicReadiness({
         topic: topicStr,
         existingTitles: topicGateCorpus()
       });
 
       if (tr.decision !== "pass") {
+        for (const r of tr.reasons) bumpBlocker("topic_gate", r);
         console.log(
           `[topic-gate] cluster="${cluster}" skipped decision=${tr.decision} score=${tr.score} reasons=${tr.reasons.join(" | ")}`
         );
         return false;
       }
+      for (const r of tr.reasons) {
+        if (r.startsWith("topic_gate_softpass:")) {
+          bumpBlocker("topic_gate_softpass", r.slice("topic_gate_softpass:".length));
+          console.log(`[topic-gate] cluster="${cluster}" ${r}`);
+        }
+      }
 
-      if (topicHitsAssetIndex(topicStr, "en", enAssetIndex)) {
+      const assetHit = describeEnAssetIndexHit(topicStr, enAssetIndex);
+      if (assetHit) {
         preIndexDedupDropped++;
-        console.log(
-          `[asset-index] cluster="${cluster}" skip duplicate_or_similar topic="${topicStr.slice(0, 96)}"`
-        );
+        bumpBlocker("asset_index", String(assetHit));
+        console.log(`[asset-index] cluster="${cluster}" skip ${assetHit} topic="${topicStr.slice(0, 96)}"`);
         return false;
       }
 
@@ -313,6 +570,7 @@ export async function runClusterPublishPipeline(options?: { source?: string }): 
       const lang = evaluateEnContentLanguage(enText);
       if (!lang.passed) {
         languageGateFailedCount++;
+        bumpBlocker("language_gate", lang.reason ?? "unknown");
         console.log(
           `[language-gate] cluster="${cluster}" skipped reason=${lang.reason ?? "unknown"} topic="${topicStr.slice(0, 80)}"`
         );
@@ -327,25 +585,93 @@ export async function runClusterPublishPipeline(options?: { source?: string }): 
       });
 
       if (pr.decision !== "pass") {
-        const similarReason = pr.reasons.find((r) => r.startsWith("similar_title:jaccard="));
+        const titleDup = pr.reasons.some((r) => r.includes("title_duplicate"));
+        if (
+          titleDup &&
+          opts?.fromMainlineCluster &&
+          !opts?.publishRetryUsed
+        ) {
+          const tryV1 = rewriteMainlineTopicTitleForDedupV1(topicStr);
+          if (tryV1 && tryV1 !== topicStr) {
+            console.log(
+              `[mainline-title-rewrite] mainline-title-rewrite-v1 publish_retry original="${topicStr.slice(0, 96)}" rewritten="${tryV1.slice(0, 96)}"`
+            );
+            const trRw = evaluateTopicReadiness({ topic: tryV1, existingTitles: topicGateCorpus() });
+            const assetRw = describeEnAssetIndexHit(tryV1, enAssetIndex);
+            const preRw = shouldPreDropTopicBeforeModel(tryV1, preDedupCorpus());
+            maybeBumpPreDedupSoftpass(preRw, cluster);
+            if (trRw.decision === "pass" && !assetRw && !preRw.drop) {
+              topicsPassed--;
+              sessionTopicStrings.pop();
+              if (tr.contentType === "ideas") topicsPassedByContentType.ideas--;
+              else topicsPassedByContentType.guide--;
+              console.log(
+                `[mainline-title-rewrite] publish_retry original="${topicStr.slice(0, 96)}" retry_ok=true`
+              );
+              return processTopicThroughPipeline(tryV1, cluster, keyword, angle, {
+                fromMainlineCluster: true,
+                publishRetryUsed: true
+              });
+            }
+          }
+          const tryV2 = rewriteMainlineTopicTitleForDedupV2(topicStr);
+          if (tryV2 && tryV2 !== topicStr) {
+            console.log(
+              `[mainline-title-rewrite] mainline-title-rewrite-v2 publish_retry original="${topicStr.slice(0, 96)}" rewritten="${tryV2.slice(0, 96)}"`
+            );
+            const trRw2 = evaluateTopicReadiness({ topic: tryV2, existingTitles: topicGateCorpus() });
+            const assetRw2 = describeEnAssetIndexHit(tryV2, enAssetIndex);
+            const preRw2 = shouldPreDropTopicBeforeModel(tryV2, preDedupCorpus());
+            maybeBumpPreDedupSoftpass(preRw2, cluster);
+            if (trRw2.decision === "pass" && !assetRw2 && !preRw2.drop) {
+              topicsPassed--;
+              sessionTopicStrings.pop();
+              if (tr.contentType === "ideas") topicsPassedByContentType.ideas--;
+              else topicsPassedByContentType.guide--;
+              console.log(
+                `[mainline-title-rewrite] publish_retry original="${topicStr.slice(0, 96)}" retry_ok=true`
+              );
+              return processTopicThroughPipeline(tryV2, cluster, keyword, angle, {
+                fromMainlineCluster: true,
+                publishRetryUsed: true
+              });
+            }
+          }
+          console.log(
+            `[mainline-title-rewrite] publish_retry original="${topicStr.slice(0, 96)}" retry_ok=false`
+          );
+        }
+
+        const similarReason = pr.reasons.find(
+          (r) =>
+            r.startsWith("high_similarity:content_jaccard=") || r.startsWith("similar_title:jaccard=")
+        );
         if (similarReason) {
           const scorePart = similarReason.split("=").pop() ?? "0";
           const score = Number.parseFloat(scorePart);
           const candidateScore = Number.isFinite(score) ? score : 0;
-          if (!fallbackReleaseCandidate || candidateScore > fallbackReleaseCandidate.score) {
-            fallbackReleaseCandidate = {
+          const prev = fallbackByTopic.get(topicStr);
+          if (!prev || candidateScore > prev.score) {
+            fallbackByTopic.set(topicStr, {
               topic: topicStr,
               cluster,
               contentType: tr.contentType === "ideas" ? "ideas" : "guide",
               article,
               score: candidateScore
-            };
+            });
           }
         }
+        for (const r of pr.reasons) bumpBlocker("publish_gate", r);
         console.log(
           `[publish-gate] cluster="${cluster}" skipped decision=${pr.decision} score=${pr.score} reasons=${pr.reasons.join(" | ")}`
         );
         return false;
+      }
+      for (const r of pr.reasons) {
+        if (r.startsWith("publish_gate_softpass:")) {
+          bumpBlocker("publish_gate_softpass", r.slice("publish_gate_softpass:".length));
+          console.log(`[publish-gate] cluster="${cluster}" ${r}`);
+        }
       }
 
       const plainDesc = article.body.replace(/#{1,6}\s+/g, "").replace(/\n+/g, " ").trim().slice(0, 220);
@@ -364,6 +690,7 @@ export async function runClusterPublishPipeline(options?: { source?: string }): 
         });
       } catch (err) {
         const m = err instanceof Error ? err.message : String(err);
+        bumpBlocker("compose_failed", m.slice(0, 120));
         publishErrors.push(`composeStagedGuide "${article.title.slice(0, 72)}": ${m}`);
         return false;
       }
@@ -372,8 +699,26 @@ export async function runClusterPublishPipeline(options?: { source?: string }): 
       if (fin.decision !== "pass") {
         finalAuditFailed++;
         for (const r of fin.reasons) finalAuditReasonCounts[r] = (finalAuditReasonCounts[r] ?? 0) + 1;
+        for (const r of fin.reasons) bumpBlocker("final_audit", r);
         console.log(
           `[final-audit] cluster="${cluster}" skipped decision=${fin.decision} reasons=${fin.reasons.join(" | ")}`
+        );
+        return false;
+      }
+
+      if (knownGuideSlugs.has(composed.slug)) {
+        usedTopicKeys.add(topicKey);
+        bumpBlocker("write_staged", "duplicate_slug");
+        console.log(`[write-staged] cluster="${cluster}" skip duplicate_slug slug=${composed.slug}`);
+        return false;
+      }
+
+      const bodyHash = hashStagedGuideBody(article.body);
+      if (knownStagedBodyHashes.has(bodyHash)) {
+        usedTopicKeys.add(topicKey);
+        bumpBlocker("write_staged", "duplicate_body_hash");
+        console.log(
+          `[write-staged] cluster="${cluster}" skip duplicate_body_hash topic="${topicStr.slice(0, 80)}"`
         );
         return false;
       }
@@ -383,13 +728,20 @@ export async function runClusterPublishPipeline(options?: { source?: string }): 
         await writeFile(composed.fullPath, composed.markdown, "utf8");
       } catch (err) {
         const m = err instanceof Error ? err.message : String(err);
+        bumpBlocker("write_staged", m.slice(0, 120));
         publishErrors.push(`write staged "${article.title.slice(0, 72)}": ${m}`);
         return false;
       }
+      knownStagedBodyHashes.add(bodyHash);
+      knownGuideSlugs.add(composed.slug);
+      usedTopicKeys.add(topicKey);
       finalAuditPassed++;
 
       sessionArticleTitles.push(article.title);
       articlesPassed++;
+      stagedFilesWrittenThisRun++;
+      if (opts?.fromMainlineCluster) mainlineWritten++;
+      else fallbackWritten++;
       articlesPassedByCluster[cluster] = (articlesPassedByCluster[cluster] ?? 0) + 1;
       if (tr.contentType === "ideas") articlesPassedByContentType.ideas++;
       else articlesPassedByContentType.guide++;
@@ -402,12 +754,40 @@ export async function runClusterPublishPipeline(options?: { source?: string }): 
       return true;
     }
 
-    while (
-      articlesPassed < MIN_SUCCESS &&
-      clusterRound < MAX_CLUSTER_ROUNDS &&
-      attemptsUsed < MAX_TOPIC_ATTEMPTS
-    ) {
+    /** Extra cluster rounds while mainline yield is low, before relying on SEO / min-yield fallback. */
+    const MAINLINE_STRETCH_EXTRA_ROUNDS = 5;
+
+    /** One extra mainline round when 1 short of target at round cap (avoids a single fallback slot). */
+    let mainlineLastSlotTried = false;
+
+    while (articlesPassed < MIN_SUCCESS && attemptsUsed < MAX_TOPIC_ATTEMPTS) {
+      const maxClusterRoundsAllowed =
+        mainlineWritten < MAINLINE_MIN_BEFORE_BROAD_FALLBACK && articlesPassed < MIN_SUCCESS
+          ? MAX_CLUSTER_ROUNDS + MAINLINE_STRETCH_EXTRA_ROUNDS
+          : MAX_CLUSTER_ROUNDS;
+      if (clusterRound >= maxClusterRoundsAllowed) {
+        const lastSlotEligible =
+          minFilesWrittenThisRun >= 8 &&
+          stagedFilesWrittenThisRun >= minFilesWrittenThisRun - 1 &&
+          articlesPassed < MIN_SUCCESS &&
+          mainlineWritten >= fallbackWritten &&
+          attemptsUsed < MAX_TOPIC_ATTEMPTS &&
+          !mainlineLastSlotTried;
+        if (lastSlotEligible) {
+          mainlineLastSlotTried = true;
+          console.log("[cluster-publish] mainline_last_slot_retry");
+        } else {
+          break;
+        }
+      }
       clusterRound++;
+      if (
+        clusterRound === MAX_CLUSTER_ROUNDS + 1 &&
+        mainlineWritten < MAINLINE_MIN_BEFORE_BROAD_FALLBACK &&
+        articlesPassed < MIN_SUCCESS
+      ) {
+        console.log("[cluster-publish] fallback_deferred_for_mainline cluster_round_stretch");
+      }
       const { clusters: rawClusters, priorityChoices } = generateTopicClusters({
         clusterCount: Math.min(4 + clusterRound - 1, 14),
         topicsPerCluster: 3
@@ -425,6 +805,7 @@ export async function runClusterPublishPipeline(options?: { source?: string }): 
             score: cr.score,
             reasons: cr.reasons
           });
+          for (const r of cr.reasons) bumpBlocker("cluster_gate", r);
           console.log(
             `[cluster-gate] cluster="${c.cluster}" skipped decision=${cr.decision} score=${cr.score} reasons=${cr.reasons.join(" | ")}`
           );
@@ -443,32 +824,98 @@ export async function runClusterPublishPipeline(options?: { source?: string }): 
           if (articlesPassed >= MIN_SUCCESS) break;
           if (attemptsUsed >= MAX_TOPIC_ATTEMPTS) break;
 
-          attemptsUsed++;
-          const pre = shouldPreDropTopicBeforeModel(topicStr, preDedupCorpus());
-          topicsSeenThisRun.push(topicStr);
+          let workTopic = topicStr;
+          let pre = shouldPreDropTopicBeforeModel(workTopic, preDedupCorpus());
+          if (pre.drop && pre.reason?.includes("title_duplicate")) {
+            const rw1 = rewriteMainlineTopicTitleForDedupV1(topicStr);
+            if (rw1) {
+              const pre2 = shouldPreDropTopicBeforeModel(rw1, preDedupCorpus());
+              const tr2 = evaluateTopicReadiness({ topic: rw1, existingTitles: topicGateCorpus() });
+              if (!pre2.drop && tr2.decision === "pass") {
+                workTopic = rw1;
+                pre = pre2;
+                console.log(
+                  `[mainline-title-rewrite] mainline-title-rewrite-v1 pre_dedup original="${topicStr.slice(0, 96)}" rewritten="${rw1.slice(0, 96)}"`
+                );
+              }
+            }
+            if (pre.drop && pre.reason?.includes("title_duplicate")) {
+              const rw2 = rewriteMainlineTopicTitleForDedupV2(topicStr);
+              if (rw2) {
+                const pre3 = shouldPreDropTopicBeforeModel(rw2, preDedupCorpus());
+                const tr3 = evaluateTopicReadiness({ topic: rw2, existingTitles: topicGateCorpus() });
+                if (!pre3.drop && tr3.decision === "pass") {
+                  workTopic = rw2;
+                  pre = pre3;
+                  console.log(
+                    `[mainline-title-rewrite] mainline-title-rewrite-v2 pre_dedup original="${topicStr.slice(0, 96)}" rewritten="${rw2.slice(0, 96)}"`
+                  );
+                }
+              }
+            }
+          }
+          if (!pre.drop) {
+            let tr0 = evaluateTopicReadiness({ topic: workTopic, existingTitles: topicGateCorpus() });
+            if (tr0.decision !== "pass" && tr0.reasons.some((r) => r.includes("title_duplicate"))) {
+              const rw1 = rewriteMainlineTopicTitleForDedupV1(topicStr);
+              if (rw1) {
+                const pre2 = shouldPreDropTopicBeforeModel(rw1, preDedupCorpus());
+                const tr2 = evaluateTopicReadiness({ topic: rw1, existingTitles: topicGateCorpus() });
+                if (!pre2.drop && tr2.decision === "pass") {
+                  workTopic = rw1;
+                  pre = pre2;
+                  console.log(
+                    `[mainline-title-rewrite] mainline-title-rewrite-v1 topic_gate original="${topicStr.slice(0, 96)}" rewritten="${rw1.slice(0, 96)}"`
+                  );
+                }
+              }
+              tr0 = evaluateTopicReadiness({ topic: workTopic, existingTitles: topicGateCorpus() });
+              if (tr0.decision !== "pass" && tr0.reasons.some((r) => r.includes("title_duplicate"))) {
+                const rw2 = rewriteMainlineTopicTitleForDedupV2(topicStr);
+                if (rw2) {
+                  const pre3 = shouldPreDropTopicBeforeModel(rw2, preDedupCorpus());
+                  const tr3 = evaluateTopicReadiness({ topic: rw2, existingTitles: topicGateCorpus() });
+                  if (!pre3.drop && tr3.decision === "pass") {
+                    workTopic = rw2;
+                    pre = pre3;
+                    console.log(
+                      `[mainline-title-rewrite] mainline-title-rewrite-v2 topic_gate original="${topicStr.slice(0, 96)}" rewritten="${rw2.slice(0, 96)}"`
+                    );
+                  }
+                }
+              }
+            }
+          }
+
+          topicsSeenThisRun.push(workTopic);
           if (pre.drop) {
             topicPreDedupDropped++;
+            bumpBlocker("pre_dedup", (pre.reason ?? "drop").replace(/^pre_dedup:/, ""));
             console.log(`[pre-dedup] cluster="${cl.cluster}" ${pre.reason ?? "drop"}`);
             continue;
           }
+          maybeBumpPreDedupSoftpass(pre, cl.cluster);
 
-          await processTopicThroughPipeline(
-            topicStr,
-            cl.cluster,
-            cl.cluster,
-            `cluster:${cl.cluster}`
-          );
+          attemptsUsed++;
+          await processTopicThroughPipeline(workTopic, cl.cluster, cl.cluster, `cluster:${cl.cluster}`, {
+            fromMainlineCluster: true
+          });
         }
       }
     }
 
+    /** 8+ target: soft floor — log first 2 combined fallback successes while mainline < 4, then release (no hard stop on total). */
+    let fallbackCombinedWhileBelowFloor = 0;
+    let fallbackSoftFloorReleased = false;
+
     if (articlesPassed < MIN_SUCCESS && attemptsUsed < MAX_TOPIC_ATTEMPTS) {
+      const mainlineBeforeSeoPool = mainlineWritten;
+      let seoFallbackStaged = 0;
       const pool = generateTopics({ count: 50 });
       for (const row of pool) {
         if (articlesPassed >= MIN_SUCCESS) break;
         if (attemptsUsed >= MAX_TOPIC_ATTEMPTS) break;
 
-        attemptsUsed++;
         const cluster = "SEO fallback pool";
         if (articlesPassedByCluster[cluster] === undefined) articlesPassedByCluster[cluster] = 0;
 
@@ -476,52 +923,162 @@ export async function runClusterPublishPipeline(options?: { source?: string }): 
         topicsSeenThisRun.push(row.topic);
         if (pre.drop) {
           topicPreDedupDropped++;
+          bumpBlocker("pre_dedup", (pre.reason ?? "drop").replace(/^pre_dedup:/, ""));
           console.log(`[pre-dedup] cluster="${cluster}" ${pre.reason ?? "drop"}`);
           continue;
         }
+        maybeBumpPreDedupSoftpass(pre, cluster);
 
-        await processTopicThroughPipeline(row.topic, cluster, row.keyword, row.angle);
+        attemptsUsed++;
+        const stagedOk = await processTopicThroughPipeline(row.topic, cluster, row.keyword, row.angle);
+        if (stagedOk) {
+          seoFallbackStaged++;
+          if (mainlineBeforeSeoPool < mainlineMinRequiredBeforeFallback) {
+            if (minFilesWrittenThisRun >= 8) {
+              if (!fallbackSoftFloorReleased && mainlineWritten < 4) {
+                fallbackCombinedWhileBelowFloor++;
+                console.log("[cluster-publish] mainline_min_share_protected");
+                console.log("[cluster-publish] fallback_limited_before_mainline_floor");
+                if (fallbackCombinedWhileBelowFloor >= 2) {
+                  fallbackSoftFloorReleased = true;
+                  console.log("[cluster-publish] fallback_floor_released_for_final_fill");
+                }
+              }
+            } else if (seoFallbackStaged >= 1) {
+              console.log("[cluster-publish] fallback_capped_until_mainline_ready seo_pool=1");
+              break;
+            }
+          }
+        }
       }
     }
 
-if (topicsPassed > 0 && articlesPassed === 0 && fallbackReleaseCandidate !== null) {
-  const candidate = fallbackReleaseCandidate as FallbackReleaseCandidate;
-  const plainDesc = candidate.article.body
-    .replace(/#{1,6}\s+/g, "")
-    .replace(/\n+/g, " ")
-    .trim()
-    .slice(0, 220);
-
-  try {
-    const composed = await composeStagedGuide({
-      title: candidate.article.title,
-      body: candidate.article.body,
-      hashtags: candidate.article.hashtags,
-      seoTitle: candidate.article.title,
-      seoDescription: plainDesc,
-      aiSummary: candidate.article.aiSummary,
-      faqs: candidate.article.faqs,
-      contentType: candidate.contentType,
-      clusterTheme: candidate.cluster
-    });
+    async function tryStageFallbackRelease(candidate: FallbackReleaseCandidate): Promise<boolean> {
+      const fbTopicKey = normalizeTopicKey(candidate.topic);
+      if (usedTopicKeys.has(fbTopicKey)) {
+        const reason = initialStagedKeys.has(fbTopicKey) ? "topic_already_staged" : "topic_reused_recently";
+        bumpBlocker("topic_pool", reason);
+        console.log(`[topic-pool] fallback-release skip ${reason} topic="${candidate.topic.slice(0, 80)}"`);
+        return false;
+      }
+      const plainDesc = candidate.article.body.replace(/#{1,6}\s+/g, "").replace(/\n+/g, " ").trim().slice(0, 220);
+      try {
+        const composed = await composeStagedGuide({
+          title: candidate.article.title,
+          body: candidate.article.body,
+          hashtags: candidate.article.hashtags,
+          seoTitle: candidate.article.title,
+          seoDescription: plainDesc,
+          aiSummary: candidate.article.aiSummary,
+          faqs: candidate.article.faqs,
+          contentType: candidate.contentType,
+          clusterTheme: candidate.cluster
+        });
         const fin = auditPublishedGuideMarkdown(composed.filename, composed.markdown);
-        if (fin.decision === "pass") {
-          await mkdir(STAGED_GUIDES_DIR, { recursive: true });
-          await writeFile(composed.fullPath, composed.markdown, "utf8");
-          finalAuditPassed++;
-          articlesPassed++;
-          articlesPassedByCluster[candidate.cluster] = (articlesPassedByCluster[candidate.cluster] ?? 0) + 1;
-          if (candidate.contentType === "ideas") articlesPassedByContentType.ideas++;
-          else articlesPassedByContentType.guide++;
-          fallbackReleaseUsed = true;
-          fallbackReleaseTopic = candidate.topic;
-          console.log(
-            `[fallback-release] staged topic="${candidate.topic}" reason=skip_publish_gate_similar_title_only`
-          );
+        if (fin.decision !== "pass") return false;
+        if (knownGuideSlugs.has(composed.slug)) {
+          usedTopicKeys.add(fbTopicKey);
+          bumpBlocker("write_staged", "duplicate_slug");
+          console.log(`[write-staged] fallback-release skip duplicate_slug slug=${composed.slug}`);
+          return false;
         }
+        const fbHash = hashStagedGuideBody(candidate.article.body);
+        if (knownStagedBodyHashes.has(fbHash)) {
+          usedTopicKeys.add(fbTopicKey);
+          bumpBlocker("write_staged", "duplicate_body_hash");
+          console.log(`[write-staged] fallback-release skip duplicate_body_hash topic="${candidate.topic.slice(0, 80)}"`);
+          return false;
+        }
+        await mkdir(STAGED_GUIDES_DIR, { recursive: true });
+        await writeFile(composed.fullPath, composed.markdown, "utf8");
+        knownStagedBodyHashes.add(fbHash);
+        knownGuideSlugs.add(composed.slug);
+        usedTopicKeys.add(fbTopicKey);
+        finalAuditPassed++;
+        articlesPassed++;
+        stagedFilesWrittenThisRun++;
+        fallbackWritten++;
+        articlesPassedByCluster[candidate.cluster] = (articlesPassedByCluster[candidate.cluster] ?? 0) + 1;
+        if (candidate.contentType === "ideas") articlesPassedByContentType.ideas++;
+        else articlesPassedByContentType.guide++;
+        fallbackReleaseUsed = true;
+        fallbackReleaseTopic = candidate.topic;
+        console.log(
+          `[fallback-release] staged topic="${candidate.topic}" reason=min_yield_or_similar_title`
+        );
+        return true;
       } catch (err) {
         const m = err instanceof Error ? err.message : String(err);
+        bumpBlocker("fallback_release", m.slice(0, 120));
         publishErrors.push(`fallbackRelease "${candidate.topic.slice(0, 72)}": ${m}`);
+        return false;
+      }
+    }
+
+    let needMinYield = computeMinYieldFallbackNeed(stagedFilesWrittenThisRun);
+    if (needMinYield > 0 && fallbackByTopic.size > 0) {
+      const mainlineSnapMinYield = mainlineWritten;
+      let minYieldFallbackStaged = 0;
+      const ranked = [...fallbackByTopic.values()].sort((a, b) => b.score - a.score);
+      for (const candidate of ranked) {
+        if (needMinYield <= 0) break;
+        if (
+          minFilesWrittenThisRun < 8 &&
+          mainlineSnapMinYield < MAINLINE_MIN_BEFORE_BROAD_FALLBACK &&
+          minYieldFallbackStaged >= 1
+        ) {
+          console.log("[cluster-publish] fallback_capped_until_mainline_ready min_yield_release=1");
+          break;
+        }
+        const ok = await tryStageFallbackRelease(candidate);
+        if (ok) {
+          minYieldFallbackStaged++;
+          if (minFilesWrittenThisRun >= 8 && mainlineSnapMinYield < 4 && !fallbackSoftFloorReleased) {
+            fallbackCombinedWhileBelowFloor++;
+            console.log("[cluster-publish] mainline_min_share_protected");
+            console.log("[cluster-publish] fallback_limited_before_mainline_floor");
+            if (fallbackCombinedWhileBelowFloor >= 2) {
+              fallbackSoftFloorReleased = true;
+              console.log("[cluster-publish] fallback_floor_released_for_final_fill");
+            }
+          }
+          needMinYield = computeMinYieldFallbackNeed(stagedFilesWrittenThisRun);
+        }
+      }
+    }
+
+    if (articlesPassed < MIN_SUCCESS && minFilesWrittenThisRun >= 8) {
+      if (!fallbackSoftFloorReleased) {
+        fallbackSoftFloorReleased = true;
+        console.log("[cluster-publish] fallback_floor_released_for_final_fill");
+      }
+      const FINAL_FILL_EXTRA_ATTEMPTS = 3;
+      let finalFillExtraUsed = 0;
+      console.log("[cluster-publish] final_fill_extra_attempt_budget", FINAL_FILL_EXTRA_ATTEMPTS);
+      const poolFinal = generateTopics({ count: 50 });
+      for (const row of poolFinal) {
+        if (articlesPassed >= MIN_SUCCESS) break;
+
+        const cluster = "SEO fallback pool";
+        if (articlesPassedByCluster[cluster] === undefined) articlesPassedByCluster[cluster] = 0;
+
+        const pre = shouldPreDropTopicBeforeModel(row.topic, preDedupCorpus());
+        topicsSeenThisRun.push(row.topic);
+        if (pre.drop) {
+          topicPreDedupDropped++;
+          bumpBlocker("pre_dedup", (pre.reason ?? "drop").replace(/^pre_dedup:/, ""));
+          console.log(`[pre-dedup] cluster="${cluster}" ${pre.reason ?? "drop"}`);
+          continue;
+        }
+        maybeBumpPreDedupSoftpass(pre, cluster);
+
+        if (attemptsUsed >= MAX_TOPIC_ATTEMPTS) {
+          if (finalFillExtraUsed >= FINAL_FILL_EXTRA_ATTEMPTS) break;
+          finalFillExtraUsed++;
+          console.log("[cluster-publish] final_fill_extra_attempt_used", finalFillExtraUsed);
+        }
+        attemptsUsed++;
+        await processTopicThroughPipeline(row.topic, cluster, row.keyword, row.angle);
       }
     }
 
@@ -569,16 +1126,17 @@ if (topicsPassed > 0 && articlesPassed === 0 && fallbackReleaseCandidate !== nul
       publishedFilesWrittenThisRun: 0,
       minFilesWrittenPerRun: minFilesWrittenThisRun,
       fileThroughputSatisfied: false,
-      throughputFailureReason: null
+      throughputFailureReason: null,
+      mainlineWritten,
+      fallbackWritten
     };
 
     const stagedCountAfterRun = await getStagedGuideCount();
-    const stagedFilesWrittenThisRun = Math.max(0, stagedCountAfterRun - stagedCountBeforeRun);
     const publishedFilesWrittenThisRun = 0;
     const fileThroughputSatisfied = stagedFilesWrittenThisRun >= minFilesWrittenThisRun;
     const throughputFailureReason = fileThroughputSatisfied
       ? null
-      : `low_throughput: staged_files_written=${stagedFilesWrittenThisRun} min_required=${minFilesWrittenThisRun} (directory delta; articlesPassed=${articlesPassed})`;
+      : `low_throughput: staged_files_written=${stagedFilesWrittenThisRun} min_required=${minFilesWrittenThisRun} (this-run counter)`;
 
     const metForcedTarget = fileThroughputSatisfied;
     const forcedFailMsg = metForcedTarget
@@ -586,13 +1144,24 @@ if (topicsPassed > 0 && articlesPassed === 0 && fallbackReleaseCandidate !== nul
       : throughputFailureReason ??
         `forced_success_target_not_met: articlesPassed=${articlesPassed} min_files=${minFilesWrittenThisRun} attemptsUsed=${attemptsUsed} maxTopicAttempts=${MAX_TOPIC_ATTEMPTS} maxClusterRounds=${MAX_CLUSTER_ROUNDS}`;
 
+    const { runHealth, runHealthReason } = computeClusterPublishRunHealth({
+      stagedFilesWrittenThisRun,
+      mainlineWritten,
+      fallbackWritten,
+      clustersPassed
+    });
+
     const runResultAug: ClusterPublishRunResult = {
       ...runResult,
       stagedFilesWrittenThisRun,
       publishedFilesWrittenThisRun,
       minFilesWrittenPerRun: minFilesWrittenThisRun,
       fileThroughputSatisfied,
-      throughputFailureReason: throughputFailureReason
+      throughputFailureReason: throughputFailureReason,
+      mainlineWritten,
+      fallbackWritten,
+      runHealth,
+      runHealthReason
     };
 
     const payload: ClusterPublishLastRunFile = {
@@ -641,10 +1210,93 @@ if (topicsPassed > 0 && articlesPassed === 0 && fallbackReleaseCandidate !== nul
       preDedupThresholdEn: PRE_DEDUP_THRESHOLD_EN,
       publishGateThresholdEn: PUBLISH_GATE_SIMILAR_TITLE_THRESHOLD_EN,
       fallbackReleaseUsed,
-      fallbackReleaseTopic
+      fallbackReleaseTopic,
+      mainlineWritten,
+      fallbackWritten,
+      runHealth,
+      runHealthReason
     };
 
     writeClusterPublishArtifacts(payload, health);
+
+    const topBlockers: [string, number][] = Object.entries(blockerReasonCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 12)
+      .map(([k, v]) => [k, v]);
+
+    const clustersConsidered = clustersGenerated;
+    const clusterPassRate =
+      clustersConsidered === 0 ? 0 : Math.round((clustersPassed / clustersConsidered) * 10000) / 10000;
+    const { duplicatePressure, gatePressure } = computeSupplyPressureFromBlockers(blockerReasonCounts);
+
+    try {
+      fs.mkdirSync(path.dirname(CLUSTER_PUBLISH_RUN_HEALTH_JSON), { recursive: true });
+      const runHealthPayload = {
+        timestamp: payload.runAt,
+        success: payload.success,
+        stagedFilesWrittenThisRun,
+        mainlineWritten,
+        fallbackWritten,
+        clustersConsidered,
+        clustersPassed,
+        clusterPassRate,
+        runHealth,
+        runHealthReason,
+        blockerReasonCounts,
+        topBlockers,
+        duplicatePressure,
+        gatePressure
+      };
+      fs.writeFileSync(CLUSTER_PUBLISH_RUN_HEALTH_JSON, JSON.stringify(runHealthPayload, null, 2), "utf8");
+      console.log("[cluster-publish] wrote generated/cluster-publish-run-health.json");
+      console.log("[cluster-publish] topBlockers:", JSON.stringify(topBlockers));
+      console.log(`[cluster-publish] pressure: duplicate=${duplicatePressure} gate=${gatePressure}`);
+    } catch (healthWriteErr) {
+      console.warn(
+        "[cluster-publish] health json write failed:",
+        healthWriteErr instanceof Error ? healthWriteErr.message : String(healthWriteErr)
+      );
+    }
+
+    try {
+      if (runHealth === "healthy" && mainlineWritten >= fallbackWritten) {
+        fs.mkdirSync(path.dirname(CLUSTER_PUBLISH_BASELINE_JSON), { recursive: true });
+        const baselinePayload = {
+          timestamp: payload.runAt,
+          targetMinFilesPerRun: MIN_FILES_PER_RUN,
+          stagedFilesWrittenThisRun,
+          mainlineWritten,
+          fallbackWritten,
+          runHealth,
+          runHealthReason,
+          baselineVersion: "v2"
+        };
+        fs.writeFileSync(CLUSTER_PUBLISH_BASELINE_JSON, JSON.stringify(baselinePayload, null, 2), "utf8");
+        console.log("[cluster-publish] wrote generated/cluster-publish-baseline.json");
+      } else if (runHealth !== "healthy") {
+        console.log("[cluster-publish] baseline_not_updated");
+      }
+    } catch (baselineErr) {
+      console.warn(
+        "[cluster-publish] baseline json write failed:",
+        baselineErr instanceof Error ? baselineErr.message : String(baselineErr)
+      );
+    }
+
+    try {
+      writeClusterPublishDailySummary({
+        runAt: payload.runAt,
+        stagedFilesWrittenThisRun,
+        mainlineWritten,
+        fallbackWritten,
+        runHealth
+      });
+    } catch (dailySummaryErr) {
+      console.warn(
+        "[cluster-publish] daily summary write failed:",
+        dailySummaryErr instanceof Error ? dailySummaryErr.message : String(dailySummaryErr)
+      );
+    }
 
     console.log(
       "[rebuild-and-publish] clustersGenerated:",
@@ -671,6 +1323,8 @@ if (topicsPassed > 0 && articlesPassed === 0 && fallbackReleaseCandidate !== nul
       articlesPassed,
       "stagedFilesWrittenThisRun:",
       stagedFilesWrittenThisRun,
+      "targetMinFilesPerRun:",
+      MIN_FILES_PER_RUN,
       "minFilesWrittenThisRun:",
       minFilesWrittenThisRun,
       "success:",
@@ -690,7 +1344,15 @@ if (topicsPassed > 0 && articlesPassed === 0 && fallbackReleaseCandidate !== nul
       "dailyStatusJson:",
       CLUSTER_PUBLISH_DAILY_STATUS_JSON,
       "healthJson:",
-      SEO_GUIDES_PUBLISH_HEALTH_JSON
+      SEO_GUIDES_PUBLISH_HEALTH_JSON,
+      "mainlineWritten:",
+      mainlineWritten,
+      "fallbackWritten:",
+      fallbackWritten,
+      "runHealth:",
+      runHealth,
+      "runHealthReason:",
+      runHealthReason
     );
 
     return payload;
@@ -746,9 +1408,24 @@ if (topicsPassed > 0 && articlesPassed === 0 && fallbackReleaseCandidate !== nul
       preDedupThresholdEn: 0.93,
       publishGateThresholdEn: 0.7,
       fallbackReleaseUsed: false,
-      fallbackReleaseTopic: null
+      fallbackReleaseTopic: null,
+      mainlineWritten: 0,
+      fallbackWritten: 0,
+      runHealth: "blocked",
+      runHealthReason: "no_files_written"
     };
     writeClusterPublishArtifacts(payload, health);
+    try {
+      writeClusterPublishDailySummary({
+        runAt,
+        stagedFilesWrittenThisRun: 0,
+        mainlineWritten: 0,
+        fallbackWritten: 0,
+        runHealth: "blocked"
+      });
+    } catch {
+      /* ignore */
+    }
     console.error("[cluster-publish-pipeline] failed:", msg);
     return payload;
   }

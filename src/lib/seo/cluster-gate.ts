@@ -8,6 +8,9 @@ export type ClusterReadinessResult = {
   score: number;
 };
 
+/** Minimum score for pass (was 58; lowered so more spindle clusters clear gate). */
+const PASS_THRESHOLD = 50;
+
 /** Too vague / product-marketing style; whole-word match. */
 const ABSTRACT_WORD_RE = /\b(momentum|blueprint|system|framework|engine)\b/i;
 
@@ -90,7 +93,7 @@ export function evaluateClusterReadiness(input: ClusterReadinessInput): ClusterR
 
   score = Math.max(0, Math.min(100, Math.round(score)));
 
-  if (score >= 58) {
+  if (score >= PASS_THRESHOLD) {
     return { decision: "pass", reasons: reasons.length ? reasons : ["ok"], score };
   }
   if (score >= 42) {

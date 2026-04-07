@@ -39,7 +39,39 @@ type ClusterBlueprint = {
   cluster: string;
 };
 
+/** Prefer these spindles first so fresh angles surface before high-collision themes. */
+const NEW_EN_SPINDLE_CLUSTERS = new Set([
+  "Short-form editing workflow versioning and handoffs for solo creators",
+  "Client acquisition content and social proof for service sellers",
+  "Creator offers lead magnets and entry products on short video",
+  "Repost and repurpose systems across formats without duplicate fatigue",
+  "Comment to DM funnels and inbound qualification on short-form",
+  "Short-form hooks for local businesses and neighborhood offers",
+  "Content batching for appointment-based businesses between sessions",
+  "Before and after proof content without client face reveal",
+  "Educational carousel and list posts adapted into short video beats",
+  "Retention scripting and repeat viewers without growth hacks framing"
+]);
+
+/** Temporarily deprioritize: heavy overlap with existing published/staged EN titles. */
+const EN_DEMOTED_HIGH_COLLISION_CLUSTERS = new Set([
+  "Stuck creators and growth plateaus on Instagram and TikTok",
+  "No time no team low budget creator workflow on YouTube and TikTok",
+  "Service business routines on Instagram and TikTok for consultants",
+  "Scaling TikTok and Instagram with systems not hacks"
+]);
+
 const CLUSTER_BLUEPRINTS: ClusterBlueprint[] = [
+  { cluster: "Short-form editing workflow versioning and handoffs for solo creators" },
+  { cluster: "Client acquisition content and social proof for service sellers" },
+  { cluster: "Creator offers lead magnets and entry products on short video" },
+  { cluster: "Repost and repurpose systems across formats without duplicate fatigue" },
+  { cluster: "Comment to DM funnels and inbound qualification on short-form" },
+  { cluster: "Short-form hooks for local businesses and neighborhood offers" },
+  { cluster: "Content batching for appointment-based businesses between sessions" },
+  { cluster: "Before and after proof content without client face reveal" },
+  { cluster: "Educational carousel and list posts adapted into short video beats" },
+  { cluster: "Retention scripting and repeat viewers without growth hacks framing" },
   { cluster: "TikTok growth and discoverability" },
   { cluster: "Instagram consistency for busy creators" },
   { cluster: "YouTube Shorts and weekly growth for small channels" },
@@ -54,12 +86,12 @@ const CLUSTER_BLUEPRINTS: ClusterBlueprint[] = [
   { cluster: "YouTube creative routines and content planning before filming" },
   { cluster: "TikTok weekly planning and batch scripts" },
   { cluster: "Instagram burnout boundaries and rest days" },
-  { cluster: "Scaling TikTok and Instagram with systems not hacks" },
   { cluster: "Coaches and freelancers booking calls via short-form video" },
   { cluster: "Instagram reels versus feed posts for coaches and consultants" },
   { cluster: "YouTube Shorts versus long form for solo creators without editors" },
   { cluster: "Evergreen versus trend-led TikTok content for small channels" },
   { cluster: "Voiceover and storytelling on TikTok without talking head setups" },
+  { cluster: "Scaling TikTok and Instagram with systems not hacks" },
   { cluster: "Stuck creators and growth plateaus on Instagram and TikTok" },
   { cluster: "No time no team low budget creator workflow on YouTube and TikTok" },
   { cluster: "Service business routines on Instagram and TikTok for consultants" }
@@ -276,9 +308,15 @@ export function generateTopicClusters(options?: {
   const state = options?.priorityState ?? loadClusterPriorityState();
   const blueprints = CLUSTER_BLUEPRINTS.map((b) => ({ ...b }));
   const ranked = orderBlueprintsByPriority(blueprints, state);
+  const newFirst = ranked.filter((m) => NEW_EN_SPINDLE_CLUSTERS.has(m.cluster));
+  const mid = ranked.filter(
+    (m) => !NEW_EN_SPINDLE_CLUSTERS.has(m.cluster) && !EN_DEMOTED_HIGH_COLLISION_CLUSTERS.has(m.cluster)
+  );
+  const demotedLast = ranked.filter((m) => EN_DEMOTED_HIGH_COLLISION_CLUSTERS.has(m.cluster));
+  const rankedOrdered = [...newFirst, ...mid, ...demotedLast];
   const out: TopicCluster[] = [];
   const priorityChoices: ClusterPriorityMeta[] = [];
-  for (const m of ranked) {
+  for (const m of rankedOrdered) {
     if (out.length >= wantClusters) break;
     const raw = buildClusterTopicsForCluster(m.cluster, wantPer);
     const topics = raw.map((t) => t.replace(/\s+/g, " ").trim()).filter((t) => isAcceptableTopic(t));
@@ -303,4 +341,66 @@ export function clustersToGeneratedTopics(clusters: TopicCluster[]): GeneratedTo
     });
   }
   return rows;
+}
+
+/** Minimum staged files written per EN cluster-publish tick (yield floor; pipeline may add fallbacks). */
+export const MIN_FILES_PER_RUN = 12;
+
+export function computeMinYieldFallbackNeed(stagedFilesWrittenThisRun: number): number {
+  const filesWritten = stagedFilesWrittenThisRun || 0;
+  return Math.max(0, MIN_FILES_PER_RUN - filesWritten);
+}
+
+const INTENT_HINT = /\b(how|ideas|tips|guide|captions|hooks?|ways|strategy)\b/i;
+
+/** V1: workflow / guide / checklist / step-by-step (distinct from V2). */
+const MAINLINE_TITLE_DEDUP_V1_SUFFIXES = [
+  "— checklist for small creators (2026)",
+  "— step by step for part-time creators",
+  "— workflow template for solo creators",
+  "— practical action plan you can reuse"
+];
+
+/** V2: mistakes / examples / beginners / small business (different phrasing than V1). */
+const MAINLINE_TITLE_DEDUP_V2_SUFFIXES = [
+  "— mistakes to avoid and what to do instead",
+  "— examples and strategy for beginners",
+  "— for small business and service sellers",
+  "— common mistakes with fixes (short)"
+];
+
+function rewriteMainlineTopicTitleForDedupInner(
+  topic: string,
+  suffixes: readonly string[],
+  hashSalt: number
+): string | null {
+  const t = topic.replace(/\s+/g, " ").trim();
+  if (t.length < 24 || t.length > 80) return null;
+  let h = hashSalt >>> 0;
+  for (let i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) >>> 0;
+  const suf = suffixes[h % suffixes.length];
+  const maxTotal = 80;
+  const maxBase = Math.max(18, maxTotal - suf.length - 1);
+  const base = t.length > maxBase ? t.slice(0, maxBase).replace(/\s+\S*$/, "").trim() || t.slice(0, maxBase).trim() : t;
+  const out = `${base} ${suf}`.replace(/\s+/g, " ").trim();
+  if (out.length < 18 || out.length > 80) return null;
+  if (!INTENT_HINT.test(out)) return null;
+  const words = out.split(/\s+/).filter(Boolean);
+  if (words.length > 16) return null;
+  if (out === t) return null;
+  return out;
+}
+
+/**
+ * Mainline dedup rewrite variant 1 (workflow / guide style). Original → v1 → v2 order in pipeline.
+ */
+export function rewriteMainlineTopicTitleForDedupV1(topic: string): string | null {
+  return rewriteMainlineTopicTitleForDedupInner(topic, MAINLINE_TITLE_DEDUP_V1_SUFFIXES, 0);
+}
+
+/**
+ * Mainline dedup rewrite variant 2 (mistakes / examples / beginners / small business).
+ */
+export function rewriteMainlineTopicTitleForDedupV2(topic: string): string | null {
+  return rewriteMainlineTopicTitleForDedupInner(topic, MAINLINE_TITLE_DEDUP_V2_SUFFIXES, 7919);
 }

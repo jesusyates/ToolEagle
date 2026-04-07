@@ -11,6 +11,15 @@ import { mapZhGuideDataToRecordFields } from "@/lib/seo-zh/zh-frontmatter-keys";
 
 const ZH_GUIDES_DIR = path.join(process.cwd(), "content", "zh-guides");
 
+/** Temporary: one log per Node process for Vercel build / function visibility. */
+let contentSourceZhLogged = false;
+
+function logContentSourceZhOnce(zhGuides: number) {
+  if (contentSourceZhLogged) return;
+  contentSourceZhLogged = true;
+  console.log(`[content-source] zh-guides=${zhGuides}`);
+}
+
 export type ZhGuideRecord = {
   title: string;
   description: string;
@@ -41,6 +50,7 @@ function mapDataToRecord(data: Record<string, unknown>): Omit<ZhGuideRecord, "bo
 
 export async function getZhGuideSlugs(): Promise<string[]> {
   const files = await fs.readdir(ZH_GUIDES_DIR).catch(() => [] as string[]);
+  logContentSourceZhOnce(files.filter((f) => f.endsWith(".md")).length);
   const slugs: string[] = [];
   for (const f of files) {
     if (!f.endsWith(".md")) continue;
@@ -70,6 +80,7 @@ export async function getAllZhGuides(): Promise<ZhGuideRecord[]> {
     const tb = Date.parse(b.publishedAt) || 0;
     return tb - ta;
   });
+  logContentSourceZhOnce(posts.length);
   return posts;
 }
 

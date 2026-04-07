@@ -20,7 +20,17 @@ export type ClusterTopicKind =
   | "platform_nuance"
   | "content_mode_voiceover"
   | "stuck_plateau"
-  | "constraints_hard";
+  | "constraints_hard"
+  | "editing_workflow"
+  | "client_acquisition_content"
+  | "offers_lead_magnets"
+  | "repost_repurpose"
+  | "comment_dm_funnel"
+  | "local_business_hooks"
+  | "appointment_batching"
+  | "proof_before_after"
+  | "carousel_list_adapt"
+  | "retention_scripting";
 
 function inferPrimaryPlatform(cluster: string): "tiktok" | "instagram" | "youtube" {
   const s = cluster.toLowerCase();
@@ -40,6 +50,16 @@ function isCrossPlatformCluster(cluster: string): boolean {
  */
 export function inferClusterTopicKind(cluster: string): ClusterTopicKind {
   const s = cluster.toLowerCase();
+  if (/\bediting workflow\b|\bhandoffs\b/i.test(s)) return "editing_workflow";
+  if (/\bclient acquisition\b/i.test(s)) return "client_acquisition_content";
+  if (/\blead magnets\b|\bentry products\b/i.test(s)) return "offers_lead_magnets";
+  if (/\brepost\b|\brepurpose systems\b/i.test(s)) return "repost_repurpose";
+  if (/\bcomment to dm\b|\bdm funnels\b/i.test(s)) return "comment_dm_funnel";
+  if (/\blocal businesses\b|\bneighborhood offers\b/i.test(s)) return "local_business_hooks";
+  if (/\bappointment-based\b/i.test(s)) return "appointment_batching";
+  if (/\bbefore and after proof\b/i.test(s)) return "proof_before_after";
+  if (/\bcarousel\b|\blist posts adapted\b/i.test(s)) return "carousel_list_adapt";
+  if (/\bretention scripting\b|\brepeat viewers\b/i.test(s)) return "retention_scripting";
   if (/\bbeginner|\bbeginners\b/i.test(s)) return "beginners";
   if (/\bfaceless\b/i.test(s)) return "faceless";
   if (/\bpart[- ]time\b/i.test(s)) return "part_time";
@@ -263,6 +283,96 @@ function constraintsHardTopics(p: "tiktok" | "instagram" | "youtube"): string[] 
   ];
 }
 
+function editingWorkflowTopics(): string[] {
+  return [
+    "guide to naming short-form edit versions so midnight revisions stop looping",
+    "how to hand off rough cuts to captions without losing hook timing beats",
+    "tips for cutting first-draft fluff on reels without re-shooting the opener",
+    "how to build a solo edit checklist that catches audio peaks before export"
+  ];
+}
+
+function clientAcquisitionContentTopics(): string[] {
+  return [
+    "how to script sixty-second case studies that pre-qualify inbound DMs",
+    "tips for turning client wins into clips that attract similar industries",
+    "guide to content angles that signal price range before the discovery call",
+    "how to stack proof clips so strangers see outcomes before your bio link"
+  ];
+}
+
+function offersLeadMagnetsTopics(): string[] {
+  return [
+    "how to pitch a free audit in sixty seconds without sounding pushy",
+    "tips for naming a lead magnet in the hook so saves mean real opt-ins",
+    "guide to teasing a mini-course clip that still delivers one takeaway",
+    "how to close short clips with one clear next step past follow for more"
+  ];
+}
+
+function repostRepurposeTopics(p: "tiktok" | "instagram" | "youtube"): string[] {
+  return [
+    `how to strip a long webinar into five standalone ${p} clips same week`,
+    `tips for mapping one shoot into carousel beats then spoken ${p} script`,
+    `guide to refreshing old posts with new hooks without rerecording b-roll`,
+    `how to schedule repurposed clips so feeds do not feel copy-paste same day`
+  ];
+}
+
+function commentDmFunnelTopics(p: "tiktok" | "instagram" | "youtube"): string[] {
+  return [
+    `how to write pinned comments on ${p} that invite DMs without bot vibes`,
+    `tips for qualifying replies so ${p} comment threads become booked calls`,
+    `guide to one keyword replies that route fans to the right inbox template`,
+    `how to follow up ${p} DMs with a single question before sending links`
+  ];
+}
+
+function localBusinessHooksTopics(p: "tiktok" | "instagram" | "youtube"): string[] {
+  return [
+    `how to open ${p} clips with neighborhood pain before flashing your logo`,
+    `tips for local service hooks that name streets audiences actually recognize`,
+    `guide to short clips that mention city seasons without sounding generic`,
+    `how to end ${p} local offers with map-friendly next steps not just follow`
+  ];
+}
+
+function appointmentBatchingTopics(p: "tiktok" | "instagram" | "youtube"): string[] {
+  return [
+    `how to batch testimonial asks between ${p} clients without double bookings`,
+    `tips for filming micro-clips in gaps when calendar runs back-to-back`,
+    `guide to one-lens setup that works between sessions on ${p} weekly`,
+    `how to queue ${p} ideas from appointment notes the same evening`
+  ];
+}
+
+function proofBeforeAfterTopics(p: "tiktok" | "instagram" | "youtube"): string[] {
+  return [
+    `how to frame before-after proof on ${p} when clients decline face camera`,
+    `tips for numeric proof overlays that stay readable on small screens`,
+    `guide to storytelling arcs that show problem-solve without fake claims`,
+    `how to pair screenshots and voiceover on ${p} for trust-heavy niches`
+  ];
+}
+
+function carouselListAdaptTopics(p: "tiktok" | "instagram" | "youtube"): string[] {
+  return [
+    `how to turn carousel bullets into spoken beats on ${p} without slide reads`,
+    `tips for pacing list-post ideas as three-act ${p} stories under one minute`,
+    `guide to converting checklist posts into hook-proof-cta ${p} rhythm`,
+    `how to reuse list hooks on ${p} while changing the closing CTA each time`
+  ];
+}
+
+function retentionScriptingTopics(p: "tiktok" | "instagram" | "youtube"): string[] {
+  return [
+    `how to script mid-video patterns on ${p} that reward viewers who stay`,
+    `tips for series hooks that bring people back without promising viral spikes`,
+    `guide to cliffhangers that resolve next upload so trust beats gimmicks`,
+    `how to mention upcoming drops on ${p} so repeats feel planned not random`
+  ];
+}
+
 /**
  * Build guide-first topic lines for one cluster; distinct angles, same spindle.
  */
@@ -325,6 +435,36 @@ export function buildClusterTopicsForCluster(cluster: string, want: number): str
       break;
     case "constraints_hard":
       pool = constraintsHardTopics(p);
+      break;
+    case "editing_workflow":
+      pool = editingWorkflowTopics();
+      break;
+    case "client_acquisition_content":
+      pool = clientAcquisitionContentTopics();
+      break;
+    case "offers_lead_magnets":
+      pool = offersLeadMagnetsTopics();
+      break;
+    case "repost_repurpose":
+      pool = repostRepurposeTopics(p);
+      break;
+    case "comment_dm_funnel":
+      pool = commentDmFunnelTopics(p);
+      break;
+    case "local_business_hooks":
+      pool = localBusinessHooksTopics(p);
+      break;
+    case "appointment_batching":
+      pool = appointmentBatchingTopics(p);
+      break;
+    case "proof_before_after":
+      pool = proofBeforeAfterTopics(p);
+      break;
+    case "carousel_list_adapt":
+      pool = carouselListAdaptTopics(p);
+      break;
+    case "retention_scripting":
+      pool = retentionScriptingTopics(p);
       break;
     default:
       pool = growthTopics(p);

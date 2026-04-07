@@ -1,3 +1,5 @@
+import { enContentTokenJaccard, enContentTokenSet, normalizeEnTitleForDedup } from "./title-dedup-tokens";
+
 export type PublishReadinessInput = {
   title: string;
   body: string;
@@ -11,24 +13,13 @@ export type PublishReadinessResult = {
 };
 
 const LOW_VALUE_TITLE = [/^test/i, /^untitled/i, /^post about/i];
-const SIM_REJECT = 0.9;
+/** Content-token overlap must be high before trigram confirms near-duplicate (stopwords stripped). */
+const SIM_REJECT = 0.92;
 const SIM_REWRITE = 0.7;
 const NEAR_DUPLICATE_TRIGRAM_REJECT = 0.9;
 
-function normalizeForTokens(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function tokenSet(s: string): Set<string> {
-  return new Set(normalizeForTokens(s).split(" ").filter((w) => w.length > 2));
-}
-
 function jaccard(a: Set<string>, b: Set<string>): number {
-  if (a.size === 0 && b.size === 0) return 1;
+  if (a.size === 0 && b.size === 0) return 0;
   let inter = 0;
   for (const x of a) if (b.has(x)) inter++;
   const union = a.size + b.size - inter;
@@ -36,19 +27,17 @@ function jaccard(a: Set<string>, b: Set<string>): number {
 }
 
 function maxTitleSimilarity(title: string, existingTitles: string[]): number {
-  const a = tokenSet(title);
-  if (a.size === 0) return 0;
   let max = 0;
   for (const t of existingTitles) {
     const s = String(t ?? "").trim();
     if (!s) continue;
-    max = Math.max(max, jaccard(a, tokenSet(s)));
+    max = Math.max(max, enContentTokenJaccard(title, s));
   }
   return max;
 }
 
 function trigramSet(s: string): Set<string> {
-  const t = normalizeForTokens(s).replace(/\s+/g, " ").trim();
+  const t = normalizeEnTitleForDedup(s).replace(/\s+/g, " ").trim();
   const out = new Set<string>();
   if (t.length < 3) {
     if (t) out.add(t);
@@ -62,18 +51,29 @@ function trigramJaccardTitle(aTitle: string, bTitle: string): number {
   return jaccard(trigramSet(aTitle), trigramSet(bTitle));
 }
 
-function hasNearDuplicateTitle(title: string, existingTitles: string[]): boolean {
-  const normalized = normalizeForTokens(title);
+/**
+ * TASK22: No hard reject on title_duplicate here — token+trigram often hit 1.0 vs corpus and zero yield.
+ * Borderline (legacy near-dup band) → softpass + metrics; stricter duplicate handling stays in final_audit.
+ */
+function publishGateTitleDupLevel(
+  title: string,
+  existingTitles: string[]
+): { level: "softpass" | "none"; sim: number } {
+  const sim = maxTitleSimilarity(title, existingTitles);
+  let borderlineNearDup = false;
   for (const t of existingTitles) {
     const s = String(t ?? "").trim();
     if (!s) continue;
-    if (normalizeForTokens(s) === normalized) return true;
-    const tokenJ = jaccard(tokenSet(title), tokenSet(s));
-    if (tokenJ < SIM_REJECT) continue;
+    const a = enContentTokenSet(title);
+    const b = enContentTokenSet(s);
+    if (a.size < 3 || b.size < 3) continue;
+    const cj = enContentTokenJaccard(title, s);
+    if (cj < SIM_REJECT) continue;
     const triJ = trigramJaccardTitle(title, s);
-    if (triJ >= NEAR_DUPLICATE_TRIGRAM_REJECT) return true;
+    if (triJ >= NEAR_DUPLICATE_TRIGRAM_REJECT) borderlineNearDup = true;
   }
-  return false;
+  if (borderlineNearDup) return { level: "softpass", sim };
+  return { level: "none", sim };
 }
 
 function paragraphCount(body: string): number {
@@ -120,13 +120,21 @@ export function evaluatePublishReadiness(input: PublishReadinessInput): PublishR
     return { decision: "reject", reasons, score: 35 };
   }
 
-  const sim = maxTitleSimilarity(title, existing);
-  if (hasNearDuplicateTitle(title, existing)) {
-    reasons.push(`near_duplicate_title:jaccard=${sim.toFixed(3)}`);
-    return { decision: "reject", reasons, score: 20 };
+  const dup = publishGateTitleDupLevel(title, existing);
+  const sim = dup.sim;
+  if (dup.level === "softpass") {
+    let score = 88;
+    if (title.length >= 35) score += 4;
+    if (body.length >= 1200) score += 4;
+    if (paras >= 5) score += 4;
+    return {
+      decision: "pass",
+      reasons: ["publish_gate_softpass:title_duplicate:content_jaccard"],
+      score: Math.min(100, score),
+    };
   }
   if (sim >= SIM_REWRITE) {
-    reasons.push(`similar_title:jaccard=${sim.toFixed(3)}`);
+    reasons.push(`high_similarity:content_jaccard=${sim.toFixed(3)}`);
     return { decision: "rewrite", reasons, score: 52 };
   }
 

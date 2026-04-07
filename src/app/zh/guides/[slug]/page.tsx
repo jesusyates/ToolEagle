@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { SiteHeader } from "../../../_components/SiteHeader";
 import { SiteFooter } from "../../../_components/SiteFooter";
-import { getZhGuideBySlug } from "@/lib/zh-guides-reader";
+import { getAllZhGuides, getZhGuideBySlug, getZhGuideSlugs } from "@/lib/zh-guides-reader";
 import { getRelatedZhGuideLinks } from "@/lib/zh-guide-related";
 import {
   getZhPublishedGuideAnswer,
@@ -14,7 +14,13 @@ import { SITE_URL } from "@/config/site";
 
 type Params = Promise<{ slug: string }>;
 
-export const dynamic = "force-dynamic";
+/** SSG: params from `content/zh-guides` (see getZhGuideSlugs). */
+export const dynamic = "force-static";
+
+export async function generateStaticParams() {
+  const slugs = await getZhGuideSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
@@ -42,8 +48,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 }
 
 export default async function ZhGuideDetailPage({ params }: { params: Params }) {
+  const corpus = await getAllZhGuides();
   const { slug } = await params;
-  const post = await getZhGuideBySlug(slug);
+  console.log(`[content-source] zh-guides-page posts=${corpus.length} slug=${slug}`);
+  const post = corpus.find((p) => p.slug === slug);
   if (!post) notFound();
 
   const related = await getRelatedZhGuideLinks(slug, 5);
@@ -83,7 +91,7 @@ export default async function ZhGuideDetailPage({ params }: { params: Params }) 
   };
 
   return (
-    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col" data-zh-guides-corpus={corpus.length}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

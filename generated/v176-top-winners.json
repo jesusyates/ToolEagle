@@ -1,6 +1,6 @@
 {
   "version": "176",
-  "builtAt": "2026-04-03T06:00:42.568Z",
+  "builtAt": "2026-04-06T06:00:41.303Z",
   "criteria": "Top ~10% of scored blog pages by page-value score, preferring rows with GSC impressions/clicks; falls back to score-only when GSC empty.",
   "gate": {
     "has_gsc_page_rows": false,

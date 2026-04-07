@@ -3,14 +3,15 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
-import { getAutoPostBySlug, getAutoPostSlugs } from "@/lib/auto-posts-reader";
+import { getAllAutoPosts, getAutoPostBySlug, getAutoPostSlugs } from "@/lib/auto-posts-reader";
 import { getRelatedGuideLinks } from "@/lib/guide-related";
 import { getPublishedGuideAnswer, getPublishedGuideFaqs } from "@/lib/seo/rebuild-article";
 import { SITE_URL } from "@/config/site";
 
 type Params = Promise<{ slug: string }>;
 
-export const dynamic = "force-dynamic";
+/** SSG: params from `content/auto-posts` + `content/sent-guides` (see getAutoPostSlugs). */
+export const dynamic = "force-static";
 
 export async function generateStaticParams() {
   const slugs = await getAutoPostSlugs();
@@ -48,8 +49,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 }
 
 export default async function GuideDetailPage({ params }: { params: Params }) {
+  const corpus = await getAllAutoPosts();
   const { slug } = await params;
-  const post = await getAutoPostBySlug(slug);
+  console.log(`[content-source] guides-page posts=${corpus.length} slug=${slug}`);
+  const post = corpus.find((p) => p.slug === slug);
   if (!post) notFound();
 
   const related = await getRelatedGuideLinks(slug, 5);
@@ -89,7 +92,7 @@ export default async function GuideDetailPage({ params }: { params: Params }) {
   };
 
   return (
-    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col" data-guides-corpus={corpus.length}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

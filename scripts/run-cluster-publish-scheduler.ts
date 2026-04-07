@@ -8,7 +8,7 @@
 
 import { runClusterPublishPipeline } from "./cluster-publish-pipeline";
 
-const DAY_MS = 24 * 60 * 60 * 1000;
+const FOUR_HOURS_MS = 4 * 60 * 60 * 1000;
 
 function parseArgs(): { mode: "once" | "watch" } {
   const a = process.argv.slice(2);
@@ -28,7 +28,7 @@ async function main() {
     process.exit(r.success ? 0 : 1);
     return;
   }
-  console.log(`[cluster-publish-scheduler] watch mode: every ${DAY_MS}ms (~24h); first run now`);
+  console.log(`[cluster-publish-scheduler] watch mode: every ${FOUR_HOURS_MS}ms (~4h); first run now`);
   await tick();
   setInterval(() => {
     tick()
@@ -38,7 +38,7 @@ async function main() {
       .catch((e) => {
         console.error("[cluster-publish-scheduler] tick failed", e);
       });
-  }, DAY_MS);
+  }, FOUR_HOURS_MS);
 }
 
 main().catch((e) => {

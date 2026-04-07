@@ -3,7 +3,8 @@ import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { getAllAutoPosts } from "@/lib/auto-posts-reader";
 
-export const dynamic = "force-dynamic";
+/** SSG: list built from `content/auto-posts` + `content/sent-guides` at build time. */
+export const dynamic = "force-static";
 
 export const metadata = {
   title: "Creator Guides | ToolEagle",
@@ -13,9 +14,10 @@ export const metadata = {
 
 export default async function GuidesListPage() {
   const posts = await getAllAutoPosts();
+  console.log(`[content-source] guides-page posts=${posts.length}`);
 
   return (
-    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col" data-guides-corpus={posts.length}>
       <SiteHeader />
       <div className="flex-1">
         <section className="container pt-10 pb-16">

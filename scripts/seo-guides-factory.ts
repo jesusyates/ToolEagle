@@ -1,6 +1,6 @@
 /**
 
- * Long-running EN guides factory: periodic cluster → staged, periodic publish → auto-posts.
+ * Long-running EN guides factory: periodic cluster → staged, periodic publish → sent-guides.
 
  * Run: npm run seo:factory:watch
 

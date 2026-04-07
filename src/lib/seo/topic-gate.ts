@@ -1,3 +1,5 @@
+import { enContentTokenJaccard, normalizeEnTitleForDedup } from "./title-dedup-tokens";
+
 export type TopicReadinessInput = {
   topic: string;
   existingTitles?: string[];
@@ -11,40 +13,28 @@ export type TopicReadinessResult = {
 };
 
 const INTENT_RE = /\b(how|ideas|tips|guide|captions|hooks?|ways|strategy)\b/i;
-const SIM_REJECT = 0.93;
-const SIM_REWRITE = 0.88;
-const PRE_DEDUP_DROP_SIM_REJECT_EN = 0.93;
-
-function normalizeForTokens(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function tokenSet(s: string): Set<string> {
-  return new Set(normalizeForTokens(s).split(" ").filter((w) => w.length > 2));
-}
-
-function jaccard(a: Set<string>, b: Set<string>): number {
-  if (a.size === 0 && b.size === 0) return 1;
-  let inter = 0;
-  for (const x of a) if (b.has(x)) inter++;
-  const union = a.size + b.size - inter;
-  return union ? inter / union : 0;
-}
+/** Content-token Jaccard (stopwords stripped); slightly higher bar vs raw token overlap. */
+const SIM_REJECT = 0.95;
+/** Below reject; at/above this is rewrite — keep below SIM_REJECT so borderline topics still pass main chain. */
+const SIM_REWRITE = 0.93;
+const PRE_DEDUP_DROP_SIM_REJECT_EN = 0.95;
 
 function maxTitleSimilarity(title: string, existingTitles: string[]): number {
-  const a = tokenSet(title);
-  if (a.size === 0) return 0;
   let max = 0;
   for (const t of existingTitles) {
     const s = String(t ?? "").trim();
     if (!s) continue;
-    max = Math.max(max, jaccard(a, tokenSet(s)));
+    max = Math.max(max, enContentTokenJaccard(title, s));
   }
   return max;
+}
+
+/** True when normalized titles match or content-token Jaccard meets strict threshold (default topic-gate bar). */
+function isStrictDuplicateTopic(candidate: string, existing: string, strictJaccard = 0.98): boolean {
+  const a = normalizeEnTitleForDedup(candidate);
+  const b = normalizeEnTitleForDedup(existing);
+  if (a.length > 0 && a === b) return true;
+  return enContentTokenJaccard(candidate, existing) >= strictJaccard;
 }
 
 /** Max Jaccard vs corpus — for pre-dedup before expensive model calls (same token rules as topic gate). */
@@ -52,14 +42,31 @@ export function topicMaxJaccardAgainstCorpus(topic: string, corpus: string[]): n
   return maxTitleSimilarity(topic, corpus);
 }
 
-/** Drop before rebuild if too similar to existing titles / staged / session (same threshold as near-duplicate reject). */
+export type PreDropBeforeModelResult = {
+  drop: boolean;
+  reason?: string;
+  /** TASK19: would have been hard pre_dedup drop; EN only — soft-pass to topic/publish/final gates. */
+  preDedupSoftpassNote?: string;
+};
+
+/** Drop before rebuild only when high content overlap with a strict duplicate (not shared shell words alone). */
 export function shouldPreDropTopicBeforeModel(
   topic: string,
   corpus: string[]
-): { drop: boolean; reason?: string } {
-  const sim = maxTitleSimilarity(topic, corpus);
-  if (sim >= PRE_DEDUP_DROP_SIM_REJECT_EN) {
-    return { drop: true, reason: `pre_dedup_jaccard=${sim.toFixed(3)}` };
+): PreDropBeforeModelResult {
+  /** Slightly looser than topic-gate strict dup (0.98): fewer false pre-drops; publish_gate still filters. */
+  const preDedupStrictJaccard = 0.99;
+  for (const t of corpus) {
+    const s = String(t ?? "").trim();
+    if (!s) continue;
+    const j = enContentTokenJaccard(topic, s);
+    if (j < PRE_DEDUP_DROP_SIM_REJECT_EN) continue;
+    if (isStrictDuplicateTopic(topic, s, preDedupStrictJaccard)) {
+      return {
+        drop: false,
+        preDedupSoftpassNote: "title_duplicate:content_jaccard",
+      };
+    }
   }
   return { drop: false };
 }
@@ -151,12 +158,22 @@ export function evaluateTopicReadiness(input: TopicReadinessInput): TopicReadine
   }
 
   const sim = maxTitleSimilarity(topic, existing);
-  if (sim >= SIM_REJECT) {
-    reasons.push(`near_duplicate_topic:jaccard=${sim.toFixed(3)}`);
-    return { decision: "reject", reasons, score: 18 };
+  const strictDup = existing.some((t) => isStrictDuplicateTopic(topic, String(t ?? "")));
+  if (sim >= SIM_REJECT && strictDup) {
+    /** TASK20 EN: duplicate enforcement deferred to publish_gate; soft-pass for observability. */
+    const contentType = preType ?? inferContentType(topic);
+    let score = 86;
+    if (topic.length >= 36) score += 5;
+    if (words.length >= 8 && words.length <= 13) score += 5;
+    return {
+      decision: "pass",
+      reasons: ["topic_gate_softpass:title_duplicate:content_jaccard"],
+      score: Math.min(100, score),
+      contentType,
+    };
   }
   if (sim >= SIM_REWRITE) {
-    reasons.push(`similar_topic:jaccard=${sim.toFixed(3)}`);
+    reasons.push(`high_similarity:content_jaccard=${sim.toFixed(3)}`);
     return { decision: "rewrite", reasons, score: 50 };
   }
 

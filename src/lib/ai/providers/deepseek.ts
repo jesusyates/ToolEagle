@@ -53,6 +53,19 @@ export const deepseekProvider: AiProvider = {
     const content = data.choices?.[0]?.message?.content;
     const rawText = typeof content === "string" ? content : "";
 
+    if (!rawText.trim()) {
+      const payload = JSON.stringify(data).slice(0, 600);
+      console.error(
+        "[deepseek] providerAttempted=deepseek providerFailed=deepseek responseEmpty=true",
+        payload
+      );
+      throw new Error(`DeepSeek returned empty text. ${payload.slice(0, 200)}`);
+    }
+    console.info(
+      "[deepseek] providerAttempted=deepseek providerFailed=none responseEmpty=false chars=",
+      rawText.length
+    );
+
     return { rawText, model: input.model, providerId: "deepseek" };
   },
 

@@ -29,6 +29,7 @@ import { getAllCaptionStyleParams } from "@/config/caption-styles";
 import { getAllGuideParams } from "@/config/traffic-topics";
 import { SITE_URL } from "@/config/site";
 import { getAllEnHowToSlugs } from "@/lib/en-how-to-content";
+import { mapZhGuideDataToRecordFields } from "@/lib/seo-zh/zh-frontmatter-keys";
 import { createAdminClient } from "@/lib/supabase/admin";
 import {
   loadContentQualityStatus,
@@ -534,29 +535,65 @@ export async function blogUrls(): Promise<SitemapEntry[]> {
   }
 }
 
-/** `/guides/[slug]` from `content/auto-posts` (cluster / SEO auto guides). */
+/** `/guides/[slug]` from `content/auto-posts` + `content/sent-guides` (deduped by URL). */
 function autoPostGuideUrls(): SitemapEntry[] {
-  const dir = path.join(process.cwd(), "content", "auto-posts");
+  const base = path.join(process.cwd(), "content");
+  const dirs = [path.join(base, "auto-posts"), path.join(base, "sent-guides")];
+  const now = new Date();
+  const byUrl = new Map<string, SitemapEntry>();
+  for (const dir of dirs) {
+    let files: string[] = [];
+    try {
+      files = fs.readdirSync(dir).filter((f) => f.endsWith(".md"));
+    } catch {
+      continue;
+    }
+    for (const f of files) {
+      try {
+        const raw = fs.readFileSync(path.join(dir, f), "utf8");
+        const { data } = matter(raw);
+        const slug = typeof data.slug === "string" ? data.slug.trim() : "";
+        if (!slug) continue;
+        const lm =
+          typeof data.publishedAt === "string" && data.publishedAt
+            ? new Date(data.publishedAt)
+            : now;
+        const url = `${BASE_URL}/guides/${slug}`;
+        byUrl.set(url, {
+          url,
+          lastModified: Number.isNaN(lm.getTime()) ? now : lm,
+          changeFrequency: "weekly" as const,
+          priority: 0.78
+        });
+      } catch {
+        /* skip bad file */
+      }
+    }
+  }
+  return [...byUrl.values()];
+}
+
+/** `/zh/guides/[slug]` from `content/zh-guides` (Chinese frontmatter keys). */
+function zhGuideUrls(): SitemapEntry[] {
+  const dir = path.join(process.cwd(), "content", "zh-guides");
+  const now = new Date();
+  const out: SitemapEntry[] = [];
   let files: string[] = [];
   try {
     files = fs.readdirSync(dir).filter((f) => f.endsWith(".md"));
   } catch {
     return [];
   }
-  const now = new Date();
-  const out: SitemapEntry[] = [];
   for (const f of files) {
     try {
       const raw = fs.readFileSync(path.join(dir, f), "utf8");
       const { data } = matter(raw);
-      const slug = typeof data.slug === "string" ? data.slug.trim() : "";
-      if (!slug) continue;
-      const lm =
-        typeof data.publishedAt === "string" && data.publishedAt
-          ? new Date(data.publishedAt)
-          : now;
+      const m = mapZhGuideDataToRecordFields(data as Record<string, unknown>);
+      if (!m.slug?.trim()) continue;
+      const lmRaw = m.updatedAt || m.publishedAt;
+      const lm = lmRaw ? new Date(lmRaw) : now;
       out.push({
-        url: `${BASE_URL}/guides/${slug}`,
+        url: `${BASE_URL}/zh/guides/${m.slug.trim()}`,
         lastModified: Number.isNaN(lm.getTime()) ? now : lm,
         changeFrequency: "weekly" as const,
         priority: 0.78
@@ -568,7 +605,28 @@ function autoPostGuideUrls(): SitemapEntry[] {
   return out;
 }
 
+/** Temporary: when sitemap aggregates guide URLs, log corpus sizes once (Vercel / grep `[content-source]`). */
+let contentSourceGuideUrlsLogged = false;
+
+function logContentSourceGuideUrlsOnce() {
+  if (contentSourceGuideUrlsLogged) return;
+  contentSourceGuideUrlsLogged = true;
+  const base = path.join(process.cwd(), "content");
+  const countMd = (dir: string) => {
+    try {
+      return fs.readdirSync(dir).filter((f) => f.endsWith(".md")).length;
+    } catch {
+      return 0;
+    }
+  };
+  const autoPosts = countMd(path.join(base, "auto-posts"));
+  const sentGuides = countMd(path.join(base, "sent-guides"));
+  const zhGuides = countMd(path.join(base, "zh-guides"));
+  console.log(`[content-source] auto-posts=${autoPosts} sent-guides=${sentGuides} zh-guides=${zhGuides}`);
+}
+
 export function guideUrls(): SitemapEntry[] {
+  logContentSourceGuideUrlsOnce();
   const now = new Date();
   const params = getAllGuideParams();
   const legacy = params.map(({ pageType, topic }) => {
@@ -586,7 +644,7 @@ export function guideUrls(): SitemapEntry[] {
     changeFrequency: "daily" as const,
     priority: 0.82
   }));
-  return [...legacy, ...enHowTo, ...autoPostGuideUrls()];
+  return [...legacy, ...enHowTo, ...autoPostGuideUrls(), ...zhGuideUrls()];
 }
 
 export async function creatorUrls(): Promise<SitemapEntry[]> {

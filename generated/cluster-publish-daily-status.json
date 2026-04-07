@@ -1,11 +1,16 @@
 {
-  "runAt": "2026-04-03T13:37:15.212Z",
-  "success": false,
-  "failed": true,
+  "runAt": "2026-04-06T12:35:34.328Z",
+  "success": true,
+  "failed": false,
   "clustersGenerated": 11,
-  "topicsPassed": 10,
-  "articlesPassed": 0,
-  "articlesPassedByCluster": {},
-  "error": "low_throughput: staged_files_written=0 min_required=4 (directory delta; articlesPassed=0)",
-  "source": "scheduler"
+  "topicsPassed": 12,
+  "articlesPassed": 12,
+  "articlesPassedByCluster": {
+    "Content batching for appointment-based businesses between sessions": 3,
+    "Short-form editing workflow versioning and handoffs for solo creators": 3,
+    "Retention scripting and repeat viewers without growth hacks framing": 3,
+    "Faceless TikTok tips without showing your face": 3
+  },
+  "error": null,
+  "source": "content-batch"
 }

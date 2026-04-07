@@ -57,6 +57,7 @@
     "seo:opt:apply": "node scripts/optimize-en-pages.js",
     "seo:opt:measure": "node scripts/measure-page-optimization-impact.js",
     "content-factory": "node scripts/run-content-factory.js",
+    "content:batch": "npx tsx scripts/run-content-batch.ts",
     "zh:generate": "node scripts/generate-zh-seo-content.js",
     "zh:keywords": "node scripts/generate-zh-keywords.js",
     "zh:keywords:v63": "node scripts/generate-zh-keywords-v63.js",

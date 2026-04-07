@@ -1,79 +1,84 @@
 {
-  "runAt": "2026-04-03T13:37:15.212Z",
+  "runAt": "2026-04-06T12:35:34.328Z",
   "clustersGenerated": 11,
   "clustersPassed": 4,
-  "topicsGenerated": 96,
-  "topicsPassed": 10,
-  "articlesPassed": 0,
+  "topicsGenerated": 75,
+  "topicsPassed": 12,
+  "articlesPassed": 12,
   "topicsPassedByContentType": {
-    "guide": 10,
+    "guide": 12,
     "ideas": 0
   },
   "articlesPassedByContentType": {
-    "guide": 0,
+    "guide": 12,
     "ideas": 0
   },
-  "articlesPassedByCluster": {},
+  "articlesPassedByCluster": {
+    "Content batching for appointment-based businesses between sessions": 3,
+    "Short-form editing workflow versioning and handoffs for solo creators": 3,
+    "Retention scripting and repeat viewers without growth hacks framing": 3,
+    "Faceless TikTok tips without showing your face": 3
+  },
   "priorityChoices": [
     {
-      "cluster": "Stuck creators and growth plateaus on Instagram and TikTok",
-      "score": 168.9,
-      "reason": "base=100; cluster_articles_total+36; tiktok_rate=52%; kind_stuck_plateau_rate=100%; jitter"
+      "cluster": "Content batching for appointment-based businesses between sessions",
+      "score": 2921.7,
+      "reason": "base=100; cluster_articles_total+2688; tiktok_rate=263%; kind_appointment_batching_rate=457%; jitter"
     },
     {
-      "cluster": "No time no team low budget creator workflow on YouTube and TikTok",
-      "score": 166.9,
-      "reason": "base=100; cluster_articles_total+36; tiktok_rate=52%; kind_constraints_hard_rate=100%; jitter"
+      "cluster": "Short-form editing workflow versioning and handoffs for solo creators",
+      "score": 1754.5,
+      "reason": "base=100; cluster_articles_total+1548; tiktok_rate=263%; kind_editing_workflow_rate=280%; jitter"
     },
     {
-      "cluster": "Service business routines on Instagram and TikTok for consultants",
-      "score": 163.7,
-      "reason": "base=100; cluster_articles_total+36; tiktok_rate=52%; kind_service_freelancer_rate=100%; jitter"
+      "cluster": "Retention scripting and repeat viewers without growth hacks framing",
+      "score": 1611.1,
+      "reason": "base=100; cluster_articles_total+1404; tiktok_rate=263%; kind_retention_scripting_rate=279%; jitter"
     },
     {
-      "cluster": "Scaling TikTok and Instagram with systems not hacks",
-      "score": 144.7,
-      "reason": "base=100; cluster_articles_total+12; tiktok_rate=52%; kind_scaling_systems_rate=100%; jitter"
+      "cluster": "Creator offers lead magnets and entry products on short video",
+      "score": 171.7,
+      "reason": "base=100; tiktok_rate=263%; kind_offers_lead_magnets_rate=50%; jitter"
     },
     {
-      "cluster": "Part time creators and weekend filming",
-      "score": 124.3,
-      "reason": "base=100; tiktok_rate=52%; kind_part_time_rate=50%; jitter"
+      "cluster": "Short-form hooks for local businesses and neighborhood offers",
+      "score": 171.6,
+      "reason": "base=100; tiktok_rate=263%; kind_local_business_hooks_rate=50%; jitter"
+    },
+    {
+      "cluster": "Before and after proof content without client face reveal",
+      "score": 171.2,
+      "reason": "base=100; tiktok_rate=263%; kind_proof_before_after_rate=50%; jitter"
+    },
+    {
+      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
+      "score": 170.8,
+      "reason": "base=100; tiktok_rate=263%; kind_repost_repurpose_rate=50%; jitter"
+    },
+    {
+      "cluster": "Client acquisition content and social proof for service sellers",
+      "score": 169.5,
+      "reason": "base=100; tiktok_rate=263%; kind_client_acquisition_content_rate=50%; jitter"
+    },
+    {
+      "cluster": "Educational carousel and list posts adapted into short video beats",
+      "score": 168.8,
+      "reason": "base=100; tiktok_rate=263%; kind_carousel_list_adapt_rate=50%; jitter"
+    },
+    {
+      "cluster": "Comment to DM funnels and inbound qualification on short-form",
+      "score": 168.7,
+      "reason": "base=100; tiktok_rate=263%; kind_comment_dm_funnel_rate=50%; jitter"
     },
     {
       "cluster": "Faceless TikTok tips without showing your face",
-      "score": 124.1,
-      "reason": "base=100; tiktok_rate=52%; kind_faceless_rate=50%; jitter"
-    },
-    {
-      "cluster": "Voiceover and storytelling on TikTok without talking head setups",
-      "score": 119.7,
-      "reason": "base=100; tiktok_rate=52%; kind_content_mode_voiceover_rate=50%; jitter"
-    },
-    {
-      "cluster": "Instagram reels versus feed posts for coaches and consultants",
-      "score": 113.9,
-      "reason": "base=100; instagram_rate=43%; kind_growth_rate=0%; jitter"
-    },
-    {
-      "cluster": "Evergreen versus trend-led TikTok content for small channels",
-      "score": 113.8,
-      "reason": "base=100; tiktok_rate=52%; kind_growth_rate=0%; jitter"
-    },
-    {
-      "cluster": "Coaches and freelancers booking calls via short-form video",
-      "score": 112.6,
-      "reason": "base=100; tiktok_rate=52%; kind_growth_rate=0%; jitter"
-    },
-    {
-      "cluster": "YouTube creative blocks and no ideas",
-      "score": 110.3,
-      "reason": "base=100; youtube_rate=0%; kind_creative_blocks_rate=50%; jitter"
+      "score": 496.9,
+      "reason": "base=100; cluster_articles_total+288; tiktok_rate=263%; kind_faceless_rate=300%; jitter"
     }
   ],
   "skippedClusters": [
     {
-      "cluster": "Part time creators and weekend filming",
+      "cluster": "Comment to DM funnels and inbound qualification on short-form",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -81,7 +86,7 @@
       ]
     },
     {
-      "cluster": "Part time creators and weekend filming",
+      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -89,34 +94,7 @@
       ]
     },
     {
-      "cluster": "Voiceover and storytelling on TikTok without talking head setups",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Faceless TikTok tips without showing your face",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Voiceover and storytelling on TikTok without talking head setups",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Part time creators and weekend filming",
+      "cluster": "Educational carousel and list posts adapted into short video beats",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -124,16 +102,7 @@
       ]
     },
     {
-      "cluster": "Voiceover and storytelling on TikTok without talking head setups",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Part time creators and weekend filming",
+      "cluster": "Comment to DM funnels and inbound qualification on short-form",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -141,34 +110,7 @@
       ]
     },
     {
-      "cluster": "Faceless TikTok tips without showing your face",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Evergreen versus trend-led TikTok content for small channels",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Faceless TikTok tips without showing your face",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Part time creators and weekend filming",
+      "cluster": "Before and after proof content without client face reveal",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -176,34 +118,7 @@
       ]
     },
     {
-      "cluster": "Voiceover and storytelling on TikTok without talking head setups",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "YouTube Shorts versus long form for solo creators without editors",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Instagram reels versus feed posts for coaches and consultants",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Part time creators and weekend filming",
+      "cluster": "Short-form hooks for local businesses and neighborhood offers",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -211,34 +126,7 @@
       ]
     },
     {
-      "cluster": "Faceless TikTok tips without showing your face",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Voiceover and storytelling on TikTok without talking head setups",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Instagram reels versus feed posts for coaches and consultants",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Coaches and freelancers booking calls via short-form video",
+      "cluster": "Comment to DM funnels and inbound qualification on short-form",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -246,16 +134,7 @@
       ]
     },
     {
-      "cluster": "YouTube Shorts versus long form for solo creators without editors",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Part time creators and weekend filming",
+      "cluster": "Before and after proof content without client face reveal",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -263,43 +142,7 @@
       ]
     },
     {
-      "cluster": "Faceless TikTok tips without showing your face",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Voiceover and storytelling on TikTok without talking head setups",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Instagram reels versus feed posts for coaches and consultants",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Evergreen versus trend-led TikTok content for small channels",
-      "decision": "rewrite",
-      "score": 54,
-      "reasons": [
-        "hub_signal",
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Coaches and freelancers booking calls via short-form video",
+      "cluster": "Educational carousel and list posts adapted into short video beats",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -307,34 +150,237 @@
       ]
     },
     {
-      "cluster": "YouTube creative blocks and no ideas",
+      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
       "decision": "rewrite",
-      "score": 54,
+      "score": 48,
       "reasons": [
-        "hub_signal",
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Client acquisition content and social proof for service sellers",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Short-form hooks for local businesses and neighborhood offers",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Before and after proof content without client face reveal",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Comment to DM funnels and inbound qualification on short-form",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Educational carousel and list posts adapted into short video beats",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Comment to DM funnels and inbound qualification on short-form",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Short-form hooks for local businesses and neighborhood offers",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Before and after proof content without client face reveal",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Client acquisition content and social proof for service sellers",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Educational carousel and list posts adapted into short video beats",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Before and after proof content without client face reveal",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Client acquisition content and social proof for service sellers",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Comment to DM funnels and inbound qualification on short-form",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Creator offers lead magnets and entry products on short video",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Short-form hooks for local businesses and neighborhood offers",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Creator offers lead magnets and entry products on short video",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Short-form hooks for local businesses and neighborhood offers",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Before and after proof content without client face reveal",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Client acquisition content and social proof for service sellers",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Educational carousel and list posts adapted into short video beats",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Comment to DM funnels and inbound qualification on short-form",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
         "score_below_pass_threshold"
       ]
     }
   ],
-  "languageGatePassed": 10,
+  "languageGatePassed": 12,
   "languageGateFailedCount": 0,
-  "finalAuditPassed": 0,
+  "finalAuditPassed": 12,
   "finalAuditFailed": 0,
   "finalAuditFailedReasonsTop": {},
   "retryCount": 7,
-  "topicPreDedupDropped": 84,
+  "topicPreDedupDropped": 0,
   "preIndexDedupDropped": 0,
-  "inventoryLow": true,
-  "forcedSuccessTarget": 4,
-  "attemptsUsed": 96,
+  "inventoryLow": false,
+  "forcedSuccessTarget": 12,
+  "attemptsUsed": 75,
   "minStagedTarget": 10,
-  "stagedFilesWrittenThisRun": 0,
+  "stagedFilesWrittenThisRun": 12,
   "publishedFilesWrittenThisRun": 0,
-  "minFilesWrittenPerRun": 4,
-  "fileThroughputSatisfied": false,
-  "throughputFailureReason": "low_throughput: staged_files_written=0 min_required=4 (directory delta; articlesPassed=0)",
-  "success": false,
-  "failed": true,
-  "error": "low_throughput: staged_files_written=0 min_required=4 (directory delta; articlesPassed=0)",
-  "source": "scheduler"
+  "minFilesWrittenPerRun": 12,
+  "fileThroughputSatisfied": true,
+  "throughputFailureReason": null,
+  "mainlineWritten": 12,
+  "fallbackWritten": 0,
+  "runHealth": "healthy",
+  "runHealthReason": "mainline_dominant",
+  "success": true,
+  "failed": false,
+  "error": null,
+  "source": "content-batch"
 }

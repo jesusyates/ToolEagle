@@ -127,7 +127,7 @@ function writeZhStagedMd(payload: {
   return fname;
 }
 
-function main() {
+async function main() {
   const limit = parseLimit();
   if (!fs.existsSync(AUDIT_JSON)) {
     console.error("[zh-rebuild-legacy] missing", AUDIT_JSON);
@@ -165,7 +165,7 @@ function main() {
 
     const platform = mapPlatform(item.detectedPlatform);
     const ctx = `legacy:${item.slug} path:${item.path}\n${snippet.slice(0, 600)}`;
-    const article = rebuildToZhGuideArticle({
+    const article = await rebuildToZhGuideArticle({
       title: topic,
       context: ctx,
       platform,
@@ -225,9 +225,7 @@ function main() {
   console.log("[zh-rebuild-legacy]", OUT_JSON, doc);
 }
 
-try {
-  main();
-} catch (e) {
+main().catch((e) => {
   console.error(e);
   process.exit(1);
-}
+});

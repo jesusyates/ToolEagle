@@ -110,8 +110,13 @@ async function scanDir(
 
 async function buildEn(): Promise<ContentAssetIndexFile> {
   const auto = await scanDir(path.join(ROOT, "content", "auto-posts"), "published", "en");
+  const sent = await scanDir(path.join(ROOT, "content", "sent-guides"), "published", "en");
   const staged = await scanDir(path.join(ROOT, "content", "staged-guides"), "staged", "en");
-  const entries = [...auto, ...staged];
+  const bySlug = new Map<string, (typeof auto)[number]>();
+  for (const e of [...auto, ...sent]) {
+    if (e.slug) bySlug.set(e.slug, e);
+  }
+  const entries = [...bySlug.values(), ...staged];
   return {
     generatedAt: new Date().toISOString(),
     language: "en",

@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-04-06T12:35:34.328Z",
+  "success": true,
+  "stagedFilesWrittenThisRun": 12,
+  "mainlineWritten": 12,
+  "fallbackWritten": 0,
+  "clustersConsidered": 11,
+  "clustersPassed": 4,
+  "clusterPassRate": 0.3636,
+  "runHealth": "healthy",
+  "runHealthReason": "mainline_dominant",
+  "blockerReasonCounts": {
+    "cluster_gate:score_below_pass_threshold": 35,
+    "pre_dedup_softpass:title_duplicate:content_jaccard": 75,
+    "topic_gate_softpass:title_duplicate:content_jaccard": 12,
+    "publish_gate_softpass:title_duplicate:content_jaccard": 12,
+    "topic_pool:topic_reused_recently": 63
+  },
+  "topBlockers": [
+    [
+      "pre_dedup_softpass:title_duplicate:content_jaccard",
+      75
+    ],
+    [
+      "topic_pool:topic_reused_recently",
+      63
+    ],
+    [
+      "cluster_gate:score_below_pass_threshold",
+      35
+    ],
+    [
+      "topic_gate_softpass:title_duplicate:content_jaccard",
+      12
+    ],
+    [
+      "publish_gate_softpass:title_duplicate:content_jaccard",
+      12
+    ]
+  ],
+  "duplicatePressure": 99,
+  "gatePressure": 35
+}

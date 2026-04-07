@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * V167 + V170 — Daily SEO / content automation hub (sequential); **single production entry**.
- * SEO cluster guide publish (`npm run seo:cluster-publish`) runs **once on process exit** (success or mustStop), non-fatal; health: `generated/seo-guides-publish-health.json` (also `cluster-publish-daily-status.json`).
+ * SEO cluster guide publish (`npm run seo:cluster-publish`) then promote (`npm run seo:publish-staged`) **once on process exit** (success or mustStop), non-fatal; health: `generated/seo-guides-publish-health.json` (also `cluster-publish-daily-status.json`).
  *
  * CLI:
  *   --dry-run          set SEO_DRY_RUN=1 for children where respected
@@ -113,6 +113,26 @@ function registerClusterPublishOnExit(opts) {
         exitCode: r.status,
         note: "exit hook; see generated/cluster-publish-daily-status.json"
       });
+      if (r.status === 0) {
+        console.log("[daily-engine] running seo:publish-staged");
+        const r2 =
+          process.platform === "win32"
+            ? spawnSync(process.env.ComSpec || "cmd.exe", ["/c", `${npmBin} run seo:publish-staged`], {
+                cwd: CWD,
+                stdio: "inherit",
+                env: process.env
+              })
+            : spawnSync(npmBin, ["run", "seo:publish-staged"], { cwd: CWD, stdio: "inherit", env: process.env });
+        appendEngineLog({
+          step: "publish_staged",
+          event: r2.status === 0 ? "ok" : "fail_nonfatal",
+          exitCode: r2.status,
+          note: "exit hook after cluster_publish"
+        });
+        if (r2.status !== 0) {
+          console.error("[daily-engine] publish-staged failed exitCode=", r2.status);
+        }
+      }
     } catch (e) {
       try {
         appendEngineLog({ step: "cluster_publish", event: "fail_nonfatal", err: String(e) });

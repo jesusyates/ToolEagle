@@ -9,6 +9,7 @@ import path from "path";
 import crypto from "crypto";
 import matter from "gray-matter";
 import { mapZhGuideDataToRecordFields } from "../seo-zh/zh-frontmatter-keys";
+import { enContentTokenJaccard, normalizeEnTitleForDedup } from "./title-dedup-tokens";
 
 export type ContentAssetIndexEntry = {
   filename: string;
@@ -32,30 +33,12 @@ export type ContentAssetIndexFile = {
   entries: ContentAssetIndexEntry[];
 };
 
-const SIMILARITY_THRESHOLD_EN = 0.93;
+/** Content-token Jaccard (EN); higher bar than legacy raw-token 0.93. */
+const SIMILARITY_THRESHOLD_EN = 0.96;
 const SIMILARITY_THRESHOLD_ZH = 0.93;
 
 export function normalizeTitleEn(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function tokensEnSet(s: string): Set<string> {
-  return new Set(normalizeTitleEn(s).split(" ").filter((w) => w.length > 2));
-}
-
-function enTokenJaccard(a: string, b: string): number {
-  const ta = tokensEnSet(a);
-  const tb = tokensEnSet(b);
-  let inter = 0;
-  for (const x of ta) {
-    if (tb.has(x)) inter++;
-  }
-  const union = ta.size + tb.size - inter;
-  return union === 0 ? 0 : inter / union;
+  return normalizeEnTitleForDedup(s);
 }
 
 function zhFingerprint(body: string, aiSummary: string): string {
@@ -103,17 +86,27 @@ export function findZhTopicAssetIndexHit(
   return null;
 }
 
+/** 命中原因（仅 EN 精细；ZH 仍用 boolean）。 */
+export function describeEnAssetIndexHit(topic: string, entries: ContentAssetIndexEntry[]): string | null {
+  const t = topic.trim();
+  if (!t || entries.length === 0) return null;
+  const nt = normalizeTitleEn(t);
+  for (const e of entries) {
+    if (normalizeTitleEn(e.title) === nt) return "asset_duplicate:exact_normalized_title";
+  }
+  for (const e of entries) {
+    const j = enContentTokenJaccard(t, e.title);
+    if (j >= SIMILARITY_THRESHOLD_EN) return `asset_duplicate:high_similarity_content_jaccard=${j.toFixed(3)}`;
+  }
+  return null;
+}
+
 /** 生成前检测：命中则不应再调模型。 */
 export function topicHitsAssetIndex(topic: string, language: "en" | "zh", entries: ContentAssetIndexEntry[]): boolean {
   const t = topic.trim();
   if (!t || entries.length === 0) return false;
   if (language === "en") {
-    const nt = normalizeTitleEn(t);
-    for (const e of entries) {
-      if (normalizeTitleEn(e.title) === nt) return true;
-      if (enTokenJaccard(t, e.title) >= SIMILARITY_THRESHOLD_EN) return true;
-    }
-    return false;
+    return describeEnAssetIndexHit(t, entries) !== null;
   }
   return findZhTopicAssetIndexHit(t, entries) !== null;
 }

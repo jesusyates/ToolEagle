@@ -60,12 +60,40 @@
     "Service business routines on Instagram and TikTok for consultants": {
       "articlesPassedTotal": 3,
       "consecutiveZeroRuns": 0
+    },
+    "SEO fallback pool": {
+      "articlesPassedTotal": 39,
+      "consecutiveZeroRuns": 5
+    },
+    "Short-form editing workflow versioning and handoffs for solo creators": {
+      "articlesPassedTotal": 132,
+      "consecutiveZeroRuns": 0
+    },
+    "Content batching for appointment-based businesses between sessions": {
+      "articlesPassedTotal": 227,
+      "consecutiveZeroRuns": 0
+    },
+    "Retention scripting and repeat viewers without growth hacks framing": {
+      "articlesPassedTotal": 120,
+      "consecutiveZeroRuns": 0
+    },
+    "Evergreen versus trend-led TikTok content for small channels": {
+      "articlesPassedTotal": 11,
+      "consecutiveZeroRuns": 0
+    },
+    "Faceless TikTok tips without showing your face": {
+      "articlesPassedTotal": 27,
+      "consecutiveZeroRuns": 0
+    },
+    "Voiceover and storytelling on TikTok without talking head setups": {
+      "articlesPassedTotal": 7,
+      "consecutiveZeroRuns": 0
     }
   },
   "platforms": {
     "tiktok": {
-      "passed": 14,
-      "runs": 27
+      "passed": 577,
+      "runs": 219
     },
     "instagram": {
       "passed": 10,
@@ -82,8 +110,8 @@
   },
   "kinds": {
     "growth": {
-      "passed": 0,
-      "runs": 6
+      "passed": 50,
+      "runs": 43
     },
     "consistency": {
       "passed": 2,
@@ -132,6 +160,26 @@
     "service_freelancer": {
       "passed": 3,
       "runs": 3
+    },
+    "editing_workflow": {
+      "passed": 132,
+      "runs": 47
+    },
+    "appointment_batching": {
+      "passed": 227,
+      "runs": 50
+    },
+    "retention_scripting": {
+      "passed": 120,
+      "runs": 43
+    },
+    "faceless": {
+      "passed": 27,
+      "runs": 9
+    },
+    "content_mode_voiceover": {
+      "passed": 7,
+      "runs": 6
     }
   }
 }

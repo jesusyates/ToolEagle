@@ -5,6 +5,7 @@
 
 import fs from "node:fs";
 import path from "path";
+import { fileURLToPath } from "node:url";
 import matter from "gray-matter";
 import { generateZhTopicClusters } from "../src/lib/seo-zh/topic-engine";
 import { evaluateZhClusterReadiness } from "../src/lib/seo-zh/cluster-gate";
@@ -97,7 +98,11 @@ function buildZhStagedMarkdown(payload: {
   });
 }
 
-async function main() {
+export async function runZhClusterPublishPipeline(): Promise<{
+  stagedFilesWrittenThisRun: number;
+  success: boolean;
+  articlesStaged: number;
+}> {
   const runAt = new Date().toISOString();
   const cwd = process.cwd();
   const zhStagedBeforeRun = countZhStagedMdFiles(ZH_STAGED);
@@ -171,7 +176,12 @@ async function main() {
     for (const cl of clusters) {
       if (articlesStaged >= MIN_SUCCESS || roundAttempts >= MAX_TOPIC_ATTEMPTS_PER_ROUND) break;
       const cr = evaluateZhClusterReadiness({ cluster: cl.cluster });
-      if (cr.decision !== "pass") continue;
+      if (cr.decision !== "pass") {
+        console.log(
+          `[zh-cluster-gate] skip cluster="${cl.cluster.slice(0, 96)}" decision=${cr.decision} score=${cr.score} reasons=${cr.reasons.join(";") || "(none)"}`
+        );
+        continue;
+      }
       for (const topicStr of cl.topics) {
         if (articlesStaged >= MIN_SUCCESS || roundAttempts >= MAX_TOPIC_ATTEMPTS_PER_ROUND) break;
         roundAttempts++;
@@ -181,7 +191,12 @@ async function main() {
           topic: topicStr,
           existingTitles: sessionTopicStrings
         });
-        if (tr.decision !== "pass") continue;
+        if (tr.decision !== "pass") {
+          console.log(
+            `[zh-topic-gate] skip topic="${topicStr.slice(0, 80)}" decision=${tr.decision} score=${tr.score} reasons=${tr.reasons.join(";") || "(none)"}`
+          );
+          continue;
+        }
         topicsPassed++;
 
         const zhAssetIndexNow = scanZhContentAssetIndexFromDisk(cwd);
@@ -198,7 +213,7 @@ async function main() {
 
         sessionTopicStrings.push(topicStr);
 
-        const article = rebuildToZhGuideArticle({
+        const article = await rebuildToZhGuideArticle({
           title: topicStr,
           context: `平台:${cl.platform} 聚类:${cl.cluster}`,
           platform: cl.platform,
@@ -299,7 +314,7 @@ async function main() {
 
   if (topicsPassed > 0 && articlesStaged === 0 && fallbackReleaseCandidate) {
     const candidate = fallbackReleaseCandidate;
-    const article = rebuildToZhGuideArticle({
+    const article = await rebuildToZhGuideArticle({
       title: candidate.topic,
       context: `平台:${candidate.platform} 兜底放行`,
       platform: candidate.platform,
@@ -400,10 +415,27 @@ async function main() {
     "health:",
     HEALTH_JSON
   );
-  process.exit(fileThroughputSatisfied ? 0 : 1);
+  return {
+    stagedFilesWrittenThisRun,
+    success: fileThroughputSatisfied,
+    articlesStaged
+  };
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+async function main() {
+  const r = await runZhClusterPublishPipeline();
+  process.exit(r.success ? 0 : 1);
+}
+
+function isZhPipelineCliEntry(): boolean {
+  const entry = process.argv[1];
+  if (!entry) return false;
+  return path.resolve(fileURLToPath(import.meta.url)) === path.resolve(entry);
+}
+
+if (isZhPipelineCliEntry()) {
+  main().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}

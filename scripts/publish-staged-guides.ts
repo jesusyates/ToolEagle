@@ -1,5 +1,5 @@
 /**
- * Promote EN guides from content/staged-guides → content/auto-posts (indexing + history).
+ * Promote EN guides from content/staged-guides → content/sent-guides (move; indexing + history).
  * Usage: npx tsx scripts/publish-staged-guides.ts [--count=5]  (default 1)
  */
 
@@ -13,7 +13,7 @@ import { auditPublishedGuideMarkdown } from "../src/lib/seo/published-guide-audi
 import type { SeoGuidesPublishHealth } from "./cluster-publish-pipeline";
 
 const STAGED_DIR = path.join(process.cwd(), "content", "staged-guides");
-const AUTO_DIR = path.join(process.cwd(), "content", "auto-posts");
+const SENT_DIR = path.join(process.cwd(), "content", "sent-guides");
 const HEALTH_JSON = path.join(process.cwd(), "generated", "seo-guides-publish-health.json");
 const STAGED_STATUS_JSON = path.join(process.cwd(), "generated", "staged-guides-status.json");
 const PUBLISH_HISTORY_JSON = path.join(process.cwd(), "generated", "publish-history.json");
@@ -81,7 +81,7 @@ export async function runPublishStagedGuides(count: number): Promise<PublishStag
     };
   }
 
-  await fs.mkdir(AUTO_DIR, { recursive: true });
+  await fs.mkdir(SENT_DIR, { recursive: true });
 
   const publishedFiles: string[] = [];
   const baseSite = SITE_URL.replace(/\/$/, "");
@@ -107,9 +107,11 @@ export async function runPublishStagedGuides(count: number): Promise<PublishStag
       continue;
     }
     finalAuditPassed++;
-    const dest = path.join(AUTO_DIR, name);
+    const dest = path.join(SENT_DIR, name);
     await fs.rename(from, dest);
     publishedFiles.push(name);
+    console.log(`[publish-staged-guides] upload success: ${name}`);
+    console.log(`[publish-staged-guides] moved to sent-guides: ${name}`);
     const { data } = matter(raw);
     const slug = typeof data.slug === "string" ? data.slug : "";
     if (slug) {
@@ -144,9 +146,9 @@ export async function runPublishStagedGuides(count: number): Promise<PublishStag
   });
 
   console.log(
-    "[publish-staged-guides] moved",
+    "[publish-staged-guides] summary: moved",
     publishedFiles.length,
-    "→ auto-posts;",
+    "→ sent-guides;",
     "remaining staged:",
     remaining
   );

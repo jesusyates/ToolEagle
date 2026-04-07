@@ -5,6 +5,21 @@ import type { FaqItem } from "@/lib/seo/rebuild-article";
 
 const AUTO_DIR = path.join(process.cwd(), "content", "auto-posts");
 const STAGED_GUIDES_DIR = path.join(process.cwd(), "content", "staged-guides");
+const SENT_GUIDES_DIR = path.join(process.cwd(), "content", "sent-guides");
+
+/** Temporary: one log per Node process for Vercel build / function visibility. */
+let contentSourceEnLogged = false;
+
+async function countMdFilesInDir(dir: string): Promise<number> {
+  const files = await fs.readdir(dir).catch(() => [] as string[]);
+  return files.filter((f) => f.endsWith(".md")).length;
+}
+
+function logContentSourceEnOnce(autoPosts: number, sentGuides: number) {
+  if (contentSourceEnLogged) return;
+  contentSourceEnLogged = true;
+  console.log(`[content-source] auto-posts=${autoPosts} sent-guides=${sentGuides}`);
+}
 
 export type AutoPostRecord = {
   title: string;
@@ -52,17 +67,83 @@ function mapPostData(data: Record<string, unknown>): Omit<AutoPostRecord, "body"
   };
 }
 
-export async function getAutoPostSlugs(): Promise<string[]> {
-  const files = await fs.readdir(AUTO_DIR).catch(() => [] as string[]);
+async function readPostsFromDir(dir: string): Promise<AutoPostRecord[]> {
+  const files = await fs.readdir(dir).catch(() => [] as string[]);
+  const posts: AutoPostRecord[] = [];
+  for (const f of files) {
+    if (!f.endsWith(".md")) continue;
+    const raw = await fs.readFile(path.join(dir, f), "utf8");
+    const { data, content } = matter(raw);
+    const d = data as Record<string, unknown>;
+    posts.push({
+      ...mapPostData(d),
+      body: content.trim()
+    });
+  }
+  return posts;
+}
+
+async function slugsFromDir(dir: string): Promise<string[]> {
+  const files = await fs.readdir(dir).catch(() => [] as string[]);
   const slugs: string[] = [];
   for (const f of files) {
     if (!f.endsWith(".md")) continue;
-    const raw = await fs.readFile(path.join(AUTO_DIR, f), "utf8");
+    const raw = await fs.readFile(path.join(dir, f), "utf8");
     const { data } = matter(raw);
     const slug = typeof data.slug === "string" ? data.slug : "";
     if (slug) slugs.push(slug);
   }
   return slugs;
+}
+
+/** Live `/guides` corpus: legacy `auto-posts` plus promoted `sent-guides` (deduped by slug). */
+export async function getAllAutoPosts(): Promise<AutoPostRecord[]> {
+  const [auto, sent] = await Promise.all([readPostsFromDir(AUTO_DIR), readPostsFromDir(SENT_GUIDES_DIR)]);
+  const bySlug = new Map<string, AutoPostRecord>();
+  for (const p of auto) {
+    if (p.slug) bySlug.set(p.slug, p);
+  }
+  for (const p of sent) {
+    if (p.slug) bySlug.set(p.slug, p);
+  }
+  const merged = [...bySlug.values()];
+  merged.sort((a, b) => {
+    const ta = Date.parse(a.publishedAt) || 0;
+    const tb = Date.parse(b.publishedAt) || 0;
+    return tb - ta;
+  });
+  logContentSourceEnOnce(auto.length, sent.length);
+  return merged;
+}
+
+/** Promoted EN guides only (`content/sent-guides`). */
+export async function getAllSentPosts(): Promise<AutoPostRecord[]> {
+  const posts = await readPostsFromDir(SENT_GUIDES_DIR);
+  posts.sort((a, b) => {
+    const ta = Date.parse(a.publishedAt) || 0;
+    const tb = Date.parse(b.publishedAt) || 0;
+    return tb - ta;
+  });
+  return posts;
+}
+
+export async function getAutoPostSlugs(): Promise<string[]> {
+  const [autoSlugs, sentSlugs, autoN, sentN] = await Promise.all([
+    slugsFromDir(AUTO_DIR),
+    slugsFromDir(SENT_GUIDES_DIR),
+    countMdFilesInDir(AUTO_DIR),
+    countMdFilesInDir(SENT_GUIDES_DIR)
+  ]);
+  logContentSourceEnOnce(autoN, sentN);
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const s of [...autoSlugs, ...sentSlugs]) {
+    if (!seen.has(s)) {
+      seen.add(s);
+      out.push(s);
+    }
+  }
+  return out;
 }
 
 export async function getStagedGuideCount(): Promise<number> {
@@ -76,27 +157,6 @@ export async function getAllStagedPosts(): Promise<AutoPostRecord[]> {
   for (const f of files) {
     if (!f.endsWith(".md")) continue;
     const raw = await fs.readFile(path.join(STAGED_GUIDES_DIR, f), "utf8");
-    const { data, content } = matter(raw);
-    const d = data as Record<string, unknown>;
-    posts.push({
-      ...mapPostData(d),
-      body: content.trim()
-    });
-  }
-  posts.sort((a, b) => {
-    const ta = Date.parse(a.publishedAt) || 0;
-    const tb = Date.parse(b.publishedAt) || 0;
-    return tb - ta;
-  });
-  return posts;
-}
-
-export async function getAllAutoPosts(): Promise<AutoPostRecord[]> {
-  const files = await fs.readdir(AUTO_DIR).catch(() => [] as string[]);
-  const posts: AutoPostRecord[] = [];
-  for (const f of files) {
-    if (!f.endsWith(".md")) continue;
-    const raw = await fs.readFile(path.join(AUTO_DIR, f), "utf8");
     const { data, content } = matter(raw);
     const d = data as Record<string, unknown>;
     posts.push({

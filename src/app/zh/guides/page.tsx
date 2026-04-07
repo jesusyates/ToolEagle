@@ -4,7 +4,8 @@ import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
 import { getAllZhGuides } from "@/lib/zh-guides-reader";
 
-export const dynamic = "force-dynamic";
+/** SSG: list built from `content/zh-guides` at build time. */
+export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "中文创作指南 | ToolEagle",
@@ -13,9 +14,10 @@ export const metadata: Metadata = {
 
 export default async function ZhGuidesIndexPage() {
   const posts = await getAllZhGuides();
+  console.log(`[content-source] zh-guides-page posts=${posts.length}`);
 
   return (
-    <main className="min-h-screen bg-page text-slate-900 flex flex-col">
+    <main className="min-h-screen bg-page text-slate-900 flex flex-col" data-zh-guides-corpus={posts.length}>
       <SiteHeader />
       <div className="flex-1 container pt-10 pb-16 max-w-3xl">
         <h1 className="text-3xl font-semibold tracking-tight">中文创作指南</h1>

@@ -38,6 +38,8 @@ export const AUTO_POSTS_DIR = path.join(process.cwd(), "content", "auto-posts");
 const AUTO_DIR = AUTO_POSTS_DIR;
 /** Pre-live EN guides from cluster publish (not in /guides until promoted). */
 export const STAGED_GUIDES_DIR = path.join(process.cwd(), "content", "staged-guides");
+/** After publish-staged-guides: promoted EN guides (live under /guides with legacy auto-posts). */
+export const SENT_GUIDES_DIR = path.join(process.cwd(), "content", "sent-guides");
 
 function slugifyBase(s: string): string {
   const t = s
@@ -65,7 +67,7 @@ export type WriteAutoPostResult = {
   slug: string;
 };
 
-/** Cluster pipeline: staged file + planned paths after promotion to auto-posts. */
+/** Cluster pipeline: staged file + planned paths after promotion to sent-guides. */
 export type WriteStagedGuideResult = {
   filename: string;
   /** Path under repo to staged md. */
@@ -81,7 +83,7 @@ export type WriteStagedGuideResult = {
 async function nextSeqForYmd(ymd: string): Promise<number> {
   let maxSeq = 0;
   const prefixRe = new RegExp(`^${ymd}-(\\d+)-`);
-  for (const dir of [AUTO_DIR, STAGED_GUIDES_DIR]) {
+  for (const dir of [AUTO_DIR, STAGED_GUIDES_DIR, SENT_GUIDES_DIR]) {
     const files = await fs.readdir(dir).catch(() => [] as string[]);
     for (const f of files) {
       const m = f.match(prefixRe);
@@ -136,7 +138,7 @@ export async function composeStagedGuide(input: WriteAutoPostInput): Promise<Com
   const filename = `${ymd}-${seq}-${baseSlug}.md`;
   const fullPath = path.join(STAGED_GUIDES_DIR, filename);
   const stagedRelativePath = path.join("content", "staged-guides", filename).split(path.sep).join("/");
-  const finalRelativePath = path.join("content", "auto-posts", filename).split(path.sep).join("/");
+  const finalRelativePath = path.join("content", "sent-guides", filename).split(path.sep).join("/");
   const plannedUrlPath = `/guides/${slug}`;
   return {
     markdown,

@@ -108,7 +108,7 @@ function parsePlatform(raw: unknown): "douyin" | "xiaohongshu" {
   return "douyin";
 }
 
-/** 主链模板偶发略低于 350 字软阈值；库存修复时本地补足，不改 rebuild-article。 */
+/** 库存修复：正文若略低于 350 字则本地补足（不改变 rebuild 主流程）。 */
 function ensureBodySoftThreshold(body: string): string {
   const t = body.trim();
   if (t.length >= 350) return t;
@@ -167,7 +167,7 @@ async function repairPublishedGuides(): Promise<Record<string, unknown>> {
       const publishedAt = m.publishedAt || runAt;
       const platform = parsePlatform(m.platform);
 
-      const rebuilt = rebuildToZhGuideArticle({
+      const rebuilt = await rebuildToZhGuideArticle({
         title,
         platform,
         contentType: "guide",

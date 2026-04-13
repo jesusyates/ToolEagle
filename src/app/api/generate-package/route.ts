@@ -1,3 +1,7 @@
+/**
+ * Transitional: Web primary package generation uses shared-core POST /v1/ai/execute (Phase 3).
+ * Route kept for rollback and non-Web callers.
+ */
 import { NextRequest, NextResponse } from "next/server";
 import {
   gateGenerationUsage,

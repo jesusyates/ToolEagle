@@ -1,6 +1,6 @@
 {
   "version": "176",
-  "builtAt": "2026-04-07T06:00:41.373Z",
+  "builtAt": "2026-04-11T06:00:42.228Z",
   "criteria": "Blog URLs with impressions>=20 and CTR below 2% or below ~60% of cohort median.",
   "gate": {
     "has_gsc_page_rows": false,

@@ -1,5 +1,6 @@
 /**
- * V95: Client → /api/generate-package (structured post packages).
+ * V95: Client → shared-core POST /v1/ai/execute (kind: post_package) via `webAiExecute`.
+ * Legacy `app/api/generate-package` remains for server rollback — not used by this client path.
  */
 
 import { FREE_DAILY_LIMIT } from "@/lib/usage";
@@ -8,6 +9,8 @@ import type { LockedPackagePreview } from "@/lib/ai/packageTierSplit";
 import { LimitReachedError } from "@/lib/ai/generateText";
 import type { PlatformId } from "@/lib/platform-intelligence/resolve-patterns";
 import { readV195ChainSessionId } from "@/lib/tiktok-chain-tracking";
+import { unwrapPackageExecuteResponse, webAiExecute } from "@/lib/web/web-ai-client";
+import { getSupabaseAccessToken } from "@/lib/auth/supabase-access-token";
 
 export { LimitReachedError };
 
@@ -124,31 +127,31 @@ export async function generatePostPackages(
   if (typeof options?.creatorAnalysisSummary === "string" && options.creatorAnalysisSummary.trim().length > 0) {
     body.creatorAnalysisSummary = options.creatorAnalysisSummary.trim().slice(0, 2400);
   }
-  const res = await fetch("/api/generate-package", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
-    body: JSON.stringify(body)
+  const accessToken = await getSupabaseAccessToken();
+  const res = await webAiExecute(accessToken, {
+    kind: "post_package",
+    ...body
   });
 
-  const data = await res.json().catch(() => ({}));
+  const rawJson = await res.json().catch(() => ({}));
+  const data = unwrapPackageExecuteResponse(rawJson) as Record<string, unknown>;
 
   if (!res.ok) {
     if (res.status === 429 && data.limitReached) {
       throw new LimitReachedError(
-        data.error ?? "Limit reached",
-        data.used ?? FREE_DAILY_LIMIT,
-        data.limit ?? FREE_DAILY_LIMIT
+        (data.error as string) ?? "Limit reached",
+        (data.used as number) ?? FREE_DAILY_LIMIT,
+        (data.limit as number) ?? FREE_DAILY_LIMIT
       );
     }
     if (res.status === 402 && data.limitReached && data.error === "insufficient_credits") {
       throw new CreditsDepletedError(
-        data.error ?? "insufficient_credits",
+        (data.error as string) ?? "insufficient_credits",
         typeof data.required === "number" ? data.required : 1,
         typeof data.remaining === "number" ? data.remaining : 0
       );
     }
-    throw new Error(data.error ?? "Package generation failed");
+    throw new Error((data.error as string) ?? "Package generation failed");
   }
 
   if (!data.packages || !Array.isArray(data.packages)) {

@@ -6,7 +6,7 @@ export type ZhTopicGateResult = {
   decision: "pass" | "reject";
   score: number;
   reasons: string[];
-  contentType: "guide" | "ideas";
+  contentType: "guide";
 };
 
 /** 最小版：重复标题检测 + 长度 */
@@ -25,6 +25,5 @@ export function evaluateZhTopicReadiness(input: {
       return { decision: "reject", score: 10, reasons: ["标题重复"], contentType: "guide" };
     }
   }
-  const contentType: "guide" | "ideas" = /几条|多少条|发几|几条合适/.test(t) ? "ideas" : "guide";
-  return { decision: "pass", score: 75, reasons: [], contentType };
+  return { decision: "pass", score: 75, reasons: [], contentType: "guide" };
 }

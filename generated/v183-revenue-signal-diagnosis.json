@@ -1,8 +1,8 @@
 {
   "version": "183.1",
-  "builtAt": "2026-04-07T06:00:44.527Z",
-  "exact_revenue_empty_reason": "no_paid_orders_in_payment_snapshot (orders.status != 'paid', paid_at is null); payment_events_table_issue: Could not find the table 'public.payment_events' in the schema cache; no_exact_attributed_orders (v180 attribution contains no attribution_confidence='exact' for paid/callback stages); orders_attributed_with_tool_slug_missing => tool_slug=null => exact revenue can't be mapped to monetization tools",
-  "orders_found": 3,
+  "builtAt": "2026-04-11T06:00:45.074Z",
+  "exact_revenue_empty_reason": "no_orders_in_payment_snapshot; payment_events_table_issue: Could not find the table 'public.payment_events' in the schema cache; no_exact_attributed_orders (v180 attribution contains no attribution_confidence='exact' for paid/callback stages)",
+  "orders_found": 0,
   "callbacks_found": 0,
   "activations_found": 0,
   "exact_attributed_orders": {
@@ -14,12 +14,8 @@
     "order_ids": []
   },
   "unattributed_orders": {
-    "count": 3,
-    "order_ids": [
-      "te_ef54e32345594a14beee24ae38da9c1d",
-      "te_b8ed3cc28a904f3f8fea2b3c41a3274d",
-      "te_5cdb304797384e87b971d1f9d5d91c4a"
-    ]
+    "count": 0,
+    "order_ids": []
   },
   "stale_data_reason": {
     "stale_data": true,
@@ -30,7 +26,7 @@
   },
   "chain_breakdown": {
     "upgrade_click": 0,
-    "create_order": 3,
+    "create_order": 0,
     "payment_callback_success": 0,
     "membership_activated": 0
   },
@@ -38,43 +34,43 @@
     "snapshot_ok": true,
     "credentials_ok": true,
     "missing_service_role_key_reason": null,
-    "orders_row_count": 3,
+    "orders_row_count": 0,
     "payment_events_row_count": 0,
-    "latest_order_at": "2026-03-24T11:20:28.144Z",
+    "latest_order_at": null,
     "latest_payment_event_at": null,
     "payment_events_error": "Could not find the table 'public.payment_events' in the schema cache",
     "orders_error": null
   },
   "freshness_audit": {
     "version": "183.1",
-    "builtAt": "2026-04-07T06:00:44.527Z",
+    "builtAt": "2026-04-11T06:00:45.074Z",
     "stale_data": true,
     "stale_reasons": [
       "analytics_missing"
     ],
     "stale_sources": {
       "data_freshness.json": {
-        "updatedAt": "2026-04-07T06:00:40.369Z",
+        "updatedAt": "2026-04-11T06:00:41.248Z",
         "staleness_applied": true,
         "reason": [
           "analytics_missing"
         ]
       },
       "search_performance.json": {
-        "updatedAt": "2026-04-07T06:00:36.261Z",
-        "age_hours": 0.002296388888888889,
+        "updatedAt": "2026-04-11T06:00:37.049Z",
+        "age_hours": 0.0022294444444444445,
         "error": "fetch failed",
         "data_empty": true,
         "is_stale": true
       },
       "tool_conversion_map.json": {
-        "updatedAt": "2026-04-07T06:00:36.694Z",
-        "age_hours": 0.0021761111111111113,
+        "updatedAt": "2026-04-11T06:00:37.455Z",
+        "age_hours": 0.002116666666666667,
         "is_stale": false
       },
       "v180_payment_db_snapshot.json": {
-        "builtAt": "2026-04-07T06:00:44.050Z",
-        "age_hours": 0.00013277777777777778,
+        "builtAt": "2026-04-11T06:00:44.614Z",
+        "age_hours": 0.00012805555555555555,
         "payment_events_error": "Could not find the table 'public.payment_events' in the schema cache",
         "is_stale": false
       }
@@ -83,7 +79,7 @@
   },
   "v182_activation_threshold": {
     "version": "183.1",
-    "builtAt": "2026-04-07T06:00:44.527Z",
+    "builtAt": "2026-04-11T06:00:45.074Z",
     "thresholds": {
       "exact_orders_min": 2,
       "data_freshness_max_age_hours": 48,
@@ -95,7 +91,7 @@
       "exact_attributed_ratio": 0,
       "chain_break": {
         "upgrade_click": 0,
-        "create_order": 3,
+        "create_order": 0,
         "payment_callback_success": 0,
         "membership_activated": 0
       },

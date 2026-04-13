@@ -6,6 +6,8 @@ import Script from "next/script";
 import PlausibleProvider from "next-plausible";
 import "./globals.css";
 import { Analytics } from "./Analytics";
+import { AuthProvider } from "@/hooks/useAuth";
+import { SharedCoreMigrationInvariant } from "@/components/dev/SharedCoreMigrationInvariant";
 import { CookieConsent } from "@/components/CookieConsent";
 import { FloatingUpgradeCTA } from "@/components/monetization/FloatingUpgradeCTA";
 import { OrganizationSchema } from "@/components/seo/OrganizationSchema";
@@ -92,10 +94,13 @@ export default async function RootLayout({
         {`(function(){if(typeof Node==="undefined"||!Node.prototype)return;var r=Node.prototype.removeChild;Node.prototype.removeChild=function(c){if(c.parentNode!==this)return c;return r.apply(this,arguments)};var i=Node.prototype.insertBefore;Node.prototype.insertBefore=function(n,ref){if(ref&&ref.parentNode!==this)return n;return i.apply(this,arguments)}})();`}
       </Script>
       <NextIntlClientProvider messages={messages} locale={locale}>
-        <Analytics />
-        {children}
-        <FloatingUpgradeCTA />
-        <CookieConsent />
+        <AuthProvider>
+          <SharedCoreMigrationInvariant />
+          <Analytics />
+          <div className="pt-[var(--site-header-offset)]">{children}</div>
+          <FloatingUpgradeCTA />
+          <CookieConsent />
+        </AuthProvider>
       </NextIntlClientProvider>
     </>
   );

@@ -17,6 +17,9 @@ import {
   runBackgroundSeoTick
 } from "./lib/seo-background-engine-core";
 
+console.log("[background-seo-engine] disabled by manual override (diagnosis mode)");
+process.exit(0);
+
 function readJson<T>(file: string, fallback: T): T {
   try {
     return JSON.parse(fs.readFileSync(file, "utf8")) as T;

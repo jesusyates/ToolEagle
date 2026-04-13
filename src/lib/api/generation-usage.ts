@@ -1,5 +1,5 @@
 /**
- * Shared usage / limit checks for /api/generate and /api/generate-package (V95).
+ * Shared usage / limit checks for server-side generation routes (V95).
  * V100.1: supporter perks extend free daily limit for ledger-linked users.
  */
 

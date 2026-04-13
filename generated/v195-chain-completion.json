@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "updated_at": "2026-04-07T06:02:21.753Z",
+  "updated_at": "2026-04-13T06:00:13.815Z",
   "source_file": "C:\\Users\\44570\\Desktop\\tooleagle\\generated\\tiktok-chain-events.jsonl",
   "chain_definition": {
     "completion_requires_ordered": [
@@ -12,8 +12,8 @@
     ],
     "notes": "completion = strict chronological order of first occurrence of each milestone; copy_event tracked separately and not required for completion"
   },
-  "total_sessions": 2,
-  "started_sessions": 2,
+  "total_sessions": 3,
+  "started_sessions": 3,
   "completed_sessions": 0,
   "completion_rate": 0,
   "copy_events_total": 1,
@@ -27,9 +27,9 @@
       "from": "session_start",
       "to": "hook_generated",
       "numerator": 1,
-      "denominator": 2,
-      "rate": 0.5,
-      "rate_pct": 50
+      "denominator": 3,
+      "rate": 0.3333333333333333,
+      "rate_pct": 33.33
     },
     {
       "from": "hook_generated",
@@ -68,15 +68,15 @@
     "transition": "session_start → hook",
     "from_step": "session_start",
     "to_step": "hook",
-    "lost_sessions": 1,
-    "from_count": 2,
+    "lost_sessions": 2,
+    "from_count": 3,
     "to_count": 1,
-    "relative_drop_rate": 50
+    "relative_drop_rate": 66.67
   },
   "common_partial_paths": [
     {
       "path_signature": "(no_chain_milestone_yet)",
-      "session_count": 1
+      "session_count": 2
     },
     {
       "path_signature": "hook → caption",
@@ -94,9 +94,9 @@
     {
       "step": "session_start",
       "next_milestone": "hook_generated",
-      "reached_with_session_start": 2,
+      "reached_with_session_start": 3,
       "reached_next_milestone": 1,
-      "lost_to_next": 1,
+      "lost_to_next": 2,
       "note": "Among sessions that emitted session_start, how many reached hook_generated (first chain step)"
     },
     {

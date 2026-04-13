@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { buildLoginRedirect } from "@/lib/auth/login-redirect";
 import { isOperatorUser } from "@/lib/auth/operator";
+import { isAdmin } from "@/lib/auth/isAdmin";
 import { DashboardClient } from "@/app/dashboard/DashboardClient";
 import { isZhDashboardDouyinSlug } from "@/lib/zh-dashboard-scope";
 
@@ -122,6 +123,8 @@ export default async function ZhDashboardPage() {
       .upsert({ id: user.id, plan: "free" }, { onConflict: "id", ignoreDuplicates: true });
   }
 
+  const showAdminSeoLinks = await isAdmin();
+
   return (
     <Suspense fallback={<div className="min-h-screen bg-page animate-pulse" />}>
       <DashboardClient
@@ -134,6 +137,7 @@ export default async function ZhDashboardPage() {
         onboardingCompleted={onboardingCompleted}
         variant="zh"
         showRevenueNav={isOperatorUser(user)}
+        showAdminSeoLinks={showAdminSeoLinks}
       />
     </Suspense>
   );

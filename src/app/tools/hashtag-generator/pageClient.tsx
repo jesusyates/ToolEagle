@@ -26,7 +26,9 @@ import { generateHashtagTemplate } from "@/lib/generators/fallback/hashtagTempla
 import { applyContentSafetyToStringArray } from "@/lib/content-safety/filter";
 import { normalizeHashtagSets } from "@/lib/tool-output/postprocess";
 import { logOutputCopy, mapListCopyToResultType, recordGenerationComplete } from "@/lib/tool-output-quality";
-import { parseUsageStatusForToolUi, type UsageStatusUiSlice } from "@/lib/usage-status-client";
+import type { UsageStatusUiSlice } from "@/lib/usage-status-client";
+import { fetchUsageQuotaToolUi } from "@/lib/web/web-usage-client";
+import { persistToolGenerationToSharedCore } from "@/lib/web/web-task-client";
 import { ToolUsageStatusHints } from "@/components/tools/ToolUsageStatusHints";
 import { CreatorKnowledgeEnginePanel } from "@/components/tools/CreatorKnowledgeEnginePanel";
 import { CreatorScoreCard } from "@/components/tools/CreatorScoreCard";
@@ -88,7 +90,7 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
     cnCreditsDaysLeft: null,
     usageRemaining: null
   });
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, accessToken } = useAuth();
 
   const keDefault = useMemo(() => {
     const intents = assets.intent_chips["hashtag-generator"];
@@ -153,15 +155,14 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
   }, [toolMeta, country]);
 
   function refreshUsageStatus() {
-    fetch("/api/usage-status")
-      .then((r) => r.json())
-      .then((d) => setUsageUi(parseUsageStatusForToolUi(d as Record<string, unknown>)))
+    void fetchUsageQuotaToolUi(accessToken ?? null)
+      .then(setUsageUi)
       .catch(() => {});
   }
 
   useEffect(() => {
     refreshUsageStatus();
-  }, []);
+  }, [accessToken]);
 
   async function generateHashtags() {
     const hadPrior = results.length > 0;
@@ -339,16 +340,12 @@ export function HashtagGeneratorClient({ relatedAside }: Props) {
       items: updated
     });
     setHistoryTrigger((prev) => prev + 1);
-    await fetch("/api/history", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({
-        toolSlug: "hashtag-generator",
-        toolName: "Hashtag Generator",
-        input: topic,
-        items: updated
-      })
+    void persistToolGenerationToSharedCore({
+      toolSlug: "hashtag-generator",
+      toolName: "Hashtag Generator",
+      input: topic,
+      items: updated,
+      market: locale.startsWith("zh") ? "cn" : "global"
     });
   }
 

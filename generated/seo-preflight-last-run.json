@@ -1,0 +1,476 @@
+{
+  "targetCount": 12,
+  "candidatesSeen": 23,
+  "approvedCount": 12,
+  "rejectedCount": 11,
+  "rejectReasonCounts": {
+    "missing_intent_keyword": 10,
+    "modifier_stack_too_long": 1
+  },
+  "estimatedTotalCost": 1.4400000000000004,
+  "approved": [
+    {
+      "topic": "how to AI writing tool using write article on global",
+      "title": "How to How to AI writing tool using write article on global in 2026 (Step-by-Step Guide)",
+      "slug": "how-to-how-to-ai-writing-tool-using-write-article-on-global-in-2026-step-by-step-guide",
+      "description": "This guide covers how to AI writing tool using write article on global for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": true,
+      "rejectReason": null
+    },
+    {
+      "topic": "how to AI content generator using write article on global",
+      "title": "From Messy to Manageable: How to AI content generator using write article on global",
+      "slug": "from-messy-to-manageable-how-to-ai-content-generator-using-write-article-on-global",
+      "description": "This guide covers how to AI content generator using write article on global for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": true,
+      "rejectReason": null
+    },
+    {
+      "topic": "best ai tools for AI content generator",
+      "title": "Beginner's Guide to Best ai tools for AI content generator (With Real Examples)",
+      "slug": "beginners-guide-to-best-ai-tools-for-ai-content-generator-with-real-examples",
+      "description": "This guide covers best ai tools for AI content generator for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": true,
+      "rejectReason": null
+    },
+    {
+      "topic": "AI content generator tips that work for global creators",
+      "title": "Stop Guessing: A Clear AI content generator tips that work for global creators Plan",
+      "slug": "stop-guessing-a-clear-ai-content-generator-tips-that-work-for-global-creators-plan",
+      "description": "This guide covers AI content generator tips that work for global creators for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": true,
+      "rejectReason": null
+    },
+    {
+      "topic": "AI content generator for global creators",
+      "title": "AI content generator for global creators Strategy: What Actually Works in 2026",
+      "slug": "ai-content-generator-for-global-creators-strategy-what-actually-works-in-2026",
+      "description": "This guide covers AI content generator for global creators for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": true,
+      "rejectReason": null
+    },
+    {
+      "topic": "how to AI write articles using write article on global",
+      "title": "How to How to AI write articles using write article on global in 2026 (Step-by-Step",
+      "slug": "how-to-how-to-ai-write-articles-using-write-article-on-global-in-2026-step-by-step",
+      "description": "This guide covers how to AI write articles using write article on global for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": true,
+      "rejectReason": null
+    },
+    {
+      "topic": "best ai tools for AI write articles",
+      "title": "Best ai tools for AI write articles Explained: Tips, Mistakes, and Best Practices",
+      "slug": "best-ai-tools-for-ai-write-articles-explained-tips-mistakes-and-best-practices",
+      "description": "This guide covers best ai tools for AI write articles for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": true,
+      "rejectReason": null
+    },
+    {
+      "topic": "AI write articles tips that work for global creators",
+      "title": "Stop Guessing: A Clear AI write articles tips that work for global creators Plan That",
+      "slug": "stop-guessing-a-clear-ai-write-articles-tips-that-work-for-global-creators-plan-that",
+      "description": "This guide covers AI write articles tips that work for global creators for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": true,
+      "rejectReason": null
+    },
+    {
+      "topic": "how to AI copywriting tool using write article on global",
+      "title": "How to AI copywriting tool using write article on global for Creators: What to",
+      "slug": "how-to-ai-copywriting-tool-using-write-article-on-global-for-creators-what-to",
+      "description": "This guide covers how to AI copywriting tool using write article on global for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": true,
+      "rejectReason": null
+    },
+    {
+      "topic": "AI copywriting tool tips that work for global creators",
+      "title": "AI copywriting tool tips that work for global creators for Creators: What to Prioritize",
+      "slug": "ai-copywriting-tool-tips-that-work-for-global-creators-for-creators-what-to-prioritize",
+      "description": "This guide covers AI copywriting tool tips that work for global creators for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": true,
+      "rejectReason": null
+    },
+    {
+      "topic": "how to AI text generator using write article on global",
+      "title": "Build a Sustainable How to AI text generator using write article on global Habit (Even",
+      "slug": "build-a-sustainable-how-to-ai-text-generator-using-write-article-on-global-habit-even",
+      "description": "This guide covers how to AI text generator using write article on global for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": true,
+      "rejectReason": null
+    },
+    {
+      "topic": "AI text generator examples for business",
+      "title": "How Creators Use AI text generator examples for business to Grow Faster",
+      "slug": "how-creators-use-ai-text-generator-examples-for-business-to-grow-faster",
+      "description": "This guide covers AI text generator examples for business for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": true,
+      "rejectReason": null
+    }
+  ],
+  "rejected": [
+    {
+      "topic": "best ai tools for AI writing tool",
+      "title": "Build a Sustainable Best ai tools for AI writing tool Habit (Even When You’re Busy)",
+      "slug": "build-a-sustainable-best-ai-tools-for-ai-writing-tool-habit-even-when-youre-busy",
+      "description": "This guide covers best ai tools for AI writing tool for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": false,
+      "rejectReason": "missing_intent_keyword"
+    },
+    {
+      "topic": "AI writing tool examples for business",
+      "title": "Build a Sustainable AI writing tool examples for business Habit (Even When You’re Busy)",
+      "slug": "build-a-sustainable-ai-writing-tool-examples-for-business-habit-even-when-youre-busy",
+      "description": "This guide covers AI writing tool examples for business for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": false,
+      "rejectReason": "missing_intent_keyword"
+    },
+    {
+      "topic": "AI writing tool tips that work for global creators",
+      "title": "The AI writing tool tips that work for global creators Playbook I Wish I Had on Day One",
+      "slug": "the-ai-writing-tool-tips-that-work-for-global-creators-playbook-i-wish-i-had-on-day-one",
+      "description": "This guide covers AI writing tool tips that work for global creators for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": false,
+      "rejectReason": "modifier_stack_too_long"
+    },
+    {
+      "topic": "AI writing tool for global creators",
+      "title": "From Messy to Manageable: AI writing tool for global creators Without Overwhelm",
+      "slug": "from-messy-to-manageable-ai-writing-tool-for-global-creators-without-overwhelm",
+      "description": "This guide covers AI writing tool for global creators for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": false,
+      "rejectReason": "missing_intent_keyword"
+    },
+    {
+      "topic": "AI content generator examples for business",
+      "title": "AI content generator examples for business for Creators: What to Prioritize First",
+      "slug": "ai-content-generator-examples-for-business-for-creators-what-to-prioritize-first",
+      "description": "This guide covers AI content generator examples for business for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": false,
+      "rejectReason": "missing_intent_keyword"
+    },
+    {
+      "topic": "AI write articles examples for business",
+      "title": "Build a Sustainable AI write articles examples for business Habit (Even When You’re",
+      "slug": "build-a-sustainable-ai-write-articles-examples-for-business-habit-even-when-youre",
+      "description": "This guide covers AI write articles examples for business for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": false,
+      "rejectReason": "missing_intent_keyword"
+    },
+    {
+      "topic": "AI write articles for global creators",
+      "title": "2026 AI write articles for global creators Roadmap: Goals, Systems, and Weekly Rhythm",
+      "slug": "2026-ai-write-articles-for-global-creators-roadmap-goals-systems-and-weekly-rhythm",
+      "description": "This guide covers AI write articles for global creators for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": false,
+      "rejectReason": "missing_intent_keyword"
+    },
+    {
+      "topic": "best ai tools for AI copywriting tool",
+      "title": "Best ai tools for AI copywriting tool for Creators: What to Prioritize First",
+      "slug": "best-ai-tools-for-ai-copywriting-tool-for-creators-what-to-prioritize-first",
+      "description": "This guide covers best ai tools for AI copywriting tool for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": false,
+      "rejectReason": "missing_intent_keyword"
+    },
+    {
+      "topic": "AI copywriting tool examples for business",
+      "title": "Build a Sustainable AI copywriting tool examples for business Habit (Even When You’re",
+      "slug": "build-a-sustainable-ai-copywriting-tool-examples-for-business-habit-even-when-youre",
+      "description": "This guide covers AI copywriting tool examples for business for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": false,
+      "rejectReason": "missing_intent_keyword"
+    },
+    {
+      "topic": "AI copywriting tool for global creators",
+      "title": "Build a Sustainable AI copywriting tool for global creators Habit (Even When You’re",
+      "slug": "build-a-sustainable-ai-copywriting-tool-for-global-creators-habit-even-when-youre",
+      "description": "This guide covers AI copywriting tool for global creators for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": false,
+      "rejectReason": "missing_intent_keyword"
+    },
+    {
+      "topic": "best ai tools for AI text generator",
+      "title": "Best ai tools for AI text generator for Creators: What to Prioritize First",
+      "slug": "best-ai-tools-for-ai-text-generator-for-creators-what-to-prioritize-first",
+      "description": "This guide covers best ai tools for AI text generator for creators: practical steps, real-world cues, and pitfalls to skip.",
+      "outlineHeadings": [
+        "Problem framing",
+        "Principles",
+        "Playbook steps",
+        "Real-world cues",
+        "Pitfalls",
+        "What to do next"
+      ],
+      "estimatedCost": 0.12,
+      "market": "US",
+      "locale": "en",
+      "contentLanguage": "en",
+      "approved": false,
+      "rejectReason": "missing_intent_keyword"
+    }
+  ],
+  "ranAt": "2026-04-13T09:15:16.536Z"
+}

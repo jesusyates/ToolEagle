@@ -8,6 +8,9 @@
 
 import { runClusterPublishPipeline } from "./cluster-publish-pipeline";
 
+console.log("[cluster-publish-scheduler] disabled by manual override (diagnosis mode)");
+process.exit(0);
+
 const FOUR_HOURS_MS = 4 * 60 * 60 * 1000;
 
 function parseArgs(): { mode: "once" | "watch" } {

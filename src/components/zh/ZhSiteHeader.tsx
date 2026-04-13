@@ -40,24 +40,47 @@ const douyinNavClass =
   "px-2.5 py-1.5 rounded-full font-bold text-red-900 bg-red-50 border border-red-200/80 hover:bg-red-100 transition";
 
 /**
- * 单一 `<nav>` 输出，避免桌面/移动两套相同链接重复出现在 DOM（抓取与无障碍重复）。
+ * DOM/layout aligned with `SiteHeader` (EN): logo | nav + locale + auth on one row from `sm` up.
  */
 export function ZhSiteHeader() {
   return (
-    <header className="border-b border-slate-200 bg-page/90 backdrop-blur sticky top-0 z-40">
-      <div className="container py-3 flex flex-col gap-3">
-        <div className="flex flex-nowrap items-center justify-between gap-3 min-h-[3.5rem]">
-          <Link href={ZH.home} className="flex items-center gap-2.5 min-w-0 shrink-0">
-            <ToolEagleLogoMark variant="cn" />
-            <div className="min-w-0">
-              <p className="text-lg font-semibold tracking-tight text-slate-900 truncate" translate="no">
-                ToolEagle
-              </p>
-              <p className="text-xs text-slate-600 truncate">短视频 · 自媒体 · 涨粉效率</p>
-            </div>
-          </Link>
+    <header className="fixed top-0 z-40 w-full border-b border-slate-200 bg-[var(--page-bg)]">
+      <div className="container py-4 sm:py-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+        <Link
+          href={ZH.home}
+          className="flex items-center gap-2.5 shrink-0 min-w-0 rounded-lg outline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-500/50"
+          aria-label="ToolEagle 首页"
+        >
+          <ToolEagleLogoMark variant="cn" />
+          <div className="min-w-0">
+            <p className="text-lg font-semibold tracking-tight text-slate-900 truncate" translate="no">
+              ToolEagle
+            </p>
+            <p className="text-xs text-slate-600 truncate">短视频 · 自媒体 · 涨粉效率</p>
+          </div>
+        </Link>
 
-          <div className="flex flex-nowrap items-center gap-2 justify-end shrink min-w-0">
+        <div className="flex flex-wrap items-center justify-between sm:justify-end gap-x-2 gap-y-2 min-w-0 sm:min-w-[min(100%,42rem)]">
+          <nav
+            className="flex flex-wrap items-center gap-0.5 sm:gap-1 text-xs sm:text-sm text-slate-700"
+            aria-label="主导航"
+          >
+            {navRest.slice(0, 1).map((item) => (
+              <Link key={item.href} href={item.href} className={navLinkClass(item)}>
+                {item.label}
+              </Link>
+            ))}
+            <Link href={ZH.douyin} className={douyinNavClass}>
+              抖音
+            </Link>
+            {navRest.slice(1).map((item) => (
+              <Link key={item.href} href={item.href} className={navLinkClass(item)}>
+                {item.label}
+                {item.comingSoon ? <span className="text-[10px] text-amber-700"> soon</span> : null}
+              </Link>
+            ))}
+          </nav>
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             <MarketSelector analyticsSource="zh_header" />
             <AuthButton
               loginAnalyticsSource="zh_header"
@@ -70,26 +93,6 @@ export function ZhSiteHeader() {
             />
           </div>
         </div>
-
-        <nav
-          className="flex flex-wrap items-center gap-1.5 text-xs text-slate-700 md:text-sm pb-0.5"
-          aria-label="主导航"
-        >
-          {navRest.slice(0, 1).map((item) => (
-            <Link key={item.href} href={item.href} className={navLinkClass(item)}>
-              {item.label}
-            </Link>
-          ))}
-          <Link href={ZH.douyin} className={douyinNavClass}>
-            抖音
-          </Link>
-          {navRest.slice(1).map((item) => (
-            <Link key={item.href} href={item.href} className={navLinkClass(item)}>
-              {item.label}
-              {item.comingSoon ? <span className="text-[10px] text-amber-700"> soon</span> : null}
-            </Link>
-          ))}
-        </nav>
       </div>
     </header>
   );

@@ -16,7 +16,8 @@ const primaryNav = [
   { href: EN_HOME, key: "home" as const },
   { href: "/tools", key: "tools" as const },
   { href: "/creator", key: "creatorHub" as const },
-  { href: "/en/how-to", key: "guides" as const },
+  { href: "/en/how-to", key: "howTo" as const },
+  { href: "/guides", key: "guides" as const },
   { href: "/pricing", key: "pricing" as const }
 ];
 
@@ -25,7 +26,9 @@ function isPrimaryNavActive(pathname: string, key: (typeof primaryNav)[number]["
   if (key === "home") return p === "/" || p === "";
   if (key === "tools") return p === "/tools" || p.startsWith("/tools/");
   if (key === "creatorHub") return p === "/creator" || p.startsWith("/creator/");
-  if (key === "guides") return p.startsWith("/en/how-to");
+  if (key === "howTo") return p.startsWith("/en/how-to");
+  if (key === "guides")
+    return p === "/guides" || p.startsWith("/guides/") || p === "/auto-posts" || p.startsWith("/auto-posts/");
   if (key === "pricing") return p === "/pricing" || p.startsWith("/pricing/");
   return false;
 }
@@ -33,12 +36,10 @@ function isPrimaryNavActive(pathname: string, key: (typeof primaryNav)[number]["
 export function SiteHeader() {
   const t = useTranslations("nav");
   const pathname = usePathname() ?? "/";
-  const guidesHubActive =
-    pathname === "/guides" || pathname.startsWith("/guides/") || pathname === "/auto-posts" || pathname.startsWith("/auto-posts/");
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200 bg-page/90 backdrop-blur">
-      <div className="container py-3.5 sm:py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+    <header className="fixed top-0 z-40 w-full border-b border-slate-200 bg-[var(--page-bg)]">
+      <div className="container py-4 sm:py-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         <Link
           href={EN_HOME}
           prefetch
@@ -77,18 +78,6 @@ export function SiteHeader() {
                 </Link>
               );
             })}
-            <Link
-              href="/guides"
-              prefetch
-              aria-current={guidesHubActive ? "page" : undefined}
-              className={
-                guidesHubActive
-                  ? "px-2 sm:px-3 py-1.5 sm:py-2 rounded-full whitespace-nowrap font-semibold text-sky-800 bg-sky-100 ring-1 ring-sky-200/80 shadow-sm"
-                  : "px-2 sm:px-3 py-1.5 sm:py-2 rounded-full text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition duration-150 whitespace-nowrap"
-              }
-            >
-              Guides
-            </Link>
           </nav>
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             <MarketSelector analyticsSource="en_header" presentation="dropdown" />

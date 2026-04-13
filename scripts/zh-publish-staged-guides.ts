@@ -1,9 +1,11 @@
 /**
  * 中文 staged → zh-guides：发布前再次终审，仅 pass 移动。
+ * 核心逻辑导出供 deploy-gate-promote 在部署通过后再调用。
  */
 
 import fs from "fs/promises";
 import path from "path";
+import { fileURLToPath } from "node:url";
 import { auditZhGuideMarkdown } from "../src/lib/seo-zh/zh-guide-audit";
 
 const ZH_STAGED = path.join(process.cwd(), "content", "zh-staged-guides");
@@ -43,8 +45,15 @@ async function loadHistory(): Promise<HistoryFile> {
   return { runs: [] };
 }
 
-async function main() {
-  const count = parseCount();
+export type ZhPublishStagedResult = {
+  publishedCount: number;
+  publishedFiles: string[];
+  finalAuditPassed: number;
+  finalAuditFailed: number;
+};
+
+/** 与 CLI / deploy-gate 共用：zh-staged-guides → zh-guides（move）。 */
+export async function runZhPublishStagedGuides(count: number): Promise<ZhPublishStagedResult> {
   const files = (await fs.readdir(ZH_STAGED).catch(() => [] as string[]))
     .filter((f) => f.endsWith(".md"))
     .sort()
@@ -113,9 +122,35 @@ async function main() {
   await fs.writeFile(HISTORY_JSON, JSON.stringify({ runs: hist.runs }, null, 2), "utf8");
 
   console.log("[zh-publish-staged-guides] moved", toMove.length, "→ content/zh-guides; audit failed:", finalAuditFailed);
+
+  return {
+    publishedCount: toMove.length,
+    publishedFiles: toMove,
+    finalAuditPassed,
+    finalAuditFailed
+  };
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+async function main() {
+  const count = parseCount();
+  try {
+    await runZhPublishStagedGuides(count);
+  } catch (e) {
+    console.error(e);
+    process.exit(1);
+  }
+}
+
+/** 仅在被 tsx/node 直接执行本文件时跑 CLI；被 deploy-gate-promote import 时不执行。 */
+function isZhPublishStagedCliEntry(): boolean {
+  const entry = process.argv[1];
+  if (!entry) return false;
+  return path.resolve(fileURLToPath(import.meta.url)) === path.resolve(entry);
+}
+
+if (isZhPublishStagedCliEntry()) {
+  main().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}

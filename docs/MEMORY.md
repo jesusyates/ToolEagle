@@ -72,7 +72,7 @@ Minimize token usage while ensuring correct, executable results.
 9. **工具质量红线（🔒 永久）** — **每一个工具必须做好，做到接近完美；如果做不好就不上线**（宁缺毋滥，禁止用凑数量替代真实可用性）。
 ---
 ## 零点五、工程结构基线（模块化 · 稳定 · 可排障）
-**共识**：代码量增长时，**结构须保持清晰、可维护**；线上须 **流畅、稳定**；出问题时 **易缩小范围、易排查根因**。（与「零」第 2 条「可维护、可观测、可演进」一致，本条为**落地约束**。）
+**共识**：代码量增长时，**结构须保持清晰、可维护**；线上须 **流畅、稳定**；出问题时 **易缩小范围、易排查根因**。（与「零」第 2 条「可维护、可观测、可演进」一致，本条为**落地约束**。）**多端模块化、shared-core 真相源、标准模块名与认证唯一链路**见下条 **「零点五·二」**。
 - **模块化 / 分层**：按职责分目录——路由与页面 `src/app`、域逻辑 `src/lib`、配置与表驱动 `src/config`、可复用 UI `src/components`；**单文件职责收敛**，避免单页堆满业务；多市场/国家站能力优先 **共享模块 + `market` / `locale` 显式分支**，**禁止**为省事复制整套「影子分叉」。
 - **稳定性**：关键路径（鉴权、支付、生成、CSE 等）**显式错误处理**；**禁止**无故 `catch` 后静默吞错；延续既有 **telemetry / 日志** 模式，必要时使用 **可检索前缀**（与现有 API 约定一致）。
 - **体验流畅**：壳层与布局 **复用**（如 `/zh` 由 `layout` 统一头尾），避免无意义重复挂载与重复请求；性能与缓存见 **「二、分区性能」**。
@@ -99,6 +99,44 @@ Minimize token usage while ensuring correct, executable results.
    - **不作**规则正文：与第 1 条冲突时 **始终以本文件（MEMORY）为准**。  
    - AI 使用方式：**先读索引或上述全链路手册（视任务）**，再按需打开其他 `memory/*.md`；不在单次对话中假设「已读完整个文件夹」。
 **索引**：给外部 AI 的协作入口说明见 **`docs/CHATGPT-PROJECT-REPORT.md`**（指向主报告与 MEMORY，避免误读过时长文）。
+---
+## 零点五·二、模块化与统一架构（极简版 · 强制）
+**总原则**：**统一后端真相源，不统一前端形态**；**所有核心能力必须模块化**；**所有核心数据必须来自 shared-core-backend**（Supabase **仅**存储与基础设施，**非**业务真相源）。
+
+**架构链**：`Web / App / Desktop` → **`shared-core-backend`** → `Supabase（存储与基础设施）`。
+
+**前端规则（能做 / 禁止）**  
+- **只能**：调用**模块**；调用 **shared-core**（经统一客户端）；**渲染 UI**。  
+- **禁止**：自建业务真相；直接操作核心数据；在页面/组件内**重写** auth / usage / task / AI 等系统。
+
+**唯一真相源（须统一）**：`user / profile`，**auth 状态**，`plan / entitlement`，`credits / quota`，`usage / cost`，`tasks / runs / results / history`，**AI 执行**，`memory / template`，`payment / orders`。
+
+**API 规则**：凡访问 shared-core 的请求须 **走 apiClient**；带 **`Authorization: Bearer`**；带 **platform / product / locale / version**（与现有 `shared-core` 客户端约定一致）。
+
+**模块化规则**  
+1. **必须模块化**：大功能不得散落在页面或组件。  
+2. **模块优先**：模块（能力）**大于**页面（UI）。  
+3. **单一职责**：一模块只解决一类问题。  
+4. **明确接口**：模块对外 **稳定 API**。  
+5. **禁止重复**：已有模块须复用。  
+6. **可迁移**：模块须 **跨 Web/App/Desktop 可复用**（框架轻、无页面逻辑）。
+
+**推荐模块物理结构**：`module/` → `core/` · `adapter/` · `types/` · `policy/` · `ui/`（**`ui/` 可选**；核心逻辑不得在页面堆叠）。
+
+**标准模块名（对齐工程演进）**：`auth-system`，`security-system`，`ai-execution-system`，`task-run-system`，`usage-quota-system`，`payment-billing-system`，`memory-template-system`，`local-intelligence-system`，`content-publish-system`。
+
+**认证系统（强制 · 唯一链路）**：`Supabase session` → **shared-core `GET /v1/account/session`（gate）** → **`AuthProvider`** → UI。  
+**禁止**：OAuth/密码 **成功即视为已登录**（须 gate 通过）；组件 **自行**判断登录态；**多 auth 真相源**。
+
+**开发流程**：先判定归属 **哪一模块** → 有则 **扩展模块** → 无则 **新建模块** → **最后**才写 UI。
+
+**迁移规则**：旧 `/api` **仅**保留为 fallback；**新功能**须走 shared-core；**一次只改一个域**。
+
+**验收**：须可验证——请求是否走 shared-core；数据是否统一；是否存在**双系统**；UI 是否真实正确。
+
+**补充硬规则**：先模块后页面；页面不得承载核心逻辑；每模块须有 **入口函数**；每模块须支持 **多端调用**；须区分 **canonical vs fallback**；须预留 **本地模式 vs 云模式** 边界。  
+**最终原则**：所有功能模块化；所有模块可复用；所有真相统一。  
+（与 **「零点五」** 工程结构基线一致；冲突时以本条 **后端真相与模块边界** 为优先落地点。）
 ---
 ## 零点六、Mobile-First（移动优先 · 🔒 永久）
 **定位（写死）**：ToolEagle **所有用户可见体验以手机为第一优先**；桌面为增强，**不得**以桌面布局为唯一标准牺牲移动端。
@@ -581,7 +619,7 @@ Minimize token usage while ensuring correct, executable results.
 | 2 | **Volume policy（体量策略）** | 与 **六点四 / 六点五** 对齐的 **limit / cap / 提前停**：各 `generate-*` / `auto-*` 脚本参数及 **`generated/content-allocation-plan.json`**、**`generated/growth-priority.json`**（存在则读摘要字段）。 |
 | 3 | **Scaling engine（缩放）** | `node scripts/check-optimization-readiness.js`（无 npm 别名时直接 node）。查看 **`generated/optimization-readiness.json`**、**`generated/optimization-scheduler-status.json`**、**`generated/page-optimization-rollout-status.json`**。页面优化链：`npm run seo:opt:candidates` → `seo:opt:recommendations` →（写入）`seo:opt:apply` → `seo:opt:measure`。 |
 | 4 | **Conversion feedback loop** | `npm run search:conversion`。辅助：`npm run search:growth`。若有 **`generated/tool-click-events.jsonl`** 或同类 telemetry 产物，抽查近期是否有写入。 |
-| 5 | **Data flywheel** | `npm run search:output-quality`；`npm run search:performance`；`npm run content:allocation`。需要跑内容工厂时用 **`npm run content-factory`**（以脚本说明为准）。 |
+| 5 | **Data flywheel** | `npm run search:output-quality`；`npm run content:allocation`（`search-performance.json` 若需更新由人工/其他流程维护，仓库已移除自动 GSC pull 脚本）。需要跑内容工厂时用 **`npm run content-factory`**（以脚本说明为准）。 |
 | 6 | **Monetization system** | `npm run revenue:summary` / `npm run revenue:expand`。代码与生成物：**`src/lib/seo/asset-seo-monetization-*.ts`**、**`generated/asset-seo-monetization-*.json`**（分支若存在则一并核对是否更新）。 |
 **管线结束后（抽查）**：可再跑 **`npm run audit:seo`**；有文案改动时 **`npm run audit:text:changed`**；结合当日 **git diff** 看 `content/blog` 等是否出现异常同质化。
 > **与六点三**：`daily-pipeline` 等属 **后台/调度职责**；**默认「上传」** **不** 以「跑完本表第 1 行长命令」为前置条件，但 **排障 / 显式用户指令** 仍可单独执行。

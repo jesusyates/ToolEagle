@@ -25,6 +25,12 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@tooleagle/auth-system": [
+        "./packages/shared/auth-system/src/index.ts"
+      ],
+      "@tooleagle/auth-system/*": [
+        "./packages/shared/auth-system/src/*"
       ]
     },
     "incremental": true
@@ -33,6 +39,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "packages/shared/**/*.ts",
     ".next/types/**/*.ts"
   ],
   "exclude": [

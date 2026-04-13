@@ -1,23 +1,72 @@
 {
-  "updatedAt": "2026-04-07T06:02:21.192Z",
+  "updatedAt": "2026-04-13T06:00:02.524Z",
   "caps": {
     "answersMax": 5,
     "guidesMax": 2
   },
-  "answersCreated": 0,
-  "guidesCreated": 0,
-  "primaryPagesCreated": 0,
-  "supportingPagesCreated": 0,
-  "skippedDueToConflict": 5,
+  "answersCreated": 4,
+  "guidesCreated": 1,
+  "primaryPagesCreated": 1,
+  "supportingPagesCreated": 4,
+  "skippedDueToConflict": 12,
   "downgradedGenerations": 3,
-  "cannibalizationPreventedCount": 5,
+  "cannibalizationPreventedCount": 12,
   "preventedConflicts": [
+    {
+      "type": "answer",
+      "url": "/answers/how-to-write-tiktok-captions",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-captions-ideas",
+      "reason": "duplicate_url"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-to-write-viral-hooks",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-hooks-ideas",
+      "reason": "duplicate_url"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-to-go-viral-tiktok",
+      "primaryType": "guide",
+      "primaryUrl": "/how-to/grow-on-tiktok",
+      "reason": "duplicate_url"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/youtube-title-formulas",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/youtube-titles-ideas",
+      "reason": "duplicate_url"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-to-write-youtube-hooks",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/youtube-hooks-ideas",
+      "reason": "duplicate_url"
+    },
     {
       "type": "guide",
       "url": "/how-to/write-viral-captions",
       "primaryType": "blog",
       "primaryUrl": "/blog/tiktok-captions-ideas",
       "reason": "plan_guard_downgrade_guide_to_answer"
+    },
+    {
+      "type": "guide",
+      "url": "/how-to/create-viral-hooks",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-hooks-ideas",
+      "reason": "duplicate_url"
+    },
+    {
+      "type": "guide",
+      "url": "/how-to/grow-on-tiktok",
+      "primaryType": "guide",
+      "primaryUrl": "/how-to/grow-on-tiktok",
+      "reason": "duplicate_url"
     },
     {
       "type": "guide",
@@ -54,14 +103,86 @@
     "guide": "step_by_step_workflow"
   },
   "queued": {
-    "answers": [],
-    "guides": []
+    "answers": [
+      {
+        "url": "/answers/how-to-go-viral-youtube",
+        "fullUrl": "https://www.tooleagle.com/answers/how-to-go-viral-youtube",
+        "source": "v123-surface-answer",
+        "platform": "youtube",
+        "topic": "growth"
+      },
+      {
+        "url": "/answers/how-to-write-instagram-captions",
+        "fullUrl": "https://www.tooleagle.com/answers/how-to-write-instagram-captions",
+        "source": "v123-surface-answer",
+        "platform": "instagram",
+        "topic": "captions"
+      },
+      {
+        "url": "/answers/how-many-hashtags-instagram",
+        "fullUrl": "https://www.tooleagle.com/answers/how-many-hashtags-instagram",
+        "source": "v123-surface-answer",
+        "platform": "instagram",
+        "topic": "hashtags"
+      },
+      {
+        "url": "/answers/how-to-go-viral-instagram",
+        "fullUrl": "https://www.tooleagle.com/answers/how-to-go-viral-instagram",
+        "source": "v123-surface-answer",
+        "platform": "instagram",
+        "topic": "growth"
+      }
+    ],
+    "guides": [
+      {
+        "url": "/en/how-to/youtube-growth",
+        "fullUrl": "https://www.tooleagle.com/en/how-to/youtube-growth",
+        "source": "v123-surface-guide",
+        "platform": "youtube",
+        "topic": "growth"
+      }
+    ]
   },
   "skippedReasons": [
+    {
+      "type": "answer",
+      "url": "/answers/how-to-write-tiktok-captions",
+      "reason": "duplicate_url"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-to-write-viral-hooks",
+      "reason": "duplicate_url"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-to-go-viral-tiktok",
+      "reason": "duplicate_url"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/youtube-title-formulas",
+      "reason": "duplicate_url"
+    },
+    {
+      "type": "answer",
+      "url": "/answers/how-to-write-youtube-hooks",
+      "reason": "duplicate_url"
+    },
     {
       "type": "guide",
       "url": "/how-to/write-viral-captions",
       "reason": "downgraded_to_answer:plan_guard_downgrade_guide_to_answer"
+    },
+    {
+      "type": "guide",
+      "url": "/how-to/create-viral-hooks",
+      "reason": "duplicate_url"
+    },
+    {
+      "type": "guide",
+      "url": "/how-to/grow-on-tiktok",
+      "reason": "duplicate_url"
     },
     {
       "type": "guide",
@@ -90,51 +211,6 @@
     },
     {
       "type": "answer",
-      "url": "/answers/how-to-write-viral-hooks",
-      "reason": "cooldown_not_elapsed"
-    },
-    {
-      "type": "answer",
-      "url": "/answers/how-to-go-viral-tiktok",
-      "reason": "cooldown_not_elapsed"
-    },
-    {
-      "type": "answer",
-      "url": "/answers/youtube-title-formulas",
-      "reason": "cooldown_not_elapsed"
-    },
-    {
-      "type": "answer",
-      "url": "/answers/how-to-write-youtube-hooks",
-      "reason": "cooldown_not_elapsed"
-    },
-    {
-      "type": "answer",
-      "url": "/answers/how-to-go-viral-youtube",
-      "reason": "cooldown_not_elapsed"
-    },
-    {
-      "type": "answer",
-      "url": "/answers/how-to-write-instagram-captions",
-      "reason": "cooldown_not_elapsed"
-    },
-    {
-      "type": "answer",
-      "url": "/answers/how-many-hashtags-instagram",
-      "reason": "cooldown_not_elapsed"
-    },
-    {
-      "type": "answer",
-      "url": "/answers/how-to-go-viral-instagram",
-      "reason": "cooldown_not_elapsed"
-    },
-    {
-      "type": "answer",
-      "url": "/answers/how-to-write-tiktok-captions",
-      "reason": "cooldown_not_elapsed"
-    },
-    {
-      "type": "answer",
       "url": "/answers/youtube-title-formulas",
       "reason": "cooldown_not_elapsed"
     },
@@ -146,21 +222,6 @@
     {
       "type": "guide",
       "url": "/how-to/create-viral-hooks",
-      "reason": "cooldown_not_elapsed"
-    },
-    {
-      "type": "guide",
-      "url": "/how-to/grow-on-tiktok",
-      "reason": "cooldown_not_elapsed"
-    },
-    {
-      "type": "guide",
-      "url": "/how-to/create-viral-hooks",
-      "reason": "cooldown_not_elapsed"
-    },
-    {
-      "type": "guide",
-      "url": "/en/how-to/youtube-growth",
       "reason": "cooldown_not_elapsed"
     }
   ]

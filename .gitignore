@@ -2,6 +2,10 @@
 /node_modules
 
 # Playwright
+e2e/.auth-seed.json
+e2e/.artifacts/
+e2e/.google-creds.json
+e2e/.google-oauth-refresh.json
 /test-results/
 /playwright-report/
 /blob-report/

@@ -1,34 +1,35 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 import { getFavorites, getHistory } from "@/lib/storage";
 
 const SYNC_KEY = "tooleagle_synced_user";
 
 export function useSyncOnLogin() {
+  const { isLoggedIn, user } = useAuth();
   const synced = useRef(false);
 
   useEffect(() => {
+    synced.current = false;
+  }, [user?.id]);
+
+  useEffect(() => {
+    if (!isLoggedIn || !user?.id) return;
+    const userId: string = user.id;
     if (synced.current) return;
 
     async function sync() {
       try {
-        const supabase = createClient();
-        const {
-          data: { user }
-        } = await supabase.auth.getUser();
-        if (!user) return;
-
         const lastSynced = typeof window !== "undefined" ? localStorage.getItem(SYNC_KEY) : null;
-        if (lastSynced === user.id) return;
+        if (lastSynced === userId) return;
 
         const favorites = getFavorites();
         const history = getHistory();
 
         if (favorites.length === 0 && history.length === 0) {
           if (typeof window !== "undefined") {
-            localStorage.setItem(SYNC_KEY, user.id);
+            localStorage.setItem(SYNC_KEY, userId);
           }
           return;
         }
@@ -54,7 +55,7 @@ export function useSyncOnLogin() {
         });
 
         if (res.ok && typeof window !== "undefined") {
-          localStorage.setItem(SYNC_KEY, user.id);
+          localStorage.setItem(SYNC_KEY, userId);
         }
         synced.current = true;
       } catch {
@@ -62,6 +63,6 @@ export function useSyncOnLogin() {
       }
     }
 
-    sync();
-  }, []);
+    void sync();
+  }, [isLoggedIn, user?.id]);
 }

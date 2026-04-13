@@ -10,7 +10,6 @@ import { createHash } from "node:crypto";
 import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
-import { cache } from "react";
 import type { FaqItem } from "@/lib/seo/rebuild-article";
 import { mapZhGuideDataToRecordFields } from "@/lib/seo-zh/zh-frontmatter-keys";
 
@@ -107,26 +106,34 @@ function mapDataToRecord(data: Record<string, unknown>): Omit<ZhGuideRecord, "bo
   };
 }
 
-const loadZhGuideRecords = cache(async (): Promise<ZhGuideRecord[]> => {
-  const files = (await fs.readdir(ZH_GUIDES_DIR).catch(() => [] as string[]))
-    .filter((f) => f.endsWith(".md"))
-    .sort((a, b) => a.localeCompare(b, "en"));
-  const stemToSlug = zhGuideStemToSlugMap(files);
-  const posts: ZhGuideRecord[] = [];
-  for (const f of files) {
-    const stem = path.basename(f, ".md");
-    const slug = stemToSlug.get(stem)!;
-    const raw = await fs.readFile(path.join(ZH_GUIDES_DIR, f), "utf8");
-    const { data, content } = matter(raw);
-    const d = data as Record<string, unknown>;
-    posts.push({
-      ...mapDataToRecord(d),
-      slug,
-      body: content.trim()
-    });
+/** 进程内单例缓存（Next / Node tsx 均可用；非 react.cache）。 */
+let zhGuideRecordsPromise: Promise<ZhGuideRecord[]> | null = null;
+
+async function loadZhGuideRecords(): Promise<ZhGuideRecord[]> {
+  if (!zhGuideRecordsPromise) {
+    zhGuideRecordsPromise = (async (): Promise<ZhGuideRecord[]> => {
+      const files = (await fs.readdir(ZH_GUIDES_DIR).catch(() => [] as string[]))
+        .filter((f) => f.endsWith(".md"))
+        .sort((a, b) => a.localeCompare(b, "en"));
+      const stemToSlug = zhGuideStemToSlugMap(files);
+      const posts: ZhGuideRecord[] = [];
+      for (const f of files) {
+        const stem = path.basename(f, ".md");
+        const slug = stemToSlug.get(stem)!;
+        const raw = await fs.readFile(path.join(ZH_GUIDES_DIR, f), "utf8");
+        const { data, content } = matter(raw);
+        const d = data as Record<string, unknown>;
+        posts.push({
+          ...mapDataToRecord(d),
+          slug,
+          body: content.trim()
+        });
+      }
+      return posts;
+    })();
   }
-  return posts;
-});
+  return zhGuideRecordsPromise;
+}
 
 export async function getZhGuideSlugs(): Promise<string[]> {
   const posts = await loadZhGuideRecords();
@@ -135,7 +142,7 @@ export async function getZhGuideSlugs(): Promise<string[]> {
 }
 
 export async function getAllZhGuides(): Promise<ZhGuideRecord[]> {
-  const posts = await loadZhGuideRecords();
+  const posts = [...(await loadZhGuideRecords())];
   posts.sort((a, b) => {
     const ta = Date.parse(a.publishedAt) || 0;
     const tb = Date.parse(b.publishedAt) || 0;

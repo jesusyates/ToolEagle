@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { trackEvent } from "@/lib/analytics";
+import { fetchCreditsBalanceForUi } from "@/lib/account/fetch-balance-for-ui";
 
 type Phase = "idle" | "loading" | "paying" | "success" | "error";
 type BillingPack = {
@@ -131,10 +132,9 @@ export function GlobalCreditsPaymentPanel({
       const status = await statusRes.json().catch(() => ({}));
       if (status?.status === "paid") {
         if (pollRef.current) clearInterval(pollRef.current);
-        const balRes = await fetch("/api/credits/balance", { credentials: "include" });
-        const bal = await balRes.json().catch(() => ({}));
+        const bal = await fetchCreditsBalanceForUi();
         setBalanceText(
-          `${bal?.remaining_credits ?? 0} credits · expires ${bal?.expire_at ? new Date(bal.expire_at).toLocaleDateString() : "-"}`
+          `${bal.remaining_credits} credits · expires ${bal.expire_at ? new Date(bal.expire_at).toLocaleDateString() : "-"}`
         );
         setPhase("success");
         trackEvent("payment_success", {

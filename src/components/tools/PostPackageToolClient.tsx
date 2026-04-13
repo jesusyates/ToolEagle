@@ -35,7 +35,9 @@ import { ZhDouyinCreditsBar } from "@/components/zh/ZhDouyinCreditsBar";
 import { getEnToolJourney } from "@/config/en-tool-journey";
 import { ToolNextSteps } from "@/components/tools/ToolNextSteps";
 import { recordGenerationComplete } from "@/lib/tool-output-quality";
+import { fetchUsageStatusPayloadPrimary } from "@/lib/web/web-usage-client";
 import { parseUsageStatusForToolUi } from "@/lib/usage-status-client";
+import { useAuth } from "@/hooks/useAuth";
 import { parseToolPrefillParams } from "@/lib/tools/tool-prefill";
 import { trackGenerationStart, trackToolEntry } from "@/lib/seo/asset-seo-conversion-tracking";
 import { computeMonetizationPotential } from "@/lib/seo/asset-seo-monetization-score";
@@ -289,6 +291,7 @@ export function PostPackageToolClient({
       : undefined;
 
   const toolMeta = tools.find((t) => t.slug === toolSlug);
+  const { accessToken } = useAuth();
 
   useEffect(() => {
     const n = parseInt(
@@ -308,11 +311,10 @@ export function PostPackageToolClient({
   }
 
   useEffect(() => {
-    fetch("/api/usage-status")
-      .then((r) => r.json())
-      .then((d) => applyUsageStatusPayload(d as Record<string, unknown>))
+    void fetchUsageStatusPayloadPrimary(accessToken ?? null)
+      .then((d) => applyUsageStatusPayload(d))
       .catch(() => {});
-  }, []);
+  }, [accessToken]);
 
   useEffect(() => {
     fetch(MONETIZATION_SERVER_INTEL, { cache: "no-store" })
@@ -511,9 +513,8 @@ export function PostPackageToolClient({
         });
         setHistoryTrigger((t) => t + 1);
 
-        fetch("/api/usage-status")
-          .then((r) => r.json())
-          .then((d) => applyUsageStatusPayload(d as Record<string, unknown>))
+        void fetchUsageStatusPayloadPrimary(accessToken ?? null)
+          .then((d) => applyUsageStatusPayload(d))
           .catch(() => {});
 
         if (typeof res.creditsUsed === "number" && typeof res.creditsRemaining === "number") {

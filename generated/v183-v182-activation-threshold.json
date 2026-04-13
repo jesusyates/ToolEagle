@@ -1,6 +1,6 @@
 {
   "version": "183.1",
-  "builtAt": "2026-04-07T06:00:44.527Z",
+  "builtAt": "2026-04-11T06:00:45.074Z",
   "thresholds": {
     "exact_orders_min": 2,
     "data_freshness_max_age_hours": 48,
@@ -12,7 +12,7 @@
     "exact_attributed_ratio": 0,
     "chain_break": {
       "upgrade_click": 0,
-      "create_order": 3,
+      "create_order": 0,
       "payment_callback_success": 0,
       "membership_activated": 0
     },

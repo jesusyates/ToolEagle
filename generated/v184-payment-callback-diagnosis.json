@@ -1,6 +1,6 @@
 {
   "version": "184.1",
-  "builtAt": "2026-04-07T06:00:44.603Z",
+  "builtAt": "2026-04-11T06:00:45.153Z",
   "callback_received_count": 0,
   "callback_success_count": 0,
   "callback_failed_count": 0,
@@ -11,7 +11,7 @@
   "provider_status": {
     "payment_events_error": "Could not find the table 'public.payment_events' in the schema cache",
     "snapshot_ok": true,
-    "orders_row_count": 3,
+    "orders_row_count": 0,
     "payment_events_row_count": 0
   },
   "deployment_checks": {

@@ -13,6 +13,9 @@ const path = require("path");
 
 const CWD = process.cwd();
 
+console.log("[daily-pipeline] disabled by manual override (diagnosis mode)");
+process.exit(0);
+
 function run(name, cmd) {
   console.log(`\n===== ${name} =====\n`);
   try {

@@ -1,6 +1,6 @@
 /**
  * Usage limits and tracking for monetization (V94).
- * Free (signed-in + anonymous cookie): N AI calls/day via /api/generate & /api/improve.
+ * Enforced on generation via shared-core + server routes; free tier daily cap applies to AI product flows.
  * Paid users: higher limits / credits-based usage.
  */
 

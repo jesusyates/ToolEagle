@@ -54,7 +54,7 @@ type Props = {
   userInput: string;
   /** V96: total successful package generations this browser (after current) */
   lifetimeGenerationCount: number;
-  /** V96: from /api/usage-status */
+  /** V96: remaining from usage payload (shared-core → UI slice, or transitional Next route when no Bearer) */
   usageRemaining: number | null;
   /** V97.1 — localized chrome + /zh/pricing upgrade path */
   uiLocale?: "en" | "zh";

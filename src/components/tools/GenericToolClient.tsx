@@ -29,7 +29,9 @@ import { ToolNextSteps } from "@/components/tools/ToolNextSteps";
 import { CopyPublishModal } from "@/components/tools/CopyPublishModal";
 import { getPublishUrlForToolSlug } from "@/lib/tools/tool-publish-platform";
 import { logOutputCopy, mapListCopyToResultType, recordGenerationComplete } from "@/lib/tool-output-quality";
-import { parseUsageStatusForToolUi, type UsageStatusUiSlice } from "@/lib/usage-status-client";
+import type { UsageStatusUiSlice } from "@/lib/usage-status-client";
+import { fetchUsageQuotaToolUi } from "@/lib/web/web-usage-client";
+import { persistToolGenerationToSharedCore } from "@/lib/web/web-task-client";
 import { ToolUsageStatusHints } from "@/components/tools/ToolUsageStatusHints";
 import { CreatorGuidanceCard } from "@/components/tools/CreatorGuidanceCard";
 import { CreatorScoreCard } from "@/components/tools/CreatorScoreCard";
@@ -77,7 +79,7 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
     cnCreditsDaysLeft: null,
     usageRemaining: null
   });
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, accessToken } = useAuth();
   const t = useTranslations("common");
   const locale = useLocale();
   const country = useCountry();
@@ -91,15 +93,14 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
   }, [toolMeta, country]);
 
   function refreshUsageStatus() {
-    fetch("/api/usage-status")
-      .then((r) => r.json())
-      .then((d) => setUsageUi(parseUsageStatusForToolUi(d as Record<string, unknown>)))
+    void fetchUsageQuotaToolUi(accessToken ?? null)
+      .then(setUsageUi)
       .catch(() => {});
   }
 
   useEffect(() => {
     refreshUsageStatus();
-  }, []);
+  }, [accessToken]);
 
   if (!toolMeta || !config) return null;
 
@@ -270,16 +271,12 @@ export function GenericToolClient({ slug, relatedAside }: GenericToolClientProps
       items: updated
     });
     setHistoryTrigger((prev) => prev + 1);
-    await fetch("/api/history", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({
-        toolSlug: toolMeta.slug,
-        toolName: toolMeta.name,
-        input,
-        items: updated
-      })
+    void persistToolGenerationToSharedCore({
+      toolSlug: toolMeta.slug,
+      toolName: toolMeta.name,
+      input,
+      items: updated,
+      market: resolveToolMarket(slug, locale)
     });
   }
 

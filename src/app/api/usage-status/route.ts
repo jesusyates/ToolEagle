@@ -8,6 +8,10 @@ import { readSupporterIdFromCookieStore } from "@/lib/supporter/supporter-id";
 import { getCnCreditsBalance } from "@/lib/credits/credits-repository";
 
 /**
+ * Transitional Next route: cookie/anonymous usage + signed-in limits when the client has no Bearer for shared-core.
+ * Primary Web read for signed-in flows: shared-core GET /v1/usage + /v1/quota (`fetchUsageStatusPayloadPrimary`).
+ * Do not add new direct UI callers — extend shared-core mapping in `shared-core-usage-quota.ts` instead.
+ *
  * V96: Read-only usage hint for upgrade triggers (no increment).
  * V100.1: limit reflects supporter daily bonus when applicable.
  */

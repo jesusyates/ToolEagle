@@ -1,96 +1,84 @@
 {
-  "runAt": "2026-04-07T06:01:34.127Z",
-  "clustersGenerated": 14,
-  "clustersPassed": 6,
-  "topicsGenerated": 198,
-  "topicsPassed": 2,
-  "articlesPassed": 2,
+  "runAt": "2026-04-08T15:30:16.007Z",
+  "clustersGenerated": 12,
+  "clustersPassed": 5,
+  "topicsGenerated": 90,
+  "topicsPassed": 1,
+  "articlesPassed": 0,
   "topicsPassedByContentType": {
-    "guide": 0,
-    "ideas": 2
+    "guide": 1,
+    "ideas": 0
   },
   "articlesPassedByContentType": {
     "guide": 0,
-    "ideas": 2
+    "ideas": 0
   },
-  "articlesPassedByCluster": {
-    "SEO fallback pool": 2
-  },
+  "articlesPassedByCluster": {},
   "priorityChoices": [
     {
       "cluster": "Content batching for appointment-based businesses between sessions",
-      "score": 2957.9,
-      "reason": "base=100; cluster_articles_total+2724; tiktok_rate=263%; kind_appointment_batching_rate=454%; jitter"
+      "score": 2954.3,
+      "reason": "base=100; cluster_articles_total+2724; tiktok_rate=256%; kind_appointment_batching_rate=454%; jitter"
     },
     {
       "cluster": "Short-form editing workflow versioning and handoffs for solo creators",
-      "score": 1788.9,
-      "reason": "base=100; cluster_articles_total+1584; tiktok_rate=263%; kind_editing_workflow_rate=281%; jitter"
+      "score": 1788.3,
+      "reason": "base=100; cluster_articles_total+1584; tiktok_rate=256%; kind_editing_workflow_rate=281%; jitter"
     },
     {
       "cluster": "Retention scripting and repeat viewers without growth hacks framing",
-      "score": 1644.8,
-      "reason": "base=100; cluster_articles_total+1440; tiktok_rate=263%; kind_retention_scripting_rate=279%; jitter"
-    },
-    {
-      "cluster": "Client acquisition content and social proof for service sellers",
-      "score": 170.6,
-      "reason": "base=100; tiktok_rate=263%; kind_client_acquisition_content_rate=50%; jitter"
-    },
-    {
-      "cluster": "Creator offers lead magnets and entry products on short video",
-      "score": 169.3,
-      "reason": "base=100; tiktok_rate=263%; kind_offers_lead_magnets_rate=50%; jitter"
+      "score": 1646,
+      "reason": "base=100; cluster_articles_total+1440; tiktok_rate=256%; kind_retention_scripting_rate=279%; jitter"
     },
     {
       "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
-      "score": 169.1,
-      "reason": "base=100; tiktok_rate=263%; kind_repost_repurpose_rate=50%; jitter"
-    },
-    {
-      "cluster": "Short-form hooks for local businesses and neighborhood offers",
-      "score": 168.2,
-      "reason": "base=100; tiktok_rate=263%; kind_local_business_hooks_rate=50%; jitter"
-    },
-    {
-      "cluster": "Comment to DM funnels and inbound qualification on short-form",
-      "score": 167.6,
-      "reason": "base=100; tiktok_rate=263%; kind_comment_dm_funnel_rate=50%; jitter"
+      "score": 169.3,
+      "reason": "base=100; tiktok_rate=256%; kind_repost_repurpose_rate=50%; jitter"
     },
     {
       "cluster": "Educational carousel and list posts adapted into short video beats",
-      "score": 167.3,
-      "reason": "base=100; tiktok_rate=263%; kind_carousel_list_adapt_rate=50%; jitter"
+      "score": 168,
+      "reason": "base=100; tiktok_rate=256%; kind_carousel_list_adapt_rate=50%; jitter"
+    },
+    {
+      "cluster": "Comment to DM funnels and inbound qualification on short-form",
+      "score": 167.4,
+      "reason": "base=100; tiktok_rate=256%; kind_comment_dm_funnel_rate=50%; jitter"
+    },
+    {
+      "cluster": "Client acquisition content and social proof for service sellers",
+      "score": 165.6,
+      "reason": "base=100; tiktok_rate=256%; kind_client_acquisition_content_rate=50%; jitter"
     },
     {
       "cluster": "Before and after proof content without client face reveal",
-      "score": 166.9,
-      "reason": "base=100; tiktok_rate=263%; kind_proof_before_after_rate=50%; jitter"
+      "score": 165.3,
+      "reason": "base=100; tiktok_rate=256%; kind_proof_before_after_rate=50%; jitter"
+    },
+    {
+      "cluster": "Short-form hooks for local businesses and neighborhood offers",
+      "score": 164.7,
+      "reason": "base=100; tiktok_rate=256%; kind_local_business_hooks_rate=50%; jitter"
+    },
+    {
+      "cluster": "Creator offers lead magnets and entry products on short video",
+      "score": 164.2,
+      "reason": "base=100; tiktok_rate=256%; kind_offers_lead_magnets_rate=50%; jitter"
     },
     {
       "cluster": "Faceless TikTok tips without showing your face",
-      "score": 532.7,
-      "reason": "base=100; cluster_articles_total+324; tiktok_rate=263%; kind_faceless_rate=300%; jitter"
+      "score": 532.1,
+      "reason": "base=100; cluster_articles_total+324; tiktok_rate=256%; kind_faceless_rate=300%; jitter"
     },
     {
       "cluster": "Evergreen versus trend-led TikTok content for small channels",
-      "score": 313.2,
-      "reason": "base=100; cluster_articles_total+132; tiktok_rate=263%; kind_growth_rate=116%; jitter"
-    },
-    {
-      "cluster": "Voiceover and storytelling on TikTok without talking head setups",
-      "score": 261.9,
-      "reason": "base=100; cluster_articles_total+84; tiktok_rate=263%; kind_content_mode_voiceover_rate=117%; jitter"
-    },
-    {
-      "cluster": "Coaches and freelancers booking calls via short-form video",
-      "score": 182.8,
-      "reason": "base=100; tiktok_rate=263%; kind_growth_rate=116%; jitter"
+      "score": 346.9,
+      "reason": "base=100; cluster_articles_total+168; tiktok_rate=256%; kind_growth_rate=129%; jitter"
     }
   ],
   "skippedClusters": [
     {
-      "cluster": "Comment to DM funnels and inbound qualification on short-form",
+      "cluster": "Creator offers lead magnets and entry products on short video",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -98,7 +86,7 @@
       ]
     },
     {
-      "cluster": "Comment to DM funnels and inbound qualification on short-form",
+      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -114,6 +102,14 @@
       ]
     },
     {
+      "cluster": "Comment to DM funnels and inbound qualification on short-form",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
       "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
       "decision": "rewrite",
       "score": 48,
@@ -122,7 +118,23 @@
       ]
     },
     {
-      "cluster": "Client acquisition content and social proof for service sellers",
+      "cluster": "Before and after proof content without client face reveal",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Comment to DM funnels and inbound qualification on short-form",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -138,14 +150,6 @@
       ]
     },
     {
-      "cluster": "Short-form hooks for local businesses and neighborhood offers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
       "cluster": "Before and after proof content without client face reveal",
       "decision": "rewrite",
       "score": 48,
@@ -162,7 +166,7 @@
       ]
     },
     {
-      "cluster": "Client acquisition content and social proof for service sellers",
+      "cluster": "Before and after proof content without client face reveal",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -178,87 +182,7 @@
       ]
     },
     {
-      "cluster": "Comment to DM funnels and inbound qualification on short-form",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Before and after proof content without client face reveal",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
       "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Client acquisition content and social proof for service sellers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Creator offers lead magnets and entry products on short video",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Before and after proof content without client face reveal",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Comment to DM funnels and inbound qualification on short-form",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Client acquisition content and social proof for service sellers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Educational carousel and list posts adapted into short video beats",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Comment to DM funnels and inbound qualification on short-form",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -298,271 +222,7 @@
       ]
     },
     {
-      "cluster": "Educational carousel and list posts adapted into short video beats",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Client acquisition content and social proof for service sellers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
       "cluster": "Comment to DM funnels and inbound qualification on short-form",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Short-form hooks for local businesses and neighborhood offers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Creator offers lead magnets and entry products on short video",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Before and after proof content without client face reveal",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Educational carousel and list posts adapted into short video beats",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Client acquisition content and social proof for service sellers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Educational carousel and list posts adapted into short video beats",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Short-form hooks for local businesses and neighborhood offers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Before and after proof content without client face reveal",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Creator offers lead magnets and entry products on short video",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Comment to DM funnels and inbound qualification on short-form",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Short-form hooks for local businesses and neighborhood offers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Creator offers lead magnets and entry products on short video",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Client acquisition content and social proof for service sellers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Before and after proof content without client face reveal",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Comment to DM funnels and inbound qualification on short-form",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Educational carousel and list posts adapted into short video beats",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Creator offers lead magnets and entry products on short video",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Comment to DM funnels and inbound qualification on short-form",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Client acquisition content and social proof for service sellers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Educational carousel and list posts adapted into short video beats",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Before and after proof content without client face reveal",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Short-form hooks for local businesses and neighborhood offers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Coaches and freelancers booking calls via short-form video",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Comment to DM funnels and inbound qualification on short-form",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Creator offers lead magnets and entry products on short video",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Educational carousel and list posts adapted into short video beats",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -594,183 +254,7 @@
       ]
     },
     {
-      "cluster": "Before and after proof content without client face reveal",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Coaches and freelancers booking calls via short-form video",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Educational carousel and list posts adapted into short video beats",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
       "cluster": "Creator offers lead magnets and entry products on short video",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Comment to DM funnels and inbound qualification on short-form",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Before and after proof content without client face reveal",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Client acquisition content and social proof for service sellers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Short-form hooks for local businesses and neighborhood offers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Coaches and freelancers booking calls via short-form video",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Client acquisition content and social proof for service sellers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Creator offers lead magnets and entry products on short video",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Comment to DM funnels and inbound qualification on short-form",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Short-form hooks for local businesses and neighborhood offers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Before and after proof content without client face reveal",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Educational carousel and list posts adapted into short video beats",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Coaches and freelancers booking calls via short-form video",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Client acquisition content and social proof for service sellers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Creator offers lead magnets and entry products on short video",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Short-form hooks for local businesses and neighborhood offers",
-      "decision": "rewrite",
-      "score": 48,
-      "reasons": [
-        "score_below_pass_threshold"
-      ]
-    },
-    {
-      "cluster": "Comment to DM funnels and inbound qualification on short-form",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -794,7 +278,135 @@
       ]
     },
     {
-      "cluster": "Coaches and freelancers booking calls via short-form video",
+      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Client acquisition content and social proof for service sellers",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Comment to DM funnels and inbound qualification on short-form",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Educational carousel and list posts adapted into short video beats",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Short-form hooks for local businesses and neighborhood offers",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Comment to DM funnels and inbound qualification on short-form",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Before and after proof content without client face reveal",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Creator offers lead magnets and entry products on short video",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Client acquisition content and social proof for service sellers",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Repost and repurpose systems across formats without duplicate fatigue",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Educational carousel and list posts adapted into short video beats",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Comment to DM funnels and inbound qualification on short-form",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Client acquisition content and social proof for service sellers",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Before and after proof content without client face reveal",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Short-form hooks for local businesses and neighborhood offers",
+      "decision": "rewrite",
+      "score": 48,
+      "reasons": [
+        "score_below_pass_threshold"
+      ]
+    },
+    {
+      "cluster": "Creator offers lead magnets and entry products on short video",
       "decision": "rewrite",
       "score": 48,
       "reasons": [
@@ -802,29 +414,29 @@
       ]
     }
   ],
-  "languageGatePassed": 2,
+  "languageGatePassed": 0,
   "languageGateFailedCount": 0,
-  "finalAuditPassed": 2,
+  "finalAuditPassed": 0,
   "finalAuditFailed": 0,
   "finalAuditFailedReasonsTop": {},
-  "retryCount": 14,
+  "retryCount": 8,
   "topicPreDedupDropped": 0,
   "preIndexDedupDropped": 0,
-  "inventoryLow": false,
-  "forcedSuccessTarget": 12,
-  "attemptsUsed": 195,
+  "inventoryLow": true,
+  "forcedSuccessTarget": 2,
+  "attemptsUsed": 15,
   "minStagedTarget": 10,
-  "stagedFilesWrittenThisRun": 2,
+  "stagedFilesWrittenThisRun": 0,
   "publishedFilesWrittenThisRun": 0,
   "minFilesWrittenPerRun": 12,
   "fileThroughputSatisfied": false,
-  "throughputFailureReason": "low_throughput: staged_files_written=2 min_required=12 (this-run counter)",
+  "throughputFailureReason": "low_throughput: staged_files_written=0 min_required=12 (this-run counter)",
   "mainlineWritten": 0,
-  "fallbackWritten": 2,
-  "runHealth": "degraded",
-  "runHealthReason": "fallback_dominant",
+  "fallbackWritten": 0,
+  "runHealth": "blocked",
+  "runHealthReason": "no_files_written",
   "success": false,
   "failed": true,
-  "error": "low_throughput: staged_files_written=2 min_required=12 (this-run counter)",
-  "source": "cli"
+  "error": "low_throughput: staged_files_written=0 min_required=12 (this-run counter)",
+  "source": "content-batch"
 }

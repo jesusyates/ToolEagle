@@ -11,6 +11,17 @@
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
   /** Page canvas — soft neutral (not pure white) for long reading sessions */
   --page-bg: hsl(220 14% 96%);
+  /**
+   * Fixed `SiteHeader` / `ZhSiteHeader`: MUST equal outer header height (see `layout.tsx` pt).
+   * Matched to py-4 + gap-3 + stacked rows on xs; sm+ single row + py-5 + border-b — no extra “river”.
+   */
+  --site-header-offset: 108px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --site-header-offset: 84px;
+  }
 }
 
 *,

@@ -54,3 +54,6 @@
 {"type":"tool_entry","toolSlug":"tiktok-caption-generator","sourceSlug":null,"sourceKind":"external","referrer":null,"ts":"2026-04-01T15:23:19.885Z","receivedAt":"2026-04-01T15:23:22.306Z"}
 {"type":"tool_entry","toolSlug":"tiktok-caption-generator","sourceSlug":null,"sourceKind":"external","referrer":"http://localhost:3001/tools/tiktok-caption-generator","ts":"2026-04-01T16:16:23.704Z","receivedAt":"2026-04-01T16:16:25.270Z"}
 {"type":"tool_entry","toolSlug":"tiktok-caption-generator","sourceSlug":null,"sourceKind":"external","referrer":"http://localhost:3001/tools/tiktok-caption-generator","ts":"2026-04-01T16:16:26.736Z","receivedAt":"2026-04-01T16:16:26.886Z"}
+{"type":"tool_entry","toolSlug":"tiktok-caption-generator","sourceSlug":null,"sourceKind":"external","referrer":"http://localhost:3000/zh/xiaohongshu","ts":"2026-04-07T15:24:20.380Z","receivedAt":"2026-04-07T15:24:23.356Z"}
+{"type":"tool_entry","toolSlug":"instagram-username-generator","sourceSlug":null,"sourceKind":"external","referrer":"http://localhost:3000/zh/xiaohongshu","ts":"2026-04-07T15:28:30.572Z","receivedAt":"2026-04-07T15:28:32.670Z"}
+{"type":"tool_entry","toolSlug":"tiktok-caption-generator","sourceSlug":null,"sourceKind":"external","referrer":"http://localhost:3001/admin/seo?tab=preflight","ts":"2026-04-13T13:55:18.256Z","receivedAt":"2026-04-13T13:55:21.483Z"}

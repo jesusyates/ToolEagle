@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { trackEvent } from "@/lib/analytics";
 import { trackConversion } from "@/lib/analytics/conversionClient";
 import { listCreditPacksForUi, type CnCreditPackId } from "@/lib/credits/credit-packs";
+import { fetchCreditsBalanceForUi } from "@/lib/account/fetch-balance-for-ui";
 
 type Phase = "idle" | "loading" | "paying" | "success" | "error";
 
@@ -149,12 +150,11 @@ export function ZhProPaymentPanel({ paymentEnabled = true }: { paymentEnabled?: 
             amount: typeof j.amount === "number" ? j.amount : current.cny,
             route: "/zh/pricing"
           });
-          const balRes = await fetch("/api/credits/balance", { credentials: "include" });
-          const bal = await balRes.json().catch(() => ({}));
+          const bal = await fetchCreditsBalanceForUi();
           setSuccessMeta({
             added: current.credits,
-            balance: Number(bal?.remaining_credits ?? 0),
-            expireAt: typeof bal?.expire_at === "string" ? bal.expire_at : null
+            balance: bal.remaining_credits,
+            expireAt: bal.expire_at
           });
           try {
             if (typeof window !== "undefined") {

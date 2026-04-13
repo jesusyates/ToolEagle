@@ -1,14 +1,14 @@
 {
   "version": "v155.0",
-  "updatedAt": "2026-04-07T06:02:22.592Z",
-  "reliability_score": 51,
+  "updatedAt": "2026-04-13T06:00:15.263Z",
+  "reliability_score": 36,
   "recent_days": 7,
   "missed_runs": [
-    "2026-04-04",
-    "2026-04-01"
+    "2026-04-12",
+    "2026-04-08"
   ],
   "missed_run_count": 2,
-  "stale_runs": 0,
+  "stale_runs": 1,
   "partial_runs": 14,
   "safe_mode_days": 0,
   "avg_retries": 0,
@@ -16,7 +16,7 @@
   "zh_health": "degraded",
   "long_running_lanes": [],
   "orchestrator_incomplete_cycle": false,
-  "stale_report_age_ms": 49570,
+  "stale_report_age_ms": 172745436,
   "notes": [
     "recovery_disabled_set_SEO_WATCHDOG_RECOVERY=1",
     "stale_source:updatedAt"

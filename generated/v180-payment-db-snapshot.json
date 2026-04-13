@@ -1,65 +1,7 @@
 {
   "ok": true,
-  "builtAt": "2026-04-07T06:00:44.050Z",
-  "orders": [
-    {
-      "id": "0311c071-5084-4d9b-8487-fd7f46082b51",
-      "order_id": "te_ef54e32345594a14beee24ae38da9c1d",
-      "user_id": "387bfe98-dd4e-4018-9068-f20956e5ed4c",
-      "anonymous_user_id": null,
-      "market": "global",
-      "amount": 12,
-      "currency": "USD",
-      "plan": "global_standard",
-      "status": "pending",
-      "provider": "lemon",
-      "provider_order_ref": null,
-      "provider_payload": {},
-      "created_at": "2026-03-24T11:20:28.144968+00:00",
-      "paid_at": null,
-      "order_type": "pro"
-    },
-    {
-      "id": "0d61a1e0-5394-480a-ab85-e08bf4c88272",
-      "order_id": "te_b8ed3cc28a904f3f8fea2b3c41a3274d",
-      "user_id": "387bfe98-dd4e-4018-9068-f20956e5ed4c",
-      "anonymous_user_id": null,
-      "market": "global",
-      "amount": 12,
-      "currency": "USD",
-      "plan": "global_standard",
-      "status": "pending",
-      "provider": "lemon",
-      "provider_order_ref": null,
-      "provider_payload": {
-        "return_url": null,
-        "payment_url": "/pricing"
-      },
-      "created_at": "2026-03-24T11:17:15.94897+00:00",
-      "paid_at": null,
-      "order_type": "pro"
-    },
-    {
-      "id": "58e94bf4-e989-4bc0-9fa2-9dede19e07d6",
-      "order_id": "te_5cdb304797384e87b971d1f9d5d91c4a",
-      "user_id": "387bfe98-dd4e-4018-9068-f20956e5ed4c",
-      "anonymous_user_id": null,
-      "market": "global",
-      "amount": 12,
-      "currency": "USD",
-      "plan": "global_standard",
-      "status": "pending",
-      "provider": "lemon",
-      "provider_order_ref": null,
-      "provider_payload": {
-        "return_url": null,
-        "payment_url": "/pricing"
-      },
-      "created_at": "2026-03-24T11:16:36.090716+00:00",
-      "paid_at": null,
-      "order_type": "pro"
-    }
-  ],
+  "builtAt": "2026-04-11T06:00:44.614Z",
+  "orders": [],
   "orders_error": null,
   "payment_events": [],
   "payment_events_error": "Could not find the table 'public.payment_events' in the schema cache",

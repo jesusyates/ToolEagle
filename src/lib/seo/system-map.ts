@@ -61,7 +61,7 @@ export type V174RuntimeTruth = {
 
 /** V175 — real GSC + conversion JSON feeding growth; stale-data guardrails. */
 export type V175DataActivationTruth = {
-  /** pull-search-performance + aggregates + v174 growth metrics use real shapes */
+  /** GSC JSON (search-performance.json when present) + aggregates + v174 growth metrics use real shapes */
   data_activation: "active" | "partially_active" | "placeholder" | "not_activated";
   /** generated/data-freshness.json + allocation stale multiplier */
   data_freshness_monitor: "active" | "partially_active" | "placeholder" | "not_activated";
@@ -446,12 +446,8 @@ export function buildSystemMap(now = new Date()): SystemMapJson {
     ],
     analytics: [
       {
-        entry_points: ["npm run search:growth", "npm run search:performance", "npm run search:conversion"],
-        scripts: [
-          "scripts/aggregate-growth-priority.js",
-          "scripts/pull-search-performance.js",
-          "scripts/aggregate-tool-conversion.js"
-        ],
+        entry_points: ["npm run search:growth", "npm run search:conversion"],
+        scripts: ["scripts/aggregate-growth-priority.js", "scripts/aggregate-tool-conversion.js"],
         outputs: [
           "generated/growth-priority.json",
           "generated/search-performance.json",
@@ -477,7 +473,7 @@ export function buildSystemMap(now = new Date()): SystemMapJson {
       "V184: Supabase migration 0037_v184_payment_events_closure.sql ensures public.payment_events exists; build-v180-payment-snapshot.ts exits non-zero if payment_events cannot be queried. Global Lemon: create-order appends checkout[custom][merchant_order_id] to NEXT_PUBLIC_PAYMENT_LINK; POST /api/payment/lemon-webhook verifies LEMON_SQUEEZY_SIGNING_SECRET, marks orders paid, writes payment_events, activates credits. CN aggregator: POST /api/payment/callback unchanged signature flow. run-v184-payment-diagnostics.js writes v184-payment-callback-diagnosis.json + v184-payment-test-result.json. Daily-engine runs V184 diagnostics after V183.",
       "V185: node scripts/run-v185-first-revenue-acquisition.js — optional npm run v184:verify; writes v185-first-payment.json + v185-revenue-system-state.json (v182_revenue_amplification.state active when exact_orders_count>=1 and callback_success>=1). Daily-engine runs with --skip-verify after V184. writeSystemMapJson merges v185: when state is active, V182 runtime flags are forced active (overrides V183 placeholder until threshold file catches up).",
       "V176: npm run v176:execution — build-v176-growth-execution.ts writes v176-internal-link-weights; consumed by scripts/lib/en-internal-linking.js after search/growth sets, before V181 revenue layer; also v176-top-winners, v176-low-ctr-fix, v176-conversion-path-amplify, v176-ab-test, v176-revenue-signals.",
-      "V175: data activation — daily-engine runs search:performance → search:conversion → search:growth; pull-search-performance writes search-performance.json (pages, queries, totals, gsc); aggregate-tool-conversion merges funnel_totals + tool-output-actions; build-v174 writes data-freshness.json; stale_data applies allocation multiplier via data-freshness.json.",
+      "V175: data activation — daily-engine runs search:conversion → search:growth (search-performance.json is optional legacy input, no longer auto-pulled); aggregate-tool-conversion merges funnel_totals + tool-output-actions; build-v174 writes data-freshness.json; stale_data applies allocation multiplier via data-freshness.json.",
       "V174: npm run v174:scale — build-v174-controlled-scale.ts writes v174-growth-metrics, page-value-score, v174-scale-plan (HIGH_PERFORMING/STABLE/RISKY), expansion hints, pruning report, conversion-path optimization; daily-engine runs search:growth + V172/V173 + V174 before content-allocation-plan so blog generation uses tiered weights; content-allocation multiplies V173 then V174 topicFrequencyMultipliers.",
       "V173: npm run v173:ramp — rolls up logs/v173-generation-events.jsonl + degradation state into v173-*.json + topic-production-control.json; content-allocation applies v173-ramp-allocation topicTailMultipliers; API adaptive relaxed_once after V173_RELAX_STREAK_THRESHOLD strict failures (default 3).",
       "V172: npm run v172:artifacts — high-quality-signals.json (retrieval + growth + tool-output-quality) + content-deduplication.json; generate-package + blog:generate inject retrieval into prompts; pregen/dedup gates; strict mode when high-quality-signals.json exists (TOOLEAGLE_V172_LEGACY_FALLBACK=1 restores heuristic packages).",

@@ -9,7 +9,8 @@ export type TopicReadinessResult = {
   decision: "pass" | "rewrite" | "reject";
   reasons: string[];
   score: number;
-  contentType?: "guide" | "ideas";
+  /** Single strategy: experience-recap guide only. */
+  contentType?: "guide";
 };
 
 const INTENT_RE = /\b(how|ideas|tips|guide|captions|hooks?|ways|strategy)\b/i;
@@ -17,7 +18,8 @@ const INTENT_RE = /\b(how|ideas|tips|guide|captions|hooks?|ways|strategy)\b/i;
 const SIM_REJECT = 0.95;
 /** Below reject; at/above this is rewrite — keep below SIM_REJECT so borderline topics still pass main chain. */
 const SIM_REWRITE = 0.93;
-const PRE_DEDUP_DROP_SIM_REJECT_EN = 0.95;
+/** Pre-dedup: Jaccard is only a pre-check; final duplicate requires near-identical normalized strings (see isPreDedupNearIdenticalEn). */
+const PRE_DEDUP_JACCARD_PRECHECK = 0.995;
 
 function maxTitleSimilarity(title: string, existingTitles: string[]): number {
   let max = 0;
@@ -42,6 +44,16 @@ export function topicMaxJaccardAgainstCorpus(topic: string, corpus: string[]): n
   return maxTitleSimilarity(topic, corpus);
 }
 
+/** Near-identical only: high Jaccard plus same normalized line or one contains the other (not similarity-alone). */
+function isPreDedupNearIdenticalEn(candidate: string, existing: string): boolean {
+  const j = enContentTokenJaccard(candidate, existing);
+  if (j < PRE_DEDUP_JACCARD_PRECHECK) return false;
+  const a = normalizeEnTitleForDedup(candidate).trim();
+  const b = normalizeEnTitleForDedup(existing).trim();
+  if (!a || !b) return false;
+  return a === b || a.includes(b) || b.includes(a);
+}
+
 export type PreDropBeforeModelResult = {
   drop: boolean;
   reason?: string;
@@ -49,19 +61,15 @@ export type PreDropBeforeModelResult = {
   preDedupSoftpassNote?: string;
 };
 
-/** Drop before rebuild only when high content overlap with a strict duplicate (not shared shell words alone). */
+/** Drop before rebuild only when titles are near-identical (Jaccard pre-check + normalized string match), not similarity-alone. */
 export function shouldPreDropTopicBeforeModel(
   topic: string,
   corpus: string[]
 ): PreDropBeforeModelResult {
-  /** Slightly looser than topic-gate strict dup (0.98): fewer false pre-drops; publish_gate still filters. */
-  const preDedupStrictJaccard = 0.99;
   for (const t of corpus) {
     const s = String(t ?? "").trim();
     if (!s) continue;
-    const j = enContentTokenJaccard(topic, s);
-    if (j < PRE_DEDUP_DROP_SIM_REJECT_EN) continue;
-    if (isStrictDuplicateTopic(topic, s, preDedupStrictJaccard)) {
+    if (isPreDedupNearIdenticalEn(topic, s)) {
       return {
         drop: false,
         preDedupSoftpassNote: "title_duplicate:content_jaccard",
@@ -71,19 +79,14 @@ export function shouldPreDropTopicBeforeModel(
   return { drop: false };
 }
 
-function inferContentType(topic: string): "guide" | "ideas" | undefined {
+/** Listicle / ideas-bank / template title shapes — pipeline is guide-only (经验复盘型). */
+function isDisabledIdeasOrListicleTopic(topic: string): boolean {
   const low = topic.toLowerCase();
-  const ideasPhrase =
-    /\b(post ideas|content ideas|caption ideas|hook ideas)\b/.test(low) ||
-    /\bideas for\b|\bhooks for\b|\bcaptions for\b/i.test(low);
-  if (ideasPhrase) return "ideas";
-  if (/\bhow\b/.test(low)) return "guide";
-  if (/\bbeginner guide\b|best ways\b|how to grow\b|\bguide to\b|stay consistent\b|stay motivated\b/.test(low)) {
-    return "guide";
-  }
-  if (/\bstrategy\b|\bways to\b|\btips for\b/.test(low)) return "guide";
-  if (/\bideas\b|\bcaptions\b|\bhooks?\b/.test(low)) return "ideas";
-  return undefined;
+  if (/\b(post ideas|content ideas|caption ideas|hook ideas)\b/.test(low)) return true;
+  if (/\b(listicle|content template)\b/i.test(low)) return true;
+  if (/\b\d+\s+(hooks|captions|ideas)\s+for\b/i.test(low)) return true;
+  if (/\b(ideas|hooks|captions)\s+for\b/i.test(low) && !/\bhow\b/.test(low)) return true;
+  return false;
 }
 
 /** Stiff or template-stacked guide lines (SEO sites rarely publish these). */
@@ -120,9 +123,14 @@ export function evaluateTopicReadiness(input: TopicReadinessInput): TopicReadine
     return { decision: "reject", reasons: ["empty_topic"], score: 0 };
   }
 
-  if (topic.length < 18 || topic.length > 80) {
+  /** EN cluster-publish: slightly wider band for borderline valid guide titles. */
+  if (topic.length < 16 || topic.length > 88) {
     reasons.push("length_out_of_range");
     return { decision: "reject", reasons, score: 20 };
+  }
+
+  if (isDisabledIdeasOrListicleTopic(topic)) {
+    return { decision: "reject", reasons: ["single_strategy:listicle_ideas_disabled"], score: 24 };
   }
 
   if (!INTENT_RE.test(topic)) {
@@ -141,9 +149,8 @@ export function evaluateTopicReadiness(input: TopicReadinessInput): TopicReadine
     return { decision: "reject", reasons, score: 22 };
   }
 
-  const preType = inferContentType(topic);
   const awkwardGuide = unnaturalGuideTopic(topic);
-  if (awkwardGuide && preType === "guide") {
+  if (awkwardGuide) {
     reasons.push(`unnatural_guide:${awkwardGuide}`);
     return { decision: "reject", reasons, score: 27 };
   }
@@ -161,7 +168,6 @@ export function evaluateTopicReadiness(input: TopicReadinessInput): TopicReadine
   const strictDup = existing.some((t) => isStrictDuplicateTopic(topic, String(t ?? "")));
   if (sim >= SIM_REJECT && strictDup) {
     /** TASK20 EN: duplicate enforcement deferred to publish_gate; soft-pass for observability. */
-    const contentType = preType ?? inferContentType(topic);
     let score = 86;
     if (topic.length >= 36) score += 5;
     if (words.length >= 8 && words.length <= 13) score += 5;
@@ -169,7 +175,7 @@ export function evaluateTopicReadiness(input: TopicReadinessInput): TopicReadine
       decision: "pass",
       reasons: ["topic_gate_softpass:title_duplicate:content_jaccard"],
       score: Math.min(100, score),
-      contentType,
+      contentType: "guide",
     };
   }
   if (sim >= SIM_REWRITE) {
@@ -177,9 +183,8 @@ export function evaluateTopicReadiness(input: TopicReadinessInput): TopicReadine
     return { decision: "rewrite", reasons, score: 50 };
   }
 
-  const contentType = preType ?? inferContentType(topic);
   let score = 86;
   if (topic.length >= 36) score += 5;
   if (words.length >= 8 && words.length <= 13) score += 5;
-  return { decision: "pass", reasons: [], score: Math.min(100, score), contentType };
+  return { decision: "pass", reasons: [], score: Math.min(100, score), contentType: "guide" };
 }

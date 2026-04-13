@@ -1,3 +1,7 @@
+/**
+ * Transitional: Web primary simple generation uses shared-core POST /v1/ai/execute (Phase 3).
+ * Route kept for rollback, direct API clients, and tests.
+ */
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { ANON_AI_COOKIE, applyAnonAiCookie, parseAnonAiCookie } from "@/lib/anon-ai-cookie";

@@ -7,7 +7,6 @@
     "GSC_SITE_URL"
   ],
   "commandOrder": [
-    "npm run search:performance",
     "npm run search:growth",
     "npm run seo:opt:candidates",
     "npm run seo:opt:recommendations",

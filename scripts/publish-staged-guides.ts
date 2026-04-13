@@ -5,6 +5,7 @@
 
 import fs from "fs/promises";
 import path from "path";
+import { fileURLToPath } from "node:url";
 import matter from "gray-matter";
 import { enqueueIndexingUrl } from "../src/lib/indexing-queue";
 import { SITE_URL } from "../src/config/site";
@@ -230,7 +231,16 @@ async function main() {
   }
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+/** 仅在被 tsx/node 直接执行本文件时跑 CLI；被 deploy-gate-promote import 时不执行。 */
+function isPublishStagedCliEntry(): boolean {
+  const entry = process.argv[1];
+  if (!entry) return false;
+  return path.resolve(fileURLToPath(import.meta.url)) === path.resolve(entry);
+}
+
+if (isPublishStagedCliEntry()) {
+  main().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}

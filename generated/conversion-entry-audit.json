@@ -1,15 +1,45 @@
 {
   "version": "171",
-  "generatedAt": "2026-04-07T06:01:29.905Z",
+  "generatedAt": "2026-04-11T06:01:06.700Z",
   "summary": {
-    "filesScanned": 230,
+    "filesScanned": 237,
     "totalSeoToolCTA": 48,
     "totalPricingHref": 2
   },
   "note": "Heuristic static scan (regex). Use for tightening redundant CTAs — not a runtime DOM audit.",
   "pages": [
     {
+      "file": "src/app/admin/import/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": [
+        "/dashboard"
+      ]
+    },
+    {
       "file": "src/app/admin/indexing/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 0
+      },
+      "upgradeDestinations": [
+        "/dashboard"
+      ]
+    },
+    {
+      "file": "src/app/admin/publish/page.tsx",
       "pageTypeGuess": "other",
       "ctaSignals": {
         "SeoToolCTA": 0,
@@ -342,6 +372,19 @@
       "upgradeDestinations": []
     },
     {
+      "file": "src/app/login/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 1
+      },
+      "upgradeDestinations": []
+    },
+    {
       "file": "src/app/onboarding/page.tsx",
       "pageTypeGuess": "other",
       "ctaSignals": {
@@ -379,6 +422,32 @@
         "DonationBox": 0,
         "subscription": 1,
         "signIn": 0
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/reset-password/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 1
+      },
+      "upgradeDestinations": []
+    },
+    {
+      "file": "src/app/signup/page.tsx",
+      "pageTypeGuess": "other",
+      "ctaSignals": {
+        "SeoToolCTA": 0,
+        "PricingLink": 0,
+        "UpgradeButton": 0,
+        "DonationBox": 0,
+        "subscription": 0,
+        "signIn": 1
       },
       "upgradeDestinations": []
     },

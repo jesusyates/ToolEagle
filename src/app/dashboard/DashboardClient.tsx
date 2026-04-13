@@ -13,7 +13,6 @@ import { FREE_DAILY_LIMIT } from "@/lib/usage";
 import { ToolCopyButton } from "@/components/tools/ToolCopyButton";
 import { useSyncOnLogin } from "@/hooks/useSyncOnLogin";
 import { safeCopyToClipboard } from "@/lib/clipboard";
-import { createClient } from "@/lib/supabase/client";
 import { trackConversion } from "@/lib/analytics";
 import { Star, History, FolderOpen } from "lucide-react";
 import { GrowthMissionBlock } from "@/components/dashboard/GrowthMissionBlock";
@@ -51,7 +50,8 @@ export function DashboardClient({
   plan,
   onboardingCompleted = true,
   variant = "en",
-  showRevenueNav = false
+  showRevenueNav = false,
+  showAdminSeoLinks = false
 }: {
   userEmail: string;
   favorites: Favorite[];
@@ -64,6 +64,8 @@ export function DashboardClient({
   variant?: "en" | "zh";
   /** 全站收入 / 联盟运营页，仅 `OPERATOR_*` 用户显示 */
   showRevenueNav?: boolean;
+  /** SEO 内容中心入口 — `profiles.role === "admin"` only */
+  showAdminSeoLinks?: boolean;
 }) {
   useSyncOnLogin();
   const searchParams = useSearchParams();
@@ -136,6 +138,14 @@ export function DashboardClient({
                   className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
                 >
                   💰 {t("revenue")}
+                </Link>
+              )}
+              {showAdminSeoLinks && (
+                <Link
+                  href="/admin/seo"
+                  className="inline-flex items-center gap-2 rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-2.5 text-sm font-semibold text-amber-950 hover:bg-amber-100"
+                >
+                  SEO内容中心
                 </Link>
               )}
               {plan === "free" && (

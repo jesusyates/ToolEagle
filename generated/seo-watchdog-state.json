@@ -1,6 +1,6 @@
 {
-  "recovery_triggers_day": "2026-04-07",
+  "recovery_triggers_day": "2026-04-13",
   "recovery_triggers_count": 0,
   "degraded_reporting_only": false,
-  "last_check_at": "2026-04-07T06:02:22.574Z"
+  "last_check_at": "2026-04-13T06:00:15.248Z"
 }

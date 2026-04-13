@@ -66,6 +66,9 @@ const { resolveRepoRoot } = require("./lib/repo-root.js") as {
   resolveRepoRoot: (startDir?: string) => string;
 };
 
+console.log("[daily-orchestrator] disabled by manual override (diagnosis mode)");
+process.exit(0);
+
 const CWD = resolveRepoRoot(path.dirname(fileURLToPath(import.meta.url)));
 const REPORT_PATH = path.join(CWD, "generated", "seo-daily-report.json");
 const SANDBOX_REPORT_PATH = path.join(CWD, "generated", "sandbox", "seo-daily-report.json");

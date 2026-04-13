@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { buildLoginRedirect } from "@/lib/auth/login-redirect";
 import { isOperatorUser } from "@/lib/auth/operator";
+import { isAdmin } from "@/lib/auth/isAdmin";
 import { DashboardClient } from "./DashboardClient";
 import { isEnDashboardAllowedToolSlug } from "@/lib/en-dashboard-scope";
 
@@ -120,6 +121,8 @@ export default async function DashboardPage() {
       .upsert({ id: user.id, plan: "free" }, { onConflict: "id", ignoreDuplicates: true });
   }
 
+  const showAdminSeoLinks = await isAdmin();
+
   return (
     <Suspense fallback={<div className="min-h-screen bg-page animate-pulse" />}>
       <DashboardClient
@@ -131,6 +134,7 @@ export default async function DashboardPage() {
         plan={plan}
         onboardingCompleted={onboardingCompleted}
         showRevenueNav={isOperatorUser(user)}
+        showAdminSeoLinks={showAdminSeoLinks}
       />
     </Suspense>
   );

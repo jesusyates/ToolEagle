@@ -1,3 +1,7 @@
+/**
+ * Phase 5 — Still required: OAuth/password flows set `te_auth_failed` cookie; client polls this
+ * lightweight route. Not a duplicate of shared-core auth — cookie bridge only.
+ */
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 

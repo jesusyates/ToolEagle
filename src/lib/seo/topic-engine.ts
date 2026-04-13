@@ -10,18 +10,10 @@ export { loadClusterPriorityState, recordClusterRunOutcome } from "./cluster-pri
 export type { ClusterPriorityMeta } from "./cluster-priority";
 
 const SEEDS = ["tiktok", "instagram", "youtube"];
-const SCENES = ["morning routine", "gym", "coffee", "skincare", "outfit"];
-const AUDIENCE = ["beginners", "girls", "creators", "small business"];
-const FORMAT = ["ideas", "tips", "captions", "hooks"];
-
 /** Guide-oriented audiences (read naturally after “as …”). */
 const GUIDE_AUDIENCES = ["beginners", "new creators", "small creators", "part-time creators"];
 
 const CREATOR_TYPES = ["small business owners", "beauty creators", "fitness creators", "faceless creators"];
-const SEASONS = ["in spring", "in summer", "for 2026", "this month"];
-const OUTPUT_TYPES = ["content ideas", "caption ideas", "hook ideas", "post ideas"];
-
-const GUIDE_MIN_SHARE = 0.6;
 
 export type GeneratedTopic = {
   topic: string;
@@ -205,93 +197,19 @@ function fillGuidePool(seen: Set<string>, pool: GeneratedTopic[]): void {
   }
 }
 
-function fillIdeasPool(seen: Set<string>, pool: GeneratedTopic[]): void {
-  for (const platform of SEEDS) {
-    for (const scene of SCENES) {
-      for (const audience of AUDIENCE) {
-        for (const format of FORMAT) {
-          if (format === "tips") continue;
-          const topic = `${platform} ${scene} ${format} for ${audience}`;
-          tryAdd(seen, pool, topic, `${platform} ${scene} ${format}`, `ideas:format:${format}`);
-        }
-      }
-    }
-  }
-
-  for (const platform of SEEDS) {
-    for (const scene of SCENES) {
-      for (const outputType of OUTPUT_TYPES) {
-        for (const audience of AUDIENCE) {
-          tryAdd(
-            seen,
-            pool,
-            `${platform} ${scene} ${outputType} for ${audience}`,
-            `${platform} ${scene} ${outputType}`,
-            "ideas:template-a"
-          );
-        }
-        for (const creatorType of CREATOR_TYPES) {
-          tryAdd(
-            seen,
-            pool,
-            `${platform} ${scene} ${outputType} for ${creatorType}`,
-            `${platform} ${scene} ${outputType}`,
-            "ideas:template-b"
-          );
-        }
-      }
-    }
-  }
-
-  for (const season of SEASONS) {
-    for (const platform of SEEDS) {
-      for (const scene of SCENES) {
-        for (const outputType of OUTPUT_TYPES) {
-          tryAdd(
-            seen,
-            pool,
-            `${season} ${platform} ${scene} ${outputType}`,
-            `${platform} ${scene} ${outputType}`,
-            "ideas:seasonal"
-          );
-        }
-      }
-    }
-  }
-}
-
 /**
- * Guide-priority mix (~60%+ guide templates), then ideas lists.
+ * Single strategy: experience-recap guide topics only (no ideas-bank / listicle pool).
  */
 export function generateTopics(options?: { count?: number }): GeneratedTopic[] {
   const want = Math.max(1, options?.count ?? 10);
   const seen = new Set<string>();
   const guidePool: GeneratedTopic[] = [];
-  const ideasPool: GeneratedTopic[] = [];
 
   fillGuidePool(seen, guidePool);
-  fillIdeasPool(seen, ideasPool);
 
   shuffleInPlace(guidePool);
-  shuffleInPlace(ideasPool);
-
-  const targetGuide = Math.ceil(want * GUIDE_MIN_SHARE);
-  const tg = Math.min(targetGuide, guidePool.length);
-  const out: GeneratedTopic[] = [];
-  out.push(...guidePool.slice(0, tg));
-
-  let need = want - out.length;
-  const ti = Math.min(need, ideasPool.length);
-  out.push(...ideasPool.slice(0, ti));
-
-  need = want - out.length;
-  out.push(...guidePool.slice(tg, tg + need));
-
-  need = want - out.length;
-  out.push(...ideasPool.slice(ti, ti + need));
-
-  shuffleInPlace(out);
-  return out.slice(0, Math.min(want, out.length));
+  shuffleInPlace(guidePool);
+  return guidePool.slice(0, Math.min(want, guidePool.length));
 }
 
 /**
@@ -343,13 +261,8 @@ export function clustersToGeneratedTopics(clusters: TopicCluster[]): GeneratedTo
   return rows;
 }
 
-/** Minimum staged files written per EN cluster-publish tick (yield floor; pipeline may add fallbacks). */
+/** Minimum staged files written per EN cluster-publish tick (yield floor). */
 export const MIN_FILES_PER_RUN = 12;
-
-export function computeMinYieldFallbackNeed(stagedFilesWrittenThisRun: number): number {
-  const filesWritten = stagedFilesWrittenThisRun || 0;
-  return Math.max(0, MIN_FILES_PER_RUN - filesWritten);
-}
 
 const INTENT_HINT = /\b(how|ideas|tips|guide|captions|hooks?|ways|strategy)\b/i;
 

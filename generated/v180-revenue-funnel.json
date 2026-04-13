@@ -1,6 +1,6 @@
 {
   "version": "180.1",
-  "builtAt": "2026-04-07T06:00:44.282Z",
+  "builtAt": "2026-04-11T06:00:44.825Z",
   "stages": [
     "visit",
     "tool_click",
@@ -14,12 +14,12 @@
   ],
   "overall": {
     "visit": null,
-    "tool_click": 56,
-    "generation_complete": 21,
+    "tool_click": 58,
+    "generation_complete": 23,
     "copy": 21,
     "publish_redirect_click": 0,
     "upgrade_click": 3,
-    "create_order": 3,
+    "create_order": 0,
     "payment_success": 0,
     "membership_active": 0
   },

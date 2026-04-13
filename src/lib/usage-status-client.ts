@@ -1,6 +1,6 @@
 /**
- * Client-side parsing of GET /api/usage-status JSON for tool UIs
- * (daily remaining / CN credits). Keeps PostPackage + GenericTool in sync.
+ * Client-side parsing of normalized usage payload (daily remaining / CN credits).
+ * Source: `fetchUsageQuotaToolUi` → shared-core primary, or transitional Next route when no Bearer.
  */
 export type UsageStatusUiSlice = {
   cnBilling: "credits" | "legacy_pro" | "free" | null;

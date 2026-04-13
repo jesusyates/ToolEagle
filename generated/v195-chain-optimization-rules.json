@@ -1,25 +1,25 @@
 {
   "version": "1",
-  "updated_at": "2026-04-07T06:02:21.759Z",
+  "updated_at": "2026-04-13T06:00:13.821Z",
   "inputs": {
     "completion": "C:\\Users\\44570\\Desktop\\tooleagle\\generated\\v195-chain-completion.json",
     "diagnosis": "C:\\Users\\44570\\Desktop\\tooleagle\\generated\\v195-chain-dropoff-diagnosis.json"
   },
   "data_snapshot": {
-    "started_sessions": 2,
+    "started_sessions": 3,
     "biggest_drop_transition": "session_start → hook",
-    "lost_sessions": 1,
-    "from_count": 2,
+    "lost_sessions": 2,
+    "from_count": 3,
     "to_count": 1
   },
   "biggest_drop_step": {
     "transition": "session_start → hook",
     "from_step": "session_start",
     "to_step": "hook",
-    "lost_sessions": 1,
-    "from_count": 2,
+    "lost_sessions": 2,
+    "from_count": 3,
     "to_count": 1,
-    "relative_drop_rate": 50
+    "relative_drop_rate": 66.67
   },
   "optimize_target_step": "hook_entry_and_first_generate",
   "recommended_fix_type": "visibility",
@@ -30,7 +30,7 @@
   "confidence_meta": {
     "tier": "low",
     "note": "Sample < 30: use directionally only.",
-    "started_sessions": 2
+    "started_sessions": 3
   },
   "top_1_fix": {
     "dimension": "visibility",

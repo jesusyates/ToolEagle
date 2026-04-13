@@ -131,6 +131,65 @@ export async function runZhClusterPublishPipeline(): Promise<{
   let attemptsUsed = 0;
   let roundsExecuted = 0;
   let clustersGeneratedTotal = 0;
+  /** Diagnostics only: topic strings emitted from clusters (per round + total). */
+  let topicsGeneratedThisRound = 0;
+  let topicsGeneratedTotal = 0;
+  let diagZhTopicGateFail = 0;
+  let diagZhTopicGatePass = 0;
+  let diagZhClusterGateSkip = 0;
+  let diagZhRebuildAttempts = 0;
+  let diagZhRebuildSuccess = 0;
+  let diagZhRebuildThrows = 0;
+  let diagZhPurityFail = 0;
+  let diagZhLanguageGateFail = 0;
+  let diagZhLanguageGatePass = 0;
+  const zhPipelineBlockers: Record<string, number> = {};
+  function bumpZhPipelineBlocker(prefix: string, raw: string) {
+    const nk = raw.replace(/\s+/g, " ").trim().slice(0, 120) || "(empty)";
+    const key = `${prefix}:${nk}`;
+    zhPipelineBlockers[key] = (zhPipelineBlockers[key] ?? 0) + 1;
+  }
+  function topZhPipelineBlockers(n: number): [string, number][] {
+    return Object.entries(zhPipelineBlockers)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, n) as [string, number][];
+  }
+  function logZhDiag(label: string, roundNum: number): void {
+    const stagedDelta = Math.max(0, countZhStagedMdFiles(ZH_STAGED) - zhStagedBeforeRun);
+    const line = {
+      lang: "ZH",
+      label,
+      round: roundNum,
+      topicsGeneratedCount: topicsGeneratedThisRound,
+      topicsGeneratedTotalSoFar: topicsGeneratedTotal,
+      passedTopicGateCount: diagZhTopicGatePass,
+      topicGateRejectedCount: diagZhTopicGateFail,
+      clusterGateSkippedClusters: diagZhClusterGateSkip,
+      assetIndexRejectedCount: preIndexDedupDropped,
+      rebuildSuccessCount: diagZhRebuildSuccess,
+      rebuildThrowCount: diagZhRebuildThrows,
+      rebuildAttemptCount: diagZhRebuildAttempts,
+      languagePurityFailCount: diagZhPurityFail,
+      languageGatePassCount: diagZhLanguageGatePass,
+      languageGateFailCount: diagZhLanguageGateFail,
+      preStagedQualityGateRejectedCount: 0,
+      publishGateRejectedCount: publishGateSkipped,
+      finalAuditRejectedCount: finalAuditFailed,
+      stagedFilesWrittenThisRun: stagedDelta
+    };
+    console.log(`[zh-cluster-publish-diag] ${JSON.stringify(line)}`);
+    if (stagedDelta === 0) {
+      const mergedTop = [
+        ...topZhPipelineBlockers(8),
+        ...Object.entries(finalAuditFailedReasonsTop).map(([k, v]) => [`final_audit:${k}`, v] as [string, number])
+      ]
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
+      console.log(
+        `[zh-cluster-publish-diag] dominant_blocker_top5 lang=ZH ${JSON.stringify(Object.fromEntries(mergedTop))}`
+      );
+    }
+  }
   const PRE_DEDUP_THRESHOLD_ZH = 0.93;
   const PUBLISH_GATE_THRESHOLD_ZH = 0.7;
   let fallbackReleaseUsed = false;
@@ -166,9 +225,12 @@ export async function runZhClusterPublishPipeline(): Promise<{
       roundSeed: round
     });
     clustersGeneratedTotal += clusters.length;
+    topicsGeneratedThisRound = clusters.reduce((n, c) => n + c.topics.length, 0);
+    topicsGeneratedTotal += topicsGeneratedThisRound;
 
     if (clusters.length === 0) {
       console.log(`[zh-cluster-publish-pipeline] round ${round} no clusters after filter, retry`);
+      logZhDiag(`round_${round}_no_clusters`, round);
       continue;
     }
 
@@ -177,6 +239,8 @@ export async function runZhClusterPublishPipeline(): Promise<{
       if (articlesStaged >= MIN_SUCCESS || roundAttempts >= MAX_TOPIC_ATTEMPTS_PER_ROUND) break;
       const cr = evaluateZhClusterReadiness({ cluster: cl.cluster });
       if (cr.decision !== "pass") {
+        diagZhClusterGateSkip++;
+        for (const r of cr.reasons) bumpZhPipelineBlocker("cluster_gate", r);
         console.log(
           `[zh-cluster-gate] skip cluster="${cl.cluster.slice(0, 96)}" decision=${cr.decision} score=${cr.score} reasons=${cr.reasons.join(";") || "(none)"}`
         );
@@ -192,17 +256,24 @@ export async function runZhClusterPublishPipeline(): Promise<{
           existingTitles: sessionTopicStrings
         });
         if (tr.decision !== "pass") {
+          diagZhTopicGateFail++;
+          for (const r of tr.reasons) bumpZhPipelineBlocker("topic_gate", r);
           console.log(
             `[zh-topic-gate] skip topic="${topicStr.slice(0, 80)}" decision=${tr.decision} score=${tr.score} reasons=${tr.reasons.join(";") || "(none)"}`
           );
           continue;
         }
         topicsPassed++;
+        diagZhTopicGatePass++;
 
         const zhAssetIndexNow = scanZhContentAssetIndexFromDisk(cwd);
         const zhHit = findZhTopicAssetIndexHit(topicStr, zhAssetIndexNow);
         if (zhHit) {
           preIndexDedupDropped++;
+          bumpZhPipelineBlocker(
+            "asset_index",
+            `${zhHit.kind}:${zhHit.entry.title ?? ""}`
+          );
           const src =
             zhHit.entry.status === "published" ? "content/zh-guides" : "content/zh-staged-guides";
           console.log(
@@ -213,15 +284,28 @@ export async function runZhClusterPublishPipeline(): Promise<{
 
         sessionTopicStrings.push(topicStr);
 
-        const article = await rebuildToZhGuideArticle({
-          title: topicStr,
-          context: `平台:${cl.platform} 聚类:${cl.cluster}`,
-          platform: cl.platform,
-          contentType: tr.contentType
-        });
+        diagZhRebuildAttempts++;
+        let article: Awaited<ReturnType<typeof rebuildToZhGuideArticle>>;
+        try {
+          article = await rebuildToZhGuideArticle({
+            title: topicStr,
+            context: `平台:${cl.platform} 聚类:${cl.cluster}`,
+            platform: cl.platform,
+            contentType: tr.contentType
+          });
+          diagZhRebuildSuccess++;
+        } catch (rebuildErr) {
+          diagZhRebuildThrows++;
+          const m = rebuildErr instanceof Error ? rebuildErr.message : String(rebuildErr);
+          bumpZhPipelineBlocker("rebuild_throw", m);
+          console.log(`[zh-rebuild-error] topic="${topicStr.slice(0, 64)}" ${m.slice(0, 240)}`);
+          continue;
+        }
 
         if (!article.languagePurity.pass) {
+          diagZhPurityFail++;
           languageGateFailedCount++;
+          bumpZhPipelineBlocker("language_purity", article.languagePurity.reason ?? "unknown");
           console.log(
             `[zh-rebuild-purity] skipped reason=${article.languagePurity.reason ?? "unknown"} topic="${topicStr.slice(0, 64)}"`
           );
@@ -237,13 +321,16 @@ export async function runZhClusterPublishPipeline(): Promise<{
         ].join("\n");
         const zg = evaluateZhContentLanguage(zhText);
         if (!zg.passed) {
+          diagZhLanguageGateFail++;
           languageGateFailedCount++;
+          bumpZhPipelineBlocker("language_gate", zg.reason ?? "unknown");
           console.log(
             `[zh-language-gate] skipped reason=${zg.reason ?? "unknown"} topic="${topicStr.slice(0, 64)}"`
           );
           continue;
         }
         languageGatePassed++;
+        diagZhLanguageGatePass++;
 
         const existingTitles = [...loadExistingGuideTitles(), ...sessionArticleTitles];
         const pr = evaluateZhPublishReadiness({
@@ -253,6 +340,7 @@ export async function runZhClusterPublishPipeline(): Promise<{
         });
         if (pr.decision !== "pass") {
           publishGateSkipped++;
+          for (const r of pr.reasons) bumpZhPipelineBlocker("publish_gate", r);
           const similarReason = pr.reasons.find((r) => r.startsWith("similar_title:jaccard_zh="));
           if (similarReason) {
             const scorePart = similarReason.split("=").pop() ?? "0";
@@ -289,6 +377,7 @@ export async function runZhClusterPublishPipeline(): Promise<{
           finalAuditFailed++;
           for (const r of audit.reasons) {
             finalAuditFailedReasonsTop[r] = (finalAuditFailedReasonsTop[r] ?? 0) + 1;
+            bumpZhPipelineBlocker("final_audit", r);
           }
           console.log(
             `[zh-final-audit] skip decision=${audit.decision} file=${fname} ${audit.reasons.join(",")}`
@@ -310,6 +399,7 @@ export async function runZhClusterPublishPipeline(): Promise<{
         `[zh-cluster-publish-pipeline] round ${round} done articlesStaged=${articlesStaged} target=${MIN_SUCCESS}, retrying`
       );
     }
+    logZhDiag(`round_${round}_end`, round);
   }
 
   if (topicsPassed > 0 && articlesStaged === 0 && fallbackReleaseCandidate) {
@@ -397,10 +487,29 @@ export async function runZhClusterPublishPipeline(): Promise<{
     preDedupThresholdZh: PRE_DEDUP_THRESHOLD_ZH,
     publishGateThresholdZh: PUBLISH_GATE_THRESHOLD_ZH,
     fallbackReleaseUsed,
-    fallbackReleaseTopic
+    fallbackReleaseTopic,
+    diagZh: {
+      topicsGeneratedTotal,
+      passedTopicGateCount: diagZhTopicGatePass,
+      topicGateRejectedCount: diagZhTopicGateFail,
+      clusterGateSkippedClusters: diagZhClusterGateSkip,
+      assetIndexRejectedCount: preIndexDedupDropped,
+      rebuildSuccessCount: diagZhRebuildSuccess,
+      rebuildThrowCount: diagZhRebuildThrows,
+      rebuildAttemptCount: diagZhRebuildAttempts,
+      languagePurityFailCount: diagZhPurityFail,
+      languageGatePassCount: diagZhLanguageGatePass,
+      languageGateFailCount: diagZhLanguageGateFail,
+      preStagedQualityGateRejectedCount: 0,
+      publishGateRejectedCount: publishGateSkipped,
+      finalAuditRejectedCount: finalAuditFailed,
+      stagedFilesWrittenThisRun,
+      dominantBlockerTop5: topZhPipelineBlockers(5)
+    }
   };
   fs.mkdirSync(path.dirname(HEALTH_JSON), { recursive: true });
   fs.writeFileSync(HEALTH_JSON, JSON.stringify(health, null, 2), "utf8");
+  logZhDiag("end_of_run_after_health", roundsExecuted);
   console.log(
     "[zh-cluster-publish-pipeline] articlesStaged:",
     articlesStaged,

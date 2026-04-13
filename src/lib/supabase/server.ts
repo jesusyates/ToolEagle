@@ -12,6 +12,7 @@ export async function createClient() {
 
   const cookieStore = await cookies();
 
+  /** Cookie-backed session (not memory-only). Route handlers that redirect should use request/response-bound cookies — see `auth/callback/route.ts`. */
   return createServerClient(
     url,
     key,

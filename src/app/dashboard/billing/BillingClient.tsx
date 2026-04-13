@@ -5,6 +5,7 @@ import Link from "next/link";
 import { SiteHeader } from "@/app/_components/SiteHeader";
 import { SiteFooter } from "@/app/_components/SiteFooter";
 import { trackEvent } from "@/lib/analytics";
+import { fetchCreditsBalanceForUi } from "@/lib/account/fetch-balance-for-ui";
 
 type Balance = {
   remaining_credits: number;
@@ -34,7 +35,7 @@ export function BillingClient({ variant = "en" }: { variant?: "en" | "zh" }) {
     (async () => {
       try {
         const [b, u, p] = await Promise.all([
-          fetch("/api/credits/balance", { credentials: "include" }).then((r) => r.json()),
+          fetchCreditsBalanceForUi(),
           fetch("/api/credits/usage?limit=80", { credentials: "include" }).then((r) => r.json()),
           fetch("/api/payment/history?limit=80", { credentials: "include" }).then((r) => r.json())
         ]);

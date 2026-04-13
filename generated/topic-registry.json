@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-07T06:02:21.190Z",
+  "updatedAt": "2026-04-13T06:00:02.522Z",
   "topics": [
     {
       "topicKey": "youtube-titles",
@@ -11,9 +11,14 @@
           "type": "guide",
           "url": "/how-to/get-youtube-subscribers",
           "createdAt": "2026-03-26T16:28:10.392Z"
+        },
+        {
+          "type": "answer",
+          "url": "/answers/youtube-title-formulas",
+          "createdAt": "2026-04-12T06:00:02.995Z"
         }
       ],
-      "lastUpdated": "2026-03-26T16:28:10.393Z"
+      "lastUpdated": "2026-04-12T06:00:02.995Z"
     },
     {
       "topicKey": "instagram-captions",
@@ -25,9 +30,14 @@
           "type": "guide",
           "url": "/how-to/go-viral-on-instagram",
           "createdAt": "2026-03-26T16:28:10.393Z"
+        },
+        {
+          "type": "answer",
+          "url": "/answers/how-to-write-instagram-captions",
+          "createdAt": "2026-04-13T06:00:02.520Z"
         }
       ],
-      "lastUpdated": "2026-03-26T16:28:10.393Z"
+      "lastUpdated": "2026-04-13T06:00:02.520Z"
     },
     {
       "topicKey": "instagram-hashtags",
@@ -39,9 +49,14 @@
           "type": "guide",
           "url": "/en/how-to/instagram-growth",
           "createdAt": "2026-03-26T16:28:35.732Z"
+        },
+        {
+          "type": "answer",
+          "url": "/answers/how-many-hashtags-instagram",
+          "createdAt": "2026-04-13T06:00:02.520Z"
         }
       ],
-      "lastUpdated": "2026-03-26T16:28:35.732Z"
+      "lastUpdated": "2026-04-13T06:00:02.520Z"
     },
     {
       "topicKey": "instagram-growth",
@@ -53,9 +68,14 @@
           "type": "guide",
           "url": "/how-to/get-instagram-followers",
           "createdAt": "2026-03-26T16:28:35.732Z"
+        },
+        {
+          "type": "answer",
+          "url": "/answers/how-to-go-viral-instagram",
+          "createdAt": "2026-04-13T06:00:02.520Z"
         }
       ],
-      "lastUpdated": "2026-03-26T16:28:35.732Z"
+      "lastUpdated": "2026-04-13T06:00:02.520Z"
     },
     {
       "topicKey": "tiktok-pov-hooks",
@@ -1075,9 +1095,14 @@
           "type": "blog",
           "url": "/blog/youtube-hooks-list",
           "createdAt": "2026-03-28T08:58:24.138Z"
+        },
+        {
+          "type": "answer",
+          "url": "/answers/how-to-write-youtube-hooks",
+          "createdAt": "2026-04-12T06:00:02.995Z"
         }
       ],
-      "lastUpdated": "2026-03-28T08:58:24.138Z"
+      "lastUpdated": "2026-04-12T06:00:02.995Z"
     },
     {
       "topicKey": "tiktok-stitch-captions",
@@ -2198,6 +2223,77 @@
         }
       ],
       "lastUpdated": "2026-03-30T06:48:30.652Z"
+    },
+    {
+      "topicKey": "tiktok-captions",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-captions-ideas",
+      "pages": [
+        {
+          "type": "answer",
+          "url": "/answers/how-to-write-tiktok-captions",
+          "createdAt": "2026-04-12T06:00:02.995Z"
+        }
+      ],
+      "lastUpdated": "2026-04-12T06:00:02.995Z"
+    },
+    {
+      "topicKey": "tiktok-hooks",
+      "platform": "tiktok",
+      "primaryType": "blog",
+      "primaryUrl": "/blog/tiktok-hooks-ideas",
+      "pages": [
+        {
+          "type": "answer",
+          "url": "/answers/how-to-write-viral-hooks",
+          "createdAt": "2026-04-12T06:00:02.995Z"
+        },
+        {
+          "type": "guide",
+          "url": "/how-to/create-viral-hooks",
+          "createdAt": "2026-04-12T06:00:02.995Z"
+        }
+      ],
+      "lastUpdated": "2026-04-12T06:00:02.995Z"
+    },
+    {
+      "topicKey": "tiktok-growth",
+      "platform": "tiktok",
+      "primaryType": "guide",
+      "primaryUrl": "/how-to/grow-on-tiktok",
+      "pages": [
+        {
+          "type": "answer",
+          "url": "/answers/how-to-go-viral-tiktok",
+          "createdAt": "2026-04-12T06:00:02.995Z"
+        },
+        {
+          "type": "guide",
+          "url": "/how-to/grow-on-tiktok",
+          "createdAt": "2026-04-12T06:00:02.995Z"
+        }
+      ],
+      "lastUpdated": "2026-04-12T06:00:02.995Z"
+    },
+    {
+      "topicKey": "youtube-growth",
+      "platform": "youtube",
+      "primaryType": "guide",
+      "primaryUrl": "/en/how-to/youtube-growth",
+      "pages": [
+        {
+          "type": "answer",
+          "url": "/answers/how-to-go-viral-youtube",
+          "createdAt": "2026-04-13T06:00:02.520Z"
+        },
+        {
+          "type": "guide",
+          "url": "/en/how-to/youtube-growth",
+          "createdAt": "2026-04-13T06:00:02.520Z"
+        }
+      ],
+      "lastUpdated": "2026-04-13T06:00:02.520Z"
     }
   ]
 }

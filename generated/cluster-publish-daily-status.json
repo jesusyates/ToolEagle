@@ -1,13 +1,11 @@
 {
-  "runAt": "2026-04-07T06:01:34.127Z",
+  "runAt": "2026-04-08T15:30:16.007Z",
   "success": false,
   "failed": true,
-  "clustersGenerated": 14,
-  "topicsPassed": 2,
-  "articlesPassed": 2,
-  "articlesPassedByCluster": {
-    "SEO fallback pool": 2
-  },
-  "error": "low_throughput: staged_files_written=2 min_required=12 (this-run counter)",
-  "source": "cli"
+  "clustersGenerated": 12,
+  "topicsPassed": 1,
+  "articlesPassed": 0,
+  "articlesPassedByCluster": {},
+  "error": "low_throughput: staged_files_written=0 min_required=12 (this-run counter)",
+  "source": "content-batch"
 }

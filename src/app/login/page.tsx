@@ -1,35 +1,40 @@
 "use client";
 
 import { Suspense } from "react";
-import { useTranslations } from "next-intl";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
-import { LoginForm } from "@/components/auth/LoginForm";
+import { PasswordLoginForm } from "@/components/auth/PasswordLoginForm";
 
-function LoginLoadingFallback() {
-  const t = useTranslations("loginPage");
+function LoginShell({ children }: { children: React.ReactNode }) {
   return (
     <main className="min-h-screen bg-page text-slate-900 flex flex-col">
       <SiteHeader />
-      <div className="flex-1 flex items-center justify-center py-12">
-        <div className="text-center">
-          <h1 className="text-2xl font-semibold text-slate-900">{t("title")}</h1>
-          <p className="mt-2 text-sm text-slate-500">{t("loadingFallback")}</p>
+      <div className="flex-1 flex flex-col items-center justify-center py-12 px-4">
+        <div className="w-full max-w-md text-center mb-8">
+          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">Sign in</h1>
+          <p className="mt-2 text-sm text-slate-600">Use your email or Google to continue.</p>
         </div>
+        {children}
       </div>
       <SiteFooter />
     </main>
   );
 }
 
+function LoginLoading() {
+  return (
+    <LoginShell>
+      <p className="text-sm text-slate-500">Loading…</p>
+    </LoginShell>
+  );
+}
+
 export default function LoginPage() {
   return (
-    <Suspense fallback={<LoginLoadingFallback />}>
-      <main className="min-h-screen bg-page text-slate-900 flex flex-col">
-        <SiteHeader />
-        <LoginForm defaultNext="/dashboard" />
-        <SiteFooter />
-      </main>
+    <Suspense fallback={<LoginLoading />}>
+      <LoginShell>
+        <PasswordLoginForm />
+      </LoginShell>
     </Suspense>
   );
 }

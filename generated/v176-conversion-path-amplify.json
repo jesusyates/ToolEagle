@@ -1,15 +1,15 @@
 {
   "version": "176",
-  "builtAt": "2026-04-07T06:00:41.373Z",
+  "builtAt": "2026-04-11T06:00:42.228Z",
   "inputs_ok": true,
   "funnel_totals": {
     "tool_click": 0,
     "tool_entry": 0,
     "copy": 21,
-    "generation_complete": 21,
+    "generation_complete": 23,
     "publish_redirect_click": 0
   },
-  "copy_to_generation_ratio": 1,
+  "copy_to_generation_ratio": 0.9130434782608695,
   "high_copy_tools": [
     {
       "tool_slug": "tiktok-caption-generator",

@@ -6,6 +6,7 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  transpilePackages: ["@tooleagle/auth-system"],
   /**
    * Default 60s — large SSG manifests (80k+ pages) can hit worker SIGTERM on Vercel.
    * @see https://nextjs.org/docs/app/api-reference/next-config-js/staticPageGenerationTimeout
@@ -45,12 +46,12 @@ const nextConfig = {
         key: "Content-Security-Policy",
         value: [
           "default-src 'self'",
-          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io https://*.plausible.io https://*.sentry.io https://challenges.cloudflare.com",
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io https://*.plausible.io https://*.sentry.io https://challenges.cloudflare.com https://www.googletagmanager.com",
           "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
           "font-src 'self' https://fonts.gstatic.com data:",
           "img-src 'self' data: blob: https:",
           "frame-src 'self' https:",
-          "connect-src 'self' https://plausible.io https://*.plausible.io https://*.sentry.io https://*.supabase.co https://*.supabase.in wss: https:"
+          "connect-src 'self' https://plausible.io https://*.plausible.io https://*.sentry.io https://*.supabase.co https://*.supabase.in wss: https: http://43.160.229.50:4000"
         ].join("; ")
       }
     ];

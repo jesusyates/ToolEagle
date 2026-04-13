@@ -1,10 +1,10 @@
 {
   "version": "176",
-  "builtAt": "2026-04-07T06:00:41.373Z",
+  "builtAt": "2026-04-11T06:00:42.228Z",
   "upgrade_click_events_observed": 0,
   "pricing_referrer_touchpoints": 3,
   "funnel_publish_redirect": 0,
-  "conversion_rate_proxy": 1,
+  "conversion_rate_proxy": 0.913,
   "high_conversion_blog_slugs": [],
   "high_value_pages_sample": [
     {

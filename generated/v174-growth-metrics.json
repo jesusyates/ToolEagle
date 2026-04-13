@@ -1,6 +1,6 @@
 {
   "version": "175",
-  "builtAt": "2026-04-07T06:00:40.369Z",
+  "builtAt": "2026-04-11T06:00:41.248Z",
   "sources": {
     "gsc_search_performance": true,
     "growth_priority": true,
@@ -16,7 +16,7 @@
   "gsc_fallback_used": true,
   "analytics_fallback_used": true,
   "pages_generated": 352,
-  "pages_indexed_approx": 323,
+  "pages_indexed_approx": 352,
   "impressions": 6029,
   "clicks": 373,
   "ctr": 0.0619,
@@ -24,8 +24,8 @@
   "retrieval_share": 0.912,
   "generation_success_rate": 0.836,
   "tool_click_rate": 0,
-  "copy_rate": 0.5,
-  "generation_complete_rate": 0.5,
+  "copy_rate": 0.477,
+  "generation_complete_rate": 0.523,
   "publish_redirect_rate": 0,
   "tool_entry_total": 0,
   "upgrade_click_rate": null,
@@ -54,11 +54,11 @@
   "stale_data": true,
   "data_freshness": {
     "version": 175,
-    "updatedAt": "2026-04-07T06:00:40.369Z",
+    "updatedAt": "2026-04-11T06:00:41.248Z",
     "threshold_hours": 48,
-    "gsc_last_updated": "2026-04-07T06:00:36.261Z",
+    "gsc_last_updated": "2026-04-11T06:00:37.049Z",
     "analytics_last_updated": null,
-    "conversion_last_updated": "2026-04-07T06:00:36.694Z",
+    "conversion_last_updated": "2026-04-11T06:00:37.455Z",
     "stale_data": true,
     "stale_reasons": [
       "analytics_missing"

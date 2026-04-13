@@ -10,6 +10,9 @@ const root = path.join(__dirname, "..");
 const engine = path.join(__dirname, "daily-engine.js");
 const extra = process.argv.slice(2);
 
+console.log("[seo-daily-proxy] disabled by manual override (diagnosis mode)");
+process.exit(0);
+
 console.warn(
   "[V170] npm run seo:daily is deprecated and forwards to daily-engine.\n" +
     "  Production cron / scheduler: npm run daily-engine\n" +

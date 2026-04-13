@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { DelegatedButton } from "@/components/DelegatedButton";
@@ -23,8 +23,11 @@ const NICHES = [
   "Other"
 ] as const;
 
-export default function OnboardingPage() {
+function OnboardingPageInner() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const gateSession = searchParams?.get("gate") === "session";
+  const { isLoggedIn, loading: authLoading } = useAuth();
   const [step, setStep] = useState(1);
   const [checking, setChecking] = useState(true);
   const [platform, setPlatform] = useState<string>("");
@@ -32,18 +35,41 @@ export default function OnboardingPage() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    createClient()
-      .auth.getUser()
-      .then(({ data: { user } }) => {
-        if (!user) router.replace("/login?next=/onboarding");
-        setChecking(false);
-      });
-  }, [router]);
+    if (authLoading) return;
+    if (gateSession) {
+      setChecking(false);
+      return;
+    }
+    if (!isLoggedIn) router.replace("/login?next=/onboarding");
+    setChecking(false);
+  }, [router, authLoading, isLoggedIn, gateSession]);
 
   if (checking) {
     return (
       <main className="min-h-screen bg-page flex items-center justify-center">
         <div className="animate-pulse text-slate-400">Loading...</div>
+      </main>
+    );
+  }
+
+  if (gateSession) {
+    return (
+      <main className="min-h-screen bg-page text-slate-900 flex flex-col">
+        <SiteHeader />
+        <div className="flex-1 flex flex-col items-center justify-center px-4 py-12 text-center">
+          <h1 className="text-xl font-semibold text-slate-900">Account verification required</h1>
+          <p className="mt-3 max-w-md text-sm text-slate-600">
+            We couldn&apos;t verify your account with our service yet. If you were invited or expect access, contact
+            support or try signing in with a method that&apos;s already linked to your account.
+          </p>
+          <Link
+            href="/login?gate=session"
+            className="mt-6 text-sm font-medium text-sky-700 underline hover:text-sky-800"
+          >
+            Back to sign in
+          </Link>
+        </div>
+        <SiteFooter />
       </main>
     );
   }
@@ -182,5 +208,19 @@ export default function OnboardingPage() {
 
       <SiteFooter />
     </main>
+  );
+}
+
+export default function OnboardingPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-page flex items-center justify-center">
+          <div className="animate-pulse text-slate-400">Loading...</div>
+        </main>
+      }
+    >
+      <OnboardingPageInner />
+    </Suspense>
   );
 }

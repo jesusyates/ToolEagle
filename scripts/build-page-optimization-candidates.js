@@ -69,7 +69,8 @@ function main() {
   if (!search || !Array.isArray(search.pages)) {
     const stub = {
       updatedAt: new Date().toISOString(),
-      error: "Missing or invalid generated/search-performance.json — run pull-search-performance (V107)",
+      error:
+        "Missing or invalid generated/search-performance.json — add or refresh that file manually (legacy GSC pull script removed)",
       candidates: []
     };
     fs.mkdirSync(path.dirname(OUT), { recursive: true });

@@ -33,7 +33,7 @@ export default async function AdminIndexingPage() {
             <Link href="/dashboard" className="text-sm font-medium text-sky-600 hover:underline">
               ← Dashboard
             </Link>
-            <Link href="/admin/seo" className="ml-4 text-sm font-medium text-sky-600 hover:underline">
+            <Link href="/admin/seo-gsc" className="ml-4 text-sm font-medium text-sky-600 hover:underline">
               SEO Monitoring
             </Link>
             <h1 className="mt-4 text-2xl font-semibold text-slate-900">Indexing Dashboard</h1>

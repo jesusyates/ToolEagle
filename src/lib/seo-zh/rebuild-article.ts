@@ -1,5 +1,5 @@
 /**
- * 中文 guide / ideas：与英文共用 `rebuild-article.ts`（DeepSeek + 中文质检）。
+ * 中文经验复盘型 guide：与英文共用 `rebuild-article.ts`（DeepSeek + 中文质检）。
  * 生成后对正文做拉丁字母清洗，以与 zh-language-gate（连续 3+ 拉丁字母）及语言纯度对齐。
  */
 
@@ -11,7 +11,7 @@ export type ZhRebuildArticleInput = {
   title: string;
   context?: string;
   platform: "douyin" | "xiaohongshu";
-  contentType?: "guide" | "ideas";
+  contentType?: "guide";
 };
 
 export type ZhLanguagePurity = { pass: boolean; reason?: string };

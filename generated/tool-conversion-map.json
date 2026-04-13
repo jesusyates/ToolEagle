@@ -1,12 +1,12 @@
 {
   "version": "175",
-  "updatedAt": "2026-04-07T06:00:36.694Z",
-  "eventCount": 56,
+  "updatedAt": "2026-04-11T06:00:37.455Z",
+  "eventCount": 58,
   "funnel_totals": {
     "tool_click": 0,
     "tool_entry": 0,
     "copy": 21,
-    "generation_complete": 21,
+    "generation_complete": 23,
     "publish_redirect_click": 0
   },
   "funnel_sources": {
@@ -16,11 +16,11 @@
   },
   "tool_output_quality_rollup": {
     "output_copy_events": 21,
-    "generation_complete_events": 21,
+    "generation_complete_events": 23,
     "by_tool_generations": {
       "hook-generator": 6,
+      "instagram-username-generator": 5,
       "tiktok-caption-generator": 3,
-      "instagram-username-generator": 3,
       "script-outline-generator": 3,
       "instagram-hashtag-generator": 1,
       "instagram-caption-generator": 1,

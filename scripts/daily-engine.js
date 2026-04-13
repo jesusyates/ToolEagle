@@ -24,6 +24,9 @@ require("dotenv").config({ path: path.join(REPO_ROOT, ".env") });
 
 const CWD = REPO_ROOT;
 
+console.log("[daily-engine] disabled by manual override (diagnosis mode)");
+process.exit(0);
+
 /** Legacy Chinese SEO (v63/v153 keyword + retrieval auto-gen). Off = skip step2_zh in this engine. */
 const ENABLE_LEGACY_ZH_SEO = false;
 
@@ -382,9 +385,7 @@ function main() {
     process.exit(1);
   };
 
-  /** V175 — GSC pull + conversion aggregate before growth merge (search:growth reads generated JSON). */
-  if (!runNpm("search:performance", "step0a_gsc")) mustStop("step0a_gsc");
-  stepsOk.step0a_gsc = true;
+  /** Legacy automated GSC pull removed — search:growth still reads generated/search-performance.json if present. */
   if (!runNpm("search:conversion", "step0b_conversion")) mustStop("step0b_conversion");
   stepsOk.step0b_conversion = true;
   /** V174 — growth + V172/V173 before allocation so EN blog batch uses fresh ramp weights */

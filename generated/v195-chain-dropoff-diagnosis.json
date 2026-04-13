@@ -1,27 +1,28 @@
 {
   "version": "1",
-  "updated_at": "2026-04-07T06:02:21.754Z",
+  "updated_at": "2026-04-13T06:00:13.816Z",
   "source_file": "C:\\Users\\44570\\Desktop\\tooleagle\\generated\\tiktok-chain-events.jsonl",
   "derived_from": "v195-chain-completion aggregate (started sessions, strict ordered milestones)",
   "biggest_drop_step": {
     "transition": "session_start → hook",
     "from_step": "session_start",
     "to_step": "hook",
-    "lost_sessions": 1,
-    "from_count": 2,
+    "lost_sessions": 2,
+    "from_count": 3,
     "to_count": 1,
-    "relative_drop_rate": 50,
+    "relative_drop_rate": 66.67,
     "interpretation": "Largest absolute loss between consecutive funnel steps (session_start → hook)."
   },
   "likely_reason_candidates": [
     "Many sessions never generate a hook after landing on a chain tool: weak first-step intent, bounce, or session_start not paired with generate (verify client wiring).",
+    "Low session_start→hook conversion (33.33%): prioritize first-generation success and visible chain entry on hook/caption landing.",
     "Many started sessions show no chain milestone yet: users leave before first successful generation."
   ],
   "sessions_stuck_at_hook_only": 0,
-  "sessions_stuck_before_caption": 1,
-  "sessions_stuck_before_hashtag": 2,
-  "sessions_stuck_before_title": 2,
-  "sessions_stuck_before_upload": 2,
+  "sessions_stuck_before_caption": 2,
+  "sessions_stuck_before_hashtag": 3,
+  "sessions_stuck_before_title": 3,
+  "sessions_stuck_before_upload": 3,
   "definitions": {
     "stuck_at_hook_only": "Reached hook_generated in strict order but not caption_generated (reaching_hook − reaching_caption).",
     "stuck_before_caption": "Started session but did not reach caption_generated in strict order (started − reaching_caption).",

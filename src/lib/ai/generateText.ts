@@ -1,11 +1,13 @@
 /**
  * Client-side AI text generation.
- * Calls the /api/generate route. Falls back to template if AI fails.
- * Sends credentials so usage limits apply to logged-in users.
+ * Primary: shared-core POST /v1/ai/execute (`webAiExecute`). Template fallback if AI response is unusable.
+ * Legacy `app/api/generate` exists for server-side rollback only — not used by this client path.
  */
 
 import { FREE_DAILY_LIMIT } from "@/lib/usage";
 import { readV195ChainSessionId } from "@/lib/tiktok-chain-tracking";
+import { parseSimpleExecuteResults, webAiExecute } from "@/lib/web/web-ai-client";
+import { getSupabaseAccessToken } from "@/lib/auth/supabase-access-token";
 
 export class LimitReachedError extends Error {
   constructor(
@@ -25,31 +27,35 @@ export async function generateAIText(
   options?: GenerateOptions & { toolSlug?: string }
 ): Promise<{ results: string[]; content_id: string }> {
   const locale = options?.locale ?? "en";
-  const res = await fetch("/api/generate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
-    body: JSON.stringify({ prompt, locale })
+  const accessToken = await getSupabaseAccessToken();
+
+  const res = await webAiExecute(accessToken, {
+    kind: "simple_text",
+    prompt,
+    locale,
+    toolSlug: options?.toolSlug ?? null
   });
 
   const data = await res.json().catch(() => ({}));
 
   if (!res.ok) {
-    if (res.status === 429 && data.limitReached) {
+    if (res.status === 429 && (data as { limitReached?: boolean }).limitReached) {
+      const d = data as { error?: string; used?: number; limit?: number };
       throw new LimitReachedError(
-        data.error ?? "You've reached today's free limit.",
-        data.used ?? FREE_DAILY_LIMIT,
-        data.limit ?? FREE_DAILY_LIMIT
+        d.error ?? "You've reached today's free limit.",
+        d.used ?? FREE_DAILY_LIMIT,
+        d.limit ?? FREE_DAILY_LIMIT
       );
     }
-    throw new Error(data.error ?? "AI generation failed");
+    throw new Error((data as { error?: string }).error ?? "AI generation failed");
   }
 
-  if (!data.results || !Array.isArray(data.results)) {
+  const parsed = parseSimpleExecuteResults(data);
+  if (!parsed || parsed.length === 0) {
     throw new Error("Invalid AI response");
   }
 
-  const results = data.results.slice(0, 5);
+  const results = parsed.slice(0, 5);
 
   const content_id =
     typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : `c-${Date.now()}-${Math.random()}`;

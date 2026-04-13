@@ -1,15 +1,13 @@
 import { createBrowserClient } from "@supabase/ssr";
-import type { LockFunc } from "@supabase/auth-js";
+import type { SupabaseClient } from "@supabase/supabase-js";
+
+let cachedBrowserClient: SupabaseClient | null = null;
 
 /**
- * Default Web Locks + steal recovery in gotrue-js can surface as:
- * AbortError: Lock broken by another request with the 'steal' option
- * (React Strict Mode double-mount, HMR, fast unmount). See supabase/issues/42505.
- * A no-op lock matches GoTrueClient's built-in fallback when LockManager is unavailable.
+ * Browser Supabase client — must use the same session transport as `/api/auth/*` (cookies).
+ * A plain `@supabase/supabase-js` + localStorage client never sees sessions set by route handlers.
  */
-const browserAuthLock: LockFunc = async (_name, _acquireTimeout, fn) => await fn();
-
-export function createClient() {
+export function createClient(): SupabaseClient {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !key) {
@@ -17,9 +15,19 @@ export function createClient() {
       "Supabase is not configured. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to .env.local"
     );
   }
-  return createBrowserClient(url, key, {
+  if (typeof window === "undefined") {
+    throw new Error("Supabase browser client must run in the browser.");
+  }
+  if (cachedBrowserClient) {
+    return cachedBrowserClient;
+  }
+  cachedBrowserClient = createBrowserClient(url, key, {
     auth: {
-      lock: browserAuthLock
-    }
+      flowType: "pkce",
+      autoRefreshToken: true,
+      detectSessionInUrl: false
+    },
+    isSingleton: true
   });
+  return cachedBrowserClient;
 }

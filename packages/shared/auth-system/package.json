@@ -1,0 +1,12 @@
+{
+  "name": "@tooleagle/auth-system",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Framework-light auth capability: messages, Supabase admin helpers (no UI, no Next).",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "peerDependencies": {
+    "@supabase/supabase-js": "^2.99.0"
+  }
+}

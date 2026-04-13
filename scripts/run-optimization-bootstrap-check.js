@@ -3,11 +3,10 @@
  * V120 — Daily watcher for first real optimization batch readiness.
  *
  * Runs chain:
- * 1) npm run search:performance
- * 2) npm run search:growth
- * 3) npm run seo:opt:candidates
- * 4) npm run seo:opt:recommendations
- * 5) node scripts/check-optimization-readiness.js
+ * 1) npm run search:growth
+ * 2) npm run seo:opt:candidates
+ * 3) npm run seo:opt:recommendations
+ * 4) node scripts/check-optimization-readiness.js
  *
  * Then refreshes scheduler via dry-run (no writes):
  * - node scripts/optimize-en-pages.js --dry-run
@@ -109,11 +108,10 @@ function writeStatus(doc) {
 function main() {
   acquireLockOrExit();
   const steps = [
-    { label: "step1", command: "npm", args: ["run", "search:performance"] },
-    { label: "step2", command: "npm", args: ["run", "search:growth"] },
-    { label: "step3", command: "npm", args: ["run", "seo:opt:candidates"] },
-    { label: "step4", command: "npm", args: ["run", "seo:opt:recommendations"] },
-    { label: "step5", command: "node", args: ["scripts/check-optimization-readiness.js"] }
+    { label: "step1", command: "npm", args: ["run", "search:growth"] },
+    { label: "step2", command: "npm", args: ["run", "seo:opt:candidates"] },
+    { label: "step3", command: "npm", args: ["run", "seo:opt:recommendations"] },
+    { label: "step4", command: "node", args: ["scripts/check-optimization-readiness.js"] }
   ];
 
   const stepResults = [];

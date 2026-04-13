@@ -62,8 +62,8 @@
       "consecutiveZeroRuns": 0
     },
     "SEO fallback pool": {
-      "articlesPassedTotal": 41,
-      "consecutiveZeroRuns": 0
+      "articlesPassedTotal": 58,
+      "consecutiveZeroRuns": 1
     },
     "Short-form editing workflow versioning and handoffs for solo creators": {
       "articlesPassedTotal": 132,
@@ -78,7 +78,7 @@
       "consecutiveZeroRuns": 0
     },
     "Evergreen versus trend-led TikTok content for small channels": {
-      "articlesPassedTotal": 11,
+      "articlesPassedTotal": 14,
       "consecutiveZeroRuns": 0
     },
     "Faceless TikTok tips without showing your face": {
@@ -86,14 +86,14 @@
       "consecutiveZeroRuns": 0
     },
     "Voiceover and storytelling on TikTok without talking head setups": {
-      "articlesPassedTotal": 7,
+      "articlesPassedTotal": 10,
       "consecutiveZeroRuns": 0
     }
   },
   "platforms": {
     "tiktok": {
-      "passed": 579,
-      "runs": 220
+      "passed": 602,
+      "runs": 235
     },
     "instagram": {
       "passed": 10,
@@ -110,8 +110,8 @@
   },
   "kinds": {
     "growth": {
-      "passed": 52,
-      "runs": 44
+      "passed": 72,
+      "runs": 56
     },
     "consistency": {
       "passed": 2,
@@ -178,8 +178,8 @@
       "runs": 9
     },
     "content_mode_voiceover": {
-      "passed": 7,
-      "runs": 6
+      "passed": 10,
+      "runs": 9
     }
   }
 }

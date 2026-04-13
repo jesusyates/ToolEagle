@@ -3,8 +3,16 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ZH } from "@/lib/zh-site/paths";
+import { fetchCreditsBalanceForUi } from "@/lib/account/fetch-balance-for-ui";
 
 type Bal = { remaining: number; daysLeft: number | null; expireAt: string | null };
+
+function daysLeftFromExpire(expireAt: string | null): number | null {
+  if (!expireAt) return null;
+  const d = new Date(expireAt);
+  if (Number.isNaN(d.getTime())) return null;
+  return Math.max(0, Math.ceil((d.getTime() - Date.now()) / 86400000));
+}
 type Log = { id: string; tool_slug: string; credits_used: number; remaining_after: number; created_at: string };
 type Order = {
   order_id: string;
@@ -28,14 +36,18 @@ export function ZhCreditsSnapshotCard() {
     let cancelled = false;
     (async () => {
       try {
-        const [b, u, p, d] = await Promise.all([
-          fetch("/api/credits/balance", { credentials: "include" }).then((r) => r.json()),
+        const [bRaw, u, p, d] = await Promise.all([
+          fetchCreditsBalanceForUi(),
           fetch("/api/credits/usage?limit=8", { credentials: "include" }).then((r) => r.json()),
           fetch("/api/credits/purchases", { credentials: "include" }).then((r) => r.json()),
           fetch("/api/donation/history", { credentials: "include" }).then((r) => r.json())
         ]);
         if (cancelled) return;
-        setBalance(b as Bal);
+        setBalance({
+          remaining: bRaw.remaining_credits,
+          daysLeft: daysLeftFromExpire(bRaw.expire_at),
+          expireAt: bRaw.expire_at
+        });
         setLogs(Array.isArray(u.logs) ? u.logs.slice(0, 8) : []);
         setOrders(Array.isArray(p.orders) ? p.orders.slice(0, 5) : []);
         const st = d?.stats;

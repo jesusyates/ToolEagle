@@ -1,6 +1,6 @@
 {
   "version": "180.1",
-  "builtAt": "2026-04-07T06:00:44.282Z",
+  "builtAt": "2026-04-11T06:00:44.825Z",
   "criteria": "upgrade_click>=2 and zero exact-attributed paid orders and zero exact create_order for that tool slug",
   "paths": [],
   "non_exact_mixing": "disallowed_for_top_paths",

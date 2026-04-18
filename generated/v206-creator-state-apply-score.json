@@ -1,9 +1,0 @@
-{
-  "bands": {
-    "weak": [0, 39],
-    "medium": [40, 69],
-    "strong": [70, 100]
-  },
-  "wired_into_generate_package": true,
-  "final_status": "ok"
-}

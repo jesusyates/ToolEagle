@@ -1,8 +1,0 @@
-{
-  "updatedAt": "2026-03-26T04:35:17.061Z",
-  "error": "GSC credentials not configured",
-  "patterns": [
-    "Configure GSC env to measure before/after."
-  ],
-  "recommendations": []
-}

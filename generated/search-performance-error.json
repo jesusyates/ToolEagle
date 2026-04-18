@@ -1,7 +1,0 @@
-{
-  "updatedAt": "2026-03-26T15:12:31.969Z",
-  "error": "GSC query failed: status=403 body={\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"User does not have sufficient permission for site 'https://www.tooleagle.com/'. See also: https://support.google.com/webmasters/answer/2451999.\",\n    \"e",
-  "code": null,
-  "siteUrl": "https://www.tooleagle.com/",
-  "note": "GSC/search-performance refresh failed or is stale; check network/proxy/credentials or update generated/search-performance.json manually."
-}

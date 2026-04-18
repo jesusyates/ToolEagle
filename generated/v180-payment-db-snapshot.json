@@ -1,9 +1,0 @@
-{
-  "ok": true,
-  "builtAt": "2026-04-11T06:00:44.614Z",
-  "orders": [],
-  "orders_error": null,
-  "payment_events": [],
-  "payment_events_error": "Could not find the table 'public.payment_events' in the schema cache",
-  "note": "payment_events missing; snapshot degraded to orders-only"
-}

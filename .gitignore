@@ -48,3 +48,14 @@ yarn-error.log*
 
 # auto-gen logs
 /logs
+
+# === SEO runtime generated files (ignore all) ===
+generated/**/*.json
+generated/*.json
+generated/**/*.jsonl
+generated/**/*.log
+generated/**/*.err
+generated/**/*.md
+
+# 如未来有需要保留的结构文件，可单独白名单，例如：
+# !generated/topic-registry.json

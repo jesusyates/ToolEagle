@@ -1,6 +1,0 @@
-{
-  "tool_types": ["hook", "caption", "hashtag", "title", "other"],
-  "wired_into_gate": true,
-  "wired_into_generate_package": true,
-  "final_status": "ok"
-}

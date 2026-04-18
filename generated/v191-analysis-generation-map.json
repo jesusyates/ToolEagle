@@ -1,0 +1,54 @@
+{
+  "issue_to_pattern_adjustment": {
+    "Opening lines do not vary or stop the scroll": {
+      "hook_focus": "Hook fix: prefer curiosity/interrupt/question opening patterns with a crisp contrast line. Avoid generic “first line” openers; ensure the first line clearly signals a specific promise + reason to keep watching.",
+      "hashtag-generator": "Hashtag fix: keep hashtags tightly aligned with one clear niche promise. Prefer 10–18 highly related niche tags; avoid broad/mixed-topic tags that dilute the first-line hook.",
+      "title-generator": "Title fix: use explicit curiosity gap or question/contradiction structure in the first part of the title. Make the title carry the same promise as the hook (no vague hype)."
+    },
+    "Content format is too scattered for the algorithm to “learn” you": {
+      "hook_focus": "Focus fix: pick one dominant content format/structure for the next 3–5 posts and repeat it consistently. Keep niche keywords stable; avoid mixing multiple angles inside a single package.",
+      "hashtag-generator": "Hashtag focus: output a more consistent, repeating hashtag set that matches your dominant format. Keep tags from drifting across unrelated topics.",
+      "title-generator": "Title focus: keep titles within one repeatable search intent pattern; avoid switching between unrelated formats in consecutive generations."
+    },
+    "CTA is missing on most posts": {
+      "hook_focus": "CTA fix: include one explicit action once the proof/pacing is established. Keep CTA clear and concrete (comment/save/follow/link), and ensure it appears in both caption/script where relevant.",
+      "hashtag-generator": "Hashtag CTA support: add one branded/engagement-oriented tag (not salesy) that supports your chosen CTA goal.",
+      "title-generator": "Title CTA support: reinforce the intended engagement action in the wording without making it feel like hard sell."
+    },
+    "Heavy CTA while the stated goal is reach": {
+      "hook_focus": "CTA placement fix: avoid sales-heavy language in the hook/opening line. Keep CTA soft and placed later (after proof) as save/follow/comment oriented engagement.",
+      "hashtag-generator": "Avoid hard-sell hashtags: prefer community/engagement/supportive tags over purchase/shopping urgency tags.",
+      "title-generator": "Avoid “buy now” style titles; keep titles focused on curiosity/reach rather than direct offers."
+    }
+  },
+  "style_to_recipe_adjustment": {
+    "Educational / calm": {
+      "hook_focus": "Tone fix: keep a calm, guide-like voice. Prefer structured “how to / steps / tips” style hook openings.",
+      "hashtag-generator": "Tone fix: prefer niche “how-to” oriented tags and keep them instructional rather than promotional.",
+      "title-generator": "Tone fix: use educational structure (steps/how-to) with one curiosity gap in the opening part."
+    },
+    "Conversational / friendly": {
+      "hook_focus": "Tone fix: use friendly, conversational framing. Choose question/curiosity openers and maintain clarity in the hook promise.",
+      "hashtag-generator": "Tone fix: choose relatable niche tags that match your audience language; avoid overly formal promotional tags.",
+      "title-generator": "Tone fix: keep titles simple and conversation-like, with one clear curiosity hook."
+    },
+    "Direct response / salesy": {
+      "hook_focus": "Tone fix: still protect the hook: lead with a problem + promise + short proof tease; delay hard sell until after the first retention beat.",
+      "hashtag-generator": "Tone fix: keep salesy tone only in the later part; hashtags should remain niche + credibility oriented.",
+      "title-generator": "Tone fix: mix discovery with conversion wording—avoid forcing direct offer in the first clause."
+    }
+  },
+  "focus_to_output_adjustment": {
+    "growth": {
+      "hook_focus": "Optimization: prioritize retention-first hooks (curiosity/interrupt) and soft CTAs (save/follow/comment). Avoid sales-heavy patterns too early.",
+      "hashtag-generator": "Optimization: choose narrower niche tags that improve reach + saves (not urgency).",
+      "title-generator": "Optimization: titles should aim for discovery (what/how/why) rather than direct selling."
+    },
+    "conversion": {
+      "hook_focus": "Optimization: include one conversion-oriented beat, but keep it aligned with retention. Use proof-led framing and end with a clear CTA after the hook promise.",
+      "hashtag-generator": "Optimization: include a single engagement/CTA-support tag set; keep remaining tags niche and credible.",
+      "title-generator": "Optimization: title should signal both relevance and the outcome (clear promise + light CTA framing)."
+    }
+  }
+}
+

@@ -49,13 +49,30 @@ yarn-error.log*
 # auto-gen logs
 /logs
 
-# === SEO runtime generated files (ignore all) ===
-generated/**/*.json
-generated/*.json
+# === generated/: 区分「运行产物」与「编译期静态 import(JSON)」===
+# Streams / logs
 generated/**/*.jsonl
 generated/**/*.log
 generated/**/*.err
+
+# 常见运行快照（仍 ignore；需要进库则改白名单）
+generated/**/*last-run.json
+generated/**/*state.json
+
+# 运行说明/草稿 md
 generated/**/*.md
 
-# 如未来有需要保留的结构文件，可单独白名单，例如：
-# !generated/topic-registry.json
+# 其余 generated 下 JSON 默认不跟踪，由白名单放行（resolveJsonModule）
+generated/*.json
+generated/**/*.json
+
+!generated/v189-creator-score-manifest.json
+!generated/v189-stage-rules.json
+!generated/v190-content-direction-map.json
+!generated/v190-monetization-manifest.json
+!generated/v190.1-monetization-copy-map.json
+!generated/v191-analysis-generation-map.json
+!generated/v191-analysis-rules.json
+!generated/v191-creator-analysis-manifest.json
+!generated/v193-platform-intelligence-summary.json
+!generated/v193-platform-patterns.json

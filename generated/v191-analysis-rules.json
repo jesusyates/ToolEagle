@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "stopwords": [
+    "the", "a", "an", "and", "or", "for", "to", "in", "on", "with", "your", "this", "that", "from", "are", "was", "were", "been", "have", "has", "had", "not", "but", "what", "when", "how", "why", "who", "all", "can", "will", "just", "like", "get", "out", "about", "into", "our", "you", "my", "me", "we", "they", "them", "its", "as", "at", "by", "of", "is", "be", "so", "if", "no", "do", "does", "did", "too", "very"
+  ],
+  "tutorial_signals": ["how to", "step", "tips", "tutorial", "guide", "learn", "beginner", "mistake", "hack", "formula", "lesson"],
+  "story_signals": ["i ", "i'm", "my ", "last week", "story", "journey", "when i", "never thought"],
+  "selling_signals": ["buy", "sale", "shop", "link", "discount", "code", "order", "book", "dm me", "apply", "offer", "cart", "checkout", "affiliate"],
+  "opinion_signals": ["unpopular", "hot take", "wrong", "truth", "everyone", "stop", "never", "always", "controversial"],
+  "listicle_signals": ["3 ways", "5 things", "top ", " reasons", "mistakes", "signs", "steps"],
+  "cta_phrases": ["link in bio", "link below", "comment", "save", "share", "follow", "subscribe", "tap", "swipe", "shop", "dm", "book a", "apply", "grab", "get yours", "http", "www.", ".com"],
+  "weakness_rules": [
+    { "id": "low_cta", "when": "cta_coverage_lt_0.2", "text": "Most posts lack a clear next step (comment / save / link / DM)." },
+    { "id": "thin_hooks", "when": "avg_title_len_lt_12", "text": "Titles/openers look short or generic — harder to stop the scroll." },
+    { "id": "mixed_niche", "when": "niche_entropy_gt_0.65", "text": "Topics jump across niches — harder for the algorithm to classify your account." },
+    { "id": "sell_goal_mismatch", "when": "goal_sales_and_selling_mix_lt_0.15", "text": "Account goal is sales-heavy but content reads mostly educational." },
+    { "id": "growth_goal_mismatch", "when": "goal_views_and_tutorial_mix_lt_0.2", "text": "Goal is reach, but posts don’t look like repeatable discovery formats (lists/tips)." }
+  ],
+  "strength_rules": [
+    { "id": "consistent_tutorial", "when": "tutorial_mix_gt_0.45", "text": "Strong tutorial/list DNA — good for saves and search intent." },
+    { "id": "clear_cta_habit", "when": "cta_coverage_gt_0.55", "text": "You already habitually ask for an action — good for conversion tests." },
+    { "id": "story_voice", "when": "story_mix_gt_0.35", "text": "Story-forward voice — strong for retention if hooks stay tight." },
+    { "id": "niche_clarity", "when": "niche_entropy_lt_0.45", "text": "Topic language clusters well — easier to own a niche." }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "description": "V189 — Weights and caps for Creator Score (0–100). All subscores are clamped before sum.",
+  "bands": [
+    { "id": "beginner", "min": 0, "max": 24, "label": "Beginner" },
+    { "id": "rising", "min": 25, "max": 49, "label": "Rising" },
+    { "id": "active", "min": 50, "max": 74, "label": "Active" },
+    { "id": "advanced", "min": 75, "max": 100, "label": "Advanced" }
+  ],
+  "weights": {
+    "generation_events": { "points_per": 1.15, "cap_events": 22, "max_points": 24 },
+    "copy_events": { "points_per": 0.95, "cap_events": 22, "max_points": 20 },
+    "tool_diversity": { "points_per_distinct_tool": 2.8, "cap_tools": 6, "max_points": 14 },
+    "workflow_chain_steps": {
+      "tools": [
+        "hook-generator",
+        "tiktok-caption-generator",
+        "hashtag-generator",
+        "title-generator"
+      ],
+      "points_per_step": 4.5,
+      "max_points": 18
+    },
+    "publish_redirect": { "points_per": 1.8, "cap": 3, "max_points": 5 },
+    "v186_intent": {
+      "points_per_unique_intent": 2.2,
+      "cap_intents": 5,
+      "max_points": 10,
+      "bonus_if_any_intent_set": 2
+    },
+    "repeat_usage_days": { "points_per_distinct_day": 1.6, "cap_days": 6, "max_points": 9 },
+    "v191_account_analysis": { "bonus_points": 3, "max_points": 3 }
+  },
+  "why_templates": {
+    "generation": "Based on {gens} generations in this browser.",
+    "copy": "Includes {copies} copy actions.",
+    "workflow": "Workflow chain: {completed}/4 tools used at least once.",
+    "publish": "Publish path: {pub} upload opens from this device.",
+    "intent": "Intent chips: {intents} distinct intents saved.",
+    "days": "Active on {days} distinct days."
+  },
+  "next_best_action": {
+    "default_hook": "Generate a hook, then move to captions.",
+    "default_caption": "Generate a full post package next.",
+    "default_hashtag": "Generate hashtags for this post.",
+    "default_title": "Generate titles to test CTR angles.",
+    "after_publish": "Re-run one tool with a different intent to A/B.",
+    "low_workflow": "Finish the chain: hook → caption → hashtag → title.",
+    "first_run": "Run one generation with no typing — then copy one block."
+  }
+}

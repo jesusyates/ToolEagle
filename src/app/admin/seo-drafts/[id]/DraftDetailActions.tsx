@@ -98,7 +98,7 @@ export function DraftDetailActions({
         setMsg(j?.error ?? `HTTP ${res.status}`);
         return;
       }
-      router.push(afterDeleteHref ?? "/admin/seo?tab=drafts");
+      router.push(afterDeleteHref ?? "/admin/seo?tab=pending");
       router.refresh();
     } catch (e) {
       setMsg(e instanceof Error ? e.message : String(e));
@@ -132,7 +132,7 @@ export function DraftDetailActions({
 
   return (
     <div className="mt-6 flex flex-wrap items-center gap-3">
-      {!deleted && status === "draft" ? (
+      {!deleted && (status === "draft" || status === "scheduled") ? (
         <button
           type="button"
           disabled={busy || publishReadiness?.level === "block"}
@@ -144,7 +144,7 @@ export function DraftDetailActions({
           onClick={() => void publish()}
           className="rounded bg-green-700 px-4 py-2 text-sm text-white disabled:opacity-50"
         >
-          {busy ? "处理中…" : "发布"}
+          {busy ? "处理中…" : status === "scheduled" ? "立即发布" : "发布"}
         </button>
       ) : null}
       {!deleted && status === "published" ? (

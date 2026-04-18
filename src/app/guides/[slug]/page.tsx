@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { SiteFooter } from "../../_components/SiteFooter";
@@ -8,7 +7,10 @@ import type { AutoPostRecord } from "@/lib/auto-posts-reader";
 import { getRelatedGuideLinks } from "@/lib/guide-related";
 import { getPublishedGuideAnswer, getPublishedGuideFaqs } from "@/lib/seo/rebuild-article";
 import { SITE_URL } from "@/config/site";
-import { createClient } from "@/lib/supabase/server";
+import {
+  getPublishedGuideArticleFromDb,
+  normalizeGuideSlugFromUrl
+} from "@/lib/seo/get-published-guide-article";
 
 type Params = Promise<{ slug: string }>;
 
@@ -44,35 +46,10 @@ function paragraphsFromGuideBody(body: string): string[] {
   return out.length > 0 ? out : [body.trim()];
 }
 
-type SeoArticleRow = {
-  title: string;
-  content: string;
-  description: string | null;
-  created_at?: string;
-  updated_at?: string;
-};
-
-async function getPublishedSeoArticle(slug: string): Promise<SeoArticleRow | null> {
-  try {
-    const supabase = await createClient();
-    const { data, error } = await supabase
-      .from("seo_articles")
-      .select("title, content, description, created_at, updated_at")
-      .eq("slug", slug)
-      .eq("status", "published")
-      .eq("deleted", false)
-      .maybeSingle();
-    if (error || !data?.title || data.content == null) return null;
-    return {
-      title: String(data.title),
-      content: String(data.content),
-      description: data.description != null ? String(data.description) : null,
-      created_at: data.created_at != null ? String(data.created_at) : undefined,
-      updated_at: data.updated_at != null ? String(data.updated_at) : undefined
-    };
-  } catch {
-    return null;
-  }
+function absoluteFromSiteBase(imageUrl: string): string {
+  const t = imageUrl.trim();
+  if (t.startsWith("/")) return `${siteBase}${t}`;
+  return t;
 }
 
 function articleJsonLd(opts: {
@@ -81,8 +58,9 @@ function articleJsonLd(opts: {
   url: string;
   datePublished: string;
   dateModified?: string;
+  imageUrl?: string | null;
 }): Record<string, unknown> {
-  return {
+  const base: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: opts.headline,
@@ -102,14 +80,20 @@ function articleJsonLd(opts: {
       url: siteBase
     }
   };
+  if (opts.imageUrl) base.image = opts.imageUrl;
+  return base;
 }
 
 function buildMetadataPayload(opts: {
   slug: string;
   titleFull: string;
   description: string;
+  ogImageUrl?: string | null;
 }): Metadata {
   const canonicalUrl = `${siteBase}/guides/${opts.slug}`;
+  const ogImage = opts.ogImageUrl
+    ? [{ url: opts.ogImageUrl, alt: opts.titleFull }]
+    : undefined;
   return {
     title: { absolute: opts.titleFull },
     description: opts.description,
@@ -121,23 +105,26 @@ function buildMetadataPayload(opts: {
       url: canonicalUrl,
       type: "article",
       siteName: "ToolEagle",
-      locale: "en_US"
+      locale: "en_US",
+      ...(ogImage ? { images: ogImage } : {})
     },
     twitter: {
-      card: "summary_large_image",
+      card: ogImage ? "summary_large_image" : "summary_large_image",
       title: opts.titleFull,
-      description: opts.description
+      description: opts.description,
+      ...(opts.ogImageUrl ? { images: [opts.ogImageUrl] } : {})
     }
   };
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
-  const fromDb = await getPublishedSeoArticle(slug);
+  const fromDb = await getPublishedGuideArticleFromDb(slug);
   if (fromDb) {
     const titleFull = `${fromDb.title.trim()} | Creator Guides`;
     const description = buildMetaDescription(fromDb.description, fromDb.content);
-    return buildMetadataPayload({ slug, titleFull, description });
+    const ogImageUrl = fromDb.cover_image ? absoluteFromSiteBase(fromDb.cover_image) : null;
+    return buildMetadataPayload({ slug, titleFull, description, ogImageUrl });
   }
   const post = await getAutoPostBySlug(slug);
   if (!post) {
@@ -180,21 +167,25 @@ function fileGuideJsonLd(post: AutoPostRecord, pageUrl: string, description: str
 
 export default async function GuideDetailPage({ params }: { params: Params }) {
   const { slug } = await params;
+  const slugNorm = normalizeGuideSlugFromUrl(slug);
   const pageUrl = `${siteBase}/guides/${slug}`;
 
-  const fromDb = await getPublishedSeoArticle(slug);
+  const fromDb = await getPublishedGuideArticleFromDb(slug);
   if (fromDb) {
     const title = fromDb.title.trim();
     const paragraphs = paragraphsFromGuideBody(fromDb.content);
     const description = buildMetaDescription(fromDb.description, fromDb.content);
     const published = fromDb.created_at ?? new Date().toISOString();
     const modified = fromDb.updated_at ?? published;
+    const coverAbs = fromDb.cover_image ? absoluteFromSiteBase(fromDb.cover_image) : null;
+    const coverAlt = (fromDb.cover_image_alt?.trim() || title).slice(0, 500);
     const jsonLd = articleJsonLd({
       headline: title,
       description,
       url: pageUrl,
       datePublished: published,
-      dateModified: modified
+      dateModified: modified,
+      imageUrl: coverAbs
     });
 
     return (
@@ -214,6 +205,18 @@ export default async function GuideDetailPage({ params }: { params: Params }) {
               </Link>
             </p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight">{title}</h1>
+            {fromDb.cover_image ? (
+              <figure className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+                <img
+                  src={fromDb.cover_image}
+                  alt={coverAlt}
+                  className="w-full max-h-[min(420px,50vh)] object-cover object-center"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                />
+              </figure>
+            ) : null}
             {fromDb.description?.trim() ? (
               <p className="mt-4 text-slate-600 leading-relaxed">{fromDb.description.trim()}</p>
             ) : null}
@@ -233,8 +236,30 @@ export default async function GuideDetailPage({ params }: { params: Params }) {
 
   const corpus = await getAllAutoPosts();
   console.log(`[content-source] guides-page posts=${corpus.length} slug=${slug}`);
-  const post = corpus.find((p) => p.slug === slug);
-  if (!post) notFound();
+  const post =
+    corpus.find((p) => p.slug === slug || p.slug === slugNorm) ??
+    corpus.find((p) => p.slug.toLowerCase() === slugNorm.toLowerCase());
+  if (!post) {
+    return (
+      <main className="min-h-screen bg-page text-slate-900 flex flex-col">
+        <SiteHeader />
+        <div className="flex-1 container py-16 max-w-xl">
+          <h1 className="text-xl font-semibold text-slate-900">未找到该指南</h1>
+          <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+            数据库与本地语料中均未匹配到该 slug（已尝试大小写不敏感与 Unicode 规范化）。
+          </p>
+          <p className="mt-2 text-xs font-mono text-slate-500 break-all">slug：{slugNorm}</p>
+          <p className="mt-2 text-sm text-slate-600">
+            请确认后台文章为「已发布」、未在回收站，且前台链接中的 slug 与数据库中的 `seo_articles.slug` 一致。
+          </p>
+          <Link href="/guides" className="mt-6 inline-block text-sky-700 hover:underline text-sm">
+            返回 Guides 列表
+          </Link>
+        </div>
+        <SiteFooter />
+      </main>
+    );
+  }
 
   const related = await getRelatedGuideLinks(slug, 5);
   const paragraphs = paragraphsFromGuideBody(post.body);

@@ -1,4 +1,9 @@
 import type { SeoPreflightContentType } from "../types/preflight";
+import {
+  buildSeoTitleFromSkeleton,
+  cleanTopicPhrase,
+  pickEnglishSkeletonKindForPreflight
+} from "@/lib/seo/seo-title-skeleton";
 
 const YEAR = 2026;
 const TITLE_MIN = 16;
@@ -93,6 +98,108 @@ function enListiclePatterns(b: string): string[] {
   ];
 }
 
+function enProblemSolutionPatterns(b: string): string[] {
+  return [
+    `Why Your ${b} Still Isn't Getting Traction`,
+    `The Real Reason ${b} Falls Flat for Most Creators`,
+    `${b}: What's Actually Broken—and the First Fix`,
+    `Stuck on ${b}? Start With This Diagnosis`,
+    `Why ${b} Looks Fine on Paper But Flops in the Feed`,
+    `${b} Troubleshooting: Friction, Fixes, and a Simple Next Test`,
+    `If ${b} Isn't Moving Numbers, Read This Before You Tweak Again`,
+    `The ${b} Problem Most Tutorials Skip`,
+    `${b} When You're Doing "Everything Right" But It Still Stalls`,
+    `Stop Patching ${b} Randomly—Use This Sequence`,
+    `${b}: Find the Bottleneck Before You Rewrite`,
+    `Why Small ${b} Changes Fail (And What to Change Instead)`
+  ];
+}
+
+function enMistakesPatterns(b: string): string[] {
+  return [
+    `The Biggest ${b} Mistakes Creators Keep Repeating`,
+    `${b} Mistakes That Quietly Cap Your Reach`,
+    `Stop Making These ${b} Errors (They're Common for a Reason)`,
+    `${b}: The "Looks Smart" Mistakes That Hurt Performance`,
+    `Seven ${b} Slip-Ups I See on Every Audit`,
+    `${b} Anti-Patterns You Can Fix This Week`,
+    `The Subtle ${b} Mistakes That Look Harmless`,
+    `Rookie ${b} Errors Even Experienced Creators Repeat`,
+    `${b} Habits That Feel Productive—but Aren't`,
+    `If ${b} Feels "Fine," Check These Failure Modes`,
+    `${b}: The Fixes That Actually Move Watch Time and Clicks`,
+    `How to Spot Bad ${b} Advice Before You Ship It`
+  ];
+}
+
+function enComparisonFromExperiencePatterns(b: string): string[] {
+  return [
+    `I Compared 10 ${b} Patterns—Here's What Actually Gets Clicks`,
+    `I Tested ${b} Styles Side-by-Side: Surprising Winners`,
+    `${b}: What I Learned After Publishing Dozens of Variants`,
+    `A Creator's Field Test of ${b} (Not Theory—Results)`,
+    `I Ranked ${b} Approaches by What Moved the Needle`,
+    `${b} Experiments: What I'd Repeat vs. What I'd Ditch`,
+    `Same Niche, Different ${b}: What Split Tests Showed`,
+    `Hands-On ${b}: Patterns That Beat Generic Advice`,
+    `${b} From the Trenches—What Worked on My Channel`,
+    `I Tried the Popular ${b} Playbooks: Here's the Honest Scorecard`,
+    `${b}: What I'd Tell Myself After 100 Posts`,
+    `Real-World ${b}—Less Hype, More Signal`
+  ];
+}
+
+function enMythBustingPatterns(b: string): string[] {
+  return [
+    `What Most "${b}" Advice Gets Wrong`,
+    `${b} Myths That Sound Smart—But Hurt Results`,
+    `The Viral ${b} Tips That Don't Hold Up`,
+    `Stop Copying This ${b} "Best Practice"`,
+    `${b}: The Popular Line vs. What Actually Works`,
+    `Debunking Trendy ${b} Advice (With a Cleaner Playbook)`,
+    `Why "Just Post More" Is the Wrong Answer for ${b}`,
+    `${b} Hot Takes That Pass the Reality Check`,
+    `The ${b} "Hack" Everyone Shares—And Why It Fails`,
+    `What ${b} Gurus Get Wrong About Algorithms and Attention`,
+    `${b}: Replace Hype With a Boring-But-True Workflow`,
+    `If Your ${b} Feels Forced, Read This First`
+  ];
+}
+
+function enPatternBreakdownPatterns(b: string): string[] {
+  return [
+    `${b} Patterns That Work Better for Faceless Creators`,
+    `Breaking Down ${b} Structures That Survive Algorithm Shifts`,
+    `${b} Templates—When to Use Them (and When to Break Them)`,
+    `The Anatomy of Strong ${b} (Copy This Skeleton)`,
+    `${b} Formulas: The Few That Still Feel Human`,
+    `Pattern Library: ${b} Variants Ranked by Effort vs. Payoff`,
+    `${b}: Reverse-Engineering What Actually Hooks`,
+    `From Weak to Strong ${b}: Pattern Upgrades That Stick`,
+    `Title and Hook Patterns for ${b} That Still Convert`,
+    `${b} Blueprints: Steal the Shape, Not the Clichés`,
+    `Why Your ${b} Blends In—And How to Break the Pattern Safely`,
+    `${b} Structures Readers Skim Less and Click More`
+  ];
+}
+
+function enScenarioSpecificPatterns(b: string): string[] {
+  return [
+    `${b} When You're Posting on a Tight Schedule`,
+    `${b} for New Accounts Without Social Proof`,
+    `${b} When You're Pivoting Niches Mid-Year`,
+    `${b} for One-Person Teams (No Crew, No Budget)`,
+    `${b} During a Slow Growth Phase—What to Change`,
+    `${b} When Your Audience Is Mostly Mobile`,
+    `${b} If You've Already Tried "Trend Chasing"`,
+    `${b} for Creators Who Hate "Hype" Language`,
+    `${b} When You Can't Film Every Day`,
+    `${b} for Side-Hustle Hours Only`,
+    `${b} After a Post Flops—What to Try Next`,
+    `${b} When You're Rebuilding From Zero`
+  ];
+}
+
 function zhPatterns(contentType: SeoPreflightContentType, base: string): string[] {
   const b = base;
   const guide = [
@@ -155,9 +262,16 @@ function zhPatterns(contentType: SeoPreflightContentType, base: string): string[
     case "how_to":
       return howTo;
     case "comparison":
+    case "comparison_from_experience":
       return comp;
     case "listicle":
+    case "mistakes":
       return list;
+    case "problem_solution":
+    case "myth_busting":
+    case "pattern_breakdown":
+    case "scenario_specific":
+      return guide;
     default:
       return guide;
   }
@@ -225,9 +339,16 @@ function jaPatterns(contentType: SeoPreflightContentType, base: string): string[
     case "how_to":
       return howTo;
     case "comparison":
+    case "comparison_from_experience":
       return comp;
     case "listicle":
+    case "mistakes":
       return list;
+    case "problem_solution":
+    case "myth_busting":
+    case "pattern_breakdown":
+    case "scenario_specific":
+      return guide;
     default:
       return guide;
   }
@@ -259,25 +380,23 @@ export function proposeTitleFromTopic(
     return trimTitleAtWordBoundary(raw, TITLE_MAX);
   }
 
-  const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-  const b = cap(base);
-
-  let patterns: string[];
-  switch (contentType) {
-    case "how_to":
-      patterns = enHowToPatterns(b);
-      break;
-    case "comparison":
-      patterns = enComparisonPatterns(b);
-      break;
-    case "listicle":
-      patterns = enListiclePatterns(b);
-      break;
-    case "guide":
-    default:
-      patterns = enGuidePatterns(b);
+  const vsSplit = base.split(/\s+vs\s+/i).map((s) => s.trim()).filter(Boolean);
+  if (vsSplit.length >= 2) {
+    const raw = buildSeoTitleFromSkeleton({
+      topic: vsSplit[0]!,
+      type: "vs",
+      altTopic: vsSplit.slice(1).join(" vs ")
+    });
+    return trimTitleAtWordBoundary(raw, TITLE_MAX);
   }
 
-  const raw = patterns[pickPatternIndex(variationIndex, topicSeed, patterns.length, patternRetryOffset)]!;
+  const topic = cleanTopicPhrase(base);
+  const kind = pickEnglishSkeletonKindForPreflight(
+    contentType,
+    variationIndex,
+    patternRetryOffset,
+    topicSeed
+  );
+  const raw = buildSeoTitleFromSkeleton({ topic: topic || base, type: kind });
   return trimTitleAtWordBoundary(raw, TITLE_MAX);
 }

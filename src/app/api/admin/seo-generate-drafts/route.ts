@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { isAdmin } from "@/lib/auth/isAdmin";
 import { generateSeoDraftsFromPreflight } from "@/lib/seo-draft-generation";
 import type { SeoPreflightCandidateResult, SeoPreflightJobResult } from "@/lib/seo-preflight";
@@ -60,6 +61,7 @@ export async function POST(request: Request) {
 
   try {
     const result = await generateSeoDraftsFromPreflight(approved, { source, persistLog: true });
+    revalidatePath("/admin/seo");
     return NextResponse.json({ ok: true, result });
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);

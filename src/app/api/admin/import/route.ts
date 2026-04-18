@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { isAdmin } from "@/lib/auth/isAdmin";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { normalizeCoverImageAltForStorage, normalizeCoverImageUrlForStorage } from "@/lib/seo/article-cover";
 import { resolveSeoArticleWithAutoFix } from "@/lib/seo/seo-gate";
 
 export const dynamic = "force-dynamic";
@@ -86,6 +87,8 @@ export async function POST(request: Request) {
   const si = header.indexOf("slug");
   const di = header.indexOf("description");
   const ci = header.indexOf("content");
+  const covi = header.indexOf("cover_image");
+  const covai = header.indexOf("cover_image_alt");
   if (ti < 0 || si < 0 || ci < 0) {
     return NextResponse.json(
       { ok: false, error: "CSV header must include title, slug, content (and optionally description)" },
@@ -104,6 +107,15 @@ export async function POST(request: Request) {
     const slugRaw = (cells[si] ?? "").trim();
     const description = di >= 0 ? (cells[di] ?? "").trim() : "";
     const content = (cells[ci] ?? "").trim();
+    const coverImageRaw = covi >= 0 ? (cells[covi] ?? "").trim() : "";
+    const coverAltRaw = covai >= 0 ? (cells[covai] ?? "").trim() : "";
+    const cover_image = normalizeCoverImageUrlForStorage(coverImageRaw);
+    const cover_image_alt =
+      cover_image === null ? null : normalizeCoverImageAltForStorage(coverAltRaw);
+    if (coverImageRaw.length > 0 && cover_image === null) {
+      failed++;
+      continue;
+    }
     if (!title || !slugRaw || !content) {
       failed++;
       continue;
@@ -122,7 +134,10 @@ export async function POST(request: Request) {
         slug: finalSlug,
         description: finalDescription || null,
         content: finalContent,
+        cover_image,
+        cover_image_alt,
         status: "published",
+        deleted: false,
         created_at: now,
         updated_at: now
       });

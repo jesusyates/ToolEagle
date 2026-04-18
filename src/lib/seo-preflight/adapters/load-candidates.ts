@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import type { SeoPreflightContentType } from "../types/preflight";
 import type { TopicRegistryFile } from "./topic-registry-types";
 
 const CANDIDATES_FILE = "seo-preflight-candidates.json";
@@ -50,5 +51,33 @@ export function mergeCandidateTopics(fileTopics: string[], requestSeeds: string[
       merged.push(k);
     }
   }
+  return merged;
+}
+
+export type CandidateTopicRow = { topic: string; contentType: SeoPreflightContentType };
+
+/**
+ * Same merge order as `mergeCandidateTopics`, but keeps per-row `contentType` (e.g. from scenario mapper).
+ * Later sources do not override an existing topic slug.
+ */
+export function mergeCandidateTopicRows(
+  fileTopics: string[],
+  requestRows: Array<{ topic: string; contentType?: SeoPreflightContentType }>,
+  registrySeeds: string[],
+  defaultContentType: SeoPreflightContentType
+): CandidateTopicRow[] {
+  const seen = new Set<string>();
+  const merged: CandidateTopicRow[] = [];
+  const push = (topic: string, contentType?: SeoPreflightContentType) => {
+    const k = topic.replace(/\s+/g, " ").trim();
+    if (!k) return;
+    const key = k.toLowerCase();
+    if (seen.has(key)) return;
+    seen.add(key);
+    merged.push({ topic: k, contentType: contentType ?? defaultContentType });
+  };
+  for (const row of requestRows) push(row.topic, row.contentType);
+  for (const t of fileTopics) push(t, defaultContentType);
+  for (const t of registrySeeds) push(t, defaultContentType);
   return merged;
 }

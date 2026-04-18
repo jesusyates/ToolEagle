@@ -34,7 +34,7 @@ export async function POST(request: Request) {
 
   const { error } = await db
     .from("seo_articles")
-    .update({ status: "draft", updated_at: now })
+    .update({ status: "draft", updated_at: now, publish_scheduled_at: null, publish_queue_source: null })
     .eq("id", id);
 
   if (error) {

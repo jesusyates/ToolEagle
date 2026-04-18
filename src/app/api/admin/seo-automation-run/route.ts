@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { isAdmin } from "@/lib/auth/isAdmin";
 import { runSeoAutomationPipeline } from "@/lib/seo-job-runner";
-import type { SeoPreflightConfig, SeoPreflightContentType } from "@/lib/seo-preflight";
+import { SEO_PREFLIGHT_CONTENT_TYPES, type SeoPreflightConfig, type SeoPreflightContentType } from "@/lib/seo-preflight";
 import fs from "node:fs/promises";
 import path from "node:path";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
-
-const CONTENT_TYPES: SeoPreflightContentType[] = ["guide", "how_to", "comparison", "listicle"];
 
 export async function GET() {
   if (!(await isAdmin())) {
@@ -46,7 +45,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "market_locale_language_required" }, { status: 400 });
   }
   const ct = typeof body.contentType === "string" ? body.contentType.trim() : "guide";
-  if (!CONTENT_TYPES.includes(ct as SeoPreflightContentType)) {
+  if (!SEO_PREFLIGHT_CONTENT_TYPES.includes(ct as SeoPreflightContentType)) {
     return NextResponse.json({ ok: false, error: "contentType_invalid" }, { status: 400 });
   }
 
@@ -73,6 +72,9 @@ export async function POST(request: Request) {
       runPreflight,
       runDraftGeneration
     });
+    if (runDraftGeneration) {
+      revalidatePath("/admin/seo");
+    }
     return NextResponse.json({ ok: result.ok, result });
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);

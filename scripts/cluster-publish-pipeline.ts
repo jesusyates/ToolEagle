@@ -898,7 +898,7 @@ export async function runClusterPublishPipeline(options?: {
       ) {
         console.log("[cluster-publish] fallback_deferred_for_mainline cluster_round_stretch");
       }
-      const { clusters: rawClusters, priorityChoices } = generateTopicClusters({
+      const { clusters: rawClusters, priorityChoices } = await generateTopicClusters({
         clusterCount: Math.min(4 + clusterRound - 1, 14),
         topicsPerCluster: 3
       });
@@ -930,7 +930,11 @@ export async function runClusterPublishPipeline(options?: {
 
       for (const cl of clusters) {
         if (articlesPassed >= MIN_SUCCESS) break;
-        for (const topicStr of cl.topics) {
+        for (let ti = 0; ti < cl.topics.length; ti++) {
+          const topicStr = cl.topics[ti]!;
+          const rowMeta = cl.meta?.[ti];
+          const pipelineKeyword = rowMeta?.keyword ?? cl.cluster;
+          const pipelineAngle = rowMeta ? `intent:${rowMeta.intent}` : `cluster:${cl.cluster}`;
           if (articlesPassed >= MIN_SUCCESS) break;
           if (attemptsUsed >= MAX_TOPIC_ATTEMPTS) break;
 
@@ -1021,7 +1025,7 @@ export async function runClusterPublishPipeline(options?: {
 
           enTopicAdmittedToPipeline++;
           attemptsUsed++;
-          await processTopicThroughPipeline(workTopic, cl.cluster, cl.cluster, `cluster:${cl.cluster}`, {
+          await processTopicThroughPipeline(workTopic, cl.cluster, pipelineKeyword, pipelineAngle, {
             fromMainlineCluster: true
           });
           if (enProviderQuotaExhaustedAbort) break enPipelineRun;

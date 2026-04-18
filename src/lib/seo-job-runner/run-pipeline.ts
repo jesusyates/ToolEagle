@@ -56,10 +56,13 @@ export async function runSeoAutomationPipeline(input: RunSeoAutomationPipelineIn
       return result;
     }
 
-    const topicStrings = mapped.topics.map((t) => t.topic);
+    const candidateSeedRows = mapped.topics.map((t) => ({
+      topic: t.topic,
+      contentType: t.contentType
+    }));
     const preflight = await runSeoPreflightJob(input.preflightConfig, {
       repoRoot: root,
-      candidateSeeds: topicStrings,
+      candidateSeedRows,
       seedsOnly: true,
       persistLog: true
     });

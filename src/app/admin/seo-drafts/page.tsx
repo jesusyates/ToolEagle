@@ -36,8 +36,10 @@ export default async function AdminSeoDraftsPage({ searchParams }: { searchParam
     .select("id, title, slug, status, created_at")
     .eq("deleted", false)
     .order("created_at", { ascending: false });
-  if (filter) {
-    q = q.eq("status", filter);
+  if (filter === "published") {
+    q = q.eq("status", "published");
+  } else if (filter === "draft") {
+    q = q.in("status", ["draft", "scheduled"]);
   }
   const { data: rows, error } = await q;
 
@@ -63,7 +65,8 @@ export default async function AdminSeoDraftsPage({ searchParams }: { searchParam
           </Link>
         </p>
         <p className="mt-2 text-slate-600 text-sm">
-          默认仅显示 <code className="text-xs">draft</code>。预检/草稿生成写入的条目会出现在此。
+          默认显示 <code className="text-xs">draft</code> 与已排期 <code className="text-xs">scheduled</code>
+          。预检/草稿生成写入的条目会出现在此。
         </p>
         <div className="mt-4 flex flex-wrap gap-3 text-sm items-center">
           <Link

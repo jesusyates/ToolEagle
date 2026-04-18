@@ -76,11 +76,21 @@ export async function POST(request: Request) {
         skipped.push(`${id}:soft_deleted`);
         continue;
       }
-      if (r.status !== "draft") {
-        skipped.push(`${id}:not_draft`);
+      const st = String(r.status ?? "").trim().toLowerCase();
+      // Align with POST /api/admin/seo-drafts/publish: drafts tab lists draft + scheduled.
+      if (st !== "draft" && st !== "scheduled") {
+        skipped.push(`${id}:not_publishable`);
         continue;
       }
-      const { error } = await db.from("seo_articles").update({ status: "published", updated_at: now }).eq("id", id);
+      const { error } = await db
+        .from("seo_articles")
+        .update({
+          status: "published",
+          updated_at: now,
+          publish_scheduled_at: null,
+          publish_queue_source: null
+        })
+        .eq("id", id);
       if (!error) applied++;
       else skipped.push(`${id}:update_error`);
     }

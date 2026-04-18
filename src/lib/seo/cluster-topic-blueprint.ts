@@ -2,6 +2,114 @@
  * Cluster-to-topic blueprint: infer pillar type and expand typed guide lines (not title tweaks).
  */
 
+import {
+  buildSeoTitleFromSkeleton,
+  cleanTopicPhrase,
+  stableTitleHash,
+  type SeoTitleSkeletonKind
+} from "./seo-title-skeleton";
+import { isPreValidatedTitle } from "./title-prevalidation";
+import { collectSearchDemandForCluster } from "./search-data-engine/collect";
+import { inferSearchDemandIntent, passesSearchDemandPhrase } from "./search-data-engine/search-style-gate";
+
+type SeoPrefixKey = "howto" | "best" | "vs" | "examples";
+
+function pickSeoPrefix(t: string): "vs" | "best" | "examples" | "howto" {
+  if (t.includes("compare") || t.includes("vs") || t.includes("versus")) return "vs";
+  if (t.includes("best") || t.includes("top") || t.includes("tools")) return "best";
+  if (t.includes("example") || t.includes("before and after")) return "examples";
+  return "howto";
+}
+
+function prefixKeyForTitle(lower: string): SeoPrefixKey {
+  if (lower.startsWith("best")) return "best";
+  if (lower.includes(" vs ")) return "vs";
+  if (lower.includes("example")) return "examples";
+  return "howto";
+}
+
+function maxPrefixSlots(wantN: number): number {
+  return Math.ceil(wantN * 0.5);
+}
+
+/** Converge cluster / seed lines to a fixed English SEO title skeleton (no free-form stacking). */
+export function normalizeSeoTitle(title: string): string {
+  const raw = title.replace(/\s+/g, " ").trim();
+  if (!raw) return title.trim();
+
+  const vsSplit = raw.split(/\s+vs\s+/i).map((s) => s.trim()).filter(Boolean);
+  if (vsSplit.length >= 2) {
+    return buildSeoTitleFromSkeleton({
+      topic: vsSplit[0]!,
+      type: "vs",
+      altTopic: vsSplit.slice(1).join(" vs ")
+    });
+  }
+
+  let t = raw.toLowerCase();
+  t = t.replace(/^real talk on\s+/i, "");
+  t = t.replace(/^from messy to manageable\s+/i, "");
+  t = t.replace(/^build a sustainable\s+/i, "");
+  t = t.replace(/^a clear\s+/i, "");
+  t = t.replace(/what works.*$/i, "");
+  t = t.replace(/explained.*$/i, "");
+  t = t.replace(/tips.*$/i, "");
+  t = t.replace(/\s+/g, " ").trim();
+
+  const topic = cleanTopicPhrase(t || raw);
+  const prefix = pickSeoPrefix(t || raw.toLowerCase());
+  let type: SeoTitleSkeletonKind = "howto";
+  if (prefix === "vs") type = "compared";
+  else if (prefix === "best") type = "best";
+  else if (prefix === "examples") type = raw.toLowerCase().includes("before and after") ? "before_after" : "examples";
+  else {
+    const rot: SeoTitleSkeletonKind[] = [
+      "howto",
+      "best",
+      "examples",
+      "compared",
+      "howto_improve",
+      "best_creators",
+      "before_after"
+    ];
+    type = rot[stableTitleHash(raw) % rot.length]!;
+  }
+
+  return buildSeoTitleFromSkeleton({ topic: topic || raw, type });
+}
+
+export function isValidSeoTitle(title: string): boolean {
+  const words = title.trim().split(/\s+/).filter(Boolean);
+  if (words.length < 4) return false;
+
+  const badPatterns = ["real talk", "messy", "sustainable", "what works"];
+  const lower = title.toLowerCase();
+  if (badPatterns.some((p) => lower.includes(p))) return false;
+  if (/\bstory\b/i.test(title)) return false;
+  return true;
+}
+
+function finalizeTopicStrings(candidates: string[], wantN: number): string[] {
+  const maxPer = maxPrefixSlots(wantN);
+  const prefixCount: Record<SeoPrefixKey, number> = { howto: 0, best: 0, vs: 0, examples: 0 };
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const raw of candidates) {
+    if (out.length >= wantN) break;
+    const t = normalizeSeoTitle(raw.replace(/\s+/g, " ").trim());
+    if (!isValidSeoTitle(t)) continue;
+    if (!isPreValidatedTitle(t)) continue;
+    const dedupeKey = t.toLowerCase();
+    if (seen.has(dedupeKey)) continue;
+    const pk = prefixKeyForTitle(dedupeKey);
+    if (prefixCount[pk] >= maxPer) continue;
+    seen.add(dedupeKey);
+    prefixCount[pk]++;
+    out.push(t);
+  }
+  return out;
+}
+
 export type ClusterTopicKind =
   | "growth"
   | "consistency"
@@ -469,6 +577,101 @@ export function buildClusterTopicsForCluster(cluster: string, want: number): str
     default:
       pool = growthTopics(p);
   }
-  const out = pool.slice(0, wantN);
-  return out.map((t) => t.replace(/\s+/g, " ").trim());
+  const merged = pool.map((t) => t.replace(/\s+/g, " ").trim());
+  return finalizeTopicStrings(merged, wantN);
+}
+
+export type ClusterTopicMeta = {
+  keyword: string;
+  intent: string;
+};
+
+function finalizeClusterTopicsWithMeta(
+  topics: string[],
+  meta: ClusterTopicMeta[],
+  wantN: number
+): { topics: string[]; meta: ClusterTopicMeta[] } {
+  const maxPer = maxPrefixSlots(wantN);
+  const prefixCount: Record<SeoPrefixKey, number> = { howto: 0, best: 0, vs: 0, examples: 0 };
+  const seen = new Set<string>();
+  const outT: string[] = [];
+  const outM: ClusterTopicMeta[] = [];
+  for (let i = 0; i < topics.length; i++) {
+    if (outT.length >= wantN) break;
+    const t = normalizeSeoTitle(topics[i]!.replace(/\s+/g, " ").trim());
+    if (!isValidSeoTitle(t)) continue;
+    if (!isPreValidatedTitle(t)) continue;
+    const dedupeKey = t.toLowerCase();
+    if (seen.has(dedupeKey)) continue;
+    const pk = prefixKeyForTitle(dedupeKey);
+    if (prefixCount[pk] >= maxPer) continue;
+    seen.add(dedupeKey);
+    prefixCount[pk]++;
+    outT.push(t);
+    outM.push(meta[i]!);
+  }
+  return { topics: outT, meta: outM };
+}
+
+/**
+ * Demand-led topics first (Google suggest + templates), then legacy blueprint lines that pass {@link passesSearchDemandPhrase}.
+ */
+export async function buildClusterTopicsForClusterAsync(
+  cluster: string,
+  want: number,
+  options?: { fetchSuggests?: boolean }
+): Promise<{ topics: string[]; meta: ClusterTopicMeta[] }> {
+  const wantN = Math.max(3, want);
+  const rows = await collectSearchDemandForCluster(cluster, {
+    max: Math.max(wantN * 4, 16),
+    fetchSuggests: options?.fetchSuggests
+  });
+  const topics: string[] = [];
+  const meta: ClusterTopicMeta[] = [];
+  const seen = new Set<string>();
+  for (const r of rows) {
+    if (topics.length >= wantN) break;
+    const key = r.topic.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    topics.push(r.topic);
+    meta.push({ keyword: r.keyword, intent: r.intent });
+  }
+  if (topics.length < wantN) {
+    const legacy = buildClusterTopicsForCluster(cluster, wantN * 3);
+    for (const t of legacy) {
+      if (topics.length >= wantN) break;
+      const norm = normalizeSeoTitle(t.replace(/\s+/g, " ").trim());
+      if (!isValidSeoTitle(norm)) continue;
+      if (!passesSearchDemandPhrase(norm)) continue;
+      const key = norm.toLowerCase();
+      if (seen.has(key)) continue;
+      seen.add(key);
+      topics.push(norm);
+      meta.push({ keyword: norm, intent: inferSearchDemandIntent(norm) });
+    }
+  }
+
+  let { topics: outTopics, meta: outMeta } = finalizeClusterTopicsWithMeta(topics, meta, wantN);
+  if (outTopics.length < wantN) {
+    const more = buildClusterTopicsForCluster(cluster, Math.max(wantN * 4, 16));
+    const have = new Set(outTopics.map((x) => x.toLowerCase()));
+    const maxPer = maxPrefixSlots(wantN);
+    const prefixCount: Record<SeoPrefixKey, number> = { howto: 0, best: 0, vs: 0, examples: 0 };
+    for (const x of outTopics) prefixCount[prefixKeyForTitle(x.toLowerCase())]++;
+    for (const t of more) {
+      if (outTopics.length >= wantN) break;
+      const nt = normalizeSeoTitle(t.replace(/\s+/g, " ").trim());
+      if (!isValidSeoTitle(nt)) continue;
+      const k = nt.toLowerCase();
+      if (have.has(k)) continue;
+      const pk = prefixKeyForTitle(k);
+      if (prefixCount[pk] >= maxPer) continue;
+      have.add(k);
+      prefixCount[pk]++;
+      outTopics.push(nt);
+      outMeta.push({ keyword: nt, intent: inferSearchDemandIntent(nt) });
+    }
+  }
+  return { topics: outTopics.slice(0, wantN), meta: outMeta.slice(0, wantN) };
 }

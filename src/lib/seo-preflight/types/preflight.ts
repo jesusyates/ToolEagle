@@ -1,6 +1,30 @@
 /** Single engine: parameterized by market / locale / content language — no per-country code forks. */
 
-export type SeoPreflightContentType = "guide" | "how_to" | "comparison" | "listicle";
+export type SeoPreflightContentType =
+  | "guide"
+  | "how_to"
+  | "comparison"
+  | "listicle"
+  | "problem_solution"
+  | "mistakes"
+  | "comparison_from_experience"
+  | "myth_busting"
+  | "pattern_breakdown"
+  | "scenario_specific";
+
+/** All valid values for API / admin validation. */
+export const SEO_PREFLIGHT_CONTENT_TYPES: SeoPreflightContentType[] = [
+  "guide",
+  "how_to",
+  "comparison",
+  "listicle",
+  "problem_solution",
+  "mistakes",
+  "comparison_from_experience",
+  "myth_busting",
+  "pattern_breakdown",
+  "scenario_specific"
+];
 
 export type SeoPreflightConfig = {
   targetCount: number;
@@ -25,6 +49,10 @@ export type SeoPreflightCandidateResult = {
   market: string;
   locale: string;
   contentLanguage: string;
+  /** Intent used for title/outline/meta (per-row when scenario pipeline supplies types). */
+  contentType?: SeoPreflightContentType;
+  /** When set, draft generation updates this row instead of inserting (single recycle retry). */
+  existingArticleId?: string;
 };
 
 export type SeoPreflightJobResult = {

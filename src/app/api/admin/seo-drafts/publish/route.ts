@@ -36,9 +36,19 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "article_soft_deleted_restore_first" }, { status: 400 });
   }
 
+  const st = String((existing as { status?: string }).status ?? "").trim().toLowerCase();
+  if (st !== "draft" && st !== "scheduled") {
+    return NextResponse.json({ ok: false, error: "invalid_status_for_publish", detail: st || "unknown" }, { status: 400 });
+  }
+
   const { error } = await db
     .from("seo_articles")
-    .update({ status: "published", updated_at: now })
+    .update({
+      status: "published",
+      updated_at: now,
+      publish_scheduled_at: null,
+      publish_queue_source: null
+    })
     .eq("id", id);
 
   if (error) {

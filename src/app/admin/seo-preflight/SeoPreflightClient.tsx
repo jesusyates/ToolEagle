@@ -2,8 +2,12 @@
 
 import { useState } from "react";
 import { SeoAutomationMarketLocaleLanguageFields } from "@/components/admin/seo/SeoAutomationMarketLocaleLanguageFields";
-import type { SeoDraftGenerationJobResult } from "@/lib/seo-draft-generation";
-import type { SeoPreflightJobResult } from "@/lib/seo-preflight";
+import type { SeoDraftGenerationJobResult } from "@/lib/seo-draft-generation/types";
+import {
+  SEO_PREFLIGHT_CONTENT_TYPES,
+  type SeoPreflightContentType,
+  type SeoPreflightJobResult
+} from "@/lib/seo-preflight/client";
 
 export function SeoPreflightClient() {
   const [targetCount, setTargetCount] = useState(5);
@@ -11,7 +15,7 @@ export function SeoPreflightClient() {
   const [locale, setLocale] = useState("en-US");
   const [contentLanguage, setContentLanguage] = useState("en");
   const [site, setSite] = useState("");
-  const [contentType, setContentType] = useState<"guide" | "how_to" | "comparison" | "listicle">("guide");
+  const [contentType, setContentType] = useState<SeoPreflightContentType>("guide");
   const [maxEstimatedCost, setMaxEstimatedCost] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -127,13 +131,14 @@ export function SeoPreflightClient() {
           <label className="block text-sm font-medium text-slate-700">内容类型</label>
           <select
             value={contentType}
-            onChange={(ev) => setContentType(ev.target.value as typeof contentType)}
+            onChange={(ev) => setContentType(ev.target.value as SeoPreflightContentType)}
             className="mt-1 w-full rounded border border-slate-300 px-2 py-1 text-sm"
           >
-            <option value="guide">guide</option>
-            <option value="how_to">how_to</option>
-            <option value="comparison">comparison</option>
-            <option value="listicle">listicle</option>
+            {SEO_PREFLIGHT_CONTENT_TYPES.map((t) => (
+              <option key={t} value={t}>
+                {t}
+              </option>
+            ))}
           </select>
         </div>
         <div>

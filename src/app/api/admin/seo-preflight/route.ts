@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
 import { isAdmin } from "@/lib/auth/isAdmin";
-import { loadScenarioTopicStrings } from "@/lib/seo-preflight/adapters/load-scenario-topics";
-import { runSeoPreflightJob, type SeoPreflightConfig, type SeoPreflightContentType } from "@/lib/seo-preflight";
+import { loadScenarioTopicRows } from "@/lib/seo-preflight/adapters/load-scenario-topics";
+import {
+  runSeoPreflightJob,
+  SEO_PREFLIGHT_CONTENT_TYPES,
+  type SeoPreflightConfig,
+  type SeoPreflightContentType
+} from "@/lib/seo-preflight";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
-
-const CONTENT_TYPES: SeoPreflightContentType[] = ["guide", "how_to", "comparison", "listicle"];
 
 function parseConfig(body: unknown): { ok: true; config: SeoPreflightConfig } | { ok: false; error: string } {
   if (!body || typeof body !== "object") return { ok: false, error: "invalid_json" };
@@ -21,7 +24,7 @@ function parseConfig(body: unknown): { ok: true; config: SeoPreflightConfig } | 
   const site = typeof o.site === "string" ? o.site.trim() : undefined;
   if (!market || !locale || !contentLanguage) return { ok: false, error: "market_locale_language_required" };
   const ct = o.contentType;
-  if (typeof ct !== "string" || !CONTENT_TYPES.includes(ct as SeoPreflightContentType)) {
+  if (typeof ct !== "string" || !SEO_PREFLIGHT_CONTENT_TYPES.includes(ct as SeoPreflightContentType)) {
     return { ok: false, error: "contentType_invalid" };
   }
   const maxEstimatedCost =
@@ -70,23 +73,25 @@ export async function POST(request: Request) {
   }
 
   const bodyObj = body as Record<string, unknown>;
-  let extraSeeds = Array.isArray(bodyObj.candidateSeeds)
+  const manualSeeds = Array.isArray(bodyObj.candidateSeeds)
     ? bodyObj.candidateSeeds
         .filter((x): x is string => typeof x === "string" && x.trim().length > 0)
         .map((s) => s.trim())
     : [];
 
-  if (bodyObj.useScenarioTopicsFile === true) {
-    const fromScenario = await loadScenarioTopicStrings(process.cwd());
-    extraSeeds = [...fromScenario, ...extraSeeds];
-  }
+  const fromScenario =
+    bodyObj.useScenarioTopicsFile === true ? await loadScenarioTopicRows(process.cwd()) : [];
+  const candidateSeedRows = [
+    ...fromScenario,
+    ...manualSeeds.map((topic) => ({ topic }))
+  ];
 
   const seedsOnly = bodyObj.seedsOnly === true;
   const persistLog = typeof bodyObj.persistLog === "boolean" ? bodyObj.persistLog : true;
 
   try {
     const result = await runSeoPreflightJob(parsed.config, {
-      candidateSeeds: extraSeeds,
+      candidateSeedRows,
       persistLog,
       seedsOnly
     });

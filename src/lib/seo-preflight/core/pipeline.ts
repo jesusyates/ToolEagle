@@ -7,11 +7,16 @@ import { structuralTitleFingerprint } from "../policy/title-job-dedupe";
 import { evaluateSeoPreflightTopicSeed, evaluateTopicEligibility } from "../policy/topic-eligibility";
 import { proposeTitleFromTopic } from "../policy/title-from-topic";
 import { loadPublishedCorpusFromTopicRegistry } from "../adapters/load-corpus";
-import { loadOptionalCandidateFile, loadRegistryTopicSeeds, mergeCandidateTopics } from "../adapters/load-candidates";
+import {
+  loadOptionalCandidateFile,
+  loadRegistryTopicSeeds,
+  mergeCandidateTopicRows
+} from "../adapters/load-candidates";
 import { writePreflightJobLog } from "../adapters/job-log";
 import type {
   SeoPreflightCandidateResult,
   SeoPreflightConfig,
+  SeoPreflightContentType,
   SeoPreflightJobResult
 } from "../types/preflight";
 
@@ -24,6 +29,8 @@ function bump(counts: Record<string, number>, key: string) {
 export type RunPreflightOptions = {
   repoRoot?: string;
   candidateSeeds?: string[];
+  /** Per-row content types (scenario automation / scenario JSON). Omitted `contentType` falls back to job config. */
+  candidateSeedRows?: Array<{ topic: string; contentType?: SeoPreflightContentType }>;
   persistLog?: boolean;
   /** When true, skip registry + seo-preflight-candidates.json; only merged request seeds (and optional scenario file via API). */
   seedsOnly?: boolean;
@@ -37,7 +44,16 @@ export async function runSeoPreflightJob(
   const seedsOnly = options?.seedsOnly === true;
   const fileTopics = seedsOnly ? [] : await loadOptionalCandidateFile(options?.repoRoot);
   const registrySeeds = seedsOnly ? [] : await loadRegistryTopicSeeds(options?.repoRoot);
-  const candidates = mergeCandidateTopics(fileTopics, options?.candidateSeeds ?? [], registrySeeds);
+  const requestRows: Array<{ topic: string; contentType?: SeoPreflightContentType }> =
+    options?.candidateSeedRows?.length
+      ? options.candidateSeedRows
+      : (options?.candidateSeeds ?? []).map((t) => ({ topic: t }));
+  const candidates = mergeCandidateTopicRows(
+    fileTopics,
+    requestRows,
+    registrySeeds,
+    config.contentType
+  );
 
   const existingTitles = corpus.titleHints;
   const approved: SeoPreflightCandidateResult[] = [];
@@ -51,24 +67,27 @@ export async function runSeoPreflightJob(
   let candidatesSeen = 0;
   const approvedTitleStructures = new Set<string>();
 
-  topicLoop: for (const topicSeed of candidates) {
+  topicLoop: for (const cand of candidates) {
     if (approved.length >= target) break;
 
+    const topicSeed = cand.topic;
+    const rowContentType = cand.contentType;
+
     candidatesSeen++;
-    const perUnit = estimatePreflightCandidateCost(config.contentType);
+    const perUnit = estimatePreflightCandidateCost(rowContentType);
     const variationIndex = candidatesSeen - 1;
 
     for (let attempt = 0; attempt <= TITLE_PATTERN_RETRY_MAX; attempt++) {
       const title = proposeTitleFromTopic(
         topicSeed,
-        config.contentType,
+        rowContentType,
         config.contentLanguage,
         variationIndex,
         attempt
       );
       const slug = slugifyForSeo(title, config.contentLanguage);
-      const description = buildMetaDescription(topicSeed, title, config.contentLanguage, config.contentType);
-      const outlineHeadings = buildCheapOutlineHeadings(title, config.contentType, config.contentLanguage);
+      const description = buildMetaDescription(topicSeed, title, config.contentLanguage, rowContentType);
+      const outlineHeadings = buildCheapOutlineHeadings(title, rowContentType, config.contentLanguage);
 
       const base: Omit<SeoPreflightCandidateResult, "approved" | "rejectReason"> = {
         topic: topicSeed,
@@ -79,10 +98,11 @@ export async function runSeoPreflightJob(
         estimatedCost: perUnit,
         market: config.market,
         locale: config.locale,
-        contentLanguage: config.contentLanguage
+        contentLanguage: config.contentLanguage,
+        contentType: rowContentType
       };
 
-      const eligSeed = evaluateSeoPreflightTopicSeed(topicSeed, config.contentLanguage, config.contentType);
+      const eligSeed = evaluateSeoPreflightTopicSeed(topicSeed, config.contentLanguage, rowContentType);
       if (!eligSeed.ok) {
         const row: SeoPreflightCandidateResult = { ...base, approved: false, rejectReason: eligSeed.rejectReason };
         rejected.push(row);
@@ -90,7 +110,7 @@ export async function runSeoPreflightJob(
         continue topicLoop;
       }
 
-      const eligTitle = evaluateTopicEligibility(title, existingTitles, config.contentLanguage, config.contentType);
+      const eligTitle = evaluateTopicEligibility(title, existingTitles, config.contentLanguage, rowContentType);
       if (!eligTitle.ok) {
         const row: SeoPreflightCandidateResult = { ...base, approved: false, rejectReason: eligTitle.rejectReason };
         rejected.push(row);

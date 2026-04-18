@@ -2,6 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
 import type { FaqItem } from "@/lib/seo/rebuild-article";
+import { normalizeGuideSlugFromUrl } from "@/lib/seo/get-published-guide-article";
 
 const AUTO_DIR = path.join(process.cwd(), "content", "auto-posts");
 const STAGED_GUIDES_DIR = path.join(process.cwd(), "content", "staged-guides");
@@ -174,5 +175,11 @@ export async function getAllStagedPosts(): Promise<AutoPostRecord[]> {
 
 export async function getAutoPostBySlug(slug: string): Promise<AutoPostRecord | null> {
   const all = await getAllAutoPosts();
-  return all.find((p) => p.slug === slug) ?? null;
+  const n = normalizeGuideSlugFromUrl(slug);
+  return (
+    all.find((p) => p.slug === slug) ??
+    all.find((p) => p.slug === n) ??
+    all.find((p) => p.slug.toLowerCase() === n.toLowerCase()) ??
+    null
+  );
 }

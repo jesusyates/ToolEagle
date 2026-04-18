@@ -1,11 +1,38 @@
 import { getDeepseekModel } from "@/config/ai-router";
 import { deepseekProvider } from "@/lib/ai/providers/deepseek";
+import {
+  buildSeoGenerationBrief,
+  formatSeoBriefForPrompt,
+  type SeoGenerationBrief
+} from "./seo-generation-brief";
 
 export type SectionGenerateInput = {
   title: string;
   outlineHeadings: string[];
   contentLanguage: string;
+  /** Preflight seed topic (keyword phrase). */
+  topic?: string;
+  /** Optional intent override; otherwise inferred from title. */
+  intent?: string;
+  /** Injected after handshake: approved framework + history constraints. */
+  approvedFrameworkBlock?: string;
 };
+
+const SEO_SECTION_SYSTEM_PROMPT = `You are writing an SEO article for a specific search intent.
+You must first follow the provided brief exactly.
+Do not write like a generic blog post.
+Do not use narrative filler, motivational framing, or vague commentary.
+Write only content that directly helps the reader solve the search query.
+Before writing each section, align internally to the brief and user rules (do not output that alignment).
+You write precise SEO article sections. Obey every rule in the user message.
+Output only the section body (no markdown H2 line for this section; the editor adds the heading).`;
+
+const SEO_SECTION_SYSTEM_FROM_FRAMEWORK = `Write the article strictly from the approved framework and history constraints in the user message.
+Do not invent a new structure or reorder sections.
+Do not fall back to generic blog style or narrative filler.
+Avoid repeating patterns and angles from the listed related titles.
+Before writing each section, align internally to the brief and framework (do not output that alignment).
+Output only the section body (no markdown H2 line for this section; the editor adds the heading).`;
 
 function mapLang(contentLanguage: string): "en" | "zh" {
   return contentLanguage.toLowerCase().startsWith("zh") ? "zh" : "en";
@@ -42,10 +69,11 @@ function sectionLengthDebug(body: string, lang: "en" | "zh"): { words?: number; 
 
 /** Strict per-section user prompt (one model call per section). */
 export function buildSectionUserPrompt(
-  title: string,
+  brief: SeoGenerationBrief,
   sectionHeading: string,
   lang: "en" | "zh",
-  priorSectionsDigest = ""
+  priorSectionsDigest = "",
+  approvedFrameworkBlock = ""
 ): string {
   const langLine =
     lang === "zh"
@@ -62,15 +90,23 @@ export function buildSectionUserPrompt(
       ? `\nEarlier sections (do not repeat their points or examples; add new information only):\n${priorSectionsDigest}\n`
       : "";
 
-  return `You are writing a high-quality SEO article.
+  const briefBlock = formatSeoBriefForPrompt(brief);
+  const frameworkSection = approvedFrameworkBlock.trim()
+    ? `\n---\n\nAPPROVED FRAMEWORK & HISTORY CONSTRAINTS\n${approvedFrameworkBlock.trim()}\n`
+    : "";
 
-Article title: ${title}
+  return `${briefBlock}${frameworkSection}
 
-Current section: ${sectionHeading}
+---
+
+SECTION TASK
+Full article title (for context): ${brief.title}
+Current section heading (cover this angle only): ${sectionHeading}
 ${langLine}
 ${digestBlock}
 Rules:
 
+* Before writing: align internally to the SEO BRIEF above (do not output that alignment).
 * Write only for this section (no separate H2 line; the editor adds the heading).
 ${lengthRule}
 * Explain the point clearly for a reader skimming search results.
@@ -80,20 +116,29 @@ ${lengthRule}
 * Provide concrete, actionable information; avoid generic advice.
 * Do not use reflective patterns like:
   'I thought... what happened... then I realized...'
-* Do not write introduction or conclusion unless explicitly requested.
+* Do not write introduction or conclusion unless this section heading clearly requires it.
 * Keep language clear and natural.
 
+Task:
+Write a complete section body that satisfies the SEO BRIEF and this section heading.
 Output only the section body text (paragraphs). No markdown heading line for this section.`;
 }
 
 /** Second attempt: model under-shot length; demand explicit expansion. */
 export function buildSectionUserPromptStrict(
-  title: string,
+  brief: SeoGenerationBrief,
   sectionHeading: string,
   lang: "en" | "zh",
-  priorSectionsDigest: string
+  priorSectionsDigest: string,
+  approvedFrameworkBlock = ""
 ): string {
-  const base = buildSectionUserPrompt(title, sectionHeading, lang, priorSectionsDigest);
+  const base = buildSectionUserPrompt(
+    brief,
+    sectionHeading,
+    lang,
+    priorSectionsDigest,
+    approvedFrameworkBlock
+  );
   const extra =
     lang === "zh"
       ? `\n\nCRITICAL RETRY: 上一版过短。本段必须至少 130 个汉字，并包含：一个具体例子 + 一句可执行建议。禁止空话。`
@@ -246,9 +291,15 @@ export async function generateArticleBySections(input: SectionGenerateInput): Pr
     throw new Error("section_generate:no_outline_headings");
   }
 
+  const brief = buildSeoGenerationBrief({
+    title: input.title,
+    topic: input.topic,
+    intent: input.intent
+  });
+
   const model = getDeepseekModel().trim() || "deepseek-chat";
-  const systemPrompt =
-    "You write precise SEO article sections. Obey every rule in the user message. Output only the section body (no title line unless it is part of the section).";
+  const fwBlock = (input.approvedFrameworkBlock || "").trim();
+  const systemPrompt = fwBlock ? SEO_SECTION_SYSTEM_FROM_FRAMEWORK : SEO_SECTION_SYSTEM_PROMPT;
 
   const pieces: string[] = [];
   for (let i = 0; i < headings.length; i++) {
@@ -257,8 +308,8 @@ export async function generateArticleBySections(input: SectionGenerateInput): Pr
 
     const runOnce = async (strict: boolean) => {
       const userPrompt = strict
-        ? buildSectionUserPromptStrict(input.title, sectionHeading, lang, priorDigest)
-        : buildSectionUserPrompt(input.title, sectionHeading, lang, priorDigest);
+        ? buildSectionUserPromptStrict(brief, sectionHeading, lang, priorDigest, fwBlock)
+        : buildSectionUserPrompt(brief, sectionHeading, lang, priorDigest, fwBlock);
       const out = await deepseekProvider.generatePackage({
         systemPrompt,
         userPrompt,

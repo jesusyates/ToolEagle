@@ -32,6 +32,7 @@
 
 | 文件 | 一句话 |
 |------|--------|
+| `global-product-rules.md` | **全局架构与功能门禁清单**（英文）；**中文权威条款**见 `docs/MEMORY.md` **「零点五·三」**；冲突以 MEMORY 为准 |
 | `FOR-EXTERNAL-AI-CHATGPT.md` | 给 ChatGPT 的写作规范与开场指令；含 Cursor 助手「需要哪里自己读哪里」的约定 |
 | `tooleagle-project-operating-manual.md` | 全链路执行手册：生产栈 V153–V169、V167 daily-engine、运行时真相/部署纪律/能力状态、上传与 Cursor 汇报（服从 MEMORY） |
 | `_TEMPLATE-RUNBOOK.md` | 新建分步说明时的空模板 |

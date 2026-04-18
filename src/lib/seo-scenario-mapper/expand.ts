@@ -1,8 +1,26 @@
 import type { AppSeoSeedRecord } from "@/lib/seo-seed-registry";
+import type { SeoPreflightContentType } from "@/lib/seo-preflight";
+import { SEO_PREFLIGHT_CONTENT_TYPES } from "@/lib/seo-preflight";
 import type { ScenarioMappedTopic } from "./types";
 import { buildNaturalScenarioTopic, buildSellingPointTopic } from "./natural-scenario-topics";
 
 const DEFAULT_ANGLES = ["how_to", "workflow", "tools", "examples", "tips"];
+
+/** Rotate intents so automation mixes classic templates with higher-click patterns (preflight gates unchanged). */
+const SCENARIO_CONTENT_ROTATION: SeoPreflightContentType[] = [...SEO_PREFLIGHT_CONTENT_TYPES];
+
+function stableMixHash(s: string): number {
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) {
+    h = (h * 33) ^ s.charCodeAt(i);
+  }
+  return Math.abs(h);
+}
+
+function pickScenarioContentType(seedId: string, keyword: string, angle: string, topic: string): SeoPreflightContentType {
+  const h = stableMixHash(`${seedId}\0${keyword}\0${angle}\0${topic}`);
+  return SCENARIO_CONTENT_ROTATION[h % SCENARIO_CONTENT_ROTATION.length]!;
+}
 
 function normLocaleFromLanguage(lang: string): string {
   const l = lang.trim().toLowerCase();
@@ -85,7 +103,7 @@ export function mapSeedsToScenarioTopics(
         seen.add(k);
         out.push({
           topic: t,
-          contentType: "guide",
+          contentType: pickScenarioContentType(seed.id, sp, "selling_point", t),
           intent: "selling_point",
           market,
           locale,

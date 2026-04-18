@@ -13,7 +13,9 @@ export type TopicReadinessResult = {
   contentType?: "guide";
 };
 
-const INTENT_RE = /\b(how|ideas|tips|guide|captions|hooks?|ways|strategy)\b/i;
+/** Includes search-query shapes (best / vs / alternatives) for demand-led cluster topics. */
+const INTENT_RE =
+  /\b(how|ideas|tips|guide|captions|hooks?|ways|strategy|best|vs|versus|alternatives|examples?|templates?|compare|ranked|worth it|top\s+\d+)\b/i;
 /** Content-token Jaccard (stopwords stripped); slightly higher bar vs raw token overlap. */
 const SIM_REJECT = 0.95;
 /** Below reject; at/above this is rewrite — keep below SIM_REJECT so borderline topics still pass main chain. */

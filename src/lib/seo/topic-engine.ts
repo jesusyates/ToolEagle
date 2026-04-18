@@ -1,4 +1,12 @@
-import { buildClusterTopicsForCluster } from "./cluster-topic-blueprint";
+import {
+  buildClusterTopicsForCluster,
+  buildClusterTopicsForClusterAsync,
+  isValidSeoTitle,
+  normalizeSeoTitle
+} from "./cluster-topic-blueprint";
+import { isPreValidatedTitle } from "./title-prevalidation";
+import { expandSeoKeywords } from "./keyword-expansion";
+import { inferSearchDemandIntent, passesSearchDemandPhrase } from "./search-data-engine/search-style-gate";
 import {
   loadClusterPriorityState,
   orderBlueprintsByPriority,
@@ -19,12 +27,16 @@ export type GeneratedTopic = {
   topic: string;
   keyword: string;
   angle: string;
+  /** Present when topic is demand-led (search-data-engine). */
+  intent?: string;
 };
 
 /** Pillar cluster: one theme + multiple distinct guide angles (not title tweaks). */
 export type TopicCluster = {
   cluster: string;
   topics: string[];
+  /** 1:1 with topics from search-data-engine (keyword + intent). */
+  meta?: Array<{ keyword: string; intent: string }>;
 };
 
 type ClusterBlueprint = {
@@ -46,6 +58,9 @@ const NEW_EN_SPINDLE_CLUSTERS = new Set([
 ]);
 
 /** Temporarily deprioritize: heavy overlap with existing published/staged EN titles. */
+/** Max rule-based expansions per base topic (after filters). */
+const MAX_EXPANSION = 3;
+
 const EN_DEMOTED_HIGH_COLLISION_CLUSTERS = new Set([
   "Stuck creators and growth plateaus on Instagram and TikTok",
   "No time no team low budget creator workflow on YouTube and TikTok",
@@ -98,11 +113,12 @@ function shuffleInPlace<T>(arr: T[]): void {
 
 function isAcceptableTopic(topic: string): boolean {
   const s = topic.replace(/\s+/g, " ").trim();
-  if (s.length < 42) return false;
-  const words = s.split(" ").filter(Boolean);
-  if (words.length < 7) return false;
   if (/^(tiktok|instagram|youtube)\s+(tiktok|instagram|youtube)\b/i.test(s)) return false;
-  return true;
+  if (!passesSearchDemandPhrase(s)) return false;
+  const words = s.split(/\s+/).filter(Boolean);
+  if (words.length >= 4 && s.length >= 28) return true;
+  if (words.length >= 7 && s.length >= 42) return true;
+  return false;
 }
 
 function tryAdd(
@@ -112,11 +128,13 @@ function tryAdd(
   keyword: string,
   angle: string
 ): void {
-  const key = topic.toLowerCase().replace(/\s+/g, " ").trim();
+  const normalized = normalizeSeoTitle(topic.replace(/\s+/g, " ").trim());
+  if (!isValidSeoTitle(normalized)) return;
+  const key = normalized.toLowerCase().replace(/\s+/g, " ").trim();
   if (seen.has(key)) return;
-  if (!isAcceptableTopic(topic)) return;
+  if (!isAcceptableTopic(normalized)) return;
   seen.add(key);
-  pool.push({ topic, keyword, angle });
+  pool.push({ topic: normalized, keyword, angle });
 }
 
 /**
@@ -212,15 +230,28 @@ export function generateTopics(options?: { count?: number }): GeneratedTopic[] {
   return guidePool.slice(0, Math.min(want, guidePool.length));
 }
 
+/** Debug: classify title prefix for SERP-style distribution logs. */
+function getPrefixType(title: string): string {
+  const t = title.toLowerCase();
+  if (t.startsWith("best")) return "best";
+  if (t.includes(" vs ")) return "vs";
+  if (t.includes("example")) return "examples";
+  if (t.startsWith("how to")) return "howto";
+  return "other";
+}
+
 /**
  * Build 2+ theme clusters; each cluster has >=3 distinct guide topics on one spindle.
  * Order by {@link loadClusterPriorityState} (platform + kind rolling success, recent cluster totals, zero streaks).
+ * Topics are demand-led first (search-data-engine), then legacy blueprint lines that pass the search-style gate.
  */
-export function generateTopicClusters(options?: {
+export async function generateTopicClusters(options?: {
   clusterCount?: number;
   topicsPerCluster?: number;
   priorityState?: ReturnType<typeof loadClusterPriorityState>;
-}): { clusters: TopicCluster[]; priorityChoices: ClusterPriorityMeta[] } {
+  /** When false, templates only (no Google suggest). Default true. */
+  fetchSearchSuggests?: boolean;
+}): Promise<{ clusters: TopicCluster[]; priorityChoices: ClusterPriorityMeta[] }> {
   const wantClusters = Math.max(2, options?.clusterCount ?? 2);
   const wantPer = Math.max(3, options?.topicsPerCluster ?? 3);
   const state = options?.priorityState ?? loadClusterPriorityState();
@@ -236,13 +267,80 @@ export function generateTopicClusters(options?: {
   const priorityChoices: ClusterPriorityMeta[] = [];
   for (const m of rankedOrdered) {
     if (out.length >= wantClusters) break;
-    const raw = buildClusterTopicsForCluster(m.cluster, wantPer);
-    const topics = raw.map((t) => t.replace(/\s+/g, " ").trim()).filter((t) => isAcceptableTopic(t));
+    const { topics: rawTopics, meta: rawMeta } = await buildClusterTopicsForClusterAsync(m.cluster, wantPer, {
+      fetchSuggests: options?.fetchSearchSuggests !== false
+    });
+    const topics: string[] = [];
+    const meta: NonNullable<TopicCluster["meta"]> = [];
+    const seenTitles = new Set<string>();
+    for (let i = 0; i < rawTopics.length; i++) {
+      const t = normalizeSeoTitle(rawTopics[i]!.replace(/\s+/g, " ").trim());
+      if (!isValidSeoTitle(t)) continue;
+      const tk = t.toLowerCase();
+      if (seenTitles.has(tk)) continue;
+      if (!isAcceptableTopic(t)) continue;
+      if (!isPreValidatedTitle(t)) continue;
+      seenTitles.add(tk);
+      topics.push(t);
+      const row = rawMeta[i];
+      meta.push(
+        row ?? {
+          keyword: t,
+          intent: inferSearchDemandIntent(t)
+        }
+      );
+      if (topics.length >= wantPer) break;
+    }
+
+    const expansionBaseCount = topics.length;
+    const expandedQueue: string[] = [];
+    for (const t0 of topics) {
+      expandedQueue.push(...expandSeoKeywords(t0).slice(0, MAX_EXPANSION));
+    }
+    console.log("[SEO EXPANSION] base:", expansionBaseCount);
+    console.log("[SEO EXPANSION] expanded:", expandedQueue.length);
+
+    for (const raw of expandedQueue) {
+      const t = normalizeSeoTitle(raw.replace(/\s+/g, " ").trim());
+      if (!isValidSeoTitle(t)) continue;
+      const tk = t.toLowerCase();
+      if (seenTitles.has(tk)) continue;
+      if (!isAcceptableTopic(t)) continue;
+      if (!isPreValidatedTitle(t)) continue;
+      seenTitles.add(tk);
+      topics.push(t);
+      meta.push({
+        keyword: t,
+        intent: inferSearchDemandIntent(t)
+      });
+    }
+
+    const maxClusterTopics = wantPer * (1 + MAX_EXPANSION);
     if (topics.length >= 3) {
-      out.push({ cluster: m.cluster, topics: topics.slice(0, wantPer) });
+      out.push({
+        cluster: m.cluster,
+        topics: topics.slice(0, maxClusterTopics),
+        meta: meta.slice(0, maxClusterTopics)
+      });
       priorityChoices.push(m);
     }
   }
+
+  const flatTitles = out.flatMap((c) => c.topics);
+  const stats: Record<string, number> = {
+    howto: 0,
+    best: 0,
+    vs: 0,
+    examples: 0,
+    other: 0
+  };
+  for (const title of flatTitles) {
+    const key = getPrefixType(title);
+    stats[key] = (stats[key] || 0) + 1;
+  }
+  console.log("[SEO TOPIC STATS]", stats);
+  console.log("[SEO SAMPLE TITLES]", flatTitles.slice(0, 10));
+
   return { clusters: out, priorityChoices };
 }
 
@@ -251,9 +349,11 @@ export function clustersToGeneratedTopics(clusters: TopicCluster[]): GeneratedTo
   const rows: GeneratedTopic[] = [];
   for (const c of clusters) {
     c.topics.forEach((topic, ti) => {
+      const m = c.meta?.[ti];
       rows.push({
         topic,
-        keyword: c.cluster.slice(0, 80),
+        keyword: m?.keyword ?? c.cluster.slice(0, 80),
+        intent: m?.intent ?? inferSearchDemandIntent(topic),
         angle: `cluster:${c.cluster}:slot${ti + 1}`
       });
     });

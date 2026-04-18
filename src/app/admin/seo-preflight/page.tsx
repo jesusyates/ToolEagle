@@ -10,7 +10,7 @@ import { SeoPreflightClient } from "./SeoPreflightClient";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Admin · SEO 预检 | ToolEagle",
+  title: "Admin · SEO 诊断预检 | ToolEagle",
   robots: { index: false, follow: false }
 };
 
@@ -37,9 +37,16 @@ export default async function AdminSeoPreflightPage() {
             SEO Content Center
           </Link>
         </div>
-        <h1 className="mt-4 text-2xl font-semibold">SEO 预检（Web）</h1>
+        <h1 className="mt-4 text-2xl font-semibold">SEO 诊断预检</h1>
         <p className="mt-2 text-slate-600">
-          单引擎参数化预检：候选 →去重 → 廉价大纲 → SEO 结构校验 → 预算 → 通过/拒绝。不写全文、不自动发布。
+          <strong className="text-slate-800">非常规生产入口。</strong>用于逐项检查候选、拒绝原因、手工种子与 API 参数实验。日常发布流请使用内容中心{" "}
+          <Link href="/admin/seo?tab=auto" className="font-medium text-sky-700 underline">
+            自动生成（生产）
+          </Link>
+          。
+        </p>
+        <p className="mt-2 text-sm text-slate-600">
+          能力说明：单引擎参数化预检（候选 → 去重 → 大纲 → 结构校验 → 预算 → 通过/拒绝）。不写全文、不自动发布；与管线内预检规则一致。
         </p>
         <div className="mt-8">
           <SeoPreflightClient />
